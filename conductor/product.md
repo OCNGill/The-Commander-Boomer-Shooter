@@ -23,6 +23,6 @@ The_Commander_Boomer_Shooter/
 ## Node Map
 | Host | Role |
 |------|------|
-| Main (10.0.0.164, 7900 XTX 24GB) | UE5 dev + local inference |
-| HTPC (10.0.0.42, RX 7600) | Blender rendering |
+| Main (7900 XTX, 24 GB) | UE5 dev + local inference |
+| HTPC (RX 7600) | Blender rendering |
 | GitHub | Version control |

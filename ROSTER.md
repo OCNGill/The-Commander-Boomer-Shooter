@@ -17,7 +17,7 @@
 - **Status**: UE 5.8 project initialized (commit cef143e)
 - **Engine**: Unreal Engine 5.8 (Blueprints)
 - **Assets**: Blender 4.x via blender-mcp skill
-- **Inference**: Local Qwen3.8-27B on Main (10.0.0.164, 7900 XTX 24GB)
+- **Inference**: Local Qwen3.8-27B on Main (7900 XTX, 24 GB)
 - **Target**: itch.io / Steam
 
 ---
