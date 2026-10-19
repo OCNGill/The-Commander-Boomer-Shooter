@@ -7,7 +7,9 @@ Exports FBX per weapon. Units: meters (UE import scale handles uu).
 import bpy, sys, os, math
 
 argv = sys.argv
-out_dir = argv[argv.index('--') + 1] if '--' in argv else os.path.dirname(os.path.abspath(__file__))
+out_dir = (argv[argv.index('--out') + 1] if '--out' in argv
+           else argv[argv.index('--') + 1] if '--' in argv and argv[argv.index('--') + 1] != '--out'
+           else os.path.dirname(os.path.abspath(__file__)) if '--out' not in argv else os.path.dirname(os.path.abspath(__file__)))
 os.makedirs(out_dir, exist_ok=True)
 
 # clear scene

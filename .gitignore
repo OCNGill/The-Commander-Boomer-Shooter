@@ -14,3 +14,10 @@ Build/
 # OS
 Thumbs.db
 .DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Blender temp
+*.blend1
