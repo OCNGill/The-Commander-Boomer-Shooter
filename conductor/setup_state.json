@@ -1,7 +1,7 @@
 {
   "repo": "The_Commander_Boomer_Shooter",
-  "last_updated": "2026-09-22",
+  "last_updated": "2026-10-19",
   "conductor_version": "1.0",
   "engine": "Unreal Engine 5.8",
-  "status": "Initialized (commit cef143e), design brief created"
+  "status": "Headless UE pipeline LIVE (M_Blockout01 umap on disk); Blender pipeline armed; weapons/enemies v1 JSON generated on Main inference"
 }

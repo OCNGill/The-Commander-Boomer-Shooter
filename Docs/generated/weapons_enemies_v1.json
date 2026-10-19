@@ -1,0 +1,114 @@
+{
+  "weapons": [
+    {
+      "id": "w_01",
+      "name": "Pilgrim Puckle",
+      "archetype": "Sidearm",
+      "projectile_speed_uu_s": 3000,
+      "damage": 15,
+      "special": "Infinite ammo, rapid fire",
+      "pickup_line": "Righteousness is in your hand.",
+      "kill_one_liner": "Sudo kill -9 --force"
+    },
+    {
+      "id": "w_02",
+      "name": "Lobster Claw SMG",
+      "archetype": "SMG",
+      "projectile_speed_uu_s": 3200,
+      "damage": 22,
+      "special": "Splitting shells on impact",
+      "pickup_line": "Pinch their soul, not just their shell.",
+      "kill_one_liner": "Process terminated: Pinched out."
+    },
+    {
+      "id": "w_03",
+      "name": "Mayflower Cannon",
+      "archetype": "Shotgun",
+      "projectile_speed_uu_s": 3500,
+      "damage": 45,
+      "special": "Pellet spread ignites targets",
+      "pickup_line": "The old world burns, the new one screams.",
+      "kill_one_liner": "System reboot: Ashed out."
+    },
+    {
+      "id": "w_04",
+      "name": "Nor-Easter Rail",
+      "archetype": "Railgun",
+      "projectile_speed_uu_s": 3800,
+      "damage": 80,
+      "special": "Pierces all cover, chain lightning",
+      "pickup_line": "The storm answers your call.",
+      "kill_one_liner": "Connection reset: Stormed out."
+    },
+    {
+      "id": "w_05",
+      "name": "Plymouth Rock Launcher",
+      "archetype": "Grenade Launcher",
+      "projectile_speed_uu_s": 4000,
+      "damage": 120,
+      "special": "Bouncing explosive rocks",
+      "pickup_line": "Heavy on the conscience, heavier on the target.",
+      "kill_one_liner": "Kernel panic: Rocked out."
+    },
+    {
+      "id": "w_06",
+      "name": "Harbor Wreck Rocket",
+      "archetype": "Rocket",
+      "projectile_speed_uu_s": 4500,
+      "damage": 200,
+      "special": "Homing, massive blast radius",
+      "pickup_line": "Sink the enemy fleet, literally.",
+      "kill_one_liner": "Sudo rm -rf /universe"
+    }
+  ],
+  "enemies": [
+    {
+      "id": "e_01",
+      "name": "Barnacle Drone",
+      "plymouth_theme": "Waterfront",
+      "attack_telegraph": "Red light pulse before spit attack",
+      "gib_style": "Spray of barnacles and circuitry",
+      "aggression": "Medium"
+    },
+    {
+      "id": "e_02",
+      "name": "Pilgrim Zealot",
+      "plymouth_theme": "Pilgrim",
+      "attack_telegraph": "Raises musket, slow wind-up",
+      "gib_style": "Feathers and red ruffs exploding outward",
+      "aggression": "High"
+    },
+    {
+      "id": "e_03",
+      "name": "Mayflower Phantom",
+      "plymouth_theme": "Mayflower",
+      "attack_telegraph": "Sails glow blue, materializes from fog",
+      "gib_style": "Dissolves into sea mist and wood splinters",
+      "aggression": "Low"
+    },
+    {
+      "id": "e_04",
+      "name": "Lobster Brute",
+      "plymouth_theme": "Lobster",
+      "attack_telegraph": "Claws charge with static, loud crack",
+      "gib_style": "Shell fragments and internal organs fly",
+      "aggression": "Very High"
+    },
+    {
+      "id": "e_05",
+      "name": "Rock Golem",
+      "plymouth_theme": "Plymouth Rock",
+      "attack_telegraph": "Cracks glow orange, stomps ground",
+      "gib_style": "Shatters into jagged granite pieces",
+      "aggression": "High"
+    },
+    {
+      "id": "e_06",
+      "name": "Nor-Easter Titan",
+      "plymouth_theme": "Nor-easter Storm",
+      "attack_telegraph": "Sky darkens, lightning strikes before charge",
+      "gib_style": "Disintegrates into rain and wind",
+      "aggression": "Extreme"
+    }
+  ]
+}

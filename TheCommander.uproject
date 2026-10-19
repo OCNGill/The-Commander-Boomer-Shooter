@@ -1,16 +1,24 @@
 {
-	"FileVersion": 3,
-	"EngineAssociation": "5.8",
-	"Category": "",
-	"Description": "The Commander - a fast-paced retro FPS (boomer shooter). Duke Nukem meets Doom meets Mass Effect. Unreal Engine + Blender pipeline.",
-	"Modules": [],
-	"Plugins": [
-		{
-			"Name": "ModelingToolsEditorMode",
-			"Enabled": true,
-			"TargetAllowList": [
-				"Editor"
-			]
-		}
-	]
+   "FileVersion": 3,
+   "EngineAssociation": "5.8",
+   "Category": "",
+   "Description": "The Commander - a fast-paced retro FPS (boomer shooter). Duke Nukem meets Doom meets Mass Effect. Unreal Engine + Blender pipeline.",
+   "Modules": [],
+   "Plugins": [
+      {
+         "Name": "ModelingToolsEditorMode",
+         "Enabled": true,
+         "TargetAllowList": [
+            "Editor"
+         ]
+      },
+      {
+         "Name": "PythonScriptPlugin",
+         "Enabled": true
+      },
+      {
+         "Name": "EditorScriptingUtilities",
+         "Enabled": true
+      }
+   ]
 }
