@@ -23,6 +23,21 @@
 > *“So we built the wall... for the people had a mind to work.”* — Nehemiah 4:6
 > Chosen because this leg was literally wall-building — placing encounters into the arena map at 2am with the fleet humming is the same unglamorous, wholehearted construction the verse celebrates.
 
+## [2026-10-19e] — Audio + combat tuning docs + actor-listing API recovered
+
+### Added
+- **`Docs/generated/sound_design_list.md`** (7.1K) — 6-weapon SFX table (reload explicitly 'none — instant hold-refire per contract'), all-6 enemy vocal/telegraph table, per-beat ambient beds, 3 music cues (foghorn/ship bell/distorted accordion/timpani), gib audio pooling spec, Content/SFX naming convention + file tree
+- **`Docs/generated/weapon_stats_table.md`** (5.7K) — tuned per-weapon stats (fire rate, hitscan/projectile, damage, spread, ammo economy), ammo math for full arena clear, TTK-per-enemy table with recommended weapons, boss phase-2 storm note, difficulty scalar knobs
+- **`Tools/python/api_inventory_probe.py`** — dir() inventory harness for editor APIs
+
+### Fixed
+- **Actor-listing API name recovered** (apilist_run1): `EditorActorSubsystem.get_all_level_actors()` exists and works — my earlier chain called `get_all_actors_of_class` (exists nowhere), `UnrealEditorSubsystem.get_all_level_actors` (wrong class), and `World.persistent_level` (not python-exposed). populate_encounters.py dedup chain now uses the real names; earlier "APIs removed" note corrected
+- sound_design_list.md token-cap truncation spliced + completed
+
+### Verse
+> *“Praise him with tambourine and dance... with strings and pipe!... with loud clashing cymbals!”* — Psalm 150:5-6
+> Chosen because this commit is the audio kit — the sound doc literally specifies the cymbals, and the whole entry is about the orchestra of the thing.
+
 ## [2026-10-19d] — Design docs generated on local inference (Main Qwen3.8)
 
 ### Added

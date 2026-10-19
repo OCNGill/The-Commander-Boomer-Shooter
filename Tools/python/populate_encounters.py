@@ -94,18 +94,16 @@ WEAPONS = [
 ]
 
 # dedup: clear any actors from a previous populate run (label prefix match)
-# PITFALL (populate_run5): none of the classic actor-list APIs exist in this
-# UE 5.8 build — EditorLevelLibrary.get_all_actors_of_class, UnrealEditorSubsystem
-# .get_all_level_actors and World.persistent_level all raise AttributeError from
-# python. Dedup therefore no-ops here; restore the map from git instead
-# (git checkout -- Content/Maps/M_Blockout01.umap) before a clean re-run.
+# API NOTE (apilist_run1): the actor lister is EDITORACTORSUBSYSTEM.get_all_level_actors()
+# (also EditorLevelLibrary.get_all_level_actors) — get_all_actors_of_class does NOT exist
+# on any of these classes, and World.persistent_level is not python-exposed in this 5.8
+# build. spawn_actor_from_object exists but returns NULL for everything (probe_run1),
+# so always class-spawn + set_static_mesh.
 cleared = 0
 _all = []
 for getter in (
-    lambda: unreal.EditorLevelLibrary.get_all_actors_of_class(unreal.StaticMeshActor),
-    lambda: unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem).get_all_level_actors(),
-    lambda: [a for a in unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem)
-             .get_editor_world().persistent_level.actors if a],
+    lambda: unreal.get_editor_subsystem(unreal.EditorActorSubsystem).get_all_level_actors(),
+    lambda: unreal.EditorLevelLibrary.get_all_level_actors(),
 ):
     try:
         _all = list(getter())
