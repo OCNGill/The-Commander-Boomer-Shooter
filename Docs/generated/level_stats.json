@@ -1,261 +1,207 @@
 {
-  "generated": "2026-10-21T01:36:41-04:00",
+  "generated": "2026-10-21T03:11:17",
   "map": "Content/Maps/M_Blockout01.umap",
-  "total_actors": 46,
-  "groups": {
-    "light": 5,
-    "fog": 1,
-    "playerstart": 1,
-    "ENC": 9,
-    "PU": 6,
-    "WP": 3,
-    "floor": 1,
-    "wall": 4,
-    "pillar": 1,
-    "cover": 8,
-    "platform": 1,
-    "ramp": 1,
-    "pit": 5
-  },
-  "enemy_count": 9,
-  "pickup_count": 6,
-  "weapon_count": 3,
-  "grid": {
-    "cell_u": 100,
-    "span": [
-      -2000,
-      2000
-    ],
-    "cells": 1600,
-    "blocked_cells": 300,
-    "free_cells": 1300,
-    "reachable_from_drop": 1300,
-    "blocker_groups": [
-      "wall",
-      "cover",
-      "pillar"
-    ],
-    "blocker_note": "walls, cover blocks and the central pillar block. The pit pad is a SURFACE flush at z=0 and the pit rim is a jumpable 0.5m kerb, so neither blocks walking."
-  },
-  "drop_zone": {
-    "label": "BO_PlayerStart",
-    "x": 0.0,
-    "y": -1500.0,
-    "z": 100.0,
-    "clear_of_cover": true
-  },
-  "pit_truth": {
-    "pad_size_u": [
-      1000.0,
-      1000.0
-    ],
-    "pad_top_z": 0.0,
-    "rim_height_u": 50.0,
-    "rim_height_m": 0.5,
-    "rim_thickness_u": 50.0,
-    "pen_interior_u": [
-      150.0,
-      150.0
-    ],
-    "pen_interior_m": [
-      1.5,
-      1.5
-    ],
-    "ue_default_step_height_u": 45,
-    "access": "drop-in over a 0.50m kerb (rim is above the 45u step height, jumpable) - a deliberate risk pocket, NOT a sealed vault"
-  },
-  "encounters": [
+  "map_bytes": 87927,
+  "map_commit": "3c3dde9",
+  "actor_count": 51,
+  "cell_size_units": 100,
+  "bounds_units": [
+    -2000,
+    2000
+  ],
+  "player_start_m": [
+    0.0,
+    -15.0
+  ],
+  "reachable_cells": 1300,
+  "total_cells": 1600,
+  "reach_pct": 81.2,
+  "block_groups": [
+    "wall",
+    "cover",
+    "pillar"
+  ],
+  "note": "The pit is a 1m drop-in with BO_Ramp_Pit at the east rim gap, so pit-floor actors count as reachable. Only wall/cover/pillar footprints block.",
+  "actors": [
     {
       "label": "ENC_Drone_01",
-      "x": 800.0,
-      "y": -400.0,
-      "z": 150.0,
-      "path_steps_from_drop": 19,
-      "straight_line_m": 13.6,
-      "in_immediate_drop_sight": false,
-      "inside_the_pit_pen": false,
-      "access": "walk"
+      "group": "ENC",
+      "at_m": [
+        8.0,
+        -4.0,
+        1.5
+      ],
+      "reachable": true
     },
     {
       "label": "ENC_Drone_02",
-      "x": -900.0,
-      "y": 300.0,
-      "z": 150.0,
-      "path_steps_from_drop": 27,
-      "straight_line_m": 20.1,
-      "in_immediate_drop_sight": false,
-      "inside_the_pit_pen": false,
-      "access": "walk"
+      "group": "ENC",
+      "at_m": [
+        -9.0,
+        3.0,
+        1.5
+      ],
+      "reachable": true
     },
-    {
-      "label": "ENC_Drone_03",
-      "x": 0.0,
-      "y": 600.0,
-      "z": 180.0,
-      "path_steps_from_drop": 29,
-      "straight_line_m": 21.0,
-      "in_immediate_drop_sight": false,
-      "inside_the_pit_pen": false,
-      "access": "walk"
-    },
-    {
-      "label": "ENC_Zealot_01",
-      "x": 1500.0,
-      "y": -800.0,
-      "z": 0.0,
-      "path_steps_from_drop": 22,
-      "straight_line_m": 16.6,
-      "in_immediate_drop_sight": false,
-      "inside_the_pit_pen": false,
-      "access": "walk"
-    },
-    {
-      "label": "ENC_Zealot_02",
-      "x": -1500.0,
-      "y": 700.0,
-      "z": 0.0,
-      "path_steps_from_drop": 37,
-      "straight_line_m": 26.6,
-      "in_immediate_drop_sight": false,
-      "inside_the_pit_pen": false,
-      "access": "walk"
-    },
-    {
-      "label": "ENC_Phantom_01",
-      "x": -700.0,
-      "y": -1400.0,
-      "z": 0.0,
-      "path_steps_from_drop": 8,
-      "straight_line_m": 7.1,
-      "in_immediate_drop_sight": true,
-      "inside_the_pit_pen": false,
-      "access": "walk"
-    },
-    {
-      "label": "ENC_Brute_Pit",
-      "x": -1200.0,
-      "y": -1200.0,
-      "z": 50.0,
-      "path_steps_from_drop": 15,
-      "straight_line_m": 12.4,
-      "in_immediate_drop_sight": false,
-      "inside_the_pit_pen": true,
-      "access": "drop-in over the 0.25m rim"
-    },
-    {
-      "label": "ENC_Golem_Platform",
-      "x": 1200.0,
-      "y": 1200.0,
-      "z": 510.0,
-      "path_steps_from_drop": 39,
-      "straight_line_m": 29.5,
-      "in_immediate_drop_sight": false,
-      "inside_the_pit_pen": false,
-      "access": "walk"
-    },
-    {
-      "label": "ENC_Boss_NorEaster",
-      "x": 0.0,
-      "y": 1600.0,
-      "z": 0.0,
-      "path_steps_from_drop": 41,
-      "straight_line_m": 31.0,
-      "in_immediate_drop_sight": false,
-      "inside_the_pit_pen": false,
-      "access": "walk"
-    }
-  ],
-  "pickups": [
     {
       "label": "PU_Armor_Platform",
-      "x": 1300.0,
-      "y": 1300.0,
-      "z": 520.0,
-      "path_steps_from_drop": 41,
-      "inside_the_pit_pen": false,
-      "access": "walk"
+      "group": "PU",
+      "at_m": [
+        13.0,
+        13.0,
+        5.2
+      ],
+      "reachable": true
     },
     {
       "label": "PU_Ammo_01",
-      "x": 500.0,
-      "y": 100.0,
-      "z": 30.0,
-      "path_steps_from_drop": 23,
-      "inside_the_pit_pen": false,
-      "access": "walk"
+      "group": "PU",
+      "at_m": [
+        5.0,
+        1.0,
+        0.3
+      ],
+      "reachable": true
     },
     {
       "label": "PU_Ammo_02",
-      "x": -500.0,
-      "y": -100.0,
-      "z": 30.0,
-      "path_steps_from_drop": 21,
-      "inside_the_pit_pen": false,
-      "access": "walk"
+      "group": "PU",
+      "at_m": [
+        -5.0,
+        -1.0,
+        0.3
+      ],
+      "reachable": true
     },
     {
       "label": "PU_KeyGreen_PillarTop",
-      "x": 0.0,
-      "y": 0.0,
-      "z": 620.0,
-      "path_steps_from_drop": null,
-      "inside_the_pit_pen": false,
-      "access": "walk"
+      "group": "PU",
+      "at_m": [
+        0.0,
+        0.0,
+        6.2
+      ],
+      "reachable": false
     },
     {
       "label": "PU_KeyRed_Pit",
-      "x": -1250.0,
-      "y": -1250.0,
-      "z": 60.0,
-      "path_steps_from_drop": 15,
-      "inside_the_pit_pen": true,
-      "access": "drop-in over the 0.25m rim"
+      "group": "PU",
+      "at_m": [
+        -12.5,
+        -12.5,
+        -1.0
+      ],
+      "reachable": true
     },
     {
-      "label": "PU_Health_Pit",
-      "x": -1150.0,
-      "y": -1150.0,
-      "z": 60.0,
-      "path_steps_from_drop": 15,
-      "inside_the_pit_pen": true,
-      "access": "drop-in over the 0.25m rim"
-    }
-  ],
-  "weapons": [
-    {
       "label": "WP_PilgrimPuckle_Spawn",
-      "path_steps_from_drop": 0,
-      "inside_the_pit_pen": false
+      "group": "WP",
+      "at_m": [
+        0.0,
+        -14.5,
+        0.4
+      ],
+      "reachable": true
     },
     {
       "label": "WP_MayflowerCannon_Mid",
-      "path_steps_from_drop": 20,
-      "inside_the_pit_pen": false
+      "group": "WP",
+      "at_m": [
+        -3.0,
+        0.0,
+        0.4
+      ],
+      "reachable": true
     },
     {
       "label": "WP_Rocket_Platform",
-      "path_steps_from_drop": 43,
-      "inside_the_pit_pen": false
+      "group": "WP",
+      "at_m": [
+        14.0,
+        14.0,
+        5.7
+      ],
+      "reachable": true
+    },
+    {
+      "label": "ENC_Drone_03",
+      "group": "ENC",
+      "at_m": [
+        0.0,
+        6.0,
+        1.8
+      ],
+      "reachable": true
+    },
+    {
+      "label": "ENC_Zealot_01",
+      "group": "ENC",
+      "at_m": [
+        15.0,
+        -8.0,
+        0.0
+      ],
+      "reachable": true
+    },
+    {
+      "label": "ENC_Zealot_02",
+      "group": "ENC",
+      "at_m": [
+        -15.0,
+        7.0,
+        0.0
+      ],
+      "reachable": true
+    },
+    {
+      "label": "ENC_Phantom_01",
+      "group": "ENC",
+      "at_m": [
+        -7.0,
+        -14.0,
+        0.0
+      ],
+      "reachable": true
+    },
+    {
+      "label": "ENC_Brute_Pit",
+      "group": "ENC",
+      "at_m": [
+        -12.0,
+        -12.0,
+        -1.0
+      ],
+      "reachable": true
+    },
+    {
+      "label": "ENC_Golem_Platform",
+      "group": "ENC",
+      "at_m": [
+        12.0,
+        12.0,
+        5.1
+      ],
+      "reachable": true
+    },
+    {
+      "label": "ENC_Boss_NorEaster",
+      "group": "ENC",
+      "at_m": [
+        0.0,
+        16.0,
+        0.0
+      ],
+      "reachable": true
+    },
+    {
+      "label": "PU_Health_Pit",
+      "group": "PU",
+      "at_m": [
+        -11.5,
+        -11.5,
+        -1.0
+      ],
+      "reachable": true
     }
-  ],
-  "unreachable_actors": [],
-  "immediate_sight_encounters": [
-    "ENC_Phantom_01"
-  ],
-  "tactical_spaces": {
-    "open_center": "BO_Pillar_Center at the origin splits the middle; 4 cover blocks ring it at +/-600",
-    "north_east_platform": "BO_Platform_NE (+250Z) reached by BO_Ramp_NE - the high ground",
-    "south_west_pit": "a flush pad with a 0.5m kerb pen guarding the red key, the medkit and the Brute",
-    "perimeter": "4 walls at +/-2000, 8 cover blocks distributed on the ring"
-  },
-  "findings": [
-    "The drop point is CLEAN: BO_PlayerStart at (0.0, -1500.0) sits in open ground, clear of every wall, cover block and pillar. My earlier 'the squad drops onto the pillar' was WRONG - the pillar is at the origin, 15m north of the drop.",
-    "The pit is NOT a sealed vault and NOT a deep hole. BO_PitFloor is a 1000u x 1000u pad whose top is flush with the main floor at z=0, and the four rim walls are 50u (0.50m) tall around a 1.5m x 1.5m pen. That rim is above the default 45u character step height, so the player DROPS IN rather than walking in - a deliberate risk pocket, and trivially jumpable. Correcting my earlier 'the level cannot be completed' claim: it can.",
-    "GUARDED POCKET: the Brute, the red key and the medkit all sit in that 1.5m pen. Reaching the red key means dropping into a tight box with a brute in it - the level's risk/reward beat, and the red pit light is already there to read it. Add a visible entry cue (a kerb ramp or a floor decal) so the drop reads as deliberate.",
-    "Contact-on-landing: ENC_Phantom_01 is 7.1m from the drop point - an enemy inside the drop zone itself.",
-    "All 9 enemy spawns, 6 pickups and 3 weapons have a walkable route from the drop; none are unreachable."
-  ],
-  "method": "40x40 occupancy grid at 100u over -2000..2000. Blockers = walls, cover blocks, central pillar. BFS 4-neighbourhood from the PlayerStart cell; path_steps are 100u steps. Straight-line distance is Euclidean from the drop. Pit-pen interiors are counted reachable because the rim is a jumpable kerb.",
-  "base_geometry_note": "The arena was absent from the committed map - blockout_map.py used the dead spawn_actor_from_object path in UE 5.8, so 23 base actors never spawned. ensure_base_geometry.py rebuilds them. The restore was re-verified against the file ON DISK, not against an in-memory dump (a dump proves the editor's memory, not the .umap).",
-  "arithmetic_correction": "An earlier revision of this file reported the pit rim as 25u and a '-8.0m x -8.0m' pen interior - a scale-multiplier error (UE cubes are 100 units per unit of scale, not 50). Corrected: rim 50u / 0.5m, pen interior 1.5m x 1.5m."
+  ]
 }
