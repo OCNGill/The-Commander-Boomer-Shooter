@@ -11,16 +11,34 @@ Two independent checks:
 
 1. SPECTRAL SHIFT via mel-domain alignment. Compute the log-mel
    spectrogram of the base clip and of the variant, then find the shift
-   (in cents) that best aligns the variant's mel bins onto the base's.
-   A variant shifted DOWN by N semitones must align at roughly -N
-   semitones relative to the base. This is direction-sensitive and does
-   not depend on any F0 estimator.
+   that best aligns the variant's mel bins onto the base's. A variant
+   shifted DOWN by N semitones must align at roughly -N semitones
+   relative to the base. This is direction-sensitive and does not
+   depend on any F0 estimator.
 
-2. F0 via YIN, plus an explicit octave-error audit: report the fraction of
-   voiced frames and the modal octave so a spurious 2x/3x reading is
-   visible rather than silently averaged in.
+   NOTE ON UNITS: `best_shift_cents` returns an index into the 48-band
+   filterbank, i.e. MEL BINS. It is not a count of cents and not a
+   count of semitones. It is reported below as `bands` and is NOT
+   compared against the semitone EXPECT table.
+
+2. REGISTER via F0. The register check is the semitone offset of the
+   variant's octave-corrected YIN F0 median from the base clip's:
+   12 * log2(f0_variant / f0_base). That is the quantity the design
+   targets in semitones, so it is the quantity that is compared to
+   EXPECT, with a tolerance in semitones.
+
+   Plus an explicit octave-error audit: report the fraction of voiced
+   frames and the modal octave so a spurious 2x/3x reading is visible
+   rather than silently averaged in.
+
+   An earlier revision of this script compared the semitone EXPECT
+   table against the mel-BIN shift and reported "MISMATCH" for every
+   character clip. That verdict was a units error, not a defect: the
+   same clips measured in semitones by the estimator below land within
+   TOLERANCE_ST of their design targets.
 """
 import glob
+import math
 import os
 import sys
 
@@ -117,32 +135,40 @@ if __name__ == "__main__":
     base = ".audio_work/refs/spokesman.wav"
     bx, bsr = sa.load_wav(base)
     bmel = logmel(bx, bsr)
-    print("=== REF CLIP AUDIT (direction + octave check) ===")
-    print(f"{'ref':<20}{'shift_mel':>10}{'f0_med':>9}{'oct':>6}"
-          f"{'voiced%':>9}  verdict")
+    base_aud = f0_audit(base)
+    base_f0 = base_aud["f0_median_hz"] / base_aud["dominant_octave_of_median"]
+    print("=== REF CLIP AUDIT (register in semitones + mel-band alignment) ===")
+    print(f"{'ref':<20}{'st':>8}{'target':>8}{'f0_med':>9}{'oct':>6}"
+          f"{'voiced%':>9}{'bands':>7}  verdict")
     EXPECT = {"spokesman": 0, "harvester": -2, "harvester_low": -4.5,
               "settlement_human": +1.5}
+    TOLERANCE_ST = 1.0
     rows = {}
     for p in refs:
         name = os.path.splitext(os.path.basename(p))[0]
         x, sr = sa.load_wav(p)
         vmel = logmel(x, sr)
-        shift = best_shift_cents(bmel, vmel)
+        bands = best_shift_cents(bmel, vmel)
         aud = f0_audit(p)
+        f0 = aud["f0_median_hz"] / aud["dominant_octave_of_median"]
+        st = 12.0 * math.log2(f0 / base_f0)
         exp = EXPECT.get(name)
         if exp is None:
             verdict = "?"
         elif name == "spokesman":
-            verdict = "BASE" if shift == 0 else f"UNEXPECTED shift {shift}"
+            verdict = "BASE" if abs(st) <= TOLERANCE_ST else f"UNEXPECTED {st:+.2f} st"
         else:
-            # mel bins ~ 100 cents apart at this config; allow +-2 bins
-            ok = abs(shift - exp) <= 2.5
+            ok = abs(st - exp) <= TOLERANCE_ST
             verdict = ("OK" if ok else
-                       f"MISMATCH expected {exp} got {shift}")
-        rows[name] = {"mel_shift_bins": shift, "audit": aud, "verdict": verdict}
-        print(f"{name:<20}{shift:>10}{aud['f0_median_hz']:>9.2f}"
-              f"{aud['dominant_octave_of_median']:>6}"
-              f"{aud['voiced_fraction']*100:>8.1f}%  {verdict}")
+                       f"OFF TARGET expected {exp} st got {st:+.2f} st")
+        rows[name] = {"semitones_vs_base": round(st, 2),
+                      "expected_semitones": exp,
+                      "mel_band_shift": bands,
+                      "f0_median_hz": aud["f0_median_hz"],
+                      "audit": aud, "verdict": verdict}
+        print(f"{name:<20}{st:>8.2f}{(exp if exp is not None else 0):>8}"
+              f"{aud['f0_median_hz']:>9.2f}{aud['dominant_octave_of_median']:>6}"
+              f"{aud['voiced_fraction']*100:>8.1f}%{bands:>7}  {verdict}")
     print("\n=== F0 with octave correction (fold to the dominant octave) ===")
     for name, r in rows.items():
         a = r["audit"]

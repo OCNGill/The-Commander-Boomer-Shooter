@@ -203,6 +203,12 @@ def build():
             "index": len(sfx_entries),
             "id": name,
             "filename": fn,
+            # The SFX live in a different directory from this manifest, so the
+            # filename alone does not resolve. The contract (section 7.1)
+            # documents an explicit path for every SFX entry for exactly this
+            # reason; the taunt entries do not need one, because they sit
+            # beside the manifest. POSIX separators, repo-relative.
+            "path": os.path.join(SFX_DIR, fn).replace(os.sep, "/"),
             "role": role,
             "description": desc,
             "duration_s": m["duration_s"],

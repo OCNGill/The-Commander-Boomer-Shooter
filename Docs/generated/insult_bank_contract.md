@@ -67,7 +67,7 @@ These were measured on the HTPC node, not assumed:
 
 | Property | Value | How measured |
 |---|---|---|
-| Audio per word | **1.38 s** | 3-word phrase → 4.80 s; 14-word phrase → 19.28 s |
+| Audio per word | **not 1.38 s** — see §1.3.1 | 3-word phrase → 4.80 s; 14-word phrase → 19.28 s; the delivered 40-line bank measures a two-term fit of **0.9228 × words + 2.831 s** (through-origin slope 1.073 s/word, rms residual 0.652 s) |
 | Silence padding | none | threshold sweep over the rendered signal |
 | `speed` parameter | **ignored** | renders at speed 1.0/1.5/2.0 were byte-identical in duration (19.28 s each) |
 | Unknown JSON keys | accepted silently | a `bogus_param` request returned a normal 200 render |
@@ -123,8 +123,8 @@ registers were chosen deliberately for the role:
 
 **The boss drops a register as it breaks.** Phase 1 and 2 taunts are
 `harvester`; phase 3 taunts are `harvester_low`. A human changes a
-character's voice by editing one line in the manifest — the `voice` field on
-the entry, or the `voice_cast` table.
+character's voice by editing one line in the manifest — the `voice_ref` field on
+the entry, or the `voices` block in the manifest.
 
 #### 1.2.1 The voice fingerprint
 
@@ -144,7 +144,7 @@ render-to-render spread).
 - **Spectral centroid (Hz)** — magnitude-weighted mean frequency.
 
 The measured fingerprint table is in §4 and in the manifest's
-`voice_cast` block. The fingerprints are the proof that any delivered file
+`voices` block. The fingerprints are the proof that any delivered file
 carries the voice it claims to.
 
 > **Method note — why the earlier "the `voice` parameter is honoured"
@@ -176,6 +176,68 @@ service is CPU-bound on a shared node, so extra concurrency buys
 diminishing returns — and the cost lands on the HTPC, which also serves the
 fleet's local inference.
 
+#### 1.3.1 The speech-rate model (measured, not assumed)
+
+The rate is **not** a flat 1.38 s/word. That figure was a single-sample
+estimate taken before the bank was rendered; the bank itself measures
+differently, and the constant is corrected here.
+
+Measured across all 40 delivered lines, from the raw 24 kHz TTS renders
+against their word counts:
+
+| Quantity | Value |
+|---|---|
+| Two-term fit | `raw_duration_s = 0.9228 x words + 2.831` |
+| Through-origin slope | **1.073 s/word** (rms residual 0.652 s) |
+| Per-word spread | 0.970 – 1.279 s/word (mean 1.085) |
+| Word counts in the bank | 7 – 10 (mean 8.6) |
+| Raw render durations | 8.65 – 11.80 s |
+| Delivered durations | 5.841 – 5.871 s |
+
+Two models are given because they answer different questions. The
+**through-origin slope (1.073 s/word)** is the marginal cost of one more
+word and is the right number for sizing a future line. The **two-term fit**
+is better for a total-duration estimate because it captures the fixed
+overhead the service adds per request. Do not use the old 1.38 s/word
+figure — it overstates the per-word cost by ~29%.
+
+#### 1.3.2 The word cap and the intelligibility rule genuinely conflict
+
+There is a real contradiction here, and it is worth stating plainly rather
+than papering over:
+
+- The USER cap is **15 words**.
+- The intelligibility rule is that a line must stay intelligible after
+  **~2x time compression**.
+- The 6.0 s ceiling is fixed by the audio contract.
+
+At the measured rate, 15 words renders to **16.3 s** of raw speech, which
+would need **2.71x** compression to fit 6.0 s — past the ~2x intelligibility
+limit. The 15-word cap and the 2x rule **cannot both hold** at a 6.0 s
+ceiling.
+
+**Resolution, as shipped.** The bank uses **7–10 words per line**: below the
+15-word cap, and inside the compression limit. The measured atempo factors
+across the delivered bank are **1.268 – 2.011x** (mean 1.608), with **zero
+lines exceeding the 2.5x hard cap**. The longest line in the bank
+(`insult_p2_09`, 10 words) sits at 2.011x — the worst case in the set, and
+still inside the ~2x rule.
+
+So the 15-word cap stands as the **authoring ceiling** and ~2x compression is
+the **binding constraint**; a 15-word line is not admissible under the
+current 6.0 s ceiling. Recorded here so the next lane does not re-derive it.
+
+#### 1.3.3 Wall-clock render cost
+
+Render wall time is a function of **contention**, not of word count alone.
+The service is CPU-only, so a single utterance takes roughly **130–165 s**
+to render on an idle node.
+
+> **Do not quote a per-line wall-clock figure from this run.** The bank was
+> rendered at concurrency, so the per-line cost in that run is not the
+> per-line cost of an isolated request. The 130–165 s figure is the
+> *single-request* cost. To quote a batch cost, re-measure it.
+
 ### 1.4 The HTPC contention rule
 
 The TTS service and the fleet's local inference server share the HTPC's
@@ -188,8 +250,9 @@ must use `/v1/completions` or it measures nothing).
 render concurrency to 4 rather than pushing the fleet's inference for a
 sound bank.** A sound bank is worth four minutes; a starved inference node
 is worth more than that. `Tools/python/health_watch.py` samples the
-inference server on a fixed interval and reports a `HEALTHY` / `DEGRADED`
-verdict against the pre-render baseline.
+inference server on a fixed interval and returns a single verdict:
+**`healthy`**, **`cold`** (a model that is still coming up), or **`wedged`**
+(accepts connections but does not answer). See §8.
 
 ---
 
@@ -205,7 +268,7 @@ verdict against the pre-render baseline.
 | Phases | 1 = cheerfully wrong non-sequiturs · 2 = glitchy repetition · 3 = threatening but still broken |
 
 **Why the length cap is 15 words, and why that is not arbitrary.** The
-service renders at 1.38 s of audio per word and ignores `speed`, so a
+service ignores `speed` and renders at the measured rate in §1.3.1, not the old 1.38 s of audio per word, so a
 line's render cost is set by its word count. A 14-word line produces 19.28 s
 of audio and cost 251 s of wall time; a short line costs 57–125 s. Lines are
 then time-compressed into the 1.5–6.0 s delivery window, so an over-long
@@ -434,18 +497,35 @@ The taunt channel ducks the music bed by **6 dB** while it plays
                 "cooldown_window": { "n_plays": 6, ... },
                 "weighted_selection": ..., "timing": ...,
                 "missing_file_fallback": ..., "ducking": ... },
+  "voices": { "field_name": "ref",
+              "not_voice": "the request field is `ref`; `voice` is accepted and silently ignored",
+              "registered_references": ["spokesman", "commander", "hermes", "harvester", "analyst", "sentry"],
+              "character_voice_map": { ... },
+              "phase_to_ref": { "1": "harvester", "2": "analyst", "3": "sentry" },
+              "fingerprint_table": { "harvester": { "role": "...",
+                                     "f0_median_hz": 76.91,
+                                     "spectral_centroid_hz": 206.03, ... }, ... } },
   "taunts": [ { "index": 0, "id": "insult_p1_01",
                 "filename": "insult_p1_01.wav",
                 "text": "...", "word_count": 9, "phase": 1,
-                "duration_s": 5.87, "integrated_lufs": -16.0,
-                "true_peak_dbtp": -3.4, "sample_peak_dbfs": -3.5,
+                "phase_weight": { "phase_1": 1.0, "phase_2": 0.0, "phase_3": 0.0 },
+                "voice_ref": "harvester",
+                "voice_fingerprint": { "role": "THE BOSS - phases 1-2",
+                                       "f0_median_hz": 76.91,
+                                       "spectral_centroid_hz": 206.03, ... },
+                "duration_s": 5.849, "integrated_lufs": -15.9,
+                "true_peak_dbtp": -1.5, "sample_peak_dbfs": -1.497,
                 "sample_rate": 44100, "channels": 1,
-                "clipped_samples": 0, "sha256": "...", "bytes": 517234,
+                "clipped_samples": 0, "sha256": "...", "bytes": 516661,
                 "verified": true, "problems": [] } ],
   "sfx": [ { "index": 0, "id": "sfx_burp", "filename": "sfx_burp.wav",
+             "path": "Content/Audio/SFX/sfx_burp.wav",
              "role": "pizza_launch", "description": "...",
              "duration_s": 1.35, "integrated_lufs": -16.3,
-             "true_peak_dbtp": -1.6, "sha256": "...", "verified": true } ],
+             "true_peak_dbtp": -1.6, "sample_peak_dbfs": -1.559,
+             "sample_rate": 44100, "channels": 1,
+             "clipped_samples": 0, "sha256": "...",
+             "verified": true, "problems": [] } ],
   "verification": { "all_taunts_verified": true, "all_sfx_verified": true,
                     "problems": [] }
 }
@@ -485,3 +565,16 @@ no TTS — these are sound effects, not speech.
 
 They are normalised through the same pipeline and to the same target as the
 taunts, so the whole bank sits at −16 LUFS.
+
+### 7.1 Where the files live
+
+| | Directory |
+|---|---|
+| Taunts | `Content/Audio/Insults/` |
+| SFX | `Content/Audio/SFX/` |
+| Manifest | `Content/Audio/Insults/insults_manifest.json` |
+
+Each SFX manifest entry carries an explicit `path` field
+(`Content/Audio/SFX/<filename>`) so a consumer never has to guess the
+layout from the id. The taunts live in a different directory, so a consumer
+that assumes one directory for both will fail to load the SFX.
