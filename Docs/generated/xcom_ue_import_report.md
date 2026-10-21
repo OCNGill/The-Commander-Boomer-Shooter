@@ -131,3 +131,23 @@ not from this import.
 
 Height deltas are expected: the manifest reports the Blender object's height, while
 the UE value is the axis-aligned bounding box of the imported mesh.
+
+
+## Triangle-count reconciliation (added 2026-10-21, Hermes)
+
+A separate audit re-imported each exported FBX into Blender and counted triangles on the raw
+mesh. The FBX files are complete and match the Blender build manifest exactly:
+
+| Enemy | source FBX tris (audited) | UE 5.8 imported tris | retention |
+|---|---|---|---|
+| XCOM_Sectoid | 7308 | 2864 | 39.2% |
+| XCOM_Viper | 5764 | 3712 | 64.4% |
+| XCOM_Floater | 2184 | 1980 | 90.7% |
+| XCOM_Muton | 5216 | 2520 | 48.3% |
+| XCOM_Chryssalid | 6252 | 2536 | 40.6% |
+
+The earlier statement that the imported triangle counts "match the Blender manifest exactly" was
+**wrong** and is retracted here. The Blender-side export is sound; the reduction happens inside
+UE 5.8's import pass (degenerate/duplicate removal on geometry assembled from joined primitives).
+Whether the engine asset still looks like the approved hero render is **not yet proven** - an
+in-engine render comparison is required before the enemies are signed off.

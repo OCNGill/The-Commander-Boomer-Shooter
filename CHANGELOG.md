@@ -232,3 +232,35 @@ and only reading the live geometry, not the intent, told us which one was real.*
 
 > *Psalm 119:105 (ESV) - "Your word is a lamp for my feet, a light on my path."* The camera had to be
 > re-aimed at the path that was actually built, not the one we assumed.
+
+### 2026-10-21f - Five X-COM enemies rebuilt, imported into UE 5.8, and the triangle claim retracted
+
+- **Enemy v3 is live.** All five X-COM models rebuilt from scratch and published to the dashboard
+  (`CommandCenter/outputs/enemy_models/`): hero shot, turnaround, human-scale reference and a
+  shape-only silhouette plate per enemy.
+- **The Floater's five descending legs with glowing feet are gone.** The body is now one continuous
+  swept manta planform from tip to tip, with a low segmented glowing dorsal core and two hair-fine
+  filaments trailing off the rear. Verified two ways: a bottom-up orthographic silhouette render shows
+  a single smooth planform, and the mesh's lowest vertex is one centred head pod at z = 0.902 - nothing
+  hangs below the body.
+- **All five FBX are imported into Unreal Engine 5.8** at `/Game/Enemies/XCOM/`, each verified by
+  reloading the saved asset from disk in a separate read-only editor session. Collision is
+  `Use Complex as Simple` on all five (written straight to `BodySetup.CollisionTraceFlag` - UE 5.8 has
+  no `set_collision_complex_as_simple` helper). Import report:
+  `Docs/generated/xcom_ue_import_report.json`.
+- **Triangle-count reconciliation - a claim is retracted.** A separate audit re-imported each exported
+  FBX into Blender and counted triangles on the raw mesh: the FBX files are complete and match the
+  Blender build manifest exactly (Sectoid 7308, Viper 5764, Floater 2184, Muton 5216, Chryssalid 6252).
+  UE 5.8's import retains only 39-91% of those triangles. The earlier statement that the imported
+  counts "match the Blender manifest exactly" was **wrong** and is retracted. The Blender-side export
+  is sound; the reduction happens in UE's import pass (degenerate/duplicate removal on geometry
+  assembled from joined primitives). **In-engine visual parity against the approved hero renders is
+  still unproven** and is the next gate.
+- Disclosed limits from the build lane, carried forward deliberately: the contact shadow is a render
+  rig (painted occlusion patch + a 700 W near-vertical spot), not baked geometry, so the engine needs
+  its own shadow solution; procedural materials do not survive FBX and need texture bakes; LODs,
+  collision meshes and import-ready gameplay assets are out of scope for this pass; the Sectoid's lit
+  shoulder caps still read as ball joints at 900 px and the Viper's head/neck still shows a seam.
+
+> *Deuteronomy 25:15 (ESV) - "You shall not have in your bag two differing weights."* One honest scale
+> for the models and one for the engine: the numbers had to reconcile before anyone signed off.

@@ -32,7 +32,11 @@
       "error": "",
       "mesh_object": "XCOM_Sectoid",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "collision_is_complex_as_simple": true
+      "collision_is_complex_as_simple": true,
+      "source_fbx_tris": 7308,
+      "imported_tris": 2864,
+      "import_retention_pct": 39.2,
+      "triangle_count_note": "triangle_count is the post-import mesh count measured inside UE 5.8; source_fbx_tris is the triangle count measured directly in the exported FBX (Blender import audit). The gap is UE 5.8 import-time degenerate/duplicate removal on geometry assembled from joined primitives - NOT a Blender export defect. Visual parity against the approved hero renders is still unverified."
     },
     {
       "enemy": "XCOM_Viper",
@@ -62,7 +66,11 @@
       "error": "",
       "mesh_object": "XCOM_Viper",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "collision_is_complex_as_simple": true
+      "collision_is_complex_as_simple": true,
+      "source_fbx_tris": 5764,
+      "imported_tris": 3712,
+      "import_retention_pct": 64.4,
+      "triangle_count_note": "triangle_count is the post-import mesh count measured inside UE 5.8; source_fbx_tris is the triangle count measured directly in the exported FBX (Blender import audit). The gap is UE 5.8 import-time degenerate/duplicate removal on geometry assembled from joined primitives - NOT a Blender export defect. Visual parity against the approved hero renders is still unverified."
     },
     {
       "enemy": "XCOM_Floater",
@@ -92,7 +100,11 @@
       "error": "",
       "mesh_object": "XCOM_Floater",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "collision_is_complex_as_simple": true
+      "collision_is_complex_as_simple": true,
+      "source_fbx_tris": 2184,
+      "imported_tris": 1980,
+      "import_retention_pct": 90.7,
+      "triangle_count_note": "triangle_count is the post-import mesh count measured inside UE 5.8; source_fbx_tris is the triangle count measured directly in the exported FBX (Blender import audit). The gap is UE 5.8 import-time degenerate/duplicate removal on geometry assembled from joined primitives - NOT a Blender export defect. Visual parity against the approved hero renders is still unverified."
     },
     {
       "enemy": "XCOM_Muton",
@@ -122,7 +134,11 @@
       "error": "",
       "mesh_object": "XCOM_Muton",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "collision_is_complex_as_simple": true
+      "collision_is_complex_as_simple": true,
+      "source_fbx_tris": 5216,
+      "imported_tris": 2520,
+      "import_retention_pct": 48.3,
+      "triangle_count_note": "triangle_count is the post-import mesh count measured inside UE 5.8; source_fbx_tris is the triangle count measured directly in the exported FBX (Blender import audit). The gap is UE 5.8 import-time degenerate/duplicate removal on geometry assembled from joined primitives - NOT a Blender export defect. Visual parity against the approved hero renders is still unverified."
     },
     {
       "enemy": "XCOM_Chryssalid",
@@ -152,7 +168,11 @@
       "error": "",
       "mesh_object": "XCOM_Chryssalid",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "collision_is_complex_as_simple": true
+      "collision_is_complex_as_simple": true,
+      "source_fbx_tris": 6252,
+      "imported_tris": 2536,
+      "import_retention_pct": 40.6,
+      "triangle_count_note": "triangle_count is the post-import mesh count measured inside UE 5.8; source_fbx_tris is the triangle count measured directly in the exported FBX (Blender import audit). The gap is UE 5.8 import-time degenerate/duplicate removal on geometry assembled from joined primitives - NOT a Blender export defect. Visual parity against the approved hero renders is still unverified."
     }
   ],
   "summary": "imported=5 failed=0"

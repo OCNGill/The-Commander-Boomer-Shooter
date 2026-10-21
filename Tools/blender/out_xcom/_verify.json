@@ -1,0 +1,117 @@
+{
+ "Sectoid": {
+  "hero_kb": 598.2,
+  "w": 720,
+  "h": 900,
+  "hot": 1081,
+  "green": 787,
+  "cyan": 736,
+  "b5_min": 72.2,
+  "b5_p05": 89.8,
+  "b5_p50": 117.7,
+  "b5_p95": 146.1,
+  "b5_dark_frac": 0.0,
+  "b5_spread": 73.9,
+  "silh": {
+   "black_pct": 11.94,
+   "grey_pct": 87.84,
+   "other_pct": 0.22
+  },
+  "kb_turn": 1534.8,
+  "kb_scale": 609.7,
+  "kb_silh": 471.4,
+  "kb": 167.9
+ },
+ "Viper": {
+  "hero_kb": 582.1,
+  "w": 720,
+  "h": 900,
+  "hot": 4234,
+  "green": 2047,
+  "cyan": 1994,
+  "b5_min": 51.9,
+  "b5_p05": 63.4,
+  "b5_p50": 116.6,
+  "b5_p95": 250.5,
+  "b5_dark_frac": 0.0,
+  "b5_spread": 198.6,
+  "silh": {
+   "black_pct": 7.85,
+   "grey_pct": 91.92,
+   "other_pct": 0.23
+  },
+  "kb_turn": 1291.6,
+  "kb_scale": 589.4,
+  "kb_silh": 473.6,
+  "kb": 140.4
+ },
+ "Floater": {
+  "hero_kb": 583.8,
+  "w": 720,
+  "h": 900,
+  "hot": 12435,
+  "green": 3812,
+  "cyan": 7287,
+  "b5_min": 34.2,
+  "b5_p05": 55.1,
+  "b5_p50": 74.3,
+  "b5_p95": 117.6,
+  "b5_dark_frac": 0.003,
+  "b5_spread": 83.4,
+  "silh": {
+   "black_pct": 6.84,
+   "grey_pct": 93.04,
+   "other_pct": 0.12
+  },
+  "kb_turn": 873.5,
+  "kb_scale": 561.6,
+  "kb_silh": 464.6,
+  "kb": 78.3
+ },
+ "Muton": {
+  "hero_kb": 612.0,
+  "w": 720,
+  "h": 900,
+  "hot": 6675,
+  "green": 2665,
+  "cyan": 3114,
+  "b5_min": 48.9,
+  "b5_p05": 63.2,
+  "b5_p50": 116.8,
+  "b5_p95": 249.6,
+  "b5_dark_frac": 0.0,
+  "b5_spread": 200.7,
+  "silh": {
+   "black_pct": 13.2,
+   "grey_pct": 86.57,
+   "other_pct": 0.24
+  },
+  "kb_turn": 1519.1,
+  "kb_scale": 603.7,
+  "kb_silh": 467.1,
+  "kb": 122.7
+ },
+ "Chryssalid": {
+  "hero_kb": 641.0,
+  "w": 720,
+  "h": 900,
+  "hot": 5562,
+  "green": 467,
+  "cyan": 79,
+  "b5_min": 24.4,
+  "b5_p05": 84.9,
+  "b5_p50": 114.6,
+  "b5_p95": 134.3,
+  "b5_dark_frac": 0.001,
+  "b5_spread": 109.9,
+  "silh": {
+   "black_pct": 21.9,
+   "grey_pct": 77.67,
+   "other_pct": 0.44
+  },
+  "kb_turn": 1857.4,
+  "kb_scale": 624.9,
+  "kb_silh": 469.7,
+  "kb": 164.8
+ }
+}
