@@ -14,6 +14,14 @@ re-dispatch, not a verdict.
 - Evidence base: every file below was opened and looked at with `vision_analyze`; every number
   was measured independently with numpy/PIL rather than taken from the rig's own JSON.
 
+> **LEDGER: no line was appended.** The original dispatch asked for one line in
+> `CommandCenter/outputs/LEDGER.md` in the form `EBERT-03 | … | <total> <verdict> | <ts>`. The
+> Commander's HOLD supersedes it on two counts: `LEDGER.md` sits outside `outputs/ebert/**`, which
+> the HOLD puts off-limits, and the required format demands a score and a verdict, which the HOLD
+> forbids. `LEDGER.md` is therefore untouched. `CommandCenter/outputs/ebert/EBERT_LIGHTING_VERDICT.md`
+> does not exist and was not created. When the scoring run happens, the ledger line should be
+> written then, with the real total.
+
 ## ⚠ Read this first: the evidence set was rewritten three times under this review
 
 | Window | What changed | Status of my observations |

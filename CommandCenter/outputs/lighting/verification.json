@@ -1,0 +1,2077 @@
+{
+ "generated": "2026-10-21T05:58:24",
+ "renderer": "EEVEE (Blender 4.2)",
+ "resolution": [
+  720,
+  900
+ ],
+ "samples": 48,
+ "view_transform": "AgX",
+ "bar": {
+  "face_p99_min": 25,
+  "torso_p99_min": 25,
+  "floor_front_over_face_min": 1.5,
+  "floor_zone_min_diff_pct": 15.0,
+  "rim_bright_over_body_min": 0.03,
+  "rim_band_mean_min": 120.0,
+  "under_lowbody_over_torso_min": 1.3,
+  "under_feet_over_torso_min": 1.3,
+  "clipped_max": 0,
+  "background_darkness_max": 40.0,
+  "floor_mean_min": 45.0,
+  "floor_mean_max": 175.0
+ },
+ "window": {
+  "face_p99": [
+   60.0,
+   180.0
+  ],
+  "torso_p99": [
+   60.0,
+   180.0
+  ],
+  "floor_mean": [
+   45.0,
+   175.0
+  ],
+  "floor_pool": [
+   95.0,
+   150.0
+  ],
+  "floor_shadow": [
+   45.0,
+   105.0
+  ],
+  "background_darkness": [
+   0.0,
+   40.0
+  ],
+  "rim_band_mean": [
+   120.0,
+   240.0
+  ]
+ },
+ "skipped": [],
+ "enemies": {
+  "XCOM_Chryssalid": {
+   "width": 720,
+   "height": 900,
+   "clipped_white_pixels": 0,
+   "clipped_white_saturated": 0,
+   "clipped_body_pixels": 0,
+   "clipped_body_pixels_on_subject": 0,
+   "clipped_colour_pixels_non_emissive": 0,
+   "clipped_colour_pixels_emissive": 0,
+   "clip_definitions": {
+    "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+    "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+    "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+    "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+    "clipped_colour_pixels_emissive": "same test on emissive pixels",
+    "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+    "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+   },
+   "bright_pixels_gt190": 1749,
+   "emissive_pixels": 1150,
+   "rim_pixels": 191485,
+   "background_darkness": 62.88,
+   "background_darkness_by_side": {
+    "top": 0.96,
+    "bottom": 145.61,
+    "left": 58.49,
+    "right": 48.09
+   },
+   "zone_stats": {
+    "face": {
+     "n": 12179,
+     "mean_lum": 88.166,
+     "p50_lum": 85.956,
+     "p99_lum": 245.44,
+     "max_lum": 246.367,
+     "max_channel": 248,
+     "bright_gt190": 617,
+     "saturated_gt190": 18,
+     "mean_lin": 0.147666
+    },
+    "torso": {
+     "n": 23955,
+     "mean_lum": 27.375,
+     "p50_lum": 18.013,
+     "p99_lum": 132.697,
+     "max_lum": 153.91,
+     "max_channel": 166,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.02533
+    },
+    "lowbody": {
+     "n": 15809,
+     "mean_lum": 48.039,
+     "p50_lum": 30.598,
+     "p99_lum": 120.705,
+     "max_lum": 154.002,
+     "max_channel": 169,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.051985
+    },
+    "feet": {
+     "n": 2323,
+     "mean_lum": 60.136,
+     "p50_lum": 36.173,
+     "p99_lum": 157.307,
+     "max_lum": 161.352,
+     "max_channel": 174,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.082554
+    },
+    "floor_front": {
+     "n": 1000,
+     "mean_lum": 153.546,
+     "p50_lum": 153.571,
+     "p99_lum": 158.638,
+     "max_lum": 159.851,
+     "max_channel": 173,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.331347
+    },
+    "floor_shadow_side": {
+     "n": 805,
+     "mean_lum": 145.021,
+     "p50_lum": 145.573,
+     "p99_lum": 154.274,
+     "max_lum": 155.355,
+     "max_channel": 170,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.295256
+    },
+    "floor_key_side": {
+     "n": 950,
+     "mean_lum": 138.205,
+     "p50_lum": 137.79,
+     "p99_lum": 150.713,
+     "max_lum": 155.21,
+     "max_channel": 170,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.26813
+    }
+   },
+   "body_pixels": 118111,
+   "visible_body_pixels": 72950,
+   "rim_band_pixels": 13165,
+   "rim_band_bright_pixels": 0,
+   "rim_band_mean_lum": 59.121,
+   "rim_band_hot_mean_lum": 0.0,
+   "rim_band_clipped_pixels": 0,
+   "rim_bright_over_body": 0.0,
+   "rim_bright_over_visible_body": 0.0,
+   "contact_shadow_pixels": 16864,
+   "contact_shadow_mean_lum": 88.004,
+   "contact_shadow_p50_lum": 137.867,
+   "contact_shadow_ratio_mask": 0.5731,
+   "emissive_only": {
+    "width": 720,
+    "height": 900,
+    "clipped_white_pixels": 0,
+    "clipped_white_saturated": 0,
+    "clipped_body_pixels": 0,
+    "clipped_body_pixels_on_subject": 0,
+    "clipped_colour_pixels_non_emissive": 0,
+    "clipped_colour_pixels_emissive": 0,
+    "clip_definitions": {
+     "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+     "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+     "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+     "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+     "clipped_colour_pixels_emissive": "same test on emissive pixels",
+     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+    },
+    "bright_pixels_gt190": 1374,
+    "emissive_pixels": 1374,
+    "rim_pixels": 2329,
+    "background_darkness": 1.454,
+    "background_darkness_by_side": {
+     "top": 0.41,
+     "bottom": 4.01,
+     "left": 0.63,
+     "right": 0.68
+    },
+    "zone_stats": {
+     "face": {
+      "n": 12179,
+      "mean_lum": 0.412,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000125
+     },
+     "torso": {
+      "n": 23955,
+      "mean_lum": 11.424,
+      "p50_lum": 1.0,
+      "p99_lum": 79.692,
+      "max_lum": 97.413,
+      "max_channel": 124,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.008543
+     },
+     "lowbody": {
+      "n": 15809,
+      "mean_lum": 0.563,
+      "p50_lum": 0.0,
+      "p99_lum": 5.363,
+      "max_lum": 25.464,
+      "max_channel": 34,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000173
+     },
+     "feet": {
+      "n": 2323,
+      "mean_lum": 0.401,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.715,
+      "max_channel": 2,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000122
+     },
+     "floor_front": {
+      "n": 1000,
+      "mean_lum": 0.938,
+      "p50_lum": 1.0,
+      "p99_lum": 3.218,
+      "max_lum": 3.933,
+      "max_channel": 5,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000285
+     },
+     "floor_shadow_side": {
+      "n": 805,
+      "mean_lum": 0.984,
+      "p50_lum": 1.0,
+      "p99_lum": 2.933,
+      "max_lum": 3.933,
+      "max_channel": 5,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000299
+     },
+     "floor_key_side": {
+      "n": 950,
+      "mean_lum": 1.07,
+      "p50_lum": 1.0,
+      "p99_lum": 3.933,
+      "max_lum": 5.363,
+      "max_channel": 7,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000325
+     }
+    },
+    "body_pixels": 118111,
+    "visible_body_pixels": 9891,
+    "rim_band_pixels": 13165,
+    "rim_band_bright_pixels": 0,
+    "rim_band_mean_lum": 3.194,
+    "rim_band_hot_mean_lum": 0.0,
+    "rim_band_clipped_pixels": 0,
+    "rim_bright_over_body": 0.0,
+    "rim_bright_over_visible_body": 0.0,
+    "contact_shadow_pixels": 16864,
+    "contact_shadow_mean_lum": 3.292,
+    "contact_shadow_p50_lum": 1.0,
+    "contact_shadow_ratio_mask": 3.5096
+   },
+   "studio_vs_reveal": {
+    "width": 1440,
+    "height": 900,
+    "clipped_white_pixels": 1036,
+    "clipped_white_saturated": 12159,
+    "clipped_body_pixels": 0,
+    "clipped_body_pixels_on_subject": 0,
+    "clipped_colour_pixels_non_emissive": 0,
+    "clipped_colour_pixels_emissive": 0,
+    "clip_definitions": {
+     "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+     "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+     "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+     "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+     "clipped_colour_pixels_emissive": "same test on emissive pixels",
+     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+    },
+    "bright_pixels_gt190": 130943,
+    "emissive_pixels": 61690,
+    "rim_pixels": 192402,
+    "background_darkness": 78.488,
+    "background_darkness_by_side": {
+     "top": 4.87,
+     "bottom": 171.19,
+     "left": 86.99,
+     "right": 53.82
+    }
+   },
+   "zones": {
+    "face": {
+     "box": [
+      0.0,
+      0.18222222222222223,
+      1.0,
+      0.2743111111111111
+     ],
+     "of": "body"
+    },
+    "torso": {
+     "box": [
+      0.0,
+      0.42333333333333334,
+      1.0,
+      0.5044444444444445
+     ],
+     "of": "body"
+    },
+    "lowbody": {
+     "box": [
+      0.0,
+      0.5611111111111111,
+      1.0,
+      0.6422222222222222
+     ],
+     "of": "body"
+    },
+    "feet": {
+     "box": [
+      0.0,
+      0.7,
+      1.0,
+      0.7577777777777778
+     ],
+     "of": "body"
+    },
+    "floor_front": {
+     "box": [
+      0.20038447988033295,
+      0.790323673248291,
+      0.25638447988033297,
+      0.818323673248291
+     ],
+     "of": "floor"
+    },
+    "floor_shadow_side": {
+     "box": [
+      0.5595143327713012,
+      0.7773129905462265,
+      0.6075143327713013,
+      0.8033129905462265
+     ],
+     "of": "floor"
+    },
+    "floor_key_side": {
+     "box": [
+      0.8304962148666382,
+      0.7903236434459686,
+      0.8824962148666382,
+      0.8183236434459686
+     ],
+     "of": "floor"
+    },
+    "_probe_screen": {
+     "pool": [
+      0.2284,
+      0.8043
+     ],
+     "shadow": [
+      0.5835,
+      0.7903
+     ],
+     "key_side": [
+      0.8565,
+      0.8043
+     ]
+    }
+   },
+   "rig": {
+    "key": 40.0,
+    "rim": 700.0,
+    "under": 2561.0,
+    "pool": 350.0,
+    "wash": 12.0
+   },
+   "emissive_materials": {
+    "accent": "XCOM_Chryssalid_ACCENT_EMISSIVE"
+   },
+   "emission_strength": {
+    "accent": 0.9,
+    "eye": 0.9,
+    "core": 0.8,
+    "plasma": 0.7
+   },
+   "body_height": 1.0278,
+   "torso_mean_lum": 27.375,
+   "face_mean_lum": 88.166,
+   "under_lowbody_over_torso": 1.7548,
+   "under_feet_over_torso": 2.1967,
+   "floor_zone_min_diff_pct": 4.7,
+   "floor_zone_means": {
+    "floor_front": 153.55,
+    "floor_shadow_side": 145.02,
+    "floor_key_side": 138.21
+   },
+   "contact_shadow_ratio": 0.9445,
+   "criteria": {
+    "no_clipped_white": true,
+    "no_clipped_body": true,
+    "no_colour_clip_off_emissive": true,
+    "floor_zones_in_window": true,
+    "floor_zones_differ_15pct": false,
+    "background_darkness_le_40": false,
+    "contact_shadow_present": true,
+    "face_p99_ge_25": true,
+    "torso_p99_ge_25": true,
+    "rim_3pct_of_body": false,
+    "rim_band_mean_ge_120": false,
+    "under_lowbody_1_3x_torso": true,
+    "under_feet_1_3x_torso": true
+   },
+   "all_criteria_pass": false,
+   "criteria_passed": 9,
+   "failed_criteria": [
+    "floor_zones_differ_15pct",
+    "background_darkness_le_40",
+    "rim_3pct_of_body",
+    "rim_band_mean_ge_120"
+   ]
+  },
+  "XCOM_Muton": {
+   "width": 720,
+   "height": 900,
+   "clipped_white_pixels": 328,
+   "clipped_white_saturated": 779,
+   "clipped_body_pixels": 328,
+   "clipped_body_pixels_on_subject": 328,
+   "clipped_colour_pixels_non_emissive": 6,
+   "clipped_colour_pixels_emissive": 1,
+   "clip_definitions": {
+    "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+    "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+    "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+    "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+    "clipped_colour_pixels_emissive": "same test on emissive pixels",
+    "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+    "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+   },
+   "bright_pixels_gt190": 9156,
+   "emissive_pixels": 3836,
+   "rim_pixels": 200077,
+   "background_darkness": 59.176,
+   "background_darkness_by_side": {
+    "top": 0.96,
+    "bottom": 142.02,
+    "left": 49.83,
+    "right": 46.08
+   },
+   "zone_stats": {
+    "face": {
+     "n": 3655,
+     "mean_lum": 41.168,
+     "p50_lum": 18.661,
+     "p99_lum": 183.119,
+     "max_lum": 210.534,
+     "max_channel": 219,
+     "bright_gt190": 40,
+     "saturated_gt190": 24,
+     "mean_lin": 0.054616
+    },
+    "torso": {
+     "n": 10582,
+     "mean_lum": 91.848,
+     "p50_lum": 61.385,
+     "p99_lum": 248.303,
+     "max_lum": 251.371,
+     "max_channel": 254,
+     "bright_gt190": 2840,
+     "saturated_gt190": 602,
+     "mean_lin": 0.2285
+    },
+    "lowbody": {
+     "n": 5881,
+     "mean_lum": 52.334,
+     "p50_lum": 24.812,
+     "p99_lum": 242.163,
+     "max_lum": 244.091,
+     "max_channel": 249,
+     "bright_gt190": 537,
+     "saturated_gt190": 52,
+     "mean_lin": 0.099151
+    },
+    "feet": {
+     "n": 2501,
+     "mean_lum": 45.455,
+     "p50_lum": 21.026,
+     "p99_lum": 133.225,
+     "max_lum": 138.007,
+     "max_channel": 154,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.055493
+    },
+    "floor_front": {
+     "n": 1000,
+     "mean_lum": 144.994,
+     "p50_lum": 145.073,
+     "p99_lum": 147.57,
+     "max_lum": 149.285,
+     "max_channel": 163,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.29273
+    },
+    "floor_shadow_side": {
+     "n": 805,
+     "mean_lum": 150.852,
+     "p50_lum": 150.856,
+     "p99_lum": 155.711,
+     "max_lum": 155.995,
+     "max_channel": 169,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.318881
+    },
+    "floor_key_side": {
+     "n": 950,
+     "mean_lum": 141.623,
+     "p50_lum": 142.288,
+     "p99_lum": 149.785,
+     "max_lum": 150.785,
+     "max_channel": 166,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.281165
+    }
+   },
+   "body_pixels": 64800,
+   "visible_body_pixels": 35110,
+   "rim_band_pixels": 8008,
+   "rim_band_bright_pixels": 427,
+   "rim_band_mean_lum": 65.393,
+   "rim_band_hot_mean_lum": 212.69,
+   "rim_band_clipped_pixels": 0,
+   "rim_bright_over_body": 0.00659,
+   "rim_bright_over_visible_body": 0.01216,
+   "contact_shadow_pixels": 9083,
+   "contact_shadow_mean_lum": 55.054,
+   "contact_shadow_p50_lum": 15.946,
+   "contact_shadow_ratio_mask": 0.3797,
+   "emissive_only": {
+    "width": 720,
+    "height": 900,
+    "clipped_white_pixels": 0,
+    "clipped_white_saturated": 0,
+    "clipped_body_pixels": 0,
+    "clipped_body_pixels_on_subject": 0,
+    "clipped_colour_pixels_non_emissive": 0,
+    "clipped_colour_pixels_emissive": 0,
+    "clip_definitions": {
+     "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+     "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+     "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+     "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+     "clipped_colour_pixels_emissive": "same test on emissive pixels",
+     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+    },
+    "bright_pixels_gt190": 814,
+    "emissive_pixels": 814,
+    "rim_pixels": 1378,
+    "background_darkness": 0.478,
+    "background_darkness_by_side": {
+     "top": 0.41,
+     "bottom": 0.59,
+     "left": 0.52,
+     "right": 0.44
+    },
+    "zone_stats": {
+     "face": {
+      "n": 3655,
+      "mean_lum": 42.501,
+      "p50_lum": 39.919,
+      "p99_lum": 89.489,
+      "max_lum": 92.345,
+      "max_channel": 119,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.035231
+     },
+     "torso": {
+      "n": 10582,
+      "mean_lum": 4.752,
+      "p50_lum": 1.503,
+      "p99_lum": 29.401,
+      "max_lum": 38.417,
+      "max_channel": 51,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.001766
+     },
+     "lowbody": {
+      "n": 5881,
+      "mean_lum": 0.411,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000125
+     },
+     "feet": {
+      "n": 2501,
+      "mean_lum": 0.405,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000123
+     },
+     "floor_front": {
+      "n": 1000,
+      "mean_lum": 0.423,
+      "p50_lum": 0.0,
+      "p99_lum": 1.715,
+      "max_lum": 1.715,
+      "max_channel": 2,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000128
+     },
+     "floor_shadow_side": {
+      "n": 805,
+      "mean_lum": 0.435,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.715,
+      "max_channel": 2,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000132
+     },
+     "floor_key_side": {
+      "n": 950,
+      "mean_lum": 0.7,
+      "p50_lum": 0.787,
+      "p99_lum": 2.43,
+      "max_lum": 2.503,
+      "max_channel": 3,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000213
+     }
+    },
+    "body_pixels": 64800,
+    "visible_body_pixels": 5690,
+    "rim_band_pixels": 8008,
+    "rim_band_bright_pixels": 0,
+    "rim_band_mean_lum": 4.155,
+    "rim_band_hot_mean_lum": 0.0,
+    "rim_band_clipped_pixels": 0,
+    "rim_bright_over_body": 0.0,
+    "rim_bright_over_visible_body": 0.0,
+    "contact_shadow_pixels": 9083,
+    "contact_shadow_mean_lum": 0.435,
+    "contact_shadow_p50_lum": 0.0,
+    "contact_shadow_ratio_mask": 1.0284
+   },
+   "studio_vs_reveal": {
+    "width": 1440,
+    "height": 900,
+    "clipped_white_pixels": 509,
+    "clipped_white_saturated": 2872,
+    "clipped_body_pixels": 0,
+    "clipped_body_pixels_on_subject": 0,
+    "clipped_colour_pixels_non_emissive": 7,
+    "clipped_colour_pixels_emissive": 0,
+    "clip_definitions": {
+     "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+     "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+     "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+     "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+     "clipped_colour_pixels_emissive": "same test on emissive pixels",
+     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+    },
+    "bright_pixels_gt190": 56749,
+    "emissive_pixels": 36885,
+    "rim_pixels": 200303,
+    "background_darkness": 67.965,
+    "background_darkness_by_side": {
+     "top": 4.87,
+     "bottom": 148.99,
+     "left": 69.59,
+     "right": 51.09
+    }
+   },
+   "zones": {
+    "face": {
+     "box": [
+      0.0,
+      0.15333333333333332,
+      1.0,
+      0.24737777777777775
+     ],
+     "of": "body"
+    },
+    "torso": {
+     "box": [
+      0.0,
+      0.4,
+      1.0,
+      0.4822222222222222
+     ],
+     "of": "body"
+    },
+    "lowbody": {
+     "box": [
+      0.0,
+      0.5411111111111111,
+      1.0,
+      0.6233333333333333
+     ],
+     "of": "body"
+    },
+    "feet": {
+     "box": [
+      0.0,
+      0.6822222222222222,
+      1.0,
+      0.7411111111111112
+     ],
+     "of": "body"
+    },
+    "floor_front": {
+     "box": [
+      0.2003841073513031,
+      0.7903233454227447,
+      0.2563841073513031,
+      0.8183233454227448
+     ],
+     "of": "floor"
+    },
+    "floor_shadow_side": {
+     "box": [
+      0.5595140347480774,
+      0.777312722325325,
+      0.6075140347480774,
+      0.803312722325325
+     ],
+     "of": "floor"
+    },
+    "floor_key_side": {
+     "box": [
+      0.8304959168434143,
+      0.7903233156204224,
+      0.8824959168434143,
+      0.8183233156204224
+     ],
+     "of": "floor"
+    },
+    "_probe_screen": {
+     "pool": [
+      0.2284,
+      0.8043
+     ],
+     "shadow": [
+      0.5835,
+      0.7903
+     ],
+     "key_side": [
+      0.8565,
+      0.8043
+     ]
+    }
+   },
+   "rig": {
+    "key": 33.024,
+    "rim": 350.0,
+    "under": 2561.0,
+    "pool": 224.708,
+    "wash": 7.704
+   },
+   "emissive_materials": {
+    "accent": "XCOM_Muton_ACCENT_EMISSIVE"
+   },
+   "emission_strength": {
+    "accent": 0.9,
+    "eye": 0.9,
+    "core": 0.8,
+    "plasma": 0.7
+   },
+   "body_height": 2.0688,
+   "torso_mean_lum": 91.848,
+   "face_mean_lum": 41.168,
+   "under_lowbody_over_torso": 0.5698,
+   "under_feet_over_torso": 0.4949,
+   "floor_zone_min_diff_pct": 2.32,
+   "floor_zone_means": {
+    "floor_front": 144.99,
+    "floor_shadow_side": 150.85,
+    "floor_key_side": 141.62
+   },
+   "contact_shadow_ratio": 1.0404,
+   "criteria": {
+    "no_clipped_white": false,
+    "no_clipped_body": false,
+    "no_colour_clip_off_emissive": false,
+    "floor_zones_in_window": true,
+    "floor_zones_differ_15pct": false,
+    "background_darkness_le_40": false,
+    "contact_shadow_present": true,
+    "face_p99_ge_25": true,
+    "torso_p99_ge_25": true,
+    "rim_3pct_of_body": false,
+    "rim_band_mean_ge_120": false,
+    "under_lowbody_1_3x_torso": false,
+    "under_feet_1_3x_torso": false
+   },
+   "all_criteria_pass": false,
+   "criteria_passed": 4,
+   "failed_criteria": [
+    "no_clipped_white",
+    "no_clipped_body",
+    "no_colour_clip_off_emissive",
+    "floor_zones_differ_15pct",
+    "background_darkness_le_40",
+    "rim_3pct_of_body",
+    "rim_band_mean_ge_120",
+    "under_lowbody_1_3x_torso",
+    "under_feet_1_3x_torso"
+   ]
+  },
+  "XCOM_Floater": {
+   "width": 720,
+   "height": 900,
+   "clipped_white_pixels": 0,
+   "clipped_white_saturated": 2,
+   "clipped_body_pixels": 0,
+   "clipped_body_pixels_on_subject": 0,
+   "clipped_colour_pixels_non_emissive": 0,
+   "clipped_colour_pixels_emissive": 0,
+   "clip_definitions": {
+    "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+    "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+    "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+    "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+    "clipped_colour_pixels_emissive": "same test on emissive pixels",
+    "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+    "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+   },
+   "bright_pixels_gt190": 460,
+   "emissive_pixels": 453,
+   "rim_pixels": 8308,
+   "background_darkness": 0.774,
+   "background_darkness_by_side": {
+    "top": 0.97,
+    "bottom": 0.42,
+    "left": 0.83,
+    "right": 0.84
+   },
+   "zone_stats": {
+    "face": {
+     "n": 0,
+     "mean_lum": 0.0,
+     "p50_lum": 0.0,
+     "p99_lum": 0.0,
+     "max_lum": 0.0,
+     "max_channel": 0,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.0
+    },
+    "torso": {
+     "n": 4930,
+     "mean_lum": 3.309,
+     "p50_lum": 1.0,
+     "p99_lum": 33.284,
+     "max_lum": 241.954,
+     "max_channel": 251,
+     "bright_gt190": 15,
+     "saturated_gt190": 8,
+     "mean_lin": 0.003195
+    },
+    "lowbody": {
+     "n": 599,
+     "mean_lum": 3.006,
+     "p50_lum": 2.503,
+     "p99_lum": 10.882,
+     "max_lum": 12.091,
+     "max_channel": 17,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.000914
+    },
+    "feet": {
+     "n": 262,
+     "mean_lum": 0.693,
+     "p50_lum": 0.787,
+     "p99_lum": 1.787,
+     "max_lum": 1.787,
+     "max_channel": 2,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.00021
+    },
+    "floor_front": {
+     "n": 964,
+     "mean_lum": 23.318,
+     "p50_lum": 2.787,
+     "p99_lum": 111.653,
+     "max_lum": 121.149,
+     "max_channel": 138,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.023522
+    },
+    "floor_shadow_side": {
+     "n": 544,
+     "mean_lum": 26.757,
+     "p50_lum": 7.261,
+     "p99_lum": 102.718,
+     "max_lum": 110.433,
+     "max_channel": 127,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.024101
+    },
+    "floor_key_side": {
+     "n": 716,
+     "mean_lum": 27.638,
+     "p50_lum": 10.228,
+     "p99_lum": 107.283,
+     "max_lum": 116.149,
+     "max_channel": 133,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.026338
+    }
+   },
+   "body_pixels": 11755,
+   "visible_body_pixels": 743,
+   "rim_band_pixels": 4846,
+   "rim_band_bright_pixels": 124,
+   "rim_band_mean_lum": 8.1,
+   "rim_band_hot_mean_lum": 178.533,
+   "rim_band_clipped_pixels": 0,
+   "rim_bright_over_body": 0.01055,
+   "rim_bright_over_visible_body": 0.16689,
+   "contact_shadow_pixels": 17918,
+   "contact_shadow_mean_lum": 9.472,
+   "contact_shadow_p50_lum": 1.0,
+   "contact_shadow_ratio_mask": 0.4062,
+   "emissive_only": {
+    "width": 720,
+    "height": 900,
+    "clipped_white_pixels": 0,
+    "clipped_white_saturated": 0,
+    "clipped_body_pixels": 0,
+    "clipped_body_pixels_on_subject": 0,
+    "clipped_colour_pixels_non_emissive": 0,
+    "clipped_colour_pixels_emissive": 0,
+    "clip_definitions": {
+     "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+     "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+     "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+     "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+     "clipped_colour_pixels_emissive": "same test on emissive pixels",
+     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+    },
+    "bright_pixels_gt190": 553,
+    "emissive_pixels": 553,
+    "rim_pixels": 910,
+    "background_darkness": 0.404,
+    "background_darkness_by_side": {
+     "top": 0.41,
+     "bottom": 0.4,
+     "left": 0.4,
+     "right": 0.4
+    },
+    "zone_stats": {
+     "face": {
+      "n": 0,
+      "mean_lum": 0.0,
+      "p50_lum": 0.0,
+      "p99_lum": 0.0,
+      "max_lum": 0.0,
+      "max_channel": 0,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.0
+     },
+     "torso": {
+      "n": 4930,
+      "mean_lum": 5.763,
+      "p50_lum": 1.0,
+      "p99_lum": 56.945,
+      "max_lum": 66.458,
+      "max_channel": 87,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.003614
+     },
+     "lowbody": {
+      "n": 599,
+      "mean_lum": 14.645,
+      "p50_lum": 14.95,
+      "p99_lum": 23.965,
+      "max_lum": 24.893,
+      "max_channel": 33,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.005388
+     },
+     "feet": {
+      "n": 262,
+      "mean_lum": 5.223,
+      "p50_lum": 5.151,
+      "p99_lum": 7.581,
+      "max_lum": 8.296,
+      "max_channel": 11,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.001585
+     },
+     "floor_front": {
+      "n": 964,
+      "mean_lum": 10.255,
+      "p50_lum": 7.296,
+      "p99_lum": 27.758,
+      "max_lum": 29.545,
+      "max_channel": 39,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.003827
+     },
+     "floor_shadow_side": {
+      "n": 544,
+      "mean_lum": 16.315,
+      "p50_lum": 17.955,
+      "p99_lum": 29.545,
+      "max_lum": 31.048,
+      "max_channel": 41,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.006756
+     },
+     "floor_key_side": {
+      "n": 716,
+      "mean_lum": 11.877,
+      "p50_lum": 12.017,
+      "p99_lum": 27.032,
+      "max_lum": 28.758,
+      "max_channel": 38,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.004459
+     }
+    },
+    "body_pixels": 11755,
+    "visible_body_pixels": 2167,
+    "rim_band_pixels": 4846,
+    "rim_band_bright_pixels": 185,
+    "rim_band_mean_lum": 12.883,
+    "rim_band_hot_mean_lum": 232.154,
+    "rim_band_clipped_pixels": 0,
+    "rim_bright_over_body": 0.01574,
+    "rim_bright_over_visible_body": 0.08537,
+    "contact_shadow_pixels": 17918,
+    "contact_shadow_mean_lum": 2.018,
+    "contact_shadow_p50_lum": 1.0,
+    "contact_shadow_ratio_mask": 0.1968
+   },
+   "studio_vs_reveal": {
+    "width": 1440,
+    "height": 900,
+    "clipped_white_pixels": 27,
+    "clipped_white_saturated": 580,
+    "clipped_body_pixels": 0,
+    "clipped_body_pixels_on_subject": 0,
+    "clipped_colour_pixels_non_emissive": 0,
+    "clipped_colour_pixels_emissive": 0,
+    "clip_definitions": {
+     "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+     "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+     "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+     "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+     "clipped_colour_pixels_emissive": "same test on emissive pixels",
+     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+    },
+    "bright_pixels_gt190": 7980,
+    "emissive_pixels": 5823,
+    "rim_pixels": 8918,
+    "background_darkness": 29.524,
+    "background_darkness_by_side": {
+     "top": 4.94,
+     "bottom": 47.99,
+     "left": 63.32,
+     "right": 0.85
+    }
+   },
+   "zones": {
+    "face": {
+     "box": [
+      0.0,
+      0.45444444444444443,
+      1.0,
+      0.4661777777777778
+     ],
+     "of": "body"
+    },
+    "torso": {
+     "box": [
+      0.0,
+      0.48444444444444446,
+      1.0,
+      0.49444444444444446
+     ],
+     "of": "body"
+    },
+    "lowbody": {
+     "box": [
+      0.0,
+      0.5022222222222222,
+      1.0,
+      0.5122222222222222
+     ],
+     "of": "body"
+    },
+    "feet": {
+     "box": [
+      0.0,
+      0.52,
+      1.0,
+      0.5277777777777778
+     ],
+     "of": "body"
+    },
+    "floor_front": {
+     "box": [
+      0.4415533215999603,
+      0.5182541296482086,
+      0.49755332159996035,
+      0.5462541296482086
+     ],
+     "of": "floor"
+    },
+    "floor_shadow_side": {
+     "box": [
+      0.4856457004547119,
+      0.5190727527141571,
+      0.5336457004547119,
+      0.5450727527141571
+     ],
+     "of": "floor"
+    },
+    "floor_key_side": {
+     "box": [
+      0.5139619936943054,
+      0.5182541296482086,
+      0.5659619936943054,
+      0.5462541296482086
+     ],
+     "of": "floor"
+    },
+    "_probe_screen": {
+     "pool": [
+      0.4696,
+      0.5323
+     ],
+     "shadow": [
+      0.5096,
+      0.5321
+     ],
+     "key_side": [
+      0.54,
+      0.5323
+     ]
+    }
+   },
+   "rig": {
+    "key": 80.0,
+    "rim": 700.0,
+    "under": 6402.5,
+    "pool": 350.0,
+    "wash": 12.0
+   },
+   "emissive_materials": {
+    "accent": "XCOM_Floater_ACCENT_EMISSIVE"
+   },
+   "emission_strength": {
+    "accent": 0.9,
+    "eye": 0.9,
+    "core": 0.8,
+    "plasma": 0.7
+   },
+   "body_height": 0.2898,
+   "torso_mean_lum": 3.309,
+   "face_mean_lum": 0.0,
+   "under_lowbody_over_torso": 0.9084,
+   "under_feet_over_torso": 0.2094,
+   "floor_zone_min_diff_pct": 3.19,
+   "floor_zone_means": {
+    "floor_front": 23.32,
+    "floor_shadow_side": 26.76,
+    "floor_key_side": 27.64
+   },
+   "contact_shadow_ratio": 1.1475,
+   "criteria": {
+    "no_clipped_white": true,
+    "no_clipped_body": true,
+    "no_colour_clip_off_emissive": true,
+    "floor_zones_in_window": false,
+    "floor_zones_differ_15pct": false,
+    "background_darkness_le_40": true,
+    "contact_shadow_present": true,
+    "face_p99_ge_25": false,
+    "torso_p99_ge_25": true,
+    "rim_3pct_of_body": false,
+    "rim_band_mean_ge_120": false,
+    "under_lowbody_1_3x_torso": false,
+    "under_feet_1_3x_torso": false
+   },
+   "all_criteria_pass": false,
+   "criteria_passed": 6,
+   "failed_criteria": [
+    "floor_zones_in_window",
+    "floor_zones_differ_15pct",
+    "face_p99_ge_25",
+    "rim_3pct_of_body",
+    "rim_band_mean_ge_120",
+    "under_lowbody_1_3x_torso",
+    "under_feet_1_3x_torso"
+   ]
+  },
+  "XCOM_Viper": {
+   "width": 720,
+   "height": 900,
+   "clipped_white_pixels": 78,
+   "clipped_white_saturated": 327,
+   "clipped_body_pixels": 78,
+   "clipped_body_pixels_on_subject": 78,
+   "clipped_colour_pixels_non_emissive": 0,
+   "clipped_colour_pixels_emissive": 0,
+   "clip_definitions": {
+    "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+    "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+    "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+    "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+    "clipped_colour_pixels_emissive": "same test on emissive pixels",
+    "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+    "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+   },
+   "bright_pixels_gt190": 7412,
+   "emissive_pixels": 14,
+   "rim_pixels": 174107,
+   "background_darkness": 61.615,
+   "background_darkness_by_side": {
+    "top": 0.96,
+    "bottom": 149.36,
+    "left": 50.46,
+    "right": 48.17
+   },
+   "zone_stats": {
+    "face": {
+     "n": 3714,
+     "mean_lum": 31.025,
+     "p50_lum": 15.938,
+     "p99_lum": 178.241,
+     "max_lum": 212.951,
+     "max_channel": 216,
+     "bright_gt190": 18,
+     "saturated_gt190": 0,
+     "mean_lin": 0.030898
+    },
+    "torso": {
+     "n": 8511,
+     "mean_lum": 123.574,
+     "p50_lum": 159.886,
+     "p99_lum": 239.083,
+     "max_lum": 241.295,
+     "max_channel": 243,
+     "bright_gt190": 3387,
+     "saturated_gt190": 0,
+     "mean_lin": 0.323321
+    },
+    "lowbody": {
+     "n": 4585,
+     "mean_lum": 109.009,
+     "p50_lum": 64.669,
+     "p99_lum": 252.793,
+     "max_lum": 254.077,
+     "max_channel": 255,
+     "bright_gt190": 1290,
+     "saturated_gt190": 0,
+     "mean_lin": 0.291294
+    },
+    "feet": {
+     "n": 2540,
+     "mean_lum": 43.994,
+     "p50_lum": 18.804,
+     "p99_lum": 133.65,
+     "max_lum": 141.575,
+     "max_channel": 156,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.050471
+    },
+    "floor_front": {
+     "n": 1000,
+     "mean_lum": 145.712,
+     "p50_lum": 146.001,
+     "p99_lum": 148.213,
+     "max_lum": 149.141,
+     "max_channel": 163,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.295883
+    },
+    "floor_shadow_side": {
+     "n": 805,
+     "mean_lum": 151.906,
+     "p50_lum": 151.997,
+     "p99_lum": 156.851,
+     "max_lum": 157.136,
+     "max_channel": 170,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.323537
+    },
+    "floor_key_side": {
+     "n": 950,
+     "mean_lum": 148.289,
+     "p50_lum": 148.998,
+     "p99_lum": 154.495,
+     "max_lum": 155.283,
+     "max_channel": 170,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.308874
+    }
+   },
+   "body_pixels": 41505,
+   "visible_body_pixels": 26901,
+   "rim_band_pixels": 7882,
+   "rim_band_bright_pixels": 801,
+   "rim_band_mean_lum": 75.615,
+   "rim_band_hot_mean_lum": 217.551,
+   "rim_band_clipped_pixels": 0,
+   "rim_bright_over_body": 0.0193,
+   "rim_bright_over_visible_body": 0.02978,
+   "contact_shadow_pixels": 5084,
+   "contact_shadow_mean_lum": 92.175,
+   "contact_shadow_p50_lum": 126.118,
+   "contact_shadow_ratio_mask": 0.6326,
+   "emissive_only": {
+    "width": 720,
+    "height": 900,
+    "clipped_white_pixels": 0,
+    "clipped_white_saturated": 0,
+    "clipped_body_pixels": 0,
+    "clipped_body_pixels_on_subject": 0,
+    "clipped_colour_pixels_non_emissive": 0,
+    "clipped_colour_pixels_emissive": 0,
+    "clip_definitions": {
+     "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+     "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+     "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+     "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+     "clipped_colour_pixels_emissive": "same test on emissive pixels",
+     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+    },
+    "bright_pixels_gt190": 61,
+    "emissive_pixels": 61,
+    "rim_pixels": 62,
+    "background_darkness": 0.405,
+    "background_darkness_by_side": {
+     "top": 0.41,
+     "bottom": 0.41,
+     "left": 0.4,
+     "right": 0.4
+    },
+    "zone_stats": {
+     "face": {
+      "n": 3714,
+      "mean_lum": 6.031,
+      "p50_lum": 2.43,
+      "p99_lum": 32.406,
+      "max_lum": 42.209,
+      "max_channel": 56,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.002317
+     },
+     "torso": {
+      "n": 8511,
+      "mean_lum": 0.953,
+      "p50_lum": 0.715,
+      "p99_lum": 9.727,
+      "max_lum": 134.888,
+      "max_channel": 159,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000331
+     },
+     "lowbody": {
+      "n": 4585,
+      "mean_lum": 0.423,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000128
+     },
+     "feet": {
+      "n": 2540,
+      "mean_lum": 0.426,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000129
+     },
+     "floor_front": {
+      "n": 1000,
+      "mean_lum": 0.377,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000114
+     },
+     "floor_shadow_side": {
+      "n": 805,
+      "mean_lum": 0.415,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.715,
+      "max_channel": 2,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000126
+     },
+     "floor_key_side": {
+      "n": 950,
+      "mean_lum": 0.438,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.715,
+      "max_channel": 2,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000133
+     }
+    },
+    "body_pixels": 41505,
+    "visible_body_pixels": 558,
+    "rim_band_pixels": 7882,
+    "rim_band_bright_pixels": 0,
+    "rim_band_mean_lum": 0.876,
+    "rim_band_hot_mean_lum": 0.0,
+    "rim_band_clipped_pixels": 0,
+    "rim_bright_over_body": 0.0,
+    "rim_bright_over_visible_body": 0.0,
+    "contact_shadow_pixels": 5084,
+    "contact_shadow_mean_lum": 0.417,
+    "contact_shadow_p50_lum": 0.0,
+    "contact_shadow_ratio_mask": 1.1061
+   },
+   "studio_vs_reveal": {
+    "width": 1440,
+    "height": 900,
+    "clipped_white_pixels": 260,
+    "clipped_white_saturated": 2438,
+    "clipped_body_pixels": 0,
+    "clipped_body_pixels_on_subject": 0,
+    "clipped_colour_pixels_non_emissive": 0,
+    "clipped_colour_pixels_emissive": 0,
+    "clip_definitions": {
+     "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+     "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+     "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+     "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+     "clipped_colour_pixels_emissive": "same test on emissive pixels",
+     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+    },
+    "bright_pixels_gt190": 54627,
+    "emissive_pixels": 32301,
+    "rim_pixels": 173168,
+    "background_darkness": 69.36,
+    "background_darkness_by_side": {
+     "top": 4.87,
+     "bottom": 152.74,
+     "left": 69.69,
+     "right": 53.08
+    }
+   },
+   "zones": {
+    "face": {
+     "box": [
+      0.0,
+      0.15666666666666668,
+      1.0,
+      0.25124444444444444
+     ],
+     "of": "body"
+    },
+    "torso": {
+     "box": [
+      0.0,
+      0.40444444444444444,
+      1.0,
+      0.4866666666666667
+     ],
+     "of": "body"
+    },
+    "lowbody": {
+     "box": [
+      0.0,
+      0.5466666666666666,
+      1.0,
+      0.6288888888888889
+     ],
+     "of": "body"
+    },
+    "feet": {
+     "box": [
+      0.0,
+      0.6877777777777778,
+      1.0,
+      0.7477777777777778
+     ],
+     "of": "body"
+    },
+    "floor_front": {
+     "box": [
+      0.20038415205478669,
+      0.7903234795331955,
+      0.2563841520547867,
+      0.8183234795331955
+     ],
+     "of": "floor"
+    },
+    "floor_shadow_side": {
+     "box": [
+      0.5595140943527221,
+      0.7773128266334534,
+      0.6075140943527222,
+      0.8033128266334534
+     ],
+     "of": "floor"
+    },
+    "floor_key_side": {
+     "box": [
+      0.8304959764480591,
+      0.7903234795331955,
+      0.8824959764480591,
+      0.8183234795331955
+     ],
+     "of": "floor"
+    },
+    "_probe_screen": {
+     "pool": [
+      0.2284,
+      0.8043
+     ],
+     "shadow": [
+      0.5835,
+      0.7903
+     ],
+     "key_side": [
+      0.8565,
+      0.8043
+     ]
+    }
+   },
+   "rig": {
+    "key": 34.298,
+    "rim": 350.0,
+    "under": 2561.0,
+    "pool": 223.674,
+    "wash": 7.669
+   },
+   "emissive_materials": {
+    "accent": "XCOM_Viper_ACCENT_EMISSIVE"
+   },
+   "emission_strength": {
+    "accent": 0.9,
+    "eye": 0.9,
+    "core": 0.8,
+    "plasma": 0.7
+   },
+   "body_height": 2.0586,
+   "torso_mean_lum": 123.574,
+   "face_mean_lum": 31.025,
+   "under_lowbody_over_torso": 0.8821,
+   "under_feet_over_torso": 0.356,
+   "floor_zone_min_diff_pct": 1.74,
+   "floor_zone_means": {
+    "floor_front": 145.71,
+    "floor_shadow_side": 151.91,
+    "floor_key_side": 148.29
+   },
+   "contact_shadow_ratio": 1.0425,
+   "criteria": {
+    "no_clipped_white": false,
+    "no_clipped_body": false,
+    "no_colour_clip_off_emissive": true,
+    "floor_zones_in_window": true,
+    "floor_zones_differ_15pct": false,
+    "background_darkness_le_40": false,
+    "contact_shadow_present": true,
+    "face_p99_ge_25": true,
+    "torso_p99_ge_25": true,
+    "rim_3pct_of_body": false,
+    "rim_band_mean_ge_120": false,
+    "under_lowbody_1_3x_torso": false,
+    "under_feet_1_3x_torso": false
+   },
+   "all_criteria_pass": false,
+   "criteria_passed": 5,
+   "failed_criteria": [
+    "no_clipped_white",
+    "no_clipped_body",
+    "floor_zones_differ_15pct",
+    "background_darkness_le_40",
+    "rim_3pct_of_body",
+    "rim_band_mean_ge_120",
+    "under_lowbody_1_3x_torso",
+    "under_feet_1_3x_torso"
+   ]
+  },
+  "XCOM_Sectoid": {
+   "width": 720,
+   "height": 900,
+   "clipped_white_pixels": 1205,
+   "clipped_white_saturated": 1442,
+   "clipped_body_pixels": 1205,
+   "clipped_body_pixels_on_subject": 1205,
+   "clipped_colour_pixels_non_emissive": 0,
+   "clipped_colour_pixels_emissive": 0,
+   "clip_definitions": {
+    "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+    "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+    "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+    "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+    "clipped_colour_pixels_emissive": "same test on emissive pixels",
+    "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+    "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+   },
+   "bright_pixels_gt190": 6561,
+   "emissive_pixels": 2717,
+   "rim_pixels": 196856,
+   "background_darkness": 60.217,
+   "background_darkness_by_side": {
+    "top": 0.96,
+    "bottom": 145.53,
+    "left": 50.03,
+    "right": 46.68
+   },
+   "zone_stats": {
+    "face": {
+     "n": 11013,
+     "mean_lum": 11.211,
+     "p50_lum": 3.362,
+     "p99_lum": 70.982,
+     "max_lum": 85.928,
+     "max_channel": 100,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.006067
+    },
+    "torso": {
+     "n": 11666,
+     "mean_lum": 71.499,
+     "p50_lum": 32.462,
+     "p99_lum": 239.022,
+     "max_lum": 241.022,
+     "max_channel": 248,
+     "bright_gt190": 2392,
+     "saturated_gt190": 669,
+     "mean_lin": 0.17253
+    },
+    "lowbody": {
+     "n": 7796,
+     "mean_lum": 94.83,
+     "p50_lum": 52.978,
+     "p99_lum": 255.0,
+     "max_lum": 255.0,
+     "max_channel": 255,
+     "bright_gt190": 1804,
+     "saturated_gt190": 635,
+     "mean_lin": 0.240645
+    },
+    "feet": {
+     "n": 3843,
+     "mean_lum": 53.634,
+     "p50_lum": 38.534,
+     "p99_lum": 134.479,
+     "max_lum": 145.502,
+     "max_channel": 159,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.05807
+    },
+    "floor_front": {
+     "n": 1000,
+     "mean_lum": 145.258,
+     "p50_lum": 145.073,
+     "p99_lum": 148.001,
+     "max_lum": 148.073,
+     "max_channel": 162,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.294086
+    },
+    "floor_shadow_side": {
+     "n": 805,
+     "mean_lum": 148.274,
+     "p50_lum": 148.431,
+     "p99_lum": 152.928,
+     "max_lum": 153.928,
+     "max_channel": 168,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.307813
+    },
+    "floor_key_side": {
+     "n": 950,
+     "mean_lum": 142.808,
+     "p50_lum": 143.288,
+     "p99_lum": 150.998,
+     "max_lum": 151.998,
+     "max_channel": 167,
+     "bright_gt190": 0,
+     "saturated_gt190": 0,
+     "mean_lin": 0.286046
+    }
+   },
+   "body_pixels": 71416,
+   "visible_body_pixels": 28944,
+   "rim_band_pixels": 7825,
+   "rim_band_bright_pixels": 756,
+   "rim_band_mean_lum": 59.246,
+   "rim_band_hot_mean_lum": 201.995,
+   "rim_band_clipped_pixels": 0,
+   "rim_bright_over_body": 0.01059,
+   "rim_bright_over_visible_body": 0.02612,
+   "contact_shadow_pixels": 6324,
+   "contact_shadow_mean_lum": 83.756,
+   "contact_shadow_p50_lum": 117.726,
+   "contact_shadow_ratio_mask": 0.5766,
+   "emissive_only": {
+    "width": 720,
+    "height": 900,
+    "clipped_white_pixels": 0,
+    "clipped_white_saturated": 0,
+    "clipped_body_pixels": 0,
+    "clipped_body_pixels_on_subject": 0,
+    "clipped_colour_pixels_non_emissive": 0,
+    "clipped_colour_pixels_emissive": 0,
+    "clip_definitions": {
+     "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+     "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+     "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+     "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+     "clipped_colour_pixels_emissive": "same test on emissive pixels",
+     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+    },
+    "bright_pixels_gt190": 588,
+    "emissive_pixels": 588,
+    "rim_pixels": 993,
+    "background_darkness": 0.542,
+    "background_darkness_by_side": {
+     "top": 0.41,
+     "bottom": 0.78,
+     "left": 0.48,
+     "right": 0.52
+    },
+    "zone_stats": {
+     "face": {
+      "n": 11013,
+      "mean_lum": 2.447,
+      "p50_lum": 1.0,
+      "p99_lum": 15.665,
+      "max_lum": 20.385,
+      "max_channel": 27,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000773
+     },
+     "torso": {
+      "n": 11666,
+      "mean_lum": 0.413,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000125
+     },
+     "lowbody": {
+      "n": 7796,
+      "mean_lum": 0.418,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000127
+     },
+     "feet": {
+      "n": 3843,
+      "mean_lum": 0.415,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000126
+     },
+     "floor_front": {
+      "n": 1000,
+      "mean_lum": 0.713,
+      "p50_lum": 0.751,
+      "p99_lum": 3.146,
+      "max_lum": 3.861,
+      "max_channel": 5,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000216
+     },
+     "floor_shadow_side": {
+      "n": 805,
+      "mean_lum": 0.718,
+      "p50_lum": 0.787,
+      "p99_lum": 2.43,
+      "max_lum": 3.218,
+      "max_channel": 4,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000218
+     },
+     "floor_key_side": {
+      "n": 950,
+      "mean_lum": 1.109,
+      "p50_lum": 1.0,
+      "p99_lum": 3.933,
+      "max_lum": 5.363,
+      "max_channel": 7,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000337
+     }
+    },
+    "body_pixels": 71416,
+    "visible_body_pixels": 5621,
+    "rim_band_pixels": 7825,
+    "rim_band_bright_pixels": 0,
+    "rim_band_mean_lum": 0.781,
+    "rim_band_hot_mean_lum": 0.0,
+    "rim_band_clipped_pixels": 0,
+    "rim_bright_over_body": 0.0,
+    "rim_bright_over_visible_body": 0.0,
+    "contact_shadow_pixels": 6324,
+    "contact_shadow_mean_lum": 0.444,
+    "contact_shadow_p50_lum": 0.0,
+    "contact_shadow_ratio_mask": 0.6227
+   },
+   "studio_vs_reveal": {
+    "width": 1440,
+    "height": 900,
+    "clipped_white_pixels": 1673,
+    "clipped_white_saturated": 6908,
+    "clipped_body_pixels": 0,
+    "clipped_body_pixels_on_subject": 0,
+    "clipped_colour_pixels_non_emissive": 0,
+    "clipped_colour_pixels_emissive": 0,
+    "clip_definitions": {
+     "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
+     "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
+     "clipped_body_pixels": "r,g,b all > 248 on the subject silhouette",
+     "clipped_colour_pixels_non_emissive": "max channel >= 250 and max-min >= 25 on NON-emissive pixels (the emissive glow and its bloom are excluded)",
+     "clipped_colour_pixels_emissive": "same test on emissive pixels",
+     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
+     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
+    },
+    "bright_pixels_gt190": 98099,
+    "emissive_pixels": 55268,
+    "rim_pixels": 195954,
+    "background_darkness": 72.69,
+    "background_darkness_by_side": {
+     "top": 4.86,
+     "bottom": 160.08,
+     "left": 77.23,
+     "right": 51.61
+    }
+   },
+   "zones": {
+    "face": {
+     "box": [
+      0.0,
+      0.14,
+      1.0,
+      0.23848888888888886
+     ],
+     "of": "body"
+    },
+    "torso": {
+     "box": [
+      0.0,
+      0.3977777777777778,
+      1.0,
+      0.48444444444444446
+     ],
+     "of": "body"
+    },
+    "lowbody": {
+     "box": [
+      0.0,
+      0.5455555555555556,
+      1.0,
+      0.6322222222222222
+     ],
+     "of": "body"
+    },
+    "feet": {
+     "box": [
+      0.0,
+      0.6933333333333334,
+      1.0,
+      0.7555555555555555
+     ],
+     "of": "body"
+    },
+    "floor_front": {
+     "box": [
+      0.20038424146175385,
+      0.7903235242366791,
+      0.25638424146175387,
+      0.8183235242366791
+     ],
+     "of": "floor"
+    },
+    "floor_shadow_side": {
+     "box": [
+      0.5595141539573669,
+      0.7773129011392593,
+      0.607514153957367,
+      0.8033129011392593
+     ],
+     "of": "floor"
+    },
+    "floor_key_side": {
+     "box": [
+      0.8304960956573486,
+      0.7903235242366791,
+      0.8824960956573487,
+      0.8183235242366791
+     ],
+     "of": "floor"
+    },
+    "_probe_screen": {
+     "pool": [
+      0.2284,
+      0.8043
+     ],
+     "shadow": [
+      0.5835,
+      0.7903
+     ],
+     "key_side": [
+      0.8565,
+      0.8043
+     ]
+    }
+   },
+   "rig": {
+    "key": 34.306,
+    "rim": 350.0,
+    "under": 2561.0,
+    "pool": 224.32,
+    "wash": 7.691
+   },
+   "emissive_materials": {
+    "accent": "XCOM_Sectoid_ACCENT_EMISSIVE"
+   },
+   "emission_strength": {
+    "accent": 0.9,
+    "eye": 0.9,
+    "core": 0.8,
+    "plasma": 0.7
+   },
+   "body_height": 1.3918,
+   "torso_mean_lum": 71.499,
+   "face_mean_lum": 11.211,
+   "under_lowbody_over_torso": 1.3263,
+   "under_feet_over_torso": 0.7501,
+   "floor_zone_min_diff_pct": 1.69,
+   "floor_zone_means": {
+    "floor_front": 145.26,
+    "floor_shadow_side": 148.27,
+    "floor_key_side": 142.81
+   },
+   "contact_shadow_ratio": 1.0208,
+   "criteria": {
+    "no_clipped_white": false,
+    "no_clipped_body": false,
+    "no_colour_clip_off_emissive": true,
+    "floor_zones_in_window": true,
+    "floor_zones_differ_15pct": false,
+    "background_darkness_le_40": false,
+    "contact_shadow_present": true,
+    "face_p99_ge_25": true,
+    "torso_p99_ge_25": true,
+    "rim_3pct_of_body": false,
+    "rim_band_mean_ge_120": false,
+    "under_lowbody_1_3x_torso": true,
+    "under_feet_1_3x_torso": false
+   },
+   "all_criteria_pass": false,
+   "criteria_passed": 6,
+   "failed_criteria": [
+    "no_clipped_white",
+    "no_clipped_body",
+    "floor_zones_differ_15pct",
+    "background_darkness_le_40",
+    "rim_3pct_of_body",
+    "rim_band_mean_ge_120",
+    "under_feet_1_3x_torso"
+   ]
+  }
+ }
+}

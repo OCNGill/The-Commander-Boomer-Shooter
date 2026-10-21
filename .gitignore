@@ -21,3 +21,9 @@ __pycache__/
 
 # Blender temp
 *.blend1
+
+# regenerable Blender render working dirs (published evidence lives in CommandCenter/outputs)
+Tools/blender/out_lighting/
+Tools/blender/out_lighting_build/
+Tools/blender/out_textures/
+Tools/blender/out_xcom_build/

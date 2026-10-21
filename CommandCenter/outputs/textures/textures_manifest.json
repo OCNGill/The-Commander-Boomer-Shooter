@@ -1,0 +1,630 @@
+[
+ {
+  "name": "T_Floor_Concrete_Wet",
+  "files": [
+   "T_Floor_Concrete_Wet.png",
+   "T_Floor_Concrete_Wet_normal.png",
+   "T_Floor_Concrete_Wet_rough.png",
+   "T_Floor_Concrete_Wet_contact.png",
+   "T_Floor_Concrete_Wet_crop1.png",
+   "T_Floor_Concrete_Wet_crop2.png",
+   "T_Floor_Concrete_Wet_crop3.png"
+  ],
+  "file_info": [
+   {
+    "file": "T_Floor_Concrete_Wet.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 7026847,
+    "kb": 6862.2
+   },
+   {
+    "file": "T_Floor_Concrete_Wet_normal.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 9823446,
+    "kb": 9593.2
+   },
+   {
+    "file": "T_Floor_Concrete_Wet_rough.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 1983311,
+    "kb": 1936.8
+   },
+   {
+    "file": "T_Floor_Concrete_Wet_contact.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 3879801,
+    "kb": 3788.9
+   },
+   {
+    "file": "T_Floor_Concrete_Wet_crop1.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1774799,
+    "kb": 1733.2
+   },
+   {
+    "file": "T_Floor_Concrete_Wet_crop2.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1767209,
+    "kb": 1725.8
+   },
+   {
+    "file": "T_Floor_Concrete_Wet_crop3.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1753138,
+    "kb": 1712.0
+   }
+  ],
+  "kb": [
+   6862.2,
+   9593.2,
+   1936.8,
+   3788.9,
+   1733.2,
+   1725.8,
+   1712.0
+  ],
+  "notes": "Wet harbour concrete: neutral cold-grey cement paste with exposed light and dark angular aggregate, round air voids, broken cracks, vertical drainage streaks and glossy pooling. Mint algae only in damp patches. Wetness reads through sheen and pooling, not hue.",
+  "size": [
+   2048,
+   2048
+  ],
+  "world_tile_m": 4.0,
+  "texel_density_cm": 0.195,
+  "palette_hex": [
+   "#4C4D4C",
+   "#787670",
+   "#1F1F21",
+   "#26292B",
+   "#668F73"
+  ],
+  "mean": 72.11,
+  "std": 18.16,
+  "seam_ratio_x": 1.49,
+  "seam_ratio_y": 1.59,
+  "maps": {
+   "diffuse": "T_Floor_Concrete_Wet.png",
+   "normal": "T_Floor_Concrete_Wet_normal.png",
+   "roughness": "T_Floor_Concrete_Wet_rough.png",
+   "contact_sheet": "T_Floor_Concrete_Wet_contact.png",
+   "crops_1to1": [
+    "T_Floor_Concrete_Wet_crop1.png",
+    "T_Floor_Concrete_Wet_crop2.png",
+    "T_Floor_Concrete_Wet_crop3.png"
+   ]
+  }
+ },
+ {
+  "name": "T_Wall_Brick_Old",
+  "files": [
+   "T_Wall_Brick_Old.png",
+   "T_Wall_Brick_Old_normal.png",
+   "T_Wall_Brick_Old_rough.png",
+   "T_Wall_Brick_Old_contact.png",
+   "T_Wall_Brick_Old_crop1.png",
+   "T_Wall_Brick_Old_crop2.png",
+   "T_Wall_Brick_Old_crop3.png"
+  ],
+  "file_info": [
+   {
+    "file": "T_Wall_Brick_Old.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 5899098,
+    "kb": 5760.8
+   },
+   {
+    "file": "T_Wall_Brick_Old_normal.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 8217980,
+    "kb": 8025.4
+   },
+   {
+    "file": "T_Wall_Brick_Old_rough.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 1022749,
+    "kb": 998.8
+   },
+   {
+    "file": "T_Wall_Brick_Old_contact.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 3655832,
+    "kb": 3570.1
+   },
+   {
+    "file": "T_Wall_Brick_Old_crop1.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1494960,
+    "kb": 1459.9
+   },
+   {
+    "file": "T_Wall_Brick_Old_crop2.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1491187,
+    "kb": 1456.2
+   },
+   {
+    "file": "T_Wall_Brick_Old_crop3.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1471044,
+    "kb": 1436.6
+   }
+  ],
+  "kb": [
+   5760.8,
+   8025.4,
+   998.8,
+   3570.1,
+   1459.9,
+   1456.2,
+   1436.6
+  ],
+  "notes": "Old oxblood harbour brick (the set oxblood carrier): running bond with individually varied brick tone, chipped arrises, recessed lime mortar with shadow under each course, soot and vertical water staining, sage salt bloom.",
+  "size": [
+   2048,
+   2048
+  ],
+  "world_tile_m": 4.0,
+  "texel_density_cm": 0.195,
+  "palette_hex": [
+   "#401B14",
+   "#543329",
+   "#1F120F",
+   "#858073",
+   "#737A6E"
+  ],
+  "mean": 52.49,
+  "std": 31.78,
+  "seam_ratio_x": 2.593,
+  "seam_ratio_y": 2.423,
+  "maps": {
+   "diffuse": "T_Wall_Brick_Old.png",
+   "normal": "T_Wall_Brick_Old_normal.png",
+   "roughness": "T_Wall_Brick_Old_rough.png",
+   "contact_sheet": "T_Wall_Brick_Old_contact.png",
+   "crops_1to1": [
+    "T_Wall_Brick_Old_crop1.png",
+    "T_Wall_Brick_Old_crop2.png",
+    "T_Wall_Brick_Old_crop3.png"
+   ]
+  }
+ },
+ {
+  "name": "T_Wall_Steel_Rusted",
+  "files": [
+   "T_Wall_Steel_Rusted.png",
+   "T_Wall_Steel_Rusted_normal.png",
+   "T_Wall_Steel_Rusted_rough.png",
+   "T_Wall_Steel_Rusted_contact.png",
+   "T_Wall_Steel_Rusted_crop1.png",
+   "T_Wall_Steel_Rusted_crop2.png",
+   "T_Wall_Steel_Rusted_crop3.png"
+  ],
+  "file_info": [
+   {
+    "file": "T_Wall_Steel_Rusted.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 5687592,
+    "kb": 5554.3
+   },
+   {
+    "file": "T_Wall_Steel_Rusted_normal.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 1689533,
+    "kb": 1649.9
+   },
+   {
+    "file": "T_Wall_Steel_Rusted_rough.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 1079583,
+    "kb": 1054.3
+   },
+   {
+    "file": "T_Wall_Steel_Rusted_contact.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 3774952,
+    "kb": 3686.5
+   },
+   {
+    "file": "T_Wall_Steel_Rusted_crop1.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1428026,
+    "kb": 1394.6
+   },
+   {
+    "file": "T_Wall_Steel_Rusted_crop2.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1439536,
+    "kb": 1405.8
+   },
+   {
+    "file": "T_Wall_Steel_Rusted_crop3.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1412400,
+    "kb": 1379.3
+   }
+  ],
+  "kb": [
+   5554.3,
+   1649.9,
+   1054.3,
+   3686.5,
+   1394.6,
+   1405.8,
+   1379.3
+  ],
+  "notes": "Rusted steel plate: rolled panel seams, domed rivet grid, ochre rust with ragged voronoi patch edges bleeding downward, corrosion pitting, forest algae on old rust.",
+  "size": [
+   2048,
+   2048
+  ],
+  "world_tile_m": 4.0,
+  "texel_density_cm": 0.195,
+  "palette_hex": [
+   "#54585E",
+   "#6B3B1C",
+   "#4C251B",
+   "#2E4730"
+  ],
+  "mean": 67.26,
+  "std": 15.81,
+  "seam_ratio_x": 3.838,
+  "seam_ratio_y": 4.528,
+  "maps": {
+   "diffuse": "T_Wall_Steel_Rusted.png",
+   "normal": "T_Wall_Steel_Rusted_normal.png",
+   "roughness": "T_Wall_Steel_Rusted_rough.png",
+   "contact_sheet": "T_Wall_Steel_Rusted_contact.png",
+   "crops_1to1": [
+    "T_Wall_Steel_Rusted_crop1.png",
+    "T_Wall_Steel_Rusted_crop2.png",
+    "T_Wall_Steel_Rusted_crop3.png"
+   ]
+  }
+ },
+ {
+  "name": "T_Ground_Gravel",
+  "files": [
+   "T_Ground_Gravel.png",
+   "T_Ground_Gravel_normal.png",
+   "T_Ground_Gravel_rough.png",
+   "T_Ground_Gravel_contact.png",
+   "T_Ground_Gravel_crop1.png",
+   "T_Ground_Gravel_crop2.png",
+   "T_Ground_Gravel_crop3.png"
+  ],
+  "file_info": [
+   {
+    "file": "T_Ground_Gravel.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 6147555,
+    "kb": 6003.5
+   },
+   {
+    "file": "T_Ground_Gravel_normal.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 8191305,
+    "kb": 7999.3
+   },
+   {
+    "file": "T_Ground_Gravel_rough.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 2570206,
+    "kb": 2510.0
+   },
+   {
+    "file": "T_Ground_Gravel_contact.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 3695946,
+    "kb": 3609.3
+   },
+   {
+    "file": "T_Ground_Gravel_crop1.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1536945,
+    "kb": 1500.9
+   },
+   {
+    "file": "T_Ground_Gravel_crop2.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1535929,
+    "kb": 1499.9
+   },
+   {
+    "file": "T_Ground_Gravel_crop3.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1534701,
+    "kb": 1498.7
+   }
+  ],
+  "kb": [
+   6003.5,
+   7999.3,
+   2510.0,
+   3609.3,
+   1500.9,
+   1499.9,
+   1498.7
+  ],
+  "notes": "Wet harbour gravel: individual rounded stones of two sizes with per-stone tone and domed relief, water pooled in the gaps, mint moss in the damp hollows.",
+  "size": [
+   2048,
+   2048
+  ],
+  "world_tile_m": 4.0,
+  "texel_density_cm": 0.195,
+  "palette_hex": [
+   "#4C4B47",
+   "#706E69",
+   "#212224",
+   "#61856E",
+   "#1C2024"
+  ],
+  "mean": 56.84,
+  "std": 15.25,
+  "seam_ratio_x": 1.459,
+  "seam_ratio_y": 1.797,
+  "maps": {
+   "diffuse": "T_Ground_Gravel.png",
+   "normal": "T_Ground_Gravel_normal.png",
+   "roughness": "T_Ground_Gravel_rough.png",
+   "contact_sheet": "T_Ground_Gravel_contact.png",
+   "crops_1to1": [
+    "T_Ground_Gravel_crop1.png",
+    "T_Ground_Gravel_crop2.png",
+    "T_Ground_Gravel_crop3.png"
+   ]
+  }
+ },
+ {
+  "name": "T_Roof_Tar",
+  "files": [
+   "T_Roof_Tar.png",
+   "T_Roof_Tar_normal.png",
+   "T_Roof_Tar_rough.png",
+   "T_Roof_Tar_contact.png",
+   "T_Roof_Tar_crop1.png",
+   "T_Roof_Tar_crop2.png",
+   "T_Roof_Tar_crop3.png"
+  ],
+  "file_info": [
+   {
+    "file": "T_Roof_Tar.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 7255031,
+    "kb": 7085.0
+   },
+   {
+    "file": "T_Roof_Tar_normal.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 9621008,
+    "kb": 9395.5
+   },
+   {
+    "file": "T_Roof_Tar_rough.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 3278236,
+    "kb": 3201.4
+   },
+   {
+    "file": "T_Roof_Tar_contact.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 3984793,
+    "kb": 3891.4
+   },
+   {
+    "file": "T_Roof_Tar_crop1.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1815235,
+    "kb": 1772.7
+   },
+   {
+    "file": "T_Roof_Tar_crop2.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1812758,
+    "kb": 1770.3
+   },
+   {
+    "file": "T_Roof_Tar_crop3.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1816223,
+    "kb": 1773.7
+   }
+  ],
+  "kb": [
+   7085.0,
+   9395.5,
+   3201.4,
+   3891.4,
+   1772.7,
+   1770.3,
+   1773.7
+  ],
+  "notes": "Tar roof: rolled seams, patch repairs, embedded angular grit, tar blisters, broken splits, cold puddle sheen, forest moss in the splits.",
+  "size": [
+   2048,
+   2048
+  ],
+  "world_tile_m": 4.0,
+  "texel_density_cm": 0.195,
+  "palette_hex": [
+   "#161618",
+   "#6B6A65",
+   "#2E2F33",
+   "#2B452F",
+   "#4C5766"
+  ],
+  "mean": 42.39,
+  "std": 19.66,
+  "seam_ratio_x": 2.104,
+  "seam_ratio_y": 2.024,
+  "maps": {
+   "diffuse": "T_Roof_Tar.png",
+   "normal": "T_Roof_Tar_normal.png",
+   "roughness": "T_Roof_Tar_rough.png",
+   "contact_sheet": "T_Roof_Tar_contact.png",
+   "crops_1to1": [
+    "T_Roof_Tar_crop1.png",
+    "T_Roof_Tar_crop2.png",
+    "T_Roof_Tar_crop3.png"
+   ]
+  }
+ },
+ {
+  "name": "T_Wood_Plank_Dock",
+  "files": [
+   "T_Wood_Plank_Dock.png",
+   "T_Wood_Plank_Dock_normal.png",
+   "T_Wood_Plank_Dock_rough.png",
+   "T_Wood_Plank_Dock_contact.png",
+   "T_Wood_Plank_Dock_crop1.png",
+   "T_Wood_Plank_Dock_crop2.png",
+   "T_Wood_Plank_Dock_crop3.png"
+  ],
+  "file_info": [
+   {
+    "file": "T_Wood_Plank_Dock.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 2722726,
+    "kb": 2658.9
+   },
+   {
+    "file": "T_Wood_Plank_Dock_normal.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 2086403,
+    "kb": 2037.5
+   },
+   {
+    "file": "T_Wood_Plank_Dock_rough.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 1448227,
+    "kb": 1414.3
+   },
+   {
+    "file": "T_Wood_Plank_Dock_contact.png",
+    "width": 2048,
+    "height": 2048,
+    "bytes": 2254162,
+    "kb": 2201.3
+   },
+   {
+    "file": "T_Wood_Plank_Dock_crop1.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 725280,
+    "kb": 708.3
+   },
+   {
+    "file": "T_Wood_Plank_Dock_crop2.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 670628,
+    "kb": 654.9
+   },
+   {
+    "file": "T_Wood_Plank_Dock_crop3.png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 735907,
+    "kb": 718.7
+   }
+  ],
+  "kb": [
+   2658.9,
+   2037.5,
+   1414.3,
+   2201.3,
+   708.3,
+   654.9,
+   718.7
+  ],
+  "notes": "Weathered dock planks: silvered sage boards with directional grain, knots, water-filled gaps, rusted nail heads, green algae rot at the plank edges.",
+  "size": [
+   2048,
+   2048
+  ],
+  "world_tile_m": 4.0,
+  "texel_density_cm": 0.195,
+  "palette_hex": [
+   "#6B6E66",
+   "#473B2F",
+   "#2B2621",
+   "#547861",
+   "#663D21"
+  ],
+  "mean": 56.01,
+  "std": 20.0,
+  "seam_ratio_x": 20.966,
+  "seam_ratio_y": 1.015,
+  "maps": {
+   "diffuse": "T_Wood_Plank_Dock.png",
+   "normal": "T_Wood_Plank_Dock_normal.png",
+   "roughness": "T_Wood_Plank_Dock_rough.png",
+   "contact_sheet": "T_Wood_Plank_Dock_contact.png",
+   "crops_1to1": [
+    "T_Wood_Plank_Dock_crop1.png",
+    "T_Wood_Plank_Dock_crop2.png",
+    "T_Wood_Plank_Dock_crop3.png"
+   ]
+  }
+ },
+ {
+  "name": "T_Set_TrimSheet",
+  "files": [
+   "T_Set_TrimSheet.png"
+  ],
+  "file_info": [
+   {
+    "file": "T_Set_TrimSheet.png",
+    "width": 4096,
+    "height": 4096,
+    "bytes": 10282120,
+    "kb": 10041.1
+   }
+  ],
+  "kb": [
+   10041.1
+  ],
+  "notes": "Trim sheet: diffuse / normal / roughness / offset contact for all six materials, labelled and indexed 1-6.",
+  "size": [
+   4096,
+   4096
+  ]
+ }
+]
