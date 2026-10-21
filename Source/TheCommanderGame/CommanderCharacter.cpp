@@ -40,7 +40,12 @@ ACommanderCharacter::ACommanderCharacter()
         CommanderBody->SetRelativeLocation(FVector(0.0f, 0.0f, 8.0f));
         CommanderBody->SetRelativeScale3D(FVector(0.8f, 0.8f, 0.9f));
 
-        static ConstructorHelpers::FObjectFinder<UStaticMesh> BodyMesh(TEXT("/Engine/BasicShapes/Capsule.Capsule"));
+        // UE 5.8 does not ship /Engine/BasicShapes/Capsule.uasset - the folder
+        // holds only Cone, Cube, Cube1, Cylinder, Plane and Sphere. Pointing
+        // FObjectFinder at the missing asset made the CDO constructor fail and
+        // left the player with no visible body. Use the cylinder instead; it is
+        // always cooked and reads as a torso under the capsule collision.
+        static ConstructorHelpers::FObjectFinder<UStaticMesh> BodyMesh(TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
         if (BodyMesh.Succeeded())
         {
             CommanderBody->SetStaticMesh(BodyMesh.Object);

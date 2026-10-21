@@ -4,12 +4,36 @@
 #include "CommanderLevelFixValues.h"
 
 #include "Components/StaticMeshComponent.h"
+#include "Components/PrimitiveComponent.h"
+#include "Components/ActorComponent.h"
 #include "Engine/StaticMeshActor.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "Materials/MaterialInterface.h"
 #include "UObject/ConstructorHelpers.h"
 #include "UObject/UObjectGlobals.h"
+
+namespace
+{
+	/**
+	 * Promotes an actor's primitive components to Movable.
+	 *
+	 * A static-mobility component refuses to move once play has begun: the
+	 * move is rejected and the level fix silently does nothing, so the arena
+	 * ships with the original geometry. Every actor this subsystem repositions
+	 * has to be made movable first.
+	 */
+	void MakeActorMovable(AActor& Actor)
+	{
+		for (UActorComponent* Component : Actor.GetComponents())
+		{
+			if (UPrimitiveComponent* Primitive = Cast<UPrimitiveComponent>(Component))
+			{
+				Primitive->SetMobility(EComponentMobility::Movable);
+			}
+		}
+	}
+}
 
 using namespace CommanderLevelFixValues;
 
@@ -119,6 +143,7 @@ bool UCommanderLevelFixSubsystem::SetHeightBand(AActor& Actor, double BottomZ, d
 		// Flat geometry (a plane): just move it so its surface sits at TopZ.
 		FVector Location = Actor.GetActorLocation();
 		Location.Z = TopZ - BoundsMax.Z;
+		MakeActorMovable(Actor);
 		Actor.SetActorLocation(Location);
 		return true;
 	}
@@ -139,6 +164,7 @@ bool UCommanderLevelFixSubsystem::SetHeightBand(AActor& Actor, double BottomZ, d
 	const double NewScaleZ = (TopZ - BottomZ) / WorldHeight * FMath::Sign(Scale.Z == 0.0 ? 1.0 : Scale.Z);
 	FVector NewScale = Scale;
 	NewScale.Z = NewScaleZ;
+	MakeActorMovable(Actor);
 	Actor.SetActorScale3D(NewScale);
 
 	// After scaling about the actor origin, the mesh top sits at
@@ -146,6 +172,7 @@ bool UCommanderLevelFixSubsystem::SetHeightBand(AActor& Actor, double BottomZ, d
 	const double NewLocationZ = TopZ - NewScaleZ * LocalTopOffset;
 	FVector NewLocation = Location;
 	NewLocation.Z = NewLocationZ;
+	MakeActorMovable(Actor);
 	Actor.SetActorLocation(NewLocation);
 	return true;
 }
@@ -203,6 +230,7 @@ void UCommanderLevelFixSubsystem::ApplyFixesToWorld(UWorld& World)
 	{
 		FVector Location = Ramp->GetActorLocation();
 		Location.Z -= PitRampLowerM * 100.0;
+		MakeActorMovable(*Ramp);
 		Ramp->SetActorLocation(Location);
 		++Fixed;
 		UE_LOG(LogCommanderLevelFix, Log, TEXT("Pit ramp %s sunk %.2f m (flush landing)"),
@@ -236,6 +264,7 @@ void UCommanderLevelFixSubsystem::ApplyFixesToWorld(UWorld& World)
 		FVector Location = Ledge->GetActorLocation();
 		Location.X = FMath::Cos(Angle) * PillarLedgeRadiusM * 100.0;
 		Location.Y = FMath::Sin(Angle) * PillarLedgeRadiusM * 100.0;
+		MakeActorMovable(*Ledge);
 		Ledge->SetActorLocation(Location);
 		++Fixed;
 		UE_LOG(LogCommanderLevelFix, Log, TEXT("Pillar ledge %s moved to %.0f deg / %.2f m radius"),
