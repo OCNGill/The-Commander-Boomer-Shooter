@@ -9,6 +9,7 @@
 #include "EngineUtils.h"
 #include "Materials/MaterialInterface.h"
 #include "UObject/ConstructorHelpers.h"
+#include "UObject/UObjectGlobals.h"
 
 using namespace CommanderLevelFixValues;
 
@@ -253,8 +254,16 @@ void UCommanderLevelFixSubsystem::ApplyFixesToWorld(UWorld& World)
 		UMaterialInterface* CoverMaterial = GrabMapMaterial(World, CoverTemplateName);
 		UMaterialInterface* PillarMaterial = GrabMapMaterial(World, PillarName);
 
-		static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeFinder(TEXT("/Engine/BasicShapes/Cube.Cube"));
-		static ConstructorHelpers::FObjectFinder<UStaticMesh> CylinderFinder(TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
+		// Runtime load, NOT ConstructorHelpers::FObjectFinder. FObjectFinder is
+		// legal only inside a constructor; calling it from BeginPlay asserts
+		// "FObjectFinders can't be used outside of constructors" and hard-crashes
+		// the packaged game on the first world load. The cooked CDO references
+		// (CubeMesh / CylinderMesh) are tried first; LoadObject is the fallback
+		// for a cook that dropped the engine primitives.
+		UStaticMesh* Cube = CubeMesh ? CubeMesh.Get()
+			: LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cube.Cube"));
+		UStaticMesh* Cylinder = CylinderMesh ? CylinderMesh.Get()
+			: LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
 
 		const float SpawnZ = PillarCoverHeightM * 50.0f;
 
@@ -275,13 +284,9 @@ void UCommanderLevelFixSubsystem::ApplyFixesToWorld(UWorld& World)
 			}
 			if (UStaticMeshComponent* Mesh = Cover->GetStaticMeshComponent())
 			{
-				if (CubeMesh)
+				if (Cube)
 				{
-					Mesh->SetStaticMesh(CubeMesh);
-				}
-				else if (CubeFinder.Succeeded())
-				{
-					Mesh->SetStaticMesh(CubeFinder.Object);
+					Mesh->SetStaticMesh(Cube);
 				}
 				Mesh->SetRelativeScale3D(FVector(PillarCoverSizeM, PillarCoverSizeM, PillarCoverHeightM));
 				if (CoverMaterial)
@@ -318,13 +323,9 @@ void UCommanderLevelFixSubsystem::ApplyFixesToWorld(UWorld& World)
 			{
 				if (UStaticMeshComponent* Mesh = Beacon->GetStaticMeshComponent())
 				{
-					if (CylinderMesh)
+					if (Cylinder)
 					{
-						Mesh->SetStaticMesh(CylinderMesh);
-					}
-					else if (CylinderFinder.Succeeded())
-					{
-						Mesh->SetStaticMesh(CylinderFinder.Object);
+						Mesh->SetStaticMesh(Cylinder);
 					}
 					Mesh->SetRelativeScale3D(FVector(BeaconRadiusM * 2.0f, BeaconRadiusM * 2.0f, BeaconHeightM));
 					if (PillarMaterial)
