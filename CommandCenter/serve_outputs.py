@@ -340,6 +340,43 @@ class Handler(BaseHTTPRequestHandler):
         return self._send(404, "not found", "text/plain")
 
 
+    def do_HEAD(self):
+        """Answer HEAD with headers only.
+
+        A missing do_HEAD under HTTP/1.1 keep-alive leaves the client waiting on a body
+        that never comes, which HANGS the request instead of failing it. Mirrors do_GET's
+        routing exactly so a HEAD on /file/<path> returns 200 + the real Content-Length.
+        """
+        path = self.path.split("?")[0]
+        if path == "/":
+            body = PAGE.encode("utf-8")
+            return self._head(200, len(body), "text/html; charset=utf-8")
+        if path == "/api/manifest":
+            body = json.dumps(build_manifest(), indent=1).encode("utf-8")
+            return self._head(200, len(body), "application/json")
+        if path.startswith("/file/"):
+            rel = path[len("/file/"):]
+            target = os.path.normpath(os.path.join(REPO, rel.replace("/", os.sep)))
+            if not target.startswith(REPO) or not os.path.isfile(target):
+                return self._head(404, 0, "text/plain")
+            ctype = "application/octet-stream"
+            low = target.lower()
+            if low.endswith((".png", ".jpg", ".jpeg", ".webp", ".gif")):
+                ctype = "image/" + low.rsplit(".", 1)[1].replace("jpg", "jpeg")
+            elif low.endswith((".md", ".txt")):
+                ctype = "text/plain; charset=utf-8"
+            elif low.endswith(".json"):
+                ctype = "application/json"
+            return self._head(200, os.path.getsize(target), ctype)
+        return self._head(404, 0, "text/plain")
+
+    def _head(self, code, length, ctype):
+        self.send_response(code)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Content-Length", str(length))
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--port", type=int, default=8899)
