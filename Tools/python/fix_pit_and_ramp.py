@@ -178,8 +178,18 @@ def comp_mesh(comp):
 
 # ---------------------------------------------------------------- the arena floor surface
 floor = actors.get("BO_Floor")
+floor_is_segment = False
 if floor is None:
-    raise RuntimeError("[PITFIX] BO_Floor not found - refusing to guess the floor")
+    # the floor has already been split into segments - any segment carries the same mesh,
+    # the same surface z and the same FLOOR_SZ, so the script is safe to re-run
+    for cand in ("BO_Floor_N", "BO_Floor_S", "BO_Floor_E", "BO_Floor_W"):
+        if cand in actors:
+            floor = actors[cand]
+            floor_is_segment = True
+            L("BO_Floor absent (already split) - deriving the floor surface from %s" % cand)
+            break
+if floor is None:
+    raise RuntimeError("[PITFIX] no floor actor found - refusing to guess the floor")
 mesh = comp_mesh(floor.static_mesh_component)
 mesh_name = mesh.get_name() if mesh else "?"
 floc = floor.get_actor_location()
@@ -206,9 +216,12 @@ def seg(label, x0, x1, y0, y1):
     L("%s x[%s..%s] y[%s..%s]" % (label, x0, x1, y0, y1))
 
 
-destroy(floor)
-actors.pop("BO_Floor", None)
-L("removed the unbroken floor")
+if not floor_is_segment:
+    destroy(floor)
+    actors.pop("BO_Floor", None)
+    L("removed the unbroken floor")
+else:
+    L("floor already split - rebuilding the four segments in place")
 seg("BO_Floor_N", AX0, AX1, HY1, AY1)
 seg("BO_Floor_S", AX0, AX1, AY0, HY0)
 seg("BO_Floor_E", HX1, AX1, HY0, HY1)
@@ -290,6 +303,67 @@ else:
             L("!!! ramp footprint x[%.0f..%.0f] y[%.0f..%.0f] OVERLAPS %s x[%.0f..%.0f] y[%.0f..%.0f]"
               % (rx0, rx1, ry0, ry1, lbl, b[0], b[1], b[2], b[3]))
 L("ramp_ok=%s  actor count now: %d" % (ramp_ok, len(list(sub.get_all_level_actors()))))
+
+# ---------------------------------------------------------------- 3b. a way OUT of the pit
+# The pit is a 1m drop-in. A drop with no way out is a trap, so cut a ramp down through the
+# east rim gap - measured from the live rim pieces, never assumed.
+pit_ramp_ok = False
+e1 = actors.get("BO_PitRim_E1")
+e2 = actors.get("BO_PitRim_E2")
+if e1 is None or e2 is None:
+    L("*** east rim pieces missing - no pit ramp built ***")
+else:
+    p1 = e1.get_actor_location(); s1 = e1.get_actor_scale3d()
+    p2 = e2.get_actor_location(); s2 = e2.get_actor_scale3d()
+    gap_y0 = p1.y + abs(s1.y) * 50.0      # north edge of the lower rim piece
+    gap_y1 = p2.y - abs(s2.y) * 50.0      # south edge of the upper rim piece
+    gap_w = gap_y1 - gap_y0
+    gap_cy = (gap_y0 + gap_y1) / 2.0
+    if gap_w <= 50.0:
+        L("*** east rim gap is not usable (y0=%.0f y1=%.0f width=%.0f) ***" % (gap_y0, gap_y1, gap_w))
+    else:
+        run = 180.0
+        drop = S - PZ
+        length = math.hypot(run, drop)
+        angle = math.degrees(math.atan2(drop, run))
+        rx = HX1 - run / 2.0
+        rz = (S + PZ) / 2.0
+        L("pit gap y[%.0f..%.0f] width=%.0f | ramp mid=(%.0f,%.0f,%.0f) length=%.0f pitch=%.1f deg"
+          % (gap_y0, gap_y1, gap_w, rx, gap_cy, rz, length, angle))
+        for yaw in (90.0, -90.0):
+            for sgn in (-1.0, 1.0):
+                a = spawn("BO_Ramp_Pit", (rx, gap_cy, rz), (gap_w / 100.0, length / 100.0, 0.5),
+                          rot=(sgn * angle, 0.0, yaw))
+                c = a.get_actor_location()
+                right = a.get_actor_right_vector()
+                half_len = abs(a.get_actor_scale3d().y) * 50.0
+                hi = unreal.Vector(c.x + right.x * half_len, c.y + right.y * half_len, c.z + right.z * half_len)
+                lo = unreal.Vector(c.x - right.x * half_len, c.y - right.y * half_len, c.z - right.z * half_len)
+                # the deep end must sit on the pit floor, the shallow end flush with the arena floor
+                ok = (abs(hi.z - PZ) < 60.0) and (abs(lo.z - S) < 60.0) and (abs(hi.x - (HX1 - run)) < 150.0)
+                L("pit ramp yaw=%.0f roll=%+0.1f  deep end z=%.0f (want %.0f) x=%.0f  floor end z=%.0f (want %.0f) x=%.0f  ok=%s"
+                  % (yaw, sgn * angle, hi.z, PZ, hi.x, lo.z, S, lo.x, ok))
+                if ok:
+                    pit_ramp_ok = True
+                    L("BO_Ramp_Pit OK - the pit is no longer a trap")
+                    break
+            if pit_ramp_ok:
+                break
+        if not pit_ramp_ok:
+            L("*** pit ramp tilt could not be verified ***")
+        # clearance against cover / walls / pillars
+        qx0, qx1 = HX1 - run, HX1
+        qy0, qy1 = gap_y0, gap_y1
+        for lbl in list(actors.keys()):
+            if not (lbl.startswith("BO_Cover") or lbl.startswith("BO_Pillar") or lbl.startswith("BO_Wall")
+                    or lbl.startswith("BO_PitRim")):
+                continue
+            b = aabb(lbl)
+            if b is None:
+                continue
+            if b[0] < qx1 and qx0 < b[1] and b[2] < qy1 and qy0 < b[3]:
+                L("!!! pit ramp footprint x[%.0f..%.0f] y[%.0f..%.0f] OVERLAPS %s x[%.0f..%.0f] y[%.0f..%.0f]"
+                  % (qx0, qx1, qy0, qy1, lbl, b[0], b[1], b[2], b[3]))
 
 # ---------------------------------------------------------------- 4. save, then PROVE it on disk
 _map_file = os.path.join(REPO, "Content", "Maps", "M_Blockout01.umap")
