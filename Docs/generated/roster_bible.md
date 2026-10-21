@@ -1,6 +1,7 @@
 # The Commander Boomer Shooter — Roster, Story, Art Direction & Boss Bible
 
-**Version:** 1.0 · **Date:** 2026-10-21 · **Owner:** Hermes (design lane)
+**Version:** 1.1 · **Date:** 2026-10-21 · **Owner:** Hermes (design lane)
+**Amendment 1.1:** human collaborators - cyborgs - skin jobs - the Harvester's pizza attack - cutscene beats - the 15-word taunt cap. JSON sections added: `story`, `silhouette_rules`, `friendly_support`, `cutscene_beats`, `tts_contract`, plus `bosses -> boss_harvester -> attacks` and `-> taunt_rotation`.
 **Machine-readable companion:** `Docs/generated/roster_bible.json` — every number in this
 document is defined there and read verbatim by the Rust runtime. Where this prose and the JSON
 disagree, **the JSON is correct and this document is stale** (and must be fixed, not the JSON).
@@ -130,6 +131,55 @@ cheerful half-finished fragments of a thing that learned language from shipping 
 | **The Commander** (player) | Last officer of the Plymouth battery. Unnamed, unvoiced. | Everywhere |
 | **The Voice on the Phone** | The Harvester, as heard. Speaks the insult bank. | Act I (distant, unintelligible), Act III (clear) |
 | **"Bell"** | The foghorn. Kills nine men in 1926 by being *on*. The only "character" the player meets who talks back. | Act I, audio only |
+| **Tobias Angell** | Contact. Runs a boat out of the slipway; opens routes, trades marks for shells. | Act I, Act II |
+| **Edda Cobb** | Rigger. Restores the shore crane hoist and the yard floodlights. | Act II |
+| **Dr. Wren Hollis** | Wireless operator and former medical orderly. Stabilises you; reads the boss's weakness. | Act II, Act III |
+
+
+**The civilian rule.** These three are civilians, and this bible treats that as a fact rather
+than a hedge. Any of them may be **absent, captured, drowned or dead** when the player
+arrives: Angell may have fled upcoast, Cobb may never have come back at all, Hollis may be
+down in the boatyard with the wireless still on. No route, no repair and no readout is
+hard-gated on one of them - each has a written fallback that costs **time, exposure or
+information** instead. A collaborator who is not there changes the shape of the level; it is
+not a fail state, and no line of dialogue in this game implies the player failed to save them.
+The machine-readable version of all of this is `roster_bible.json -> friendly_support`.
+
+
+### 2.6 Cutscene beats and camera language
+
+Nine beats across the three acts - **three per act** - and every one of them is flagged in
+`roster_bible.json -> cutscene_beats` with `type` and the boolean `is_cutscene`, so the engine
+lane can build them without reading this prose. Two kinds of beat exist:
+
+| Flag | What it is | Camera rule |
+|---|---|---|
+| `cutscene` | a scripted beat that takes the camera from the player | **Sequencer** track: one cine camera, one audio bus, one subtitle track, no gameplay HUD |
+| `in_game_dialogue` | a conversation that happens inside live gameplay | no camera takeover, gameplay never pauses, the camera may drift 10 degrees but never cuts |
+
+**Sequencer is the tool.** Every `cutscene` beat is a single track named
+`Seq_<Act><Name>` in the level sequence, with the camera move authored as one continuous
+shot wherever possible - the yard dolly and the manifest macro are single takes on purpose,
+because a cut in this game reads as a mistake. `in_game_dialogue` beats are not Sequencer
+tracks at all: they are dialogue triggers with subtitles over live play, and they never stop
+the AI.
+
+| Act | Beat id | Type | Camera language |
+|---|---|---|---|
+| I | `beat_a1_battery_watch` | cutscene | locked low behind the 12-inch breech, 35 mm, fog at knee height; one slow push to the telephone when it rings |
+| I | `beat_a1_slipway_contact` | in_game_dialogue | first person, 90 degrees, contact lit from below by his own lantern, 10 degree drift so he never sits dead centre |
+| I | `beat_a1_pillar_climb` | cutscene | 24 mm crane rising with the player up the pillar, sodium lamp blooming, 1.5 s hold on the settlement behind the fog |
+| II | `beat_a2_gantry_dolly` | cutscene | 24 mm dolly along the loading gantry, stacks passing close to the lens, work lights only; the camera never stops moving |
+| II | `beat_a2_hoist_repair` | in_game_dialogue | first person, the repair reads on the winch drum rather than the HUD, camera holds still so the player can cover the approach |
+| II | `beat_a2_manifest` | cutscene | 85 mm macro on a paper manifest, slow lateral drift down the names until it reaches the Commander's line |
+| III | `beat_a3_harvester_arrives` | cutscene | low 21 mm push from the harbour water, legs unfolding one at a time, camera never above the dorsal hump, ends on the boss's shadow crossing the lens |
+| III | `beat_a3_weakness_readout` | in_game_dialogue | no cut, no pause; the readout is a subtitle and one HUD prompt while the fight continues |
+| III | `beat_a3_roll_preview` | cutscene | 35 mm at rail height so the player sees the seam light pass, locked off, then the HUD fading up as control returns |
+
+**Two rules the beats obey.** A cutscene never gives the player a weapon and never shows an
+enemy silhouette the player has not already met - the Harvester is introduced by *shadow and
+scale*, not by a reveal of a face. And no beat runs longer than 62 s; every one is skippable,
+and every `in_game_dialogue` beat can be walked out of.
 
 ---
 
@@ -192,19 +242,36 @@ with neither is floating in dead space, which is exactly what Ebert saw.
 
 ## 5. The roster
 
-### 5.1 Two bloodlines, one world
+### 5.1 Five bloodlines, one world
 
-The game carries **two** monster lines and they must not blur into each other:
+The game carries **two monster lines** and three later additions, and none of the five may blur into each other. The original two:
 
 | Line | Members | Language | Reads as |
 |---|---|---|---|
 | **X-COM 1994 originals** | Sectoid, Viper, Floater, Muton, Chryssalid | Original *UFO: Enemy Unknown* designs, modernized | Aliens: biomechanical, chitin + plasma, emissive eyes and cores |
 | **Plymouth natives** | Barnacle Drone, Pilgrim Zealot, Mayflower Phantom, Lobster Brute, Rock Golem, Nor-Easter Titan | Original designs (1926 maritime + rock + fog) | Working gear of the yard: barnacle, canvas, sail-cloth, shell, granite |
 
+**Three more lines join them**, and each has its own rule:
+
+| Line | Members | Language | Reads as |
+|---|---|---|---|
+| **Human collaborators** | Tobias Angell, Edda Cobb, Dr. Wren Hollis | Original (1926 dockworkers) | The only friendly actors in the game - and the only entries that can be dead when you arrive |
+| **Cyborgs** | Cyberdisc, Bionic Chryssalid | 1994 X-COM line, own designs | Machines that were *built*: hard rings and hydraulic legs, no organic curvature |
+| **Skin jobs** | the Oysterman, the Lampwright, the Ice Man | Cylon-style synthetics wearing Plymouth | People-shaped and not people - every one of them has exactly one tell |
+
+
 **The naming rule that keeps them apart:** X-COM enemies are named for what they *are*
 (Sectoid, Viper, Floater). Plymouth enemies are named for what they are *made of or wear*
 (Barnacle, Pilgrim, Mayflower, Lobster, Rock). A player who has never seen the game should be
 able to guess which is which from the name alone, and never be wrong.
+
+The naming rule that keeps the lines apart still holds for the new entries, with one extra
+clause: **a skin job is named for the coat it wears, because the coat is the only part of it
+that is real.** The Oysterman, the Lampwright, the Ice Man - a player who has never seen the
+game can guess those are people, and the game is about the gap between that guess and the
+truth. The cyborgs are named for what they are, like the X-COM line, and the humans are given
+plain 1926 New England names, because the horror in this game is administrative, not gothic.
+
 
 ### 5.2 Full roster
 
@@ -316,6 +383,106 @@ projectiles at 2,000 uu/s every 2.0 s.
 - **Phase 2 (50–0%):** **shield regenerates 10 HP/s if not hit.** Rocket splash clears the
   projectile storm. Adjusted TTK ~5.0 s. Ammo cost ≈ 4 rockets + 4 cannons.
 - **Deck note:** the only 2048px asset in the game. At 'low' it drops to 1024 with a 4th-mip bias.
+
+
+### 5.3 Human collaborators (friendly)
+
+Three humans, one per job the player actually needs. They are the only friendly actors in the
+game and the only entries in this bible that can be **dead** when the player arrives. Each has
+a gameplay function, not a dialogue function; if you removed their lines from the game, the
+player would still be missing a route, a repair and a readout.
+
+| | **Tobias Angell** | **Edda Cobb** | **Dr. Wren Hollis** |
+|---|---|---|---|
+| **Job** | Contact | Engineer | Medic / researcher |
+| **Height / tris** | 1.79 m - 7,200 tris `[target]` | 1.71 m - 7,600 tris `[target]` | 1.66 m - 6,900 tris `[target]` |
+| **Silhouette** | lean, stovepipe cap, belted oilskin, hand lantern held low | broad, bib overalls, canvas coat, an oversized spanner carried like a bat | slight, long cardigan, headphones round the neck, a notebook never put down |
+| **HP / speed** | 60 - 300 uu/s | 70 - 280 uu/s | 55 - 300 uu/s |
+| **Gameplay role** | unbolts the **sea-wall service lane** (fast route to the yard); sells one marked hostile for 30 Light rounds | 12 s hold-repair of the **shore crane hoist**: raises the container bridge and brings the **yard floodlights** up | one field dose per act (40 HP, granted as a pickup - no regen); reads the boss's weakness over the wireless |
+| **If they are not there** | the door is found unbolted after 45 s of searching - same route, no intel, 45 s lost | the hoist stays dead for the act; the player climbs the container stack by hand in 12 s, fully exposed, no floodlight, no second route | no readout; the player has to take the x2 mouth hit once in the first 30 s of the fight to learn it |
+| **If they die** | the door stays bolted for the act; 3 Scattergun blasts (3 Heavy rounds) force it | the hoist is never repaired: no second route, no floodlights, and the skin jobs keep their cover | the wireless is silent for the rest of the game |
+| **Budget** | <=9,500 tris - 1024px - 5 materials - 24 bones - 1 vfx | <=9,500 tris - 1024px - 5 materials - 26 bones - 1 vfx | <=9,000 tris - 1024px - 5 materials - 24 bones - 1 vfx |
+
+**Why the three are civilians and not soldiers.** Angell is a boatman, Cobb is a rigger, Hollis
+is a wireless clerk with a medical orderly's kit. None of them can fight, and the game does
+not pretend otherwise: their HP is a single Puckle volley, they never carry a weapon, and the
+yard is the one place in the game where the player will be shot at while talking to someone.
+The three are also the reason the acts are survivable at all - every one of them hands the
+player a route, a machine or a fact, and every one of those can be taken away.
+
+### 5.4 Cyborgs
+
+Two machines, and they are here to do things the organic five cannot. The Cyberdisc is the
+1994 X-COM lineage's own cyborg, and it is unmistakably a machine - hard concentric rings, one
+amber emitter lens, no organic curvature anywhere on it. The Bionic Chryssalid is a heavier
+cybernetic variant of a species the player already knows, and it fills a gap the organic
+roster leaves open: it deletes the player's cover, so the fight moves instead of the shooting.
+
+##### CYBERDISC - *the shield that walks* `[target]`
+0.55 m body, 1.90 m span, hovers 0.85 m clear - **4,200 tris** (ceiling 5,500) - 1024px - 4
+materials - 14 bones - 2 vfx. A flat disc with **no limbs at all**, a raised emitter ring on
+the rear third, three radial vents. It projects a field in front of itself and the aliens
+standing behind it **cannot be damaged** - the first enemy in the game that makes the player
+shoot something they cannot hurt, and the reason the player must move instead of trade.
+`disc-cleave`: 1.2 s tell -> 26 dmg at 2,600 uu/s. **Machine-readable silhouette:** hover,
+0 limbs, 3 body segments, reads as *a disc over a shadow*; it must never read as winged,
+biped or organic. **Deck note:** 14 bones and one emissive - the cheapest field projector on
+the Deck.
+
+##### BIONIC CHRYSSALID - *the one that walks through cover* `[target]`
+1.10 m - **9,800 tris** (ceiling 12,000) - 1024px - 6 materials - **32 bones** - 2 vfx. The
+forward-pitched stalker you already know, rebuilt on hydraulic legs with plate where the
+chitin was - and it **walks where the organic one leaps**. Its `hydraulic-scythe` lands for
+45 dmg behind a **1.8 s** tell (the full warning the global damage-to-telegraph scale owes a
+45-damage attack), and it shears any cover within **700 uu**, so the player has to keep
+moving. **Machine-readable silhouette:** crouched, 6 limbs, 5 body segments, reads as *the
+fast stalker, wrong-weight and machine-jointed*. **Deck note:** 32 bones is the highest bone
+count in the kit - animate three at a time or it stutters on the Deck.
+
+### 5.5 Skin jobs
+
+Three human-appearing synthetic infiltrators: Cylon-style units walking through a New England
+settlement wearing people. The rule that governs all three is that **detection is a puzzle,
+not a jump scare.** Each one has **exactly one tell**, the tell is in the entry, and each tell
+is a different instrument so that learning one does not give you the others:
+
+| Entry | Tell | Instrument | How the player learns it |
+|---|---|---|---|
+| **the Oysterman** | the **cast shadow has a bare head** - the sou'wester's brim is missing from the shadow, so the shadow and the body disagree | any hard light source | a scripted near-miss at the fish store in Act I, then Tobias Angell says it out loud: *look at the shadows* |
+| **the Lampwright** | the **lantern glass shows a different, younger face**, and the reflection lags her movement | lantern glass, window panes, wet hull plating | first seen in Act II. Her shadow is deliberately **correct**, so the Oysterman's tell does not fire on her - the player has to use the other instrument |
+| **the Ice Man** | the **boot prints sink four times deeper than his weight accounts for**, and there is no drag mark behind the yoke | wet sand, mud, ash, snow | seen on the beach road, then again in the yard |
+
+**The level guarantees the instrument.** Every Lampwright spawns within 40 m of a reflective
+surface and every Ice Man within 30 m of soft ground, so a player who is paying attention can
+always find the evidence. The tells are also *diegetic* - the floodlights Edda Cobb restores
+in Act II are what make the shadows legible at all, which is the strongest reason to do the
+repair. Nothing in the HUD says "this man is a robot"; the evidence is in the world, and the
+player is never told they may shoot a civilian.
+
+##### THE OYSTERMAN - *the one in the oilskin* `[target]`
+1.78 m - 7,400 tris (ceiling 9,500) - 1024px - 5 materials - 24 bones - 1 vfx. A man in a
+belted oilskin and sou'wester, carrying an oyster crate in both hands, walking like every
+other man in the street. `crate-cleave`: 1.3 s tell -> 30 dmg at 250 uu. **Tell:** the cast
+shadow has a bare head. **Deck note:** the shadow is a decal on a proxy mesh - one extra
+draw, and it needs no shadow-casting light of its own.
+
+##### THE LAMPWRIGHT - *the variant* `[target]`
+1.72 m - 7,600 tris (ceiling 9,500) - 1024px - 5 materials - 24 bones - **2 vfx**. A woman in
+a long canvas coat with an unlit storm lantern held out from the hip, unhurried and wrong.
+`lantern-lash`: 1.1 s tell -> 30 dmg at 260 uu. **Tell:** the lantern glass shows a different,
+younger face, and the reflection lags her movement. **Deck note:** the second vfx system is
+the glass reflection - a second render of the head, not a mirror.
+
+##### THE ICE MAN - *the heavy variant* `[target]`
+1.85 m - 8,100 tris (ceiling 10,000) - 1024px - 5 materials - 24 bones - 1 vfx. A broad
+delivery man with an ice block on a shoulder yoke, wide and slow, a load wider than his
+shoulders. `yoke-swing`: 1.6 s tell -> 34 dmg at 300 uu. **Tell:** the boot prints sink four
+times deeper than his weight accounts for, and there is no drag mark behind the yoke.
+
+**Design note.** The three skin jobs are the only enemies that the player is *not* told are
+enemies. They arrive as set dressing, they do not attack until they are close, and the game
+never scolds the player for shooting a civilian - it just is. The 1994 *UFO* grammar again:
+the horror is that the settlement was never empty, not that the monsters have claws.
 
 ---
 
@@ -483,7 +650,7 @@ Full spec in §5.2. The design intent in one line: *it is weather that has opini
 | Phase | HP | Behaviour |
 |---|---|---|
 | **I — GRAZE** | 100–66% | Grid-locked, 1 node per 20 s, slow (200 uu/s). Telegraphed 1.4 s bite. Telegraphed 1.8 s roll along the outer rail. |
-| **II — SWALLOW** | 66–33% | 1 node per 12 s. Spawns 2 Chryssalids per node consumed. Adds a **famine lunge** — a straight-line charge across the grid, 1.0 s telegraph, 700 uu/s, hits for 55. |
+| **II — SWALLOW** | 66–33% | 1 node per 12 s. Spawns 2 Chryssalids per node consumed. Adds a **famine lunge** — a straight-line charge across the grid, 1.0 s telegraph, 700 uu/s, hits for 45. | From Phase II it also **burps glowing pepperoni pizzas**.
 | **III — ROLL** | 33–0% | Node consumption **halts** (the arena is already mostly eaten — the HUD shows the manifest filling). It rolls continuously, 1,100 uu/s, and *cannot stop*. The player must survive the roll and hit the exposed back. Adds a **shriek** — the foghorn again, this time the one from 1926 that killed nine men. |
 
 **Anti-frustration guarantees** (binding):
@@ -494,6 +661,61 @@ Full spec in §5.2. The design intent in one line: *it is weather that has opini
 - **No instant death.** Every hit the Harvester deals is survivable, and the arena never
   reduces below a 12×12 uu safe island at the centre. If the arena cannot be reduced further,
   the boss stops eating and the fight becomes pure DPS.
+
+
+### 8.3 The Harvester's attack list
+
+The Harvester's full attack list, by the names the JSON uses
+(`roster_bible.json -> bosses -> boss_harvester -> attacks`):
+
+| Attack name | Tell | Damage | Note |
+|---|---|---|---|
+| `pellet-eat` | 1.4 s | 45 | it eats a power node; the node heals it, and denying the node is the whole fight |
+| `roll` | 1.8 s | 60 | the roll along the arena rail; it cannot turn, so the exposed back is the vulnerability |
+| `famine-lunge` | 1.0 s | 45 | straight-line charge across the grid at 700 uu/s |
+| `glowing-pepperoni-pizza` | 1.2 s | 30 + 10/s splash | **burped** - section 8.4 below |
+| `shriek` | 1.2 s | 0 | the 1926 foghorn, the one that killed nine men - phase 3 entry |
+
+### 8.4 THE HARVESTER'S PIZZA
+
+The Harvester eats power nodes, and it also throws pizza. The pizza is a **glowing
+pepperoni pizza** - hot, cheese bubbling, pepperoni blistering - and it comes out of the
+maw in a **burp**, because the Harvester has no hands and has never pretended otherwise.
+
+| Property | Value |
+|---|---|
+| Name | `glowing-pepperoni-pizza` |
+| Telegraph | **1.2 s** - the maw inhales, the dorsal core flashes amber, a wet gulp precedes the burp, and the **landing ring lights on the floor** for the whole tell |
+| Flight | lobbed on a 45 degree arc at 900 uu/s, decelerating under 600 uu/s2, spinning about its axis, apex at 1.5 s, then it lands and bursts |
+| Damage | **30** on impact, then **10/s for 6 s** in a 300 uu cheese pool |
+| HP | **20** - it is a physical object with a health pool, and the game says so |
+| Phase | from Phase II (66% HP) onward |
+| **The player's answer** | **shoot it out of the air.** Two Puckle rounds kill the pizza in flight and no cheese pool ever forms. If it is not shot, dash clear of the landing ring - the ring is lit on the floor for the full 1.2 s tell, so a clean dodge is always available |
+
+The pizza is the only Harvester attack the **cheap gun** can answer, and that is deliberate:
+it is how the fight teaches the player that the Pilgrim Puckle is not a secondary weapon. It
+is also the fight's comic register - the boss is a logistics organism hurling food at you
+while it fills in a form - and it stays under the tone rules of section 2.4. The joke is that
+it is *hot*.
+
+### 8.5 The Harvester's taunt rotation
+
+The Harvester is the only fully voiced actor in the game, and its lines are the **insult
+bank**: `Tools/python/taunt_lines.py` - 40 lines, 13 / 14 / 13 across three phases, gated so
+that Phase I only ever says phase 1 lines. Selection is pure Rust and lives in
+`roster_bible.json -> bosses -> boss_harvester -> taunt_rotation`, which points at the bank
+rather than restating it.
+
+| Property | Value |
+|---|---|
+| Bank | `Tools/python/taunt_lines.py` (40 lines: 13 / 14 / 13) |
+| Contract | `roster_bible.json -> tts_contract` and `-> bosses -> boss_harvester -> taunt_rotation` |
+| **Line cap** | **15 words, one thought per line** - see section 11.1 |
+| Selection | phase-gated, no immediate repeat, 1.5 s minimum gap, 6.0 s maximum gap |
+| Gating | phase 1 lines until 66% HP - phase 2 until 33% - phase 3 below |
+| Engine | F5-TTS, HTPC `10.0.0.42:8020/synth`, voice `spokesman` |
+| Output | RIFF/WAVE, PCM s16le, mono, 24,000 Hz |
+| Channel | the taunt channel ducks the music bed by 6 dB and never ducks weapon SFX |
 
 ---
 
@@ -557,7 +779,7 @@ Plus, for the entity to pass on *content* rather than only form:
 
 ### 10.2 Per-category extras
 
-- **Roster sheet.** All 12 entities in one orthographic line-up at true relative scale, on the
+- **Roster sheet.** All 20 entities (19 roster entries plus the Harvester) in one orthographic line-up at true relative scale, on the
   same ground plane, with a 1.8 m human. This is the single most useful image for Clarity and
   it is cheap to produce.
 - **Level.** Top-down orthographic with tile grid + legend; ≥3 ground-level gameplay frames;
@@ -595,6 +817,29 @@ selection algorithm, the timing/cooldown, the render pipeline, the WAV format th
 parses, and the **exact defect** in the current renderer (the payload key) that has to be fixed
 before a single line lands.
 
+
+### 11.1 The line cap - 15 words, one thought per line
+
+**Every rendered taunt line is fifteen words or fewer and carries exactly one thought.** The
+cap lives in the JSON (`tts_contract.max_words = 15`, `one_thought_per_line = true`) so that
+the audio lane which renders the bank and the Rust lane which rotates it generate to the
+same limit. A line that breaks the cap is rejected at review; it is never patched after it
+has been rendered.
+
+**The cost model, measured.** A two-sentence line took **251 seconds** to render on the HTPC
+F5-TTS service; a short line took **57 seconds**. The service ignores a `speed` parameter, so
+line length is the only cost lever there is - and it is an expensive one. A bank of long lines
+renders in **hours** instead of **minutes**: at 251 s per line the 40-line bank is roughly
+**2.8 hours** of machine time, against about **38 minutes** at 57 s. The fifteen-word cap is
+what keeps the boss's voice affordable to iterate on, and it is why the cap is a number in a
+contract file rather than a note in a writing guide.
+
+The bank's own validator is **stricter** than the contract, which is the correct posture:
+`taunt_lines.py` enforces `MAX_WORDS = 10` and `MIN_WORDS = 5` (measured on the same service
+at ~1.38 s of speech per word). Fifteen is the ceiling the contract guarantees, not the
+target. One thought per line is also a *writing* rule, and the two-sentence lines that used
+to live in the bank are the exact thing it exists to stop.
+
 ---
 
 ## 12. Definition of done for this bible
@@ -606,6 +851,13 @@ before a single line lands.
 - [x] Rust/engine boundary with a single machine-readable contract file
 - [x] TTS insult-bank contract with the render defect identified
 - [x] Photograph plan mapped to Ebert's exact evidence requirements
+- [x] Human collaborators as full roster entries, each with a gameplay role and a written fallback
+- [x] Two cyborgs (Cyberdisc, Bionic Chryssalid) with machine-readable silhouettes and full budgets
+- [x] Three skin jobs (the Oysterman, the Lampwright, the Ice Man), each with one learnable tell
+- [x] The Harvester's glowing pepperoni pizza as a named attack, with flight behaviour, damage and the player's answer
+- [x] The Harvester's taunt rotation, pointed at the existing insult bank
+- [x] Cutscene beats, three per act, flagged cutscene vs in-game dialogue for the engine lane
+- [x] The 15-word, one-thought taunt cap written into the JSON TTS contract as well as this prose
 - [ ] **The renders.** Every frame in §10 exists. Until then nothing here is scoreable.
 - [ ] **Level 2 and 3 exist.** Acts II and III are specified but unbuilt.
 

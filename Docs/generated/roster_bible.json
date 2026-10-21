@@ -1,5 +1,5 @@
 {
-  "schema": "tcbs.roster.v1",
+  "schema": "tcbs.roster.v1.1",
   "generated": "2026-10-21",
   "title": "The Commander Boomer Shooter - Full Roster Bible",
   "source_of_truth": "Docs/generated/roster_bible.md",
@@ -48,7 +48,7 @@
       "role": "swarm pressure, psychic harassment",
       "height_m": 1.39,
       "width_m": 0.52,
-      "length_m": 0.70,
+      "length_m": 0.7,
       "tris": 7308,
       "status": "BUILT (Tools/blender/out_xcom/XCOM_Sectoid.fbx)",
       "hp": 30,
@@ -71,7 +71,22 @@
         "vfx_systems": 1,
         "deck_note": "one emissive channel (eyes), no GI dependency - reads on emissive alone"
       },
-      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "projectile_speed", "aggro_range"], "engine": ["mesh", "skeleton", "materials", "eye_emissive"]}
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "projectile_speed",
+          "aggro_range"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "eye_emissive"
+        ]
+      }
     },
     {
       "id": "xcom_viper",
@@ -81,7 +96,7 @@
       "role": "ranged line unit, plasma rifle pressure",
       "height_m": 2.06,
       "width_m": 0.64,
-      "length_m": 0.70,
+      "length_m": 0.7,
       "tris": 5764,
       "status": "BUILT (Tools/blender/out_xcom/XCOM_Viper.fbx)",
       "hp": 90,
@@ -105,7 +120,23 @@
         "vfx_systems": 2,
         "deck_note": "plasma coil emissive is the second light source in the silhouette"
       },
-      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "projectile_speed", "burst_count", "burst_interval_s"], "engine": ["mesh", "skeleton", "materials", "plasma_coil_emissive"]}
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "projectile_speed",
+          "burst_count",
+          "burst_interval_s"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "plasma_coil_emissive"
+        ]
+      }
     },
     {
       "id": "xcom_floater",
@@ -115,8 +146,8 @@
       "role": "hovering psi attacker, ignores ground cover",
       "height_m": 0.29,
       "width_m": 2.48,
-      "length_m": 1.40,
-      "hover_clearance_m": 0.90,
+      "length_m": 1.4,
+      "hover_clearance_m": 0.9,
       "tris": 2184,
       "status": "BUILT (Tools/blender/out_xcom/XCOM_Floater.fbx)",
       "hp": 45,
@@ -139,7 +170,24 @@
         "vfx_systems": 2,
         "deck_note": "cheapest asset in the kit - no legs means no leg animation cost; hover ellipse is a decal, not geometry"
       },
-      "port": {"logic": ["hp", "speed", "hover_clearance_m", "telegraph_s", "damage", "beam_range_uu", "bob_amplitude_m", "bob_period_s"], "engine": ["mesh", "skeleton", "materials", "core_emissive"]}
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "hover_clearance_m",
+          "telegraph_s",
+          "damage",
+          "beam_range_uu",
+          "bob_amplitude_m",
+          "bob_period_s"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "core_emissive"
+        ]
+      }
     },
     {
       "id": "xcom_muton",
@@ -173,7 +221,22 @@
         "vfx_systems": 2,
         "deck_note": "oxblood accent is the ONLY warm hue in the alien set - keep it to one material instance"
       },
-      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "projectile_speed", "burst_count"], "engine": ["mesh", "skeleton", "materials", "visor_emissive"]}
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "projectile_speed",
+          "burst_count"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "visor_emissive"
+        ]
+      }
     },
     {
       "id": "xcom_chryssalid",
@@ -206,7 +269,22 @@
         "vfx_systems": 1,
         "deck_note": "4 legs + 2 scythes = the highest bone count per tri; keep animation on 2 bones at a time"
       },
-      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "leap_range_uu", "leap_cooldown_s"], "engine": ["mesh", "skeleton", "materials", "venom_emissive"]}
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "leap_range_uu",
+          "leap_cooldown_s"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "venom_emissive"
+        ]
+      }
     },
     {
       "id": "plymouth_drone",
@@ -214,7 +292,7 @@
       "lineage": "Plymouth-native (original)",
       "tier": "swarm",
       "role": "cheap swarm unit, zone denial near water",
-      "height_m": 0.60,
+      "height_m": 0.6,
       "tris": 2600,
       "status": "DESIGNED (blockout E_BarnacleDrone.uasset exists; v2 mesh not built)",
       "hp": 36,
@@ -228,8 +306,29 @@
       },
       "silhouette": "clustered shell cone on three stubby legs, single red eye-lens",
       "signature": "wet shell-clicking idle; red eye-lens pulses 0.6 s before the spit",
-      "budget": {"tris": 2600, "tris_ceiling": 3500, "texture_res": 512, "materials": 3, "skeleton_bones": 12, "vfx_systems": 1, "deck_note": "3 spawns per wave - LOD0 only, 512px textures"},
-      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "projectile_speed", "spawn_group_size"], "engine": ["mesh", "materials"]}
+      "budget": {
+        "tris": 2600,
+        "tris_ceiling": 3500,
+        "texture_res": 512,
+        "materials": 3,
+        "skeleton_bones": 12,
+        "vfx_systems": 1,
+        "deck_note": "3 spawns per wave - LOD0 only, 512px textures"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "projectile_speed",
+          "spawn_group_size"
+        ],
+        "engine": [
+          "mesh",
+          "materials"
+        ]
+      }
     },
     {
       "id": "plymouth_zealot",
@@ -251,8 +350,29 @@
       },
       "silhouette": "hunched pilgrim in a ruffed collar, long musket held across the body",
       "signature": "the red ruffs explode outward when it dies",
-      "budget": {"tris": 5400, "tris_ceiling": 7000, "texture_res": 1024, "materials": 5, "skeleton_bones": 26, "vfx_systems": 1, "deck_note": "cloth is the only material - no cloth sim, baked to the mesh"},
-      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "range_uu"], "engine": ["mesh", "skeleton", "materials"]}
+      "budget": {
+        "tris": 5400,
+        "tris_ceiling": 7000,
+        "texture_res": 1024,
+        "materials": 5,
+        "skeleton_bones": 26,
+        "vfx_systems": 1,
+        "deck_note": "cloth is the only material - no cloth sim, baked to the mesh"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "range_uu"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials"
+        ]
+      }
     },
     {
       "id": "plymouth_phantom",
@@ -274,8 +394,31 @@
       },
       "silhouette": "translucent tattered sail-cloak, hollow hood, no visible feet",
       "signature": "materialises out of fog on a glass-shatter precursor",
-      "budget": {"tris": 4800, "tris_ceiling": 6000, "texture_res": 1024, "materials": 4, "skeleton_bones": 20, "vfx_systems": 3, "deck_note": "translucency is a dithered mask, not a blend - cheapest honest ghost on Deck"},
-      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "beam_range_uu", "fade_in_s"], "engine": ["mesh", "skeleton", "materials", "dither_mask"]}
+      "budget": {
+        "tris": 4800,
+        "tris_ceiling": 6000,
+        "texture_res": 1024,
+        "materials": 4,
+        "skeleton_bones": 20,
+        "vfx_systems": 3,
+        "deck_note": "translucency is a dithered mask, not a blend - cheapest honest ghost on Deck"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "beam_range_uu",
+          "fade_in_s"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "dither_mask"
+        ]
+      }
     },
     {
       "id": "plymouth_brute",
@@ -283,7 +426,7 @@
       "lineage": "Plymouth-native (original)",
       "tier": "heavy",
       "role": "pit gatekeeper, very high aggression, closes to melee",
-      "height_m": 2.30,
+      "height_m": 2.3,
       "tris": 7200,
       "status": "DESIGNED (blockout E_LobsterBrute.uasset exists; v2 mesh not built)",
       "hp": 450,
@@ -297,8 +440,30 @@
       },
       "silhouette": "armoured lobster torso, two huge asymmetric claws, sub-bass rumble idle",
       "signature": "claws charge with static and snap audibly 1.0 s before the hit",
-      "budget": {"tris": 7200, "tris_ceiling": 9000, "texture_res": 1024, "materials": 5, "skeleton_bones": 24, "vfx_systems": 2, "deck_note": "hard shell = high roughness, cheap specular - no clearcoat"},
-      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "range_uu"], "engine": ["mesh", "skeleton", "materials", "shell_metal"]}
+      "budget": {
+        "tris": 7200,
+        "tris_ceiling": 9000,
+        "texture_res": 1024,
+        "materials": 5,
+        "skeleton_bones": 24,
+        "vfx_systems": 2,
+        "deck_note": "hard shell = high roughness, cheap specular - no clearcoat"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "range_uu"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "shell_metal"
+        ]
+      }
     },
     {
       "id": "plymouth_golem",
@@ -306,7 +471,7 @@
       "lineage": "Plymouth-native (original)",
       "tier": "static_obstacle",
       "role": "platform gate, slam AoE, high HP, low speed",
-      "height_m": 2.60,
+      "height_m": 2.6,
       "tris": 8600,
       "status": "DESIGNED (blockout E_RockGolem.uasset exists; v2 mesh not built)",
       "hp": 600,
@@ -320,8 +485,31 @@
       },
       "silhouette": "blocky granite mass, no neck, glowing orange cracks in the shoulders",
       "signature": "cracks glow orange 1.5 s before the slam, 0.8 s recovery window after",
-      "budget": {"tris": 8600, "tris_ceiling": 10000, "texture_res": 1024, "materials": 4, "skeleton_bones": 16, "vfx_systems": 1, "deck_note": "16 bones - the least animation cost of any heavy"},
-      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "radius_uu", "recovery_s"], "engine": ["mesh", "skeleton", "materials", "crack_emissive"]}
+      "budget": {
+        "tris": 8600,
+        "tris_ceiling": 10000,
+        "texture_res": 1024,
+        "materials": 4,
+        "skeleton_bones": 16,
+        "vfx_systems": 1,
+        "deck_note": "16 bones - the least animation cost of any heavy"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "radius_uu",
+          "recovery_s"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "crack_emissive"
+        ]
+      }
     },
     {
       "id": "plymouth_titan",
@@ -329,7 +517,7 @@
       "lineage": "Plymouth-native (original)",
       "tier": "boss",
       "role": "storm boss, phase-2 shield regen, projectile storm",
-      "height_m": 3.00,
+      "height_m": 3.0,
       "tris": 14000,
       "status": "DESIGNED (blockout E_NorEasterTitan.uasset exists; v2 mesh not built)",
       "hp": 2000,
@@ -343,13 +531,443 @@
         "spawn_interval_s": 2.0
       },
       "phases": [
-        {"phase": 1, "hp_range": [0.5, 1.0], "shield_regen_hp_s": 0, "note": "standard - Mayflower Cannon is the answer"},
-        {"phase": 2, "hp_range": [0.0, 0.5], "shield_regen_hp_s": 10, "note": "shield regenerates if not hit; rocket splash clears projectiles"}
+        {
+          "phase": 1,
+          "hp_range": [
+            0.5,
+            1.0
+          ],
+          "shield_regen_hp_s": 0,
+          "note": "standard - Mayflower Cannon is the answer"
+        },
+        {
+          "phase": 2,
+          "hp_range": [
+            0.0,
+            0.5
+          ],
+          "shield_regen_hp_s": 10,
+          "note": "shield regenerates if not hit; rocket splash clears projectiles"
+        }
       ],
       "silhouette": "storm-front mass, cloud skirt, lightning-forked arms",
       "signature": "sky darkens and lightning strikes BEFORE the charge - 1.8 s of free warning",
-      "budget": {"tris": 14000, "tris_ceiling": 18000, "texture_res": 2048, "materials": 6, "skeleton_bones": 28, "vfx_systems": 4, "deck_note": "the only 2048px asset in the game; at 'low' it drops to 1024 with a 4th-mip bias"},
-      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "projectile_speed", "spawn_interval_s", "phase_thresholds", "shield_regen_hp_s"], "engine": ["mesh", "skeleton", "materials", "lightning_vfx"]}
+      "budget": {
+        "tris": 14000,
+        "tris_ceiling": 18000,
+        "texture_res": 2048,
+        "materials": 6,
+        "skeleton_bones": 28,
+        "vfx_systems": 4,
+        "deck_note": "the only 2048px asset in the game; at 'low' it drops to 1024 with a 4th-mip bias"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "projectile_speed",
+          "spawn_interval_s",
+          "phase_thresholds",
+          "shield_regen_hp_s"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "lightning_vfx"
+        ]
+      }
+    },
+    {
+      "id": "human_tobias_angell",
+      "name": "Tobias Angell",
+      "lineage": "Plymouth-native (original)",
+      "tier": "friendly_contact",
+      "role": "resistance contact inside the settlement; opens a route, or trades a marked hostile for shells",
+      "height_m": 1.79,
+      "width_m": 0.52,
+      "length_m": 0.34,
+      "tris": 7200,
+      "status": "DESIGNED (no blockout asset; v2 mesh not built)",
+      "hp": 60,
+      "speed_uu_s": 300,
+      "attack": {
+        "name": "route-open",
+        "type": "support_interact",
+        "telegraph_s": 0.5,
+        "damage": 0,
+        "range_uu": 300
+      },
+      "silhouette": "lean upright dockworker, stovepipe cap and belted oilskin, hand lantern held low, face unreadable at 40 px",
+      "signature": "he trades in marks: a hostile he has seen is worth 30 rounds of Light ammo to him",
+      "budget": {
+        "tris": 7200,
+        "tris_ceiling": 9500,
+        "texture_res": 1024,
+        "materials": 5,
+        "skeleton_bones": 24,
+        "vfx_systems": 1,
+        "deck_note": "one cloth material baked to the mesh - no cloth sim, ever"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "range_uu",
+          "support_id",
+          "presence_state"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials"
+        ]
+      }
+    },
+    {
+      "id": "human_edda_cobb",
+      "name": "Edda Cobb",
+      "lineage": "Plymouth-native (original)",
+      "tier": "friendly_engineer",
+      "role": "yard rigger; restores a piece of hardware, which opens a route and lights the yard",
+      "height_m": 1.71,
+      "width_m": 0.58,
+      "length_m": 0.36,
+      "tris": 7600,
+      "status": "DESIGNED (no blockout asset; v2 mesh not built)",
+      "hp": 70,
+      "speed_uu_s": 280,
+      "attack": {
+        "name": "hoist-restore",
+        "type": "support_interact",
+        "telegraph_s": 12.0,
+        "damage": 0,
+        "range_uu": 250
+      },
+      "silhouette": "broad upright rigger in bib overalls and a canvas coat, one oversized spanner carried like a bat",
+      "signature": "she repairs under fire and complains about it; the floodlights come up as a side effect",
+      "budget": {
+        "tris": 7600,
+        "tris_ceiling": 9500,
+        "texture_res": 1024,
+        "materials": 5,
+        "skeleton_bones": 26,
+        "vfx_systems": 1,
+        "deck_note": "tool and coat share one material - the spanner is the only separate part"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "range_uu",
+          "support_id",
+          "presence_state",
+          "hold_time_s"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials"
+        ]
+      }
+    },
+    {
+      "id": "human_wren_hollis",
+      "name": "Dr. Wren Hollis",
+      "lineage": "Plymouth-native (original)",
+      "tier": "friendly_medic_researcher",
+      "role": "harbour wireless operator and former medical orderly; stabilises the player, reads out the boss's weakness",
+      "height_m": 1.66,
+      "width_m": 0.48,
+      "length_m": 0.32,
+      "tris": 6900,
+      "status": "DESIGNED (no blockout asset; v2 mesh not built)",
+      "hp": 55,
+      "speed_uu_s": 300,
+      "attack": {
+        "name": "field-dose",
+        "type": "support_interact",
+        "telegraph_s": 1.5,
+        "damage": 0,
+        "range_uu": 250
+      },
+      "silhouette": "slight upright figure in a long cardigan, headphones round the neck, a notebook never put down",
+      "signature": "she reads the boss out loud while it is happening, which is the only reason the player knows its weakness",
+      "budget": {
+        "tris": 6900,
+        "tris_ceiling": 9000,
+        "texture_res": 1024,
+        "materials": 5,
+        "skeleton_bones": 24,
+        "vfx_systems": 1,
+        "deck_note": "notebook and headphones are one material - no separate props pass"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "range_uu",
+          "support_id",
+          "presence_state"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials"
+        ]
+      }
+    },
+    {
+      "id": "xcom_cyberdisc",
+      "name": "Cyberdisc",
+      "lineage": "X-COM 1994 (original UFO: Enemy Unknown)",
+      "tier": "cyborg_support",
+      "role": "hovering shield projector; the only enemy that makes the player shoot something they cannot damage",
+      "height_m": 0.55,
+      "width_m": 1.9,
+      "length_m": 1.9,
+      "hover_clearance_m": 0.85,
+      "tris": 4200,
+      "status": "DESIGNED (no blockout asset; v2 mesh not built)",
+      "hp": 160,
+      "speed_uu_s": 300,
+      "attack": {
+        "name": "disc-cleave",
+        "type": "telegraphed_projectile",
+        "telegraph_s": 1.2,
+        "damage": 26,
+        "projectile_speed_uu_s": 2600
+      },
+      "silhouette": "flat disc hovering with no limbs, raised emitter ring on the rear third, three radial vents, no organic curvature anywhere",
+      "signature": "unmistakably a machine: hard concentric rings and one amber emitter lens, and it never once pretends to be alive",
+      "budget": {
+        "tris": 4200,
+        "tris_ceiling": 5500,
+        "texture_res": 1024,
+        "materials": 4,
+        "skeleton_bones": 14,
+        "vfx_systems": 2,
+        "deck_note": "14 bones and one emissive - the cheapest field projector on the Deck"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "hover_clearance_m",
+          "telegraph_s",
+          "damage",
+          "projectile_speed",
+          "field_radius_uu",
+          "field_hold_s"
+        ],
+        "engine": [
+          "mesh",
+          "materials",
+          "emitter_lens_emissive",
+          "field_shell_vfx"
+        ]
+      }
+    },
+    {
+      "id": "xcom_bionic_chryssalid",
+      "name": "Bionic Chryssalid",
+      "lineage": "X-COM 1994 (original UFO: Enemy Unknown)",
+      "tier": "cyborg_heavy_flanker",
+      "role": "heavy cybernetic variant of the Chryssalid; the only enemy that deletes the player's cover",
+      "height_m": 1.1,
+      "width_m": 0.95,
+      "length_m": 1.78,
+      "tris": 9800,
+      "status": "DESIGNED (no blockout asset; v2 mesh not built)",
+      "hp": 320,
+      "speed_uu_s": 300,
+      "attack": {
+        "name": "hydraulic-scythe",
+        "type": "telegraphed_melee",
+        "telegraph_s": 1.8,
+        "damage": 45,
+        "range_uu": 450
+      },
+      "silhouette": "the forward-pitched Chryssalid stalker rebuilt on hydraulic legs, plate instead of chitin, walking where the organic one leaps",
+      "signature": "it shears whatever cover is within 700 uu, so the fight moves instead of the shooting",
+      "budget": {
+        "tris": 9800,
+        "tris_ceiling": 12000,
+        "texture_res": 1024,
+        "materials": 6,
+        "skeleton_bones": 32,
+        "vfx_systems": 2,
+        "deck_note": "32 bones is the highest count in the kit - animate 3 at a time or it stutters"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "range_uu",
+          "cover_shatter_radius_uu",
+          "cover_shatter_cooldown_s"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "hydraulic_emissive"
+        ]
+      }
+    },
+    {
+      "id": "skinjob_oysterman",
+      "name": "the Oysterman",
+      "lineage": "Cylon-style synthetic (original, Plymouth infiltration)",
+      "tier": "skin_job_infiltrator",
+      "role": "human-appearing infiltrator walking the settlement in oilskin; kills at contact once it is close",
+      "height_m": 1.78,
+      "width_m": 0.54,
+      "length_m": 0.34,
+      "tris": 7400,
+      "status": "DESIGNED (no blockout asset; v2 mesh not built)",
+      "hp": 70,
+      "speed_uu_s": 300,
+      "attack": {
+        "name": "crate-cleave",
+        "type": "telegraphed_melee",
+        "telegraph_s": 1.3,
+        "damage": 30,
+        "range_uu": 250
+      },
+      "silhouette": "a man in a belted oilskin and sou'wester, carrying an oyster crate in both hands, walking like every other man in the street",
+      "signature": "TELL: the cast shadow has a bare head - the sou'wester's brim is missing from the shadow, so the shadow and the body disagree",
+      "budget": {
+        "tris": 7400,
+        "tris_ceiling": 9500,
+        "texture_res": 1024,
+        "materials": 5,
+        "skeleton_bones": 24,
+        "vfx_systems": 1,
+        "deck_note": "the shadow is a decal on a proxy mesh - one extra draw, no shadow-casting light needed"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "range_uu",
+          "tell_shadow_brim",
+          "tell_shadow_bare_head"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "shadow_proxy_mesh"
+        ]
+      }
+    },
+    {
+      "id": "skinjob_lampwright",
+      "name": "the Lampwright",
+      "lineage": "Cylon-style synthetic (original, Plymouth infiltration)",
+      "tier": "skin_job_infiltrator",
+      "role": "variant of the Oysterman in a canvas coat with an unlit storm lantern; the shadow is correct, so the other tell is the only tell",
+      "height_m": 1.72,
+      "width_m": 0.5,
+      "length_m": 0.33,
+      "tris": 7600,
+      "status": "DESIGNED (no blockout asset; v2 mesh not built)",
+      "hp": 70,
+      "speed_uu_s": 320,
+      "attack": {
+        "name": "lantern-lash",
+        "type": "telegraphed_melee",
+        "telegraph_s": 1.1,
+        "damage": 30,
+        "range_uu": 260
+      },
+      "silhouette": "a woman in a long canvas coat with an unlit storm lantern held out from the hip, unhurried, deliberate, wrong",
+      "signature": "TELL: the lantern glass shows a different, younger face, and the reflection does not move with her",
+      "budget": {
+        "tris": 7600,
+        "tris_ceiling": 9500,
+        "texture_res": 1024,
+        "materials": 5,
+        "skeleton_bones": 24,
+        "vfx_systems": 2,
+        "deck_note": "one extra vfx system for the glass reflection - it is a second render of the head, not a mirror"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "range_uu",
+          "tell_reflection_face",
+          "tell_reflection_lag"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "glass_reflection_vfx"
+        ]
+      }
+    },
+    {
+      "id": "skinjob_ice_man",
+      "name": "the Ice Man",
+      "lineage": "Cylon-style synthetic (original, Plymouth infiltration)",
+      "tier": "skin_job_infiltrator",
+      "role": "heaviest variant, ice delivery on a shoulder yoke; the slowest of the three and the hardest to see coming",
+      "height_m": 1.85,
+      "width_m": 0.62,
+      "length_m": 0.36,
+      "tris": 8100,
+      "status": "DESIGNED (no blockout asset; v2 mesh not built)",
+      "hp": 90,
+      "speed_uu_s": 260,
+      "attack": {
+        "name": "yoke-swing",
+        "type": "telegraphed_melee",
+        "telegraph_s": 1.6,
+        "damage": 34,
+        "range_uu": 300
+      },
+      "silhouette": "a broad delivery man with an ice block on a shoulder yoke, wide and slow, a load wider than his shoulders",
+      "signature": "TELL: his boot prints sink four times deeper than his weight accounts for, and there is no drag mark behind the yoke",
+      "budget": {
+        "tris": 8100,
+        "tris_ceiling": 10000,
+        "texture_res": 1024,
+        "materials": 5,
+        "skeleton_bones": 24,
+        "vfx_systems": 1,
+        "deck_note": "yoke and ice are one material - the load never chips, so the silhouette stays clean"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "speed",
+          "telegraph_s",
+          "damage",
+          "range_uu",
+          "tell_footprint_depth",
+          "tell_footprint_drag"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "footprint_decal"
+        ]
+      }
     }
   ],
   "bosses": [
@@ -361,7 +979,7 @@
       "role": "final boss, Level 2",
       "concept": "Pac-Man's grid-eat pursuit and Sonic's momentum, fused into one X-COM organism. It moves on a lattice, eats the arena's power nodes to grow, and when it stops eating it ROLLS.",
       "lineage": "X-COM 1994-derived - a Celestial-tier 'Lattice' organism, modernized",
-      "height_m": 3.40,
+      "height_m": 3.4,
       "tris": 18500,
       "budget": {
         "tris": 18500,
@@ -372,7 +990,104 @@
         "vfx_systems": 5,
         "deck_note": "7 materials is the cap - merge the two dark chitin materials before ship"
       },
-      "port": {"logic": ["hp", "phase_thresholds", "grid_move_s", "lunge_speed", "lunge_telegraph_s", "node_hunger_rate", "pellet_eat_time_s", "power_state_s", "damage"], "engine": ["mesh", "skeleton", "materials", "roll_trail_vfx", "pellet_glow_vfx"]}
+      "port": {
+        "logic": [
+          "hp",
+          "phase_thresholds",
+          "grid_move_s",
+          "lunge_speed",
+          "lunge_telegraph_s",
+          "node_hunger_rate",
+          "pellet_eat_time_s",
+          "power_state_s",
+          "damage",
+          "pizza_hp",
+          "pizza_projectile_speed",
+          "pizza_gravity",
+          "pizza_splash_damage",
+          "pizza_splash_duration_s",
+          "taunt_selection"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "roll_trail_vfx",
+          "pellet_glow_vfx",
+          "pizza_projectile_vfx",
+          "pizza_cheese_pool_vfx"
+        ]
+      },
+      "attacks": [
+        {
+          "name": "pellet-eat",
+          "type": "telegraphed_aoe",
+          "telegraph_s": 1.4,
+          "damage": 45,
+          "radius_uu": 300,
+          "notes": "the boss eats a power node; the node heals it and is the denial target the whole fight is built on"
+        },
+        {
+          "name": "roll",
+          "type": "telegraphed_charge",
+          "telegraph_s": 1.8,
+          "damage": 60,
+          "notes": "the roll along the arena rail; it cannot turn, so the exposed back is the vulnerability"
+        },
+        {
+          "name": "famine-lunge",
+          "type": "telegraphed_charge",
+          "telegraph_s": 1.0,
+          "damage": 45,
+          "projectile_speed_uu_s": 700,
+          "notes": "straight-line charge across the grid; damage cut from 55 to 45 so the global telegraph rule stays honest"
+        },
+        {
+          "name": "glowing-pepperoni-pizza",
+          "type": "telegraphed_projectile",
+          "telegraph_s": 1.2,
+          "damage": 30,
+          "launch": "burp",
+          "projectile_speed_uu_s": 900,
+          "gravity_uu_s2": 600,
+          "hp": 20,
+          "splash_damage": 10,
+          "splash_duration_s": 6.0,
+          "radius_uu": 300,
+          "phase": 2,
+          "flight": "burped out of the maw on a 45 degree lob, decelerating under 600 uu/s2, spinning about its axis, apex at 1.5 s, then it lands and bursts",
+          "counter": "shoot it out of the air - the pizza has 20 HP and two Puckle rounds kill it, in which case no cheese pool ever forms; if it is not shot, dash clear of the landing ring, which is lit on the floor for the full 1.2 s tell",
+          "notes": "the only Harvester attack the cheap gun can answer, which is how the fight teaches the player that the Puckle matters"
+        },
+        {
+          "name": "shriek",
+          "type": "audio_only_phase_call",
+          "telegraph_s": 1.2,
+          "damage": 0,
+          "notes": "the 1926 foghorn, the one that killed nine men - phase 3 entry"
+        }
+      ],
+      "taunt_rotation": {
+        "source": "Tools/python/taunt_lines.py",
+        "contract": "roster_bible.json -> tts_contract",
+        "bank_lines": 40,
+        "bank_phase_counts": {
+          "1": 13,
+          "2": 14,
+          "3": 13
+        },
+        "max_words": 15,
+        "one_thought_per_line": true,
+        "phase_gate": {
+          "1": "phase 1 lines until 66% HP",
+          "2": "phase 2 lines until 33% HP",
+          "3": "phase 3 lines below 33% HP"
+        },
+        "selection": "pure Rust: phase-gated, no immediate repeat, 1.5 s minimum gap, 6.0 s maximum gap",
+        "engine": "F5-TTS, HTPC 10.0.0.42:8020/synth, voice 'spokesman'",
+        "output_format": "RIFF/WAVE, PCM s16le, mono, 24000 Hz",
+        "channel": "the taunt channel ducks the music bed by 6 dB and never ducks weapon SFX"
+      }
     },
     {
       "id": "boss_titan",
@@ -380,23 +1095,754 @@
       "codename": "STORM BOSS",
       "status": "DESIGNED - blockout only",
       "role": "Level 1 boss",
-      "budget": {"tris": 14000, "tris_ceiling": 18000, "texture_res": 2048, "materials": 6, "skeleton_bones": 28, "vfx_systems": 4, "deck_note": "see roster entry plymouth_titan"},
-      "port": {"logic": ["hp", "phase_thresholds", "shield_regen_hp_s", "damage", "projectile_speed"], "engine": ["mesh", "skeleton", "materials", "lightning_vfx"]}
+      "budget": {
+        "tris": 14000,
+        "tris_ceiling": 18000,
+        "texture_res": 2048,
+        "materials": 6,
+        "skeleton_bones": 28,
+        "vfx_systems": 4,
+        "deck_note": "see roster entry plymouth_titan"
+      },
+      "port": {
+        "logic": [
+          "hp",
+          "phase_thresholds",
+          "shield_regen_hp_s",
+          "damage",
+          "projectile_speed"
+        ],
+        "engine": [
+          "mesh",
+          "skeleton",
+          "materials",
+          "lightning_vfx"
+        ]
+      }
     }
   ],
   "weapons": [
-    {"id": "w_puckle", "name": "Pilgrim Puckle", "archetype": "Sidearm", "fire_rate_rps": 12.0, "projectile_speed_uu_s": 3000, "damage": 12, "pellets": 1, "spread_deg": 0.0, "ammo_type": "Light", "max_carry": 300, "pickup_refill": 30, "hitscan": false, "primary_target": "Drones, Zealots, Sectoids"},
-    {"id": "w_scattergun", "name": "Sextant Scattergun", "archetype": "Shotgun", "fire_rate_rps": 1.8, "projectile_speed_uu_s": 3000, "damage": 14, "pellets": 10, "spread_deg": 4.5, "ammo_type": "Heavy", "max_carry": 24, "pickup_refill": 24, "hitscan": false, "primary_target": "Close range, Brutes"},
-    {"id": "w_blunderbuss", "name": "Barnacle Blunderbuss", "archetype": "Shotgun projectile", "fire_rate_rps": 0.9, "projectile_speed_uu_s": 3000, "damage": 22, "pellets": 12, "spread_deg": 8.0, "ammo_type": "Heavy", "max_carry": 12, "pickup_refill": 12, "hitscan": false, "primary_target": "Mid range, Zealots, Phantom"},
-    {"id": "w_rail", "name": "Rockhopper Rail", "archetype": "Railgun", "fire_rate_rps": 0.5, "projectile_speed_uu_s": 5000, "damage": 85, "pellets": 1, "spread_deg": 0.0, "ammo_type": "Rail", "max_carry": 10, "pickup_refill": 10, "hitscan": false, "primary_target": "Brute, Golem"},
-    {"id": "w_rocket", "name": "Harbor Wreck Rocket", "archetype": "Rocket", "fire_rate_rps": 0.8, "projectile_speed_uu_s": 3500, "damage": 120, "splash_damage": 60, "pellets": 1, "spread_deg": 0.0, "ammo_type": "Rocket", "max_carry": 8, "pickup_refill": 8, "hitscan": false, "primary_target": "Boss, groups"},
-    {"id": "w_cannon", "name": "Mayflower Cannon", "archetype": "Heavy projectile", "fire_rate_rps": 0.4, "projectile_speed_uu_s": 4000, "damage": 250, "pellets": 1, "spread_deg": 0.0, "ammo_type": "Heavy", "max_carry": 6, "pickup_refill": 6, "hitscan": false, "primary_target": "Boss, Titan phase 1/2"}
+    {
+      "id": "w_puckle",
+      "name": "Pilgrim Puckle",
+      "archetype": "Sidearm",
+      "fire_rate_rps": 12.0,
+      "projectile_speed_uu_s": 3000,
+      "damage": 12,
+      "pellets": 1,
+      "spread_deg": 0.0,
+      "ammo_type": "Light",
+      "max_carry": 300,
+      "pickup_refill": 30,
+      "hitscan": false,
+      "primary_target": "Drones, Zealots, Sectoids"
+    },
+    {
+      "id": "w_scattergun",
+      "name": "Sextant Scattergun",
+      "archetype": "Shotgun",
+      "fire_rate_rps": 1.8,
+      "projectile_speed_uu_s": 3000,
+      "damage": 14,
+      "pellets": 10,
+      "spread_deg": 4.5,
+      "ammo_type": "Heavy",
+      "max_carry": 24,
+      "pickup_refill": 24,
+      "hitscan": false,
+      "primary_target": "Close range, Brutes"
+    },
+    {
+      "id": "w_blunderbuss",
+      "name": "Barnacle Blunderbuss",
+      "archetype": "Shotgun projectile",
+      "fire_rate_rps": 0.9,
+      "projectile_speed_uu_s": 3000,
+      "damage": 22,
+      "pellets": 12,
+      "spread_deg": 8.0,
+      "ammo_type": "Heavy",
+      "max_carry": 12,
+      "pickup_refill": 12,
+      "hitscan": false,
+      "primary_target": "Mid range, Zealots, Phantom"
+    },
+    {
+      "id": "w_rail",
+      "name": "Rockhopper Rail",
+      "archetype": "Railgun",
+      "fire_rate_rps": 0.5,
+      "projectile_speed_uu_s": 5000,
+      "damage": 85,
+      "pellets": 1,
+      "spread_deg": 0.0,
+      "ammo_type": "Rail",
+      "max_carry": 10,
+      "pickup_refill": 10,
+      "hitscan": false,
+      "primary_target": "Brute, Golem"
+    },
+    {
+      "id": "w_rocket",
+      "name": "Harbor Wreck Rocket",
+      "archetype": "Rocket",
+      "fire_rate_rps": 0.8,
+      "projectile_speed_uu_s": 3500,
+      "damage": 120,
+      "splash_damage": 60,
+      "pellets": 1,
+      "spread_deg": 0.0,
+      "ammo_type": "Rocket",
+      "max_carry": 8,
+      "pickup_refill": 8,
+      "hitscan": false,
+      "primary_target": "Boss, groups"
+    },
+    {
+      "id": "w_cannon",
+      "name": "Mayflower Cannon",
+      "archetype": "Heavy projectile",
+      "fire_rate_rps": 0.4,
+      "projectile_speed_uu_s": 4000,
+      "damage": 250,
+      "pellets": 1,
+      "spread_deg": 0.0,
+      "ammo_type": "Heavy",
+      "max_carry": 6,
+      "pickup_refill": 6,
+      "hitscan": false,
+      "primary_target": "Boss, Titan phase 1/2"
+    }
   ],
   "difficulty_knobs": [
-    {"id": "EnemyHPScalar", "default": 1.0, "easy": 0.75, "hard": 1.5, "nightmare": 2.0, "applies_to": "all enemy hp"},
-    {"id": "ProjectileSpeedScalar", "default": 1.0, "easy": 1.2, "hard": 0.8, "nightmare": 0.8, "applies_to": "player and enemy projectile speed"},
-    {"id": "PickupSpawnMultiplier", "default": 1.0, "easy": 1.5, "hard": 0.75, "nightmare": 0.75, "applies_to": "ammo restored per pickup"},
-    {"id": "EnemyFireRateScalar", "default": 1.0, "easy": 0.8, "hard": 1.2, "nightmare": 1.2, "applies_to": "enemy attack cadence"},
-    {"id": "DamageResistanceScalar", "default": 1.0, "easy": 0.5, "hard": 1.0, "nightmare": 1.25, "applies_to": "per-weapon-type resistance"}
-  ]
+    {
+      "id": "EnemyHPScalar",
+      "default": 1.0,
+      "easy": 0.75,
+      "hard": 1.5,
+      "nightmare": 2.0,
+      "applies_to": "all enemy hp"
+    },
+    {
+      "id": "ProjectileSpeedScalar",
+      "default": 1.0,
+      "easy": 1.2,
+      "hard": 0.8,
+      "nightmare": 0.8,
+      "applies_to": "player and enemy projectile speed"
+    },
+    {
+      "id": "PickupSpawnMultiplier",
+      "default": 1.0,
+      "easy": 1.5,
+      "hard": 0.75,
+      "nightmare": 0.75,
+      "applies_to": "ammo restored per pickup"
+    },
+    {
+      "id": "EnemyFireRateScalar",
+      "default": 1.0,
+      "easy": 0.8,
+      "hard": 1.2,
+      "nightmare": 1.2,
+      "applies_to": "enemy attack cadence"
+    },
+    {
+      "id": "DamageResistanceScalar",
+      "default": 1.0,
+      "easy": 0.5,
+      "hard": 1.0,
+      "nightmare": 1.25,
+      "applies_to": "per-weapon-type resistance"
+    }
+  ],
+  "version": "1.1",
+  "amended": "2026-10-21",
+  "human_readable": "Docs/generated/roster_bible.md",
+  "story": {
+    "acts": [
+      {
+        "act": 1,
+        "name": "I - THE BATTERY",
+        "level": "M_Blockout01 \"Plymouth Dark\"",
+        "beat": "Player enters from the south, crosses the arena, climbs the pillar to the green keycard, drops into the pit for the red one",
+        "turn": "The player learns the fog lies: the way *out* is through the thing that looks like a wall"
+      },
+      {
+        "act": 2,
+        "name": "II - THE YARD",
+        "level": "M_Yard02 (unbuilt)",
+        "beat": "The crane yard: a maze of stacked containers, the loading gantry overhead, the aliens working",
+        "turn": "The player learns the aliens are **workers**, and the boss is **management**"
+      },
+      {
+        "act": 3,
+        "name": "III - THE ROLL",
+        "level": "M_Harbor03 (unbuilt)",
+        "beat": "The **Harvester** arrives - a boss that eats the arena",
+        "turn": "The player learns it is not here to conquer; it is here to **collect**, and the level is a shipping manifest"
+      }
+    ]
+  },
+  "silhouette_rules": [
+    {
+      "id": "xcom_cyberdisc",
+      "entity": "Cyberdisc",
+      "rule": "a flat disc on nothing, with a raised emitter ring on the rear third - reads as a hovering disc, never as a bird, an insect or a UFO",
+      "machine_readable": {
+        "posture": "hover",
+        "limbs": 0,
+        "body_segments": 3,
+        "hover_clearance_m": 0.85,
+        "reads_as": "a disc over a shadow",
+        "must_not_read_as": [
+          "winged",
+          "biped",
+          "organic"
+        ]
+      }
+    },
+    {
+      "id": "xcom_bionic_chryssalid",
+      "entity": "Bionic Chryssalid",
+      "rule": "the Chryssalid you already know, but standing on hydraulic legs - it does not leap, it walks, and it reads as heavy",
+      "machine_readable": {
+        "posture": "crouch",
+        "limbs": 6,
+        "body_segments": 5,
+        "reads_as": "the fast stalker, wrong-weight and machine-jointed",
+        "must_not_read_as": [
+          "light",
+          "floating",
+          "organic"
+        ]
+      }
+    },
+    {
+      "id": "skinjob_oysterman",
+      "entity": "the Oysterman",
+      "rule": "a man in oilskin with an oyster crate, and the sou'wester's brim is missing from his shadow",
+      "machine_readable": {
+        "posture": "upright_biped",
+        "limbs": 4,
+        "body_segments": 6,
+        "reads_as": "a dockworker with a crate",
+        "must_not_read_as": [
+          "alien",
+          "armed"
+        ]
+      },
+      "tell": {
+        "type": "shadow_mismatch",
+        "instrument": "any hard light source",
+        "observable": "the cast shadow has a bare head - the brim is absent from the shadow, not from the body",
+        "learned_at": "act 1 scripted near-miss at the fish store, then taught outright by Tobias Angell",
+        "difficulty": "readable at 20 m under a street lamp; useless in flat fog"
+      }
+    },
+    {
+      "id": "skinjob_lampwright",
+      "entity": "the Lampwright",
+      "rule": "a woman in a canvas coat with an unlit storm lantern, and the lantern glass shows a face that is not hers",
+      "machine_readable": {
+        "posture": "upright_biped",
+        "limbs": 4,
+        "body_segments": 6,
+        "reads_as": "a lamplighter on her round",
+        "must_not_read_as": [
+          "alien",
+          "armed"
+        ]
+      },
+      "tell": {
+        "type": "reflection_mismatch",
+        "instrument": "lantern glass, window panes, wet hull plating",
+        "observable": "the reflection in the glass is a different, younger face, and it lags her movement",
+        "learned_at": "her first appearance in act 2; her shadow is deliberately correct, so the Oysterman's tell does not fire on her",
+        "difficulty": "needs a reflective surface - the level guarantees one within 40 m of every Lampwright"
+      }
+    },
+    {
+      "id": "skinjob_ice_man",
+      "entity": "the Ice Man",
+      "rule": "a delivery man with an ice block on a shoulder yoke, and his boot prints sink like a loaded cart",
+      "machine_readable": {
+        "posture": "upright_biped",
+        "limbs": 4,
+        "body_segments": 7,
+        "reads_as": "an ice delivery man, loaded and slow",
+        "must_not_read_as": [
+          "alien",
+          "armed"
+        ]
+      },
+      "tell": {
+        "type": "footprint_mismatch",
+        "instrument": "wet sand, mud, ash, snow",
+        "observable": "the prints are four times deeper than his weight accounts for, and there is no drag mark behind the yoke",
+        "learned_at": "seen on the beach road, then again in the yard",
+        "difficulty": "needs soft ground - the level guarantees a patch of wet sand within 30 m of every Ice Man"
+      }
+    }
+  ],
+  "friendly_support": [
+    {
+      "id": "human_tobias_angell",
+      "entity": "Tobias Angell",
+      "ability": "route_broker",
+      "opens_route": "sea-wall service lane (act 1 to act 2 connector)",
+      "route_effect": "the bolted service door at the fish store swings open; the lane skips the whole battery approach",
+      "intel_trade": {
+        "accepts": "one Light ammo pickup (30 rounds)",
+        "gives": "one hostile marked on the map for 25 s",
+        "repeatable": false
+      },
+      "presence": {
+        "can_be_absent": true,
+        "absent_states": [
+          "never_came_back",
+          "captured",
+          "fled_upcoast",
+          "dead"
+        ],
+        "fallback": "the door is found unbolted after 45 s of searching - same route, no intel, 45 s lost",
+        "death_penalty": "the door stays bolted for the act; the player can force it with 3 Sextant Scattergun blasts (3 Heavy rounds)"
+      }
+    },
+    {
+      "id": "human_edda_cobb",
+      "entity": "Edda Cobb",
+      "ability": "hardware_restore",
+      "restores": "the shore crane hoist and the yard floodlights",
+      "hold_time_s": 12.0,
+      "interrupted_by_fire": true,
+      "route_effect": "the hoist raises the container bridge - a second route into the yard",
+      "visibility_effect": "the floodlights kill the fog concealment skin jobs depend on, so their shadows and reflections become legible",
+      "presence": {
+        "can_be_absent": true,
+        "absent_states": [
+          "never_came_back",
+          "captured",
+          "dead",
+          "wrong_island"
+        ],
+        "fallback": "the hoist stays dead for the act; the player climbs the container stack by hand in 12 s, fully exposed, with no floodlight and no second route"
+      }
+    },
+    {
+      "id": "human_wren_hollis",
+      "entity": "Dr. Wren Hollis",
+      "ability": "field_stabilise_and_readout",
+      "stabilises": "one field dose per act, restoring 40 HP as a one-time pickup - the no-regen rule is unchanged",
+      "reads_out": "the Harvester's hunger is its weakness: the open mouth is a x2 damage window, and the power node can be baited",
+      "readout_window": "act 2 gantry, then once per boss phase over the wireless",
+      "presence": {
+        "can_be_absent": true,
+        "absent_states": [
+          "drowned",
+          "captured",
+          "dead",
+          "wireless_destroyed"
+        ],
+        "fallback": "no readout; the player has to take the x2 mouth hit once in the first 30 s of the fight to learn it"
+      }
+    }
+  ],
+  "cutscene_beats": [
+    {
+      "id": "beat_a1_battery_watch",
+      "act": 1,
+      "level": "M_Blockout01",
+      "name": "The battery watch",
+      "type": "cutscene",
+      "is_cutscene": true,
+      "duration_s": 38.0,
+      "tool": "Unreal Sequencer",
+      "sequencer_track": "Seq_A1_BatteryWatch",
+      "owner_lane": "engine",
+      "skippable": true,
+      "trigger": "level_start",
+      "camera": "locked low behind the 12-inch breech on a 35 mm lens, fog at knee height; the frame does not move until the telephone rings, then a slow 1/3-stop push to the handset on the parapet",
+      "shots": [
+        {
+          "t_s": 0.0,
+          "camera": "locked low behind the gun breech, 35 mm, muzzle out of frame right",
+          "action": "the battery ticks, a gull, nothing else",
+          "line": "VOICE ON PHONE (distant, wet): Commander? You are still on the line. Good. Good good good."
+        },
+        {
+          "t_s": 12.0,
+          "camera": "slow push toward the field telephone on the parapet, 50 mm",
+          "action": "the telephone rings - a wet clicking, not a bell",
+          "line": "MERCY DUNNE (radio): Don't shoot yet. They have not looked up."
+        },
+        {
+          "t_s": 24.0,
+          "camera": "pan left to the fog line, 50 mm, a pier lamp guttering",
+          "action": "the fog thins; the pier is full of things and they are working",
+          "line": "VOICE ON PHONE: You are on the manifest. Number one."
+        },
+        {
+          "t_s": 32.0,
+          "camera": "85 mm, shallow focus, the handset on the deck",
+          "action": "the clicking stops",
+          "line": "VOICE ON PHONE: Your shift starts now."
+        }
+      ]
+    },
+    {
+      "id": "beat_a1_slipway_contact",
+      "act": 1,
+      "level": "M_Blockout01",
+      "name": "The contact at the slipway",
+      "type": "in_game_dialogue",
+      "is_cutscene": false,
+      "duration_s": 45.0,
+      "tool": "in-engine dialogue trigger",
+      "sequencer_track": null,
+      "owner_lane": "engine",
+      "skippable": true,
+      "trigger": "player enters the slipway trigger volume",
+      "camera": "no camera takeover - first person at 90 degrees, the contact framed in the player's own light, the view allowed to drift 10 degrees so he never sits dead centre; gameplay never pauses",
+      "shots": [
+        {
+          "t_s": 0.0,
+          "camera": "first person, 90 degrees, angell lit from below by his own lantern",
+          "action": "he does not stop working while he talks",
+          "line": "TOBIAS ANGELL: You are the battery. I have been waiting for the battery."
+        },
+        {
+          "t_s": 8.0,
+          "camera": "first person, 10 degree drift left, the fish store door in frame",
+          "action": "he nods at the bolted service door",
+          "line": "TOBIAS ANGELL: That door opens the sea wall. Twenty minutes on the sand, or four if you are clever."
+        },
+        {
+          "t_s": 20.0,
+          "camera": "first person, hold on the lantern, the fog behind him",
+          "action": "he counts shells into his hand",
+          "line": "TOBIAS ANGELL: Thirty rounds and I will mark one of them for you."
+        },
+        {
+          "t_s": 32.0,
+          "camera": "first person, widen to include the pier fog",
+          "action": "he looks at the pier and stops talking for a moment",
+          "line": "TOBIAS ANGELL: I may not be here when you come back. I have not been here for eight days."
+        }
+      ]
+    },
+    {
+      "id": "beat_a1_pillar_climb",
+      "act": 1,
+      "level": "M_Blockout01",
+      "name": "The green keycard",
+      "type": "cutscene",
+      "is_cutscene": true,
+      "duration_s": 24.0,
+      "tool": "Unreal Sequencer",
+      "sequencer_track": "Seq_A1_PillarClimb",
+      "owner_lane": "engine",
+      "skippable": true,
+      "trigger": "player takes the green keycard",
+      "camera": "a crane that rises with the player up the pillar on a 24 mm lens, sodium lamp blooming as it climbs, then a 1.5 s hold on the settlement below with the fog behind it",
+      "shots": [
+        {
+          "t_s": 0.0,
+          "camera": "24 mm, camera rising with the player, pillar rungs in the near field",
+          "action": "the climb, the sodium lamp swinging in frame",
+          "line": "VOICE ON PHONE: Climb. Look at it from above and it stops pretending."
+        },
+        {
+          "t_s": 12.0,
+          "camera": "24 mm, craning past the player, the town opening out below",
+          "action": "the green keycard glow pulses once on the parapet",
+          "line": "MERCY DUNNE (radio): Green card is yours. The red one is in the pit. Do not go in the pit."
+        },
+        {
+          "t_s": 20.0,
+          "camera": "28 mm, hold on the settlement, fog wall moving in behind it",
+          "action": "the hold - the town, and the wall of fog eating it from the seaward side",
+          "line": ""
+        }
+      ]
+    },
+    {
+      "id": "beat_a2_gantry_dolly",
+      "act": 2,
+      "level": "M_Yard02",
+      "name": "The loading gantry",
+      "type": "cutscene",
+      "is_cutscene": true,
+      "duration_s": 46.0,
+      "tool": "Unreal Sequencer",
+      "sequencer_track": "Seq_A2_GantryDolly",
+      "owner_lane": "engine",
+      "skippable": true,
+      "trigger": "first entry to the yard",
+      "camera": "a 24 mm dolly along the loading gantry, container stacks passing close to the lens, work lights only; the camera never stops moving, because the yard is a production line and the shot is a conveyor",
+      "shots": [
+        {
+          "t_s": 0.0,
+          "camera": "24 mm, dolly starts on the gantry rail, container corner filling the left third",
+          "action": "an alien passes below carrying a crate like a porter",
+          "line": "TOBIAS ANGELL: They are not invading. They are loading."
+        },
+        {
+          "t_s": 14.0,
+          "camera": "24 mm, dolly continues, gantry leg crosses frame right to left",
+          "action": "a second and third alien move a crate between them, working",
+          "line": "TOBIAS ANGELL: Every box out of that yard has a label. Everything out of that yard is a shipment."
+        },
+        {
+          "t_s": 28.0,
+          "camera": "35 mm, dolly slows, the camera cranes down through the stacks",
+          "action": "the yard opens out: rows of crates, all of them labelled",
+          "line": "MERCY DUNNE (radio): Ours. All of those are ours. I labelled the first one myself, in 1919."
+        },
+        {
+          "t_s": 40.0,
+          "camera": "50 mm, push on one crate's shipping label",
+          "action": "the label reads PLYMOUTH, MASS, and a number",
+          "line": ""
+        }
+      ]
+    },
+    {
+      "id": "beat_a2_hoist_repair",
+      "act": 2,
+      "level": "M_Yard02",
+      "name": "The hoist repair",
+      "type": "in_game_dialogue",
+      "is_cutscene": false,
+      "duration_s": 40.0,
+      "tool": "in-engine dialogue trigger",
+      "sequencer_track": null,
+      "owner_lane": "engine",
+      "skippable": true,
+      "trigger": "player reaches the shore crane winch",
+      "camera": "no camera takeover - first person, the repair is read on the winch itself rather than on the HUD, and the camera holds still so the player can cover the approach while they work",
+      "shots": [
+        {
+          "t_s": 0.0,
+          "camera": "first person, the winch drum filling the frame",
+          "action": "she drops the spanner into the drum teeth and starts",
+          "line": "EDDA COBB: Hold this lever or hold the gun. Not both, love."
+        },
+        {
+          "t_s": 10.0,
+          "camera": "first person, slight dip as the player crouches to the housing",
+          "action": "the hold-repair progress reads on the winch drum",
+          "line": "EDDA COBB: Eleven seconds. I have counted them. I was a signal corps clerk, I count everything."
+        },
+        {
+          "t_s": 24.0,
+          "camera": "first person, the yard lights coming up as the hoist turns over",
+          "action": "the floodlights strike and the fog thins - every shadow in the yard appears at once",
+          "line": "EDDA COBB: There. Now you can see the shadows. Look at the shadows."
+        },
+        {
+          "t_s": 33.0,
+          "camera": "first person, hold on the container bridge as it lifts",
+          "action": "the second route opens",
+          "line": "EDDA COBB: Bridge is up. And I will not be here tomorrow, so take the light with you."
+        }
+      ]
+    },
+    {
+      "id": "beat_a2_manifest",
+      "act": 2,
+      "level": "M_Yard02",
+      "name": "The manifest",
+      "type": "cutscene",
+      "is_cutscene": true,
+      "duration_s": 30.0,
+      "tool": "Unreal Sequencer",
+      "sequencer_track": "Seq_A2_Manifest",
+      "owner_lane": "engine",
+      "skippable": true,
+      "trigger": "player enters the yard office",
+      "camera": "85 mm macro on a paper manifest under a lantern, the camera drifting slowly across the column of names until it reaches the Commander's line; the paper is the scariest object in the game and the shot says so",
+      "shots": [
+        {
+          "t_s": 0.0,
+          "camera": "85 mm macro, lantern light raking across the paper, no wider than the page",
+          "action": "a column of names in a clerk's hand",
+          "line": ""
+        },
+        {
+          "t_s": 9.0,
+          "camera": "85 mm, slow lateral drift down the column",
+          "action": "the names are dates as well as names - 1919, 1921, 1924",
+          "line": "MERCY DUNNE (radio): It has been collecting since before I wrote that first label."
+        },
+        {
+          "t_s": 19.0,
+          "camera": "85 mm, drift stops on one line",
+          "action": "the line reads PLYMOUTH, MASS - and the Commander's name, with a weight beside it",
+          "line": "VOICE ON PHONE: Ah. There you are. I have been holding your crate."
+        },
+        {
+          "t_s": 26.0,
+          "camera": "85 mm, the paper lifts slightly in a draught that should not exist",
+          "action": "the hold, the page, the name",
+          "line": ""
+        }
+      ]
+    },
+    {
+      "id": "beat_a3_harvester_arrives",
+      "act": 3,
+      "level": "M_Harbor03",
+      "name": "The Harvester arrives",
+      "type": "cutscene",
+      "is_cutscene": true,
+      "duration_s": 62.0,
+      "tool": "Unreal Sequencer",
+      "sequencer_track": "Seq_A3_HarvesterArrives",
+      "owner_lane": "engine",
+      "skippable": true,
+      "trigger": "first crossing of the harbour rail",
+      "camera": "a low 21 mm push from the harbour water as the Harvester crosses the rail, its six legs unfolding one at a time; the camera never rises above the dorsal hump, so it never reads as a face; the last frame is the boss's own shadow sweeping across the lens",
+      "shots": [
+        {
+          "t_s": 0.0,
+          "camera": "21 mm, low over black water, the rail seam glowing ahead",
+          "action": "the seam lights up - the roll is coming",
+          "line": "DR. WREN HOLLIS (wireless): It is on the rail. Do not stand on the rail."
+        },
+        {
+          "t_s": 16.0,
+          "camera": "21 mm, slow push as the legs unfold, the body rising out of the water",
+          "action": "the maw opens once, tasting the air",
+          "line": "VOICE ON PHONE: I have the whole yard in my mouth. I only need the rest of you."
+        },
+        {
+          "t_s": 34.0,
+          "camera": "21 mm, hold, the boss filling frame, the camera still below the dorsal hump",
+          "action": "it eats a crane leg - the geometry stops existing",
+          "line": "DR. WREN HOLLIS (wireless): It is eating the level. That is the boss. The rest is scenery."
+        },
+        {
+          "t_s": 50.0,
+          "camera": "21 mm, the boss's shadow crosses the lens, blacking out the frame",
+          "action": "the frame goes to black on the shadow",
+          "line": "VOICE ON PHONE: Do you like pizza? I ask because I am about to be very badly made at you."
+        }
+      ]
+    },
+    {
+      "id": "beat_a3_weakness_readout",
+      "act": 3,
+      "level": "M_Harbor03",
+      "name": "The readout",
+      "type": "in_game_dialogue",
+      "is_cutscene": false,
+      "duration_s": 30.0,
+      "tool": "in-engine dialogue trigger",
+      "sequencer_track": null,
+      "owner_lane": "engine",
+      "skippable": true,
+      "trigger": "first boss phase transition",
+      "camera": "no camera takeover - the readout arrives as a subtitle and a single HUD prompt while the fight continues; the game never pauses a boss fight to explain itself",
+      "shots": [
+        {
+          "t_s": 0.0,
+          "camera": "gameplay camera, no change, the fight continues in full view",
+          "action": "the boss is mid-bite, mouth open",
+          "line": "DR. WREN HOLLIS (wireless): It chews. It has to. That is the whole of it - it has to eat."
+        },
+        {
+          "t_s": 9.0,
+          "camera": "gameplay camera, unchanged",
+          "action": "the HUD prompt fades in over the open mouth",
+          "line": "DR. WREN HOLLIS (wireless): When it opens, it is not looking. Put everything in the mouth."
+        },
+        {
+          "t_s": 18.0,
+          "camera": "gameplay camera, unchanged, the player takes the shot",
+          "action": "the player shoots the open mouth",
+          "line": "DR. WREN HOLLIS (wireless): Twice the damage. I read it off the manifest. It cannot digest a full crate."
+        }
+      ]
+    },
+    {
+      "id": "beat_a3_roll_preview",
+      "act": 3,
+      "level": "M_Harbor03",
+      "name": "The first roll",
+      "type": "cutscene",
+      "is_cutscene": true,
+      "duration_s": 28.0,
+      "tool": "Unreal Sequencer",
+      "sequencer_track": "Seq_A3_RollPreview",
+      "owner_lane": "engine",
+      "skippable": true,
+      "trigger": "arena cleared of stragglers, before the boss engagement",
+      "camera": "35 mm at rail height so the player sees the seam light pass across the floor, locked off while the body goes over, then a cut to the HUD fading in as control returns",
+      "shots": [
+        {
+          "t_s": 0.0,
+          "camera": "35 mm, camera on the floor at rail height, the seam glowing",
+          "action": "the seam lights, 0.8 s before the roll",
+          "line": "DR. WREN HOLLIS (wireless): The seam. It lights before it comes. It is the only warning you get."
+        },
+        {
+          "t_s": 9.0,
+          "camera": "35 mm, locked off, the body passes over the lens",
+          "action": "the roll, fast, over the camera in a second",
+          "line": "VOICE ON PHONE: Faster. Faster. I am being late on a manifest."
+        },
+        {
+          "t_s": 19.0,
+          "camera": "35 mm, the boss at the far end of the rail, back turned",
+          "action": "the exposed back - the first thing the player is shown to shoot",
+          "line": "DR. WREN HOLLIS (wireless): Its back. When it rolls it cannot turn. Put the cannon in the back."
+        },
+        {
+          "t_s": 25.0,
+          "camera": "35 mm, the HUD fading up over the shot",
+          "action": "control returns",
+          "line": ""
+        }
+      ]
+    }
+  ],
+  "tts_contract": {
+    "bank_source": "Tools/python/taunt_lines.py",
+    "bank_lines": 40,
+    "bank_phase_counts": {
+      "1": 13,
+      "2": 14,
+      "3": 13
+    },
+    "max_words": 15,
+    "one_thought_per_line": true,
+    "word_count_rule": "every rendered line is 15 words or fewer and carries exactly one thought",
+    "applies_to": [
+      "Tools/python/render_taunts.py (audio lane)",
+      "the Rust taunt rotation (boss_harvester.taunt_rotation)"
+    ],
+    "render_cost_measured": {
+      "two_sentence_line_s": 251,
+      "short_line_s": 57,
+      "note": "measured on the HTPC F5-TTS service; the service ignores a speed parameter, so line length is the only cost lever"
+    },
+    "cost_model": "a bank of long lines renders in hours instead of minutes - the 40-line bank is roughly 2.8 hours at 251 s per line against about 38 minutes at 57 s",
+    "bank_working_limit": "the bank's own validator is stricter than the contract: taunt_lines.py enforces MAX_WORDS = 10 and MIN_WORDS = 5, measured at ~1.38 s of speech per word",
+    "bank_measured": {
+      "lines": 40,
+      "phase_counts": {
+        "1": 13,
+        "2": 14,
+        "3": 13
+      },
+      "min_words": 7,
+      "max_words_observed": 10,
+      "lines_over_cap": 0
+    },
+    "engine": "F5-TTS, HTPC 10.0.0.42:8020/synth, voice 'spokesman'",
+    "output_format": "RIFF/WAVE, PCM s16le, mono, 24000 Hz",
+    "selection": "phase-gated, no immediate repeat, 1.5 s minimum gap, 6.0 s maximum gap",
+    "priority": "the taunt channel ducks the music bed by 6 dB and never ducks weapon SFX"
+  }
 }
