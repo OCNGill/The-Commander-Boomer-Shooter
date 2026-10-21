@@ -1,0 +1,164 @@
+UPSCALER PROOF LOG - regenerated from live editor runs
+Project : The_Commander_Boomer_Shooter
+Engine  : D:/Unreal_Engine/UE_5.8
+Runner  : Tools/ue/run_editor.py launches UnrealEditor-Cmd.exe, then
+          Tools/ue/verify_upscaler_run.py gates the result on log content.
+Host    : AMD Ryzen 5 4500U / AMD Radeon(TM) Graphics, 495MB dedicated VRAM,
+          D3D12 feature level 12_1, shader model 6.7 (SM 6.7-class adapter)
+Note    : this host is NOT a Steam Deck. Frame timings here are not Deck numbers.
+
+==============================================================================
+RUN: Deck   -DP=CommanderDeckRDNA2
+LOG: Saved/Logs/upscaler-verify-20261021-122720.log   (721 frames)
+==============================================================================
+  -- FSR provider selection --
+  LogFSR: Forcing FSR Upscaling to version '3.1.5' because of r.FidelityFX.FSR.RequestProvider=3
+  LogFSR: Successfully initialized FSR Upscaling provider using version '3.1.5'
+  -- Console variable state at exit (DumpCVars) --
+  r.FidelityFX.FSR.Enabled = "1"      LastSetBy: DeviceProfile
+  r.FidelityFX.FSR.RequestProvider = "3"      LastSetBy: DeviceProfile
+  r.FidelityFX.FSR.QualityMode = "3"      LastSetBy: DeviceProfile
+  r.ScreenPercentage = "50"      LastSetBy: Code
+  r.AntiAliasingMethod = "2"      LastSetBy: DeviceProfile
+  r.TemporalAA.Upscaler = "1"      LastSetBy: DeviceProfile
+  r.BloomQuality = "0"      LastSetBy: DeviceProfile
+  r.Shadow.MaxCSMResolution = "512"      LastSetBy: DeviceProfile
+  -- Device profile CVar pushes (ECVF_SetByDeviceProfile, 0x07) --
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.FidelityFX.FSR.Enabled:1 -> 1]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.FidelityFX.FSR.RequestProvider:0 -> 3]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.FidelityFX.FSR.QualityMode:1 -> 3]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.AntiAliasingMethod:4 -> 2]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.TemporalAA.Upscaler:1 -> 1]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.BloomQuality:5 -> 0]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.Shadow.MaxCSMResolution:2048 -> 512]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[UI.SlateSDFText.RasterizationMode:Bitmap -> Msdf]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[UI.SlateSDFText.ResolutionLevel:2 -> 2]]
+  -- Priority gate evidence (DeviceProfile outranks SystemSettingsIni) --
+  LogConsoleManager: Warning: Setting the console variable 'r.Shadow.MaxCSMResolution' with 'SetByScalability' was ignored as it is lower priority than the previous 'SetByProjectSetting'. Value remains '2048'
+  LogConsoleManager: Warning: Setting the console variable 'r.FidelityFX.FSR.Enabled' with 'SetBySystemSettingsIni' was ignored as it is lower priority than the previous 'SetByDeviceProfile'. Value remains '1'
+  LogConsoleManager: Warning: Setting the console variable 'r.FidelityFX.FSR.RequestProvider' with 'SetBySystemSettingsIni' was ignored as it is lower priority than the previous 'SetByDeviceProfile'. Value remains '3'
+  LogConsoleManager: Warning: Setting the console variable 'r.TemporalAA.Upscaler' with 'SetBySystemSettingsIni' was ignored as it is lower priority than the previous 'SetByDeviceProfile'. Value remains '1'
+
+==============================================================================
+RUN: Vega   -DP=CommanderVegaLaptop
+LOG: Saved/Logs/upscaler-verify-20261021-122951.log   (601 frames)
+==============================================================================
+  -- FSR provider selection --
+  LogFSR: Forcing FSR Upscaling to version '2.3.4' because of r.FidelityFX.FSR.RequestProvider=2
+  LogFSR: Successfully initialized FSR Upscaling provider using version '2.3.4'
+  -- Console variable state at exit (DumpCVars) --
+  r.FidelityFX.FSR.Enabled = "1"      LastSetBy: DeviceProfile
+  r.FidelityFX.FSR.RequestProvider = "2"      LastSetBy: DeviceProfile
+  r.FidelityFX.FSR.QualityMode = "1"      LastSetBy: DeviceProfile
+  r.ScreenPercentage = "66.6667"      LastSetBy: Code
+  r.AntiAliasingMethod = "2"      LastSetBy: DeviceProfile
+  r.TemporalAA.Upscaler = "1"      LastSetBy: DeviceProfile
+  r.BloomQuality = "0"      LastSetBy: DeviceProfile
+  r.Shadow.MaxCSMResolution = "512"      LastSetBy: DeviceProfile
+  -- Device profile CVar pushes (ECVF_SetByDeviceProfile, 0x07) --
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.FidelityFX.FSR.Enabled:1 -> 1]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.FidelityFX.FSR.RequestProvider:0 -> 2]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.FidelityFX.FSR.QualityMode:1 -> 1]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.AntiAliasingMethod:4 -> 2]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.TemporalAA.Upscaler:1 -> 1]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.BloomQuality:5 -> 0]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.Shadow.MaxCSMResolution:2048 -> 512]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[UI.SlateSDFText.RasterizationMode:Bitmap -> Msdf]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[UI.SlateSDFText.ResolutionLevel:2 -> 2]]
+  -- Priority gate evidence (DeviceProfile outranks SystemSettingsIni) --
+  LogConsoleManager: Warning: Setting the console variable 'r.Shadow.MaxCSMResolution' with 'SetByScalability' was ignored as it is lower priority than the previous 'SetByProjectSetting'. Value remains '2048'
+  LogConsoleManager: Warning: Setting the console variable 'r.FidelityFX.FSR.Enabled' with 'SetBySystemSettingsIni' was ignored as it is lower priority than the previous 'SetByDeviceProfile'. Value remains '1'
+  LogConsoleManager: Warning: Setting the console variable 'r.FidelityFX.FSR.RequestProvider' with 'SetBySystemSettingsIni' was ignored as it is lower priority than the previous 'SetByDeviceProfile'. Value remains '2'
+  LogConsoleManager: Warning: Setting the console variable 'r.TemporalAA.Upscaler' with 'SetBySystemSettingsIni' was ignored as it is lower priority than the previous 'SetByDeviceProfile'. Value remains '1'
+
+==============================================================================
+RUN: RDNA3   -DP=CommanderRDNA3Desktop
+LOG: Saved/Logs/upscaler-verify-20261021-123044.log   (601 frames)
+==============================================================================
+  -- FSR provider selection --
+  LogFSR: Successfully initialized FSR Upscaling provider using version '3.1.5'
+  -- Console variable state at exit (DumpCVars) --
+  r.FidelityFX.FSR.Enabled = "1"      LastSetBy: DeviceProfile
+  r.FidelityFX.FSR.RequestProvider = "0"      LastSetBy: DeviceProfile
+  r.FidelityFX.FSR.QualityMode = "1"      LastSetBy: DeviceProfile
+  r.ScreenPercentage = "66.6667"      LastSetBy: Code
+  r.AntiAliasingMethod = "2"      LastSetBy: DeviceProfile
+  r.TemporalAA.Upscaler = "1"      LastSetBy: DeviceProfile
+  r.BloomQuality = "4"      LastSetBy: DeviceProfile
+  r.Shadow.MaxCSMResolution = "2048"      LastSetBy: DeviceProfile
+  -- Device profile CVar pushes (ECVF_SetByDeviceProfile, 0x07) --
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.FidelityFX.FSR.Enabled:1 -> 1]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.FidelityFX.FSR.RequestProvider:0 -> 0]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.FidelityFX.FSR.QualityMode:1 -> 1]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.AntiAliasingMethod:4 -> 2]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.TemporalAA.Upscaler:1 -> 1]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.BloomQuality:5 -> 4]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[r.Shadow.MaxCSMResolution:2048 -> 2048]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[UI.SlateSDFText.RasterizationMode:Bitmap -> Msdf]]
+  LogDeviceProfileManager: Pushing Device Profile CVar: [[UI.SlateSDFText.ResolutionLevel:2 -> 2]]
+  -- Priority gate evidence (DeviceProfile outranks SystemSettingsIni) --
+  LogConsoleManager: Warning: Setting the console variable 'r.Shadow.MaxCSMResolution' with 'SetByScalability' was ignored as it is lower priority than the previous 'SetByProjectSetting'. Value remains '2048'
+  LogConsoleManager: Warning: Setting the console variable 'r.FidelityFX.FSR.Enabled' with 'SetBySystemSettingsIni' was ignored as it is lower priority than the previous 'SetByDeviceProfile'. Value remains '1'
+  LogConsoleManager: Warning: Setting the console variable 'r.FidelityFX.FSR.RequestProvider' with 'SetBySystemSettingsIni' was ignored as it is lower priority than the previous 'SetByDeviceProfile'. Value remains '0'
+  LogConsoleManager: Warning: Setting the console variable 'r.TemporalAA.Upscaler' with 'SetBySystemSettingsIni' was ignored as it is lower priority than the previous 'SetByDeviceProfile'. Value remains '1'
+
+==============================================================================
+CROSS-RUN ATTRIBUTION
+==============================================================================
+  CommanderDeckRDNA2    -> forces FSR 3.1.5, r.ScreenPercentage 50
+  CommanderVegaLaptop   -> forces FSR 2.3.4, r.ScreenPercentage 66.6667
+  CommanderRDNA3Desktop -> RequestProvider 0 (loader chooses); on this SM 6.7
+                          host the loader resolved to 3.1.5, r.ScreenPercentage 66.6667
+  The Deck profile NEVER requested provider 2. The 2.3.4 reading comes from
+  the Vega profile run, not from the Deck profile.
+
+==============================================================================
+KNOWN BENIGN ARTIFACT - frameTimeDelta unit warning
+==============================================================================
+  LogFSR: Warning: frameTimeDelta is less than 1.0f - this value should be
+  milliseconds (~16.6f for 60fps)
+  Occurs at frame index 0 only, before the world ticks, so the world delta is
+  approximately zero. NOT a seconds-vs-milliseconds bug:
+  Plugins/FSR/Source/FFXFSRTemporalUpscaling/Private/FFXFSRTemporalUpscaler.cpp:1774
+      WorldDeltaTimeSeconds * 1000.f
+  already converts to milliseconds. The vendored AMD source is NOT patched.
+
+==============================================================================
+DLSS-G / NVIDIA NGX MANIFEST - driver-side, not a vendoring gap
+==============================================================================
+  Log: Failed to open manifest file at:
+       C:/ProgramData/NVIDIA/NGX/models/nvngx_config.txt
+  That file is written by the NVIDIA display driver. This host has no NVIDIA
+  driver, so the manifest does not exist. The vendored payload is complete and
+  NVIDIA-signed (verified in-log):
+    nvngx_dlssg.dll   7,506,544 bytes
+    sl.dlss_g.dll       637,056 bytes
+    sl.common.dll       843,904 bytes
+    sl.reflex.dll       388,736 bytes
+  'Disabling DLSS-G since it is not supported on current hardware' is the
+  correct outcome on an AMD iGPU.
+
+  Streamline stack loads clean:
+    sl.common  2.14.16  PRODUCTION
+    sl.dlss_g  2.14.16  PRODUCTION
+    sl.pcl     2.14.16  PRODUCTION
+    sl.reflex  2.14.16  PRODUCTION
+  'Skip registering IDXGISwapchainProvider (kFeatureDLSS_G,
+   eErrorNoSupportedAdapterFound)' is correct on this 495MB Radeon iGPU.
+  It must be re-verified on eligible hardware, not treated as a defect.
+
+==============================================================================
+PLUGIN EXTRACTION INTEGRITY
+==============================================================================
+  1,668 files installed across the three vendored plugin trees
+    (FSR 478, DLSS/NIS/Streamline/XeSS 1,190)
+  Each installed file matches its archive member by path and size:
+  zero missing, zero size differences, zero extra installed files.
+
+==============================================================================
+SHADOW RESOLUTION DEFECT - FIXED
+==============================================================================
+  The project's own [/Script/Engine.RendererSettings] sets
+  r.Shadow.MaxCSMResolution=2048 at ECVF_SetByProjectSetting (0x04), which
+  outranks ECVF_SetByScalability (0x02), so [ShadowQuality@0]'s 512 could
+  never apply. Fixed by setting it in the device profile (0x07).

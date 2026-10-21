@@ -19,6 +19,34 @@
       {
          "Name": "EditorScriptingUtilities",
          "Enabled": true
+      },
+      {
+         "Name": "FSR",
+         "Enabled": true,
+         "TargetAllowList": [
+            "Win64"
+         ]
+      },
+      {
+         "Name": "DLSS",
+         "Enabled": true,
+         "TargetAllowList": [
+            "Win64"
+         ]
+      },
+      {
+         "Name": "StreamlineNGXCommon",
+         "Enabled": true,
+         "TargetAllowList": [
+            "Win64"
+         ]
+      },
+      {
+         "Name": "XeSS",
+         "Enabled": true,
+         "TargetAllowList": [
+            "Win64"
+         ]
       }
    ]
 }

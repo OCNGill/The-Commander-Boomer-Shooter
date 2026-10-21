@@ -15,6 +15,14 @@ Build/
 Thumbs.db
 .DS_Store
 
+
+# Vendored upscaler plugin trees (multi-GB binaries, never committed).
+# Reproduce with: python Tools/ue/fetch_upscaler_plugins.py
+Plugins/
+
+# Downloaded upscaler archives (cache dir, never committed)
+*.zip
+!Tools/**/*.zip
 # Python
 __pycache__/
 *.pyc
