@@ -1,0 +1,42 @@
+[
+ {
+  "name": "XCOM_Sectoid",
+  "fbx": "XCOM_Sectoid.fbx",
+  "fbx_kb": 72.8,
+  "tris": 2864,
+  "png": "XCOM_Sectoid.png",
+  "height_m": 1.95
+ },
+ {
+  "name": "XCOM_Viper",
+  "fbx": "XCOM_Viper.fbx",
+  "fbx_kb": 91.0,
+  "tris": 3712,
+  "png": "XCOM_Viper.png",
+  "height_m": 2.1
+ },
+ {
+  "name": "XCOM_Floater",
+  "fbx": "XCOM_Floater.fbx",
+  "fbx_kb": 60.9,
+  "tris": 1980,
+  "png": "XCOM_Floater.png",
+  "height_m": 1.85
+ },
+ {
+  "name": "XCOM_Muton",
+  "fbx": "XCOM_Muton.fbx",
+  "fbx_kb": 68.8,
+  "tris": 2520,
+  "png": "XCOM_Muton.png",
+  "height_m": 2.05
+ },
+ {
+  "name": "XCOM_Chryssalid",
+  "fbx": "XCOM_Chryssalid.fbx",
+  "fbx_kb": 70.0,
+  "tris": 2536,
+  "png": "XCOM_Chryssalid.png",
+  "height_m": 1.35
+ }
+]

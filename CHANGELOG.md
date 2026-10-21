@@ -84,3 +84,34 @@
 ### Verse
 > *"Whatever you do, work at it with all your heart, as working for the Lord."* — Colossians 3:23
 > Chosen because this is the Commander's personal project — every polygon, every blueprint node, is an offering.
+
+## [2026-10-21] X-COM Enemy Pass + Command Center + Aux Vision Repair
+
+- **Aux vision repaired.** `auxiliary.vision` in `%LOCALAPPDATA%\hermes\config.yaml` repointed
+  from `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` to
+  `minimax/minimax-m3.1-flash:free` (provider `custom:openrouter`) per Commander directive.
+  Verified end-to-end: `vision_analyze` on a synthetic probe image returned an accurate
+  description (red block upper-left, blue block lower-right). Ebert's eyes work again.
+  Backup of the pre-patch config retained as `config.yaml.bak-2026-10-21-*`.
+  Scope note: only `auxiliary.vision` was touched. The `delegation`, `providers`, `model.default`,
+  and `compression` blocks belong to another lane and were not modified.
+- **5 true-3D X-COM enemies built** (`Tools/blender/xcom_enemies.py`, Blender 4.2.23 LTS, headless):
+  Sectoid, Viper, Floater, Muton, Chryssalid. Original 1994 *UFO: Enemy Unknown* roster,
+  modernized (chitin/armor/plasma materials, emissive eyes + power cores, sane polycount
+  1.9k-3.7k tris). Each ships with the "reveal" light rig that reproduces the 1994
+  terror-mission reveal - hard cold key, colored alien rim, low under-glow.
+  Output: `Tools/blender/out_xcom/` - 5 FBX + 5 lit preview PNGs (720x900) + `xcom_manifest.json`.
+- **Command Center live** - `CommandCenter/serve_outputs.py` serves a single dashboard at
+  `http://10.0.0.93:8899/` aggregating fleet node status, swarm ledger, task queue, agent
+  output slots, renders, Blender kit, UE content inventory, design docs and git state.
+- **Swarm harness** - `CommandCenter/SWARM_TASK_QUEUE.md` (8 tasks),
+  `CommandCenter/SWARM_LAUNCH_PACKETS.md` (5 ready-to-paste window prompts, 2x HTPC + 3x Main),
+  `Tools/blender/blender_turn_htpc.sh` (flock-serialized Blender turns - the HTPC has
+  ~5GB free and a second concurrent Blender would OOM the node).
+- **Ebert re-armed** with his own rubric (`Agents/Ebert/designs/zero_trust_likert_rubric.md`,
+  7 weighted axes, 6.2 pass bar, screenshot-as-evidence, no rounding). Scoring the enemy
+  kit and defining the bar for level design, background textures and lighting.
+
+> Psalm 33:6 (ESV) - "By the word of the LORD were the heavens made; and all the host of them
+> by the breath of his mouth." Chosen because every asset in this pass is made by command,
+> and the swarm only executes what is spoken to it.
