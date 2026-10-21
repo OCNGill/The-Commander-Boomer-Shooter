@@ -1,0 +1,187 @@
+{
+  "generated": "2026-10-21T01:13:57-04:00",
+  "map": "Content/Maps/M_Blockout01.umap",
+  "total_actors": 46,
+  "groups": {
+    "light": 5,
+    "fog": 1,
+    "playerstart": 1,
+    "ENC": 9,
+    "PU": 6,
+    "WP": 3,
+    "floor": 1,
+    "wall": 4,
+    "pillar": 1,
+    "cover": 8,
+    "platform": 1,
+    "ramp": 1,
+    "pit": 5
+  },
+  "tactical": {
+    "drop_zone": {
+      "label": null,
+      "x": 0,
+      "y": 0,
+      "free_cells_reachable": 1
+    },
+    "tactical_spaces": {
+      "open_center": "pillar BO_Pillar_Center splits the middle; 4 cover blocks form a ring at +/-600",
+      "west_north_corner": "platform BO_Platform_NE + ramp BO_Ramp_NE (elevated, +250Z)",
+      "south_west_pit": "pit floor + 4 rim segments (hazard, sightline blocker)",
+      "perimeter": "4 walls at +/-2000 with 8 cover blocks distributed"
+    },
+    "encounters": [
+      {
+        "label": "ENC_Drone_01",
+        "x": 800.0,
+        "y": -400.0,
+        "z": 150.0,
+        "path_steps_from_drop": null,
+        "straight_line_m": 894.4,
+        "in_immediate_drop_sight": false
+      },
+      {
+        "label": "ENC_Drone_02",
+        "x": -900.0,
+        "y": 300.0,
+        "z": 150.0,
+        "path_steps_from_drop": null,
+        "straight_line_m": 948.7,
+        "in_immediate_drop_sight": false
+      },
+      {
+        "label": "ENC_Drone_03",
+        "x": 0.0,
+        "y": 600.0,
+        "z": 180.0,
+        "path_steps_from_drop": null,
+        "straight_line_m": 600.0,
+        "in_immediate_drop_sight": true
+      },
+      {
+        "label": "ENC_Zealot_01",
+        "x": 1500.0,
+        "y": -800.0,
+        "z": 0.0,
+        "path_steps_from_drop": null,
+        "straight_line_m": 1700.0,
+        "in_immediate_drop_sight": false
+      },
+      {
+        "label": "ENC_Zealot_02",
+        "x": -1500.0,
+        "y": 700.0,
+        "z": 0.0,
+        "path_steps_from_drop": null,
+        "straight_line_m": 1655.3,
+        "in_immediate_drop_sight": false
+      },
+      {
+        "label": "ENC_Phantom_01",
+        "x": -700.0,
+        "y": -1400.0,
+        "z": 0.0,
+        "path_steps_from_drop": null,
+        "straight_line_m": 1565.2,
+        "in_immediate_drop_sight": false
+      },
+      {
+        "label": "ENC_Brute_Pit",
+        "x": -1200.0,
+        "y": -1200.0,
+        "z": 50.0,
+        "path_steps_from_drop": null,
+        "straight_line_m": 1697.1,
+        "in_immediate_drop_sight": false
+      },
+      {
+        "label": "ENC_Golem_Platform",
+        "x": 1200.0,
+        "y": 1200.0,
+        "z": 510.0,
+        "path_steps_from_drop": null,
+        "straight_line_m": 1697.1,
+        "in_immediate_drop_sight": false
+      },
+      {
+        "label": "ENC_Boss_NorEaster",
+        "x": 0.0,
+        "y": 1600.0,
+        "z": 0.0,
+        "path_steps_from_drop": null,
+        "straight_line_m": 1600.0,
+        "in_immediate_drop_sight": false
+      }
+    ],
+    "pickups": [
+      {
+        "label": "PU_Armor_Platform",
+        "path_steps_from_drop": null,
+        "straight_line_m": 1838.5
+      },
+      {
+        "label": "PU_Ammo_01",
+        "path_steps_from_drop": null,
+        "straight_line_m": 509.9
+      },
+      {
+        "label": "PU_Ammo_02",
+        "path_steps_from_drop": null,
+        "straight_line_m": 509.9
+      },
+      {
+        "label": "PU_KeyGreen_PillarTop",
+        "path_steps_from_drop": 0,
+        "straight_line_m": 0.0
+      },
+      {
+        "label": "PU_KeyRed_Pit",
+        "path_steps_from_drop": null,
+        "straight_line_m": 1767.8
+      },
+      {
+        "label": "PU_Health_Pit",
+        "path_steps_from_drop": null,
+        "straight_line_m": 1626.3
+      }
+    ],
+    "weapons": [
+      {
+        "label": "WP_PilgrimPuckle_Spawn",
+        "path_steps_from_drop": null
+      },
+      {
+        "label": "WP_MayflowerCannon_Mid",
+        "path_steps_from_drop": null
+      },
+      {
+        "label": "WP_Rocket_Platform",
+        "path_steps_from_drop": null
+      }
+    ],
+    "unreachable_actors": [
+      "ENC_Drone_01",
+      "ENC_Drone_02",
+      "ENC_Drone_03",
+      "ENC_Zealot_01",
+      "ENC_Zealot_02",
+      "ENC_Phantom_01",
+      "ENC_Brute_Pit",
+      "ENC_Golem_Platform",
+      "ENC_Boss_NorEaster"
+    ],
+    "immediate_sight_encounters": [
+      "ENC_Drone_03"
+    ],
+    "notes": [
+      "Occupancy grid: 40x40 cells at 100u, arena -2000..2000. Walls, cover, pillar, pit and pit rims are blocking.",
+      "BFS from the PlayerStart cell; 'path_steps' is the shortest walkable route in 100u steps.",
+      "COVER/FLOOR/PLATFORM actors are the navigable surfaces; only the blocking set is carved out."
+    ]
+  },
+  "enemy_count": 9,
+  "pickup_count": 6,
+  "weapon_count": 3,
+  "base_geometry_present": true,
+  "base_geometry_note": "Restored 2026-10-21 via Tools/python/ensure_base_geometry.py - the committed map had never contained the arena (blockout_map.py used the dead spawn_actor_from_object path, which returns NULL and fails silently)."
+}

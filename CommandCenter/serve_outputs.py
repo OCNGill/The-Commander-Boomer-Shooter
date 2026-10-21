@@ -119,7 +119,63 @@ def build_manifest():
                                  "name": f, "kb": round(st.st_size / 1024, 1),
                                  "mtime": time.strftime("%H:%M", time.localtime(st.st_mtime))})
     imgs.sort(key=lambda x: x["mtime"], reverse=True)
-    m["images"] = imgs[:80]
+    m["images"] = imgs[:400]
+
+    # ---- categorized gallery: one bucket per workstream ----
+    CATS = [
+        ("enemies", ("out_xcom", "xcom", "enemy")),
+        ("lighting", ("out_lighting", "lighting", "rig_evidence")),
+        ("level", ("out_level", "level", "blueprint")),
+        ("textures", ("out_textures", "textures", "trim", "contact")),
+        ("ebert", ("ebert", "verdict")),
+        ("blender", ("out_blender", "blender")),
+    ]
+
+    def bucket(path):
+        p = path.lower()
+        for name, keys in CATS:
+            for k in keys:
+                if k in p:
+                    return name
+        return "other"
+
+    gallery = {}
+    for i in imgs:
+        gallery.setdefault(bucket(i["path"]), []).append(i)
+    m["gallery"] = {k: v[:60] for k, v in gallery.items()}
+
+    # ---- briefs + swarm packets (readable inline) ----
+    briefs = []
+    for fp in sorted(glob.glob(os.path.join(CC, "briefs", "*.md")) +
+                     glob.glob(os.path.join(CC, "*.md"))):
+        if os.path.isfile(fp):
+            briefs.append({"path": os.path.relpath(fp, REPO).replace("\\", "/"),
+                           "name": os.path.basename(fp),
+                           "kb": round(os.path.getsize(fp) / 1024, 1),
+                           "text": read(fp, 60000)})
+    m["briefs"] = briefs
+
+    # ---- Ebert verdicts, inline ----
+    ebert = []
+    for fp in sorted(glob.glob(os.path.join(OUT, "ebert", "*.md"))):
+        if os.path.isfile(fp):
+            ebert.append({"path": os.path.relpath(fp, REPO).replace("\\", "/"),
+                          "name": os.path.basename(fp),
+                          "kb": round(os.path.getsize(fp) / 1024, 1),
+                          "text": read(fp, 40000)})
+    m["ebert"] = ebert
+
+    # ---- level stats + latest manifest snapshots ----
+    for key, rel in (("level_stats", "Docs/generated/level_stats.json"),
+                     ("xcom_manifest", "Tools/blender/out_xcom/xcom_manifest.json"),
+                     ("ue_import_report", "Docs/generated/xcom_ue_import_report.json"),
+                     ("level_transforms", "Docs/generated/level_transforms.json")):
+        p = os.path.join(REPO, rel.replace("/", os.sep))
+        if os.path.exists(p):
+            try:
+                m[key] = json.loads(read(p, 400000))
+            except Exception:
+                m[key] = read(p, 4000)
 
     # ---- blender kit ----
     kit = []

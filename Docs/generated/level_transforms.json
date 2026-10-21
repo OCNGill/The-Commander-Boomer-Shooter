@@ -1,0 +1,1090 @@
+[
+ {
+  "name": "DirectionalLight_0",
+  "label": "BO_Sun",
+  "class": "DirectionalLight",
+  "loc": [
+   0.0,
+   0.0,
+   3000.0
+  ],
+  "rot": {
+   "pitch": -50.0,
+   "yaw": 30.0,
+   "roll": -0.0
+  },
+  "scale": [
+   2.5,
+   2.5,
+   2.5
+  ],
+  "mesh": "",
+  "group": "light",
+  "source": "map",
+  "light_color": [
+   255.0,
+   255.0,
+   255.0
+  ],
+  "light_intensity": 10.0
+ },
+ {
+  "name": "ExponentialHeightFog_0",
+  "label": "LGT_Fog",
+  "class": "ExponentialHeightFog",
+  "loc": [
+   0.0,
+   0.0,
+   100.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "fog",
+  "source": "map"
+ },
+ {
+  "name": "PlayerStart_0",
+  "label": "BO_PlayerStart",
+  "class": "PlayerStart",
+  "loc": [
+   0.0,
+   -1500.0,
+   100.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "playerstart",
+  "source": "map"
+ },
+ {
+  "name": "PointLight_0",
+  "label": "LGT_PitRed",
+  "class": "PointLight",
+  "loc": [
+   -1200.0,
+   -1200.0,
+   220.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "light",
+  "source": "map",
+  "light_color": [
+   255.0,
+   137.0,
+   108.0
+  ],
+  "light_intensity": 4000.0
+ },
+ {
+  "name": "PointLight_1",
+  "label": "LGT_KeyGreen",
+  "class": "PointLight",
+  "loc": [
+   0.0,
+   0.0,
+   750.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "light",
+  "source": "map",
+  "light_color": [
+   149.0,
+   255.0,
+   179.0
+  ],
+  "light_intensity": 2500.0
+ },
+ {
+  "name": "PointLight_2",
+  "label": "LGT_BossCold",
+  "class": "PointLight",
+  "loc": [
+   0.0,
+   1600.0,
+   260.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "light",
+  "source": "map",
+  "light_color": [
+   170.0,
+   196.0,
+   255.0
+  ],
+  "light_intensity": 5000.0
+ },
+ {
+  "name": "PointLight_3",
+  "label": "LGT_SpawnWarm",
+  "class": "PointLight",
+  "loc": [
+   0.0,
+   -1450.0,
+   220.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "light",
+  "source": "map",
+  "light_color": [
+   255.0,
+   237.0,
+   203.0
+  ],
+  "light_intensity": 3000.0
+ },
+ {
+  "name": "StaticMeshActor_0",
+  "label": "ENC_Drone_01",
+  "class": "StaticMeshActor",
+  "loc": [
+   800.0,
+   -400.0,
+   150.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "ENC",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_1",
+  "label": "ENC_Drone_02",
+  "class": "StaticMeshActor",
+  "loc": [
+   -900.0,
+   300.0,
+   150.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "ENC",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_10",
+  "label": "PU_Armor_Platform",
+  "class": "StaticMeshActor",
+  "loc": [
+   1300.0,
+   1300.0,
+   520.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.143,
+   1.143,
+   1.143
+  ],
+  "mesh": "",
+  "group": "PU",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_11",
+  "label": "PU_Ammo_01",
+  "class": "StaticMeshActor",
+  "loc": [
+   500.0,
+   100.0,
+   30.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.86,
+   1.86,
+   1.86
+  ],
+  "mesh": "",
+  "group": "PU",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_12",
+  "label": "PU_Ammo_02",
+  "class": "StaticMeshActor",
+  "loc": [
+   -500.0,
+   -100.0,
+   30.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.86,
+   1.86,
+   1.86
+  ],
+  "mesh": "",
+  "group": "PU",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_13",
+  "label": "PU_KeyGreen_PillarTop",
+  "class": "StaticMeshActor",
+  "loc": [
+   0.0,
+   0.0,
+   620.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   40.0,
+   40.0,
+   40.0
+  ],
+  "mesh": "",
+  "group": "PU",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_14",
+  "label": "PU_KeyRed_Pit",
+  "class": "StaticMeshActor",
+  "loc": [
+   -1250.0,
+   -1250.0,
+   60.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   40.0,
+   40.0,
+   40.0
+  ],
+  "mesh": "",
+  "group": "PU",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_15",
+  "label": "WP_PilgrimPuckle_Spawn",
+  "class": "StaticMeshActor",
+  "loc": [
+   0.0,
+   -1450.0,
+   40.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   3.39,
+   3.39,
+   3.39
+  ],
+  "mesh": "",
+  "group": "WP",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_16",
+  "label": "WP_MayflowerCannon_Mid",
+  "class": "StaticMeshActor",
+  "loc": [
+   -300.0,
+   0.0,
+   40.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   2.522,
+   2.522,
+   2.522
+  ],
+  "mesh": "",
+  "group": "WP",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_17",
+  "label": "WP_Rocket_Platform",
+  "class": "StaticMeshActor",
+  "loc": [
+   1400.0,
+   1400.0,
+   570.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.697,
+   1.697,
+   1.697
+  ],
+  "mesh": "",
+  "group": "WP",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_18",
+  "label": "BO_Floor",
+  "class": "StaticMeshActor",
+  "loc": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   40.0,
+   40.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "floor",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_19",
+  "label": "BO_Wall_N",
+  "class": "StaticMeshActor",
+  "loc": [
+   0.0,
+   2000.0,
+   200.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   40.0,
+   0.5,
+   4.0
+  ],
+  "mesh": "",
+  "group": "wall",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_2",
+  "label": "ENC_Drone_03",
+  "class": "StaticMeshActor",
+  "loc": [
+   0.0,
+   600.0,
+   180.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "ENC",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_20",
+  "label": "BO_Wall_S",
+  "class": "StaticMeshActor",
+  "loc": [
+   0.0,
+   -2000.0,
+   200.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   40.0,
+   0.5,
+   4.0
+  ],
+  "mesh": "",
+  "group": "wall",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_21",
+  "label": "BO_Wall_E",
+  "class": "StaticMeshActor",
+  "loc": [
+   2000.0,
+   0.0,
+   200.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   0.5,
+   40.0,
+   4.0
+  ],
+  "mesh": "",
+  "group": "wall",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_22",
+  "label": "BO_Wall_W",
+  "class": "StaticMeshActor",
+  "loc": [
+   -2000.0,
+   0.0,
+   200.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   0.5,
+   40.0,
+   4.0
+  ],
+  "mesh": "",
+  "group": "wall",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_23",
+  "label": "BO_Pillar_Center",
+  "class": "StaticMeshActor",
+  "loc": [
+   0.0,
+   0.0,
+   300.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   4.0,
+   4.0,
+   6.0
+  ],
+  "mesh": "",
+  "group": "pillar",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_24",
+  "label": "BO_Cover_00",
+  "class": "StaticMeshActor",
+  "loc": [
+   600.0,
+   600.0,
+   50.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   3.0,
+   3.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "cover",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_25",
+  "label": "BO_Cover_01",
+  "class": "StaticMeshActor",
+  "loc": [
+   -600.0,
+   600.0,
+   50.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 45.0,
+   "roll": -0.0
+  },
+  "scale": [
+   3.0,
+   3.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "cover",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_26",
+  "label": "BO_Cover_02",
+  "class": "StaticMeshActor",
+  "loc": [
+   600.0,
+   -600.0,
+   50.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 90.0,
+   "roll": -0.0
+  },
+  "scale": [
+   3.0,
+   3.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "cover",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_27",
+  "label": "BO_Cover_03",
+  "class": "StaticMeshActor",
+  "loc": [
+   -600.0,
+   -600.0,
+   50.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 30.0,
+   "roll": -0.0
+  },
+  "scale": [
+   4.0,
+   2.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "cover",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_28",
+  "label": "BO_Cover_04",
+  "class": "StaticMeshActor",
+  "loc": [
+   0.0,
+   1200.0,
+   50.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   6.0,
+   1.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "cover",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_29",
+  "label": "BO_Cover_05",
+  "class": "StaticMeshActor",
+  "loc": [
+   0.0,
+   -1200.0,
+   50.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   6.0,
+   1.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "cover",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_3",
+  "label": "ENC_Zealot_01",
+  "class": "StaticMeshActor",
+  "loc": [
+   1500.0,
+   -800.0,
+   0.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.651,
+   1.651,
+   1.651
+  ],
+  "mesh": "",
+  "group": "ENC",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_30",
+  "label": "BO_Cover_06",
+  "class": "StaticMeshActor",
+  "loc": [
+   1400.0,
+   0.0,
+   50.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.0,
+   6.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "cover",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_31",
+  "label": "BO_Cover_07",
+  "class": "StaticMeshActor",
+  "loc": [
+   -1400.0,
+   0.0,
+   50.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.0,
+   6.0,
+   1.0
+  ],
+  "mesh": "",
+  "group": "cover",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_32",
+  "label": "BO_Platform_NE",
+  "class": "StaticMeshActor",
+  "loc": [
+   1200.0,
+   1200.0,
+   250.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   8.0,
+   8.0,
+   5.0
+  ],
+  "mesh": "",
+  "group": "platform",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_33",
+  "label": "BO_Ramp_NE",
+  "class": "StaticMeshActor",
+  "loc": [
+   950.0,
+   950.0,
+   120.0
+  ],
+  "rot": {
+   "pitch": -14.0,
+   "yaw": 45.0,
+   "roll": 0.0
+  },
+  "scale": [
+   5.0,
+   3.0,
+   0.6
+  ],
+  "mesh": "",
+  "group": "ramp",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_34",
+  "label": "BO_PitFloor",
+  "class": "StaticMeshActor",
+  "loc": [
+   -1200.0,
+   -1200.0,
+   -25.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   10.0,
+   10.0,
+   0.5
+  ],
+  "mesh": "",
+  "group": "pit",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_35",
+  "label": "BO_PitRim_E",
+  "class": "StaticMeshActor",
+  "loc": [
+   -1100.0,
+   -1200.0,
+   25.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   0.5,
+   20.0,
+   0.5
+  ],
+  "mesh": "",
+  "group": "pit",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_36",
+  "label": "BO_PitRim_W",
+  "class": "StaticMeshActor",
+  "loc": [
+   -1300.0,
+   -1200.0,
+   25.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   0.5,
+   20.0,
+   0.5
+  ],
+  "mesh": "",
+  "group": "pit",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_37",
+  "label": "BO_PitRim_N",
+  "class": "StaticMeshActor",
+  "loc": [
+   -1200.0,
+   -1100.0,
+   25.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   20.0,
+   0.5,
+   0.5
+  ],
+  "mesh": "",
+  "group": "pit",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_38",
+  "label": "BO_PitRim_S",
+  "class": "StaticMeshActor",
+  "loc": [
+   -1200.0,
+   -1300.0,
+   25.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   20.0,
+   0.5,
+   0.5
+  ],
+  "mesh": "",
+  "group": "pit",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_4",
+  "label": "ENC_Zealot_02",
+  "class": "StaticMeshActor",
+  "loc": [
+   -1500.0,
+   700.0,
+   0.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.651,
+   1.651,
+   1.651
+  ],
+  "mesh": "",
+  "group": "ENC",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_5",
+  "label": "ENC_Phantom_01",
+  "class": "StaticMeshActor",
+  "loc": [
+   -700.0,
+   -1400.0,
+   0.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.309,
+   1.309,
+   1.309
+  ],
+  "mesh": "",
+  "group": "ENC",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_6",
+  "label": "ENC_Brute_Pit",
+  "class": "StaticMeshActor",
+  "loc": [
+   -1200.0,
+   -1200.0,
+   50.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   2.0,
+   2.0,
+   2.0
+  ],
+  "mesh": "",
+  "group": "ENC",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_7",
+  "label": "ENC_Golem_Platform",
+  "class": "StaticMeshActor",
+  "loc": [
+   1200.0,
+   1200.0,
+   510.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   0.938,
+   0.938,
+   0.938
+  ],
+  "mesh": "",
+  "group": "ENC",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_8",
+  "label": "ENC_Boss_NorEaster",
+  "class": "StaticMeshActor",
+  "loc": [
+   0.0,
+   1600.0,
+   0.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   0.643,
+   0.643,
+   0.643
+  ],
+  "mesh": "",
+  "group": "ENC",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_9",
+  "label": "PU_Health_Pit",
+  "class": "StaticMeshActor",
+  "loc": [
+   -1150.0,
+   -1150.0,
+   60.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   1.333,
+   1.333,
+   1.333
+  ],
+  "mesh": "",
+  "group": "PU",
+  "source": "map"
+ }
+]
