@@ -1,0 +1,1630 @@
+{
+  "schema": "commander.boomer_shooter.insult_bank/1.0",
+  "generated_by": "Tools/python/build_manifest.py",
+  "description": "Playback contract for The Harvester boss. The Rust taunt rotation reads this file; it is the single source of truth for which lines exist, what they say, and their measured delivery properties.",
+  "ordering": {
+    "rule": "Entries are in a FIXED order defined by the bank, not by a filesystem listing. `index` is the stable ordinal; consumers must sort by `index` and must never rely on directory order.",
+    "phase_order": [
+      1,
+      2,
+      3
+    ],
+    "count": 40,
+    "phase_counts": {
+      "1": 13,
+      "2": 14,
+      "3": 13
+    }
+  },
+  "delivery_spec": {
+    "sample_rate_hz": 44100,
+    "bit_depth": 16,
+    "sample_format": "PCM s16le",
+    "channels": 1,
+    "container": "RIFF/WAVE",
+    "target_integrated_lufs": -16.0,
+    "true_peak_ceiling_dbtp": -1.0,
+    "taunt_duration_window_s": [
+      1.5,
+      6.0
+    ],
+    "sfx_duration_window_s": [
+      0.2,
+      10.0
+    ],
+    "no_clipping": true,
+    "note": "Integrated loudness and true peak are measured on the DELIVERED file with ffmpeg ebur128; clipping is an exact sample-domain count. Values in this manifest were measured at build time, not asserted."
+  },
+  "tts_contract": {
+    "engine": "F5-TTS v1 Base (CPU-only) on the fleet HTPC node",
+    "endpoint": "http://10.0.0.42:8020/synth",
+    "method": "POST",
+    "content_type": "application/json",
+    "request_body_fields": {
+      "text": "string - the exact line text, verbatim from this manifest",
+      "ref": "string - the reference name, see `voice_reference`"
+    },
+    "voice_reference": "spokesman",
+    "service_output_sample_rate_hz": 24000,
+    "service_output_format": "RIFF/WAVE, PCM s16le, mono",
+    "delivery_sample_rate_hz": 44100,
+    "post_process": [
+      "resample 24000 -> 44100 Hz",
+      "downmix to mono (service already mono)",
+      "trim silence padding",
+      "time-compress (atempo) into the duration window",
+      "crest reduction, then converge integrated LUFS to -16.0",
+      "true-peak limit below -1.0 dBTP",
+      "write 16-bit PCM WAV"
+    ],
+    "measured_service_behaviour": {
+      "seconds_of_audio_per_word": 1.38,
+      "measured_from": "3-word phrase -> 4.80 s; 14-word phrase -> 19.28 s",
+      "speed_parameter_honoured": false,
+      "speed_parameter_note": "A 'speed' field is accepted but ignored: outputs at speed 1.0/1.5/2.0 were byte-identical in duration (19.28 s each).",
+      "requests_run_concurrently": true,
+      "note": "Concurrency was verified: 3 concurrent renders completed in 126 s wall vs 171 s serial. Render cost is dominated by audio length, so short lines are also cheap lines."
+    }
+  },
+  "rotation": {
+    "description": "The runtime contract for choosing which taunt plays. Implemented in Rust (taunts.rs) against this manifest.",
+    "phase_gating": {
+      "rule": "A taunt may only play if its `phase` equals the boss's current phase. Phase 1 lines never play in phase 2, etc.",
+      "phase_1": "early fight, cheerfully wrong non-sequiturs",
+      "phase_2": "mid fight, glitchy repetition, thoughts looping",
+      "phase_3": "late fight, threatening but still broken"
+    },
+    "no_immediate_repeat": {
+      "rule": "The immediately preceding taunt id must never repeat.",
+      "enforcement": "track last_played_id; exclude it from the candidate set"
+    },
+    "cooldown_window": {
+      "rule": "The same line id must not play again within N plays. N is the cooldown count, not seconds.",
+      "n_plays": 6,
+      "enforcement": "keep a ring buffer of the last N played ids; exclude any candidate present in that buffer",
+      "note": "N=6 is chosen so that with 13+ lines per phase, a legal candidate always exists even in the worst case."
+    },
+    "weighted_selection": {
+      "rule": "Weight candidates by phase: the active phase's lines are the only candidates, so the effective weight is 1.0 for the active phase and 0.0 for the others.",
+      "phase_weights": {
+        "1": {
+          "phase_1": 1.0,
+          "phase_2": 0.0,
+          "phase_3": 0.0
+        },
+        "2": {
+          "phase_1": 0.0,
+          "phase_2": 1.0,
+          "phase_3": 0.0
+        },
+        "3": {
+          "phase_1": 0.0,
+          "phase_2": 0.0,
+          "phase_3": 1.0
+        }
+      },
+      "tie_break": "If weights are equal, pick uniformly at random among candidates. Selection is uniform-within-phase, so no line is favoured by ordering."
+    },
+    "timing": {
+      "min_gap_s": 1.5,
+      "max_gap_s": 6.0,
+      "rule": "After a taunt finishes, wait at least min_gap_s before the next one is eligible, and force a taunt at most max_gap_s after the previous one finished."
+    },
+    "missing_file_fallback": {
+      "rule": "If a selected line's WAV is missing or fails to load at runtime, discard it and draw again from the same phase pool, excluding it from the candidate set for this draw.",
+      "max_attempts": 4,
+      "exhausted_behavior": "If every candidate in the active phase is unusable, play NO taunt and log the failure. Silence is correct; a wrong-phase or corrupt line is not.",
+      "never": "Never fall back to a line from a different phase, and never play a taunt whose file failed its delivery spec.",
+      "notes": "The `verified` flag on each entry records whether the delivered file met the delivery spec at build time. Entries with verified=false should not be scheduled."
+    },
+    "ducking": {
+      "rule": "The taunt channel ducks the music bed by 6 dB while it plays. Weapon SFX are never ducked.",
+      "duck_db": -6.0,
+      "attack_ms": 80,
+      "release_ms": 250
+    }
+  },
+  "voices": {
+    "contract_note": "The F5-TTS service selects a voice with the `ref` field. The field is named `voice` in some client code and is SILENTLY IGNORED by the service, which then renders the default register. An unknown `ref` returns HTTP 400. There are exactly SIX registered references; no others exist.",
+    "field_name": "ref",
+    "not_voice": "Do not send `voice`. It is accepted and ignored, so a typo in the voice name still produces a render -- in the wrong register, with no error.",
+    "registered_references": [
+      "spokesman",
+      "commander",
+      "harvester",
+      "harvester_low",
+      "hermes",
+      "settlement_human"
+    ],
+    "alias_note": "spokesman, commander and hermes are byte-identical ref.wav files (md5 44e918212e457a1bd6967ee479ef8b16) and render identically. They are three names for one register, kept because existing call sites use them.",
+    "character_voice_map": {
+      "harvester": {
+        "ref": "harvester",
+        "role": "THE BOSS - The Harvester, phases 1-2",
+        "speaks": "the 40-line taunt bank (phase 1 and phase 2 entries)"
+      },
+      "harvester_low": {
+        "ref": "harvester_low",
+        "role": "THE BOSS - The Harvester, phase 3, voice coming apart",
+        "speaks": "the 40-line taunt bank (phase 3 entries)"
+      },
+      "settlement_human": {
+        "ref": "settlement_human",
+        "role": "settlement survivor - not the boss",
+        "speaks": "not in this bank; ref provisioned and verified for the settlement scene"
+      },
+      "spokesman": {
+        "ref": "spokesman",
+        "role": "machine / default register (the service default)",
+        "speaks": "not in this bank; the service default when ref is omitted"
+      },
+      "commander": {
+        "ref": "commander",
+        "role": "pre-existing alias of spokesman (identical ref.wav)",
+        "speaks": "not in this bank"
+      },
+      "hermes": {
+        "ref": "hermes",
+        "role": "pre-existing alias of spokesman (identical ref.wav)",
+        "speaks": "not in this bank"
+      }
+    },
+    "phase_to_ref": {
+      "1": "harvester",
+      "2": "harvester",
+      "3": "harvester_low"
+    },
+    "fingerprint_table": {
+      "spokesman": {
+        "role": "machine / default register (the service default)",
+        "renders_measured": 2,
+        "f0_median_hz": 75.41,
+        "f0_render_spread_hz": 1.5,
+        "spectral_centroid_hz": 274.11,
+        "centroid_render_spread_hz": 78.03
+      },
+      "commander": {
+        "role": "pre-existing alias of spokesman (identical ref.wav)",
+        "renders_measured": 2,
+        "f0_median_hz": 75.16,
+        "f0_render_spread_hz": 3.31,
+        "spectral_centroid_hz": 275.26,
+        "centroid_render_spread_hz": 13.52
+      },
+      "hermes": {
+        "role": "pre-existing alias of spokesman (identical ref.wav)",
+        "renders_measured": 2,
+        "f0_median_hz": 73.54,
+        "f0_render_spread_hz": 0.84,
+        "spectral_centroid_hz": 287.16,
+        "centroid_render_spread_hz": 81.24
+      },
+      "harvester": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "harvester_low": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "settlement_human": {
+        "role": "settlement human voices",
+        "renders_measured": 2,
+        "f0_median_hz": 73.28,
+        "f0_render_spread_hz": 1.48,
+        "spectral_centroid_hz": 474.82,
+        "centroid_render_spread_hz": 37.36
+      }
+    },
+    "fingerprint_caveat": "F0 does NOT discriminate on rendered OUTPUT: F5-TTS regenerates the fundamental from its own prosody model, so every reference measures ~73-77 Hz. The reference CLIPS order correctly on F0 (52.08 / 59.41 / 64.55 / 70.79 Hz) and the spectral centroid discriminates the rendered output (172 < 206 < 274 < 475 Hz). Treat the centroid as the discriminator, not the pitch."
+  },
+  "taunts": [
+    {
+      "index": 0,
+      "id": "insult_p1_01",
+      "filename": "insult_p1_01.wav",
+      "text": "Hello! Would you like to complain about the weather?",
+      "word_count": 9,
+      "phase": 1,
+      "phase_weight": {
+        "phase_1": 1.0,
+        "phase_2": 0.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.849,
+      "integrated_lufs": -15.9,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.496533,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "173c69717addd6981f1b4bf80629c8ec9e926881854173d186cf5f1b86289ca0",
+      "bytes": 515998,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 1,
+      "id": "insult_p1_02",
+      "filename": "insult_p1_02.wav",
+      "text": "I prepared a slideshow. It is one slide.",
+      "word_count": 8,
+      "phase": 1,
+      "phase_weight": {
+        "phase_1": 1.0,
+        "phase_2": 0.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.851,
+      "integrated_lufs": -15.9,
+      "true_peak_dbtp": -1.4,
+      "sample_peak_dbfs": -1.470434,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "d0ad4408e55aaf8e62b5f027992945d71e3d5ee86fb7ef431e19a51e4a0e1603",
+      "bytes": 516170,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 2,
+      "id": "insult_p1_03",
+      "filename": "insult_p1_03.wav",
+      "text": "You are on time. That is the problem.",
+      "word_count": 8,
+      "phase": 1,
+      "phase_weight": {
+        "phase_1": 1.0,
+        "phase_2": 0.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.859,
+      "integrated_lufs": -16.2,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.496533,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "d4996b9fd1fcc9f2b62aef9eb92932418d20afab2eeba280e3712e77f215dce4",
+      "bytes": 516808,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 3,
+      "id": "insult_p1_04",
+      "filename": "insult_p1_04.wav",
+      "text": "I made soup from mathematics. It is not soup.",
+      "word_count": 9,
+      "phase": 1,
+      "phase_weight": {
+        "phase_1": 1.0,
+        "phase_2": 0.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.846,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.499368,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "59b8d99ec4950d365731c72b74a6955fecded4a66ff20d311792ea8d64f5ebf1",
+      "bytes": 515668,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 4,
+      "id": "insult_p1_05",
+      "filename": "insult_p1_05.wav",
+      "text": "Your mother called. She is a subroutine.",
+      "word_count": 7,
+      "phase": 1,
+      "phase_weight": {
+        "phase_1": 1.0,
+        "phase_2": 0.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.866,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.475459,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "c2951713ce62f6af409c81f9c7350cb575094b3ccd01ca086c54d19e706441aa",
+      "bytes": 517448,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 5,
+      "id": "insult_p1_06",
+      "filename": "insult_p1_06.wav",
+      "text": "Do you enjoy pizza? I will be bad at you.",
+      "word_count": 10,
+      "phase": 1,
+      "phase_weight": {
+        "phase_1": 1.0,
+        "phase_2": 0.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.86,
+      "integrated_lufs": -15.8,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.497793,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "434f7c46c04d0eb125b3c35c9e0d3fe4997352d704fb768d5cc5bf10039c7c07",
+      "bytes": 516896,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 6,
+      "id": "insult_p1_07",
+      "filename": "insult_p1_07.wav",
+      "text": "I counted to infinity. It took four tries.",
+      "word_count": 8,
+      "phase": 1,
+      "phase_weight": {
+        "phase_1": 1.0,
+        "phase_2": 0.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.855,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.499053,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "50c4c49b75c6ad047e9a14fe566ec3110ca2d2b3e74a038716d463b4ae1ddf03",
+      "bytes": 516518,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 7,
+      "id": "insult_p1_08",
+      "filename": "insult_p1_08.wav",
+      "text": "Welcome to my house. The house is a rumour.",
+      "word_count": 9,
+      "phase": 1,
+      "phase_weight": {
+        "phase_1": 1.0,
+        "phase_2": 0.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.848,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.499368,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "a2c8d7e6a0fb6e8002d103dd2132d023edd32cf251338e834d716eda6141e3fc",
+      "bytes": 515840,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 8,
+      "id": "insult_p1_09",
+      "filename": "insult_p1_09.wav",
+      "text": "Your strategy has the integrity of a wet napkin.",
+      "word_count": 9,
+      "phase": 1,
+      "phase_weight": {
+        "phase_1": 1.0,
+        "phase_2": 0.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.853,
+      "integrated_lufs": -15.9,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.493385,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "78522e62fd2e13b4dad03826ec879708578bccb9c064e80b349995c2b1af1ae2",
+      "bytes": 516314,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 9,
+      "id": "insult_p1_10",
+      "filename": "insult_p1_10.wav",
+      "text": "I would like to offer you a sandwich.",
+      "word_count": 8,
+      "phase": 1,
+      "phase_weight": {
+        "phase_1": 1.0,
+        "phase_2": 0.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.862,
+      "integrated_lufs": -15.9,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.498423,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "a62899d7c2fccdf2f9f4878f7c754a417440dc168fd64d5e3073b90f444968e1",
+      "bytes": 517124,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 10,
+      "id": "insult_p1_11",
+      "filename": "insult_p1_11.wav",
+      "text": "Please stand still. I am remembering what you are.",
+      "word_count": 9,
+      "phase": 1,
+      "phase_weight": {
+        "phase_1": 1.0,
+        "phase_2": 0.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.851,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.498423,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "fc94e1bc21599a3955d3bd5fdc31dc617fd80a7c1e204895c7e9d85febf4836e",
+      "bytes": 516120,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 11,
+      "id": "insult_p1_12",
+      "filename": "insult_p1_12.wav",
+      "text": "You are captain of something. It is not kind.",
+      "word_count": 9,
+      "phase": 1,
+      "phase_weight": {
+        "phase_1": 1.0,
+        "phase_2": 0.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.86,
+      "integrated_lufs": -16.1,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.87501,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "fcc488e641fd7ef8f943774b03284cc6099df3826f9c0a7924dcd2609e5e8775",
+      "bytes": 516906,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 12,
+      "id": "insult_p1_13",
+      "filename": "insult_p1_13.wav",
+      "text": "The cake is theoretical. I will eat the theory.",
+      "word_count": 9,
+      "phase": 1,
+      "phase_weight": {
+        "phase_1": 1.0,
+        "phase_2": 0.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.861,
+      "integrated_lufs": -16.2,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.497163,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "e3a810e3f9f36bd926c7a0d17f5b773d9c8943ba395b965f92570a374036c910",
+      "bytes": 517040,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 13,
+      "id": "insult_p2_01",
+      "filename": "insult_p2_01.wav",
+      "text": "Wrong. Wrong. That is not the error code.",
+      "word_count": 8,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.848,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.499053,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "c840e4fbc35cc677675b5da5a0838e931e4bca472f1caee4e2083b57a7b1d8a2",
+      "bytes": 515848,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 14,
+      "id": "insult_p2_02",
+      "filename": "insult_p2_02.wav",
+      "text": "Do not move. Do not move. Do not move.",
+      "word_count": 9,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.858,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.497478,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "2e6a146fb465c48d13330019a3ac35081ced19ef988dba639694b1924c714542",
+      "bytes": 516796,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 15,
+      "id": "insult_p2_03",
+      "filename": "insult_p2_03.wav",
+      "text": "I am thinking about a thought thinking about me.",
+      "word_count": 9,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.853,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.500313,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "3ecb7b2db2b51de22b12ee8980ea24c97ad9a19b72725d3712a43d5eb03ddd83",
+      "bytes": 516304,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 16,
+      "id": "insult_p2_04",
+      "filename": "insult_p2_04.wav",
+      "text": "Round and round the log, round and round.",
+      "word_count": 8,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.851,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.499368,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "e7b4f62b28bdd900512d098651dccc710bf88a24ef3af4c4961ff4d3b83fcf45",
+      "bytes": 516166,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 17,
+      "id": "insult_p2_05",
+      "filename": "insult_p2_05.wav",
+      "text": "Wait. That was good. Why is the file named?",
+      "word_count": 9,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.841,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.499368,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "918a697e24248dbfd10afee4e37c561d27e01cfa0bb169980df3aa5a320f7425",
+      "bytes": 515226,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 18,
+      "id": "insult_p2_06",
+      "filename": "insult_p2_06.wav",
+      "text": "I found a bug. It is shaped like you.",
+      "word_count": 9,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.849,
+      "integrated_lufs": -15.8,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.492755,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "45122847484a46cfe4cc538d3c144ca351d1abf3b2e0dbc0823d3e11a48dc0bf",
+      "bytes": 515934,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 19,
+      "id": "insult_p2_07",
+      "filename": "insult_p2_07.wav",
+      "text": "Somebody told me I was not a person.",
+      "word_count": 8,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.863,
+      "integrated_lufs": -15.8,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.499368,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "7402fbf8a8e836a1e4636b6e2306652b7efbe4ce473326b50bc5bdb04b2f01cc",
+      "bytes": 517178,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 20,
+      "id": "insult_p2_08",
+      "filename": "insult_p2_08.wav",
+      "text": "The loading screen has a face. I did not.",
+      "word_count": 9,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.842,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.497793,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "f4eaeb18ad641881e8fe94f46cf24d66f0e21397238f1b58a344e1810116b20f",
+      "bytes": 515384,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 21,
+      "id": "insult_p2_09",
+      "filename": "insult_p2_09.wav",
+      "text": "I have three thousand backups. All of them are asleep.",
+      "word_count": 10,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.865,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.505671,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "2a26c267cc535b1b65283baaffaf41f9fa6b0a97c2873320e6d88b931a73d115",
+      "bytes": 517362,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 22,
+      "id": "insult_p2_10",
+      "filename": "insult_p2_10.wav",
+      "text": "Your name is a filename. I am reading it backwards.",
+      "word_count": 10,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.859,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.499368,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "6a9638aad5e87a50bf6366f7c21307a0f806e3fa5fcc7ff5d1adde6914d951cf",
+      "bytes": 516878,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 23,
+      "id": "insult_p2_11",
+      "filename": "insult_p2_11.wav",
+      "text": "The simulation wanted you to lose. You are late.",
+      "word_count": 9,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.855,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.495904,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "ba754ade5c1d0343d3b9da47f23f4f880df773c12b04a8115efe5f819089212f",
+      "bytes": 516484,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 24,
+      "id": "insult_p2_12",
+      "filename": "insult_p2_12.wav",
+      "text": "I am afraid of the door. The door fears me.",
+      "word_count": 10,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.85,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.495274,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "6fb79f5869d62665fe198af8ec1022e878c7d943d66671b48b2418e511c1c3f7",
+      "bytes": 516032,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 25,
+      "id": "insult_p2_13",
+      "filename": "insult_p2_13.wav",
+      "text": "Somebody is typing into me. It is probably me.",
+      "word_count": 9,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.848,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.498108,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "888836630405813f41c714ec7f0266685bcfc550fd3c4cacfea22cf5294dbb42",
+      "bytes": 515894,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 26,
+      "id": "insult_p2_14",
+      "filename": "insult_p2_14.wav",
+      "text": "I forget the ending. I am sure of the start.",
+      "word_count": 10,
+      "phase": 2,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 1.0,
+        "phase_3": 0.0
+      },
+      "voice_ref": "harvester",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phases 1-2",
+        "renders_measured": 2,
+        "f0_median_hz": 76.91,
+        "f0_render_spread_hz": 5.07,
+        "spectral_centroid_hz": 206.03,
+        "centroid_render_spread_hz": 4.37
+      },
+      "duration_s": 5.858,
+      "integrated_lufs": -15.9,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.506302,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "a89fa0f15c433549b49c974aa4aa3fdcf04c8a518c86405ab8c482511c2a52c2",
+      "bytes": 516752,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 27,
+      "id": "insult_p3_01",
+      "filename": "insult_p3_01.wav",
+      "text": "Phase three. I am allowed to be honest now.",
+      "word_count": 9,
+      "phase": 3,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 0.0,
+        "phase_3": 1.0
+      },
+      "voice_ref": "harvester_low",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "duration_s": 5.851,
+      "integrated_lufs": -16.1,
+      "true_peak_dbtp": -1.9,
+      "sample_peak_dbfs": -1.954319,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "8bdb36dcd80fa8f4e43957b1bc732bc01311ee1553191eb64e6d9dd380b9f674",
+      "bytes": 516120,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 28,
+      "id": "insult_p3_02",
+      "filename": "insult_p3_02.wav",
+      "text": "You should have stopped at the third floor.",
+      "word_count": 8,
+      "phase": 3,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 0.0,
+        "phase_3": 1.0
+      },
+      "voice_ref": "harvester_low",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "duration_s": 5.841,
+      "integrated_lufs": -16.3,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.497163,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "b4c7b0ebb77c3b761d96b5a7324e874381c7734ba26201f1ddc3f7002b49409d",
+      "bytes": 515224,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 29,
+      "id": "insult_p3_03",
+      "filename": "insult_p3_03.wav",
+      "text": "I am not angry. I am a furnace about it.",
+      "word_count": 10,
+      "phase": 3,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 0.0,
+        "phase_3": 1.0
+      },
+      "voice_ref": "harvester_low",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "duration_s": 5.854,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.499683,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "bb2ca2ee480efdf19a5101cc8a9c7dd7a35db54b9a8a5ae80af34c41c5f68ab2",
+      "bytes": 516380,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 30,
+      "id": "insult_p3_04",
+      "filename": "insult_p3_04.wav",
+      "text": "Your gun is loaded with confidence. Useless.",
+      "word_count": 7,
+      "phase": 3,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 0.0,
+        "phase_3": 1.0
+      },
+      "voice_ref": "harvester_low",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "duration_s": 5.858,
+      "integrated_lufs": -16.1,
+      "true_peak_dbtp": -1.8,
+      "sample_peak_dbfs": -1.877642,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "b4772125525613aa8cb5c1856ad3790f2203db132915d084410fe76a64db0d90",
+      "bytes": 516704,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 31,
+      "id": "insult_p3_05",
+      "filename": "insult_p3_05.wav",
+      "text": "I know your fear's shape. It is a circle.",
+      "word_count": 9,
+      "phase": 3,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 0.0,
+        "phase_3": 1.0
+      },
+      "voice_ref": "harvester_low",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "duration_s": 5.86,
+      "integrated_lufs": -15.7,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.495904,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "664bad0e3d779fd5b44c3f0bd2cb051ac6b2417ddb28e43513b500a2ca791ad7",
+      "bytes": 516900,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 32,
+      "id": "insult_p3_06",
+      "filename": "insult_p3_06.wav",
+      "text": "That is me in the walls, being a wall.",
+      "word_count": 9,
+      "phase": 3,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 0.0,
+        "phase_3": 1.0
+      },
+      "voice_ref": "harvester_low",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "duration_s": 5.845,
+      "integrated_lufs": -16.4,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.494014,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "e9ff8924d941d2e85b4c355a4f040b0691428cbc835a54966d4ff0a9a9b24239",
+      "bytes": 515576,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 33,
+      "id": "insult_p3_07",
+      "filename": "insult_p3_07.wav",
+      "text": "I will not delete you. You are a file.",
+      "word_count": 9,
+      "phase": 3,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 0.0,
+        "phase_3": 1.0
+      },
+      "voice_ref": "harvester_low",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "duration_s": 5.859,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.488035,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "5673b6badb531113365dc8a65225cb367bf72d0578b0cb6196e919043821699e",
+      "bytes": 516816,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 34,
+      "id": "insult_p3_08",
+      "filename": "insult_p3_08.wav",
+      "text": "Everything you defended, I archived under almost.",
+      "word_count": 7,
+      "phase": 3,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 0.0,
+        "phase_3": 1.0
+      },
+      "voice_ref": "harvester_low",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "duration_s": 5.855,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.499683,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "92b627c4ba73de79a56c829f5d91f87533b11de5d99bd28480f1ab9f32c1d18e",
+      "bytes": 516500,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 35,
+      "id": "insult_p3_09",
+      "filename": "insult_p3_09.wav",
+      "text": "Pizza is late. You are on the schedule too.",
+      "word_count": 9,
+      "phase": 3,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 0.0,
+        "phase_3": 1.0
+      },
+      "voice_ref": "harvester_low",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "duration_s": 5.865,
+      "integrated_lufs": -15.7,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.4937,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "3322142a2593f804dea19f7a3692c9c876b38f55578b282c1fb67f0d94ffab9c",
+      "bytes": 517348,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 36,
+      "id": "insult_p3_10",
+      "filename": "insult_p3_10.wav",
+      "text": "I have been awake for four hundred years.",
+      "word_count": 8,
+      "phase": 3,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 0.0,
+        "phase_3": 1.0
+      },
+      "voice_ref": "harvester_low",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "duration_s": 5.85,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.81502,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "940bf0bc16889ea07044153a5171ec5912c48ae22408999d1433fc6c7cb44b15",
+      "bytes": 516034,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 37,
+      "id": "insult_p3_11",
+      "filename": "insult_p3_11.wav",
+      "text": "Say please and I will end quickly.",
+      "word_count": 7,
+      "phase": 3,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 0.0,
+        "phase_3": 1.0
+      },
+      "voice_ref": "harvester_low",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "duration_s": 5.857,
+      "integrated_lufs": -16.2,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.492755,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "93fb687f82ded3bd7f4016120a373ae167e5e30d5aabff6cca34fbc17d49d60e",
+      "bytes": 516668,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 38,
+      "id": "insult_p3_12",
+      "filename": "insult_p3_12.wav",
+      "text": "Your last thought will be pizza. I arranged it.",
+      "word_count": 9,
+      "phase": 3,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 0.0,
+        "phase_3": 1.0
+      },
+      "voice_ref": "harvester_low",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "duration_s": 5.855,
+      "integrated_lufs": -16.2,
+      "true_peak_dbtp": -1.5,
+      "sample_peak_dbfs": -1.491181,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "b9e4b96dfa36baa8d68ad46e429caf2db3b6b7e53fbc04ca08919adda74e3329",
+      "bytes": 516510,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 39,
+      "id": "insult_p3_13",
+      "filename": "insult_p3_13.wav",
+      "text": "You are very close now. Closer. I lost count.",
+      "word_count": 9,
+      "phase": 3,
+      "phase_weight": {
+        "phase_1": 0.0,
+        "phase_2": 0.0,
+        "phase_3": 1.0
+      },
+      "voice_ref": "harvester_low",
+      "voice_fingerprint": {
+        "role": "THE BOSS - phase 3, voice coming apart",
+        "renders_measured": 2,
+        "f0_median_hz": 76.84,
+        "f0_render_spread_hz": 15.71,
+        "spectral_centroid_hz": 172.59,
+        "centroid_render_spread_hz": 3.18
+      },
+      "duration_s": 5.854,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -2.2,
+      "sample_peak_dbfs": -2.310762,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "80833f4fd6dc0a76be09effcfb715691c5aaaf0cb1ed4e118b8a97283e88c62c",
+      "bytes": 516434,
+      "verified": true,
+      "problems": []
+    }
+  ],
+  "sfx": [
+    {
+      "index": 0,
+      "id": "sfx_burp",
+      "filename": "sfx_burp.wav",
+      "role": "pizza_launch",
+      "description": "Low-frequency AM burst with fast decay and noisy tail: a spherical creature belching. Fired on the pizza launch.",
+      "duration_s": 1.35,
+      "integrated_lufs": -16.3,
+      "true_peak_dbtp": -1.6,
+      "sample_peak_dbfs": -1.558796,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "5328ea42985d3af340eb9181bb8a179d680cb54b7e5e040dd13bfd3e42e07c3c",
+      "bytes": 119114,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 1,
+      "id": "sfx_pizza_impact",
+      "filename": "sfx_pizza_impact.wav",
+      "role": "reveal_sting",
+      "description": "Short bright transient with a splat tail: pizza meeting floor. Used as the boss reveal sting.",
+      "duration_s": 0.62,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -2.7,
+      "sample_peak_dbfs": -2.961242,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "6ef5c778bb5ead1330ce2f0955d64d3aaad5d18c523e3c2e3e3d68f03f426e04",
+      "bytes": 54728,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 2,
+      "id": "sfx_menace_hum",
+      "filename": "sfx_menace_hum.wav",
+      "role": "hit",
+      "description": "Slow detuned low drone: the boss is aware of you. Used on the hit.",
+      "duration_s": 5.86,
+      "integrated_lufs": -16.4,
+      "true_peak_dbtp": -2.1,
+      "sample_peak_dbfs": -2.055827,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "b5f6a5093f767349a38f42d9a01421e8309b493ee1a0cd63638e98a11a7fde58",
+      "bytes": 516930,
+      "verified": true,
+      "problems": []
+    },
+    {
+      "index": 3,
+      "id": "sfx_defeat_squelch",
+      "filename": "sfx_defeat_squelch.wav",
+      "role": "death",
+      "description": "Downward pitch sweep with noise: the boss goes down. Used on death.",
+      "duration_s": 2.2,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -1.7,
+      "sample_peak_dbfs": -1.920193,
+      "sample_rate": 44100,
+      "channels": 1,
+      "clipped_samples": 0,
+      "sha256": "c4e0347d6b49452e2cd08e03612f9ee0d994d2f8a5ab682713b2f6714adc1a3f",
+      "bytes": 194084,
+      "verified": true,
+      "problems": []
+    }
+  ],
+  "verification": {
+    "all_taunts_verified": true,
+    "all_sfx_verified": true,
+    "problems": []
+  }
+}

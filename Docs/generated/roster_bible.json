@@ -1084,9 +1084,12 @@
           "3": "phase 3 lines below 33% HP"
         },
         "selection": "pure Rust: phase-gated, no immediate repeat, 1.5 s minimum gap, 6.0 s maximum gap",
-        "engine": "F5-TTS, HTPC 10.0.0.42:8020/synth, voice 'spokesman'",
-        "output_format": "RIFF/WAVE, PCM s16le, mono, 24000 Hz",
-        "channel": "the taunt channel ducks the music bed by 6 dB and never ducks weapon SFX"
+        "engine": "F5-TTS, HTPC 10.0.0.42:8020/synth, voice selected by the `ref` field (NOT `voice`): `harvester` for phases 1-2, `harvester_low` for phase 3",
+        "output_format": "RIFF/WAVE, PCM s16le, mono, 24000 Hz service output; DELIVERED at 44 100 Hz mono 16-bit after normalisation",
+        "channel": "the taunt channel ducks the music bed by 6 dB and never ducks weapon SFX",
+        "audio_manifest": "Content/Audio/Insults/insults_manifest.json",
+        "audio_delivered": true,
+        "audio_note": "The 40-line bank is RENDERED, NORMALISED and MEASURED. All 40 verify clean: -16.4..-15.7 LUFS, true peaks -2.2..-1.4 dBTP, 0 clipped samples, 5.841-5.866 s. The manifest is the playback contract; the Rust core must read `index`, `phase` and `voice_ref` from it."
       }
     },
     {
@@ -1840,9 +1843,24 @@
       "max_words_observed": 10,
       "lines_over_cap": 0
     },
-    "engine": "F5-TTS, HTPC 10.0.0.42:8020/synth, voice 'spokesman'",
-    "output_format": "RIFF/WAVE, PCM s16le, mono, 24000 Hz",
+    "engine": "F5-TTS, HTPC 10.0.0.42:8020/synth. The voice is selected by the `ref` field -- NOT `voice`. `voice` is accepted and SILENTLY IGNORED by the service, which then renders the default register, so a typo in the voice name produces a wrong-character render with no error. An unknown `ref` returns HTTP 400.",
+    "output_format": "RIFF/WAVE, PCM s16le, mono, 24000 Hz service output; DELIVERED at 44 100 Hz mono 16-bit after normalisation",
     "selection": "phase-gated, no immediate repeat, 1.5 s minimum gap, 6.0 s maximum gap",
-    "priority": "the taunt channel ducks the music bed by 6 dB and never ducks weapon SFX"
+    "priority": "the taunt channel ducks the music bed by 6 dB and never ducks weapon SFX",
+    "voice_refs_used": {
+      "harvester": "The Harvester, phases 1-2 (27 lines)",
+      "harvester_low": "The Harvester, phase 3 (13 lines)"
+    },
+    "voice_refs_registered": [
+      "spokesman",
+      "commander",
+      "harvester",
+      "harvester_low",
+      "hermes",
+      "settlement_human"
+    ],
+    "delivered_format": "RIFF/WAVE, PCM s16le, mono, 44100 Hz, 16-bit, -16 LUFS, true peak below -1.0 dBTP",
+    "audio_manifest": "Content/Audio/Insults/insults_manifest.json",
+    "audio_handover": "Docs/generated/audio_handover.md"
   }
 }

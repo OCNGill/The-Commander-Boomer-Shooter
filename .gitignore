@@ -19,6 +19,13 @@ Thumbs.db
 __pycache__/
 *.pyc
 
+# Audio lane working directory: raw TTS renders, normalisation
+# intermediates, voice-probe scratch and measurement scratch. The DELIVERED
+# files live in Content/Audio/ and the contract in
+# Content/Audio/Insults/insults_manifest.json; everything here is
+# regenerable and must never be committed.
+.audio_work/
+
 # Blender temp
 *.blend1
 

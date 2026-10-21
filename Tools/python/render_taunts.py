@@ -16,11 +16,25 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from taunt_lines import TAUNTS, validate  # noqa: E402
 
 SYNTH_URL = "http://10.0.0.42:8020/synth"
-VOICE = "spokesman"
+# The service reads "ref", NOT "voice". An unknown ref returns HTTP 400
+# {"error": "unknown voice", "voices": [...]} -- it does NOT fall back to
+# the default, so a typo here fails loudly instead of silently rendering
+# the wrong character. Omitting "ref" entirely DOES fall back to
+# "spokesman" (the default).
+#
+# Character voices live in the service's registry as directories:
+#   BASE/voices/<key>/{ref.wav,ref.txt}
+# scanned per request, so a new slot appears without a service restart.
+# The character slots (harvester, harvester_low, settlement_human) were
+# provisioned for this project; see Docs/generated/insult_bank_contract.md.
+VOICE = "harvester"
+# Per-phase voice: the boss drops lower as it comes apart.
+PHASE_VOICE = {1: "harvester", 2: "harvester", 3: "harvester_low"}
 OUT_DIR = sys.argv[1] if len(sys.argv) > 1 else "."
-WORKERS = int(sys.argv[2]) if len(sys.argv) > 2 else 3
+WORKERS = int(sys.argv[2]) if len(sys.argv) > 2 else 4
 RETRIES = 3
-TIMEOUT = 600
+# Measured: a 14-word line takes ~360 s of wall time on the CPU-only node.
+TIMEOUT = 1800
 
 _lock = threading.Lock()
 _state = {"done": 0, "fail": 0, "total": len(TAUNTS)}
@@ -35,7 +49,8 @@ def render(line):
             print(f"[skip] {tid}", flush=True)
         return True
 
-    payload = json.dumps({"text": line["text"], "voice": VOICE}).encode()
+    ref = PHASE_VOICE.get(line.get("phase", 1), VOICE)
+    payload = json.dumps({"text": line["text"], "ref": ref}).encode()
     for attempt in range(1, RETRIES + 1):
         t0 = time.time()
         try:
