@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-21T01:13:57-04:00",
+  "generated": "2026-10-21T01:16:13-04:00",
   "map": "Content/Maps/M_Blockout01.umap",
   "total_actors": 46,
   "groups": {
@@ -17,171 +17,200 @@
     "ramp": 1,
     "pit": 5
   },
-  "tactical": {
-    "drop_zone": {
-      "label": null,
-      "x": 0,
-      "y": 0,
-      "free_cells_reachable": 1
-    },
-    "tactical_spaces": {
-      "open_center": "pillar BO_Pillar_Center splits the middle; 4 cover blocks form a ring at +/-600",
-      "west_north_corner": "platform BO_Platform_NE + ramp BO_Ramp_NE (elevated, +250Z)",
-      "south_west_pit": "pit floor + 4 rim segments (hazard, sightline blocker)",
-      "perimeter": "4 walls at +/-2000 with 8 cover blocks distributed"
-    },
-    "encounters": [
-      {
-        "label": "ENC_Drone_01",
-        "x": 800.0,
-        "y": -400.0,
-        "z": 150.0,
-        "path_steps_from_drop": null,
-        "straight_line_m": 894.4,
-        "in_immediate_drop_sight": false
-      },
-      {
-        "label": "ENC_Drone_02",
-        "x": -900.0,
-        "y": 300.0,
-        "z": 150.0,
-        "path_steps_from_drop": null,
-        "straight_line_m": 948.7,
-        "in_immediate_drop_sight": false
-      },
-      {
-        "label": "ENC_Drone_03",
-        "x": 0.0,
-        "y": 600.0,
-        "z": 180.0,
-        "path_steps_from_drop": null,
-        "straight_line_m": 600.0,
-        "in_immediate_drop_sight": true
-      },
-      {
-        "label": "ENC_Zealot_01",
-        "x": 1500.0,
-        "y": -800.0,
-        "z": 0.0,
-        "path_steps_from_drop": null,
-        "straight_line_m": 1700.0,
-        "in_immediate_drop_sight": false
-      },
-      {
-        "label": "ENC_Zealot_02",
-        "x": -1500.0,
-        "y": 700.0,
-        "z": 0.0,
-        "path_steps_from_drop": null,
-        "straight_line_m": 1655.3,
-        "in_immediate_drop_sight": false
-      },
-      {
-        "label": "ENC_Phantom_01",
-        "x": -700.0,
-        "y": -1400.0,
-        "z": 0.0,
-        "path_steps_from_drop": null,
-        "straight_line_m": 1565.2,
-        "in_immediate_drop_sight": false
-      },
-      {
-        "label": "ENC_Brute_Pit",
-        "x": -1200.0,
-        "y": -1200.0,
-        "z": 50.0,
-        "path_steps_from_drop": null,
-        "straight_line_m": 1697.1,
-        "in_immediate_drop_sight": false
-      },
-      {
-        "label": "ENC_Golem_Platform",
-        "x": 1200.0,
-        "y": 1200.0,
-        "z": 510.0,
-        "path_steps_from_drop": null,
-        "straight_line_m": 1697.1,
-        "in_immediate_drop_sight": false
-      },
-      {
-        "label": "ENC_Boss_NorEaster",
-        "x": 0.0,
-        "y": 1600.0,
-        "z": 0.0,
-        "path_steps_from_drop": null,
-        "straight_line_m": 1600.0,
-        "in_immediate_drop_sight": false
-      }
-    ],
-    "pickups": [
-      {
-        "label": "PU_Armor_Platform",
-        "path_steps_from_drop": null,
-        "straight_line_m": 1838.5
-      },
-      {
-        "label": "PU_Ammo_01",
-        "path_steps_from_drop": null,
-        "straight_line_m": 509.9
-      },
-      {
-        "label": "PU_Ammo_02",
-        "path_steps_from_drop": null,
-        "straight_line_m": 509.9
-      },
-      {
-        "label": "PU_KeyGreen_PillarTop",
-        "path_steps_from_drop": 0,
-        "straight_line_m": 0.0
-      },
-      {
-        "label": "PU_KeyRed_Pit",
-        "path_steps_from_drop": null,
-        "straight_line_m": 1767.8
-      },
-      {
-        "label": "PU_Health_Pit",
-        "path_steps_from_drop": null,
-        "straight_line_m": 1626.3
-      }
-    ],
-    "weapons": [
-      {
-        "label": "WP_PilgrimPuckle_Spawn",
-        "path_steps_from_drop": null
-      },
-      {
-        "label": "WP_MayflowerCannon_Mid",
-        "path_steps_from_drop": null
-      },
-      {
-        "label": "WP_Rocket_Platform",
-        "path_steps_from_drop": null
-      }
-    ],
-    "unreachable_actors": [
-      "ENC_Drone_01",
-      "ENC_Drone_02",
-      "ENC_Drone_03",
-      "ENC_Zealot_01",
-      "ENC_Zealot_02",
-      "ENC_Phantom_01",
-      "ENC_Brute_Pit",
-      "ENC_Golem_Platform",
-      "ENC_Boss_NorEaster"
-    ],
-    "immediate_sight_encounters": [
-      "ENC_Drone_03"
-    ],
-    "notes": [
-      "Occupancy grid: 40x40 cells at 100u, arena -2000..2000. Walls, cover, pillar, pit and pit rims are blocking.",
-      "BFS from the PlayerStart cell; 'path_steps' is the shortest walkable route in 100u steps.",
-      "COVER/FLOOR/PLATFORM actors are the navigable surfaces; only the blocking set is carved out."
-    ]
-  },
   "enemy_count": 9,
   "pickup_count": 6,
   "weapon_count": 3,
-  "base_geometry_present": true,
-  "base_geometry_note": "Restored 2026-10-21 via Tools/python/ensure_base_geometry.py - the committed map had never contained the arena (blockout_map.py used the dead spawn_actor_from_object path, which returns NULL and fails silently)."
+  "grid": {
+    "cell_u": 100,
+    "span": [
+      -2000,
+      2000
+    ],
+    "cells": 1600,
+    "blocked_cells": 469,
+    "free_cells": 1131,
+    "reachable_from_drop": 1115
+  },
+  "drop_zone": {
+    "label": "BO_PlayerStart",
+    "x": 0.0,
+    "y": -1500.0,
+    "z": 100.0,
+    "drop_point_inside_a_blocker": false
+  },
+  "encounters": [
+    {
+      "label": "ENC_Drone_01",
+      "x": 800.0,
+      "y": -400.0,
+      "z": 150.0,
+      "path_steps_from_drop": 19,
+      "straight_line_m": 1360.1,
+      "in_immediate_drop_sight": false,
+      "sits_inside_a_blocker": false
+    },
+    {
+      "label": "ENC_Drone_02",
+      "x": -900.0,
+      "y": 300.0,
+      "z": 150.0,
+      "path_steps_from_drop": 35,
+      "straight_line_m": 2012.5,
+      "in_immediate_drop_sight": false,
+      "sits_inside_a_blocker": false
+    },
+    {
+      "label": "ENC_Drone_03",
+      "x": 0.0,
+      "y": 600.0,
+      "z": 180.0,
+      "path_steps_from_drop": 29,
+      "straight_line_m": 2100.0,
+      "in_immediate_drop_sight": false,
+      "sits_inside_a_blocker": false
+    },
+    {
+      "label": "ENC_Zealot_01",
+      "x": 1500.0,
+      "y": -800.0,
+      "z": 0.0,
+      "path_steps_from_drop": 22,
+      "straight_line_m": 1655.3,
+      "in_immediate_drop_sight": false,
+      "sits_inside_a_blocker": false
+    },
+    {
+      "label": "ENC_Zealot_02",
+      "x": -1500.0,
+      "y": 700.0,
+      "z": 0.0,
+      "path_steps_from_drop": 45,
+      "straight_line_m": 2662.7,
+      "in_immediate_drop_sight": false,
+      "sits_inside_a_blocker": false
+    },
+    {
+      "label": "ENC_Phantom_01",
+      "x": -700.0,
+      "y": -1400.0,
+      "z": 0.0,
+      "path_steps_from_drop": 6,
+      "straight_line_m": 707.1,
+      "in_immediate_drop_sight": true,
+      "sits_inside_a_blocker": true
+    },
+    {
+      "label": "ENC_Brute_Pit",
+      "x": -1200.0,
+      "y": -1200.0,
+      "z": 50.0,
+      "path_steps_from_drop": null,
+      "straight_line_m": 1236.9,
+      "in_immediate_drop_sight": false,
+      "sits_inside_a_blocker": true
+    },
+    {
+      "label": "ENC_Golem_Platform",
+      "x": 1200.0,
+      "y": 1200.0,
+      "z": 510.0,
+      "path_steps_from_drop": 39,
+      "straight_line_m": 2954.7,
+      "in_immediate_drop_sight": false,
+      "sits_inside_a_blocker": false
+    },
+    {
+      "label": "ENC_Boss_NorEaster",
+      "x": 0.0,
+      "y": 1600.0,
+      "z": 0.0,
+      "path_steps_from_drop": 41,
+      "straight_line_m": 3100.0,
+      "in_immediate_drop_sight": false,
+      "sits_inside_a_blocker": false
+    }
+  ],
+  "pickups": [
+    {
+      "label": "PU_Armor_Platform",
+      "path_steps_from_drop": 41,
+      "straight_line_m": 3087.1,
+      "sits_inside_a_blocker": false
+    },
+    {
+      "label": "PU_Ammo_01",
+      "path_steps_from_drop": 23,
+      "straight_line_m": 1676.3,
+      "sits_inside_a_blocker": false
+    },
+    {
+      "label": "PU_Ammo_02",
+      "path_steps_from_drop": 27,
+      "straight_line_m": 1486.6,
+      "sits_inside_a_blocker": false
+    },
+    {
+      "label": "PU_KeyGreen_PillarTop",
+      "path_steps_from_drop": 23,
+      "straight_line_m": 1500.0,
+      "sits_inside_a_blocker": true
+    },
+    {
+      "label": "PU_KeyRed_Pit",
+      "path_steps_from_drop": null,
+      "straight_line_m": 1274.8,
+      "sits_inside_a_blocker": true
+    },
+    {
+      "label": "PU_Health_Pit",
+      "path_steps_from_drop": null,
+      "straight_line_m": 1202.1,
+      "sits_inside_a_blocker": true
+    }
+  ],
+  "weapons": [
+    {
+      "label": "WP_PilgrimPuckle_Spawn",
+      "path_steps_from_drop": 0,
+      "sits_inside_a_blocker": false
+    },
+    {
+      "label": "WP_MayflowerCannon_Mid",
+      "path_steps_from_drop": 26,
+      "sits_inside_a_blocker": false
+    },
+    {
+      "label": "WP_Rocket_Platform",
+      "path_steps_from_drop": 43,
+      "sits_inside_a_blocker": false
+    }
+  ],
+  "unreachable_actors": [
+    "ENC_Brute_Pit"
+  ],
+  "elevated_spawns": [
+    {
+      "label": "ENC_Golem_Platform",
+      "z": 510.0,
+      "note": "elevated - needs the ramp or a climb"
+    }
+  ],
+  "immediate_sight_encounters": [
+    "ENC_Phantom_01"
+  ],
+  "tactical_spaces": {
+    "open_center": "BO_Pillar_Center at the origin splits the middle; 4 cover blocks ring it at +/-600",
+    "north_east_platform": "BO_Platform_NE (+250Z) reached by BO_Ramp_NE - the high ground",
+    "south_west_pit": "BO_PitFloor + 4 rim segments - hazard and sightline blocker",
+    "perimeter": "4 walls at +/-2000, 8 cover blocks distributed on the ring"
+  },
+  "findings": [
+    "The PlayerStart sits in open ground, clear of every blocker - a clean drop.",
+    "Contact-on-landing: ENC_Phantom_01 is 707u (7.1m) from the drop point - an enemy in the drop zone itself.",
+    "ENC_Phantom_01, ENC_Brute_Pit sits INSIDE the pit volume. The pit is a hazard, not walkable ground in the grid - that spawn is only reachable if the player can climb down into the pit. Either add a ladder/stairs, or move the spawn to the rim.",
+    "Elevated spawns (ENC_Golem_Platform) are only reachable via BO_Ramp_NE - the grid treats the platform as a surface, so the route exists but the Z transition is not modelled. Verify the ramp actually connects in-engine.",
+    "UNREACHABLE spawns: ENC_Brute_Pit"
+  ],
+  "method": "40x40 occupancy grid at 100u over -2000..2000. Blockers = walls, cover, pillar, pit floor and pit rims; floor, platform and ramp are surfaces. BFS on the 4-neighbourhood from the PlayerStart cell; path_steps are 100u steps. Straight-line distance is Euclidean from the drop.",
+  "base_geometry_note": "Arena restored 2026-10-21 via Tools/python/ensure_base_geometry.py - the committed map had never contained the arena (blockout_map.py used the dead spawn_actor_from_object path)."
 }
