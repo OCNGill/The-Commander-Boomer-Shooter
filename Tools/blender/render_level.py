@@ -992,7 +992,8 @@ def build_game(M, heights):
         elif k == 'platform':
             cube('PL_' + lab(r), (c[0], c[1], c[2]), (d[0], d[1], d[2]), M['plat'], (0, 0, yaw(r)))
         elif k == 'ramp':
-            cube('RM_' + lab(r), *ramp_geo(r, c, d), M['ramp'])
+            _gc, _gd, _gr = ramp_geo(r, c, d)
+            cube('RM_' + lab(r), _gc, _gd, M['ramp'], _gr)
         elif k == 'step':
             cube('ST_' + lab(r), (c[0], c[1], c[2]), (d[0], d[1], d[2]), M['cover'], (0.0, 0.0, 0.0))
         elif k == 'pitfloor':
@@ -1190,7 +1191,9 @@ def main():
     # shot 4: NE platform
     if PLAT:
         c = loc(PLAT)
-        cam('CAM_PLAT', (c[0] - 6.0, c[1] - 16.0, 1.60), (c[0], c[1], 3.2), lens=38.0)
+        # the ramp is 15m long (foot y=-7, lip y=+8): stand behind its foot and look up the slope,
+        # otherwise the old eye-level camera sits past the foot and the ramp leaves frame.
+        cam('CAM_PLAT', (8.60, -14.00, 2.40), (11.20, 0.50, 2.00), lens=26.0)
         rig((c[0], c[1], 3.0), key=10000.0)
     p = shot('gameplay_04_platform.png', 1280, 720, 40)
     frames.append({'file': 'gameplay_04_platform.png', 'bytes': os.path.getsize(p),
@@ -1199,7 +1202,9 @@ def main():
     # shot 6: the pit exit ramp, shot from the arena floor looking down the slope
     if PITRAMP:
         c = loc(PITRAMP)
-        cam('CAM_PITRAMP', (c[0] + 4.15, c[1], 1.60), (c[0] - 1.15, c[1], -0.70), lens=34.0)
+        # the pit ramp runs x=-10.55 (pit floor) -> x=-8.75 (east rim gap); look down the slope
+        # from over the rim so the whole flight and both landings are in frame.
+        cam('CAM_PITRAMP', (-3.75, -9.50, 2.20), (-9.65, -13.00, -0.50), lens=30.0)
         rig((c[0] - 0.5, c[1], -0.4), key=7000.0)
     p = shot('gameplay_06_pitramp.png', 1280, 720, 40)
     frames.append({'file': 'gameplay_06_pitramp.png', 'bytes': os.path.getsize(p),
