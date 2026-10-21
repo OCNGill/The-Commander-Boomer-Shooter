@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-21T01:36:17-04:00",
+  "generated": "2026-10-21T01:36:41-04:00",
   "map": "Content/Maps/M_Blockout01.umap",
   "total_actors": 46,
   "groups": {
@@ -45,20 +45,24 @@
     "clear_of_cover": true
   },
   "pit_truth": {
-    "floor_top_z": 0.0,
-    "rim_height_u": 25.0,
-    "rim_height_m": 0.25,
-    "rim_thickness_u": 1000.0,
+    "pad_size_u": [
+      1000.0,
+      1000.0
+    ],
+    "pad_top_z": 0.0,
+    "rim_height_u": 50.0,
+    "rim_height_m": 0.5,
+    "rim_thickness_u": 50.0,
     "pen_interior_u": [
-      -800.0,
-      -800.0
+      150.0,
+      150.0
     ],
     "pen_interior_m": [
-      -8.0,
-      -8.0
+      1.5,
+      1.5
     ],
     "ue_default_step_height_u": 45,
-    "access": "drop-in (jumpable) - deliberate risk pocket"
+    "access": "drop-in over a 0.50m kerb (rim is above the 45u step height, jumpable) - a deliberate risk pocket, NOT a sealed vault"
   },
   "encounters": [
     {
@@ -245,12 +249,13 @@
     "perimeter": "4 walls at +/-2000, 8 cover blocks distributed on the ring"
   },
   "findings": [
-    "The drop point is CLEAN: BO_PlayerStart at (0.0, -1500.0) sits in open ground, no cells of hard cover away from any wall, cover block or pillar. My earlier 'the squad drops onto the pillar' was WRONG - the pillar is at the origin, 15m north of the drop.",
-    "The pit is NOT a sealed vault and NOT a deep hole. BO_PitFloor is a 1000u x 1000u pad whose top is flush with the main floor at z=0, and the four rim walls are 25u (0.25m) tall around a -800u x -800u (-8.0m x -8.0m) pen. That rim is above the default 45u character step height, so the player DROPS IN rather than walking in - a deliberate risk pocket, and trivially jumpable. Correcting my earlier 'the level cannot be completed' claim: it can.",
-    "GUARDED POCKET: ENC_Brute_Pit and PU_KeyRed_Pit, PU_Health_Pit sit inside that pen with the Brute. Reaching the red key means dropping into a 2m pen with a brute in it - that is the level's risk/reward beat, and the red pit light is already there to read it. Add a visible entry cue (a kerb ramp or a floor decal) so the drop reads as deliberate.",
+    "The drop point is CLEAN: BO_PlayerStart at (0.0, -1500.0) sits in open ground, clear of every wall, cover block and pillar. My earlier 'the squad drops onto the pillar' was WRONG - the pillar is at the origin, 15m north of the drop.",
+    "The pit is NOT a sealed vault and NOT a deep hole. BO_PitFloor is a 1000u x 1000u pad whose top is flush with the main floor at z=0, and the four rim walls are 50u (0.50m) tall around a 1.5m x 1.5m pen. That rim is above the default 45u character step height, so the player DROPS IN rather than walking in - a deliberate risk pocket, and trivially jumpable. Correcting my earlier 'the level cannot be completed' claim: it can.",
+    "GUARDED POCKET: the Brute, the red key and the medkit all sit in that 1.5m pen. Reaching the red key means dropping into a tight box with a brute in it - the level's risk/reward beat, and the red pit light is already there to read it. Add a visible entry cue (a kerb ramp or a floor decal) so the drop reads as deliberate.",
     "Contact-on-landing: ENC_Phantom_01 is 7.1m from the drop point - an enemy inside the drop zone itself.",
     "All 9 enemy spawns, 6 pickups and 3 weapons have a walkable route from the drop; none are unreachable."
   ],
   "method": "40x40 occupancy grid at 100u over -2000..2000. Blockers = walls, cover blocks, central pillar. BFS 4-neighbourhood from the PlayerStart cell; path_steps are 100u steps. Straight-line distance is Euclidean from the drop. Pit-pen interiors are counted reachable because the rim is a jumpable kerb.",
-  "base_geometry_note": "The arena was absent from the committed map - blockout_map.py used the dead spawn_actor_from_object path in UE 5.8, so 23 base actors never spawned. ensure_base_geometry.py rebuilds them. The restore was re-verified against the file ON DISK, not against an in-memory dump (a dump proves the editor's memory, not the .umap)."
+  "base_geometry_note": "The arena was absent from the committed map - blockout_map.py used the dead spawn_actor_from_object path in UE 5.8, so 23 base actors never spawned. ensure_base_geometry.py rebuilds them. The restore was re-verified against the file ON DISK, not against an in-memory dump (a dump proves the editor's memory, not the .umap).",
+  "arithmetic_correction": "An earlier revision of this file reported the pit rim as 25u and a '-8.0m x -8.0m' pen interior - a scale-multiplier error (UE cubes are 100 units per unit of scale, not 50). Corrected: rim 50u / 0.5m, pen interior 1.5m x 1.5m."
 }
