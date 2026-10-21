@@ -115,3 +115,49 @@
 > Psalm 33:6 (ESV) - "By the word of the LORD were the heavens made; and all the host of them
 > by the breath of his mouth." Chosen because every asset in this pass is made by command,
 > and the swarm only executes what is spoken to it.
+
+## [2026-10-21b] — Arena integrity: poisoned commit, missing floor hole, buried ramp
+
+### Fixed
+- **The arena was never actually restored.** Commit `0a2e558` enshrined a REVERTED map:
+  the git blob for `Content/Maps/M_Blockout01.umap` is 50,181 bytes / 25 actors, not the
+  80,624-byte / 46-actor level. Chain of custody, recovered from the logs: the restore did
+  hit disk at 01:12:51 (`[LEVELDUMP] on-disk umap after: 80624 bytes`), and 18 seconds later
+  a builder's `git checkout` destroyed it - and the commit then froze the destroyed file.
+  **Rule adopted: the blob size inside the commit is now the only proof. A dump reads the
+  editor's in-memory world and proves nothing about the file on disk.**
+- **The floor had no hole at all.** `BO_Floor` was a single unbroken 40x40m plane at z=0, so
+  the pit, its rim, `ENC_Brute_Pit`, `PU_KeyRed_Pit` and `PU_Health_Pit` sat *underneath* the
+  floor surface - invisible and unreachable. The renders were cutting the floor open to
+  depict a level the map did not contain.
+- **The NE ramp was buried in the platform.** `BO_Ramp_NE` at (950,950) sits inside the
+  platform footprint (800-1600), so it never reached the floor and the Golem encounter on
+  the platform had no approach.
+- **`Tools/python/fix_pit_and_ramp.py`** (new): derives the floor surface height `S` from the
+  live mesh (plane -> `loc.z`, cube -> `loc.z + scale.z*50`), re-cuts the floor around the pit
+  with the same mesh, drops the pit floor 100u below `S`, rebuilds the rim as 200u walls
+  (100u proud of the floor), re-places `BO_Ramp_NE` clear of the platform footprint, and
+  self-verifies the resulting ramp tilt from the actual transforms.
+- **UE 5.8 commandlet pitfall: `-script=` needs FORWARD SLASHES.** With backslashes, `FParse`
+  truncated the value at the first backslash run - `C:\Users\Gillsystems Laptop\source` -
+  so every script load died with `Could not load Python file`, the run still printed `[DONE]`,
+  and the map was never touched. Every historical success in this repo used forward slashes.
+  `Tools/python/run_arena_fix.bat` now uses the forward-slash form verbatim, plus a
+  pre-flight existence check and a `tasklist | findstr` guard (the guard had been calling
+  MSYS `find`, which silently failed).
+- **Own-vision pass caught a disqualifying defect before the critic did.** The v2 Floater
+  still shipped five legs each ending in a rounded glowing cyan orb - the exact defect
+  named in round 1 - and the v2 lighting renders came back with rim 2/7 and under-glow 3/7
+  against a rig whose own `verification.json` showed `under_energy` of 1.2W and a face-zone
+  `p99_lum` of 1. Both were re-steered with hard numeric acceptance criteria before any
+  scoring pass ran.
+
+### Changed
+- Level builder permanently hard-stopped from `UnrealEditor-Cmd`, commandlets, populate/apilist
+  /dump scripts, git, `Content/Maps/**` and `Docs/generated/level_transforms.json`. Blender-only.
+- The map and dump leg is assistant-owned. Builders do not commit.
+
+### Verse
+> *"But be doers of the word, and not hearers only, deceiving yourselves."* - James 1:22 (ESV)
+> Chosen because this entry is entirely about the difference between hearing a report
+> ("[DONE]", "TOTAL=46", "restored") and doing the thing (reading the file, checking the blob).
