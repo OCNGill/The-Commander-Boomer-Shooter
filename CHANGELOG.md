@@ -212,3 +212,23 @@ and only reading the live geometry, not the intent, told us which one was real.*
 ### Verse
 > *"Test everything; hold fast what is good."* — 1 Thessalonians 5:21 (ESV)
 > This leg replaced guessed geometry with measured geometry: the engine reports where each ramp actually ends, and the climb ships only because every rise was proven inside the jump budget.
+
+### 2026-10-21e - Cameras re-aimed at the geometry the engine actually built
+
+- The pit and platform frames were still aimed for the old guessed ramp positions. Once both ramps
+  were rebuilt from engine-measured end points, the NE ramp's foot sat 15m from where the old
+  eye-level camera stood, so the ramp fell out of frame and the platform read as unreachable.
+- `CAM_PLAT` now stands behind the ramp's foot and looks up the slope; `CAM_PITRAMP` looks down the
+  pit exit ramp from over the rim. Both landings are in frame in both shots.
+- `gameplay_06_pitramp.png` is new: the pit exit ramp in close view, solid geometry with visible
+  thickness and underside.
+- Fixed the `ramp_geo` call site: the helper now returns a rotation, and the old one-line call was
+  unpacking that rotation into the material slot, which aborted every gameplay frame with
+  "sequence expected at dimension 1, not 'Material'".
+- Verified by vision on the fresh renders: the pit is a genuine sunken recess with a flush exit ramp;
+  the platform ramp is one continuous slope with both landings visible and no gap; the pit ramp shows
+  real thickness with a solid landing at each end. All 9 frames are byte-verified against the copies
+  the dashboard serves at `http://10.0.0.93:8899/file/CommandCenter/outputs/level/<name>`.
+
+> *Psalm 119:105 (ESV) - "Your word is a lamp for my feet, a light on my path."* The camera had to be
+> re-aimed at the path that was actually built, not the one we assumed.
