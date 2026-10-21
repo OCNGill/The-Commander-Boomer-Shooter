@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-21T05:57:49",
+ "generated": "2026-10-21T06:22:10",
  "renderer": "EEVEE (Blender 4.2)",
  "resolution": [
   720,
@@ -17,22 +17,22 @@
   "KEY_EL": 42.0,
   "KEY_DIST": 1.85,
   "KEY_SPOT": 40.0,
-  "RIM_AZ": 155.0,
-  "RIM_EL": 32.0,
-  "RIM_DIST": 1.1,
+  "RIM_AZ": 130.0,
+  "RIM_EL": 58.0,
+  "RIM_DIST": 0.95,
   "RIM_CONE": 50.0,
-  "UNDER_Z": 0.1,
-  "UNDER_CONE": 30.0,
-  "UNDER_OFF": 0.08,
+  "UNDER_Z": 0.04,
+  "UNDER_CONE": 50.0,
+  "UNDER_OFF": 0.06,
   "POOL_AZ": 145.0,
   "POOL_EL": 70.0,
   "POOL_DIST": 1.8,
-  "POOL_CONE": 26.0,
+  "POOL_CONE": 22.0,
   "POOL_BLEND": 0.4,
-  "WASH_AZ": 140.0,
-  "WASH_EL": 68.0,
-  "WASH_DIST": 2.0,
-  "WASH_SIZE": 0.9,
+  "WASH_AZ": 300.0,
+  "WASH_EL": 55.0,
+  "WASH_DIST": 1.6,
+  "WASH_SIZE": 1.2,
   "REF_HEIGHT": 2.0,
   "POOL_G": 0.35,
   "POOL_LAT": 0.32,
@@ -46,9 +46,9 @@
    1.0
   ],
   "reveal_rim": [
-   0.2,
+   0.03,
    1.0,
-   0.42
+   0.12
   ],
   "reveal_under": [
    0.45,
@@ -72,10 +72,10 @@
   ]
  },
  "emission_strength": {
-  "accent": 0.9,
-  "eye": 0.9,
-  "core": 0.8,
-  "plasma": 0.7
+  "accent": 0.32,
+  "eye": 0.32,
+  "core": 0.3,
+  "plasma": 0.26
  },
  "emission_colors": {
   "accent": [
@@ -119,8 +119,8 @@
       0.78,
       1.0
      ],
-     "watts": 10.56,
-     "energy": 10.56,
+     "watts": 15.84,
+     "energy": 15.84,
      "location": [
       -0.1967,
       -1.3992,
@@ -140,25 +140,25 @@
      "name": "reveal_rim",
      "type": "AREA",
      "color": [
-      0.2,
+      0.03,
       1.0,
-      0.42
+      0.12
      ],
-     "watts": 184.86,
-     "energy": 184.86,
+     "watts": 52.82,
+     "energy": 52.82,
      "location": [
-      -0.8689,
-      0.4052,
-      1.3185
+      -0.3326,
+      0.3964,
+      1.5475
      ],
      "rotation_deg": [
-      60.26,
+      27.78,
       0.0,
-      -115.0
+      -140.0
      ],
      "shadow": true,
-     "size": 3.597,
-     "size_y": 1.233
+     "size": 0.462,
+     "size_y": 0.154
     },
     {
      "name": "reveal_under",
@@ -168,22 +168,22 @@
       0.9,
       1.0
      ],
-     "watts": 676.31,
-     "energy": 676.31,
+     "watts": 1123.16,
+     "energy": 1123.16,
      "location": [
-      0.0472,
-      -0.0674,
-      0.1028
+      0.0354,
+      -0.0505,
+      0.0411
      ],
      "rotation_deg": [
-      158.2,
+      167.91,
       0.0,
       35.0
      ],
      "shadow": false,
-     "spot_size_deg": 30.0,
-     "spot_blend": 0.35,
-     "shadow_soft_size": 0.021
+     "spot_size_deg": 50.0,
+     "spot_blend": 0.3,
+     "shadow_soft_size": 0.01
     },
     {
      "name": "reveal_pool",
@@ -193,8 +193,8 @@
       0.72,
       1.0
      ],
-     "watts": 92.43,
-     "energy": 92.43,
+     "watts": 166.03,
+     "energy": 166.03,
      "location": [
       -0.5183,
       0.3629,
@@ -206,7 +206,7 @@
       -151.72
      ],
      "shadow": true,
-     "spot_size_deg": 26.0,
+     "spot_size_deg": 22.0,
      "spot_blend": 0.4,
      "shadow_soft_size": 0.2
     },
@@ -218,20 +218,20 @@
       0.55,
       0.7
      ],
-     "watts": 3.17,
-     "energy": 3.17,
+     "watts": 47.96,
+     "energy": 47.96,
      "location": [
-      -0.5899,
-      0.495,
-      1.9059
+      0.4716,
+      -0.8168,
+      1.347
      ],
      "rotation_deg": [
-      22.0,
+      35.0,
       0.0,
-      -130.0
+      30.0
      ],
      "shadow": false,
-     "size": 0.925
+     "size": 1.233
     }
    ],
    "world_background_strength": 0.1,
@@ -243,7 +243,7 @@
    "per_light_table": {
     "reveal_key": {
      "type": "SPOT",
-     "watts": 10.56,
+     "watts": 15.84,
      "color": [
       0.62,
       0.78,
@@ -266,53 +266,53 @@
     },
     "reveal_rim": {
      "type": "AREA",
-     "watts": 184.86,
+     "watts": 52.82,
      "color": [
-      0.2,
+      0.03,
       1.0,
-      0.42
+      0.12
      ],
      "location": [
-      -0.8689,
-      0.4052,
-      1.3185
+      -0.3326,
+      0.3964,
+      1.5475
      ],
      "rotation_deg": [
-      60.26,
+      27.78,
       0.0,
-      -115.0
+      -140.0
      ],
      "spot_size_deg": null,
-     "size": 3.597,
-     "size_y": 1.233,
+     "size": 0.462,
+     "size_y": 0.154,
      "shadow": true
     },
     "reveal_under": {
      "type": "SPOT",
-     "watts": 676.31,
+     "watts": 1123.16,
      "color": [
       0.45,
       0.9,
       1.0
      ],
      "location": [
-      0.0472,
-      -0.0674,
-      0.1028
+      0.0354,
+      -0.0505,
+      0.0411
      ],
      "rotation_deg": [
-      158.2,
+      167.91,
       0.0,
       35.0
      ],
-     "spot_size_deg": 30.0,
+     "spot_size_deg": 50.0,
      "size": null,
      "size_y": null,
      "shadow": false
     },
     "reveal_pool": {
      "type": "SPOT",
-     "watts": 92.43,
+     "watts": 166.03,
      "color": [
       0.52,
       0.72,
@@ -328,31 +328,31 @@
       0.0,
       -151.72
      ],
-     "spot_size_deg": 26.0,
+     "spot_size_deg": 22.0,
      "size": null,
      "size_y": null,
      "shadow": true
     },
     "reveal_wash": {
      "type": "AREA",
-     "watts": 3.17,
+     "watts": 47.96,
      "color": [
       0.45,
       0.55,
       0.7
      ],
      "location": [
-      -0.5899,
-      0.495,
-      1.9059
+      0.4716,
+      -0.8168,
+      1.347
      ],
      "rotation_deg": [
-      22.0,
+      35.0,
       0.0,
-      -130.0
+      30.0
      ],
      "spot_size_deg": null,
-     "size": 0.925,
+     "size": 1.233,
      "size_y": null,
      "shadow": false
     }
@@ -361,10 +361,10 @@
     "accent": "XCOM_Chryssalid_ACCENT_EMISSIVE"
    },
    "emission_strength": {
-    "accent": 0.9,
-    "eye": 0.9,
-    "core": 0.8,
-    "plasma": 0.7
+    "accent": 0.32,
+    "eye": 0.32,
+    "core": 0.3,
+    "plasma": 0.26
    },
    "body_height": 1.0278,
    "anchor": [
@@ -473,8 +473,8 @@
       0.78,
       1.0
      ],
-     "watts": 35.34,
-     "energy": 35.34,
+     "watts": 64.2,
+     "energy": 64.2,
      "location": [
       -0.3958,
       -2.8166,
@@ -494,25 +494,25 @@
      "name": "reveal_rim",
      "type": "AREA",
      "color": [
-      0.2,
+      0.03,
       1.0,
-      0.42
+      0.12
      ],
-     "watts": 374.5,
-     "energy": 374.5,
+     "watts": 214.0,
+     "energy": 214.0,
      "location": [
-      -1.7491,
-      0.8156,
-      2.6541
+      -0.6695,
+      0.7978,
+      3.1149
      ],
      "rotation_deg": [
-      60.26,
-      0.0,
-      -115.0
+      27.78,
+      -0.0,
+      -140.0
      ],
      "shadow": true,
-     "size": 7.241,
-     "size_y": 2.483
+     "size": 0.931,
+     "size_y": 0.31
     },
     {
      "name": "reveal_under",
@@ -525,19 +525,19 @@
      "watts": 2740.27,
      "energy": 2740.27,
      "location": [
-      0.0949,
-      -0.1356,
-      0.2069
+      0.0712,
+      -0.1017,
+      0.0828
      ],
      "rotation_deg": [
-      158.2,
-      0.0,
+      167.91,
+      -0.0,
       35.0
      ],
      "shadow": false,
-     "spot_size_deg": 30.0,
-     "spot_blend": 0.35,
-     "shadow_soft_size": 0.041
+     "spot_size_deg": 50.0,
+     "spot_blend": 0.3,
+     "shadow_soft_size": 0.021
     },
     {
      "name": "reveal_pool",
@@ -547,8 +547,8 @@
       0.72,
       1.0
      ],
-     "watts": 240.44,
-     "energy": 240.44,
+     "watts": 963.0,
+     "energy": 963.0,
      "location": [
       -1.0433,
       0.7305,
@@ -560,7 +560,7 @@
       -151.72
      ],
      "shadow": true,
-     "spot_size_deg": 26.0,
+     "spot_size_deg": 22.0,
      "spot_blend": 0.4,
      "shadow_soft_size": 0.2
     },
@@ -572,20 +572,20 @@
       0.55,
       0.7
      ],
-     "watts": 8.24,
-     "energy": 8.24,
+     "watts": 278.2,
+     "energy": 278.2,
      "location": [
-      -1.1874,
-      0.9963,
-      3.8363
+      0.9493,
+      -1.6442,
+      2.7115
      ],
      "rotation_deg": [
-      22.0,
-      0.0,
-      -130.0
+      35.0,
+      -0.0,
+      30.0
      ],
      "shadow": false,
-     "size": 1.862
+     "size": 2.483
     }
    ],
    "world_background_strength": 0.1,
@@ -597,7 +597,7 @@
    "per_light_table": {
     "reveal_key": {
      "type": "SPOT",
-     "watts": 35.34,
+     "watts": 64.2,
      "color": [
       0.62,
       0.78,
@@ -620,25 +620,25 @@
     },
     "reveal_rim": {
      "type": "AREA",
-     "watts": 374.5,
+     "watts": 214.0,
      "color": [
-      0.2,
+      0.03,
       1.0,
-      0.42
+      0.12
      ],
      "location": [
-      -1.7491,
-      0.8156,
-      2.6541
+      -0.6695,
+      0.7978,
+      3.1149
      ],
      "rotation_deg": [
-      60.26,
-      0.0,
-      -115.0
+      27.78,
+      -0.0,
+      -140.0
      ],
      "spot_size_deg": null,
-     "size": 7.241,
-     "size_y": 2.483,
+     "size": 0.931,
+     "size_y": 0.31,
      "shadow": true
     },
     "reveal_under": {
@@ -650,23 +650,23 @@
       1.0
      ],
      "location": [
-      0.0949,
-      -0.1356,
-      0.2069
+      0.0712,
+      -0.1017,
+      0.0828
      ],
      "rotation_deg": [
-      158.2,
-      0.0,
+      167.91,
+      -0.0,
       35.0
      ],
-     "spot_size_deg": 30.0,
+     "spot_size_deg": 50.0,
      "size": null,
      "size_y": null,
      "shadow": false
     },
     "reveal_pool": {
      "type": "SPOT",
-     "watts": 240.44,
+     "watts": 963.0,
      "color": [
       0.52,
       0.72,
@@ -682,31 +682,31 @@
       0.0,
       -151.72
      ],
-     "spot_size_deg": 26.0,
+     "spot_size_deg": 22.0,
      "size": null,
      "size_y": null,
      "shadow": true
     },
     "reveal_wash": {
      "type": "AREA",
-     "watts": 8.24,
+     "watts": 278.2,
      "color": [
       0.45,
       0.55,
       0.7
      ],
      "location": [
-      -1.1874,
-      0.9963,
-      3.8363
+      0.9493,
+      -1.6442,
+      2.7115
      ],
      "rotation_deg": [
-      22.0,
-      0.0,
-      -130.0
+      35.0,
+      -0.0,
+      30.0
      ],
      "spot_size_deg": null,
-     "size": 1.862,
+     "size": 2.483,
      "size_y": null,
      "shadow": false
     }
@@ -715,10 +715,10 @@
     "accent": "XCOM_Muton_ACCENT_EMISSIVE"
    },
    "emission_strength": {
-    "accent": 0.9,
-    "eye": 0.9,
-    "core": 0.8,
-    "plasma": 0.7
+    "accent": 0.32,
+    "eye": 0.32,
+    "core": 0.3,
+    "plasma": 0.26
    },
    "body_height": 2.0688,
    "anchor": [
@@ -827,8 +827,8 @@
       0.78,
       1.0
      ],
-     "watts": 1.68,
-     "energy": 1.68,
+     "watts": 1.26,
+     "energy": 1.26,
      "location": [
       -0.0554,
       -0.3945,
@@ -848,25 +848,25 @@
      "name": "reveal_rim",
      "type": "AREA",
      "color": [
-      0.2,
+      0.03,
       1.0,
-      0.42
+      0.12
      ],
-     "watts": 14.7,
-     "energy": 14.7,
+     "watts": 4.2,
+     "energy": 4.2,
      "location": [
-      -0.245,
-      0.1143,
-      0.3718
+      -0.0938,
+      0.1118,
+      0.4363
      ],
      "rotation_deg": [
-      60.26,
+      27.78,
       0.0,
-      -115.0
+      -140.0
      ],
      "shadow": true,
-     "size": 1.014,
-     "size_y": 0.348
+     "size": 0.13,
+     "size_y": 0.043
     },
     {
      "name": "reveal_under",
@@ -879,19 +879,19 @@
      "watts": 134.43,
      "energy": 134.43,
      "location": [
-      0.0133,
-      -0.019,
-      0.029
+      0.01,
+      -0.0142,
+      0.0116
      ],
      "rotation_deg": [
-      158.2,
-      0.0,
+      167.91,
+      -0.0,
       35.0
      ],
      "shadow": false,
-     "spot_size_deg": 30.0,
-     "spot_blend": 0.35,
-     "shadow_soft_size": 0.006
+     "spot_size_deg": 50.0,
+     "spot_blend": 0.3,
+     "shadow_soft_size": 0.003
     },
     {
      "name": "reveal_pool",
@@ -901,8 +901,8 @@
       0.72,
       1.0
      ],
-     "watts": 7.35,
-     "energy": 7.35,
+     "watts": 18.9,
+     "energy": 18.9,
      "location": [
       -0.1461,
       0.1023,
@@ -914,7 +914,7 @@
       -151.72
      ],
      "shadow": true,
-     "spot_size_deg": 26.0,
+     "spot_size_deg": 22.0,
      "spot_blend": 0.4,
      "shadow_soft_size": 0.2
     },
@@ -926,20 +926,20 @@
       0.55,
       0.7
      ],
-     "watts": 0.25,
-     "energy": 0.25,
+     "watts": 9.67,
+     "energy": 9.67,
      "location": [
-      -0.1663,
-      0.1396,
-      0.5374
+      0.133,
+      -0.2303,
+      0.3798
      ],
      "rotation_deg": [
-      22.0,
+      35.0,
       0.0,
-      -130.0
+      30.0
      ],
      "shadow": false,
-     "size": 0.261
+     "size": 0.348
     }
    ],
    "world_background_strength": 0.1,
@@ -951,7 +951,7 @@
    "per_light_table": {
     "reveal_key": {
      "type": "SPOT",
-     "watts": 1.68,
+     "watts": 1.26,
      "color": [
       0.62,
       0.78,
@@ -974,25 +974,25 @@
     },
     "reveal_rim": {
      "type": "AREA",
-     "watts": 14.7,
+     "watts": 4.2,
      "color": [
-      0.2,
+      0.03,
       1.0,
-      0.42
+      0.12
      ],
      "location": [
-      -0.245,
-      0.1143,
-      0.3718
+      -0.0938,
+      0.1118,
+      0.4363
      ],
      "rotation_deg": [
-      60.26,
+      27.78,
       0.0,
-      -115.0
+      -140.0
      ],
      "spot_size_deg": null,
-     "size": 1.014,
-     "size_y": 0.348,
+     "size": 0.13,
+     "size_y": 0.043,
      "shadow": true
     },
     "reveal_under": {
@@ -1004,23 +1004,23 @@
       1.0
      ],
      "location": [
-      0.0133,
-      -0.019,
-      0.029
+      0.01,
+      -0.0142,
+      0.0116
      ],
      "rotation_deg": [
-      158.2,
-      0.0,
+      167.91,
+      -0.0,
       35.0
      ],
-     "spot_size_deg": 30.0,
+     "spot_size_deg": 50.0,
      "size": null,
      "size_y": null,
      "shadow": false
     },
     "reveal_pool": {
      "type": "SPOT",
-     "watts": 7.35,
+     "watts": 18.9,
      "color": [
       0.52,
       0.72,
@@ -1036,31 +1036,31 @@
       -0.0,
       -151.72
      ],
-     "spot_size_deg": 26.0,
+     "spot_size_deg": 22.0,
      "size": null,
      "size_y": null,
      "shadow": true
     },
     "reveal_wash": {
      "type": "AREA",
-     "watts": 0.25,
+     "watts": 9.67,
      "color": [
       0.45,
       0.55,
       0.7
      ],
      "location": [
-      -0.1663,
-      0.1396,
-      0.5374
+      0.133,
+      -0.2303,
+      0.3798
      ],
      "rotation_deg": [
-      22.0,
+      35.0,
       0.0,
-      -130.0
+      30.0
      ],
      "spot_size_deg": null,
-     "size": 0.261,
+     "size": 0.348,
      "size_y": null,
      "shadow": false
     }
@@ -1069,10 +1069,10 @@
     "accent": "XCOM_Floater_ACCENT_EMISSIVE"
    },
    "emission_strength": {
-    "accent": 0.9,
-    "eye": 0.9,
-    "core": 0.8,
-    "plasma": 0.7
+    "accent": 0.32,
+    "eye": 0.32,
+    "core": 0.3,
+    "plasma": 0.26
    },
    "body_height": 0.2898,
    "anchor": [
@@ -1181,8 +1181,8 @@
       0.78,
       1.0
      ],
-     "watts": 36.34,
-     "energy": 36.34,
+     "watts": 54.54,
+     "energy": 54.54,
      "location": [
       -0.3939,
       -2.8026,
@@ -1202,25 +1202,25 @@
      "name": "reveal_rim",
      "type": "AREA",
      "color": [
-      0.2,
+      0.03,
       1.0,
-      0.42
+      0.12
      ],
-     "watts": 370.8,
-     "energy": 370.8,
+     "watts": 211.88,
+     "energy": 211.88,
      "location": [
-      -1.7404,
-      0.8116,
-      2.6409
+      -0.6661,
+      0.7939,
+      3.0995
      ],
      "rotation_deg": [
-      60.26,
+      27.78,
       -0.0,
-      -115.0
+      -140.0
      ],
      "shadow": true,
-     "size": 7.205,
-     "size_y": 2.47
+     "size": 0.926,
+     "size_y": 0.309
     },
     {
      "name": "reveal_under",
@@ -1233,19 +1233,19 @@
      "watts": 2713.17,
      "energy": 2713.17,
      "location": [
-      0.0945,
-      -0.1349,
-      0.2059
+      0.0708,
+      -0.1012,
+      0.0823
      ],
      "rotation_deg": [
-      158.2,
-      0.0,
+      167.91,
+      -0.0,
       35.0
      ],
      "shadow": false,
-     "spot_size_deg": 30.0,
-     "spot_blend": 0.35,
-     "shadow_soft_size": 0.041
+     "spot_size_deg": 50.0,
+     "spot_blend": 0.3,
+     "shadow_soft_size": 0.021
     },
     {
      "name": "reveal_pool",
@@ -1255,8 +1255,8 @@
       0.72,
       1.0
      ],
-     "watts": 236.96,
-     "energy": 236.96,
+     "watts": 541.16,
+     "energy": 541.16,
      "location": [
       -1.0381,
       0.7269,
@@ -1268,7 +1268,7 @@
       -151.72
      ],
      "shadow": true,
-     "spot_size_deg": 26.0,
+     "spot_size_deg": 22.0,
      "spot_blend": 0.4,
      "shadow_soft_size": 0.2
     },
@@ -1280,20 +1280,20 @@
       0.55,
       0.7
      ],
-     "watts": 8.12,
-     "energy": 8.12,
+     "watts": 156.34,
+     "energy": 156.34,
      "location": [
-      -1.1815,
-      0.9914,
-      3.8173
+      0.9446,
+      -1.6361,
+      2.698
      ],
      "rotation_deg": [
-      22.0,
+      35.0,
       0.0,
-      -130.0
+      30.0
      ],
      "shadow": false,
-     "size": 1.853
+     "size": 2.47
     }
    ],
    "world_background_strength": 0.1,
@@ -1305,7 +1305,7 @@
    "per_light_table": {
     "reveal_key": {
      "type": "SPOT",
-     "watts": 36.34,
+     "watts": 54.54,
      "color": [
       0.62,
       0.78,
@@ -1328,25 +1328,25 @@
     },
     "reveal_rim": {
      "type": "AREA",
-     "watts": 370.8,
+     "watts": 211.88,
      "color": [
-      0.2,
+      0.03,
       1.0,
-      0.42
+      0.12
      ],
      "location": [
-      -1.7404,
-      0.8116,
-      2.6409
+      -0.6661,
+      0.7939,
+      3.0995
      ],
      "rotation_deg": [
-      60.26,
+      27.78,
       -0.0,
-      -115.0
+      -140.0
      ],
      "spot_size_deg": null,
-     "size": 7.205,
-     "size_y": 2.47,
+     "size": 0.926,
+     "size_y": 0.309,
      "shadow": true
     },
     "reveal_under": {
@@ -1358,23 +1358,23 @@
       1.0
      ],
      "location": [
-      0.0945,
-      -0.1349,
-      0.2059
+      0.0708,
+      -0.1012,
+      0.0823
      ],
      "rotation_deg": [
-      158.2,
-      0.0,
+      167.91,
+      -0.0,
       35.0
      ],
-     "spot_size_deg": 30.0,
+     "spot_size_deg": 50.0,
      "size": null,
      "size_y": null,
      "shadow": false
     },
     "reveal_pool": {
      "type": "SPOT",
-     "watts": 236.96,
+     "watts": 541.16,
      "color": [
       0.52,
       0.72,
@@ -1390,31 +1390,31 @@
       -0.0,
       -151.72
      ],
-     "spot_size_deg": 26.0,
+     "spot_size_deg": 22.0,
      "size": null,
      "size_y": null,
      "shadow": true
     },
     "reveal_wash": {
      "type": "AREA",
-     "watts": 8.12,
+     "watts": 156.34,
      "color": [
       0.45,
       0.55,
       0.7
      ],
      "location": [
-      -1.1815,
-      0.9914,
-      3.8173
+      0.9446,
+      -1.6361,
+      2.698
      ],
      "rotation_deg": [
-      22.0,
+      35.0,
       0.0,
-      -130.0
+      30.0
      ],
      "spot_size_deg": null,
-     "size": 1.853,
+     "size": 2.47,
      "size_y": null,
      "shadow": false
     }
@@ -1423,10 +1423,10 @@
     "accent": "XCOM_Viper_ACCENT_EMISSIVE"
    },
    "emission_strength": {
-    "accent": 0.9,
-    "eye": 0.9,
-    "core": 0.8,
-    "plasma": 0.7
+    "accent": 0.32,
+    "eye": 0.32,
+    "core": 0.3,
+    "plasma": 0.26
    },
    "body_height": 2.0586,
    "anchor": [
@@ -1535,8 +1535,8 @@
       0.78,
       1.0
      ],
-     "watts": 16.61,
-     "energy": 16.61,
+     "watts": 25.85,
+     "energy": 25.85,
      "location": [
       -0.2663,
       -1.8948,
@@ -1556,25 +1556,25 @@
      "name": "reveal_rim",
      "type": "AREA",
      "color": [
-      0.2,
+      0.03,
       1.0,
-      0.42
+      0.12
      ],
-     "watts": 169.49,
-     "energy": 169.49,
+     "watts": 96.85,
+     "energy": 96.85,
      "location": [
-      -1.1767,
-      0.5487,
-      1.7855
+      -0.4504,
+      0.5367,
+      2.0955
      ],
      "rotation_deg": [
-      60.26,
+      27.78,
       0.0,
-      -115.0
+      -140.0
      ],
      "shadow": true,
-     "size": 4.871,
-     "size_y": 1.67
+     "size": 0.626,
+     "size_y": 0.209
     },
     {
      "name": "reveal_under",
@@ -1587,19 +1587,19 @@
      "watts": 1240.18,
      "energy": 1240.18,
      "location": [
-      0.0639,
-      -0.0912,
-      0.1392
+      0.0479,
+      -0.0684,
+      0.0557
      ],
      "rotation_deg": [
-      158.2,
-      -0.0,
+      167.91,
+      0.0,
       35.0
      ],
      "shadow": false,
-     "spot_size_deg": 30.0,
-     "spot_blend": 0.35,
-     "shadow_soft_size": 0.028
+     "spot_size_deg": 50.0,
+     "spot_blend": 0.3,
+     "shadow_soft_size": 0.014
     },
     {
      "name": "reveal_pool",
@@ -1609,8 +1609,8 @@
       0.72,
       1.0
      ],
-     "watts": 108.63,
-     "energy": 108.63,
+     "watts": 247.09,
+     "energy": 247.09,
      "location": [
       -0.7019,
       0.4915,
@@ -1622,7 +1622,7 @@
       -151.72
      ],
      "shadow": true,
-     "spot_size_deg": 26.0,
+     "spot_size_deg": 22.0,
      "spot_blend": 0.4,
      "shadow_soft_size": 0.2
     },
@@ -1634,20 +1634,20 @@
       0.55,
       0.7
      ],
-     "watts": 3.72,
-     "energy": 3.72,
+     "watts": 71.38,
+     "energy": 71.38,
      "location": [
-      -0.7988,
-      0.6703,
-      2.5809
+      0.6386,
+      -1.1061,
+      1.8241
      ],
      "rotation_deg": [
-      22.0,
+      35.0,
       0.0,
-      -130.0
+      30.0
      ],
      "shadow": false,
-     "size": 1.253
+     "size": 1.67
     }
    ],
    "world_background_strength": 0.1,
@@ -1659,7 +1659,7 @@
    "per_light_table": {
     "reveal_key": {
      "type": "SPOT",
-     "watts": 16.61,
+     "watts": 25.85,
      "color": [
       0.62,
       0.78,
@@ -1682,25 +1682,25 @@
     },
     "reveal_rim": {
      "type": "AREA",
-     "watts": 169.49,
+     "watts": 96.85,
      "color": [
-      0.2,
+      0.03,
       1.0,
-      0.42
+      0.12
      ],
      "location": [
-      -1.1767,
-      0.5487,
-      1.7855
+      -0.4504,
+      0.5367,
+      2.0955
      ],
      "rotation_deg": [
-      60.26,
+      27.78,
       0.0,
-      -115.0
+      -140.0
      ],
      "spot_size_deg": null,
-     "size": 4.871,
-     "size_y": 1.67,
+     "size": 0.626,
+     "size_y": 0.209,
      "shadow": true
     },
     "reveal_under": {
@@ -1712,23 +1712,23 @@
       1.0
      ],
      "location": [
-      0.0639,
-      -0.0912,
-      0.1392
+      0.0479,
+      -0.0684,
+      0.0557
      ],
      "rotation_deg": [
-      158.2,
-      -0.0,
+      167.91,
+      0.0,
       35.0
      ],
-     "spot_size_deg": 30.0,
+     "spot_size_deg": 50.0,
      "size": null,
      "size_y": null,
      "shadow": false
     },
     "reveal_pool": {
      "type": "SPOT",
-     "watts": 108.63,
+     "watts": 247.09,
      "color": [
       0.52,
       0.72,
@@ -1744,31 +1744,31 @@
       -0.0,
       -151.72
      ],
-     "spot_size_deg": 26.0,
+     "spot_size_deg": 22.0,
      "size": null,
      "size_y": null,
      "shadow": true
     },
     "reveal_wash": {
      "type": "AREA",
-     "watts": 3.72,
+     "watts": 71.38,
      "color": [
       0.45,
       0.55,
       0.7
      ],
      "location": [
-      -0.7988,
-      0.6703,
-      2.5809
+      0.6386,
+      -1.1061,
+      1.8241
      ],
      "rotation_deg": [
-      22.0,
+      35.0,
       0.0,
-      -130.0
+      30.0
      ],
      "spot_size_deg": null,
-     "size": 1.253,
+     "size": 1.67,
      "size_y": null,
      "shadow": false
     }
@@ -1777,10 +1777,10 @@
     "accent": "XCOM_Sectoid_ACCENT_EMISSIVE"
    },
    "emission_strength": {
-    "accent": 0.9,
-    "eye": 0.9,
-    "core": 0.8,
-    "plasma": 0.7
+    "accent": 0.32,
+    "eye": 0.32,
+    "core": 0.3,
+    "plasma": 0.26
    },
    "body_height": 1.3918,
    "anchor": [

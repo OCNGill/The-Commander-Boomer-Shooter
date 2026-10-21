@@ -1,0 +1,402 @@
+{
+  "schema": "tcbs.roster.v1",
+  "generated": "2026-10-21",
+  "title": "The Commander Boomer Shooter - Full Roster Bible",
+  "source_of_truth": "Docs/generated/roster_bible.md",
+  "engine": "Unreal Engine 5.8 + Blender 4.2.23 (authoring); Rust 1.92 (ship)",
+  "target_hardware": "Steam Deck, 'low' preset, 1280x800, 60 FPS target",
+  "portability": {
+    "logic": "pure Rust - damage math, AI state machines, encounter scripting, audio scheduling, taunt selection, pickup rules, weapon stats",
+    "engine": "UE5/Blender-side - meshes, skeletons, materials, textures, lighting rigs, level geometry, particles",
+    "contract": "This file is the ONLY interface between the two. The Rust runtime reads these numbers verbatim; no value here is re-derived in code."
+  },
+  "global_rules": {
+    "movement_speed_uu_s": 600,
+    "jump_height_uu": 250,
+    "double_jump_uu": 150,
+    "dash_cooldown_s": 1.2,
+    "dash_speed_multiplier": 1.5,
+    "dash_duration_s": 0.5,
+    "wall_jump_multiplier": 1.8,
+    "no_reload": true,
+    "reload_anim_allowed": false,
+    "weapon_switch_instant": true,
+    "hitscan_for_player": false,
+    "player_projectile_speed_min_uu_s": 3000,
+    "health_regen": false,
+    "stamina": false,
+    "cover_as_mechanic": false,
+    "aim_down_sights": true,
+    "one_liners": [
+      "Sudo kill -9 --force",
+      "Process terminated: Pinched out.",
+      "System reboot: Ashed out.",
+      "Connection reset: Stormed out.",
+      "Kernel panic: Rocked out.",
+      "Sudo rm -rf /universe",
+      "Noobs Detected",
+      "Commander STOMPED",
+      "ROBOT"
+    ]
+  },
+  "roster": [
+    {
+      "id": "xcom_sectoid",
+      "name": "Sectoid",
+      "lineage": "X-COM 1994 (original UFO: Enemy Unknown)",
+      "tier": "psychic_infiltrator",
+      "role": "swarm pressure, psychic harassment",
+      "height_m": 1.39,
+      "width_m": 0.52,
+      "length_m": 0.70,
+      "tris": 7308,
+      "status": "BUILT (Tools/blender/out_xcom/XCOM_Sectoid.fbx)",
+      "hp": 30,
+      "speed_uu_s": 320,
+      "attack": {
+        "name": "psi-lance",
+        "type": "telegraphed_projectile",
+        "telegraph_s": 1.2,
+        "damage": 12,
+        "projectile_speed_uu_s": 2200
+      },
+      "silhouette": "small + gaunt, oversized smooth cranium, symmetric glowing eyes, NO mouth",
+      "signature": "luminous eyes, no mouth, bare skull - reads as a praying thing with nothing under the hood",
+      "budget": {
+        "tris": 7308,
+        "tris_ceiling": 9000,
+        "texture_res": 1024,
+        "materials": 4,
+        "skeleton_bones": 24,
+        "vfx_systems": 1,
+        "deck_note": "one emissive channel (eyes), no GI dependency - reads on emissive alone"
+      },
+      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "projectile_speed", "aggro_range"], "engine": ["mesh", "skeleton", "materials", "eye_emissive"]}
+    },
+    {
+      "id": "xcom_viper",
+      "name": "Viper",
+      "lineage": "X-COM 1994",
+      "tier": "line_infantry",
+      "role": "ranged line unit, plasma rifle pressure",
+      "height_m": 2.06,
+      "width_m": 0.64,
+      "length_m": 0.70,
+      "tris": 5764,
+      "status": "BUILT (Tools/blender/out_xcom/XCOM_Viper.fbx)",
+      "hp": 90,
+      "speed_uu_s": 300,
+      "attack": {
+        "name": "plasma-burst",
+        "type": "telegraphed_projectile",
+        "telegraph_s": 1.0,
+        "damage": 18,
+        "projectile_speed_uu_s": 2500,
+        "burst_count": 3
+      },
+      "silhouette": "tall + narrow reptilian hunter, forward-projecting elongated snout, raised ribbed dorsal spine, plasma pistol held out front",
+      "signature": "45 cm forward-projecting snout, five-rib dorsal spine, plasma pistol with a glowing coil",
+      "budget": {
+        "tris": 5764,
+        "tris_ceiling": 7500,
+        "texture_res": 1024,
+        "materials": 5,
+        "skeleton_bones": 26,
+        "vfx_systems": 2,
+        "deck_note": "plasma coil emissive is the second light source in the silhouette"
+      },
+      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "projectile_speed", "burst_count", "burst_interval_s"], "engine": ["mesh", "skeleton", "materials", "plasma_coil_emissive"]}
+    },
+    {
+      "id": "xcom_floater",
+      "name": "Floater",
+      "lineage": "X-COM 1994",
+      "tier": "aerial_ambusher",
+      "role": "hovering psi attacker, ignores ground cover",
+      "height_m": 0.29,
+      "width_m": 2.48,
+      "length_m": 1.40,
+      "hover_clearance_m": 0.90,
+      "tris": 2184,
+      "status": "BUILT (Tools/blender/out_xcom/XCOM_Floater.fbx)",
+      "hp": 45,
+      "speed_uu_s": 380,
+      "attack": {
+        "name": "psi-drain",
+        "type": "telegraphed_beam",
+        "telegraph_s": 1.4,
+        "damage": 9,
+        "beam_range_uu": 1200
+      },
+      "silhouette": "LEGLESS broad manta parasite: ONE continuous swept planform tip to tip, low segmented glowing dorsal core, NOTHING under the body",
+      "signature": "2.5 m span, no legs at all, a body-shaped hover ellipse is the only thing beneath it",
+      "budget": {
+        "tris": 2184,
+        "tris_ceiling": 3200,
+        "texture_res": 1024,
+        "materials": 3,
+        "skeleton_bones": 18,
+        "vfx_systems": 2,
+        "deck_note": "cheapest asset in the kit - no legs means no leg animation cost; hover ellipse is a decal, not geometry"
+      },
+      "port": {"logic": ["hp", "speed", "hover_clearance_m", "telegraph_s", "damage", "beam_range_uu", "bob_amplitude_m", "bob_period_s"], "engine": ["mesh", "skeleton", "materials", "core_emissive"]}
+    },
+    {
+      "id": "xcom_muton",
+      "name": "Muton",
+      "lineage": "X-COM 1994",
+      "tier": "armoured_heavy",
+      "role": "armoured line breaker, heavy plasma rifle, area denial",
+      "height_m": 2.07,
+      "width_m": 1.15,
+      "length_m": 1.09,
+      "tris": 5216,
+      "status": "BUILT (Tools/blender/out_xcom/XCOM_Muton.fbx)",
+      "hp": 220,
+      "speed_uu_s": 260,
+      "attack": {
+        "name": "heavy-plasma",
+        "type": "telegraphed_projectile",
+        "telegraph_s": 1.6,
+        "damage": 34,
+        "projectile_speed_uu_s": 1800,
+        "burst_count": 2
+      },
+      "silhouette": "heavy + wide armoured slab, horizontal emissive visor slit, huge pauldrons, two-handed plasma rifle, oxblood chest plate",
+      "signature": "the only creature in the kit with a horizontal visor slit; the oxblood chest plate is the focal point",
+      "budget": {
+        "tris": 5216,
+        "tris_ceiling": 7000,
+        "texture_res": 1024,
+        "materials": 6,
+        "skeleton_bones": 28,
+        "vfx_systems": 2,
+        "deck_note": "oxblood accent is the ONLY warm hue in the alien set - keep it to one material instance"
+      },
+      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "projectile_speed", "burst_count"], "engine": ["mesh", "skeleton", "materials", "visor_emissive"]}
+    },
+    {
+      "id": "xcom_chryssalid",
+      "name": "Chryssalid",
+      "lineage": "X-COM 1994",
+      "tier": "fast_stalker",
+      "role": "fast flanker, leaper, closes distance hard",
+      "height_m": 1.03,
+      "width_m": 0.82,
+      "length_m": 1.62,
+      "tris": 6252,
+      "status": "BUILT (Tools/blender/out_xcom/XCOM_Chryssalid.fbx)",
+      "hp": 70,
+      "speed_uu_s": 520,
+      "attack": {
+        "name": "scythe-leap",
+        "type": "telegraphed_melee",
+        "telegraph_s": 0.7,
+        "damage": 40,
+        "leap_range_uu": 900
+      },
+      "silhouette": "low + wide forward-pitched stalker on four long digitigrade legs, two scythe forelimbs sweeping forward, venom glow",
+      "signature": "a fast crouch - readable in pure silhouette at 40 px tall",
+      "budget": {
+        "tris": 6252,
+        "tris_ceiling": 8000,
+        "texture_res": 1024,
+        "materials": 4,
+        "skeleton_bones": 30,
+        "vfx_systems": 1,
+        "deck_note": "4 legs + 2 scythes = the highest bone count per tri; keep animation on 2 bones at a time"
+      },
+      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "leap_range_uu", "leap_cooldown_s"], "engine": ["mesh", "skeleton", "materials", "venom_emissive"]}
+    },
+    {
+      "id": "plymouth_drone",
+      "name": "Barnacle Drone",
+      "lineage": "Plymouth-native (original)",
+      "tier": "swarm",
+      "role": "cheap swarm unit, zone denial near water",
+      "height_m": 0.60,
+      "tris": 2600,
+      "status": "DESIGNED (blockout E_BarnacleDrone.uasset exists; v2 mesh not built)",
+      "hp": 36,
+      "speed_uu_s": 400,
+      "attack": {
+        "name": "shell-spit",
+        "type": "telegraphed_projectile",
+        "telegraph_s": 0.6,
+        "damage": 8,
+        "projectile_speed_uu_s": 2600
+      },
+      "silhouette": "clustered shell cone on three stubby legs, single red eye-lens",
+      "signature": "wet shell-clicking idle; red eye-lens pulses 0.6 s before the spit",
+      "budget": {"tris": 2600, "tris_ceiling": 3500, "texture_res": 512, "materials": 3, "skeleton_bones": 12, "vfx_systems": 1, "deck_note": "3 spawns per wave - LOD0 only, 512px textures"},
+      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "projectile_speed", "spawn_group_size"], "engine": ["mesh", "materials"]}
+    },
+    {
+      "id": "plymouth_zealot",
+      "name": "Pilgrim Zealot",
+      "lineage": "Plymouth-native (original)",
+      "tier": "ranged",
+      "role": "musket rifleman, holds lanes, shouts FOR THE KING on attack",
+      "height_m": 1.85,
+      "tris": 5400,
+      "status": "DESIGNED (blockout E_PilgrimZealot.uasset exists; v2 mesh not built)",
+      "hp": 120,
+      "speed_uu_s": 280,
+      "attack": {
+        "name": "musket-shot",
+        "type": "telegraphed_hitscan_ray",
+        "telegraph_s": 1.5,
+        "damage": 26,
+        "range_uu": 3000
+      },
+      "silhouette": "hunched pilgrim in a ruffed collar, long musket held across the body",
+      "signature": "the red ruffs explode outward when it dies",
+      "budget": {"tris": 5400, "tris_ceiling": 7000, "texture_res": 1024, "materials": 5, "skeleton_bones": 26, "vfx_systems": 1, "deck_note": "cloth is the only material - no cloth sim, baked to the mesh"},
+      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "range_uu"], "engine": ["mesh", "skeleton", "materials"]}
+    },
+    {
+      "id": "plymouth_phantom",
+      "name": "Mayflower Phantom",
+      "lineage": "Plymouth-native (original)",
+      "tier": "sniper_ambusher",
+      "role": "long-range glass sniper, low aggression, punishes standing still",
+      "height_m": 1.75,
+      "tris": 4800,
+      "status": "DESIGNED (blockout E_MayflowerPhantom.uasset exists; v2 mesh not built)",
+      "hp": 200,
+      "speed_uu_s": 240,
+      "attack": {
+        "name": "sail-beam",
+        "type": "telegraphed_beam",
+        "telegraph_s": 2.0,
+        "damage": 45,
+        "beam_range_uu": 5000
+      },
+      "silhouette": "translucent tattered sail-cloak, hollow hood, no visible feet",
+      "signature": "materialises out of fog on a glass-shatter precursor",
+      "budget": {"tris": 4800, "tris_ceiling": 6000, "texture_res": 1024, "materials": 4, "skeleton_bones": 20, "vfx_systems": 3, "deck_note": "translucency is a dithered mask, not a blend - cheapest honest ghost on Deck"},
+      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "beam_range_uu", "fade_in_s"], "engine": ["mesh", "skeleton", "materials", "dither_mask"]}
+    },
+    {
+      "id": "plymouth_brute",
+      "name": "Lobster Brute",
+      "lineage": "Plymouth-native (original)",
+      "tier": "heavy",
+      "role": "pit gatekeeper, very high aggression, closes to melee",
+      "height_m": 2.30,
+      "tris": 7200,
+      "status": "DESIGNED (blockout E_LobsterBrute.uasset exists; v2 mesh not built)",
+      "hp": 450,
+      "speed_uu_s": 300,
+      "attack": {
+        "name": "claw-snap",
+        "type": "telegraphed_melee",
+        "telegraph_s": 1.0,
+        "damage": 55,
+        "range_uu": 400
+      },
+      "silhouette": "armoured lobster torso, two huge asymmetric claws, sub-bass rumble idle",
+      "signature": "claws charge with static and snap audibly 1.0 s before the hit",
+      "budget": {"tris": 7200, "tris_ceiling": 9000, "texture_res": 1024, "materials": 5, "skeleton_bones": 24, "vfx_systems": 2, "deck_note": "hard shell = high roughness, cheap specular - no clearcoat"},
+      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "range_uu"], "engine": ["mesh", "skeleton", "materials", "shell_metal"]}
+    },
+    {
+      "id": "plymouth_golem",
+      "name": "Rock Golem",
+      "lineage": "Plymouth-native (original)",
+      "tier": "static_obstacle",
+      "role": "platform gate, slam AoE, high HP, low speed",
+      "height_m": 2.60,
+      "tris": 8600,
+      "status": "DESIGNED (blockout E_RockGolem.uasset exists; v2 mesh not built)",
+      "hp": 600,
+      "speed_uu_s": 140,
+      "attack": {
+        "name": "ground-slam",
+        "type": "telegraphed_aoe",
+        "telegraph_s": 1.5,
+        "damage": 60,
+        "radius_uu": 700
+      },
+      "silhouette": "blocky granite mass, no neck, glowing orange cracks in the shoulders",
+      "signature": "cracks glow orange 1.5 s before the slam, 0.8 s recovery window after",
+      "budget": {"tris": 8600, "tris_ceiling": 10000, "texture_res": 1024, "materials": 4, "skeleton_bones": 16, "vfx_systems": 1, "deck_note": "16 bones - the least animation cost of any heavy"},
+      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "radius_uu", "recovery_s"], "engine": ["mesh", "skeleton", "materials", "crack_emissive"]}
+    },
+    {
+      "id": "plymouth_titan",
+      "name": "Nor-Easter Titan",
+      "lineage": "Plymouth-native (original)",
+      "tier": "boss",
+      "role": "storm boss, phase-2 shield regen, projectile storm",
+      "height_m": 3.00,
+      "tris": 14000,
+      "status": "DESIGNED (blockout E_NorEasterTitan.uasset exists; v2 mesh not built)",
+      "hp": 2000,
+      "speed_uu_s": 200,
+      "attack": {
+        "name": "storm-surge",
+        "type": "telegraphed_projectile_spread",
+        "telegraph_s": 1.8,
+        "damage": 45,
+        "projectile_speed_uu_s": 2000,
+        "spawn_interval_s": 2.0
+      },
+      "phases": [
+        {"phase": 1, "hp_range": [0.5, 1.0], "shield_regen_hp_s": 0, "note": "standard - Mayflower Cannon is the answer"},
+        {"phase": 2, "hp_range": [0.0, 0.5], "shield_regen_hp_s": 10, "note": "shield regenerates if not hit; rocket splash clears projectiles"}
+      ],
+      "silhouette": "storm-front mass, cloud skirt, lightning-forked arms",
+      "signature": "sky darkens and lightning strikes BEFORE the charge - 1.8 s of free warning",
+      "budget": {"tris": 14000, "tris_ceiling": 18000, "texture_res": 2048, "materials": 6, "skeleton_bones": 28, "vfx_systems": 4, "deck_note": "the only 2048px asset in the game; at 'low' it drops to 1024 with a 4th-mip bias"},
+      "port": {"logic": ["hp", "speed", "telegraph_s", "damage", "projectile_speed", "spawn_interval_s", "phase_thresholds", "shield_regen_hp_s"], "engine": ["mesh", "skeleton", "materials", "lightning_vfx"]}
+    }
+  ],
+  "bosses": [
+    {
+      "id": "boss_harvester",
+      "name": "The Harvester",
+      "codename": "PAC-SONIC HYBRID",
+      "status": "DESIGNED - not built",
+      "role": "final boss, Level 2",
+      "concept": "Pac-Man's grid-eat pursuit and Sonic's momentum, fused into one X-COM organism. It moves on a lattice, eats the arena's power nodes to grow, and when it stops eating it ROLLS.",
+      "lineage": "X-COM 1994-derived - a Celestial-tier 'Lattice' organism, modernized",
+      "height_m": 3.40,
+      "tris": 18500,
+      "budget": {
+        "tris": 18500,
+        "tris_ceiling": 22000,
+        "texture_res": 2048,
+        "materials": 7,
+        "skeleton_bones": 32,
+        "vfx_systems": 5,
+        "deck_note": "7 materials is the cap - merge the two dark chitin materials before ship"
+      },
+      "port": {"logic": ["hp", "phase_thresholds", "grid_move_s", "lunge_speed", "lunge_telegraph_s", "node_hunger_rate", "pellet_eat_time_s", "power_state_s", "damage"], "engine": ["mesh", "skeleton", "materials", "roll_trail_vfx", "pellet_glow_vfx"]}
+    },
+    {
+      "id": "boss_titan",
+      "name": "Nor-Easter Titan",
+      "codename": "STORM BOSS",
+      "status": "DESIGNED - blockout only",
+      "role": "Level 1 boss",
+      "budget": {"tris": 14000, "tris_ceiling": 18000, "texture_res": 2048, "materials": 6, "skeleton_bones": 28, "vfx_systems": 4, "deck_note": "see roster entry plymouth_titan"},
+      "port": {"logic": ["hp", "phase_thresholds", "shield_regen_hp_s", "damage", "projectile_speed"], "engine": ["mesh", "skeleton", "materials", "lightning_vfx"]}
+    }
+  ],
+  "weapons": [
+    {"id": "w_puckle", "name": "Pilgrim Puckle", "archetype": "Sidearm", "fire_rate_rps": 12.0, "projectile_speed_uu_s": 3000, "damage": 12, "pellets": 1, "spread_deg": 0.0, "ammo_type": "Light", "max_carry": 300, "pickup_refill": 30, "hitscan": false, "primary_target": "Drones, Zealots, Sectoids"},
+    {"id": "w_scattergun", "name": "Sextant Scattergun", "archetype": "Shotgun", "fire_rate_rps": 1.8, "projectile_speed_uu_s": 3000, "damage": 14, "pellets": 10, "spread_deg": 4.5, "ammo_type": "Heavy", "max_carry": 24, "pickup_refill": 24, "hitscan": false, "primary_target": "Close range, Brutes"},
+    {"id": "w_blunderbuss", "name": "Barnacle Blunderbuss", "archetype": "Shotgun projectile", "fire_rate_rps": 0.9, "projectile_speed_uu_s": 3000, "damage": 22, "pellets": 12, "spread_deg": 8.0, "ammo_type": "Heavy", "max_carry": 12, "pickup_refill": 12, "hitscan": false, "primary_target": "Mid range, Zealots, Phantom"},
+    {"id": "w_rail", "name": "Rockhopper Rail", "archetype": "Railgun", "fire_rate_rps": 0.5, "projectile_speed_uu_s": 5000, "damage": 85, "pellets": 1, "spread_deg": 0.0, "ammo_type": "Rail", "max_carry": 10, "pickup_refill": 10, "hitscan": false, "primary_target": "Brute, Golem"},
+    {"id": "w_rocket", "name": "Harbor Wreck Rocket", "archetype": "Rocket", "fire_rate_rps": 0.8, "projectile_speed_uu_s": 3500, "damage": 120, "splash_damage": 60, "pellets": 1, "spread_deg": 0.0, "ammo_type": "Rocket", "max_carry": 8, "pickup_refill": 8, "hitscan": false, "primary_target": "Boss, groups"},
+    {"id": "w_cannon", "name": "Mayflower Cannon", "archetype": "Heavy projectile", "fire_rate_rps": 0.4, "projectile_speed_uu_s": 4000, "damage": 250, "pellets": 1, "spread_deg": 0.0, "ammo_type": "Heavy", "max_carry": 6, "pickup_refill": 6, "hitscan": false, "primary_target": "Boss, Titan phase 1/2"}
+  ],
+  "difficulty_knobs": [
+    {"id": "EnemyHPScalar", "default": 1.0, "easy": 0.75, "hard": 1.5, "nightmare": 2.0, "applies_to": "all enemy hp"},
+    {"id": "ProjectileSpeedScalar", "default": 1.0, "easy": 1.2, "hard": 0.8, "nightmare": 0.8, "applies_to": "player and enemy projectile speed"},
+    {"id": "PickupSpawnMultiplier", "default": 1.0, "easy": 1.5, "hard": 0.75, "nightmare": 0.75, "applies_to": "ammo restored per pickup"},
+    {"id": "EnemyFireRateScalar", "default": 1.0, "easy": 0.8, "hard": 1.2, "nightmare": 1.2, "applies_to": "enemy attack cadence"},
+    {"id": "DamageResistanceScalar", "default": 1.0, "easy": 0.5, "hard": 1.0, "nightmare": 1.25, "applies_to": "per-weapon-type resistance"}
+  ]
+}

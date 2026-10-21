@@ -1,6 +1,6 @@
 # Lighting Evidence (v4 reveal rig)
 
-Generated 2026-10-21 05:58 by `Tools/blender/rig_evidence.py`.
+Generated 2026-10-21 06:22 by `Tools/blender/rig_evidence.py`.
 
 All numbers below are MEASURED from the rendered PNGs in this folder by
 the same script that rendered them, then re-measured independently by
@@ -19,90 +19,90 @@ Metric definitions:
 ## XCOM_Chryssalid
 
 **Numbers:** clipped_white_pixels = **0**, clipped_body_pixels = **0**,
-clipped_colour_pixels_non_emissive = **0**, emissive_pixels = **1150**,
-rim_pixels = **191485**, background_darkness = **62.9**.
-
-**Rig elements legible in this frame:** reveal_key, reveal_under, reveal_pool + contact shadow, emissives.
-
-**Detail:** floor zones front/shadow-side/outer = 154 / 145 / 138
-(min difference 5%), contact shadow ratio 0.57, face p99 245,
-torso p99 133, under-glow low-body/torso 1.75x and feet/torso 2.20x,
-rim band mean 59 (hot 0), rim bright pixels 0 = 0.000 of the body.
-
-**Did not meet the bar:** floor_zones_differ_15pct, background_darkness_le_40, rim_3pct_of_body, rim_band_mean_ge_120.
-
-**Emissive proof frame** (`XCOM_Chryssalid_emissive_only.png`, no scene lights,
-emission x6.0, Fog Glow only): 1374 bright pixels, 0 clipped.
-
-## XCOM_Muton
-
-**Numbers:** clipped_white_pixels = **328**, clipped_body_pixels = **328**,
-clipped_colour_pixels_non_emissive = **6**, emissive_pixels = **3836**,
-rim_pixels = **200077**, background_darkness = **59.2**.
+clipped_colour_pixels_non_emissive = **0**, emissive_pixels = **173**,
+rim_pixels = **38389**, background_darkness = **55.3**.
 
 **Rig elements legible in this frame:** reveal_key, reveal_pool + contact shadow, emissives.
 
-**Detail:** floor zones front/shadow-side/outer = 145 / 151 / 142
-(min difference 2%), contact shadow ratio 0.38, face p99 183,
-torso p99 248, under-glow low-body/torso 0.57x and feet/torso 0.49x,
-rim band mean 65 (hot 213), rim bright pixels 427 = 0.007 of the body.
+**Detail:** floor zones front/shadow-side/outer = 118 / 101 / 106
+(min difference 5%), contact shadow ratio 0.50, face p99 251,
+torso p99 163, under-glow low-body/torso 1.07x and feet/torso 0.92x,
+rim band mean 56 (hot 208), rim bright pixels 37 = 0.000 of the body.
 
-**Did not meet the bar:** no_clipped_white, no_clipped_body, no_colour_clip_off_emissive, floor_zones_differ_15pct, background_darkness_le_40, rim_3pct_of_body, rim_band_mean_ge_120, under_lowbody_1_3x_torso, under_feet_1_3x_torso.
+**Did not meet the bar:** floor_zones_differ_15pct, background_darkness_le_40, rim_3pct_of_body, rim_band_mean_ge_120, under_lowbody_1_3x_torso, under_feet_1_3x_torso.
+
+**Emissive proof frame** (`XCOM_Chryssalid_emissive_only.png`, no scene lights,
+emission x6.0, Fog Glow only): 1290 bright pixels, 0 clipped.
+
+## XCOM_Muton
+
+**Numbers:** clipped_white_pixels = **0**, clipped_body_pixels = **0**,
+clipped_colour_pixels_non_emissive = **0**, emissive_pixels = **13915**,
+rim_pixels = **59712**, background_darkness = **66.0**.
+
+**Rig elements legible in this frame:** reveal_key, reveal_pool + contact shadow, emissives.
+
+**Detail:** floor zones front/shadow-side/outer = 159 / 132 / 117
+(min difference 11%), contact shadow ratio 0.35, face p99 213,
+torso p99 237, under-glow low-body/torso 0.98x and feet/torso 0.50x,
+rim band mean 97 (hot 215), rim bright pixels 764 = 0.012 of the body.
+
+**Did not meet the bar:** floor_zones_differ_15pct, background_darkness_le_40, rim_3pct_of_body, rim_band_mean_ge_120, under_lowbody_1_3x_torso, under_feet_1_3x_torso.
 
 **Emissive proof frame** (`XCOM_Muton_emissive_only.png`, no scene lights,
-emission x6.0, Fog Glow only): 814 bright pixels, 0 clipped.
+emission x6.0, Fog Glow only): 758 bright pixels, 0 clipped.
 
 ## XCOM_Floater
 
 **Numbers:** clipped_white_pixels = **0**, clipped_body_pixels = **0**,
-clipped_colour_pixels_non_emissive = **0**, emissive_pixels = **453**,
-rim_pixels = **8308**, background_darkness = **0.8**.
+clipped_colour_pixels_non_emissive = **0**, emissive_pixels = **30**,
+rim_pixels = **603**, background_darkness = **0.7**.
 
-**Rig elements legible in this frame:** emissives.
+**Rig elements legible in this frame:** reveal_under, reveal_pool + contact shadow, emissives.
 
-**Detail:** floor zones front/shadow-side/outer = 23 / 27 / 28
-(min difference 3%), contact shadow ratio 0.41, face p99 0,
-torso p99 33, under-glow low-body/torso 0.91x and feet/torso 0.21x,
-rim band mean 8 (hot 179), rim bright pixels 124 = 0.011 of the body.
+**Detail:** floor zones front/shadow-side/outer = 53 / 83 / 62
+(min difference 14%), contact shadow ratio 0.16, face p99 0,
+torso p99 74, under-glow low-body/torso 8.77x and feet/torso 0.80x,
+rim band mean 7 (hot 167), rim bright pixels 13 = 0.001 of the body.
 
-**Did not meet the bar:** floor_zones_in_window, floor_zones_differ_15pct, face_p99_ge_25, rim_3pct_of_body, rim_band_mean_ge_120, under_lowbody_1_3x_torso, under_feet_1_3x_torso.
+**Did not meet the bar:** floor_zones_differ_15pct, face_p99_ge_25, rim_3pct_of_body, rim_band_mean_ge_120, under_feet_1_3x_torso.
 
 **Emissive proof frame** (`XCOM_Floater_emissive_only.png`, no scene lights,
-emission x6.0, Fog Glow only): 553 bright pixels, 0 clipped.
+emission x6.0, Fog Glow only): 513 bright pixels, 0 clipped.
 
 ## XCOM_Viper
 
-**Numbers:** clipped_white_pixels = **78**, clipped_body_pixels = **78**,
-clipped_colour_pixels_non_emissive = **0**, emissive_pixels = **14**,
-rim_pixels = **174107**, background_darkness = **61.6**.
+**Numbers:** clipped_white_pixels = **344**, clipped_body_pixels = **344**,
+clipped_colour_pixels_non_emissive = **0**, emissive_pixels = **75**,
+rim_pixels = **84051**, background_darkness = **57.2**.
 
-**Rig elements legible in this frame:** reveal_key, reveal_pool + contact shadow, emissives.
+**Rig elements legible in this frame:** reveal_key, reveal_rim, reveal_pool + contact shadow, emissives.
 
-**Detail:** floor zones front/shadow-side/outer = 146 / 152 / 148
-(min difference 2%), contact shadow ratio 0.63, face p99 178,
-torso p99 239, under-glow low-body/torso 0.88x and feet/torso 0.36x,
-rim band mean 76 (hot 218), rim bright pixels 801 = 0.019 of the body.
+**Detail:** floor zones front/shadow-side/outer = 151 / 122 / 127
+(min difference 4%), contact shadow ratio 0.59, face p99 210,
+torso p99 239, under-glow low-body/torso 1.26x and feet/torso 0.40x,
+rim band mean 103 (hot 215), rim bright pixels 1333 = 0.032 of the body.
 
-**Did not meet the bar:** no_clipped_white, no_clipped_body, floor_zones_differ_15pct, background_darkness_le_40, rim_3pct_of_body, rim_band_mean_ge_120, under_lowbody_1_3x_torso, under_feet_1_3x_torso.
+**Did not meet the bar:** no_clipped_white, no_clipped_body, floor_zones_differ_15pct, background_darkness_le_40, rim_band_mean_ge_120, under_lowbody_1_3x_torso, under_feet_1_3x_torso.
 
 **Emissive proof frame** (`XCOM_Viper_emissive_only.png`, no scene lights,
-emission x6.0, Fog Glow only): 61 bright pixels, 0 clipped.
+emission x6.0, Fog Glow only): 48 bright pixels, 0 clipped.
 
 ## XCOM_Sectoid
 
-**Numbers:** clipped_white_pixels = **1205**, clipped_body_pixels = **1205**,
-clipped_colour_pixels_non_emissive = **0**, emissive_pixels = **2717**,
-rim_pixels = **196856**, background_darkness = **60.2**.
+**Numbers:** clipped_white_pixels = **895**, clipped_body_pixels = **895**,
+clipped_colour_pixels_non_emissive = **0**, emissive_pixels = **10426**,
+rim_pixels = **73563**, background_darkness = **54.2**.
 
-**Rig elements legible in this frame:** reveal_key, reveal_under, reveal_pool + contact shadow, emissives.
+**Rig elements legible in this frame:** reveal_key, reveal_pool + contact shadow, emissives.
 
-**Detail:** floor zones front/shadow-side/outer = 145 / 148 / 143
-(min difference 2%), contact shadow ratio 0.58, face p99 71,
-torso p99 239, under-glow low-body/torso 1.33x and feet/torso 0.75x,
-rim band mean 59 (hot 202), rim bright pixels 756 = 0.011 of the body.
+**Detail:** floor zones front/shadow-side/outer = 152 / 114 / 109
+(min difference 4%), contact shadow ratio 0.52, face p99 82,
+torso p99 230, under-glow low-body/torso 0.63x and feet/torso 0.63x,
+rim band mean 80 (hot 208), rim bright pixels 1269 = 0.018 of the body.
 
-**Did not meet the bar:** no_clipped_white, no_clipped_body, floor_zones_differ_15pct, background_darkness_le_40, rim_3pct_of_body, rim_band_mean_ge_120, under_feet_1_3x_torso.
+**Did not meet the bar:** no_clipped_white, no_clipped_body, floor_zones_differ_15pct, background_darkness_le_40, rim_3pct_of_body, rim_band_mean_ge_120, under_lowbody_1_3x_torso, under_feet_1_3x_torso.
 
 **Emissive proof frame** (`XCOM_Sectoid_emissive_only.png`, no scene lights,
-emission x6.0, Fog Glow only): 588 bright pixels, 0 clipped.
+emission x6.0, Fog Glow only): 544 bright pixels, 0 clipped.
 

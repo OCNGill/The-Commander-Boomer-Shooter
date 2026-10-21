@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-21T05:58:24",
+ "generated": "2026-10-21T06:22:40",
  "renderer": "EEVEE (Blender 4.2)",
  "resolution": [
   720,
@@ -57,7 +57,7 @@
    "width": 720,
    "height": 900,
    "clipped_white_pixels": 0,
-   "clipped_white_saturated": 0,
+   "clipped_white_saturated": 444,
    "clipped_body_pixels": 0,
    "clipped_body_pixels_on_subject": 0,
    "clipped_colour_pixels_non_emissive": 0,
@@ -71,108 +71,108 @@
     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
    },
-   "bright_pixels_gt190": 1749,
-   "emissive_pixels": 1150,
-   "rim_pixels": 191485,
-   "background_darkness": 62.88,
+   "bright_pixels_gt190": 1204,
+   "emissive_pixels": 173,
+   "rim_pixels": 38389,
+   "background_darkness": 55.317,
    "background_darkness_by_side": {
-    "top": 0.96,
-    "bottom": 145.61,
-    "left": 58.49,
-    "right": 48.09
+    "top": 0.97,
+    "bottom": 128.7,
+    "left": 49.12,
+    "right": 44.36
    },
    "zone_stats": {
     "face": {
      "n": 12179,
-     "mean_lum": 88.166,
-     "p50_lum": 85.956,
-     "p99_lum": 245.44,
-     "max_lum": 246.367,
-     "max_channel": 248,
-     "bright_gt190": 617,
-     "saturated_gt190": 18,
-     "mean_lin": 0.147666
+     "mean_lum": 113.299,
+     "p50_lum": 111.377,
+     "p99_lum": 251.367,
+     "max_lum": 251.652,
+     "max_channel": 253,
+     "bright_gt190": 1163,
+     "saturated_gt190": 173,
+     "mean_lin": 0.216817
     },
     "torso": {
      "n": 23955,
-     "mean_lum": 27.375,
-     "p50_lum": 18.013,
-     "p99_lum": 132.697,
-     "max_lum": 153.91,
-     "max_channel": 166,
-     "bright_gt190": 0,
+     "mean_lum": 57.149,
+     "p50_lum": 56.769,
+     "p99_lum": 163.169,
+     "max_lum": 222.933,
+     "max_channel": 224,
+     "bright_gt190": 41,
      "saturated_gt190": 0,
-     "mean_lin": 0.02533
+     "mean_lin": 0.055816
     },
     "lowbody": {
      "n": 15809,
-     "mean_lum": 48.039,
-     "p50_lum": 30.598,
-     "p99_lum": 120.705,
-     "max_lum": 154.002,
-     "max_channel": 169,
+     "mean_lum": 61.35,
+     "p50_lum": 71.004,
+     "p99_lum": 121.101,
+     "max_lum": 161.519,
+     "max_channel": 166,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.051985
+     "mean_lin": 0.058709
     },
     "feet": {
      "n": 2323,
-     "mean_lum": 60.136,
-     "p50_lum": 36.173,
-     "p99_lum": 157.307,
-     "max_lum": 161.352,
-     "max_channel": 174,
+     "mean_lum": 52.682,
+     "p50_lum": 50.15,
+     "p99_lum": 123.41,
+     "max_lum": 137.281,
+     "max_channel": 147,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.082554
+     "mean_lin": 0.044036
     },
     "floor_front": {
      "n": 1000,
-     "mean_lum": 153.546,
-     "p50_lum": 153.571,
-     "p99_lum": 158.638,
-     "max_lum": 159.851,
-     "max_channel": 173,
+     "mean_lum": 118.317,
+     "p50_lum": 117.836,
+     "p99_lum": 126.624,
+     "max_lum": 127.981,
+     "max_channel": 147,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.331347
+     "mean_lin": 0.184807
     },
     "floor_shadow_side": {
      "n": 805,
-     "mean_lum": 145.021,
-     "p50_lum": 145.573,
-     "p99_lum": 154.274,
-     "max_lum": 155.355,
-     "max_channel": 170,
+     "mean_lum": 100.605,
+     "p50_lum": 100.758,
+     "p99_lum": 103.758,
+     "max_lum": 104.545,
+     "max_channel": 126,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.295256
+     "mean_lin": 0.130502
     },
     "floor_key_side": {
      "n": 950,
-     "mean_lum": 138.205,
-     "p50_lum": 137.79,
-     "p99_lum": 150.713,
-     "max_lum": 155.21,
-     "max_channel": 170,
+     "mean_lum": 106.039,
+     "p50_lum": 105.59,
+     "p99_lum": 112.991,
+     "max_lum": 114.421,
+     "max_channel": 124,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.26813
+     "mean_lin": 0.146971
     }
    },
    "body_pixels": 118111,
-   "visible_body_pixels": 72950,
+   "visible_body_pixels": 108969,
    "rim_band_pixels": 13165,
-   "rim_band_bright_pixels": 0,
-   "rim_band_mean_lum": 59.121,
-   "rim_band_hot_mean_lum": 0.0,
+   "rim_band_bright_pixels": 37,
+   "rim_band_mean_lum": 55.627,
+   "rim_band_hot_mean_lum": 207.996,
    "rim_band_clipped_pixels": 0,
-   "rim_bright_over_body": 0.0,
-   "rim_bright_over_visible_body": 0.0,
+   "rim_bright_over_body": 0.00031,
+   "rim_bright_over_visible_body": 0.00034,
    "contact_shadow_pixels": 16864,
-   "contact_shadow_mean_lum": 88.004,
-   "contact_shadow_p50_lum": 137.867,
-   "contact_shadow_ratio_mask": 0.5731,
+   "contact_shadow_mean_lum": 59.343,
+   "contact_shadow_p50_lum": 74.107,
+   "contact_shadow_ratio_mask": 0.5016,
    "emissive_only": {
     "width": 720,
     "height": 900,
@@ -191,15 +191,15 @@
      "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
      "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
     },
-    "bright_pixels_gt190": 1374,
-    "emissive_pixels": 1374,
-    "rim_pixels": 2329,
-    "background_darkness": 1.454,
+    "bright_pixels_gt190": 1290,
+    "emissive_pixels": 1290,
+    "rim_pixels": 387,
+    "background_darkness": 0.625,
     "background_darkness_by_side": {
      "top": 0.41,
-     "bottom": 4.01,
-     "left": 0.63,
-     "right": 0.68
+     "bottom": 1.18,
+     "left": 0.44,
+     "right": 0.45
     },
     "zone_stats": {
      "face": {
@@ -215,90 +215,90 @@
      },
      "torso": {
       "n": 23955,
-      "mean_lum": 11.424,
+      "mean_lum": 4.863,
       "p50_lum": 1.0,
-      "p99_lum": 79.692,
-      "max_lum": 97.413,
-      "max_channel": 124,
+      "p99_lum": 39.204,
+      "max_lum": 48.432,
+      "max_channel": 64,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.008543
+      "mean_lin": 0.002147
      },
      "lowbody": {
       "n": 15809,
-      "mean_lum": 0.563,
+      "mean_lum": 0.433,
       "p50_lum": 0.0,
-      "p99_lum": 5.363,
-      "max_lum": 25.464,
-      "max_channel": 34,
+      "p99_lum": 1.43,
+      "max_lum": 10.442,
+      "max_channel": 14,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.000173
+      "mean_lin": 0.000132
      },
      "feet": {
       "n": 2323,
-      "mean_lum": 0.401,
+      "mean_lum": 0.392,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000119
+     },
+     "floor_front": {
+      "n": 1000,
+      "mean_lum": 0.446,
+      "p50_lum": 0.0,
+      "p99_lum": 1.007,
+      "max_lum": 1.715,
+      "max_channel": 2,
+      "bright_gt190": 0,
+      "saturated_gt190": 0,
+      "mean_lin": 0.000135
+     },
+     "floor_shadow_side": {
+      "n": 805,
+      "mean_lum": 0.471,
       "p50_lum": 0.0,
       "p99_lum": 1.0,
       "max_lum": 1.715,
       "max_channel": 2,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.000122
-     },
-     "floor_front": {
-      "n": 1000,
-      "mean_lum": 0.938,
-      "p50_lum": 1.0,
-      "p99_lum": 3.218,
-      "max_lum": 3.933,
-      "max_channel": 5,
-      "bright_gt190": 0,
-      "saturated_gt190": 0,
-      "mean_lin": 0.000285
-     },
-     "floor_shadow_side": {
-      "n": 805,
-      "mean_lum": 0.984,
-      "p50_lum": 1.0,
-      "p99_lum": 2.933,
-      "max_lum": 3.933,
-      "max_channel": 5,
-      "bright_gt190": 0,
-      "saturated_gt190": 0,
-      "mean_lin": 0.000299
+      "mean_lin": 0.000143
      },
      "floor_key_side": {
       "n": 950,
-      "mean_lum": 1.07,
-      "p50_lum": 1.0,
-      "p99_lum": 3.933,
-      "max_lum": 5.363,
-      "max_channel": 7,
+      "mean_lum": 0.498,
+      "p50_lum": 0.715,
+      "p99_lum": 1.365,
+      "max_lum": 1.715,
+      "max_channel": 2,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.000325
+      "mean_lin": 0.000151
      }
     },
     "body_pixels": 118111,
-    "visible_body_pixels": 9891,
+    "visible_body_pixels": 5087,
     "rim_band_pixels": 13165,
     "rim_band_bright_pixels": 0,
-    "rim_band_mean_lum": 3.194,
+    "rim_band_mean_lum": 1.432,
     "rim_band_hot_mean_lum": 0.0,
     "rim_band_clipped_pixels": 0,
     "rim_bright_over_body": 0.0,
     "rim_bright_over_visible_body": 0.0,
     "contact_shadow_pixels": 16864,
-    "contact_shadow_mean_lum": 3.292,
+    "contact_shadow_mean_lum": 1.138,
     "contact_shadow_p50_lum": 1.0,
-    "contact_shadow_ratio_mask": 3.5096
+    "contact_shadow_ratio_mask": 2.5516
    },
    "studio_vs_reveal": {
     "width": 1440,
     "height": 900,
-    "clipped_white_pixels": 1036,
-    "clipped_white_saturated": 12159,
+    "clipped_white_pixels": 727,
+    "clipped_white_saturated": 12148,
     "clipped_body_pixels": 0,
     "clipped_body_pixels_on_subject": 0,
     "clipped_colour_pixels_non_emissive": 0,
@@ -312,15 +312,15 @@
      "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
      "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
     },
-    "bright_pixels_gt190": 130943,
-    "emissive_pixels": 61690,
-    "rim_pixels": 192402,
-    "background_darkness": 78.488,
+    "bright_pixels_gt190": 128599,
+    "emissive_pixels": 64478,
+    "rim_pixels": 38839,
+    "background_darkness": 74.789,
     "background_darkness_by_side": {
-     "top": 4.87,
-     "bottom": 171.19,
-     "left": 86.99,
-     "right": 53.82
+     "top": 4.94,
+     "bottom": 162.0,
+     "left": 90.64,
+     "right": 45.74
     }
    },
    "zones": {
@@ -403,33 +403,33 @@
     }
    },
    "rig": {
-    "key": 40.0,
-    "rim": 700.0,
-    "under": 2561.0,
-    "pool": 350.0,
-    "wash": 12.0
+    "key": 60.0,
+    "rim": 200.0,
+    "under": 4253.116,
+    "pool": 628.723,
+    "wash": 181.631
    },
    "emissive_materials": {
     "accent": "XCOM_Chryssalid_ACCENT_EMISSIVE"
    },
    "emission_strength": {
-    "accent": 0.9,
-    "eye": 0.9,
-    "core": 0.8,
-    "plasma": 0.7
+    "accent": 0.32,
+    "eye": 0.32,
+    "core": 0.3,
+    "plasma": 0.26
    },
    "body_height": 1.0278,
-   "torso_mean_lum": 27.375,
-   "face_mean_lum": 88.166,
-   "under_lowbody_over_torso": 1.7548,
-   "under_feet_over_torso": 2.1967,
-   "floor_zone_min_diff_pct": 4.7,
+   "torso_mean_lum": 57.149,
+   "face_mean_lum": 113.299,
+   "under_lowbody_over_torso": 1.0735,
+   "under_feet_over_torso": 0.9218,
+   "floor_zone_min_diff_pct": 5.12,
    "floor_zone_means": {
-    "floor_front": 153.55,
-    "floor_shadow_side": 145.02,
-    "floor_key_side": 138.21
+    "floor_front": 118.32,
+    "floor_shadow_side": 100.61,
+    "floor_key_side": 106.04
    },
-   "contact_shadow_ratio": 0.9445,
+   "contact_shadow_ratio": 0.8503,
    "criteria": {
     "no_clipped_white": true,
     "no_clipped_body": true,
@@ -442,27 +442,29 @@
     "torso_p99_ge_25": true,
     "rim_3pct_of_body": false,
     "rim_band_mean_ge_120": false,
-    "under_lowbody_1_3x_torso": true,
-    "under_feet_1_3x_torso": true
+    "under_lowbody_1_3x_torso": false,
+    "under_feet_1_3x_torso": false
    },
    "all_criteria_pass": false,
-   "criteria_passed": 9,
+   "criteria_passed": 7,
    "failed_criteria": [
     "floor_zones_differ_15pct",
     "background_darkness_le_40",
     "rim_3pct_of_body",
-    "rim_band_mean_ge_120"
+    "rim_band_mean_ge_120",
+    "under_lowbody_1_3x_torso",
+    "under_feet_1_3x_torso"
    ]
   },
   "XCOM_Muton": {
    "width": 720,
    "height": 900,
-   "clipped_white_pixels": 328,
-   "clipped_white_saturated": 779,
-   "clipped_body_pixels": 328,
-   "clipped_body_pixels_on_subject": 328,
-   "clipped_colour_pixels_non_emissive": 6,
-   "clipped_colour_pixels_emissive": 1,
+   "clipped_white_pixels": 0,
+   "clipped_white_saturated": 497,
+   "clipped_body_pixels": 0,
+   "clipped_body_pixels_on_subject": 0,
+   "clipped_colour_pixels_non_emissive": 0,
+   "clipped_colour_pixels_emissive": 6,
    "clip_definitions": {
     "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
     "clipped_white_saturated": "max channel >= 250 AND all channels >= 200",
@@ -472,108 +474,108 @@
     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
    },
-   "bright_pixels_gt190": 9156,
-   "emissive_pixels": 3836,
-   "rim_pixels": 200077,
-   "background_darkness": 59.176,
+   "bright_pixels_gt190": 21636,
+   "emissive_pixels": 13915,
+   "rim_pixels": 59712,
+   "background_darkness": 65.95,
    "background_darkness_by_side": {
-    "top": 0.96,
-    "bottom": 142.02,
-    "left": 49.83,
-    "right": 46.08
+    "top": 0.97,
+    "bottom": 158.17,
+    "left": 57.56,
+    "right": 50.66
    },
    "zone_stats": {
     "face": {
      "n": 3655,
-     "mean_lum": 41.168,
-     "p50_lum": 18.661,
-     "p99_lum": 183.119,
-     "max_lum": 210.534,
-     "max_channel": 219,
-     "bright_gt190": 40,
-     "saturated_gt190": 24,
-     "mean_lin": 0.054616
+     "mean_lum": 113.919,
+     "p50_lum": 123.324,
+     "p99_lum": 212.845,
+     "max_lum": 214.959,
+     "max_channel": 223,
+     "bright_gt190": 168,
+     "saturated_gt190": 105,
+     "mean_lin": 0.203742
     },
     "torso": {
      "n": 10582,
-     "mean_lum": 91.848,
-     "p50_lum": 61.385,
-     "p99_lum": 248.303,
-     "max_lum": 251.371,
-     "max_channel": 254,
-     "bright_gt190": 2840,
-     "saturated_gt190": 602,
-     "mean_lin": 0.2285
+     "mean_lum": 135.195,
+     "p50_lum": 121.233,
+     "p99_lum": 236.878,
+     "max_lum": 244.303,
+     "max_channel": 250,
+     "bright_gt190": 4102,
+     "saturated_gt190": 2460,
+     "mean_lin": 0.311607
     },
     "lowbody": {
      "n": 5881,
-     "mean_lum": 52.334,
-     "p50_lum": 24.812,
-     "p99_lum": 242.163,
-     "max_lum": 244.091,
-     "max_channel": 249,
-     "bright_gt190": 537,
-     "saturated_gt190": 52,
-     "mean_lin": 0.099151
+     "mean_lum": 132.542,
+     "p50_lum": 100.059,
+     "p99_lum": 247.303,
+     "max_lum": 249.231,
+     "max_channel": 253,
+     "bright_gt190": 2400,
+     "saturated_gt190": 107,
+     "mean_lin": 0.36838
     },
     "feet": {
      "n": 2501,
-     "mean_lum": 45.455,
-     "p50_lum": 21.026,
-     "p99_lum": 133.225,
-     "max_lum": 138.007,
-     "max_channel": 154,
+     "mean_lum": 67.237,
+     "p50_lum": 55.311,
+     "p99_lum": 146.069,
+     "max_lum": 150.638,
+     "max_channel": 164,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.055493
+     "mean_lin": 0.0732
     },
     "floor_front": {
      "n": 1000,
-     "mean_lum": 144.994,
-     "p50_lum": 145.073,
-     "p99_lum": 147.57,
-     "max_lum": 149.285,
-     "max_channel": 163,
+     "mean_lum": 158.774,
+     "p50_lum": 158.906,
+     "p99_lum": 160.336,
+     "max_lum": 160.979,
+     "max_channel": 172,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.29273
+     "mean_lin": 0.347964
     },
     "floor_shadow_side": {
      "n": 805,
-     "mean_lum": 150.852,
-     "p50_lum": 150.856,
-     "p99_lum": 155.711,
-     "max_lum": 155.995,
+     "mean_lum": 132.001,
+     "p50_lum": 130.26,
+     "p99_lum": 147.473,
+     "max_lum": 148.685,
      "max_channel": 169,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.318881
+     "mean_lin": 0.232988
     },
     "floor_key_side": {
      "n": 950,
-     "mean_lum": 141.623,
-     "p50_lum": 142.288,
-     "p99_lum": 149.785,
-     "max_lum": 150.785,
-     "max_channel": 166,
+     "mean_lum": 117.36,
+     "p50_lum": 117.545,
+     "p99_lum": 120.653,
+     "max_lum": 122.188,
+     "max_channel": 143,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.281165
+     "mean_lin": 0.180636
     }
    },
-   "body_pixels": 64800,
-   "visible_body_pixels": 35110,
+   "body_pixels": 64799,
+   "visible_body_pixels": 64153,
    "rim_band_pixels": 8008,
-   "rim_band_bright_pixels": 427,
-   "rim_band_mean_lum": 65.393,
-   "rim_band_hot_mean_lum": 212.69,
+   "rim_band_bright_pixels": 764,
+   "rim_band_mean_lum": 96.566,
+   "rim_band_hot_mean_lum": 214.736,
    "rim_band_clipped_pixels": 0,
-   "rim_bright_over_body": 0.00659,
-   "rim_bright_over_visible_body": 0.01216,
+   "rim_bright_over_body": 0.01179,
+   "rim_bright_over_visible_body": 0.01191,
    "contact_shadow_pixels": 9083,
-   "contact_shadow_mean_lum": 55.054,
-   "contact_shadow_p50_lum": 15.946,
-   "contact_shadow_ratio_mask": 0.3797,
+   "contact_shadow_mean_lum": 56.14,
+   "contact_shadow_p50_lum": 33.24,
+   "contact_shadow_ratio_mask": 0.3536,
    "emissive_only": {
     "width": 720,
     "height": 900,
@@ -592,38 +594,38 @@
      "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
      "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
     },
-    "bright_pixels_gt190": 814,
-    "emissive_pixels": 814,
-    "rim_pixels": 1378,
-    "background_darkness": 0.478,
+    "bright_pixels_gt190": 758,
+    "emissive_pixels": 758,
+    "rim_pixels": 346,
+    "background_darkness": 0.41,
     "background_darkness_by_side": {
      "top": 0.41,
-     "bottom": 0.59,
-     "left": 0.52,
-     "right": 0.44
+     "bottom": 0.42,
+     "left": 0.42,
+     "right": 0.4
     },
     "zone_stats": {
      "face": {
       "n": 3655,
-      "mean_lum": 42.501,
-      "p50_lum": 39.919,
-      "p99_lum": 89.489,
-      "max_lum": 92.345,
-      "max_channel": 119,
+      "mean_lum": 18.544,
+      "p50_lum": 17.095,
+      "p99_lum": 44.712,
+      "max_lum": 46.214,
+      "max_channel": 61,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.035231
+      "mean_lin": 0.008536
      },
      "torso": {
       "n": 10582,
-      "mean_lum": 4.752,
-      "p50_lum": 1.503,
-      "p99_lum": 29.401,
-      "max_lum": 38.417,
-      "max_channel": 51,
+      "mean_lum": 1.356,
+      "p50_lum": 1.0,
+      "p99_lum": 10.284,
+      "max_lum": 14.95,
+      "max_channel": 20,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.001766
+      "mean_lin": 0.000415
      },
      "lowbody": {
       "n": 5881,
@@ -649,60 +651,60 @@
      },
      "floor_front": {
       "n": 1000,
-      "mean_lum": 0.423,
+      "mean_lum": 0.378,
       "p50_lum": 0.0,
-      "p99_lum": 1.715,
-      "max_lum": 1.715,
-      "max_channel": 2,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.000128
+      "mean_lin": 0.000115
      },
      "floor_shadow_side": {
       "n": 805,
-      "mean_lum": 0.435,
+      "mean_lum": 0.405,
       "p50_lum": 0.0,
       "p99_lum": 1.0,
-      "max_lum": 1.715,
-      "max_channel": 2,
+      "max_lum": 1.0,
+      "max_channel": 1,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.000132
+      "mean_lin": 0.000123
      },
      "floor_key_side": {
       "n": 950,
-      "mean_lum": 0.7,
-      "p50_lum": 0.787,
-      "p99_lum": 2.43,
-      "max_lum": 2.503,
-      "max_channel": 3,
+      "mean_lum": 0.45,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.000213
+      "mean_lin": 0.000137
      }
     },
-    "body_pixels": 64800,
-    "visible_body_pixels": 5690,
+    "body_pixels": 64799,
+    "visible_body_pixels": 2896,
     "rim_band_pixels": 8008,
     "rim_band_bright_pixels": 0,
-    "rim_band_mean_lum": 4.155,
+    "rim_band_mean_lum": 1.807,
     "rim_band_hot_mean_lum": 0.0,
     "rim_band_clipped_pixels": 0,
     "rim_bright_over_body": 0.0,
     "rim_bright_over_visible_body": 0.0,
     "contact_shadow_pixels": 9083,
-    "contact_shadow_mean_lum": 0.435,
+    "contact_shadow_mean_lum": 0.419,
     "contact_shadow_p50_lum": 0.0,
-    "contact_shadow_ratio_mask": 1.0284
+    "contact_shadow_ratio_mask": 1.1085
    },
    "studio_vs_reveal": {
     "width": 1440,
     "height": 900,
-    "clipped_white_pixels": 509,
-    "clipped_white_saturated": 2872,
+    "clipped_white_pixels": 120,
+    "clipped_white_saturated": 2500,
     "clipped_body_pixels": 0,
     "clipped_body_pixels_on_subject": 0,
-    "clipped_colour_pixels_non_emissive": 7,
+    "clipped_colour_pixels_non_emissive": 6,
     "clipped_colour_pixels_emissive": 0,
     "clip_definitions": {
      "clipped_white_pixels": "r,g,b all > 248 (white blowout), frame wide",
@@ -713,15 +715,15 @@
      "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
      "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
     },
-    "bright_pixels_gt190": 56749,
-    "emissive_pixels": 36885,
-    "rim_pixels": 200303,
-    "background_darkness": 67.965,
+    "bright_pixels_gt190": 66879,
+    "emissive_pixels": 45763,
+    "rim_pixels": 61025,
+    "background_darkness": 70.243,
     "background_darkness_by_side": {
-     "top": 4.87,
-     "bottom": 148.99,
-     "left": 69.59,
-     "right": 51.09
+     "top": 4.94,
+     "bottom": 156.22,
+     "left": 71.8,
+     "right": 51.55
     }
    },
    "zones": {
@@ -804,37 +806,37 @@
     }
    },
    "rig": {
-    "key": 33.024,
-    "rim": 350.0,
+    "key": 60.0,
+    "rim": 200.0,
     "under": 2561.0,
-    "pool": 224.708,
-    "wash": 7.704
+    "pool": 900.0,
+    "wash": 260.0
    },
    "emissive_materials": {
     "accent": "XCOM_Muton_ACCENT_EMISSIVE"
    },
    "emission_strength": {
-    "accent": 0.9,
-    "eye": 0.9,
-    "core": 0.8,
-    "plasma": 0.7
+    "accent": 0.32,
+    "eye": 0.32,
+    "core": 0.3,
+    "plasma": 0.26
    },
    "body_height": 2.0688,
-   "torso_mean_lum": 91.848,
-   "face_mean_lum": 41.168,
-   "under_lowbody_over_torso": 0.5698,
-   "under_feet_over_torso": 0.4949,
-   "floor_zone_min_diff_pct": 2.32,
+   "torso_mean_lum": 135.195,
+   "face_mean_lum": 113.919,
+   "under_lowbody_over_torso": 0.9804,
+   "under_feet_over_torso": 0.4973,
+   "floor_zone_min_diff_pct": 11.09,
    "floor_zone_means": {
-    "floor_front": 144.99,
-    "floor_shadow_side": 150.85,
-    "floor_key_side": 141.62
+    "floor_front": 158.77,
+    "floor_shadow_side": 132.0,
+    "floor_key_side": 117.36
    },
-   "contact_shadow_ratio": 1.0404,
+   "contact_shadow_ratio": 0.8314,
    "criteria": {
-    "no_clipped_white": false,
-    "no_clipped_body": false,
-    "no_colour_clip_off_emissive": false,
+    "no_clipped_white": true,
+    "no_clipped_body": true,
+    "no_colour_clip_off_emissive": true,
     "floor_zones_in_window": true,
     "floor_zones_differ_15pct": false,
     "background_darkness_le_40": false,
@@ -847,11 +849,8 @@
     "under_feet_1_3x_torso": false
    },
    "all_criteria_pass": false,
-   "criteria_passed": 4,
+   "criteria_passed": 7,
    "failed_criteria": [
-    "no_clipped_white",
-    "no_clipped_body",
-    "no_colour_clip_off_emissive",
     "floor_zones_differ_15pct",
     "background_darkness_le_40",
     "rim_3pct_of_body",
@@ -864,7 +863,7 @@
    "width": 720,
    "height": 900,
    "clipped_white_pixels": 0,
-   "clipped_white_saturated": 2,
+   "clipped_white_saturated": 5,
    "clipped_body_pixels": 0,
    "clipped_body_pixels_on_subject": 0,
    "clipped_colour_pixels_non_emissive": 0,
@@ -878,15 +877,15 @@
     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
    },
-   "bright_pixels_gt190": 460,
-   "emissive_pixels": 453,
-   "rim_pixels": 8308,
-   "background_darkness": 0.774,
+   "bright_pixels_gt190": 39,
+   "emissive_pixels": 30,
+   "rim_pixels": 603,
+   "background_darkness": 0.723,
    "background_darkness_by_side": {
     "top": 0.97,
     "bottom": 0.42,
-    "left": 0.83,
-    "right": 0.84
+    "left": 0.74,
+    "right": 0.75
    },
    "zone_stats": {
     "face": {
@@ -902,84 +901,84 @@
     },
     "torso": {
      "n": 4930,
-     "mean_lum": 3.309,
-     "p50_lum": 1.0,
-     "p99_lum": 33.284,
-     "max_lum": 241.954,
-     "max_channel": 251,
-     "bright_gt190": 15,
-     "saturated_gt190": 8,
-     "mean_lin": 0.003195
+     "mean_lum": 4.066,
+     "p50_lum": 0.072,
+     "p99_lum": 74.464,
+     "max_lum": 244.954,
+     "max_channel": 254,
+     "bright_gt190": 20,
+     "saturated_gt190": 11,
+     "mean_lin": 0.005172
     },
     "lowbody": {
      "n": 599,
-     "mean_lum": 3.006,
-     "p50_lum": 2.503,
-     "p99_lum": 10.882,
-     "max_lum": 12.091,
-     "max_channel": 17,
+     "mean_lum": 35.662,
+     "p50_lum": 39.966,
+     "p99_lum": 64.983,
+     "max_lum": 65.771,
+     "max_channel": 92,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.000914
+     "mean_lin": 0.022045
     },
     "feet": {
      "n": 262,
-     "mean_lum": 0.693,
-     "p50_lum": 0.787,
-     "p99_lum": 1.787,
-     "max_lum": 1.787,
-     "max_channel": 2,
+     "mean_lum": 3.242,
+     "p50_lum": 2.719,
+     "p99_lum": 10.172,
+     "max_lum": 10.302,
+     "max_channel": 19,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.00021
+     "mean_lin": 0.000987
     },
     "floor_front": {
      "n": 964,
-     "mean_lum": 23.318,
-     "p50_lum": 2.787,
-     "p99_lum": 111.653,
-     "max_lum": 121.149,
-     "max_channel": 138,
+     "mean_lum": 53.185,
+     "p50_lum": 33.411,
+     "p99_lum": 150.966,
+     "max_lum": 151.966,
+     "max_channel": 170,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.023522
+     "mean_lin": 0.077974
     },
     "floor_shadow_side": {
      "n": 544,
-     "mean_lum": 26.757,
-     "p50_lum": 7.261,
-     "p99_lum": 102.718,
-     "max_lum": 110.433,
-     "max_channel": 127,
+     "mean_lum": 82.825,
+     "p50_lum": 91.894,
+     "p99_lum": 151.251,
+     "max_lum": 151.966,
+     "max_channel": 170,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.024101
+     "mean_lin": 0.123942
     },
     "floor_key_side": {
      "n": 716,
-     "mean_lum": 27.638,
-     "p50_lum": 10.228,
-     "p99_lum": 107.283,
-     "max_lum": 116.149,
-     "max_channel": 133,
+     "mean_lum": 62.198,
+     "p50_lum": 55.956,
+     "p99_lum": 148.888,
+     "max_lum": 149.966,
+     "max_channel": 168,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.026338
+     "mean_lin": 0.086032
     }
    },
    "body_pixels": 11755,
-   "visible_body_pixels": 743,
+   "visible_body_pixels": 1856,
    "rim_band_pixels": 4846,
-   "rim_band_bright_pixels": 124,
-   "rim_band_mean_lum": 8.1,
-   "rim_band_hot_mean_lum": 178.533,
+   "rim_band_bright_pixels": 13,
+   "rim_band_mean_lum": 6.533,
+   "rim_band_hot_mean_lum": 167.302,
    "rim_band_clipped_pixels": 0,
-   "rim_bright_over_body": 0.01055,
-   "rim_bright_over_visible_body": 0.16689,
+   "rim_bright_over_body": 0.00111,
+   "rim_bright_over_visible_body": 0.007,
    "contact_shadow_pixels": 17918,
-   "contact_shadow_mean_lum": 9.472,
+   "contact_shadow_mean_lum": 8.338,
    "contact_shadow_p50_lum": 1.0,
-   "contact_shadow_ratio_mask": 0.4062,
+   "contact_shadow_ratio_mask": 0.1568,
    "emissive_only": {
     "width": 720,
     "height": 900,
@@ -998,9 +997,9 @@
      "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
      "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
     },
-    "bright_pixels_gt190": 553,
-    "emissive_pixels": 553,
-    "rim_pixels": 910,
+    "bright_pixels_gt190": 513,
+    "emissive_pixels": 513,
+    "rim_pixels": 167,
     "background_darkness": 0.404,
     "background_darkness_by_side": {
      "top": 0.41,
@@ -1022,90 +1021,90 @@
      },
      "torso": {
       "n": 4930,
-      "mean_lum": 5.763,
-      "p50_lum": 1.0,
-      "p99_lum": 56.945,
-      "max_lum": 66.458,
-      "max_channel": 87,
+      "mean_lum": 2.514,
+      "p50_lum": 0.787,
+      "p99_lum": 26.183,
+      "max_lum": 31.691,
+      "max_channel": 42,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.003614
+      "mean_lin": 0.000951
      },
      "lowbody": {
       "n": 599,
-      "mean_lum": 14.645,
-      "p50_lum": 14.95,
-      "p99_lum": 23.965,
-      "max_lum": 24.893,
-      "max_channel": 33,
+      "mean_lum": 4.272,
+      "p50_lum": 3.933,
+      "p99_lum": 9.012,
+      "max_lum": 9.084,
+      "max_channel": 12,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.005388
+      "mean_lin": 0.001297
      },
      "feet": {
       "n": 262,
-      "mean_lum": 5.223,
-      "p50_lum": 5.151,
-      "p99_lum": 7.581,
-      "max_lum": 8.296,
-      "max_channel": 11,
+      "mean_lum": 1.226,
+      "p50_lum": 1.43,
+      "p99_lum": 2.43,
+      "max_lum": 2.503,
+      "max_channel": 3,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.001585
+      "mean_lin": 0.000372
      },
      "floor_front": {
       "n": 964,
-      "mean_lum": 10.255,
-      "p50_lum": 7.296,
-      "p99_lum": 27.758,
-      "max_lum": 29.545,
-      "max_channel": 39,
+      "mean_lum": 3.301,
+      "p50_lum": 1.715,
+      "p99_lum": 11.488,
+      "max_lum": 12.732,
+      "max_channel": 17,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.003827
+      "mean_lin": 0.001009
      },
      "floor_shadow_side": {
       "n": 544,
-      "mean_lum": 16.315,
-      "p50_lum": 17.955,
-      "p99_lum": 29.545,
-      "max_lum": 31.048,
-      "max_channel": 41,
+      "mean_lum": 5.83,
+      "p50_lum": 5.866,
+      "p99_lum": 12.732,
+      "max_lum": 13.519,
+      "max_channel": 18,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.006756
+      "mean_lin": 0.001806
      },
      "floor_key_side": {
       "n": 716,
-      "mean_lum": 11.877,
-      "p50_lum": 12.017,
-      "p99_lum": 27.032,
-      "max_lum": 28.758,
-      "max_channel": 38,
+      "mean_lum": 3.875,
+      "p50_lum": 3.218,
+      "p99_lum": 11.229,
+      "max_lum": 12.017,
+      "max_channel": 16,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.004459
+      "mean_lin": 0.001184
      }
     },
     "body_pixels": 11755,
-    "visible_body_pixels": 2167,
+    "visible_body_pixels": 1176,
     "rim_band_pixels": 4846,
-    "rim_band_bright_pixels": 185,
-    "rim_band_mean_lum": 12.883,
-    "rim_band_hot_mean_lum": 232.154,
+    "rim_band_bright_pixels": 159,
+    "rim_band_mean_lum": 9.461,
+    "rim_band_hot_mean_lum": 212.361,
     "rim_band_clipped_pixels": 0,
-    "rim_bright_over_body": 0.01574,
-    "rim_bright_over_visible_body": 0.08537,
+    "rim_bright_over_body": 0.01353,
+    "rim_bright_over_visible_body": 0.1352,
     "contact_shadow_pixels": 17918,
-    "contact_shadow_mean_lum": 2.018,
-    "contact_shadow_p50_lum": 1.0,
-    "contact_shadow_ratio_mask": 0.1968
+    "contact_shadow_mean_lum": 0.821,
+    "contact_shadow_p50_lum": 0.715,
+    "contact_shadow_ratio_mask": 0.2487
    },
    "studio_vs_reveal": {
     "width": 1440,
     "height": 900,
-    "clipped_white_pixels": 27,
-    "clipped_white_saturated": 580,
+    "clipped_white_pixels": 15,
+    "clipped_white_saturated": 542,
     "clipped_body_pixels": 0,
     "clipped_body_pixels_on_subject": 0,
     "clipped_colour_pixels_non_emissive": 0,
@@ -1119,15 +1118,15 @@
      "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
      "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
     },
-    "bright_pixels_gt190": 7980,
-    "emissive_pixels": 5823,
-    "rim_pixels": 8918,
-    "background_darkness": 29.524,
+    "bright_pixels_gt190": 6531,
+    "emissive_pixels": 4684,
+    "rim_pixels": 1174,
+    "background_darkness": 28.531,
     "background_darkness_by_side": {
      "top": 4.94,
-     "bottom": 47.99,
-     "left": 63.32,
-     "right": 0.85
+     "bottom": 46.28,
+     "left": 61.09,
+     "right": 0.79
     }
    },
    "zones": {
@@ -1210,38 +1209,38 @@
     }
    },
    "rig": {
-    "key": 80.0,
-    "rim": 700.0,
+    "key": 60.0,
+    "rim": 200.0,
     "under": 6402.5,
-    "pool": 350.0,
-    "wash": 12.0
+    "pool": 900.0,
+    "wash": 460.608
    },
    "emissive_materials": {
     "accent": "XCOM_Floater_ACCENT_EMISSIVE"
    },
    "emission_strength": {
-    "accent": 0.9,
-    "eye": 0.9,
-    "core": 0.8,
-    "plasma": 0.7
+    "accent": 0.32,
+    "eye": 0.32,
+    "core": 0.3,
+    "plasma": 0.26
    },
    "body_height": 0.2898,
-   "torso_mean_lum": 3.309,
+   "torso_mean_lum": 4.066,
    "face_mean_lum": 0.0,
-   "under_lowbody_over_torso": 0.9084,
-   "under_feet_over_torso": 0.2094,
-   "floor_zone_min_diff_pct": 3.19,
+   "under_lowbody_over_torso": 8.7708,
+   "under_feet_over_torso": 0.7973,
+   "floor_zone_min_diff_pct": 14.49,
    "floor_zone_means": {
-    "floor_front": 23.32,
-    "floor_shadow_side": 26.76,
-    "floor_key_side": 27.64
+    "floor_front": 53.19,
+    "floor_shadow_side": 82.83,
+    "floor_key_side": 62.2
    },
-   "contact_shadow_ratio": 1.1475,
+   "contact_shadow_ratio": 1.5573,
    "criteria": {
     "no_clipped_white": true,
     "no_clipped_body": true,
     "no_colour_clip_off_emissive": true,
-    "floor_zones_in_window": false,
+    "floor_zones_in_window": true,
     "floor_zones_differ_15pct": false,
     "background_darkness_le_40": true,
     "contact_shadow_present": true,
@@ -1249,28 +1248,26 @@
     "torso_p99_ge_25": true,
     "rim_3pct_of_body": false,
     "rim_band_mean_ge_120": false,
-    "under_lowbody_1_3x_torso": false,
+    "under_lowbody_1_3x_torso": true,
     "under_feet_1_3x_torso": false
    },
    "all_criteria_pass": false,
-   "criteria_passed": 6,
+   "criteria_passed": 8,
    "failed_criteria": [
-    "floor_zones_in_window",
     "floor_zones_differ_15pct",
     "face_p99_ge_25",
     "rim_3pct_of_body",
     "rim_band_mean_ge_120",
-    "under_lowbody_1_3x_torso",
     "under_feet_1_3x_torso"
    ]
   },
   "XCOM_Viper": {
    "width": 720,
    "height": 900,
-   "clipped_white_pixels": 78,
-   "clipped_white_saturated": 327,
-   "clipped_body_pixels": 78,
-   "clipped_body_pixels_on_subject": 78,
+   "clipped_white_pixels": 344,
+   "clipped_white_saturated": 588,
+   "clipped_body_pixels": 344,
+   "clipped_body_pixels_on_subject": 344,
    "clipped_colour_pixels_non_emissive": 0,
    "clipped_colour_pixels_emissive": 0,
    "clip_definitions": {
@@ -1282,108 +1279,108 @@
     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
    },
-   "bright_pixels_gt190": 7412,
-   "emissive_pixels": 14,
-   "rim_pixels": 174107,
-   "background_darkness": 61.615,
+   "bright_pixels_gt190": 8729,
+   "emissive_pixels": 75,
+   "rim_pixels": 84051,
+   "background_darkness": 57.174,
    "background_darkness_by_side": {
-    "top": 0.96,
-    "bottom": 149.36,
-    "left": 50.46,
-    "right": 48.17
+    "top": 0.97,
+    "bottom": 133.43,
+    "left": 50.62,
+    "right": 46.33
    },
    "zone_stats": {
     "face": {
      "n": 3714,
-     "mean_lum": 31.025,
-     "p50_lum": 15.938,
-     "p99_lum": 178.241,
-     "max_lum": 212.951,
-     "max_channel": 216,
-     "bright_gt190": 18,
+     "mean_lum": 108.574,
+     "p50_lum": 101.601,
+     "p99_lum": 209.951,
+     "max_lum": 226.445,
+     "max_channel": 229,
+     "bright_gt190": 418,
      "saturated_gt190": 0,
-     "mean_lin": 0.030898
+     "mean_lin": 0.203601
     },
     "torso": {
      "n": 8511,
-     "mean_lum": 123.574,
-     "p50_lum": 159.886,
-     "p99_lum": 239.083,
-     "max_lum": 241.295,
-     "max_channel": 243,
-     "bright_gt190": 3387,
-     "saturated_gt190": 0,
-     "mean_lin": 0.323321
+     "mean_lum": 144.36,
+     "p50_lum": 168.596,
+     "p99_lum": 238.922,
+     "max_lum": 245.512,
+     "max_channel": 247,
+     "bright_gt190": 2072,
+     "saturated_gt190": 7,
+     "mean_lin": 0.346827
     },
     "lowbody": {
      "n": 4585,
-     "mean_lum": 109.009,
-     "p50_lum": 64.669,
-     "p99_lum": 252.793,
-     "max_lum": 254.077,
-     "max_channel": 255,
-     "bright_gt190": 1290,
+     "mean_lum": 182.438,
+     "p50_lum": 219.3,
+     "p99_lum": 250.793,
+     "max_lum": 252.793,
+     "max_channel": 254,
+     "bright_gt190": 2880,
      "saturated_gt190": 0,
-     "mean_lin": 0.291294
+     "mean_lin": 0.561816
     },
     "feet": {
      "n": 2540,
-     "mean_lum": 43.994,
-     "p50_lum": 18.804,
-     "p99_lum": 133.65,
-     "max_lum": 141.575,
-     "max_channel": 156,
+     "mean_lum": 57.383,
+     "p50_lum": 46.974,
+     "p99_lum": 138.048,
+     "max_lum": 146.499,
+     "max_channel": 161,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.050471
+     "mean_lin": 0.05582
     },
     "floor_front": {
      "n": 1000,
-     "mean_lum": 145.712,
-     "p50_lum": 146.001,
-     "p99_lum": 148.213,
-     "max_lum": 149.141,
-     "max_channel": 163,
+     "mean_lum": 151.246,
+     "p50_lum": 151.278,
+     "p99_lum": 153.278,
+     "max_lum": 153.278,
+     "max_channel": 164,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.295883
+     "mean_lin": 0.316861
     },
     "floor_shadow_side": {
      "n": 805,
-     "mean_lum": 151.906,
-     "p50_lum": 151.997,
-     "p99_lum": 156.851,
-     "max_lum": 157.136,
-     "max_channel": 170,
+     "mean_lum": 121.73,
+     "p50_lum": 121.561,
+     "p99_lum": 130.196,
+     "max_lum": 132.911,
+     "max_channel": 143,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.323537
+     "mean_lin": 0.197466
     },
     "floor_key_side": {
      "n": 950,
-     "mean_lum": 148.289,
-     "p50_lum": 148.998,
-     "p99_lum": 154.495,
-     "max_lum": 155.283,
-     "max_channel": 170,
+     "mean_lum": 126.556,
+     "p50_lum": 126.787,
+     "p99_lum": 131.788,
+     "max_lum": 132.788,
+     "max_channel": 147,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.308874
+     "mean_lin": 0.219062
     }
    },
    "body_pixels": 41505,
-   "visible_body_pixels": 26901,
+   "visible_body_pixels": 40999,
    "rim_band_pixels": 7882,
-   "rim_band_bright_pixels": 801,
-   "rim_band_mean_lum": 75.615,
-   "rim_band_hot_mean_lum": 217.551,
+   "rim_band_bright_pixels": 1333,
+   "rim_band_mean_lum": 103.315,
+   "rim_band_hot_mean_lum": 215.456,
    "rim_band_clipped_pixels": 0,
-   "rim_bright_over_body": 0.0193,
-   "rim_bright_over_visible_body": 0.02978,
+   "rim_bright_over_body": 0.03212,
+   "rim_bright_over_visible_body": 0.03251,
    "contact_shadow_pixels": 5084,
-   "contact_shadow_mean_lum": 92.175,
-   "contact_shadow_p50_lum": 126.118,
-   "contact_shadow_ratio_mask": 0.6326,
+   "contact_shadow_mean_lum": 89.682,
+   "contact_shadow_p50_lum": 117.291,
+   "contact_shadow_ratio_mask": 0.593,
    "emissive_only": {
     "width": 720,
     "height": 900,
@@ -1402,38 +1399,38 @@
      "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
      "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
     },
-    "bright_pixels_gt190": 61,
-    "emissive_pixels": 61,
-    "rim_pixels": 62,
-    "background_darkness": 0.405,
+    "bright_pixels_gt190": 48,
+    "emissive_pixels": 48,
+    "rim_pixels": 34,
+    "background_darkness": 0.404,
     "background_darkness_by_side": {
      "top": 0.41,
-     "bottom": 0.41,
+     "bottom": 0.4,
      "left": 0.4,
      "right": 0.4
     },
     "zone_stats": {
      "face": {
       "n": 3714,
-      "mean_lum": 6.031,
-      "p50_lum": 2.43,
-      "p99_lum": 32.406,
-      "max_lum": 42.209,
-      "max_channel": 56,
+      "mean_lum": 1.782,
+      "p50_lum": 1.0,
+      "p99_lum": 12.382,
+      "max_lum": 17.883,
+      "max_channel": 24,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.002317
+      "mean_lin": 0.00055
      },
      "torso": {
       "n": 8511,
-      "mean_lum": 0.953,
-      "p50_lum": 0.715,
-      "p99_lum": 9.727,
-      "max_lum": 134.888,
-      "max_channel": 159,
+      "mean_lum": 0.491,
+      "p50_lum": 0.0,
+      "p99_lum": 1.715,
+      "max_lum": 76.759,
+      "max_channel": 100,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.000331
+      "mean_lin": 0.00016
      },
      "lowbody": {
       "n": 4585,
@@ -1470,32 +1467,32 @@
      },
      "floor_shadow_side": {
       "n": 805,
-      "mean_lum": 0.415,
+      "mean_lum": 0.404,
       "p50_lum": 0.0,
       "p99_lum": 1.0,
-      "max_lum": 1.715,
-      "max_channel": 2,
+      "max_lum": 1.0,
+      "max_channel": 1,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.000126
+      "mean_lin": 0.000123
      },
      "floor_key_side": {
       "n": 950,
-      "mean_lum": 0.438,
+      "mean_lum": 0.424,
       "p50_lum": 0.0,
       "p99_lum": 1.0,
-      "max_lum": 1.715,
-      "max_channel": 2,
+      "max_lum": 1.0,
+      "max_channel": 1,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.000133
+      "mean_lin": 0.000129
      }
     },
     "body_pixels": 41505,
-    "visible_body_pixels": 558,
+    "visible_body_pixels": 171,
     "rim_band_pixels": 7882,
     "rim_band_bright_pixels": 0,
-    "rim_band_mean_lum": 0.876,
+    "rim_band_mean_lum": 0.5,
     "rim_band_hot_mean_lum": 0.0,
     "rim_band_clipped_pixels": 0,
     "rim_bright_over_body": 0.0,
@@ -1508,8 +1505,8 @@
    "studio_vs_reveal": {
     "width": 1440,
     "height": 900,
-    "clipped_white_pixels": 260,
-    "clipped_white_saturated": 2438,
+    "clipped_white_pixels": 468,
+    "clipped_white_saturated": 2608,
     "clipped_body_pixels": 0,
     "clipped_body_pixels_on_subject": 0,
     "clipped_colour_pixels_non_emissive": 0,
@@ -1523,15 +1520,15 @@
      "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
      "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
     },
-    "bright_pixels_gt190": 54627,
-    "emissive_pixels": 32301,
-    "rim_pixels": 173168,
-    "background_darkness": 69.36,
+    "bright_pixels_gt190": 54179,
+    "emissive_pixels": 31792,
+    "rim_pixels": 83671,
+    "background_darkness": 66.313,
     "background_darkness_by_side": {
-     "top": 4.87,
-     "bottom": 152.74,
-     "left": 69.69,
-     "right": 53.08
+     "top": 4.94,
+     "bottom": 143.93,
+     "left": 71.92,
+     "right": 47.06
     }
    },
    "zones": {
@@ -1614,33 +1611,33 @@
     }
    },
    "rig": {
-    "key": 34.298,
-    "rim": 350.0,
+    "key": 51.477,
+    "rim": 200.0,
     "under": 2561.0,
-    "pool": 223.674,
-    "wash": 7.669
+    "pool": 510.814,
+    "wash": 147.568
    },
    "emissive_materials": {
     "accent": "XCOM_Viper_ACCENT_EMISSIVE"
    },
    "emission_strength": {
-    "accent": 0.9,
-    "eye": 0.9,
-    "core": 0.8,
-    "plasma": 0.7
+    "accent": 0.32,
+    "eye": 0.32,
+    "core": 0.3,
+    "plasma": 0.26
    },
    "body_height": 2.0586,
-   "torso_mean_lum": 123.574,
-   "face_mean_lum": 31.025,
-   "under_lowbody_over_torso": 0.8821,
-   "under_feet_over_torso": 0.356,
-   "floor_zone_min_diff_pct": 1.74,
+   "torso_mean_lum": 144.36,
+   "face_mean_lum": 108.574,
+   "under_lowbody_over_torso": 1.2638,
+   "under_feet_over_torso": 0.3975,
+   "floor_zone_min_diff_pct": 3.81,
    "floor_zone_means": {
-    "floor_front": 145.71,
-    "floor_shadow_side": 151.91,
-    "floor_key_side": 148.29
+    "floor_front": 151.25,
+    "floor_shadow_side": 121.73,
+    "floor_key_side": 126.56
    },
-   "contact_shadow_ratio": 1.0425,
+   "contact_shadow_ratio": 0.8048,
    "criteria": {
     "no_clipped_white": false,
     "no_clipped_body": false,
@@ -1651,19 +1648,18 @@
     "contact_shadow_present": true,
     "face_p99_ge_25": true,
     "torso_p99_ge_25": true,
-    "rim_3pct_of_body": false,
+    "rim_3pct_of_body": true,
     "rim_band_mean_ge_120": false,
     "under_lowbody_1_3x_torso": false,
     "under_feet_1_3x_torso": false
    },
    "all_criteria_pass": false,
-   "criteria_passed": 5,
+   "criteria_passed": 6,
    "failed_criteria": [
     "no_clipped_white",
     "no_clipped_body",
     "floor_zones_differ_15pct",
     "background_darkness_le_40",
-    "rim_3pct_of_body",
     "rim_band_mean_ge_120",
     "under_lowbody_1_3x_torso",
     "under_feet_1_3x_torso"
@@ -1672,10 +1668,10 @@
   "XCOM_Sectoid": {
    "width": 720,
    "height": 900,
-   "clipped_white_pixels": 1205,
-   "clipped_white_saturated": 1442,
-   "clipped_body_pixels": 1205,
-   "clipped_body_pixels_on_subject": 1205,
+   "clipped_white_pixels": 895,
+   "clipped_white_saturated": 2082,
+   "clipped_body_pixels": 895,
+   "clipped_body_pixels_on_subject": 895,
    "clipped_colour_pixels_non_emissive": 0,
    "clipped_colour_pixels_emissive": 0,
    "clip_definitions": {
@@ -1687,108 +1683,108 @@
     "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
     "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
    },
-   "bright_pixels_gt190": 6561,
-   "emissive_pixels": 2717,
-   "rim_pixels": 196856,
-   "background_darkness": 60.217,
+   "bright_pixels_gt190": 15860,
+   "emissive_pixels": 10426,
+   "rim_pixels": 73563,
+   "background_darkness": 54.178,
    "background_darkness_by_side": {
-    "top": 0.96,
-    "bottom": 145.53,
-    "left": 50.03,
-    "right": 46.68
+    "top": 0.97,
+    "bottom": 124.26,
+    "left": 50.56,
+    "right": 43.35
    },
    "zone_stats": {
     "face": {
      "n": 11013,
-     "mean_lum": 11.211,
-     "p50_lum": 3.362,
-     "p99_lum": 70.982,
-     "max_lum": 85.928,
-     "max_channel": 100,
+     "mean_lum": 55.102,
+     "p50_lum": 56.962,
+     "p99_lum": 81.838,
+     "max_lum": 89.43,
+     "max_channel": 103,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.006067
+     "mean_lin": 0.041225
     },
     "torso": {
      "n": 11666,
-     "mean_lum": 71.499,
-     "p50_lum": 32.462,
-     "p99_lum": 239.022,
-     "max_lum": 241.022,
-     "max_channel": 248,
-     "bright_gt190": 2392,
-     "saturated_gt190": 669,
-     "mean_lin": 0.17253
+     "mean_lum": 155.7,
+     "p50_lum": 184.194,
+     "p99_lum": 230.457,
+     "max_lum": 232.669,
+     "max_channel": 241,
+     "bright_gt190": 6526,
+     "saturated_gt190": 4443,
+     "mean_lin": 0.419934
     },
     "lowbody": {
      "n": 7796,
-     "mean_lum": 94.83,
-     "p50_lum": 52.978,
-     "p99_lum": 255.0,
-     "max_lum": 255.0,
+     "mean_lum": 97.768,
+     "p50_lum": 62.832,
+     "p99_lum": 251.444,
+     "max_lum": 253.299,
      "max_channel": 255,
-     "bright_gt190": 1804,
-     "saturated_gt190": 635,
-     "mean_lin": 0.240645
+     "bright_gt190": 1676,
+     "saturated_gt190": 474,
+     "mean_lin": 0.22566
     },
     "feet": {
-     "n": 3843,
-     "mean_lum": 53.634,
-     "p50_lum": 38.534,
-     "p99_lum": 134.479,
-     "max_lum": 145.502,
-     "max_channel": 159,
-     "bright_gt190": 0,
-     "saturated_gt190": 0,
-     "mean_lin": 0.05807
+     "n": 3844,
+     "mean_lum": 98.609,
+     "p50_lum": 89.338,
+     "p99_lum": 218.891,
+     "max_lum": 254.575,
+     "max_channel": 255,
+     "bright_gt190": 328,
+     "saturated_gt190": 279,
+     "mean_lin": 0.164952
     },
     "floor_front": {
      "n": 1000,
-     "mean_lum": 145.258,
-     "p50_lum": 145.073,
-     "p99_lum": 148.001,
-     "max_lum": 148.073,
-     "max_channel": 162,
+     "mean_lum": 151.651,
+     "p50_lum": 151.494,
+     "p99_lum": 153.853,
+     "max_lum": 154.137,
+     "max_channel": 165,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.294086
+     "mean_lin": 0.31883
     },
     "floor_shadow_side": {
      "n": 805,
-     "mean_lum": 148.274,
-     "p50_lum": 148.431,
-     "p99_lum": 152.928,
-     "max_lum": 153.928,
-     "max_channel": 168,
+     "mean_lum": 114.301,
+     "p50_lum": 114.202,
+     "p99_lum": 123.353,
+     "max_lum": 125.711,
+     "max_channel": 142,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.307813
+     "mean_lin": 0.17246
     },
     "floor_key_side": {
      "n": 950,
-     "mean_lum": 142.808,
-     "p50_lum": 143.288,
-     "p99_lum": 150.998,
-     "max_lum": 151.998,
-     "max_channel": 167,
+     "mean_lum": 109.485,
+     "p50_lum": 109.778,
+     "p99_lum": 114.857,
+     "max_lum": 117.215,
+     "max_channel": 129,
      "bright_gt190": 0,
      "saturated_gt190": 0,
-     "mean_lin": 0.286046
+     "mean_lin": 0.15891
     }
    },
-   "body_pixels": 71416,
-   "visible_body_pixels": 28944,
+   "body_pixels": 71417,
+   "visible_body_pixels": 67042,
    "rim_band_pixels": 7825,
-   "rim_band_bright_pixels": 756,
-   "rim_band_mean_lum": 59.246,
-   "rim_band_hot_mean_lum": 201.995,
+   "rim_band_bright_pixels": 1269,
+   "rim_band_mean_lum": 80.197,
+   "rim_band_hot_mean_lum": 207.503,
    "rim_band_clipped_pixels": 0,
-   "rim_bright_over_body": 0.01059,
-   "rim_bright_over_visible_body": 0.02612,
+   "rim_bright_over_body": 0.01777,
+   "rim_bright_over_visible_body": 0.01893,
    "contact_shadow_pixels": 6324,
-   "contact_shadow_mean_lum": 83.756,
-   "contact_shadow_p50_lum": 117.726,
-   "contact_shadow_ratio_mask": 0.5766,
+   "contact_shadow_mean_lum": 78.344,
+   "contact_shadow_p50_lum": 100.201,
+   "contact_shadow_ratio_mask": 0.5166,
    "emissive_only": {
     "width": 720,
     "height": 900,
@@ -1807,27 +1803,27 @@
      "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
      "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
     },
-    "bright_pixels_gt190": 588,
-    "emissive_pixels": 588,
-    "rim_pixels": 993,
-    "background_darkness": 0.542,
+    "bright_pixels_gt190": 544,
+    "emissive_pixels": 544,
+    "rim_pixels": 146,
+    "background_darkness": 0.419,
     "background_darkness_by_side": {
      "top": 0.41,
-     "bottom": 0.78,
-     "left": 0.48,
-     "right": 0.52
+     "bottom": 0.45,
+     "left": 0.41,
+     "right": 0.42
     },
     "zone_stats": {
      "face": {
       "n": 11013,
-      "mean_lum": 2.447,
-      "p50_lum": 1.0,
-      "p99_lum": 15.665,
-      "max_lum": 20.385,
-      "max_channel": 27,
+      "mean_lum": 0.793,
+      "p50_lum": 0.787,
+      "p99_lum": 4.648,
+      "max_lum": 6.866,
+      "max_channel": 9,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.000773
+      "mean_lin": 0.000241
      },
      "torso": {
       "n": 11666,
@@ -1852,7 +1848,7 @@
       "mean_lin": 0.000127
      },
      "feet": {
-      "n": 3843,
+      "n": 3844,
       "mean_lum": 0.415,
       "p50_lum": 0.0,
       "p99_lum": 1.0,
@@ -1864,57 +1860,57 @@
      },
      "floor_front": {
       "n": 1000,
-      "mean_lum": 0.713,
-      "p50_lum": 0.751,
-      "p99_lum": 3.146,
-      "max_lum": 3.861,
-      "max_channel": 5,
+      "mean_lum": 0.411,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.000216
+      "mean_lin": 0.000125
      },
      "floor_shadow_side": {
       "n": 805,
-      "mean_lum": 0.718,
-      "p50_lum": 0.787,
-      "p99_lum": 2.43,
-      "max_lum": 3.218,
-      "max_channel": 4,
+      "mean_lum": 0.427,
+      "p50_lum": 0.0,
+      "p99_lum": 1.0,
+      "max_lum": 1.0,
+      "max_channel": 1,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.000218
+      "mean_lin": 0.00013
      },
      "floor_key_side": {
       "n": 950,
-      "mean_lum": 1.109,
-      "p50_lum": 1.0,
-      "p99_lum": 3.933,
-      "max_lum": 5.363,
-      "max_channel": 7,
+      "mean_lum": 0.501,
+      "p50_lum": 0.715,
+      "p99_lum": 1.0,
+      "max_lum": 1.715,
+      "max_channel": 2,
       "bright_gt190": 0,
       "saturated_gt190": 0,
-      "mean_lin": 0.000337
+      "mean_lin": 0.000152
      }
     },
-    "body_pixels": 71416,
-    "visible_body_pixels": 5621,
+    "body_pixels": 71417,
+    "visible_body_pixels": 2235,
     "rim_band_pixels": 7825,
     "rim_band_bright_pixels": 0,
-    "rim_band_mean_lum": 0.781,
+    "rim_band_mean_lum": 0.487,
     "rim_band_hot_mean_lum": 0.0,
     "rim_band_clipped_pixels": 0,
     "rim_bright_over_body": 0.0,
     "rim_bright_over_visible_body": 0.0,
     "contact_shadow_pixels": 6324,
-    "contact_shadow_mean_lum": 0.444,
+    "contact_shadow_mean_lum": 0.417,
     "contact_shadow_p50_lum": 0.0,
-    "contact_shadow_ratio_mask": 0.6227
+    "contact_shadow_ratio_mask": 1.0146
    },
    "studio_vs_reveal": {
     "width": 1440,
     "height": 900,
-    "clipped_white_pixels": 1673,
-    "clipped_white_saturated": 6908,
+    "clipped_white_pixels": 1223,
+    "clipped_white_saturated": 7337,
     "clipped_body_pixels": 0,
     "clipped_body_pixels_on_subject": 0,
     "clipped_colour_pixels_non_emissive": 0,
@@ -1928,15 +1924,15 @@
      "emissive_pixels": "max channel > 190 and max-min >= 25 (coloured glow)",
      "rim_pixels": "g - r > 55 and g > 90 (alien green rim)"
     },
-    "bright_pixels_gt190": 98099,
-    "emissive_pixels": 55268,
-    "rim_pixels": 195954,
-    "background_darkness": 72.69,
+    "bright_pixels_gt190": 103841,
+    "emissive_pixels": 62540,
+    "rim_pixels": 73310,
+    "background_darkness": 68.944,
     "background_darkness_by_side": {
-     "top": 4.86,
-     "bottom": 160.08,
-     "left": 77.23,
-     "right": 51.61
+     "top": 4.94,
+     "bottom": 148.51,
+     "left": 80.6,
+     "right": 43.57
     }
    },
    "zones": {
@@ -2019,33 +2015,33 @@
     }
    },
    "rig": {
-    "key": 34.306,
-    "rim": 350.0,
+    "key": 53.372,
+    "rim": 200.0,
     "under": 2561.0,
-    "pool": 224.32,
-    "wash": 7.691
+    "pool": 510.256,
+    "wash": 147.407
    },
    "emissive_materials": {
     "accent": "XCOM_Sectoid_ACCENT_EMISSIVE"
    },
    "emission_strength": {
-    "accent": 0.9,
-    "eye": 0.9,
-    "core": 0.8,
-    "plasma": 0.7
+    "accent": 0.32,
+    "eye": 0.32,
+    "core": 0.3,
+    "plasma": 0.26
    },
    "body_height": 1.3918,
-   "torso_mean_lum": 71.499,
-   "face_mean_lum": 11.211,
-   "under_lowbody_over_torso": 1.3263,
-   "under_feet_over_torso": 0.7501,
-   "floor_zone_min_diff_pct": 1.69,
+   "torso_mean_lum": 155.7,
+   "face_mean_lum": 55.102,
+   "under_lowbody_over_torso": 0.6279,
+   "under_feet_over_torso": 0.6333,
+   "floor_zone_min_diff_pct": 4.21,
    "floor_zone_means": {
-    "floor_front": 145.26,
-    "floor_shadow_side": 148.27,
-    "floor_key_side": 142.81
+    "floor_front": 151.65,
+    "floor_shadow_side": 114.3,
+    "floor_key_side": 109.48
    },
-   "contact_shadow_ratio": 1.0208,
+   "contact_shadow_ratio": 0.7537,
    "criteria": {
     "no_clipped_white": false,
     "no_clipped_body": false,
@@ -2058,11 +2054,11 @@
     "torso_p99_ge_25": true,
     "rim_3pct_of_body": false,
     "rim_band_mean_ge_120": false,
-    "under_lowbody_1_3x_torso": true,
+    "under_lowbody_1_3x_torso": false,
     "under_feet_1_3x_torso": false
    },
    "all_criteria_pass": false,
-   "criteria_passed": 6,
+   "criteria_passed": 5,
    "failed_criteria": [
     "no_clipped_white",
     "no_clipped_body",
@@ -2070,6 +2066,7 @@
     "background_darkness_le_40",
     "rim_3pct_of_body",
     "rim_band_mean_ge_120",
+    "under_lowbody_1_3x_torso",
     "under_feet_1_3x_torso"
    ]
   }

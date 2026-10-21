@@ -20,11 +20,11 @@ below are expressed RELATIVE to the actor root at the feet, in UE axes
 
 | # | Element | UE light | Colour (R,G,B) | Intensity (cd) | Attenuation radius | Relative location (X,Y,Z) | Rotation (Pitch,Yaw,Roll) | Enabled when |
 |---|---------|----------|-----------------|----------------|--------------------|--------------------------|-----------------------------|---------------|
-| 1 | `reveal_key` | Spot | (0.62, 0.78, 1.00) | 84.1 | 10 cm | (1.81, -1.688, 3.488) | (-131.99, 137.0, 0.0) | always on while the enemy is revealed (reveal window open). Fade in over 0.25 s with the spawn animation. |
-| 2 | `reveal_rim` | Point | (0.20, 1.00, 0.42) | 2942.9 | 5 cm | (-1.454, -0.839, 2.309) | (-122.0, 29.99, 0.0) | always on while revealed. This is the only thing separating the silhouette from the black backdrop - it must never be disabled. |
-| 3 | `reveal_under` | Point | (0.45, 0.90, 1.00) | 2942.9 | 2 cm | (0.108, 0.0, 0.072) | (-45.0, 180.0, 0.0) | enabled only during the reveal (the creature rises out of the floor). Disabled once the creature is fully stood up. |
-| 4 | `reveal_pool` | Spot | (0.52, 0.72, 1.00) | 247.3 | 20 cm | (-1.041, -0.379, 4.035) | (-157.36, -6.72, 0.0) | enabled with the reveal. Optional but it is what puts a bounded pool of light on the ground and the contact shadow under the feet. |
-| 5 | `reveal_wash` | Point | (0.45, 0.55, 0.70) | 19.8 | 25 cm | (-1.303, -0.349, 3.338) | (-158.0, 14.99, 0.0) | optional ambient floor lift. Keep it dim - it is what makes the shadow side of the floor readable without flattening it. |
+| 1 | `reveal_key` | Spot | (0.62, 0.78, 1.00) | 126.1 | 10 cm | (1.81, -1.688, 3.488) | (-131.99, 137.0, 0.0) | always on while the enemy is revealed (reveal window open). Fade in over 0.25 s with the spawn animation. |
+| 2 | `reveal_rim` | Point | (0.20, 1.00, 0.42) | 420.4 | 5 cm | (-0.903, -0.079, 2.71) | (-147.99, 5.0, 0.0) | always on while revealed. This is the only thing separating the silhouette from the black backdrop - it must never be disabled. |
+| 3 | `reveal_under` | Point | (0.45, 0.90, 1.00) | 8940.4 | 2 cm | (0.108, 0.0, 0.072) | (-45.0, 180.0, 0.0) | enabled only during the reveal (the creature rises out of the floor). Disabled once the creature is fully stood up. |
+| 4 | `reveal_pool` | Spot | (0.52, 0.72, 1.00) | 1321.6 | 20 cm | (-1.041, -0.379, 4.035) | (-157.36, -6.72, 0.0) | enabled with the reveal. Optional but it is what puts a bounded pool of light on the ground and the contact shadow under the feet. |
+| 5 | `reveal_wash` | Point | (0.45, 0.55, 0.70) | 381.8 | 25 cm | (1.646, -0.144, 2.359) | (-144.99, 175.0, 0.0) | optional ambient floor lift. Keep it dim - it is what makes the shadow side of the floor readable without flattening it. |
 
 Rotation note: a UE spotlight emits along -Z at zero rotation, so the
 listed (Pitch, Yaw, Roll) already includes the -90 pitch.  Each light
@@ -33,7 +33,7 @@ equivalent and is usually easier to wire in Blueprint.
 
 ### 1a. reveal_key - hard cold key, front-left
 
-- Type: **Spot**, colour (0.62, 0.78, 1.00), intensity **84.1 cd**
+- Type: **Spot**, colour (0.62, 0.78, 1.00), intensity **126.1 cd**
 - Inner cone 24 deg / outer cone 40 deg, shadow casting ON.
 - Location (actor space): (1.81, -1.688, 3.488)   Aim at chest: (0.0, 0.0, 1.26)
 - Rotation: (-131.99, 137.0, 0.0)
@@ -43,7 +43,7 @@ equivalent and is usually easier to wire in Blueprint.
 
 ### 1b. reveal_rim - alien green rim, behind-above
 
-The reference rig uses a LONG THIN AREA STRIP (5.00 x 1.20 body
+The reference rig uses a LONG THIN AREA STRIP (0.90 x 0.30 body
 heights) behind and above the subject.  A strip wraps the whole
 silhouette edge in one pass; a spot only ever grazes a thin slice of
 it, and trying to make a spot cover the edge is what drives the rim
@@ -54,17 +54,17 @@ a Spot with a wide cone if the project has no area lights.  The
 intensity below is the measured Blender value; for UE, divide by the
 strip area and use the resulting value with a wide outer cone.
 
-- Type: **Spot**, colour (0.20, 1.00, 0.42), intensity **2942.9 cd**
+- Type: **Spot**, colour (0.20, 1.00, 0.42), intensity **420.4 cd**
 - Inner cone 30 deg / outer cone 50 deg, shadow casting ON.
-- Location (actor space): (-1.454, -0.839, 2.309)   Aim at chest: (0.0, 0.0, 1.26)
-- Rotation: (-122.0, 29.99, 0.0)
+- Location (actor space): (-0.903, -0.079, 2.71)   Aim at chest: (0.0, 0.0, 1.26)
+- Rotation: (-147.99, 5.0, 0.0)
 - Behind and above, grazing the silhouette.  It is the SEPARATION light:
   with the backdrop near-black, this is the only thing that draws the
   outline.  Never let it be culled or replaced by a fill.
 
 ### 1c. reveal_under - cyan under-glow, local uplight
 
-- Type: **Point**, colour (0.45, 0.90, 1.00), intensity **2942.9 cd**
+- Type: **Point**, colour (0.45, 0.90, 1.00), intensity **8940.4 cd**
 - Location (actor space): (0.108, 0.0, 0.072)  (at the feet, between them, 0.07 m above
   the floor)  Aim at the legs: (0.0, 0.0, 0.18)
 - Attenuation radius 2 cm, shadow casting OFF.
@@ -75,11 +75,11 @@ strip area and use the resulting value with a wide outer cone.
 
 ### 1d. reveal_pool + reveal_wash - the floor
 
-- reveal_pool: **Spot**, colour (0.52, 0.72, 1.00), intensity **247.3 cd**,
+- reveal_pool: **Spot**, colour (0.52, 0.72, 1.00), intensity **1321.6 cd**,
   cone 22 deg with a soft edge, aimed at the ground 0.63 m in front of
   the feet, from behind-above.  It makes the bounded pool of light on
   the floor AND the creature's own contact shadow inside it.
-- reveal_wash: **Point**, colour (0.45, 0.55, 0.70), intensity **19.8 cd**,
+- reveal_wash: **Point**, colour (0.45, 0.55, 0.70), intensity **381.8 cd**,
   25 cm source radius, shadow casting off.  This is the only ambient
   term in the rig.  It must stay dim: it exists so the shadow side of
   the floor is readable, not so the creature is lit from nowhere.
@@ -88,7 +88,7 @@ strip area and use the resulting value with a wide outer cone.
 
 | Material | Emission colour | Blender emission strength | UE5 emissive value |
 |----------|-----------------|----------------------------|-------------------|
-| `XCOM_Chryssalid_ACCENT_EMISSIVE` | (0.05, 1.00, 0.25) | 0.50 | 10.0 |
+| `XCOM_Chryssalid_ACCENT_EMISSIVE` | (0.05, 1.00, 0.25) | 0.32 | 6.4 |
 
 UE5 multiplies an emissive colour by 20 internally, so the UE column is
 the Blender strength x 20.  Set these on the material instance; do not
@@ -123,7 +123,7 @@ reference is a dark scene, not a smoky one.
   so all five enemies cast their shadow the same way.
 - The rim is ALWAYS behind-above.
 - The world stays near-black (Blender background strength 0.10 in the
-  reference renders, which measured a background_darkness of 71.3).
+  reference renders, which measured a background_darkness of 55.3).
 - Nothing in the rig may be allowed to clip: the reference frames have
   0 clipped white pixels on the body.
 
@@ -131,10 +131,11 @@ reference is a dark scene, not a smoky one.
 
 | Enemy | clipped white | clipped body | clipped colour (non-emissive) | emissive px | rim px | background darkness | floor zones | face p99 | torso p99 |
 |--------|---------------|-------------|------------------------------|------------|-------|--------------------|-------------|----------|-----------|
-| XCOM_Chryssalid | 0 | 0 | 0 | 22739 | 279364 | 71.3 | front 157, shadow_side 153, key_side 162 | 231 | 148 |
-| XCOM_Muton | 0 | 0 | 0 | 3091 | 253861 | 67.6 | front 152, shadow_side 160, key_side 165 | 197 | 230 |
-| XCOM_Floater | 0 | 0 | 0 | 8306 | 46589 | 1.7 | front 32, shadow_side 36, key_side 36 | 0 | 40 |
-| XCOM_Viper | 194 | 194 | 0 | 14242 | 251503 | 69.6 | front 151, shadow_side 160, key_side 168 | 198 | 238 |
+| XCOM_Chryssalid | 0 | 0 | 0 | 173 | 38389 | 55.3 | front 118, shadow_side 101, key_side 106 | 251 | 163 |
+| XCOM_Muton | 0 | 0 | 0 | 13915 | 59712 | 66.0 | front 159, shadow_side 132, key_side 117 | 213 | 237 |
+| XCOM_Floater | 0 | 0 | 0 | 30 | 603 | 0.7 | front 53, shadow_side 83, key_side 62 | 0 | 74 |
+| XCOM_Viper | 344 | 344 | 0 | 75 | 84051 | 57.2 | front 151, shadow_side 122, key_side 127 | 210 | 239 |
+| XCOM_Sectoid | 895 | 895 | 0 | 10426 | 73563 | 54.2 | front 152, shadow_side 114, key_side 109 | 82 | 230 |
 
 ## 6. Wiring it up in Blueprint
 
