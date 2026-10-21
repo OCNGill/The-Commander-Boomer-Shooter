@@ -123,8 +123,8 @@ def build_manifest():
 
     # ---- categorized gallery: one bucket per workstream ----
     CATS = [
-        ("enemies", ("out_xcom", "xcom", "enemy")),
-        ("lighting", ("out_lighting", "lighting", "rig_evidence")),
+        ("lighting", ("out_lighting", "lighting", "rig_evidence", "reveal", "emissive")),
+        ("enemies", ("out_xcom", "enemy", "sectoid", "viper", "floater", "muton", "chryssalid")),
         ("level", ("out_level", "level", "blueprint")),
         ("textures", ("out_textures", "textures", "trim", "contact")),
         ("ebert", ("ebert", "verdict")),
@@ -266,6 +266,11 @@ async function go(){
   const dirty=(m.dirty||[]).map(c=>`<li class="warn">${esc(c)}</li>`).join('')||'<li class="dim">clean tree</li>';
   const fbx=(m.blender_fbx||[]).map(f=>`<li>${esc(f.name)} <span class="dim">${f.kb}KB</span></li>`).join('')||'<li class="dim">no FBX yet</li>';
   const ue=(m.ue_assets||[]).map(a=>`<li>${esc(a.path)} <span class="dim">${a.kb}KB</span></li>`).join('')||'<li class="dim">none</li>';
+  const gal=Object.entries(m.gallery||{}).map(([k,v])=>`<h3 style="margin:16px 0 8px;color:#9fd">${esc(k)} <span class="dim">(${v.length})</span></h3><div class="imgs">${v.map(i=>`<figure><a href="/file/${encodeURI(i.path)}" target="_blank"><img src="/file/${encodeURI(i.path)}?v=${Date.now()}" loading="lazy"><figcaption>${esc(i.path.split('/').pop())}</figcaption></a></figure>`).join('')}</div>`).join('');
+  const brf=(m.briefs||[]).map(b=>`<details><summary>${esc(b.name)} <span class="dim">${b.kb}KB</span></summary><pre>${esc(b.text)}</pre></details>`).join('');
+  const ebt=(m.ebert||[]).map(b=>`<details><summary>${esc(b.name)} <span class="dim">${b.kb}KB</span></summary><pre>${esc(b.text)}</pre></details>`).join('');
+  const lv=m.level_stats||{};const lfind=(lv.findings||[]).map(f=>`<li>${esc(f)}</li>`).join('');
+  const lgrid=lv.grid?`<div class="dim">grid ${lv.grid.cell_u}u · ${lv.grid.cells} cells · ${lv.grid.blocked_cells} blocked · ${lv.grid.reachable_from_drop} reachable from drop</div>`:'';
   const docs=(m.docs||[]).map(d=>`<li><a href="/file/${encodeURI(d.path)}">${esc(d.path.split('/').pop())}</a> <span class="dim">${d.kb}KB ${esc(d.mtime)}</span></li>`).join('');
   document.getElementById('sub').innerHTML='updated '+esc(m.generated)+' · repo <code>'+esc(m.repo.split('/').pop())+'</code> · '+
     'queue '+(m.queue.tasks||[]).length+' tasks · ledger '+(m.ledger||[]).length+' · images '+(m.images||[]).length+' · UE '+(m.ue_counts.uasset||0)+' assets / '+(m.ue_counts.umap||0)+' maps';
@@ -285,6 +290,10 @@ async function go(){
   <h2>Renders &amp; screenshots</h2><div class="imgs">${imgs||'<span class="dim">none yet</span>'}</div>
   <h2>Blender kit</h2><ul>${fbx}</ul>
   <h2>UE content</h2><ul>${ue}</ul>
+  <h2>Level findings</h2>${lgrid}<ul>${lfind||'<li class="dim">no level stats yet</li>'}</ul>
+  <h2>Gallery by workstream</h2>${gal||'<div class="dim">no images yet</div>'}
+  <h2>Briefs &amp; launch packets</h2>${brf||'<div class="dim">none</div>'}
+  <h2>Ebert verdicts</h2>${ebt||'<div class="dim">none yet</div>'}
   <h2>Design docs</h2><ul>${docs}</ul>
   <h2>Git</h2><ul>${commits}</ul><h2>Uncommitted</h2><ul>${dirty}</ul>`;
 }
