@@ -1030,7 +1030,11 @@ def tex_tar():
     Y = np.arange(h, dtype=np.float32)[:, None]
     X = np.arange(w, dtype=np.float32)[None, :]
 
-    base = fbm(h, w, SEED + 61, octaves=6, fy=32, fx=32)
+    # Rolled roofing has PARALLEL laps running one way. Every other field
+    # here uses a frequency that is deliberately INCOMMENSURATE with the
+    # 256 px seam pitch, so nothing lines up with the seams and no second
+    # direction of banding appears.
+    base = fbm(h, w, SEED + 61, octaves=6, fy=24, fx=20)
     grit = hash01(h, w, SEED + 62)
 
     rgb = np.zeros((h, w, 3), np.float32)
@@ -1039,25 +1043,25 @@ def tex_tar():
     rgb[:, :, 2] = TAR_BASE[2] + (base - 0.5) * 0.055
     height = (base - 0.5) * 0.10
 
-    # ---- embedded granules: voronoi chips, angular like real grit --------
-    # Two scales of angular chip, and the selection is irregular so the
-    # field never settles into a visible grid of square modules.
-    f1, f2, cid = worley2(h, w, 7, SEED + 63)
+    # ---- embedded granules: angular chips, bedded into the tar -----------
+    # The grit is the clearest tar cue, so it is dense, angular, and sits IN
+    # the surface rather than scattered on top of it.
+    f1, f2, cid = worley2(h, w, 5, SEED + 63)
     tone = hash_int(cid, SEED + 64)
-    gsel = smoothstep(0.34, 0.52, tone) * smoothstep(0.62, 0.40, tone)
-    gsel = np.clip(gsel + smoothstep(0.72, 0.88, tone) * 0.8, 0, 1)
-    gedge = smoothstep(1.8, 0.0, f2 - f1)
-    gdome = smoothstep(3.2, 0.0, f1)
-    rgb = tint(rgb, gsel * (1.0 - gedge * 0.8) * 0.75, TAR_GRIT)
-    rgb = tint(rgb, gsel * gedge * 0.35, (0.030, 0.032, 0.036))
-    height = height + gsel * gdome * 0.22
-    # a second, coarser scatter of larger stones
-    k1, k2, kcid = worley2(h, w, 23, SEED + 63)
-    ksel = smoothstep(0.80, 0.93, hash_int(kcid, SEED + 641))
-    kedge = smoothstep(2.4, 0.0, k2 - k1)
-    rgb = tint(rgb, ksel * (1.0 - kedge * 0.85) * 0.80, (0.480, 0.470, 0.445))
-    rgb = tint(rgb, ksel * kedge * 0.40, (0.026, 0.028, 0.032))
-    height = height + ksel * smoothstep(11.0, 0.0, k1) * 0.34
+    gsel = smoothstep(0.30, 0.46, tone) * smoothstep(0.66, 0.44, tone)
+    gsel = np.clip(gsel + smoothstep(0.74, 0.90, tone) * 0.9, 0, 1)
+    gedge = smoothstep(1.4, 0.0, f2 - f1)
+    gdome = smoothstep(2.4, 0.0, f1)
+    rgb = tint(rgb, gsel * (1.0 - gedge * 0.8) * 0.80, TAR_GRIT)
+    rgb = tint(rgb, gsel * gedge * 0.40, (0.030, 0.032, 0.036))
+    height = height + gsel * gdome * 0.16
+    # a second, coarser scatter of larger stones, bedded down
+    k1, k2, kcid = worley2(h, w, 19, SEED + 63)
+    ksel = smoothstep(0.82, 0.94, hash_int(kcid, SEED + 641))
+    kedge = smoothstep(2.0, 0.0, k2 - k1)
+    rgb = tint(rgb, ksel * (1.0 - kedge * 0.85) * 0.85, (0.480, 0.470, 0.445))
+    rgb = tint(rgb, ksel * kedge * 0.45, (0.026, 0.028, 0.032))
+    height = height + ksel * smoothstep(9.0, 0.0, k1) * 0.22
 
     # ---- rolled seams: a raised lap with a lit top edge and a cast shadow --
     # A rolled seam is a lap, not a drawn line: it wanders, and it is broken
@@ -1065,29 +1069,31 @@ def tex_tar():
     pitch = 256.0
     sy = ((Y + pitch / 2) % pitch) - pitch / 2
     wander = (fbm(h, w, SEED + 65, octaves=4, fy=2, fx=16) - 0.5) * 26.0
-    ragged = (fbm(h, w, SEED + 651, octaves=4, fy=32, fx=32) - 0.5) * 5.0
+    ragged = (fbm(h, w, SEED + 651, octaves=4, fy=8, fx=32) - 0.5) * 5.0
     s = sy + wander + ragged
     lip_r = smoothstep(11.0, 0.0, np.abs(s))
     # the crown of the roll catches the sky; the trough below it is in shade
     crown = smoothstep(7.0, 2.0, s) * smoothstep(-4.0, -10.0, s)
     trough = smoothstep(6.0, 16.0, s) * smoothstep(26.0, 15.0, s)
     rgb = tint(rgb, lip_r * 0.45, TAR_SEAM)
-    rgb = tint(rgb, crown * 0.30, (0.330, 0.340, 0.360))
-    rgb = tint(rgb, trough * 0.60, (0.020, 0.022, 0.026))
-    height = height + lip_r * 0.60 + crown * 0.35 - trough * 0.30
+    # a narrow, bright, CONTINUOUS highlight along the crown: this is what
+    # makes the lap read as a raised roll rather than a drawn line
+    rgb = tint(rgb, crown * 0.60, (0.520, 0.535, 0.560))
+    rgb = tint(rgb, trough * 0.70, (0.015, 0.017, 0.020))
+    height = height + lip_r * 0.85 + crown * 0.50 - trough * 0.45
 
     # ---- patch repairs: a trowelled patch with a raised, ragged edge ------
     # The patch shape comes from a MULTI-OCTAVE field rather than one
     # thresholded lattice: a single lattice draws its own grid, and the
     # surface then reads as a mosaic of square tiles.
-    patch_f = fbm(h, w, SEED + 66, octaves=6, fy=32, fx=32)
+    patch_f = fbm(h, w, SEED + 66, octaves=6, fy=20, fx=28)
     patch = smoothstep(0.52, 0.66, patch_f)
     patch_edge = patch * smoothstep(0.66, 0.60, patch_f)
-    trowel = fbm_aniso(h, w, SEED + 67, octaves=4, fy=32, fx=8)
-    rgb = tint(rgb, patch * 0.65, (0.045, 0.047, 0.053))
-    rgb = tint(rgb, patch * smoothstep(0.55, 0.80, trowel) * 0.35, (0.085, 0.087, 0.094))
-    rgb = tint(rgb, patch_edge * 0.55, (0.115, 0.118, 0.128))
-    height = height + patch * 0.22 + patch_edge * 0.25
+    trowel = fbm_aniso(h, w, SEED + 67, octaves=4, fy=64, fx=11)
+    rgb = tint(rgb, patch * 0.38, (0.045, 0.047, 0.053))
+    rgb = tint(rgb, patch * smoothstep(0.55, 0.80, trowel) * 0.22, (0.085, 0.087, 0.094))
+    rgb = tint(rgb, patch_edge * 0.40, (0.115, 0.118, 0.128))
+    height = height + patch * 0.14 + patch_edge * 0.18
 
     # ---- blisters: domed bulges of trapped air under a stretched skin -----
     bf1, bf2, bcid = worley2(h, w, 34, SEED + 68)
@@ -1112,20 +1118,24 @@ def tex_tar():
     # ---- wet sheen: standing water with a broad sky reflection ------------
     # A multi-octave field, not one coarse lattice: a single lattice would
     # draw its own grid and the pools would read as square tiles.
-    wet_f = fbm(h, w, SEED + 72, octaves=6, fy=32, fx=32)
+    wet_f = fbm(h, w, SEED + 72, octaves=6, fy=28, fx=18)
     wet = smoothstep(0.50, 0.66, wet_f)
     pool_edge = smoothstep(0.50, 0.55, wet_f) * smoothstep(0.66, 0.60, wet_f)
     rgb = tint(rgb, wet * 0.45, (0.030, 0.038, 0.052))
-    rgb = tint(rgb, smoothstep(0.55, 0.90, wet) * 0.30, (0.330, 0.380, 0.450))
-    rgb = tint(rgb, pool_edge * 0.40, (0.520, 0.570, 0.640))
+    # a glossy, directional reflection in the wet areas: tar roofs read wet
+    # from the SPECULAR response, not from being dark
+    rgb = tint(rgb, smoothstep(0.55, 0.90, wet) * 0.40, (0.330, 0.380, 0.450))
+    rgb = tint(rgb, pool_edge * 0.50, (0.560, 0.610, 0.680))
+    gloss = smoothstep(0.80, 0.97, fbm(h, w, SEED + 76, octaves=3, fy=64, fx=64))
+    rgb = tint(rgb, gloss * wet * 0.45, (0.720, 0.780, 0.860))
     height = height - wet * 0.06
 
-    moss = smoothstep(0.66, 0.86, fbm(h, w, SEED + 73, octaves=4, fy=16, fx=16))
+    moss = smoothstep(0.66, 0.86, fbm(h, w, SEED + 73, octaves=4, fy=32, fx=9))
     rgb = tint(rgb, moss * 0.42, TAR_FOREST)
-    rgb = tint(rgb, smoothstep(0.80, 0.94, fbm(h, w, SEED + 74, octaves=3, fy=8, fx=8)) * 0.24,
+    rgb = tint(rgb, smoothstep(0.80, 0.94, fbm(h, w, SEED + 74, octaves=3, fy=16, fx=5)) * 0.24,
                (0.330, 0.360, 0.300))
 
-    g = grime(h, w, SEED + 75, strength=0.25, fy=8, fx=8)
+    g = grime(h, w, SEED + 75, strength=0.25, fy=16, fx=5)
     rgb = tint(rgb, g * 0.35, (0.195, 0.192, 0.180))
     rgb = np.clip(rgb + (grit[:, :, None] - 0.5) * 0.035, 0, 1)
     rgb = np.clip(rgb, 0, 1)

@@ -418,60 +418,60 @@
     "file": "T_Roof_Tar.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 7255031,
-    "kb": 7085.0
+    "bytes": 7148115,
+    "kb": 6980.6
    },
    {
     "file": "T_Roof_Tar_normal.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 9621008,
-    "kb": 9395.5
+    "bytes": 9360777,
+    "kb": 9141.4
    },
    {
     "file": "T_Roof_Tar_rough.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 3278236,
-    "kb": 3201.4
+    "bytes": 2935068,
+    "kb": 2866.3
    },
    {
     "file": "T_Roof_Tar_contact.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 3984793,
-    "kb": 3891.4
+    "bytes": 3961106,
+    "kb": 3868.3
    },
    {
     "file": "T_Roof_Tar_crop1.png",
     "width": 1024,
     "height": 1024,
-    "bytes": 1815235,
-    "kb": 1772.7
+    "bytes": 1775862,
+    "kb": 1734.2
    },
    {
     "file": "T_Roof_Tar_crop2.png",
     "width": 1024,
     "height": 1024,
-    "bytes": 1812758,
-    "kb": 1770.3
+    "bytes": 1781616,
+    "kb": 1739.9
    },
    {
     "file": "T_Roof_Tar_crop3.png",
     "width": 1024,
     "height": 1024,
-    "bytes": 1816223,
-    "kb": 1773.7
+    "bytes": 1786108,
+    "kb": 1744.2
    }
   ],
   "kb": [
-   7085.0,
-   9395.5,
-   3201.4,
-   3891.4,
-   1772.7,
-   1770.3,
-   1773.7
+   6980.6,
+   9141.4,
+   2866.3,
+   3868.3,
+   1734.2,
+   1739.9,
+   1744.2
   ],
   "notes": "Tar roof: rolled seams, patch repairs, embedded angular grit, tar blisters, broken splits, cold puddle sheen, forest moss in the splits.",
   "size": [
@@ -487,10 +487,10 @@
    "#2B452F",
    "#4C5766"
   ],
-  "mean": 42.39,
-  "std": 19.66,
-  "seam_ratio_x": 2.104,
-  "seam_ratio_y": 2.024,
+  "mean": 42.85,
+  "std": 19.57,
+  "seam_ratio_x": 2.451,
+  "seam_ratio_y": 2.07,
   "maps": {
    "diffuse": "T_Roof_Tar.png",
    "normal": "T_Roof_Tar_normal.png",
@@ -614,12 +614,12 @@
     "file": "T_Set_TrimSheet.png",
     "width": 4096,
     "height": 4096,
-    "bytes": 10282120,
-    "kb": 10041.1
+    "bytes": 10248918,
+    "kb": 10008.7
    }
   ],
   "kb": [
-   10041.1
+   10008.7
   ],
   "notes": "Trim sheet: diffuse / normal / roughness / offset contact for all six materials, labelled and indexed 1-6.",
   "size": [
