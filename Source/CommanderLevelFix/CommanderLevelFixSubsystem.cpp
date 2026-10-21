@@ -41,6 +41,23 @@ namespace CommanderLevelFixPrivate
 	static const TCHAR* KeycardName = TEXT("StaticMeshActor_13");  // PU_KeyGreen_PillarTop
 }
 
+UCommanderLevelFixSubsystem::UCommanderLevelFixSubsystem(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+{
+	// Hard references so the engine meshes are cooked into the package:
+	// a Shipping cook drops anything only referenced at runtime.
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeFinder(TEXT("/Engine/BasicShapes/Cube.Cube"));
+	if (CubeFinder.Succeeded())
+	{
+		CubeMesh = CubeFinder.Object;
+	}
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> CylinderFinder(TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
+	if (CylinderFinder.Succeeded())
+	{
+		CylinderMesh = CylinderFinder.Object;
+	}
+}
+
 bool UCommanderLevelFixSubsystem::ShouldCreateSubsystem(UObject* Outer) const
 {
 	if (!Super::ShouldCreateSubsystem(Outer))
@@ -59,7 +76,15 @@ bool UCommanderLevelFixSubsystem::ShouldCreateSubsystem(UObject* Outer) const
 void UCommanderLevelFixSubsystem::OnWorldBeginPlay(UWorld& InWorld)
 {
 	Super::OnWorldBeginPlay(InWorld);
-	ApplyFixes(InWorld);
+	ApplyFixesToWorld(InWorld);
+}
+
+void UCommanderLevelFixSubsystem::ApplyFixes()
+{
+	if (UWorld* World = GetWorld())
+	{
+		ApplyFixesToWorld(*World);
+	}
 }
 
 AActor* UCommanderLevelFixSubsystem::FindByName(UWorld& World, const TCHAR* Name)
@@ -82,13 +107,17 @@ bool UCommanderLevelFixSubsystem::SetHeightBand(AActor& Actor, double BottomZ, d
 		return false;
 	}
 
-	const FBox Bounds = Mesh->GetLocalBounds().GetBox();
-	const double LocalHeight = Bounds.Max.Z - Bounds.Min.Z;
+	// UE 5.8: UStaticMeshComponent::GetLocalBounds takes the min/max out
+	// parameters, and it hides the zero-argument USceneComponent overload.
+	FVector BoundsMin = FVector::ZeroVector;
+	FVector BoundsMax = FVector::ZeroVector;
+	Mesh->GetLocalBounds(BoundsMin, BoundsMax);
+	const double LocalHeight = BoundsMax.Z - BoundsMin.Z;
 	if (LocalHeight <= KINDA_SMALL_NUMBER)
 	{
 		// Flat geometry (a plane): just move it so its surface sits at TopZ.
 		FVector Location = Actor.GetActorLocation();
-		Location.Z = TopZ - Bounds.Max.Z;
+		Location.Z = TopZ - BoundsMax.Z;
 		Actor.SetActorLocation(Location);
 		return true;
 	}
@@ -103,7 +132,7 @@ bool UCommanderLevelFixSubsystem::SetHeightBand(AActor& Actor, double BottomZ, d
 	{
 		return false;
 	}
-	const double LocalTopOffset = Bounds.Max.Z;
+	const double LocalTopOffset = BoundsMax.Z;
 
 	// Scale the actor so the mesh spans the requested band, then move it.
 	const double NewScaleZ = (TopZ - BottomZ) / WorldHeight * FMath::Sign(Scale.Z == 0.0 ? 1.0 : Scale.Z);
@@ -131,7 +160,7 @@ UMaterialInterface* UCommanderLevelFixSubsystem::GrabMapMaterial(UWorld& World, 
 	return Mesh ? Mesh->GetMaterial(0) : nullptr;
 }
 
-void UCommanderLevelFixSubsystem::ApplyFixes(UWorld& World)
+void UCommanderLevelFixSubsystem::ApplyFixesToWorld(UWorld& World)
 {
 	using namespace CommanderLevelFixPrivate;
 
@@ -246,7 +275,11 @@ void UCommanderLevelFixSubsystem::ApplyFixes(UWorld& World)
 			}
 			if (UStaticMeshComponent* Mesh = Cover->GetStaticMeshComponent())
 			{
-				if (CubeFinder.Succeeded())
+				if (CubeMesh)
+				{
+					Mesh->SetStaticMesh(CubeMesh);
+				}
+				else if (CubeFinder.Succeeded())
 				{
 					Mesh->SetStaticMesh(CubeFinder.Object);
 				}
@@ -285,7 +318,11 @@ void UCommanderLevelFixSubsystem::ApplyFixes(UWorld& World)
 			{
 				if (UStaticMeshComponent* Mesh = Beacon->GetStaticMeshComponent())
 				{
-					if (CylinderFinder.Succeeded())
+					if (CylinderMesh)
+					{
+						Mesh->SetStaticMesh(CylinderMesh);
+					}
+					else if (CylinderFinder.Succeeded())
 					{
 						Mesh->SetStaticMesh(CylinderFinder.Object);
 					}

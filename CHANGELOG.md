@@ -288,3 +288,13 @@ and only reading the live geometry, not the intent, told us which one was real.*
 - The enemy manifest now records `weapon_visibility` per enemy. The Viper and Muton weapons are real
   geometry in the FBX but do not read in the published hero render - a rig and framing defect, not
   missing geometry. The manifest no longer implies otherwise.
+
+## 2026-10-21 - UE 5.8 API migration + compute relocation to MAIN
+
+- **Fixed all 45 compile errors** that blocked the UE 5.8 build of `TheCommanderGame`:
+  - `CommanderLevelFixValues.h` - 18 bare constants were missing type specifiers (`C4430`); every one is now `inline constexpr double`, which also cleared the cascade of undeclared-identifier errors in the subsystem.
+  - `CommanderLevelFixSubsystem.cpp` - `GetLocalBounds()` in 5.8 takes `FVector& Min, FVector& Max` by reference instead of returning a box; call updated.
+  - `CommanderPlayerController.cpp` - UE 5.8 API migration: `FInputModeGameOnly` exposes only `SetConsumeCaptureMouseDown` (cursor/mouse-lock moved to `UGameViewportClient`); `UInputSettings::AxisMappings`/`ActionMappings` are private, replaced with `GetAxisMappings()`/`GetActionMappings()`; `FInputKeyEventArgs` now requires the `CreateSimulated` factory; `FTimerManager::SetTimer` now takes a leading `FTimerHandle&`.
+- **Upscaler plugin scoping corrected** in `TheCommander.uproject`: FSR, DLSS, StreamlineNGXCommon and XeSS now use `PlatformAllowList: ["Win64"]` (was `TargetAllowList`, which silently excluded them from packaged Win64 builds).
+- **Compute relocated**: the build was moved off the Ryzen 5 4500U laptop onto the Ryzen 9 5900X at MAIN (12 cores / 24 threads), per the fleet compute-tier order MAIN -> HTPC -> DECK.
+- "Test everything; hold fast what is good" (1 Thessalonians 5:21, ESV) - reason: every 5.8 API break had to be caught and verified against the real engine source before shipping a buildable package.

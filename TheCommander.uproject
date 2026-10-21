@@ -44,28 +44,28 @@
     {
       "Name": "FSR",
       "Enabled": true,
-      "TargetAllowList": [
+      "PlatformAllowList": [
         "Win64"
       ]
     },
     {
       "Name": "DLSS",
       "Enabled": true,
-      "TargetAllowList": [
+      "PlatformAllowList": [
         "Win64"
       ]
     },
     {
       "Name": "StreamlineNGXCommon",
       "Enabled": true,
-      "TargetAllowList": [
+      "PlatformAllowList": [
         "Win64"
       ]
     },
     {
       "Name": "XeSS",
       "Enabled": true,
-      "TargetAllowList": [
+      "PlatformAllowList": [
         "Win64"
       ]
     },

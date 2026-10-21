@@ -17,14 +17,15 @@
 #include "Subsystems/WorldSubsystem.h"
 #include "CommanderLevelFixSubsystem.generated.h"
 
+class AActor;
+class UMaterialInterface;
 class UStaticMeshComponent;
 class UStaticMesh;
-class UPointLight;
 
 /**
  * Applies the level fixes to the blockout map at world begin play:
  *
- *  - the five BO_PitRim posts stop walling the pit in and become a 0.25 m lip
+ *  - the five BO_PitRim segments stop walling the pit in and become a 0.25 m lip
  *  - BO_Ramp_Pit is sunk so its top face is flush with the arena floor
  *  - the three BO_PillarStep ledges are re-spaced into a traversable spiral
  *  - two cover blocks are added within 8 m of the pillar axis
@@ -36,14 +37,32 @@ class UCommanderLevelFixSubsystem : public UWorldSubsystem
 	GENERATED_BODY()
 
 public:
+	UCommanderLevelFixSubsystem(const FObjectInitializer& ObjectInitializer);
+
 	virtual bool ShouldCreateSubsystem(UObject* Outer) const override;
 	virtual void OnWorldBeginPlay(UWorld& InWorld) override;
 
-	/** Re-applies the fixes. Exposed so a game mode can call it after a level load. */
+	/**
+	 * Re-applies the fixes to this subsystem's world. Exposed so a game mode can
+	 * call it after a level load. Takes no arguments: a Blueprint-callable
+	 * function cannot take a UWorld reference, and UWorldSubsystem already
+	 * carries the world it belongs to.
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Commander|Level")
-	void ApplyFixes(UWorld& World);
+	void ApplyFixes();
 
 private:
+	/** Applies the fixes to a specific world. */
+	void ApplyFixesToWorld(UWorld& World);
+
+	/** Engine primitives, hard-referenced so they are cooked into the package. */
+	UPROPERTY()
+	TObjectPtr<UStaticMesh> CubeMesh;
+
+	UPROPERTY()
+	TObjectPtr<UStaticMesh> CylinderMesh;
+
+
 	/** Finds an actor by its always-serialized FName. */
 	static AActor* FindByName(UWorld& World, const TCHAR* Name);
 
