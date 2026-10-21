@@ -21,7 +21,11 @@ if [ "$#" -lt 1 ]; then
 fi
 
 SCRIPT="$1"; shift
-[ -f "$SCRIPT" ] || SCRIPT="$SWARM_DIR/$1"
+# NOTE: resolve the script path BEFORE any further arg shifts - a relative name is
+# resolved against the swarm dir, never against a later positional arg.
+if [ ! -f "$SCRIPT" ]; then
+  SCRIPT="$SWARM_DIR/$(basename "$SCRIPT")"
+fi
 if [ ! -f "$SCRIPT" ]; then
   echo "SCRIPT NOT FOUND: $SCRIPT" >&2
   exit 2
