@@ -280,12 +280,16 @@ else:
         half_len = abs(a.get_actor_scale3d().y) * 50.0
         hi = unreal.Vector(c.x + right.x * half_len, c.y + right.y * half_len, c.z + right.z * half_len)
         lo = unreal.Vector(c.x - right.x * half_len, c.y - right.y * half_len, c.z - right.z * half_len)
-        ok = (abs(hi.z - top) < 150.0) and (abs(lo.z - S) < 150.0)
-        L("ramp roll=%+0.1f  high end z=%.0f (want %.0f)  low end z=%.0f (want %.0f)  ok=%s"
-          % (sign * angle, hi.z, top, lo.z, S, ok))
+        edge_y = p.y - half_y
+        # the high end must MEET the platform's south edge - a ramp whose high end lands 15m away is a ramp to nowhere
+        ok = (abs(hi.z - top) < 150.0) and (abs(lo.z - S) < 150.0) \
+             and (abs(hi.y - edge_y) < 150.0) and (lo.y < hi.y - 100.0)
+        L("ramp roll=%+0.1f  high end z=%.0f (want %.0f)  low end z=%.0f (want %.0f)  high y=%.0f (want %.0f)  ok=%s"
+          % (sign * angle, hi.z, top, lo.z, S, hi.y, edge_y, ok))
         if ok:
             ramp_ok = True
-            L("BO_Ramp_NE OK - length=%.0f pitch=%.1f deg  high=%.0f low=%.0f" % (length, angle, hi.z, lo.z))
+            L("BO_Ramp_NE OK - length=%.0f pitch=%.1f deg  high=%.0f low=%.0f  high end (%.0f,%.0f,%.0f) meets the platform edge"
+              % (length, angle, hi.z, lo.z, hi.x, hi.y, hi.z))
             break
     if not ramp_ok:
         L("*** ramp tilt could not be verified ***")
@@ -364,6 +368,62 @@ else:
             if b[0] < qx1 and qx0 < b[1] and b[2] < qy1 and qy0 < b[3]:
                 L("!!! pit ramp footprint x[%.0f..%.0f] y[%.0f..%.0f] OVERLAPS %s x[%.0f..%.0f] y[%.0f..%.0f]"
                   % (qx0, qx1, qy0, qy1, lbl, b[0], b[1], b[2], b[3]))
+
+# ---------------------------------------------------------------- 3c. climbable route to the pillar top
+# level1_bible.md puts the green keycard on the pillar top as a vertical-traversal reward, and the
+# bible's own movement spec puts the jump height at 250uu (2.5m) with a 1.8x wall jump. The pillar
+# is 6.2m tall, so the keycard was unreachable as built. Cut three ledges into a spiral up the
+# pillar, every rise under the jump budget, and PROVE the rises.
+step_ok = False
+_pk = None
+for _k in actors:
+    if _k.startswith("BO_") and "pillar" in _k.lower() and "step" not in _k.lower():
+        _pk = _k
+        break
+pillar = actors.get(_pk) if _pk else None
+if _pk:
+    L("pillar actor key = %s" % _pk)
+if pillar is None:
+    L("*** no pillar - no climb route built ***")
+else:
+    pl = pillar.get_actor_location()
+    ps = pillar.get_actor_scale3d()
+    hx = abs(ps.x) * 50.0
+    rad = hx + 70.0
+    top = abs(pl.z) + abs(ps.z) * 50.0
+    JUMP = 250.0
+    rises = []
+    prev = 0.0
+    placed = []
+    for i in range(3):
+        h = 185.0 + i * 190.0
+        a = math.radians(30.0) + i * (2.0 * math.pi / 3.0)
+        sx = pl.x + math.cos(a) * rad
+        sy = pl.y + math.sin(a) * rad
+        spawn("BO_PillarStep_%d" % (i + 1), (sx, sy, h), (1.4, 1.4, 0.3), rot=(0.0, 0.0, 0.0))
+        walk = h + 15.0
+        rises.append(walk - prev)
+        prev = walk
+        placed.append((i + 1, h, sx, sy, walk))
+    rises.append(top - prev)
+    L("pillar top %.0f | ledge walking surfaces %s | rises %s (jump budget %.0f)"
+      % (top, ", ".join("%.0f" % q[4] for q in placed), ", ".join("%.0f" % r for r in rises), JUMP))
+    step_ok = all(r <= JUMP for r in rises) and rises[0] > 0
+    L("pillar climb route %s" % ("OK - every rise is within the 2.5m jump" if step_ok
+                                 else "*** NOT CLIMBABLE: %s ***" % [round(r) for r in rises]))
+    # clearance against cover / walls / the pillar skin
+    for lbl, h, sx, sy, _ in placed:
+        qx0, qx1 = sx - 70.0, sx + 70.0
+        qy0, qy1 = sy - 70.0, sy + 70.0
+        for other in list(actors.keys()):
+            if not (other.startswith("BO_Cover") or other.startswith("BO_Wall")):
+                continue
+            b = aabb(other)
+            if b is None:
+                continue
+            if b[0] < qx1 and qx0 < b[1] and b[2] < qy1 and qy0 < b[3]:
+                L("!!! ledge %s x[%.0f..%.0f] y[%.0f..%.0f] OVERLAPS %s x[%.0f..%.0f] y[%.0f..%.0f]"
+                  % (lbl, qx0, qx1, qy0, qy1, other, b[0], b[1], b[2], b[3]))
 
 # ---------------------------------------------------------------- 4. save, then PROVE it on disk
 _map_file = os.path.join(REPO, "Content", "Maps", "M_Blockout01.umap")

@@ -264,6 +264,18 @@ def main():
             rec['light_color'] = lcol
         if linten is not None:
             rec['light_intensity'] = linten
+        # Ramp end points in world space, measured from the live actor. The renderer builds
+        # ramps from THESE, not from a guessed Euler convention that may not match the engine.
+        if 'ramp' in str(label).lower():
+            try:
+                _r = actor.get_actor_right_vector()
+                _s = actor.get_actor_scale3d()
+                _half = abs(float(_s.y)) * 50.0
+                _c = actor.get_actor_location()
+                rec['ends'] = [[round(_c.x + _r.x * _half, 2), round(_c.y + _r.y * _half, 2), round(_c.z + _r.z * _half, 2)],
+                               [round(_c.x - _r.x * _half, 2), round(_c.y - _r.y * _half, 2), round(_c.z - _r.z * _half, 2)]]
+            except Exception as _exc:
+                L('end point probe failed for %s: %r' % (label, _exc))
         records.append(rec)
         L('name=%s class=%s loc=%s rot=%s scale=%s mesh=%s group=%s'
           % (name, cls, loc, rot, scale, mesh or '-', rec['group']))

@@ -191,3 +191,24 @@ poisons.
 *Proverbs 25:2 (ESV) — "It is the glory of God to conceal a matter: but the honour of kings is to
 search out a matter." This mission was the search: three separate map states claimed the same arena,
 and only reading the live geometry, not the intent, told us which one was real.*
+
+## [2026-10-21d] — The green keycard is climbable, and the geometry is measured, not guessed
+
+### Added
+- **Pillar climb spiral** — 3 ledges (`BO_PillarStep_1/2/3`) spiralling up `BO_Pillar_Center` (top = 600uu) with walking surfaces at 200 / 390 / 580uu. Every rise is 200 / 190 / 190uu against the 250uu jump budget, so the green keycard on the pillar top is reachable. It was never a soft-lock (the bible's alternative reward is 200 health), but it was unjumpable as built.
+- **World-space ramp endpoint probe** — `Tools/python/dump_level_transforms.py` now records `rec['ends']`, the two end points of every ramp measured from the live actor (right vector x half-extent x scale), instead of leaving the renderer to guess a roll sign.
+- **Location-aware ramp verification** — the arena fix script now requires the platform ramp's high end to land within 150uu of the platform's south edge, not merely at the right height.
+
+### Fixed
+- **Renderer builds ramps from engine truth** — `Tools/blender/render_level.py` places each ramp at the midpoint of its measured ends, with the true slope length and a slope-aligned rotation (radians, metres), and draws the new ledges as cover blocks. The previous Euler guess could put a ramp metres from where it stands.
+- **Pit exit ramp roll sign** — the first build put the deep end at z=0 and the floor end at z=-100; the script's own measurement caught it and the corrected build gives deep end z=-100 / floor end z=0.
+- **Pillar lookup** — the climb step searched for a `BO_Pillar` actor that does not exist (the real actor is `BO_Pillar_Center`), so the ledges were never created and the map save silently no-op'd. The lookup is now a `BO_`-prefixed fuzzy match that cannot grab the keycard actor or its own ledges.
+
+### Verified
+- Engine-measured ramp ends in the refreshed dump: `BO_Ramp_NE` high end (1120, 800, 500) — exactly the platform's south edge — low end (1120, -700, 0) on the arena floor. `BO_Ramp_Pit` deep end (-1055, -1300, -100), floor end (-875, -1300, 0).
+- The fix log records `ramp roll=-18.4 high end z=500 (want 500) low end z=0 (want 0) high y=800 (want 800) ok=True` and `pillar climb route OK - every rise is within the 2.5m jump`.
+- Map grew 87,927 -> 92,202 bytes and now holds 54 actors (3 more than before: the climb ledges).
+
+### Verse
+> *"Test everything; hold fast what is good."* — 1 Thessalonians 5:21 (ESV)
+> This leg replaced guessed geometry with measured geometry: the engine reports where each ramp actually ends, and the climb ships only because every rise was proven inside the jump budget.
