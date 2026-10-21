@@ -89,7 +89,7 @@ def purge():
             except Exception:
                 pass
 
-def mat(name, base, rough=0.5, metal=0.0, emit=None, estr=0.0):
+def mat(name, base, rough=0.5, metal=0.0, emit=None, estr=0.0, tex=None, tscale=0.30, bump=0.45):
     m = bpy.data.materials.new(name)
     m.use_nodes = True
     b = m.node_tree.nodes.get('Principled BSDF')
@@ -100,7 +100,54 @@ def mat(name, base, rough=0.5, metal=0.0, emit=None, estr=0.0):
         if emit:
             b.inputs['Emission Color'].default_value = (emit[0], emit[1], emit[2], 1.0)
             b.inputs['Emission Strength'].default_value = estr
+        if tex:
+            wire_surface(m, b, base, tex, tscale, bump)
     return m
+
+TEX_DIRS = ['out_textures_v2', 'out_textures']
+
+def tex_path(stem):
+    """Resolve an albedo/normal pair for a texture stem. The v2 (corrected) set wins when present."""
+    base = os.path.dirname(os.path.abspath(__file__))
+    for d in TEX_DIRS:
+        p = os.path.join(base, d, stem + '.png')
+        if os.path.exists(p):
+            n = os.path.join(base, d, stem + '_normal.png')
+            return (p, n if os.path.exists(n) else None)
+    return None
+
+def wire_surface(m, b, base, tex, tscale, bump_strength):
+    """World-space box-projected albedo multiplied over the flat grade, plus a normal map.
+    World position (not Object/Generated) so tiling stays consistent across scaled boxes and
+    no surface is stretched. The flat colour multiplies the albedo, so the level keeps its
+    deliberately dark grade while gaining real surface detail."""
+    alb, nrm = tex
+    nodes, links = m.node_tree.nodes, m.node_tree.links
+    geo = nodes.new('ShaderNodeNewGeometry')
+    mp = nodes.new('ShaderNodeMapping')
+    mp.inputs['Scale'].default_value = (tscale, tscale, tscale)
+    links.new(geo.outputs['Position'], mp.inputs['Vector'])
+    t = nodes.new('ShaderNodeTexImage')
+    t.image = bpy.data.images.load(alb)
+    t.projection = 'BOX'
+    t.projection_blend = 0.3
+    links.new(mp.outputs['Vector'], t.inputs['Vector'])
+    mix = nodes.new('ShaderNodeMixRGB')
+    mix.blend_type = 'MULTIPLY'
+    mix.inputs['Fac'].default_value = 1.0
+    mix.inputs['Color1'].default_value = (base[0], base[1], base[2], 1.0)
+    links.new(t.outputs['Color'], mix.inputs['Color2'])
+    links.new(mix.outputs['Color'], b.inputs['Base Color'])
+    if nrm:
+        n = nodes.new('ShaderNodeTexImage')
+        n.image = bpy.data.images.load(nrm)
+        n.projection = 'BOX'
+        n.projection_blend = 0.3
+        links.new(mp.outputs['Vector'], n.inputs['Vector'])
+        bn = nodes.new('ShaderNodeBump')
+        bn.inputs['Strength'].default_value = bump_strength
+        links.new(n.outputs['Color'], bn.inputs['Height'])
+        links.new(bn.outputs['Normal'], b.inputs['Normal'])
 
 def ramp_geo(r, c, d):
     """Ramp geometry. When the map dump carries measured world-space end points, use them: the box is
@@ -219,12 +266,15 @@ def bp_mats():
 
 def game_mats():
     M = {}
-    M['floor'] = mat('G_Floor', (0.026, 0.031, 0.038), 0.34, 0.10)
-    M['wall'] = mat('G_Wall', (0.048, 0.055, 0.064), 0.52)
-    M['cover'] = mat('G_Cover', (0.030, 0.052, 0.034), 0.60)
-    M['pillar'] = mat('G_Pillar', (0.052, 0.058, 0.068), 0.38, 0.14)
-    M['plat'] = mat('G_Platform', (0.058, 0.064, 0.074), 0.34, 0.16)
-    M['ramp'] = mat('G_Ramp', (0.066, 0.064, 0.060), 0.42, 0.12)
+    TEX = {'floor': 'T_Floor_Concrete_Wet', 'wall': 'T_Wall_Brick_Old', 'cover': 'T_Set_TrimSheet',
+           'pillar': 'T_Wall_Steel_Rusted', 'plat': 'T_Wood_Plank_Dock', 'ramp': 'T_Set_TrimSheet',
+           'crate': 'T_Wood_Plank_Dock'}
+    M['floor'] = mat('G_Floor', (0.34, 0.36, 0.40), 0.34, 0.10, tex=tex_path(TEX['floor']), tscale=0.90)
+    M['wall'] = mat('G_Wall', (0.46, 0.44, 0.42), 0.52, tex=tex_path(TEX['wall']), tscale=0.55)
+    M['cover'] = mat('G_Cover', (0.40, 0.46, 0.42), 0.60, tex=tex_path(TEX['cover']), tscale=0.80)
+    M['pillar'] = mat('G_Pillar', (0.44, 0.46, 0.48), 0.38, 0.14, tex=tex_path(TEX['pillar']), tscale=0.80)
+    M['plat'] = mat('G_Platform', (0.50, 0.46, 0.42), 0.34, 0.16, tex=tex_path(TEX['plat']), tscale=0.70)
+    M['ramp'] = mat('G_Ramp', (0.50, 0.48, 0.46), 0.42, 0.12, tex=tex_path(TEX['ramp']), tscale=0.70)
     M['pit'] = mat('G_Pit', (0.095, 0.028, 0.026), 0.72)
     M['pitrim'] = mat('G_PitRim', (0.090, 0.030, 0.026), 0.58)
     M['far'] = mat('G_Far', (0.016, 0.018, 0.022), 0.9)
@@ -233,7 +283,7 @@ def game_mats():
     M['pu'] = mat('G_PU', (0.26, 0.04, 0.20), 0.3, emit=(0.92, 0.14, 0.62), estr=5.5)
     M['wp'] = mat('G_WP', (0.04, 0.26, 0.10), 0.3, emit=(0.18, 0.95, 0.40), estr=8.0)
     M['key'] = mat('G_Key', (0.06, 0.28, 0.12), 0.3, emit=(0.30, 0.95, 0.45), estr=6.0)
-    M['crate'] = mat('G_Crate', (0.10, 0.11, 0.115), 0.5, 0.1)
+    M['crate'] = mat('G_Crate', (0.52, 0.48, 0.44), 0.5, 0.1, tex=tex_path(TEX['crate']), tscale=1.20)
     M['gun'] = mat('G_Gun', (0.055, 0.060, 0.065), 0.35, 0.5)
     return M
 
@@ -332,7 +382,7 @@ def shot(name, w, h, samples=40):
         print('[LEVEL] eevee failed %r -> cycles' % (exc,))
         sc.render.engine = 'CYCLES'
         sc.cycles.device = 'CPU'
-        sc.cycles.samples = 24
+        sc.cycles.samples = 12
         sc.cycles.use_denoising = True
         bpy.ops.render.render(write_still=True)
     sz = os.path.getsize(p)

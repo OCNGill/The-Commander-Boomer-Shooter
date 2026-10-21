@@ -264,3 +264,27 @@ and only reading the live geometry, not the intent, told us which one was real.*
 
 > *Deuteronomy 25:15 (ESV) - "You shall not have in your bag two differing weights."* One honest scale
 > for the models and one for the engine: the numbers had to reconcile before anyone signed off.
+
+### 2026-10-21g - The level finally wears its own materials
+
+- **The level was wearing flat paint.** `Tools/blender/render_level.py` built every material as a flat
+  Principled base colour with no image texture node anywhere in the file. Six finished procedural
+  albedos - concrete, brick, rusted steel, trim sheet, wood planking - were sitting on disk, and the
+  gameplay renders used none of them. Ebert caught it as the highest-leverage fix in the project.
+- **Now wired.** All five gameplay materials load their albedo and normal map, projected in WORLD space
+  with a box projection so a scaled box never stretches its texture, and the flat grade is multiplied
+  over the albedo so the level keeps its deliberately dark grade instead of being washed out by the
+  texture. One tile per metre instead of one per 4.5 m, so the grain actually resolves on screen.
+- **Verified by looking, not by asserting.** The floor now reads as gritty wet concrete in the render
+  (vision check on `level_perspective.png`). The mood is unchanged - still a dark tactical arena, deep
+  shadows, localised green and pink light.
+- **Honest limit, carried forward:** the low cover blocks, walls and platforms still read as flat
+  shapes. That is a LIGHTING gap, not a mapping gap - their vertical faces are unlit, and unlit surface
+  shows no material. A level fill-light pass is queued for the next level build, deliberately held
+  until Ebert's level verdict is issued so the frames it is scoring are not rewritten underneath it.
+- Also fixed: the ramp material lost its assignment during the re-grade and the render died on
+  `KeyError: 'ramp'` - caught, repaired, and the full nine-frame set re-rendered clean. Cycles samples
+  cut 24 -> 12 with denoising on, taking a nine-frame pass from about seven minutes to under three.
+- The enemy manifest now records `weapon_visibility` per enemy. The Viper and Muton weapons are real
+  geometry in the FBX but do not read in the published hero render - a rig and framing defect, not
+  missing geometry. The manifest no longer implies otherwise.
