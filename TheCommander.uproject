@@ -1,52 +1,77 @@
 {
-   "FileVersion": 3,
-   "EngineAssociation": "5.8",
-   "Category": "",
-   "Description": "The Commander - a fast-paced retro FPS (boomer shooter). Duke Nukem meets Doom meets Mass Effect. Unreal Engine + Blender pipeline.",
-   "Modules": [],
-   "Plugins": [
-      {
-         "Name": "ModelingToolsEditorMode",
-         "Enabled": true,
-         "TargetAllowList": [
-            "Editor"
-         ]
-      },
-      {
-         "Name": "PythonScriptPlugin",
-         "Enabled": true
-      },
-      {
-         "Name": "EditorScriptingUtilities",
-         "Enabled": true
-      },
-      {
-         "Name": "FSR",
-         "Enabled": true,
-         "TargetAllowList": [
-            "Win64"
-         ]
-      },
-      {
-         "Name": "DLSS",
-         "Enabled": true,
-         "TargetAllowList": [
-            "Win64"
-         ]
-      },
-      {
-         "Name": "StreamlineNGXCommon",
-         "Enabled": true,
-         "TargetAllowList": [
-            "Win64"
-         ]
-      },
-      {
-         "Name": "XeSS",
-         "Enabled": true,
-         "TargetAllowList": [
-            "Win64"
-         ]
-      }
-   ]
+  "FileVersion": 3,
+  "EngineAssociation": "5.8",
+  "Category": "",
+  "Description": "The Commander - a fast-paced retro FPS (boomer shooter). Duke Nukem meets Doom meets Mass Effect. Unreal Engine + Blender pipeline.",
+  "Modules": [
+    {
+      "Name": "TheCommanderGame",
+      "Type": "Runtime",
+      "LoadingPhase": "Default",
+      "AdditionalDependencies": [
+        "Engine",
+        "CoreUObject"
+      ]
+    },
+    {
+      "Name": "CommanderLevelFix",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "ModelingToolsEditorMode",
+      "Enabled": true,
+      "TargetAllowList": [
+        "Editor"
+      ]
+    },
+    {
+      "Name": "PythonScriptPlugin",
+      "Enabled": true,
+      "TargetAllowList": [
+        "Editor"
+      ]
+    },
+    {
+      "Name": "EditorScriptingUtilities",
+      "Enabled": true,
+      "TargetAllowList": [
+        "Editor"
+      ]
+    },
+    {
+      "Name": "FSR",
+      "Enabled": true,
+      "TargetAllowList": [
+        "Win64"
+      ]
+    },
+    {
+      "Name": "DLSS",
+      "Enabled": true,
+      "TargetAllowList": [
+        "Win64"
+      ]
+    },
+    {
+      "Name": "StreamlineNGXCommon",
+      "Enabled": true,
+      "TargetAllowList": [
+        "Win64"
+      ]
+    },
+    {
+      "Name": "XeSS",
+      "Enabled": true,
+      "TargetAllowList": [
+        "Win64"
+      ]
+    },
+    {
+      "Name": "AdvancedFileSystem",
+      "Enabled": false
+    }
+  ]
 }
