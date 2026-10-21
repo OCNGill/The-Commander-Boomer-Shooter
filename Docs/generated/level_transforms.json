@@ -335,7 +335,7 @@
   "loc": [
    -1250.0,
    -1250.0,
-   60.0
+   -100.0
   ],
   "rot": {
    "pitch": 0.0,
@@ -418,29 +418,6 @@
   ],
   "mesh": "",
   "group": "WP",
-  "source": "map"
- },
- {
-  "name": "StaticMeshActor_18",
-  "label": "BO_Floor",
-  "class": "StaticMeshActor",
-  "loc": [
-   0.0,
-   0.0,
-   0.0
-  ],
-  "rot": {
-   "pitch": 0.0,
-   "yaw": 0.0,
-   "roll": 0.0
-  },
-  "scale": [
-   40.0,
-   40.0,
-   1.0
-  ],
-  "mesh": "",
-  "group": "floor",
   "source": "map"
  },
  {
@@ -812,36 +789,13 @@
   "source": "map"
  },
  {
-  "name": "StaticMeshActor_33",
-  "label": "BO_Ramp_NE",
-  "class": "StaticMeshActor",
-  "loc": [
-   950.0,
-   950.0,
-   120.0
-  ],
-  "rot": {
-   "pitch": -14.0,
-   "yaw": 45.0,
-   "roll": 0.0
-  },
-  "scale": [
-   5.0,
-   3.0,
-   0.6
-  ],
-  "mesh": "",
-  "group": "ramp",
-  "source": "map"
- },
- {
   "name": "StaticMeshActor_34",
   "label": "BO_PitFloor",
   "class": "StaticMeshActor",
   "loc": [
    -1200.0,
    -1200.0,
-   -25.0
+   -125.0
   ],
   "rot": {
    "pitch": 0.0,
@@ -851,29 +805,6 @@
   "scale": [
    10.0,
    10.0,
-   0.5
-  ],
-  "mesh": "",
-  "group": "pit",
-  "source": "map"
- },
- {
-  "name": "StaticMeshActor_35",
-  "label": "BO_PitRim_E",
-  "class": "StaticMeshActor",
-  "loc": [
-   -1100.0,
-   -1200.0,
-   25.0
-  ],
-  "rot": {
-   "pitch": 0.0,
-   "yaw": 0.0,
-   "roll": 0.0
-  },
-  "scale": [
-   0.5,
-   20.0,
    0.5
   ],
   "mesh": "",
@@ -885,9 +816,9 @@
   "label": "BO_PitRim_W",
   "class": "StaticMeshActor",
   "loc": [
+   -1500.0,
    -1300.0,
-   -1200.0,
-   25.0
+   0.0
   ],
   "rot": {
    "pitch": 0.0,
@@ -896,8 +827,8 @@
   },
   "scale": [
    0.5,
-   20.0,
-   0.5
+   4.5,
+   2.0
   ],
   "mesh": "",
   "group": "pit",
@@ -910,7 +841,7 @@
   "loc": [
    -1200.0,
    -1100.0,
-   25.0
+   0.0
   ],
   "rot": {
    "pitch": 0.0,
@@ -918,9 +849,9 @@
    "roll": 0.0
   },
   "scale": [
-   20.0,
+   5.5,
    0.5,
-   0.5
+   2.0
   ],
   "mesh": "",
   "group": "pit",
@@ -932,8 +863,8 @@
   "class": "StaticMeshActor",
   "loc": [
    -1200.0,
-   -1300.0,
-   25.0
+   -1500.0,
+   0.0
   ],
   "rot": {
    "pitch": 0.0,
@@ -941,12 +872,35 @@
    "roll": 0.0
   },
   "scale": [
-   20.0,
+   5.5,
    0.5,
-   0.5
+   2.0
   ],
   "mesh": "",
   "group": "pit",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_39",
+  "label": "BO_Floor_N",
+  "class": "StaticMeshActor",
+  "loc": [
+   0.0,
+   462.5,
+   0.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   40.0,
+   30.75,
+   1.0
+  ],
+  "mesh": "",
+  "group": "floor",
   "source": "map"
  },
  {
@@ -970,6 +924,144 @@
   ],
   "mesh": "",
   "group": "ENC",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_40",
+  "label": "BO_Floor_S",
+  "class": "StaticMeshActor",
+  "loc": [
+   0.0,
+   -1762.5,
+   0.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   40.0,
+   4.75,
+   1.0
+  ],
+  "mesh": "",
+  "group": "floor",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_41",
+  "label": "BO_Floor_E",
+  "class": "StaticMeshActor",
+  "loc": [
+   562.5,
+   -1300.0,
+   0.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   28.75,
+   4.5,
+   1.0
+  ],
+  "mesh": "",
+  "group": "floor",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_42",
+  "label": "BO_Floor_W",
+  "class": "StaticMeshActor",
+  "loc": [
+   -1762.5,
+   -1300.0,
+   0.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   4.75,
+   4.5,
+   1.0
+  ],
+  "mesh": "",
+  "group": "floor",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_43",
+  "label": "BO_PitRim_E1",
+  "class": "StaticMeshActor",
+  "loc": [
+   -900.0,
+   -1462.5,
+   0.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   0.5,
+   1.25,
+   2.0
+  ],
+  "mesh": "",
+  "group": "pit",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_44",
+  "label": "BO_PitRim_E2",
+  "class": "StaticMeshActor",
+  "loc": [
+   -900.0,
+   -1137.5,
+   0.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": 0.0
+  },
+  "scale": [
+   0.5,
+   1.25,
+   2.0
+  ],
+  "mesh": "",
+  "group": "pit",
+  "source": "map"
+ },
+ {
+  "name": "StaticMeshActor_45",
+  "label": "BO_Ramp_NE",
+  "class": "StaticMeshActor",
+  "loc": [
+   1120.0,
+   50.0,
+   250.0
+  ],
+  "rot": {
+   "pitch": 0.0,
+   "yaw": 0.0,
+   "roll": -18.435
+  },
+  "scale": [
+   4.0,
+   15.811,
+   0.5
+  ],
+  "mesh": "",
+  "group": "ramp",
   "source": "map"
  },
  {
@@ -1002,7 +1094,7 @@
   "loc": [
    -1200.0,
    -1200.0,
-   50.0
+   -100.0
   ],
   "rot": {
    "pitch": 0.0,
@@ -1071,7 +1163,7 @@
   "loc": [
    -1150.0,
    -1150.0,
-   60.0
+   -100.0
   ],
   "rot": {
    "pitch": 0.0,

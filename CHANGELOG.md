@@ -161,3 +161,33 @@
 > *"But be doers of the word, and not hearers only, deceiving yourselves."* - James 1:22 (ESV)
 > Chosen because this entry is entirely about the difference between hearing a report
 > ("[DONE]", "TOTAL=46", "restored") and doing the thing (reading the file, checking the blob).
+
+## [2026-10-21c] — The pit is real: floor cut open, ramp landed on the platform
+
+The arena map said one thing and the renders said another. The renders showed a pit the map did not
+contain, and a ramp buried inside the platform it was supposed to reach.
+
+**Root cause (two separate defects, both confirmed against the live map, not against a stale JSON):**
+1. `BO_Floor` was a single unbroken 40x40m plane at z=0 with no hole cut in it. The pit, its rim,
+   `ENC_Brute_Pit`, `PU_KeyRed_Pit` and `PU_Health_Pit` all sat *under* the floor surface — invisible
+   and unreachable. The pit was a drawing, not a place.
+2. `BO_Ramp_NE` was at (950, 950) — inside the platform footprint (800..1600) — so it was buried in the
+   platform and never reached the floor.
+
+**Fix:** the floor is now four segments (N/S/E/W) around a real hole spanning x[-1525..-875] ×
+y[-1525..-1075]; the pit floor sits 100 units below the arena floor at z=-100; the rim walls are 200
+units tall (100 proud of the floor) with a 2m entrance gap in the east wall; the pit's three actors
+were moved down onto the pit floor; and the ramp was rebuilt from the platform's own measured top
+(z=500) and south edge (y=800) so its high end lands exactly on the platform lip and its low end
+exactly on the arena floor (pitch 18.4 degrees, roll -18.435).
+
+**Verified, not assumed:** the fix script reads every dimension from the live actors, and the run log
+records `ramp roll=-18.4 high end z=500 (want 500) low end z=0 (want 0) ok=True`. The refreshed
+transform dump shows 50 actors (floor 4 · wall 4 · cover 8 · pillar 1 · platform 1 · ramp 1 · pit 6 ·
+ENC 9 · PU 6 · WP 3 · light 5 · fog 1 · playerstart 1) and the map grew 80,624 -> 86,437 bytes.
+The blob size was verified inside the commit, because the last three "restores" of this map were
+poisons.
+
+*Proverbs 25:2 (ESV) — "It is the glory of God to conceal a matter: but the honour of kings is to
+search out a matter." This mission was the search: three separate map states claimed the same arena,
+and only reading the live geometry, not the intent, told us which one was real.*

@@ -4,23 +4,16 @@ set UE=D:\Unreal_Engine\UE_5.8\Engine\Binaries\Win64\UnrealEditor-Cmd.exe
 set SL=C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter
 cd /d "%SL%"
 
-if not exist "%SL%\Tools\python\ensure_base_geometry.py" (
-  echo [PREFLIGHT] ensure_base_geometry.py missing - aborting
-  exit /b 8
-)
 if not exist "%SL%\Tools\python\fix_pit_and_ramp.py" (
   echo [PREFLIGHT] fix_pit_and_ramp.py missing - aborting
   exit /b 8
 )
 
-call :guard ENSURE || exit /b 9
-echo [STEP 1] ensure_base_geometry.py
-"%UE%" "%SL%/TheCommander.uproject" -run=pythonscript -script="%SL%/Tools/python/ensure_base_geometry.py" -unattended -nosplash -NoSound -stdout -FullStdOutLogOutput -abslog="%SL%/Saved/Logs/ensure_base_run4.log"
-echo [STEP 1] exit=%errorlevel%
-
+rem [STEP 1] ensure_base_geometry.py is NOT run - the base arena is already restored and committed
+rem (commit 13362ed, blob 80,624 bytes, 46 actors). Running it again is a wasted 10-minute boot.
 call :guard FIX || exit /b 9
 echo [STEP 2] fix_pit_and_ramp.py
-"%UE%" "%SL%/TheCommander.uproject" -run=pythonscript -script="%SL%/Tools/python/fix_pit_and_ramp.py" -unattended -nosplash -NoSound -stdout -FullStdOutLogOutput -abslog="%SL%/Saved/Logs/fix_pit_run2.log"
+"%UE%" "%SL%/TheCommander.uproject" -run=pythonscript -script="%SL%/Tools/python/fix_pit_and_ramp.py" -unattended -nosplash -NoSound -stdout -FullStdOutLogOutput -abslog="%SL%/Saved/Logs/fix_pit_run3.log"
 echo [STEP 2] exit=%errorlevel%
 
 echo [FILE] map on disk:
