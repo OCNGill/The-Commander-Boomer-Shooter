@@ -298,3 +298,16 @@ and only reading the live geometry, not the intent, told us which one was real.*
 - **Upscaler plugin scoping corrected** in `TheCommander.uproject`: FSR, DLSS, StreamlineNGXCommon and XeSS now use `PlatformAllowList: ["Win64"]` (was `TargetAllowList`, which silently excluded them from packaged Win64 builds).
 - **Compute relocated**: the build was moved off the Ryzen 5 4500U laptop onto the Ryzen 9 5900X at MAIN (12 cores / 24 threads), per the fleet compute-tier order MAIN -> HTPC -> DECK.
 - "Test everything; hold fast what is good" (1 Thessalonians 5:21, ESV) - reason: every 5.8 API break had to be caught and verified against the real engine source before shipping a buildable package.
+
+## [2026-10-22] — Doctrine amendment: the shipped runtime is UE5/C++, not Rust
+
+### Changed
+- **`Docs/generated/roster_bible.md` §9 and `Docs/generated/roster_bible.json` now describe a UE5 5.8 / C++ ship runtime** — Commander Gill's standing decision (2026-10-22, "nah, stay with C++ then - adjust specs"). The boundary table's logic column is C++ Unreal module code (damage math, AI state machines, encounter scripting, weapon stats, audio scheduling, taunt selection, difficulty scalars, score); the engine column stays UE5/Blender content (meshes, skeletons, materials, lighting, particles, audio assets).
+- **`roster_bible.json` is still the ONLY interface** — reworded for a C++ consumer: the C++ runtime reads the numbers verbatim and a build-time generator emits the C++ stat tables from the JSON, so no value is ever re-typed by hand and the two can never drift.
+- **`Docs/generated/roster_bible.json` `engine` / `portability` fields updated** — `engine` now reads "Unreal Engine 5.8 + Blender 4.2.23 (authoring); C++ / UE5 runtime (ship)"; `portability.logic` is "pure C++ (UE5 module code)"; `portability.contract` states the C++ runtime reads the numbers verbatim. Bible version bumped 1.1 → 1.2 (JSON `version`, `amended`, `generated`, and the MD header + Amendment 1.2 line).
+- **New `Tools/python/gen_roster_bible.py`** — the generator that owns the boundary doctrine and renders both `roster_bible.md` and `roster_bible.json` from it. It is idempotent, refuses to write while any "rust" runtime wording survives, and `python Tools/python/gen_roster_bible.py --check` fails if either generated file drifts from the doctrine.
+- **Linux portability note re-pointed at UE's platform-agnostic APIs** — the WAV read path is now `FFileHelper` / `IFileManager` plus a hand-rolled RIFF parser instead of a Rust `std::fs` reader.
+
+### Verse
+> *"Plans fail for lack of counsel, but with many advisers they succeed."* — Proverbs 15:22 (ESV)
+> Chosen because this leg is the counsel landing: the Commander heard the options and chose C++, and the specs are now adjusted to match that advice instead of the plan failing for want of it.

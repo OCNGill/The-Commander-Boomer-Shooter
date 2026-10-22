@@ -1,9 +1,10 @@
 # The Commander Boomer Shooter — Roster, Story, Art Direction & Boss Bible
 
-**Version:** 1.1 · **Date:** 2026-10-21 · **Owner:** Hermes (design lane)
+**Version:** 1.2 · **Date:** 2026-10-22 · **Owner:** Hermes (design lane)
 **Amendment 1.1:** human collaborators - cyborgs - skin jobs - the Harvester's pizza attack - cutscene beats - the 15-word taunt cap. JSON sections added: `story`, `silhouette_rules`, `friendly_support`, `cutscene_beats`, `tts_contract`, plus `bosses -> boss_harvester -> attacks` and `-> taunt_rotation`.
+**Amendment 1.2:** the shipped runtime is UE5 5.8 with C++ module code - the boundary is now C++ vs UE5/Blender, and `roster_bible.json` stays the only interface (a build-time generator emits the C++ stat tables from it).
 **Machine-readable companion:** `Docs/generated/roster_bible.json` — every number in this
-document is defined there and read verbatim by the Rust runtime. Where this prose and the JSON
+document is defined there and read verbatim by the C++ runtime. Where this prose and the JSON
 disagree, **the JSON is correct and this document is stale** (and must be fixed, not the JSON).
 **Scored by:** Ebert, `Agents/Ebert/designs/zero_trust_likert_rubric.md` v1.0 — bar **6.2/7.0**,
 no rounding, any axis at 1.0 = automatic fail, **screenshots are mandatory evidence**.
@@ -702,7 +703,7 @@ it is *hot*.
 
 The Harvester is the only fully voiced actor in the game, and its lines are the **insult
 bank**: `Tools/python/taunt_lines.py` - 40 lines, 13 / 14 / 13 across three phases, gated so
-that Phase I only ever says phase 1 lines. Selection is pure Rust and lives in
+that Phase I only ever says phase 1 lines. Selection is pure C++ and lives in
 `roster_bible.json -> bosses -> boss_harvester -> taunt_rotation`, which points at the bank
 rather than restating it.
 
@@ -719,12 +720,11 @@ rather than restating it.
 
 ---
 
-## 9. Engine / Rust boundary
+## 9. Engine / C++ boundary
 
-The shipped game is a **Rust executable** (cargo 1.92.0). The current build is UE5 + Blender.
-The split is not negotiable and it is not fuzzy:
+The shipped game is a **UE5 5.8 build whose runtime is C++** - the gameplay logic is an Unreal module compiled from C++ under `Source/`, not a separate executable. Blender is the authoring tool. The split is not negotiable and it is not fuzzy:
 
-| Belongs in **Rust** (pure logic, ports cleanly) | Belongs in **UE5 / Blender** (engine-side content) |
+| Belongs in **C++** (UE5 module code - pure logic, unit-testable) | Belongs in **UE5 / Blender** (engine-side content) |
 |---|---|
 | Damage math, hit resolution, resistance scalars | Meshes, skeletons, FBX import, LODs |
 | AI state machines, telegraph timers, aggro, pathing costs | Materials, textures, material instances |
@@ -732,24 +732,16 @@ The split is not negotiable and it is not fuzzy:
 | Weapon stats, ammo economy, pickup rules | Particles, decals, gib meshes, audio *assets* |
 | Audio **scheduling** (when, at what volume, with what priority) | Audio playback (the mixer) |
 | Taunt/insult selection, cooldowns, phase gating | The rendered insult WAVs themselves |
-| Difficulty scalar application | |
-| Score, one-liner selection, gib-request dispatch | |
+| Difficulty scalar application |  |
+| Score, one-liner selection, gib-request dispatch |  |
 
-**The contract file is `Docs/generated/roster_bible.json`.** The Rust side reads it verbatim at
-build time and generates its stat tables from it. No value in that JSON is re-typed into Rust by
-hand — a generator consumes it, so the two can never drift. The same is true of the boss spec
-and the insult-bank spec.
+**The contract file is `Docs/generated/roster_bible.json`.** The C++ side reads it verbatim at build time - a build-time generator emits the C++ stat tables from it. No value in that JSON is re-typed into C++ by hand - a generator consumes it, so the two can never drift. The same is true of the boss spec and the insult-bank spec.
 
-**Linux note.** The game must build and run on Linux (fleet nodes develop it; the Deck runs it
-under Proton). Therefore:
+**Linux note.** The game must build and run on Linux (fleet nodes develop it; the Deck runs it under Proton). Therefore:
 - All paths in tooling are POSIX-normalised and relative; no Windows-only path assumptions.
-- All asset names are lowercase-with-underscores for the Rust side's asset manifest, even though
-  the UE assets keep their display casing.
-- The headless Blender and UE commandlet invocations in `Tools/blender/` and `Tools/python/` are
-  written to run on both; the Windows equivalents use `flock` equivalents via
-  `Tools/blender/blender_turn_htpc.sh`.
-- No Windows-only audio or filesystem API in the Rust port. The WAV reader is written against
-  `std::fs` + a hand-rolled RIFF parser (the TTS service emits plain RIFF/PCM — see §11.3).
+- All asset names are lowercase-with-underscores for the C++ side's asset manifest, even though the UE assets keep their display casing.
+- The headless Blender and UE commandlet invocations in `Tools/blender/` and `Tools/python/` are written to run on both; the Windows equivalents use `flock` equivalents via `Tools/blender/blender_turn_htpc.sh`.
+- No Windows-only audio or filesystem API in the C++ runtime. The WAV reader is written against UE's platform-agnostic file API (`FFileHelper` / `IFileManager`) plus a hand-rolled RIFF parser (the TTS service emits plain RIFF/PCM - see §11.3).
 
 ---
 
@@ -813,7 +805,7 @@ is worse than a missing one**, because a substitute is a fabricated result.
 The Harvester speaks. What it says is the "insult bank" — 40 lines of cheerful, half-finished,
 glitchy-repetitive non-sequiturs in three phases, delivered by **F5-TTS on the HTPC**
 (`http://10.0.0.42:8020/synth`). The contract fixes: the line schema, the safety rules, the
-selection algorithm, the timing/cooldown, the render pipeline, the WAV format the Rust side
+selection algorithm, the timing/cooldown, the render pipeline, the WAV format the C++ side
 parses, and the **exact defect** in the current renderer (the payload key) that has to be fixed
 before a single line lands.
 
@@ -822,7 +814,7 @@ before a single line lands.
 
 **Every rendered taunt line is fifteen words or fewer and carries exactly one thought.** The
 cap lives in the JSON (`tts_contract.max_words = 15`, `one_thought_per_line = true`) so that
-the audio lane which renders the bank and the Rust lane which rotates it generate to the
+the audio lane which renders the bank and the C++ lane which rotates it generate to the
 same limit. A line that breaks the cap is rejected at review; it is never patched after it
 has been rendered.
 
@@ -848,7 +840,7 @@ to live in the bank are the exact thing it exists to stop.
 - [x] Story: premise, three acts, antagonist, tone rules, named characters
 - [x] Art direction: palette, materials, reveal rig, camera, motion
 - [x] Both bosses specified, including the **Pac-Man/Sonic hybrid** (full spec in its own file)
-- [x] Rust/engine boundary with a single machine-readable contract file
+- [x] C++/engine boundary with a single machine-readable contract file
 - [x] TTS insult-bank contract with the render defect identified
 - [x] Photograph plan mapped to Ebert's exact evidence requirements
 - [x] Human collaborators as full roster entries, each with a gameplay role and a written fallback

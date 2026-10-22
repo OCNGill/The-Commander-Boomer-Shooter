@@ -47,6 +47,24 @@ ARCHIVES = [
         "url": "https://gpuopen.com/download/UE-FSR-4_1_1.zip",
         "sha256": "9ce745e25c4b86bbc0974258045690c9c80d4e524cd48359e20005528ee722c5",
         "size": 2007843138,
+        # 4.1.1 is the NEWEST REDISTRIBUTABLE AMD FSR artifact (verified
+        # 2026-10-22 by full download + sha256sum of the live file).
+        # FSR 4.1.2 is DRIVER-SIDE ONLY: it shipped 2026-10-20 inside
+        # AMD Software: Adrenalin Edition 26.10.1 as an in-driver upscaler
+        # and has NO redistributable package -- GPUOpen's plugin download
+        # redirect (https://gpuopen.com/download-ue-fsr-plugin/) still
+        # resolves to UE-FSR-4_1_1.zip, /download/UE-FSR-4_1_2.zip returns
+        # HTTP 404, and FidelityFX-SDK has no v2.4.0 tag or pre-release
+        # (latest release is v2.3.0, 2026-06-24).
+        # RDNA 3.5 APU support for FSR 4.1 is UNDECIDED by AMD.
+        # FSR 4.1 Vulkan support is NOT shipped; it awaits FSR SDK 2.4
+        # (unreleased).
+        "note": (
+            "4.1.1 = newest redistributable FSR artifact. 4.1.2 (Adrenalin "
+            "26.10.1, 2026-10-20) is driver-side only, no redistributable "
+            "build exists; RDNA 3.5 APU support undecided by AMD; Vulkan "
+            "FSR 4.1 awaits unreleased SDK 2.4."
+        ),
         # source prefix -> destination folder under Plugins/
         "map": [
             ("UE-FSR-4_1_1/FSR-580/FSR/", "FSR/"),

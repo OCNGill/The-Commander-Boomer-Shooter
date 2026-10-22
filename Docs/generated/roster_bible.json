@@ -1,14 +1,14 @@
 {
   "schema": "tcbs.roster.v1.1",
-  "generated": "2026-10-21",
+  "generated": "2026-10-22",
   "title": "The Commander Boomer Shooter - Full Roster Bible",
   "source_of_truth": "Docs/generated/roster_bible.md",
-  "engine": "Unreal Engine 5.8 + Blender 4.2.23 (authoring); Rust 1.92 (ship)",
+  "engine": "Unreal Engine 5.8 + Blender 4.2.23 (authoring); C++ / UE5 runtime (ship)",
   "target_hardware": "Steam Deck, 'low' preset, 1280x800, 60 FPS target",
   "portability": {
-    "logic": "pure Rust - damage math, AI state machines, encounter scripting, audio scheduling, taunt selection, pickup rules, weapon stats",
+    "logic": "pure C++ (UE5 module code) - damage math, AI state machines, encounter scripting, audio scheduling, taunt selection, pickup rules, weapon stats",
     "engine": "UE5/Blender-side - meshes, skeletons, materials, textures, lighting rigs, level geometry, particles",
-    "contract": "This file is the ONLY interface between the two. The Rust runtime reads these numbers verbatim; no value here is re-derived in code."
+    "contract": "This file is the ONLY interface between the two. The C++ runtime reads these numbers verbatim; no value here is re-derived in code, and a build-time generator emits the C++ stat tables from it."
   },
   "global_rules": {
     "movement_speed_uu_s": 600,
@@ -1083,13 +1083,13 @@
           "2": "phase 2 lines until 33% HP",
           "3": "phase 3 lines below 33% HP"
         },
-        "selection": "pure Rust: phase-gated, no immediate repeat, 1.5 s minimum gap, 6.0 s maximum gap",
+        "selection": "pure C++: phase-gated, no immediate repeat, 1.5 s minimum gap, 6.0 s maximum gap",
         "engine": "F5-TTS, HTPC 10.0.0.42:8020/synth, voice selected by the `ref` field (NOT `voice`): `harvester` for phases 1-2, `harvester_low` for phase 3",
         "output_format": "RIFF/WAVE, PCM s16le, mono, 24000 Hz service output; DELIVERED at 44 100 Hz mono 16-bit after normalisation",
         "channel": "the taunt channel ducks the music bed by 6 dB and never ducks weapon SFX",
         "audio_manifest": "Content/Audio/Insults/insults_manifest.json",
         "audio_delivered": true,
-        "audio_note": "The 40-line bank is RENDERED, NORMALISED and MEASURED. All 40 verify clean: -16.4..-15.7 LUFS, true peaks -2.2..-1.4 dBTP, 0 clipped samples, 5.841-5.866 s. The manifest is the playback contract; the Rust core must read `index`, `phase` and `voice_ref` from it."
+        "audio_note": "The 40-line bank is RENDERED, NORMALISED and MEASURED. All 40 verify clean: -16.4..-15.7 LUFS, true peaks -2.2..-1.4 dBTP, 0 clipped samples, 5.841-5.866 s. The manifest is the playback contract; the C++ core must read `index`, `phase` and `voice_ref` from it."
       }
     },
     {
@@ -1259,8 +1259,8 @@
       "applies_to": "per-weapon-type resistance"
     }
   ],
-  "version": "1.1",
-  "amended": "2026-10-21",
+  "version": "1.2",
+  "amended": "2026-10-22",
   "human_readable": "Docs/generated/roster_bible.md",
   "story": {
     "acts": [
@@ -1823,7 +1823,7 @@
     "word_count_rule": "every rendered line is 15 words or fewer and carries exactly one thought",
     "applies_to": [
       "Tools/python/render_taunts.py (audio lane)",
-      "the Rust taunt rotation (boss_harvester.taunt_rotation)"
+      "the C++ taunt rotation (boss_harvester.taunt_rotation)"
     ],
     "render_cost_measured": {
       "two_sentence_line_s": 251,
