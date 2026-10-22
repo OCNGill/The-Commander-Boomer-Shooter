@@ -231,15 +231,18 @@ def build_studio(world, center, size):
     # key light the ground clipped to pure white and the creature lost its
     # lower half against it.  The floor is darkened to a deep neutral so
     # the subject reads as a lit figure on a dark ground.
+    dark = unreal.LinearColor(0.05, 0.05, 0.06, 1.0)
     try:
-        params = floor_mat.get_editor_property('vector_parameter_value')
-        for pv in (params if isinstance(params, list) else [params]):
+        mid = unreal.MaterialInstanceDynamic(material_interface=floor_mat)
+        for pname in ('Color', 'BaseColor', 'Base Color', 'color'):
             try:
-                pv.set_editor_property('parameter_value', unreal.LinearColor(0.06, 0.06, 0.07, 1.0))
+                unreal.MaterialEditingLibrary.set_material_instance_vector_parameter_value(
+                    mid, pname, dark)
+                fcomp.set_material(0, mid)
+                L('floor material darkened via parameter %s' % pname)
+                break
             except Exception:
-                pass
-        floor_mat.set_editor_property('vector_parameter_value', params)
-        L('floor material darkened')
+                continue
     except Exception as exc:
         L('floor material tint failed: %r' % (exc,))
     # 100-unit cube -> a floor a few subject-widths across
@@ -414,7 +417,7 @@ class Shooter(object):
         if w is None:
             return None
         path = w.get_path_name()
-        if not path or 'Untitled' in path:
+        if not path:
             return None
         return w
 
@@ -458,11 +461,18 @@ class Shooter(object):
         if not os.path.isdir(SHOTS):
             os.makedirs(SHOTS)
         self.guard = _map_guard()
-        try:
-            ok = bool(unreal.EditorLoadingAndSavingUtils.load_map(MAP))
-            L('load_map(%s) -> %s' % (MAP, ok))
-        except Exception as exc:
-            L('load_map(%s) raised: %s' % (MAP, exc))
+        # DELIBERATELY DO NOT LOAD A LEVEL.
+        #
+        # The proofing map's BSP brush is not an actor, so clear_world()
+        # cannot remove it, and the arena's own geometry ends up in every
+        # capture: a big lit white slab across the lower frame with the
+        # level's unlit void behind it.  The studio is built from scratch
+        # here anyway - floor, three directional lights, a skylight and one
+        # creature - so the honest backdrop is the render target's own
+        # clear colour against an empty world.  No .umap is opened, so the
+        # map guard is belt-and-braces rather than the only protection.
+        L("using the editor's empty world - no level loaded")
+        self.report['map'] = '(empty world - no level loaded)'
         self.report['map_guard_sha256'] = self.guard[1] if self.guard else None
         self.state = 'wait_world'
         self.wait = 0
@@ -472,8 +482,7 @@ class Shooter(object):
         w = self.world_ready()
         if w is not None:
             self.world = w
-            self.report['map'] = w.get_path_name()
-            L('world: %s' % self.report['map'])
+            L('world: %s' % w.get_path_name())
             clear_world(self.world)
             self._strip_sky()
             self.state = 'next_enemy'
