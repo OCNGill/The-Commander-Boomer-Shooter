@@ -47,10 +47,24 @@ public:
     /** Second half of the audit: read the pawn after the simulated input ticked. */
     void RunInputAuditAfterTick();
 
+    /**
+     * Ask the engine to shut down normally.
+     *
+     * A killed process never runs FEngineLoop::PreExit, which is where the
+     * engine writes the stable PSO cache. The Steam Deck build dies on the
+     * first runtime-created PSO because vkd3d-proton cannot create it, and the
+     * only way to get that PSO into a cache we can ship is to let a run
+     * finish and record it.
+     */
+    void RequestGracefulExit();
+
 protected:
     /** True once the audit has been kicked off. */
     bool bInputAuditStarted = false;
 
     /** Handle for the audit's follow-up timer. */
     FTimerHandle InputAuditTimerHandle;
+
+    /** Handle for the post-audit graceful-exit timer. */
+    FTimerHandle CommanderExitTimerHandle;
 };

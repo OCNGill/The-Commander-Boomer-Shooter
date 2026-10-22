@@ -12,6 +12,8 @@
 #include "InputKeyEventArgs.h"
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
+#include "Misc/Paths.h"
+#include "HAL/PlatformMisc.h"
 #include "TheCommanderGame.h"
 #include "TimerManager.h"
 
@@ -127,4 +129,26 @@ void ACommanderPlayerController::RunInputAuditAfterTick()
     InputKey(FInputKeyEventArgs::CreateSimulated(EKeys::MouseX, IE_Released, 0.0f));
 
     UE_LOG(LogCommander, Display, TEXT("=== COMMANDER INPUT AUDIT END ==="));
+
+    // Optional graceful exit. The engine writes the stable PSO cache during a
+    // normal shutdown, so a run that is force-killed never produces one - and
+    // the Steam Deck build needs that cache because vkd3d-proton cannot create
+    // the runtime PSOs the game would otherwise build on first draw.
+    if (FParse::Param(FCommandLine::Get(), TEXT("CommanderExitAfterAudit")))
+    {
+        constexpr float GracefulExitDelay = 5.0f;
+        UE_LOG(LogCommander, Display, TEXT("=== COMMANDER GRACEFUL EXIT SCHEDULED (delay %.1fs) ==="), GracefulExitDelay);
+        GetWorldTimerManager().SetTimer(
+            CommanderExitTimerHandle,
+            FTimerDelegate::CreateUObject(this, &ACommanderPlayerController::RequestGracefulExit),
+            GracefulExitDelay,
+            false);
+    }
+}
+
+void ACommanderPlayerController::RequestGracefulExit()
+{
+    UE_LOG(LogCommander, Display, TEXT("=== COMMANDER GRACEFUL EXIT: ProjectSavedDir=%s ==="), *FPaths::ProjectSavedDir());
+    UE_LOG(LogCommander, Display, TEXT("=== COMMANDER GRACEFUL EXIT: RequestExit(false) ==="));
+    FGenericPlatformMisc::RequestExit(false);
 }
