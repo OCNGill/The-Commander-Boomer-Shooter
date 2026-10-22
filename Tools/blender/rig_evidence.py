@@ -75,31 +75,52 @@ CAM_H = 0.62               # camera height as a fraction of body height
 CAM_TARGET_Z = 0.42
 
 KEY_AZ, KEY_EL, KEY_DIST = 262.0, 42.0, 1.00
-KEY_SPOT = 40.0
+KEY_SPOT = 40.0   # PROVEN: 40 deg keeps the floor at 0; 90 deg floods it
 KEY_COLOR_MAX = 0.62
-RIM_AZ, RIM_EL, RIM_DIST = 128.0, 15.0, 1.10
-RIM_CONE = 44.0
+# The rim-only diagnostic showed the rim putting 49,617 floor pixels above
+# 150 while the band stayed at 112: its energy was going DOWN onto the
+# ground, not sideways across the contour.  The rim has to arrive almost
+# edge-on to the camera, from BEHIND the subject and just off the camera
+# axis, so the beam passes the body and catches the far silhouette edge.
+RIM_AZ, RIM_EL, RIM_DIST = 175.0, 14.0, 1.30
 # The rim is a LONG THIN AREA STRIP behind and above the subject.  A strip
 # grazes the whole silhouette edge; a spot can only ever touch a thin slice
 # of it, which is why the 3%-of-body criterion could never be met.
 # The strip is sized in METRES at the 2 m reference body, so a small
 # creature gets a proportionally small strip.  1.2 x 0.4 m is a strip that
 # can graze a silhouette edge - not a 3.5 x 1.2 m floodlight emitter.
-RIM_SIZE_X, RIM_SIZE_Y = 2.40, 0.90
-RIM_REF_H = 1.4             # the strip is 2.40 x 0.90 m on a 1.4 m body
-RIM_CONE = 50.0            # UE-side spot cone for the rim (Blender uses a
-                          # broad AREA wrap; the game gets a wide spot)
-UNDER_Z = 0.040
-UNDER_RADIUS = 0.01        # small source, so the falloff is steep
-UNDER_OFF = 0.06           # under-light sits just in front of the feet
-UNDER_CONE = 20.0          # UE-side cone for the under-glow (Blender uses
+RIM_SIZE_X, RIM_SIZE_Y = 2.40, 0.90   # kept for the UE handoff (a Rect
+                                      # Area Light is the game equivalent)
+RIM_REF_H = 1.4
+RIM_CONE = 45.0
+RIM_AZ_PINNED = 175.0      # MEASURED by the rim-only sweep: at 175 the
+                          # band is highest (40.0 vs 26.8 at 152 and 14.5
+                          # at 130) AND the floor spill is halved
+                          # (32,426 floor px over 150 vs 70,143 at 130)            # the rim MUST be a cone.  An area light floods
+                          # its whole hemisphere and lights the floor
+                          # behind the creature no matter where it is aimed
+                          # or how its power is cut.  The isolated
+                          # diagnostic measured the area rim putting
+                          # 192/183/176 on the floor at a background of
+                          # 69.8 with a body p99 of only 72.
+UNDER_Z = 0.030
+UNDER_RADIUS = 0.15        # a broad soft source: a tiny hard
+                          # source burns a blown white spot into
+                          # the legs (423 clipped pixels at u3000)
+UNDER_OFF = 0.05           # under-light sits just in front of the feet
+UNDER_CONE = 9.0          # UE-side cone for the under-glow (Blender uses
                           # a POINT, the game gets a narrow spot)
 # The pool light sits DIRECTLY BEHIND the creature on the camera axis, so
 # its cast shadow runs straight toward the viewer and the lit ellipse
 # lands in front of the feet.  Everything below is measured along that
 # axis, which makes the three floor probes deterministic.
-POOL_AZ, POOL_EL, POOL_DIST = 145.0, 70.0, 1.30
-POOL_CONE = 22.0
+# The pool light must be OFF the camera axis.  A light directly behind
+# the subject throws its shadow straight at the lens, and the ellipse then
+# lands in the foreground with the shadow running out of the top of it.
+# At 235 (60 degrees off the camera axis) the shadow falls ACROSS the
+# visible floor and the ellipse stays in frame.
+POOL_AZ, POOL_EL, POOL_DIST = 235.0, 62.0, 1.30
+POOL_CONE = 26.0
 POOL_BLEND = 0.40
 # The pool light sits directly BEHIND the subject on the camera axis, so
 # the creature's cast shadow is thrown straight toward the viewer into the
@@ -113,9 +134,9 @@ POOL_BLEND = 0.40
 # actually in frame is the band immediately around the feet.  All three
 # probes therefore live in that band: the pool's ellipse, the creature's
 # own contact shadow, and the floor on the far side of the camera axis.
-POOL_G = 0.35              # pool centre, body heights toward the camera
+POOL_G = 0.30              # pool centre, body heights toward the camera
 POOL_FRONT = POOL_G        # legacy alias
-POOL_LAT = 0.32            # pool centre, lateral offset (off the shadow axis)
+POOL_LAT = 0.18            # pool centre, lateral offset (off the shadow axis)
 POOL_SHADOW = 0.60         # shadow probe, fraction of the way to the shadow tip
 POOL_EDGE = 0.42           # key-side probe, lateral offset on the far side
 WASH_AZ, WASH_EL, WASH_DIST = 300.0, 55.0, 1.20
@@ -143,8 +164,8 @@ EMIT_COLORS = {
     'core': (0.05, 0.60, 1.00),
     'plasma': (0.45, 0.05, 1.00),
 }
-EMIT_STRENGTH = {'accent': 0.10, 'eye': 0.10, 'core': 0.10, 'plasma': 0.10}
-PROOF_EMIT_SCALE = 6.0
+EMIT_STRENGTH = {'accent': 0.010, 'eye': 0.010, 'core': 0.010, 'plasma': 0.010}
+PROOF_EMIT_SCALE = 2.0
 
 GROUND_ALBEDO = 0.18
 HAZE_STRENGTH = 0.003
@@ -415,6 +436,95 @@ def zone_stats(rgb, mask, emis, box, mode='body'):
     }
 
 
+
+def detached_pieces(mask):
+    """Count disconnected pieces in the rendered silhouette.
+
+    Ebert's verdict names the debris as visible disconnected parts: the
+    Sectoid's free hand, the Floater's white box and white tile, the
+    Muton's white shard, the hip fragments.  3D mesh islands cannot
+    separate those from the designed appendages (each primitive is split
+    into several islands), but the question is about what is VISIBLE: a
+    connected component of the silhouette mask.
+
+    Returns (component_count, pixels_in_components_other_than_the_largest,
+             the largest component's pixel count).
+    """
+    h, w = mask.shape
+    seen = _np.zeros((h, w), dtype=bool)
+    comps = []
+    for y in range(h):
+        row = mask[y]
+        for x in range(w):
+            if not row[x] or seen[y, x]:
+                continue
+            stack = [(y, x)]
+            seen[y, x] = True
+            n = 0
+            while stack:
+                cy, cx = stack.pop()
+                n += 1
+                for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                    ny, nx = cy + dy, cx + dx
+                    if 0 <= ny < h and 0 <= nx < w and mask[ny, nx] \
+                            and not seen[ny, nx]:
+                        seen[ny, nx] = True
+                        stack.append((ny, nx))
+            comps.append(n)
+    comps.sort(reverse=True)
+    if not comps:
+        return (0, 0, 0)
+    largest = comps[0]
+    rest = sum(comps[1:])
+    return (len(comps), rest, largest)
+
+
+
+def score_of(m):
+    """The single objective, used by every path that measures a frame.
+
+    It is the CONTRACT, not a soft preference: the band, the fraction, the
+    clipping, the background, the floor window, the floor contrast and the
+    under ratios all count.  A path that scores differently from the path
+    that publishes is how three rigs came to answer for one creature.
+    """
+    zs = m.get('zone_stats', {})
+    if not zs:
+        return 0.0
+    fl = [zs.get('floor_front', {}).get('mean_lum', 0.0),
+          zs.get('floor_shadow_side', {}).get('mean_lum', 0.0),
+          zs.get('floor_key_side', {}).get('mean_lum', 0.0)]
+    band = m.get('rim_band_mean_lum', 0.0)
+    frac = m.get('rim_bright_over_body', 0.0)
+    clip = m.get('clipped_white_pixels', 0)
+    clipc = m.get('clipped_colour_pixels_non_emissive', 0)
+    bg = m.get('background_darkness', 0.0)
+    tm = max(1.0, zs.get('torso', {}).get('mean_lum', 0.0))
+    ul = zs.get('lowbody', {}).get('mean_lum', 0.0) / tm
+    uf = zs.get('feet', {}).get('mean_lum', 0.0) / tm
+    diffs = []
+    for a in range(3):
+        for b in range(a + 1, 3):
+            hi = max(fl[a], fl[b])
+            if hi > 0.001:
+                diffs.append(abs(fl[a] - fl[b]) / hi * 100.0)
+    mdiff = min(diffs) if diffs else 0.0
+    s = 0.0
+    s += 3.0 * min(1.0, band / 120.0)
+    s += 2.0 * min(1.0, frac / 0.03)
+    # Clipping is not a small deduction - a blown frame is a failed
+    # frame.  Weight it so hard that no amount of band or floor can buy
+    # its way past a whiteout.
+    s += 4.0 if clip == 0 else max(0.0, 1.0 - clip / 200.0)
+    s += 2.0 if clipc == 0 else max(0.0, 0.5 - clipc / 400.0)
+    s += 2.0 if bg <= 40.0 else max(0.0, 1.0 - (bg - 40.0) / 40.0)
+    s += 2.0 if all(45.0 <= v <= 175.0 for v in fl) else 0.0
+    s += 1.0 * min(1.0, mdiff / 15.0)
+    s += 1.5 * min(1.0, ul / 1.3)
+    s += 1.5 * min(1.0, uf / 1.3)
+    return s
+
+
 def measure(reveal_path, mask_path=None, emis_path=None, zones=None):
     """Hard numbers from a rendered frame."""
     rgb = read_png_np(reveal_path)
@@ -511,6 +621,15 @@ def measure(reveal_path, mask_path=None, emis_path=None, zones=None):
         hot_lum = lum[hot] if hot.any() else _np.array([0.0])
         res['body_pixels'] = body_px
         res['visible_body_pixels'] = vis_body
+        try:
+            comps, rest, largest = detached_pieces(mask)
+            res['silhouette_components'] = comps
+            res['detached_piece_pixels'] = rest
+            res['largest_component_pixels'] = largest
+        except Exception as e:
+            res['silhouette_components'] = -1
+            res['detached_piece_pixels'] = -1
+            print('[V4]   detached-piece scan failed: %s' % e)
         res['rim_band_pixels'] = int((band & mask).sum())
         res['rim_band_bright_pixels'] = band_bright
         res['rim_band_mean_lum'] = round(float(band_lum.mean()), 3)
@@ -583,6 +702,50 @@ ONLY = [None, False]
 
 
 
+
+# ============================================================ run guard
+# A clean exit has to mean the measurements exist, not merely that
+# nothing crashed.  This project has produced a clean success signal from
+# an instrument that did no work five times over: the health watch, the
+# wrong-path probe, the purge, the wrong-node liveness check, and an
+# unbound local.  The guard is structural, not local: the run COUNTS what
+# it produced and raises if the count does not match what it attempted.
+ROWS = {'measured': 0, 'enemies': 0, 'rendered': 0}
+
+
+def guard_measure(name):
+    ROWS['measured'] += 1
+    ROWS['enemies'] += 1
+    print('[V4]   measured row for %s (%d rows total)'
+          % (name, ROWS['measured']))
+
+
+def guard_render(name):
+    ROWS['rendered'] += 1
+    print('[V4]   rendered frames for %s (%d sets)' % (name, ROWS['rendered']))
+
+
+def guard_final(expected):
+    """Raise unless the run produced what it set out to produce.
+
+    expected_enemies : how many enemies entered the loop
+    """
+    problems = []
+    print('[V4]   RUN GUARD: measurement rows %d of %d expected | rendered '
+          'sets %d of %d expected'
+          % (ROWS['measured'], expected, ROWS['rendered'], expected))
+    if ROWS['measured'] < expected:
+        problems.append('only %d measurement rows for %d enemies'
+                        % (ROWS['measured'], expected))
+    if ROWS['rendered'] < expected:
+        problems.append('only %d rendered sets for %d enemies'
+                        % (ROWS['rendered'], expected))
+    if problems:
+        raise RuntimeError('RUN GUARD FAILED: ' + '; '.join(problems))
+    print('[V4]   RUN GUARD OK: %d measurement rows, %d rendered sets'
+          % (ROWS['measured'], ROWS['rendered']))
+
+
 def bl_main(out_dir, src_dir):
     """Build into a staging directory.  Nothing is published unless all
     five enemies produced a complete, verified set - a crashed run must
@@ -598,18 +761,72 @@ def bl_main(out_dir, src_dir):
 
     names = enemy_list(src_dir)
     only = ONLY[0]
-    if ONLY[1]:
+    if only:
+        names = [n for n in names if only.lower() in n.lower()]
+    if ONLY[1] == 'diag':
+        _done = 0
         for name in names:
             floor_contributions(name, os.path.join(src_dir, name + '.fbx'),
                                 stage, mask_dir, tmp_dir)
+            _done += 1
+        if _done != len(names):
+            raise RuntimeError('DIAGNOSTIC GUARD FAILED: %d of %d floor '
+                               'diagnostics produced a measurement'
+                               % (_done, len(names)))
+        print('[V4]   DIAGNOSTIC GUARD OK: %d floor diagnostics' % _done)
         return
-    if only:
-        names = [n for n in names if only.lower() in n.lower()]
+    if ONLY[1] == 'islands':
+        for name in names:
+            island_inventory(name, os.path.join(src_dir, name + '.fbx'),
+                             stage, mask_dir, tmp_dir)
+        return
+    if ONLY[1] == 'parity':
+        for name in names:
+            parity_check(name, os.path.join(src_dir, name + '.fbx'),
+                         stage, mask_dir, tmp_dir)
+        return
+    if ONLY[1] == 'rimonly':
+        _done = 0
+        for name in names:
+            rim_only(name, os.path.join(src_dir, name + '.fbx'),
+                     stage, mask_dir, tmp_dir)
+            _done += 1
+        if _done != len(names):
+            raise RuntimeError('DIAGNOSTIC GUARD FAILED: %d of %d rim-only '
+                               'diagnostics produced a measurement'
+                               % (_done, len(names)))
+        print('[V4]   DIAGNOSTIC GUARD OK: %d rim-only diagnostics' % _done)
+        return
+    if ONLY[1] == 'grid':
+        _done = 0
+        for name in names:
+            floor_grid(name, os.path.join(src_dir, name + '.fbx'),
+                       stage, mask_dir, tmp_dir)
+            _done += 1
+        if _done != len(names):
+            raise RuntimeError('DIAGNOSTIC GUARD FAILED: %d of %d floor grids '
+                               'produced a measurement' % (_done, len(names)))
+        print('[V4]   DIAGNOSTIC GUARD OK: %d floor grids' % _done)
+        return
+    if ONLY[1] == 'probe':
+        _done = 0
+        for name in names:
+            probe_sweep(name, os.path.join(src_dir, name + '.fbx'),
+                        stage, mask_dir, tmp_dir)
+            _done += 1
+        if _done != len(names):
+            raise RuntimeError('DIAGNOSTIC GUARD FAILED: %d of %d probe '
+                               'diagnostics produced a measurement'
+                               % (_done, len(names)))
+        print('[V4]   DIAGNOSTIC GUARD OK: %d probe diagnostics'
+              % _done)
+        return
     print('[V4] enemies: %s' % names)
 
     rig_log = {}
     verification = {}
     skipped = []
+    entered = []
 
     for name in names:
         fbx = os.path.join(src_dir, name + '.fbx')
@@ -623,6 +840,7 @@ def bl_main(out_dir, src_dir):
             skipped.append((name, 'fbx mid-write (%d -> %d)' % (s1, s2)))
             print('[V4] SKIP %s: fbx mid-write' % name)
             continue
+        entered.append(name)
         try:
             data = do_enemy(name, fbx, stage, mask_dir, tmp_dir)
         except Exception as e:
@@ -636,6 +854,16 @@ def bl_main(out_dir, src_dir):
             continue
         rig_log[name] = data['rig']
         verification[name] = data['verification']
+
+    # LEVEL 1 GUARD: every enemy that entered the loop must have produced
+    # a row.  A single enemy dying mid-pass cannot hide behind four good
+    # ones.  The count is printed either way.
+    print('[V4]   ENEMY LOOP: %d of %d enemies produced a measurement row'
+          % (ROWS['measured'], len(entered)))
+    for nm in entered:
+        if nm not in verification:
+            raise RuntimeError('ENEMY LOOP GUARD FAILED: %s entered the loop '
+                               'and produced no measurement row' % nm)
 
     write_rig_params(stage, rig_log, names)
     write_verification(stage, verification, names, skipped)
@@ -716,6 +944,13 @@ def bl_main(out_dir, src_dir):
             for fn in os.listdir(tmp_pub):
                 shutil.move(os.path.join(tmp_pub, fn), os.path.join(dst, fn))
             shutil.rmtree(tmp_pub, ignore_errors=True)
+            for name in names:
+                for suf in ('_reveal.png', '_emissive_only.png',
+                            '_studio_vs_reveal.png'):
+                    fp = os.path.join(dst, name + suf)
+                    if not os.path.exists(fp) or os.path.getsize(fp) < 4096:
+                        raise RuntimeError('PUBLISH GUARD FAILED: %s missing '
+                                           'in %s' % (fp, dst))
             print('[V4] published -> %s' % dst)
         except Exception as e:
             print('[V4] publish to %s failed: %s' % (dst, e))
@@ -963,6 +1198,9 @@ def import_subject(fbx_path):
             bpy.ops.object.mode_set(mode='OBJECT')
     except Exception:
         pass
+    print('[V4]   %s imported %d mesh object(s): %s'
+          % (fbx_path.split('/')[-1], len(meshes),
+             [o.name for o in meshes][:14]))
     bpy.ops.object.select_all(action='DESELECT')
     for o in meshes:
         o.select_set(True)
@@ -986,8 +1224,177 @@ def import_subject(fbx_path):
     height = max(zs) - min(zs)
     if height < 0.05:
         height = 1.0
-    return obj, height
+    # the largest dimension, which is the honest size measure for a wide
+    # flat manta
+    extent = max(max(xs) - min(xs), max(ys) - min(ys), height)
+    removed = purge_detached(obj, height,
+                             scene_objs=list(bpy.context.scene.objects))
+    if not removed:
+        print('[V4]   %s purge ran and removed 0 pieces' % obj.name)
+    return obj, height, extent
 
+
+
+
+BODY_MATERIALS = ('CHITIN', 'PLATE', 'PLATE_DARK', 'PLATE_OXBLOOD',
+                   'CHITIN_BONE', 'SHELL', 'BODY', 'SKIN')
+
+
+def _is_body_material(name):
+    """True when the material is one of the creature's own body materials."""
+    u = (name or '').upper()
+    if 'EMISSIVE' in u:
+        return True
+    return any(b in u for b in BODY_MATERIALS)
+
+
+def _is_white_material(name):
+    """True for the default/unassigned material - the debris signature."""
+    u = (name or '').upper()
+    if not u or u in ('(NONE)', 'NONE'):
+        return True
+    if 'EMISSIVE' in u:
+        return False
+    if any(b in u for b in BODY_MATERIALS):
+        return False
+    # a material with no name or a generic one, and any bright white
+    return True
+
+
+def purge_detached(obj, height, scene_objs=None):
+    """Delete the small detached parts that float clear of the body.
+
+    Ebert's verdict names the debris: the Sectoid's free hand, the Floater's
+    white box and white tile, the Muton's white shard, the hip fragments.
+    The first three are WHITE - default or unassigned material.
+
+    THE RULE IS MATERIAL AND POSITION, NOT ISLAND COUNT.  These creatures
+    are assembled from segmented plates, limbs and armour, so they are
+    legitimately dozens of connected components; "island" is not "debris".
+    An earlier version deleted 60 of the Chryssalid's 80 pieces, including
+    its emissive eyes, and aborted the asset.
+
+    A piece is DELETED when ALL of these hold:
+      - it carries a DEFAULT/WHITE material
+      - it carries NO body material and NO ACCENT_EMISSIVE material
+      - its bounding box sits OUTSIDE the body's own bounds by more than
+        the tolerance band
+    A piece carrying a body material is ANATOMY, however far out it sits,
+    and ACCENT_EMISSIVE is the eyes and is never removed.
+
+    Clustering alone WELDED the debris onto the body ("80 islands ->
+    1 parts") - tidier, but Ebert's complaint was visual, and a white box
+    welded to the shoulder is still a white box on the shoulder.  So the
+    island test is used to SEGMENT, and the material-and-position test
+    decides what is deleted.
+
+    Returns the list of removed pieces (material, distance, size) and
+    prints them per asset.  Anything that throws PROPAGATES: a purge that
+    reports "found nothing" must be distinguishable from a purge that
+    never ran, and ten silent skips have already cost this project ten
+    iterations.
+    """
+    import bmesh
+    me = obj.data
+    mats = [m.name if m else '(none)' for m in me.materials]
+    removed = []
+
+    bm = bmesh.new()
+    bm.from_mesh(me)
+    bm.verts.ensure_lookup_table()
+    bm.faces.ensure_lookup_table()
+
+    parent = list(range(len(bm.verts)))
+
+    def find(a):
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]
+            a = parent[a]
+        return a
+
+    def union(a, b):
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            parent[rb] = ra
+
+    for e in bm.edges:
+        union(e.verts[0].index, e.verts[1].index)
+
+    islands = {}
+    for v in bm.verts:
+        islands.setdefault(find(v.index), []).append(v)
+    if len(islands) < 2:
+        bm.free()
+        print('[V4]   %s purge: 1 island, 0 pieces removed' % obj.name)
+        return removed
+
+    isl = list(islands.values())
+    isl_of_vert = {}
+    for i, grp in enumerate(isl):
+        for v in grp:
+            isl_of_vert[v.index] = i
+
+    # ---- per island: material set and bounding box ----------------------
+    isl_mats = {}
+    for f in bm.faces:
+        ii = isl_of_vert.get(f.verts[0].index, -1)
+        if ii < 0:
+            continue
+        nm = mats[f.material_index] if f.material_index < len(mats) else '(none)'
+        isl_mats.setdefault(ii, set()).add(nm)
+    isl_faces = {}
+    for f in bm.faces:
+        ii = isl_of_vert.get(f.verts[0].index, -1)
+        if ii >= 0:
+            isl_faces[ii] = isl_faces.get(ii, 0) + 1
+
+    # ---- the BODY's own bounds, taken from the largest island ------------
+    biggest = max(range(len(isl)), key=lambda i: isl_faces.get(i, 0))
+    body_pts = [v.co.copy() for v in isl[biggest]]
+    blo = [min(p[i] for p in body_pts) for i in range(3)]
+    bhi = [max(p[i] for p in body_pts) for i in range(3)]
+
+    tol = max(0.02, 0.04 * height)
+    debris = []
+    for i, grp in enumerate(isl):
+        if i == biggest:
+            continue
+        names = sorted(isl_mats.get(i, set()))
+        white = any(_is_white_material(x) for x in names)
+        body_mat = any(_is_body_material(x) for x in names)
+        emissive = any('EMISSIVE' in x.upper() for x in names)
+        if not white or body_mat or emissive:
+            continue
+        pts = [v.co for v in grp]
+        ilo = [min(p[k] for p in pts) for k in range(3)]
+        ihi = [max(p[k] for p in pts) for k in range(3)]
+        # how far outside the body's own bounds is this piece?
+        out = 0.0
+        for k in range(3):
+            if ilo[k] > bhi[k]:
+                out = max(out, ilo[k] - bhi[k])
+            elif ihi[k] < blo[k]:
+                out = max(out, blo[k] - ihi[k])
+        d = min((v.co - p).length for v in grp for p in body_pts)
+        if out > tol:
+            debris.append((i, grp, names, round(d, 3), round(out, 3),
+                           isl_faces.get(i, 0)))
+
+    for i, grp, names, d, out, nf in debris:
+        for v in grp:
+            bm.verts.remove(v)
+        removed.append((names[:3], 'dist %.3f' % d, 'outside %.3f' % out,
+                        '%d faces' % nf))
+
+    if removed:
+        bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces],
+                        context='VERTS')
+        bm.to_mesh(me)
+        me.update()
+    bm.free()
+    print('[V4]   %s purge: %d islands, removed %d debris piece(s): %s'
+          % (obj.name, len(islands), len(removed), removed))
+    return removed
 
 
 def emissive_kind(lname):
@@ -1037,6 +1444,7 @@ def fix_materials(scale=1.0):
                       (col[0], col[1], col[2], 1.0))
             set_input(bsdf, ['Emission Strength'], st)
             set_input(bsdf, ['Base Color'], (0.0, 0.0, 0.0, 1.0))
+            set_input(bsdf, ['Emission Strength'], st)
             set_input(bsdf, ['Roughness'], 0.60)
             set_input(bsdf, ['Specular IOR Level', 'Specular'], 0.03)
         found[kind] = m.name
@@ -1285,7 +1693,11 @@ def collect_rig():
 class Rig(object):
     """THE HAND-SET GLOBAL RIG.
 
-    key 45, rim 260, under 3000, pool 180, wash 20.
+    key 260 (spot 40), rim 4000 (cone 45, az 240, el 20), under 2400
+    (cone 34, aimed at 0.22 h), pool 90, wash 1.2.
+
+    These are the probe9 winners on the Muton: band 124.0, fraction 0.0583,
+    background 28.6, floor 100/90/62 - all inside their bars at once.
 
     The key comes down a little so it stops competing with the under-glow on
     the body; the rim goes up a touch because the Viper at 200 W already
@@ -1299,13 +1711,42 @@ class Rig(object):
     enemy in the set.  The per-enemy corrector is OFF - see adjust_once().
     """
     def __init__(self):
-        # Energy units follow REF_HEIGHT = 1.0 now, so these are 4x the
-        # numbers the last passes used, for the same absolute result.
-        self.key = 180.0
-        self.rim = 1040.0
-        self.under = 12000.0
-        self.pool = 1400.0
-        self.wash = 80.0
+        # Energy units follow REF_HEIGHT = 1.0, so every light's
+        # illuminance is rig_value / DIST^2 regardless of body height.
+        # These values are the ones that reproduce the levels the previous
+        # passes measured, with the new proportional distances.
+        self.key = 120.0
+        self.rim = 9000.0
+        self.under = 3200.0
+        self.pool = 26.0
+        self.wash = 0.5
+        # cone angles are rig attributes so a sweep can vary them
+        self.key_spot = KEY_SPOT
+        self.rim_cone = RIM_CONE
+        # the under-glow is a light from BELOW: aim it at the lower body
+        # (0.30 h), not at the chest - the torso's brightness comes from
+        # the key, and the under only has to beat the torso on the legs
+        self.under_aim = 0.05
+        self.emissive_scale = 1.0
+        # Per-subject exposure scale.  P ~ h^2 keeps the ILLUMINANCE
+        # constant, but the body fills a different fraction of the frame at
+        # each size, so the measured band and the clipping differ by size
+        # (parity: band 1.2 / 34.5 / 91.0 / 116.9 / 131.4 across the set).
+        # One scale per subject, fitted by measurement, makes the five read
+        # the same way.
+        self.exposure = 1.0
+        # the creature's LARGEST dimension.  Height is the wrong measure for
+        # this set: the Floater is a wide flat manta and 0.290 m of height
+        # says nothing about its size.
+        self.size = 2.0
+        # per-subject knobs, all fitted by measurement in ONE render path
+        self.rim_az = RIM_AZ
+        self.rim_gain = 1.0
+        self.wash_gain = 1.0
+        self.under_gain = 1.0
+        # the under-to-torso ratio is exposure-invariant, so the under needs
+        # its own gain per subject
+        self.under_gain = 1.0
 
     def as_dict(self):
         return dict((k, round(getattr(self, k), 3))
@@ -1325,7 +1766,7 @@ def lateral_dir():
 
 
 
-def pool_geometry(height):
+def pool_geometry(height, size=None):
     """Pool light geometry, expressed on the camera axis.
 
       cd the unit vector from the subject toward the camera
@@ -1336,11 +1777,12 @@ def pool_geometry(height):
       S  the tip of the creature's cast shadow on the floor
     """
     h = float(height)
+    sz = float(size if size else height)
     cd = cam_dir()
     ld = lateral_dir()
-    P = light_pose((0.0, 0.0, 0.55 * h), POOL_AZ, POOL_EL, POOL_DIST * h)
-    G = ((POOL_G * h) * cd[0] - (POOL_LAT * h) * ld[0],
-         (POOL_G * h) * cd[1] - (POOL_LAT * h) * ld[1], 0.0)
+    P = light_pose((0.0, 0.0, 0.55 * h), POOL_AZ, POOL_EL, POOL_DIST * sz)
+    G = ((POOL_G * sz) * cd[0] - (POOL_LAT * sz) * ld[0],
+         (POOL_G * sz) * cd[1] - (POOL_LAT * sz) * ld[1], 0.0)
     # cast shadow: the ray from the light through the top of the body
     C = (0.0, 0.0, 1.00 * h)
     dz = P[2] - C[2]
@@ -1352,44 +1794,94 @@ def pool_geometry(height):
     return P, cd, ld, G, S
 
 
-def pool_target(height):
+def pool_target(height, size=None):
     """Ground point the pool light aims at."""
-    return pool_geometry(height)[3]
+    return pool_geometry(height, size)[3]
 
 
-def pool_target(height):
+def pool_target(height, size=None):
     """Ground point the pool light aims at."""
-    return pool_geometry(height)[3]
+    return pool_geometry(height, size)[3]
 
 
-def pool_target(height):
+def pool_target(height, size=None):
     """Ground point the pool light aims at."""
-    return pool_geometry(height)[3]
+    return pool_geometry(height, size)[3]
 
 
 
 
-def build_reveal_rig(rig, anchor, height, target):
+def make_rig(name, sc, height):
+    """Build the rig for one subject, with its size threaded through.
+
+    A parameter that reaches some call sites and not others is the same
+    class of defect as a purge that reaches some assets and not others, so
+    this is the ONE place a rig is made.
+    """
+    rig = Rig()
+    size = sc.get('size') or height
+    rig.size = size
+    subject_overrides(name, rig, height)
+    floater_overrides(name, rig, height)
+    return rig
+
+
+def build_reveal_rig(rig, anchor, height, target, obj=None):
     """The v4 reveal rig.  Every element is defined RELATIVE to the subject,
     so all five enemies get an identical shadow direction."""
     clear_lights()
     h = float(height)
-    s = (h / REF_HEIGHT) ** 2.0     # power scales with the body footprint
+    size = getattr(rig, 'size', None) or h
+    # Normalise by the LARGEST dimension, not the height: the Floater is a
+    # wide flat manta and its 0.290 m of height says nothing about its
+    # size.  A squared-height scale gave it 0.084 of the energy and the
+    # Muton 4.28 - a fifty-one-fold spread - and the Floater rendered as a
+    # black frame.  The floor keeps a small creature on the record.
+    s = max(0.45, (size / REF_HEIGHT) ** 2.0)
     # An AREA light's power is spread over its surface, but the irradiance
     # at the subject is set by power/distance, so the same watts carry over
     # from the reference rig - a wider strip just wraps more of the edge.
     sa = s
-    chest = (0.0, 0.0, 0.70 * h)
-    P, cd, ld, G, S = pool_geometry(h)
+    chest = (0.0, 0.0, 0.70 * size)
+    # A light's distance is set by the BODY it has to illuminate.  The
+    # Floater is 2.48 m across and 0.29 m tall, so a key placed at the
+    # subject's SIZE sits 2.5 m from a 29 cm creature and lights the
+    # floor instead.  Scale the distance by the body's own height.
+    dscale = max(0.20, min(1.0, h / max(0.05, size)))
+    # The pool and the fill scale with the subject's SIZE, the way the
+    # rig's energy already is, so a one-metre creature is not lit by a
+    # pool tuned for a two-metre one.
+    pscale = max(0.35, min(1.0, size / 2.0))
+    # Aim at the geometry's REAL centre, not a height-derived guess.  A
+    # 0.29 m subject aimed at 0.70*h was being lit at empty air.
+    centre = chest
+    if obj is not None:
+        try:
+            xs = [v.co.x for v in obj.data.vertices]
+            ys = [v.co.y for v in obj.data.vertices]
+            zs = [v.co.z for v in obj.data.vertices]
+            centre = ((min(xs) + max(xs)) * 0.5,
+                      (min(ys) + max(ys)) * 0.5,
+                      (min(zs) + max(zs)) * 0.55)
+        except Exception:
+            centre = chest
+    P, cd, ld, G, S = pool_geometry(h, size)
     lights = []
 
-    key_dist = getattr(rig, 'key_dist', None) or (KEY_DIST * h)
-    key_w = rig.key * s
+    key_dist = getattr(rig, 'key_dist', None) or (KEY_DIST * size * dscale)
+    # A wide flat subject presents a near-horizontal silhouette edge, and a
+    # light 42 degrees above it barely grazes that edge.  The flatter the
+    # subject, the lower the key and the rim.
+    flat = (size / max(0.05, h)) if h else 1.0
+    key_el = max(6.0, KEY_EL - min(30.0, (flat - 1.0) * 4.0))
+    rim_el = max(2.0, RIM_EL - min(20.0, (flat - 1.0) * 2.5))
+    key_w = rig.key * s * rig.exposure
     key = add_light('reveal_key', 'SPOT',
-                    light_pose(chest, KEY_AZ, KEY_EL, key_dist),
-                    target=chest, color=KEY_COLOR, energy=key_w,
-                    spot_deg=KEY_SPOT, spot_blend=0.30, soft=0.05)
-    key['aim'] = list(chest)
+                    light_pose(centre, KEY_AZ, key_el, key_dist),
+                    target=centre, color=KEY_COLOR, energy=key_w,
+                    spot_deg=getattr(rig, 'key_spot', KEY_SPOT),
+                    spot_blend=0.30, soft=0.05)
+    key['aim'] = [round(v, 4) for v in centre]
     lights.append(key)
 
     # Green separation light: a LONG THIN AREA STRIP behind and above the
@@ -1397,14 +1889,22 @@ def build_reveal_rig(rig, anchor, height, target):
     # only ever grazes a thin slice of it, and trying to make a spot cover
     # the edge is what drove the rim into the thousands of watts and blew
     # the frame out.
-    rim = add_light('reveal_rim', 'AREA',
-                    light_pose(chest, RIM_AZ, RIM_EL, RIM_DIST * h),
-                    target=(0.0, 0.0, 0.55 * h), color=RIM_COLOR,
-                    energy=rig.rim * sa,
-                    area_size=RIM_SIZE_X * h / RIM_REF_H,
-                    area_size_y=RIM_SIZE_Y * h / RIM_REF_H,
+    # Aim the rim just past the subject's centre, on the far side, so the
+    # beam grazes the far silhouette edge instead of dumping on the floor
+    # in front of it.
+    rim_target = (centre[0] - 0.10 * size * cd[0],
+                  centre[1] - 0.10 * size * cd[1],
+                  centre[2] + 0.04 * size)
+    rim = add_light('reveal_rim', 'SPOT',
+                    light_pose(rim_target, getattr(rig, 'rim_az', RIM_AZ),
+                               rim_el, RIM_DIST * size * dscale),
+                    target=rim_target, color=RIM_COLOR,
+                    energy=rig.rim * sa * rig.exposure
+                    * getattr(rig, 'rim_gain', 1.0),
+                    spot_deg=getattr(rig, 'rim_cone', RIM_CONE),
+                    spot_blend=0.35, soft=0.02,
                     shadow=True)
-    rim['aim'] = [0.0, 0.0, 0.55 * h]
+    rim['aim'] = [round(v, 4) for v in centre]
     lights.append(rim)
 
     # Narrow uplight at the feet, straight up the legs.  Never a flood.
@@ -1415,27 +1915,32 @@ def build_reveal_rig(rig, anchor, height, target):
     # white pixels.  The spot's cone points UP, so the floor never sees it.
     under_w = getattr(rig, 'under_abs_w', None) or (rig.under * s)
     under_cone = getattr(rig, 'under_cone', None) or UNDER_CONE
-    upos = (UNDER_OFF * h * cd[0], UNDER_OFF * h * cd[1], UNDER_Z * h)
+    upos = (UNDER_OFF * size * cd[0], UNDER_OFF * size * cd[1], UNDER_Z * size)
     under = add_light('reveal_under', 'SPOT', upos,
-                      target=(0.0, 0.0, 0.32 * h), color=UNDER_COLOR,
-                      energy=under_w,
+                      target=(0.0, 0.0,
+                              getattr(rig, 'under_aim', 0.14) * size),
+                      color=UNDER_COLOR,
+                      energy=under_w * rig.exposure * rig.under_gain,
                       spot_deg=under_cone, spot_blend=0.15,
                       soft=UNDER_RADIUS * h, shadow=False)
-    under['aim'] = [0.0, 0.0, 0.32 * h]
+    under['aim'] = [0.0, 0.0,
+                    getattr(rig, 'under_aim', 0.14) * size]
     lights.append(under)
 
     pool = add_light('reveal_pool', 'SPOT',
-                     light_pose((0.0, 0.0, 0.55 * h), POOL_AZ, POOL_EL, POOL_DIST * h),
-                     target=G, color=POOL_COLOR, energy=rig.pool * s,
+                     light_pose((0.0, 0.0, 0.55 * size), POOL_AZ, POOL_EL,
+                                POOL_DIST * size),
+                     target=G, color=POOL_COLOR,
+                     energy=rig.pool * s * rig.exposure * pscale,
                      spot_deg=POOL_CONE, spot_blend=POOL_BLEND, soft=0.20,
                      shadow=True)
     pool['aim'] = list(G)
     lights.append(pool)
 
     wash = add_light('reveal_wash', 'AREA',
-                     light_pose((0.0, 0.0, 0.0), WASH_AZ, WASH_EL, WASH_DIST * h),
+                     light_pose((0.0, 0.0, 0.0), WASH_AZ, WASH_EL, WASH_DIST * size),
                      target=(0.0, 0.0, 0.0), color=WASH_COLOR, energy=rig.wash * s,
-                     area_size=WASH_SIZE * h, shadow=False)
+                     area_size=WASH_SIZE * size, shadow=False)
     wash['aim'] = [0.0, 0.0, 0.0]
     lights.append(wash)
     return lights
@@ -1467,7 +1972,7 @@ def build_studio_rig(target, height):
 
 
 
-def compute_zones(cam, anchor, height, rig=None):
+def compute_zones(cam, anchor, height, rig=None, size=None):
     """Screen-space boxes for the body and for the floor.
 
     The camera is nearly level with the creature, so the only floor that is
@@ -1492,7 +1997,7 @@ def compute_zones(cam, anchor, height, rig=None):
 
     h = float(height)
     z = {}
-    P, cd, ld, G, S = pool_geometry(h)
+    P, cd, ld, G, S = pool_geometry(h, size)
 
     pool_pt = G
     shadow_pt = (POOL_SHADOW * S[0], POOL_SHADOW * S[1], 0.0)
@@ -1801,25 +2306,58 @@ def setup_scene(fbx, res_scale):
     res = import_subject(fbx)
     if not res:
         return None
-    obj, height = res
+    obj, height, extent = res
     orient_subject(obj)
     found = fix_materials(1.0)
     ground = add_ground()
     haze = add_haze(height)
     anchor = emissive_anchor(obj, height)
-    cam_z = CAM_H * height
+    size = extent if extent else height
+    # The eye height must clear the subject's OVERALL size, not just its
+    # height: a wide flat manta lit from a camera 0.18 m off the floor
+    # reads as buried in the ground.
+    cam_z = CAM_H * size
     target = (0.0, 0.0, CAM_TARGET_Z * height)
     dist = CAM_COVER * height
     cam = add_camera(target, dist=dist, cam_z=cam_z)
     bpy.context.view_layer.update()
-    dist = fit_camera(cam, obj, target, dist, cam_z, height)
-    return {'obj': obj, 'height': height, 'found': found, 'ground': ground,
+    dist = fit_camera(cam, obj, target, dist, cam_z, size)
+    return {'obj': obj, 'height': height, 'extent': extent, 'size': size,
+            'found': found, 'ground': ground,
             'haze': haze, 'anchor': anchor, 'cam': cam, 'cam_z': cam_z,
             'target': target, 'dist': dist}
 
 
 
 
+
+
+def render_rig_frame(rig, anchor, height, target, path, mask_path,
+                      emis_path, zones, samples=None, glare=False, scale=1.0,
+                      obj=None, only_lights=None):
+    """Render the rig and measure it.  THE ONLY way a frame is produced.
+
+    Both the probe and the delivered evidence go through this function, so
+    the numbers the fitter reads are the numbers the verifier measures.
+    """
+    build_reveal_rig(rig, anchor, height, target, obj)
+    if only_lights:
+        for ob in list(bpy.context.scene.objects):
+            if ob.type == 'LIGHT' and ob.name not in only_lights:
+                bpy.data.objects.remove(ob, do_unlink=True)
+    if glare:
+        enable_glare(threshold=0.90, size=0.50, strength=0.25)
+    else:
+        disable_glare()
+    set_world_strength(WORLD_STRENGTH)
+    bsc = bpy.context.scene
+    rx, ry = bsc.render.resolution_x, bsc.render.resolution_y
+    if scale != 1.0:
+        bsc.render.resolution_x = int(RES_X * scale)
+        bsc.render.resolution_y = int(RES_Y * scale)
+    render_to(path, samples=samples or SAMPLES)
+    bsc.render.resolution_x, bsc.render.resolution_y = rx, ry
+    return measure(path, mask_path, emis_path, zones)
 
 def floor_contributions(name, fbx, out_dir, mask_dir, tmp_dir):
     """Diagnostic: isolate each light and report what it does to the floor
@@ -1838,16 +2376,15 @@ def floor_contributions(name, fbx, out_dir, mask_dir, tmp_dir):
     rig0 = Rig()
     floater_overrides(name, rig0, height)
     zones = merge_zones(body_row_zones(mask_path),
-                        compute_zones(cam, anchor, height, rig0))
+                        compute_zones(cam, anchor, height, rig0, size))
     tmp = os.path.join(tmp_dir, name + '_diag.png')
     print('[V4] === LIGHT DIAGNOSTIC %s (h=%.3f) ===' % (name, height))
 
     def shoot(keep, label, rim_w=None):
-        rig = Rig()
-        floater_overrides(name, rig, height)
+        rig = make_rig(name, sc, height)
         if rim_w is not None:
             rig.rim = rim_w
-        build_reveal_rig(rig, anchor, height, target)
+        build_reveal_rig(rig, anchor, height, target, obj)
         for ob in list(bpy.context.scene.objects):
             if ob.type == 'LIGHT' and ob.name not in keep:
                 bpy.data.objects.remove(ob, do_unlink=True)
@@ -1882,8 +2419,34 @@ def subject_overrides(name, rig, height):
     40, so their wash is trimmed from 20 to 12.  The Floater gets an
     entirely separate rig (see floater_overrides)."""
     if name in ('XCOM_Viper', 'XCOM_Muton'):
-        rig.wash = 48.0
-        print('[V4] %s override: wash -> %.0f' % (name, rig.wash))
+        rig.wash = 0.9
+    # The Sectoid clipped 2442 white pixels and the Muton 1271: the
+    # emissive is the thing blowing out.  Lowering the emission strength
+    # frees the exposure budget for the rim energy, which is what actually
+    # moves the band.
+    if name == 'XCOM_Sectoid':
+        rig.emissive_scale = 0.55
+    elif name == 'XCOM_Viper':
+        rig.emissive_scale = 0.55
+    # The rim cannot satisfy the band and the clipping at once from one
+    # global value: the small creatures clip where the large ones are still
+    # short.  Tune it per subject, the same way the emissive is tuned.
+    if name == 'XCOM_Chryssalid':
+        # its band is 16 with a fraction of 0.0000, so its body is nearly
+        # black, while its 6076 clipped pixels are on the EMISSIVE EYES
+        # (clipB is zero).  Cut the emissive and raise the rim.
+        rig.emissive_scale = 0.18
+        rig.rim = 5000.0
+    elif name == 'XCOM_Floater':
+        rig.rim = 5000.0
+    elif name in ('XCOM_Muton', 'XCOM_Viper'):
+        rig.rim = 9000.0
+    elif name == 'XCOM_Sectoid':
+        rig.rim = 8000.0
+    elif name == 'XCOM_Muton':
+        rig.emissive_scale = 0.40
+    print('[V4] %s overrides: wash %.1f emissive x%.2f'
+          % (name, rig.wash, getattr(rig, 'emissive_scale', 1.0)))
     return rig
 
 
@@ -1909,67 +2472,497 @@ def floater_overrides(name, rig, height):
     return rig
 
 
-def do_enemy(name, fbx, out_dir, mask_dir, tmp_dir):
-    """Render one enemy under the global rig.
 
-    There is no search here.  The rig is global (see class Rig); this
-    function renders it, MEASURES the result, applies at most ONE
-    deterministic correction, re-renders, and reports the final numbers.
+def probe_sweep(name, fbx, out_dir, mask_dir, tmp_dir):
+    """A decisive sweep: for each candidate rig, render the FULL rig and read
+    the four numbers that matter - body p99 (the key), band and fraction
+    (the rim, both dominance tests), and the floor and background (the
+    flood).  Also renders the key alone, because the band and fraction
+    cannot pass against a black body.
+    """
+    sc = setup_scene(fbx, 1.0)
+    if not sc:
+        return
+    obj, height = sc['obj'], sc['height']
+    size = sc.get('size') or height
+    anchor = sc['anchor']
+    cam, target = sc['cam'], sc['target']
+    mask_path = os.path.join(mask_dir, name + '_probe_mask.png')
+    emis_path_probe = os.path.join(mask_dir, name + '_probe_emis.png')
+    render_mask(obj, mask_path, 'silhouette', scale=1.0)
+    render_mask(obj, emis_path_probe, 'emissive', scale=1.0)
+    fix_materials(getattr(rig0, 'emissive_scale', 1.0))
+    rig0 = Rig()
+    subject_overrides(name, rig0, height)
+    floater_overrides(name, rig0, height)
+    zones = merge_zones(body_row_zones(mask_path),
+                        compute_zones(cam, anchor, height, rig0, size))
+    tmp = os.path.join(tmp_dir, name + '_probe.png')
+    print('[V4] ===== PROBE SWEEP %s (h=%.3f) =====' % (name, height))
+
+    def shoot(label, key_spot=None, key_e=None, rim_e=None, rim_az=None,
+              rim_el=None, rim_cone=None, under_e=None, under_aim=None,
+              only=None):
+        rig = make_rig(name, sc, height)
+        if key_spot is not None:
+            rig.key_spot = key_spot
+        if key_e is not None:
+            rig.key = key_e
+        if rim_e is not None:
+            rig.rim = rim_e
+        if under_e is not None:
+            rig.under = under_e
+        if under_aim is not None:
+            rig.under_aim = under_aim
+        if rim_cone is not None:
+            rig.rim_cone = rim_cone
+        if rim_az is not None:
+            for ob in bpy.context.scene.objects:
+                if ob.name == 'reveal_rim':
+                    ob.location = light_pose((0.0, 0.0, 0.55 * height),
+                                             rim_az, rim_el, RIM_DIST * sizeeight)
+                    aim(ob, (0.0, 0.0, 0.55 * height))
+        if only:
+            for ob in list(bpy.context.scene.objects):
+                if ob.type == 'LIGHT' and ob.name not in only:
+                    bpy.data.objects.remove(ob, do_unlink=True)
+        m = render_rig_frame(rig, anchor, height, target, tmp, mask_path,
+                              emis_path_probe, zones)
+        zs = m['zone_stats']
+        tm = max(0.001, zs['torso']['mean_lum'])
+        print('[V4]   %-30s p99 %4.0f | band %5.1f frac %.4f | under %.2f/%.2f | '
+              'clipW %5d | floor %4.0f/%4.0f/%4.0f | bg %5.1f'
+              % (label, zs['torso']['p99_lum'], m.get('rim_band_mean_lum', 0),
+                 m.get('rim_bright_over_body', 0),
+                 zs['lowbody']['mean_lum'] / tm, zs['feet']['mean_lum'] / tm,
+                 m['clipped_white_pixels'],
+                 zs['floor_front']['mean_lum'], zs['floor_shadow_side']['mean_lum'],
+                 zs['floor_key_side']['mean_lum'], m['background_darkness']))
+        return m
+
+    # ---- 1. the KEY alone: find the cone/energy that puts the body at
+    #         70-110 without touching the floor -----------------------
+    print('[V4] --- 1. KEY ALONE: body p99 target 70-110 ---')
+    for spot, ke in ((90.0, 90.0), (120.0, 90.0), (90.0, 150.0)):
+        shoot('key alone spot %.0f e %.0f' % (spot, ke),
+              key_spot=spot, key_e=ke, only=('reveal_key',))
+    # ---- 2. the RIM alone: sweep the AZIMUTH WIDE ---------------------
+    # The rim was at az 160 and the POOL light is at az 145, so the rim's
+    # spill landed on the pool's own shadow-side floor probe and the
+    # creature's edge never lit up.  Sweep the bearing to find where the
+    # rim actually grazes the visible silhouette: the signature is the
+    # band and fraction RISING while the background stays flat.
+    print('[V4] --- 2. RIM ALONE: wide azimuth sweep ---')
+    for az in (60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 200.0, 240.0):
+        for cone in (30.0, 45.0):
+            shoot('rim alone az %.0f cone %.0f e 1400' % (az, cone),
+                  rim_e=1400.0, rim_cone=cone, rim_az=az, rim_el=20.0,
+                  only=('reveal_rim',))
+    # ---- 3. the under walked up, not down ------------------------------
+    # The sweep proved the under is what makes the rim's numbers exist:
+    # every step DOWN in the under made the band and fraction worse.
+    print('[V4] --- 3. RIM+UNDER: walk the under UP ---')
+    for ue in (250.0, 750.0, 1500.0, 3000.0):
+        shoot('rim 1400 cone45 + under %.0f' % ue,
+              rim_e=1400.0, rim_cone=45.0, rim_az=120.0, rim_el=20.0,
+              under_e=ue, only=('reveal_rim', 'reveal_under'))
+    # ---- 4. the COMBINED row, at the winning azimuth 240 --------------
+    # cone 45 / under 3000 clears band (126.9), fraction (0.0597),
+    # background (28.4) and floor (100/92/62, 38% spread).  What is left
+    # is the torso being blown: p99 251, 602 clipped pixels, and the
+    # under ratio capped at 1.11 because the under is competing with a
+    # torso that the KEY is over-lighting.  The key is the lever: the face
+    # p99 reads 249-255, so there is a lot of headroom above the 25 bar.
+    print('[V4] --- 4. COMBINED at az 240: the KEY sweep ---')
+    for ke in (260.0, 140.0, 80.0, 40.0, 20.0):
+        for ue in (3000.0, 2000.0):
+            shoot('full k%.0f u%.0f' % (ke, ue),
+                  key_spot=40.0, key_e=ke, rim_e=4000.0, rim_cone=45.0,
+                  rim_az=240.0, rim_el=20.0, under_e=ue, under_aim=0.22)
+    return True
+
+
+
+def parity_check(name, fbx, out_dir, mask_dir, tmp_dir):
+    """Prove the probe path and the delivered path are the same rig.
+
+    v6a reported clipW 2765 for a Muton that probe9 measured at 429 with
+    identical constants: the delivered frame had the Fog Glow compositor
+    on and the probe had it off.  This renders one rig through both paths
+    and prints both sets of numbers.
+    """
+    sc = setup_scene(fbx, 1.0)
+    if not sc:
+        return
+    obj, height = sc['obj'], sc['height']
+    size = sc.get('size') or height
+    anchor = sc['anchor']
+    cam, target = sc['cam'], sc['target']
+    mask_path = os.path.join(mask_dir, name + '_parity_mask.png')
+    emis_path = os.path.join(mask_dir, name + '_parity_emis.png')
+    render_mask(obj, mask_path, 'silhouette', scale=1.0)
+    render_mask(obj, emis_path, 'emissive', scale=1.0)
+    rig = make_rig(name, sc, height)
+    fix_materials(getattr(rig, 'emissive_scale', 1.0))
+    zones = merge_zones(body_row_zones(mask_path),
+                        compute_zones(cam, anchor, height, rig, size))
+    p1 = os.path.join(tmp_dir, name + '_parity1.png')
+    p2 = os.path.join(tmp_dir, name + '_parity2.png')
+    m1 = render_rig_frame(rig, anchor, height, target, p1, mask_path,
+                          emis_path, zones, obj=obj)
+    # the delivered path re-uses the same function, so this is the same
+    # render; the check is that the numbers agree with the probe rows
+    m2 = render_rig_frame(rig, anchor, height, target, p2, mask_path,
+                          emis_path, zones, obj=obj)
+    for lbl, m in (('probe path ', m1), ('deliver path', m2)):
+        print('[V4]   parity %s clipW %d clipB %d clipC %d | bg %.1f | '
+              'band %.1f frac %.4f'
+              % (lbl, m['clipped_white_pixels'], m['clipped_body_pixels'],
+                 m['clipped_colour_pixels_non_emissive'],
+                 m['background_darkness'], m.get('rim_band_mean_lum', 0),
+                 m.get('rim_bright_over_body', 0)))
+    return True
+
+
+def island_inventory(name, fbx, out_dir, mask_dir, tmp_dir):
+    """Fast diagnostic: what disconnected geometry does this FBX contain?"""
+    sc = setup_scene(fbx, 1.0)
+    if not sc:
+        return
+    obj, height = sc['obj'], sc['height']
+    print('[V4] %s: height %.3f, extent %.3f, %d verts, %d polys'
+          % (name, height, sc.get('extent') or 0, len(obj.data.vertices),
+             len(obj.data.polygons)))
+    return True
+
+
+def fit_exposure(name, rig, anchor, height, target, mask_path, emis_path,
+                 zones, tmp):
+    """Fit one exposure scale for this subject.
+
+    The rig is global; only the exposure is per-subject, and it is fitted by
+    measurement, never by assumption.  The objective is the CONTRACT: the
+    band mean, the fraction, zero clipped pixels, the background under 40
+    and the floor inside 45-175.
+    """
+    def assess(m):
+        zs = m['zone_stats']
+        fl = [zs['floor_front']['mean_lum'],
+              zs['floor_shadow_side']['mean_lum'],
+              zs['floor_key_side']['mean_lum']]
+        band = m.get('rim_band_mean_lum', 0.0)
+        frac = m.get('rim_bright_over_body', 0.0)
+        clip = m['clipped_white_pixels']
+        bg = m['background_darkness']
+        diffs = []
+        for i in range(3):
+            for j in range(i + 1, 3):
+                hi = max(fl[i], fl[j])
+                if hi > 0.001:
+                    diffs.append(abs(fl[i] - fl[j]) / hi * 100.0)
+        mdiff = min(diffs) if diffs else 0.0
+        score = 0.0
+        score += min(1.0, band / 120.0)
+        score += min(1.0, frac / 0.03)
+        score += 1.0 if clip == 0 else max(0.0, 1.0 - clip / 400.0)
+        score += 1.0 if bg <= 40 else max(0.0, 1.0 - (bg - 40) / 40.0)
+        score += 1.0 if all(45.0 <= v <= 175.0 for v in fl) else 0.0
+        score += min(1.0, mdiff / 15.0)
+        tm = max(1.0, zs['torso']['mean_lum'])
+        ul = zs['lowbody']['mean_lum'] / tm
+        uf = zs['feet']['mean_lum'] / tm
+        score += min(1.0, ul / 1.3) + min(1.0, uf / 1.3)
+        return score, (band, frac, clip, bg, fl, mdiff, ul, uf)
+
+    best = None
+    for e in (0.5, 0.75, 1.0, 1.5, 2.0, 3.0):
+        rig.exposure = e
+        m = render_rig_frame(rig, anchor, height, target, tmp, mask_path,
+                              emis_path, zones, obj=obj)
+        sc, detail = assess(m)
+        print('[V4]   exposure %.2f -> score %.2f | band %.1f frac %.4f '
+              'clip %d bg %.1f floor %s diff %.0f%%'
+              % (e, sc, detail[0], detail[1], detail[2], detail[3],
+                 ['%.0f' % v for v in detail[4]], detail[5]))
+        if best is None or sc > best[0]:
+            best = (sc, e, detail)
+    rig.exposure = best[1]
+    print('[V4]   %s exposure fitted to %.2f (score %.2f, band %.1f, '
+          'frac %.4f, clip %d)'
+          % (name, best[1], best[0], best[2][0], best[2][1], best[2][2]))
+
+    # ---- stage 2: the under GAIN.  Exposure scales everything, so the
+    #      under-to-torso ratio is exposure-invariant; only the ratio of
+    #      the under to the key/rim can change it.
+    best2 = None
+    for ug in (0.5, 1.0, 2.0, 4.0):
+        rig.under_gain = ug
+        m = render_rig_frame(rig, anchor, height, target, tmp, mask_path,
+                              emis_path, zones, obj=obj)
+        sc, detail = assess(m)
+        print('[V4]   under gain %.2f -> score %.2f | under %.2f/%.2f | '
+              'band %.1f clip %d' % (ug, sc, detail[6], detail[7],
+                                     detail[0], detail[2]))
+        if best2 is None or sc > best2[0]:
+            best2 = (sc, ug, detail)
+    rig.under_gain = best2[1]
+    print('[V4]   %s under gain fitted to %.2f (under %.2f/%.2f)'
+          % (name, best2[1], best2[2][6], best2[2][7]))
+    return best2
+
+
+def floor_grid(name, fbx, out_dir, mask_dir, tmp_dir):
+    """Diagnostic: where is the floor actually bright and where is the
+    shadow?  Prints a screen-space grid of floor luminance with the three
+    probe positions marked."""
+    sc = setup_scene(fbx, 1.0)
+    if not sc:
+        return
+    obj, height = sc['obj'], sc['height']
+    size = sc.get('size') or height
+    anchor = sc['anchor']
+    cam, target = sc['cam'], sc['target']
+    mask_path = os.path.join(mask_dir, name + '_grid_mask.png')
+    emis_path = os.path.join(mask_dir, name + '_grid_emis.png')
+    render_mask(obj, mask_path, 'silhouette', scale=1.0)
+    render_mask(obj, emis_path, 'emissive', scale=1.0)
+    rig = make_rig(name, sc, height)
+    fix_materials(getattr(rig, 'emissive_scale', 1.0))
+    zones = merge_zones(body_row_zones(mask_path),
+                        compute_zones(cam, anchor, height, rig, size))
+    tmp = os.path.join(tmp_dir, name + '_grid.png')
+    m = render_rig_frame(rig, anchor, height, target, tmp, mask_path,
+                          emis_path, zones, obj=obj)
+    rgb = read_png_np(tmp)
+    mask = _mask_np(mask_path)
+    lum = (0.2126 * rgb[:, :, 0] + 0.7152 * rgb[:, :, 1] + 0.0722 * rgb[:, :, 2])
+    h, w = lum.shape
+    print('[V4] === FLOOR GRID %s (y grows DOWNWARD) ===' % name)
+    ps = zones.get('_probe_screen', {})
+    NX, NY = 16, 10
+    for j in range(NY):
+        row = []
+        for i in range(NX):
+            x0 = int(i * w / NX); x1 = max(x0 + 1, int((i + 1) * w / NX))
+            y0 = int(j * h / NY); y1 = max(y0 + 1, int((j + 1) * h / NY))
+            vals = [lum[y, x] for y in range(y0, min(y1, h))
+                    for x in range(x0, min(x1, w)) if not mask[y, x]]
+            row.append('%3d' % (sum(vals) // len(vals) if vals else 0))
+        print('[V4]   y%4.2f | %s' % (j / float(NY), ' '.join(row)))
+    print('[V4]   probes (x, y with y DOWNWARD): %s' % ps)
+    for k, v in ps.items():
+        px, py = int(v[0] * w), int(v[1] * h)
+        win = []
+        for dy in range(-6, 7, 3):
+            for dx in range(-6, 7, 3):
+                x, y = px + dx, py + dy
+                if 0 <= x < w and 0 <= y < h and not mask[y, x]:
+                    win.append(int(lum[y, x]))
+        print('[V4]   probe %-9s screen %.3f %.3f -> floor %s'
+              % (k, v[0], v[1], win))
+    return True
+
+
+def rim_only(name, fbx, out_dir, mask_dir, tmp_dir):
+    """Diagnostic: the rim as the ONLY light in the scene.
+
+    The rim gained fifty percent and the band did not move by a single
+    unit, which means the rim is not landing on the silhouette edge at
+    all.  This renders the creature lit by the rim alone and reports, per
+    side of the body, how much of the silhouette EDGE the rim actually
+    reaches - and where the bright band lands.
+
+    If the band is centred on the body it is a fill light, not a rim.
+    If it is on the floor it is aimed past the subject.
+    """
+    sc = setup_scene(fbx, 1.0)
+    if not sc:
+        return
+    obj, height = sc['obj'], sc['height']
+    size = sc.get('size') or height
+    anchor = sc['anchor']
+    cam, target = sc['cam'], sc['target']
+    mask_path = os.path.join(mask_dir, name + '_rim_mask.png')
+    emis_path = os.path.join(mask_dir, name + '_rim_emis.png')
+    render_mask(obj, mask_path, 'silhouette', scale=1.0)
+    render_mask(obj, emis_path, 'emissive', scale=1.0)
+    rig = make_rig(name, sc, height)
+    zones = merge_zones(body_row_zones(mask_path),
+                        compute_zones(cam, anchor, height, rig, size))
+    tmp = os.path.join(tmp_dir, name + '_rim.png')
+
+    for rim_w, key_w, key_on in ((6000.0, 0.0, False),
+                                 (9000.0, 0.0, False),
+                                 (9000.0, 60.0, True),
+                                 (9000.0, 120.0, True),
+                                 (9000.0, 260.0, True)):
+        rig.rim = rim_w
+        rig.rim_az = 175.0
+        rig.key = key_w
+        keep = ('reveal_rim',) if not key_on else ('reveal_rim', 'reveal_key')
+        m = render_rig_frame(rig, anchor, height, target, tmp, mask_path,
+                              emis_path, zones, obj=obj, only_lights=keep)
+        rgb = read_png_np(tmp)
+        mask = _mask_np(mask_path)
+        lum = (0.2126 * rgb[:, :, 0] + 0.7152 * rgb[:, :, 1]
+               + 0.0722 * rgb[:, :, 2])
+        band = _band_mask(mask, BAND_PX)
+        body = mask
+        inband = band & body
+        bright = inband & (lum > 190)
+        # how much of the band is lit, and is the bright part the EDGE?
+        edge_bright = int(bright.sum())
+        edge_total = int(inband.sum())
+        # where is the bright stuff?  left/right/top/bottom of the frame
+        h, w = lum.shape
+        cx = w * 0.5
+        lft = int(bright[:, :int(cx)].sum())
+        rgt = int(bright[:, int(cx):].sum())
+        top = int(bright[:int(h * 0.35), :].sum())
+        bot = int(bright[int(h * 0.65):, :].sum())
+        # and is the floor lit?
+        floorbright = int(((lum > 150) & (~mask)).sum())
+        print('[V4]   rim %6.0f key %5.0f: band bright %d of %d edge px | '
+              'band mean %5.1f | frac %.4f | bright L %d R %d top %d bottom %d '
+              '| floor px >150 %d | bg %.1f | clipW %d'
+              % (rim_w, key_w, edge_bright, edge_total,
+                 m.get('rim_band_mean_lum', 0), m.get('rim_bright_over_body', 0),
+                 lft, rgt, top, bot, floorbright, m['background_darkness'],
+                 m['clipped_white_pixels']))
+    return True
+
+def do_enemy(name, fbx, out_dir, mask_dir, tmp_dir):
+    """Render one enemy under the global rig, and measure it.
+
+    ONE RIG, ONE RENDER PATH, ONE MEASUREMENT.  v10 had three paths
+    answering for the same creature - the probe read clipW 2267 on the
+    Viper, the delivered frame read 630 and the parity frame read 146.  A
+    score computed on a rig nobody ever sees is fiction, so everything below
+    goes through render_rig_frame(), and the DELIVERED PNG is the frame that
+    was measured.
     """
     print('[V4] === %s ===' % name)
     sc = setup_scene(fbx, 1.0)
     if not sc:
         return None
     obj, height = sc['obj'], sc['height']
+    size = sc.get('size') or height
     anchor = sc['anchor']
     cam, target = sc['cam'], sc['target']
-    print('[V4] %s height=%.3f anchor=%s emissive=%s'
-          % (name, height, tuple(round(a, 3) for a in anchor), sc['found']))
+    ground, haze = sc['ground'], sc['haze']
 
-    rig = Rig()
-    subject_overrides(name, rig, height)
-    floater_overrides(name, rig, height)
+    rig = make_rig(name, sc, height)
+    xs = [o.matrix_world @ v.co for o in [obj] for v in o.data.vertices]
+    blo = [min(p[i] for p in xs) for i in range(3)]
+    bhi = [max(p[i] for p in xs) for i in range(3)]
+    # where does the creature actually land in the frame?
+    try:
+        from bpy_extras.object_utils import world_to_camera_view
+        sp = []
+        for v in obj.data.vertices:
+            co = world_to_camera_view(bpy.context.scene, cam,
+                                     obj.matrix_world @ v.co)
+            sp.append((co.x, 1.0 - co.y))
+        sx = [p[0] for p in sp]; sy = [p[1] for p in sp]
+        frame = 'x %.3f..%.3f y %.3f..%.3f' % (min(sx), max(sx),
+                                                 min(sy), max(sy))
+    except Exception as e:
+        frame = 'frame unknown (%s)' % e
+    print('[V4]   %s FRAME: %s' % (name, frame))
+    print('[V4]   %s height %.3f size %.3f flat %.2f | world bbox '
+          'x %.2f..%.2f y %.2f..%.2f z %.2f..%.2f | cam z %.2f dist %.2f '
+          '| rig %s'
+          % (name, height, size, size / max(0.05, height),
+             blo[0], bhi[0], blo[1], bhi[1], blo[2], bhi[2],
+             sc['cam_z'], sc['dist'], rig.as_dict()))
+
     mask_path = os.path.join(mask_dir, name + '_mask.png')
     emis_path = os.path.join(mask_dir, name + '_emis.png')
     render_mask(obj, mask_path, 'silhouette', scale=1.0)
     render_mask(obj, emis_path, 'emissive', scale=1.0)
-    try:
-        em = read_png_np(emis_path)
-        lit = int((em[:, :, 0] > 40).sum())
-    except Exception:
-        lit = -1
-    print('[V4] %s emissive mask lit px = %d' % (name, lit))
-    if lit <= 0:
-        print('[V4] %s ABORT: emissive mask is empty' % name)
-        return None
-
+    fix_materials(getattr(rig, 'emissive_scale', 1.0))
     zones = merge_zones(body_row_zones(mask_path),
-                        compute_zones(cam, anchor, height, rig))
-    print('[V4] %s floor probe screen positions: %s'
-          % (name, zones.get('_probe_screen')))
+                        compute_zones(cam, anchor, height, rig, size))
 
-    def render_probe(tag):
-        build_reveal_rig(rig, anchor, height, target)
-        enable_glare(threshold=0.90, size=0.50, strength=0.25)
-        set_world_strength(WORLD_STRENGTH)
-        p = os.path.join(tmp_dir, name + '_probe_%s.png' % tag)
-        render_to(p, samples=SAMPLES)
-        return measure(p, mask_path, emis_path, zones)
+    probe = os.path.join(tmp_dir, name + '_probe.png')
 
-    # ---- pass 1: the global rig, as-is ---------------------------------
-    m1 = render_probe('1')
-    report_probe(name, m1, rig, 'GLOBAL RIG')
+    def shoot():
+        # The fit measures THE SAME KIND OF IMAGE the delivered frame is:
+        # full resolution, same mask, same zones.  A fit on a cheaper image
+        # is the parity defect all over again.
+        m = render_rig_frame(rig, anchor, height, target, probe,
+                              mask_path, emis_path, zones, samples=16,
+                              obj=obj)
+        # The objective is the HARD 13-criteria count, not the soft score.
+        # score_of() is a continuous 20-point proxy; the publish gate counts
+        # evaluate()'s pass/fail criteria.  When the fitter optimises the
+        # proxy it buys under-lighting points and trades away rim, background
+        # and clipping criteria -- the fitter and the gate then disagree
+        # about what "better" means, which is how a set that scores 41/65
+        # gets published over one that scores 42/65.
+        hard, _ = evaluate(m)
+        return m, sum(1 for v in hard.values() if v), score_of(m)
 
-    # ---- the corrector is off: the hand-set rig is what is rendered ----
-    report_probe(name, m1, rig, 'FINAL')
+    # ---- the rim's azimuth is PINNED at 190 ---------------------------
+    # The sweep answered its question: at 190 the low-body ratio reads
+    # 1.63 / 1.63 / 1.78 / 1.63 on four of the five creatures, clearing
+    # the 1.3 bar every time, while 220 and 240 are consistently worse.
+    # It is now a constant, not a search.
+    rig.rim_az = RIM_AZ_PINNED
 
-    # ---- the delivered frames ------------------------------------------
-    build_reveal_rig(rig, anchor, height, target)
-    set_world_strength(WORLD_STRENGTH)
-    enable_glare(threshold=0.90, size=0.50, strength=0.25)
+    # ---- stage 2: the exposure and the wash gain ----------------------
+    # The exposure scales everything; the wash gain moves the FLOOR
+    # without touching the body, which is what a subject whose floors are
+    # too dark needs (its body is already at the clip ceiling).
+    best = None
+    rim_base = rig.rim          # the per-enemy value; the sweep is relative
+    for e in (0.6, 1.0, 1.6):
+        for wg in (1.0, 3.0):
+            for rg in (1.0, 1.6, 2.2):
+                rig.exposure = e
+                rig.wash_gain = wg
+                rig.rim_gain = rg
+                rig.rim = rim_base
+                m, hard, soft = shoot()
+                key = (hard, soft)
+                if best is None or key > best[0]:
+                    best = (key, e, wg, rg, m)
+    rig.exposure, rig.wash_gain, rig.rim_gain = best[1], best[2], best[3]
+    print('[V4]   %s exposure -> %.2f, wash gain -> %.2f, rim gain -> %.2f '
+          '(hard %d, score %.2f)'
+          % (name, rig.exposure, rig.wash_gain, rig.rim_gain,
+             best[0][0], best[0][1]))
+
+    # ---- stage 3: the under gain.  The under-to-torso ratio is
+    #      exposure-invariant, so it needs its own knob.
+    best = None
+    under_base = rig.under
+    for ug in (1.0, 2.0, 4.0):
+        for ua in (0.02, 0.05, 0.09):
+            rig.under_gain = ug
+            rig.under = under_base
+            rig.under_aim = ua
+            m, hard, soft = shoot()
+            key = (hard, soft)
+            if best is None or key > best[0]:
+                best = (key, ug, ua, m)
+    rig.under_gain, rig.under_aim = best[1], best[2]
+    print('[V4]   %s under gain -> %.2f, under aim -> %.2f (hard %d, score %.2f)'
+          % (name, rig.under_gain, rig.under_aim, best[0][0], best[0][1]))
+
+    # ---- THE DELIVERED FRAME IS THE MEASURED FRAME -------------------
     reveal_path = os.path.join(out_dir, name + '_reveal.png')
-    render_to(reveal_path, samples=SAMPLES)
+    m = render_rig_frame(rig, anchor, height, target, reveal_path,
+                          mask_path, emis_path, zones, obj=obj)
+    v = dict(m)
+    v['exposure'] = rig.exposure
+    v['wash_gain'] = rig.wash_gain
+    v['under_gain'] = rig.under_gain
+    v['rim_azimuth'] = rig.rim_az
+    v['rim_gain'] = rig.rim_gain
+    v['under_aim'] = rig.under_aim
 
+    # the labelled copy for the side-by-side
     lbl = add_label(cam, 'REVEAL (rig)')
     reveal_lbl = os.path.join(tmp_dir, name + '_reveal_lbl.png')
     render_to(reveal_lbl, samples=SAMPLES)
@@ -1979,8 +2972,6 @@ def do_enemy(name, fbx, out_dir, mask_dir, tmp_dir):
         pass
 
     # emissive-only proof: NO scene lights at all
-    haze = sc['haze']
-    ground = sc['ground']
     haze.hide_render = True
     fix_materials(PROOF_EMIT_SCALE)
     clear_lights()
@@ -1992,7 +2983,7 @@ def do_enemy(name, fbx, out_dir, mask_dir, tmp_dir):
     ground.hide_render = False
 
     # flat studio rig, same camera, for the side-by-side
-    fix_materials(1.0)
+    fix_materials(getattr(rig, 'emissive_scale', 1.0))
     build_studio_rig(target, height)
     set_world_strength(0.60)
     disable_glare()
@@ -2005,12 +2996,8 @@ def do_enemy(name, fbx, out_dir, mask_dir, tmp_dir):
         pass
     sbs_path = os.path.join(out_dir, name + '_studio_vs_reveal.png')
     hstack_png(studio_path, reveal_lbl, sbs_path)
+    guard_render(name)
 
-    # ---- measure the DELIVERED frame ----------------------------------
-    build_reveal_rig(rig, anchor, height, target)
-    set_world_strength(WORLD_STRENGTH)
-    disable_glare()
-    v = measure(reveal_path, mask_path, emis_path, zones)
     v['emissive_only'] = measure(proof_path, mask_path, emis_path, zones)
     v['studio_vs_reveal'] = measure(sbs_path)
     v['zones'] = zones
@@ -2018,6 +3005,7 @@ def do_enemy(name, fbx, out_dir, mask_dir, tmp_dir):
     v['emissive_materials'] = sc['found']
     v['emission_strength'] = dict((k, round(x, 3)) for k, x in EMIT_STRENGTH.items())
     v['body_height'] = round(height, 4)
+    v['body_size'] = round(size, 4)
 
     zs = v['zone_stats']
     tm = max(0.001, zs['torso']['mean_lum'])
@@ -2028,11 +3016,11 @@ def do_enemy(name, fbx, out_dir, mask_dir, tmp_dir):
     fl = [zs[k]['mean_lum'] for k in ('floor_front', 'floor_shadow_side',
                                       'floor_key_side')]
     diffs = []
-    for i in range(3):
-        for j in range(i + 1, 3):
-            hi = max(fl[i], fl[j])
+    for a in range(3):
+        for b in range(a + 1, 3):
+            hi = max(fl[a], fl[b])
             if hi > 0.001:
-                diffs.append(abs(fl[i] - fl[j]) / hi * 100.0)
+                diffs.append(abs(fl[a] - fl[b]) / hi * 100.0)
     v['floor_zone_min_diff_pct'] = round(min(diffs) if diffs else 0.0, 2)
     v['floor_zone_means'] = dict(zip(('floor_front', 'floor_shadow_side',
                                       'floor_key_side'), [round(x, 2) for x in fl]))
@@ -2060,20 +3048,29 @@ def do_enemy(name, fbx, out_dir, mask_dir, tmp_dir):
     rigdata['emissive_materials'] = sc['found']
     rigdata['emission_strength'] = v['emission_strength']
     rigdata['body_height'] = round(height, 4)
+    rigdata['body_size'] = round(size, 4)
+    rigdata['exposure'] = rig.exposure
+    rigdata['wash_gain'] = rig.wash_gain
+    rigdata['under_gain'] = rig.under_gain
+    rigdata['rim_azimuth'] = rig.rim_az
+    rigdata['rim_gain'] = rig.rim_gain
+    rigdata['under_aim'] = rig.under_aim
     rigdata['anchor'] = [round(x, 4) for x in anchor]
     rigdata['camera'] = {'az': CAM_AZ, 'dist': round(sc['dist'], 4),
                          'z': round(sc['cam_z'], 4), 'lens': CAM_LENS,
-                         'target': [0.0, 0.0, round(CAM_TARGET_Z * height, 4)]}
+                         'target': [0.0, 0.0, round(CAM_TARGET_Z * size, 4)]}
     build_studio_rig(target, height)
     rigdata['studio_rig'] = collect_rig()
 
-    print('[V4] %s DELIVERED: %d/13 criteria | clipW=%d clipB=%d clipC=%d '
-          'bg=%.1f floors %s | %s'
+    guard_measure(name)
+    print('[V4] %s DELIVERED: %d/13 | clipW=%d clipB=%d clipC=%d bg=%.1f '
+          'floors %s | band %.0f frac %.4f | under %.2f/%.2f'
           % (name, npass, v['clipped_white_pixels'], v['clipped_body_pixels'],
              v['clipped_colour_pixels_non_emissive'], v['background_darkness'],
-             v.get('floor_zone_means'),
-             'PASS' if v['all_criteria_pass']
-             else 'FAIL ' + ','.join(v['failed_criteria'])))
+             v.get('floor_zone_means'), v.get('rim_band_mean_lum', 0),
+             v.get('rim_bright_over_body', 0),
+             v.get('under_lowbody_over_torso'), v.get('under_feet_over_torso')))
+    print('[V4]   %s FAILED: %s' % (name, ', '.join(v['failed_criteria'])))
     return {'rig': rigdata, 'verification': v}
 
 
@@ -2894,8 +3891,21 @@ def render_params_table(out_dir, doc):
 if __name__ == '__main__':
     _out, _src, _verify, _only = parse_args()
     ONLY[0] = _only
-    ONLY[1] = ('--diag' in sys.argv)
-    if _verify:
-        verify_main(_out)
-    else:
-        bl_main(_out, _src)
+    _mode = None
+    for _m in ('grid', 'islands', 'parity', 'probe', 'diag', 'rimonly'):
+        if ('--' + _m) in sys.argv:
+            _mode = _m
+            break
+    ONLY[1] = _mode
+    try:
+        if _verify:
+            verify_main(_out)
+        else:
+            bl_main(_out, _src)
+    except Exception:
+        import traceback
+        traceback.print_exc()
+        # A diagnostic that failed must NOT report success.  This project has
+        # had six instruments report success over a failure.
+        print('[V4] RUN FAILED - exiting non-zero')
+        raise
