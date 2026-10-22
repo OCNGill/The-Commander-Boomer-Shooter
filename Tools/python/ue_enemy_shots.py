@@ -248,13 +248,13 @@ def build_studio(world, center, size):
 
     # KEY: warm, from front-left-above.  Casts the contact shadow.
     directional((center.x - size * 2.0, center.y + size * 2.0,
-                 center.z + size * 2.0), 2.6, (1.0, 0.95, 0.87), True, 'KEY')
+                 center.z + size * 2.0), 1.0, (1.0, 0.95, 0.87), True, 'KEY')
     # FILL: cool, from camera-right, no shadow, lifts the dark side.
     directional((center.x + size * 2.0, center.y - size * 2.0,
-                 center.z + size * 0.3), 0.9, (0.60, 0.72, 0.92), False, 'FILL')
+                 center.z + size * 0.3), 0.35, (0.60, 0.72, 0.92), False, 'FILL')
     # RIM: cool, from behind-above, no shadow.  Draws the silhouette edge.
     directional((center.x - size * 1.5, center.y - size * 2.0,
-                 center.z + size * 1.8), 1.8, (0.72, 0.86, 1.0), False, 'RIM')
+                 center.z + size * 1.8), 0.7, (0.72, 0.86, 1.0), False, 'RIM')
 
     return actors
 
@@ -392,6 +392,41 @@ class Shooter(object):
             return None
         return w
 
+    def _strip_sky(self):
+        """Make the render target's clear colour the background.
+
+        UE 5.8's SceneCaptureComponent2D has NO primitive_render_mode
+        property (setting it fails), so the world sky is always rendered
+        into the capture: a black zenith over a blown-out white horizon,
+        with the creature silhouetted against it.  The fix is at the world
+        level - clear WorldSettings' default sky material so there is no
+        sky to render, and the capture's own clear colour shows through.
+        """
+        w = self.world
+        try:
+            ws = w.get_world_settings()
+            L('WorldSettings: %s' % ws.get_class().get_name())
+            for prop in ('default_sky_material',):
+                try:
+                    before = ws.get_editor_property(prop)
+                    ws.set_editor_property(prop, None)
+                    L('  %s -> None (was %s)' % (prop, before))
+                except Exception as exc:
+                    L('  %s failed: %r' % (prop, exc))
+            for prop in ('default_physical_camera',):
+                pass
+        except Exception as exc:
+            L('world settings failed: %r' % (exc,))
+        # a skylight would also light the scene; report whether one exists
+        try:
+            sub = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
+            for a in sub.get_all_level_actors():
+                cn = a.get_class().get_name()
+                if 'Sky' in cn or 'Light' in cn or 'Atmosphere' in cn or 'Fog' in cn:
+                    L('  remaining light-ish actor: %s' % cn)
+        except Exception:
+            pass
+
     # -- states -----------------------------------------------------------
     def do_boot(self):
         if not os.path.isdir(SHOTS):
@@ -414,6 +449,7 @@ class Shooter(object):
             self.report['map'] = w.get_path_name()
             L('world: %s' % self.report['map'])
             clear_world(self.world)
+            self._strip_sky()
             self.state = 'next_enemy'
             return
         if self.wait > 120:
@@ -495,7 +531,25 @@ class Shooter(object):
             # blew out the lower half of the frame.  Mode 0 renders the
             # primitives only, so the render target's clear colour is the
             # background.
-            setp(self.comp, 'primitive_render_mode', 0)
+            if not getattr(self, '_props_logged', False):
+                try:
+                    names = [n for n in dir(self.comp)
+                             if any(k in n.lower() for k in
+                                    ('render', 'mode', 'flag', 'sky', 'capture'))]
+                    L('CAPTURE PROPS: %s' % sorted(names))
+                except Exception as exc:
+                    L('capture prop discovery failed: %r' % (exc,))
+                self._props_logged = True
+            # Belt and braces: also ask the component to exclude the world
+            # sky, so a black background cannot come back even if the
+            # render-mode property is ignored by this engine build.
+            try:
+                sf = self.comp.get_editor_property('show_flags')
+                setp(sf, 'sky_atmosphere', False)
+                setp(sf, 'skybox', False)
+                L('%s show_flags sky cleared' % self.rec['enemy'])
+            except Exception as exc:
+                L('%s show_flags unavailable: %r' % (self.rec['enemy'], exc))
             self.comp.capture_scene()
             L('%s capture issued (read in %d ticks)'
               % (self.rec['enemy'], TICKS_BEFORE_READ))
