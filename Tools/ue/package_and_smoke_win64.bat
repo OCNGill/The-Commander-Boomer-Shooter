@@ -58,11 +58,6 @@ REM  tasklist /FI ... /NH prints "INFO: No tasks are running which match the
 REM  specified criteria." when nothing matches - and "tokens=2" of that line is
 REM  the word "tasks", not a PID. Match on the image name instead.
 REM ---------------------------------------------------------------------------
-:find_game
-set "PREEXIST="
-for /f "tokens=1" %%P in ('tasklist /FI "IMAGENAME eq %GAMEPROC%" /NH 2^>nul ^| find /i "%GAMEPROC%"') do set "PREEXIST=%%P"
-goto :eof
-
 echo.
 echo === [1/5] BUILD GAME TARGET ===
 call "%UE%\Engine\Build\BatchFiles\Build.bat" TheCommanderGame Win64 Development ^
@@ -227,3 +222,13 @@ if defined SKIPSMOKE ( echo     RESULT: SKIPPED & exit /b 0 )
 if "%VERDICT%"=="BOOTED" ( echo     RESULT: PASS & exit /b 0 )
 echo     RESULT: FAIL
 exit /b 8
+
+REM ---------------------------------------------------------------------------
+REM  Subroutine: find a running instance of the game. MUST STAY AT THE END OF THIS
+REM  FILE - a label in the middle of the main flow is fallen into, and the
+REM  'goto :eof' below would end the whole lane before it ever builds anything.
+REM ---------------------------------------------------------------------------
+:find_game
+set "PREEXIST="
+for /f "tokens=1" %%P in ('tasklist /FI "IMAGENAME eq %GAMEPROC%" /NH 2^>nul ^| find /i "%GAMEPROC%"') do set "PREEXIST=%%P"
+goto :eof
