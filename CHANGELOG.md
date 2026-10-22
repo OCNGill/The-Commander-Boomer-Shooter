@@ -455,6 +455,14 @@ and only reading the live geometry, not the intent, told us which one was real.*
 | **GE-Proton7-28** | **map loaded, player spawned, input audit running → E_INVALIDARG on the first runtime PSO** |
 | 11.0 / 8.0 / 7.0 / Hotfix | installed, not yet tried |
 
+### Cleanup
+- **The stale pre-fix build is removed from the Deck.** `/home/deck/AI/commander_build/` held the
+  earlier `TheCommanderGame.exe` (sha256 `202919e8a4ce9b59…`, 344,876,032 B) — the binary that
+  crashes in `FD3D12Viewport::Init` under the XeFG swapchain hijack. Keeping a second, older
+  executable of the same game on a node is how a fixed build gets re-tested and re-failed. Deleted
+  after the fixed binary (sha256 `ba51d650…`) was confirmed in place at
+  `/home/deck/AI/TheCommander_Win64/`.
+
 ### Next leg — one cause, one fix
 1. Make the game **exit gracefully** after the input audit so UE writes
    `Saved/PipelineCaches/Windows/TheCommander_PCD3D_SM6.stable.upipelinecache`. A forced kill writes
