@@ -409,3 +409,67 @@ and only reading the live geometry, not the intent, told us which one was real.*
 > metric showed that the first number measured teardown and the second measured nothing new.
 > "Studies to answer" is the discipline of going back to the evidence and answering with what the
 > evidence actually says — even when the honest answer retracts two of my own claims.
+
+## [2026-10-22e] — Steam Deck: the game BOOTS under Proton; the blocker is a missing PSO cache, not the build
+
+### The result
+- **Correcting my own earlier claim: Proton IS installed on the Deck** — Experimental (11.0-100), 11.0,
+  8.0, Hotfix, 7.0, plus **GE-Proton7-28** in `compatibilitytools.d`. My earlier probe looked in the
+  wrong path and concluded "Proton not installed". The Deck also already holds the **fixed** build
+  (`TheCommanderGame.exe` sha256 `ba51d650993ea82b`, byte-identical to the laptop's).
+- **The `Proton 11.0-100` prefix failure is fixable.** `Error while copying to
+  ".../drive_c/windows/system32/amdxcffx64.dll"` is a prefix-ordering bug — Proton copies that driver
+  DLL before `drive_c/windows/system32` exists. **Pre-creating `pfx/drive_c/windows/system32` and
+  `syswow64` before the first run makes the prefix build cleanly** (374 MB, no error).
+- **GE-Proton7-28 takes the game to full gameplay state on the Deck:**
+  - `RHI D3D12 with Feature Level SM6 is supported and will be used` (vkd3d-proton 2.6.0, build d00d035321c9f81)
+  - `LogXeFGRHI: Display: Override swap chain: 0` → **the XeFG crash fix holds on the Deck too**
+  - `LogFSR: Successfully initialized FSR Upscaling provider using version '3.1.5'`
+  - `LogFFXFI: Successfully initialized FSR FrameInterpolation using version '3.1.6'`
+  - `LogLoad: LoadMap: /Game/Maps/M_Blockout01` · `ACommanderGameMode::InitGame` ·
+    `CommanderPlayerController ready: pawn=CommanderCharacter playerinput=EnhancedPlayerInput`
+  - Full input audit: WASD **and** gamepad axis mappings, Fire / Jump / Dash action bindings,
+    pawn at `V(Y=-1500.00, Z=90.15)`
+  - DLSS correctly skipped (no NVIDIA); Streamline correctly unsupported for D3D12
+- **Then it dies:** `Fatal error: [D3D12Util.cpp:1062] hr failed at D3D12CommandList.cpp:244 with
+  error E_INVALIDARG`, ~0.5 s after `Encountered a new graphics PSO: 2110166719 (PSOPrecacheState: Missed)`.
+
+### Root cause — single and precise
+- **The package ships no PSO cache.** `Could not open FPipelineCacheFile:
+  ../../../TheCommander/Content/PipelineCaches/Windows/TheCommander_PCD3D_SM6.stable.upipelinecache`
+  on every target; **no `.upipelinecache` exists anywhere** on MAIN or the laptop.
+- **14-15 PSOs are created at runtime on every target — the same set everywhere** (MAIN 15, Deck 13 of
+  them before it died): 4026005998, 265281650, 1998208102, 2110166719, 1252366740, 45228890, 3228235678,
+  3372292158, 1148996969, 1818476037, 4012981560, 1440837915, 544261722, 3809084492.
+- Native D3D12 (MAIN, laptop) creates them fine → the game plays. **vkd3d-proton cannot create them →
+  E_INVALIDARG → crash.** A vkd3d-proton capability gap, not a defect in our code.
+- **Therefore "ship a PSO cache" was never a no-op.** My `[2026-10-22d]` correction was right about the
+  **shader library** (8239 shaders, already cooked, already loaded — that part was genuinely a no-op)
+  and wrong to generalise it to the **PSO cache**, which is a *different artifact* and **is** absent.
+  On native D3D12 that absence costs 15 runtime compiles; on the Deck's vkd3d it is fatal.
+
+### Proton version matrix (Deck, this build)
+| Proton | Result |
+|---|---|
+| Experimental 11.0-100 | prefix created; D3D12 SM6 up; **Vulkan device lost (`VK_ERROR_DEVICE_LOST`)** ~49 s in |
+| **GE-Proton7-28** | **map loaded, player spawned, input audit running → E_INVALIDARG on the first runtime PSO** |
+| 11.0 / 8.0 / 7.0 / Hotfix | installed, not yet tried |
+
+### Next leg — one cause, one fix
+1. Make the game **exit gracefully** after the input audit so UE writes
+   `Saved/PipelineCaches/Windows/TheCommander_PCD3D_SM6.stable.upipelinecache`. A forced kill writes
+   nothing, which is why no cache has ever existed here. Small C++ change, rebuild on MAIN.
+2. Ship that file in the package at `TheCommander/Content/PipelineCaches/Windows/`.
+3. Re-run on the Deck — the 14 PSOs load from cache instead of being created at runtime, so vkd3d
+   never has to create them.
+4. Fallback if that is not enough: **native Linux/Vulkan build** (still needs the UE 5.8 Linux engine
+   = Epic login, the one Commander action I cannot do).
+
+### Verse
+> *"Let all things be done decently and in order."* — 1 Corinthians 14:40 (ESV)
+> Chosen because this leg was a chain of failures that had to be put in order before anything could be
+> trusted: Proton "not installed" (wrong — it was installed, I probed the wrong path), a prefix bug (a
+> directory that has to exist before Proton copies a DLL into it), a Vulkan device loss, and then the
+> real cause sitting underneath all of it — 14 PSOs that must exist before the game can draw a frame
+> on the Deck. Nothing here worked by brute force; it worked because the failures were separated,
+> named, and put in order.
