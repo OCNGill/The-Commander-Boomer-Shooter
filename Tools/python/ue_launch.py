@@ -106,8 +106,12 @@ def main():
         # a tick-driven script never gets the frames it needs.  -ExecCmds
         # runs the same code but leaves the editor alive, so the slate
         # post-tick callback keeps firing until the script quits it.
-        script_abs = os.path.abspath(script_arg)
-        args.append("-ExecCmds=py exec(open('%s').read())" % script_abs)
+        # FORWARD SLASHES ONLY.  A Windows backslash in the embedded
+        # Python source is read as an escape sequence, and 'F:\Gillsystems'
+        # becomes a truncated \uXXXX unicode escape -> SyntaxError before
+        # the script ever runs.
+        script_abs = os.path.abspath(script_arg).replace('\\', '/')
+        args.append("-ExecCmds=py exec(open(r'%s').read())" % script_abs)
         # Over SSH there is no interactive desktop session, so the editor
         # cannot create a D3D12 swapchain (DXGI_ERROR_NOT_CURRENTLY_AVAILABLE
         # in WindowsD3D12Viewport.cpp).  -RenderOffscreen renders without a
