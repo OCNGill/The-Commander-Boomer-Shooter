@@ -22,7 +22,7 @@
     "file": "T_Floor_Concrete_Wet_normal.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 9823446,
+    "bytes": 9823460,
     "kb": 9593.2
    },
    {
@@ -36,14 +36,14 @@
     "file": "T_Floor_Concrete_Wet_contact.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 3879801,
+    "bytes": 3879803,
     "kb": 3788.9
    },
    {
     "file": "T_Floor_Concrete_Wet_crop1.png",
     "width": 1024,
     "height": 1024,
-    "bytes": 1774799,
+    "bytes": 1774794,
     "kb": 1733.2
    },
    {
@@ -217,36 +217,36 @@
     "file": "T_Wall_Steel_Rusted.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 5687592,
+    "bytes": 5687594,
     "kb": 5554.3
    },
    {
     "file": "T_Wall_Steel_Rusted_normal.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 1689533,
+    "bytes": 1689532,
     "kb": 1649.9
    },
    {
     "file": "T_Wall_Steel_Rusted_rough.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 1079583,
+    "bytes": 1079581,
     "kb": 1054.3
    },
    {
     "file": "T_Wall_Steel_Rusted_contact.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 3774952,
+    "bytes": 3774949,
     "kb": 3686.5
    },
    {
     "file": "T_Wall_Steel_Rusted_crop1.png",
     "width": 1024,
     "height": 1024,
-    "bytes": 1428026,
-    "kb": 1394.6
+    "bytes": 1428018,
+    "kb": 1394.5
    },
    {
     "file": "T_Wall_Steel_Rusted_crop2.png",
@@ -259,7 +259,7 @@
     "file": "T_Wall_Steel_Rusted_crop3.png",
     "width": 1024,
     "height": 1024,
-    "bytes": 1412400,
+    "bytes": 1412401,
     "kb": 1379.3
    }
   ],
@@ -268,7 +268,7 @@
    1649.9,
    1054.3,
    3686.5,
-   1394.6,
+   1394.5,
    1405.8,
    1379.3
   ],
@@ -317,42 +317,42 @@
     "file": "T_Ground_Gravel.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 6147555,
+    "bytes": 6147545,
     "kb": 6003.5
    },
    {
     "file": "T_Ground_Gravel_normal.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 8191305,
+    "bytes": 8191299,
     "kb": 7999.3
    },
    {
     "file": "T_Ground_Gravel_rough.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 2570206,
+    "bytes": 2570210,
     "kb": 2510.0
    },
    {
     "file": "T_Ground_Gravel_contact.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 3695946,
+    "bytes": 3695948,
     "kb": 3609.3
    },
    {
     "file": "T_Ground_Gravel_crop1.png",
     "width": 1024,
     "height": 1024,
-    "bytes": 1536945,
+    "bytes": 1536944,
     "kb": 1500.9
    },
    {
     "file": "T_Ground_Gravel_crop2.png",
     "width": 1024,
     "height": 1024,
-    "bytes": 1535929,
+    "bytes": 1535926,
     "kb": 1499.9
    },
    {
@@ -418,60 +418,60 @@
     "file": "T_Roof_Tar.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 7148115,
-    "kb": 6980.6
+    "bytes": 7250028,
+    "kb": 7080.1
    },
    {
     "file": "T_Roof_Tar_normal.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 9360777,
-    "kb": 9141.4
+    "bytes": 9930543,
+    "kb": 9697.8
    },
    {
     "file": "T_Roof_Tar_rough.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 2935068,
-    "kb": 2866.3
+    "bytes": 3280499,
+    "kb": 3203.6
    },
    {
     "file": "T_Roof_Tar_contact.png",
     "width": 2048,
     "height": 2048,
-    "bytes": 3961106,
-    "kb": 3868.3
+    "bytes": 3968446,
+    "kb": 3875.4
    },
    {
     "file": "T_Roof_Tar_crop1.png",
     "width": 1024,
     "height": 1024,
-    "bytes": 1775862,
-    "kb": 1734.2
+    "bytes": 1805338,
+    "kb": 1763.0
    },
    {
     "file": "T_Roof_Tar_crop2.png",
     "width": 1024,
     "height": 1024,
-    "bytes": 1781616,
-    "kb": 1739.9
+    "bytes": 1814221,
+    "kb": 1771.7
    },
    {
     "file": "T_Roof_Tar_crop3.png",
     "width": 1024,
     "height": 1024,
-    "bytes": 1786108,
-    "kb": 1744.2
+    "bytes": 1819970,
+    "kb": 1777.3
    }
   ],
   "kb": [
-   6980.6,
-   9141.4,
-   2866.3,
-   3868.3,
-   1734.2,
-   1739.9,
-   1744.2
+   7080.1,
+   9697.8,
+   3203.6,
+   3875.4,
+   1763.0,
+   1771.7,
+   1777.3
   ],
   "notes": "Tar roof: rolled seams, patch repairs, embedded angular grit, tar blisters, broken splits, cold puddle sheen, forest moss in the splits.",
   "size": [
@@ -487,10 +487,10 @@
    "#2B452F",
    "#4C5766"
   ],
-  "mean": 42.85,
-  "std": 19.57,
-  "seam_ratio_x": 2.451,
-  "seam_ratio_y": 2.07,
+  "mean": 43.92,
+  "std": 19.2,
+  "seam_ratio_x": 1.548,
+  "seam_ratio_y": 1.651,
   "maps": {
    "diffuse": "T_Roof_Tar.png",
    "normal": "T_Roof_Tar_normal.png",
@@ -614,12 +614,12 @@
     "file": "T_Set_TrimSheet.png",
     "width": 4096,
     "height": 4096,
-    "bytes": 10248918,
-    "kb": 10008.7
+    "bytes": 10229091,
+    "kb": 9989.3
    }
   ],
   "kb": [
-   10008.7
+   9989.3
   ],
   "notes": "Trim sheet: diffuse / normal / roughness / offset contact for all six materials, labelled and indexed 1-6.",
   "size": [

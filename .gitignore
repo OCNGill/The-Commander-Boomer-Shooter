@@ -42,3 +42,9 @@ Tools/blender/out_lighting/
 Tools/blender/out_lighting_build/
 Tools/blender/out_textures/
 Tools/blender/out_xcom_build/
+
+# Live output-server log (held open by the running server; never commit)
+CommandCenter/serve_outputs.log
+
+# Scratch commandlet project descriptor, created per run and deleted after use
+TheCommanderParity.uproject

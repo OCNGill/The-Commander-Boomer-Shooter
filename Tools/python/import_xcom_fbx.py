@@ -13,7 +13,9 @@ import json
 import traceback
 
 PROJ = unreal.SystemLibrary.get_project_directory()
-FBX_DIR = os.path.join(PROJ, 'Tools', 'blender', 'out_xcom')
+# FBX source dir. Override with XCOM_FBX_DIR to import a different export
+# generation (e.g. Tools/blender/out_xcom_new) without editing this file.
+FBX_DIR = os.environ.get('XCOM_FBX_DIR') or os.path.join(PROJ, 'Tools', 'blender', 'out_xcom')
 DEST = '/Game/Enemies/XCOM'
 REPORT_JSON = os.path.join(PROJ, 'Docs', 'generated', 'xcom_ue_import_report.json')
 

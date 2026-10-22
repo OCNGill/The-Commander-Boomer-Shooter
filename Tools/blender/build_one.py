@@ -5,7 +5,7 @@ import traceback
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import make_textures_v2 as mt  # noqa: E402
+import make_textures as mt  # noqa: E402
 
 name = sys.argv[sys.argv.index('--') + 1] if '--' in sys.argv else 'T_Wood_Plank_Dock'
 print('BUILDING %s' % name, flush=True)

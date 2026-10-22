@@ -18,7 +18,7 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import make_textures_v2 as mt  # noqa: E402
+import make_textures as mt  # noqa: E402
 
 OUT = None
 MIRROR = None
