@@ -135,3 +135,23 @@ time still needs measuring, but it will be driven by APU throughput, not by a co
 Reason for the verse: this build compiled clean — `BUILD SUCCESSFUL`, zero errors, zero warnings — and
 the shipped binary still died on the first frame. Only booting the actual packaged `.exe` exposed it.
 This ledger exists so that the receipt of every build is a *tested* fact, not a compiler's opinion.
+
+## Steam Deck — Proton path (2026-10-22)
+
+The Deck runs the shipped **Windows/D3D12** build under Proton far enough to play, which changes the
+plan: the Windows build is a viable stopgap while a native Linux/Vulkan build is prepared.
+
+| Stage | Result |
+|---|---|
+| Proton availability | **Experimental 11.0-100, 11.0, 8.0, Hotfix, 7.0, GE-Proton7-28** — all present |
+| Prefix creation | **Fixed** — pre-create `pfx/drive_c/windows/{system32,syswow64}` before the first run, or Proton fails copying `amdxcffx64.dll` |
+| RHI | `RHI D3D12 with Feature Level SM6 is supported and will be used` (vkd3d-proton 2.6.0) |
+| XeFG fix | `Override swap chain: 0` — **holds on the Deck** |
+| FSR | Upscaling provider **3.1.5**, FrameInterpolation **3.1.6** |
+| Gameplay | `LoadMap M_Blockout01` · `InitGame` · `CommanderPlayerController ready` · full input audit (WASD + gamepad) |
+| Failure | `E_INVALIDARG` at `D3D12CommandList.cpp:244` on the first **runtime-created PSO** |
+
+**Single root cause:** the package ships no `TheCommander_PCD3D_SM6.stable.upipelinecache`, so 14-15
+PSOs are created at runtime on every target (the same set everywhere). Native D3D12 creates them
+without complaint; vkd3d-proton cannot and the process dies. Shipping a PSO cache is the fix — see
+`CHANGELOG.md` `[2026-10-22e]`.
