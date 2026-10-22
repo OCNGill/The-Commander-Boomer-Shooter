@@ -311,3 +311,32 @@ and only reading the live geometry, not the intent, told us which one was real.*
 ### Verse
 > *"Plans fail for lack of counsel, but with many advisers they succeed."* — Proverbs 15:22 (ESV)
 > Chosen because this leg is the counsel landing: the Commander heard the options and chose C++, and the specs are now adjusted to match that advice instead of the plan failing for want of it.
+
+## [2026-10-22b] — Standalone Win64 build: compiles, cooks, packages, and boots on AMD with FSR
+
+### Added
+- **`Tools/ue/package_and_smoke_win64.bat`** — the repeatable sovereign build lane: builds the standalone game target, cooks, stages, packages, archives, and then **boots the shipped `.exe` and checks it survives first frame**. "It compiles" is not "it plays"; this script proves both in one run and reports a machine-readable verdict (`BOOTED` / `FATAL_VIEWPORT` / `FAIL`) plus `FSR=ENGAGED` and `INPUT_AUDIT=OK`.
+- **`Docs/generated/ZERO_TRUST_CONFIG_AUDIT.md`** — 9 findings, every one cited to a real file+line or a real engine log captured on MAIN. Verdict: **PASS WITH ONE FIX APPLIED**.
+
+### Fixed
+- **CRITICAL — the packaged standalone build died on the first frame.** XeSS Frame Generation (XeFG) hijacked the D3D12 swap chain and failed to create one: `LogXeFGSDK: Error: Failed to create swap chain: 0x887a0022` (`DXGI_ERROR_NOT_CURRENTLY_AVAILABLE`) → `LogXeFGRHI: Error: Failed to create XeFG swap chain, result: -17` → `LogD3D12RHI: Error: hr failed at WindowsD3D12Viewport.cpp:162` → `Fatal error: Failure creating: D3D12Viewport`.
+  - **Not an FSR problem and not GPU-specific.** The same run logged `LogFSR: Successfully initialized FSR Upscaling provider using version '4.1.2 *'` — FSR initialised cleanly *before* the crash. XeFG is the Intel vendor path (`libxell.dll` 1.3.2) and it does not own the swap chain in an AMD-first build.
+  - **Fix:** `r.XeFG.OverrideSwapChain=0` in `Config/DefaultEngine.ini` (line 114) — the project-level equivalent of the engine's `-XeFGOverrideSwapChainDisabled` switch, but **baked into the shipped `.exe`** so the crash cannot recur on any machine. XeSS *upscaling* (XeSS 3) is a separate module and is unaffected.
+  - **Re-verified by re-packaging and re-smoking with no command-line workaround:** `LogConfig: Set CVar [[r.XeFG.OverrideSwapChain:0]]` → `LogXeFGRHI: Display: Override swap chain: 0` → map loads → clean exit.
+
+### Verified (measured on MAIN — Ryzen 9 5900X, RX 7900 XTX, UE 5.8)
+- Editor target compile: **218 actions, 108 s, 0 errors / 0 warnings**. Game target compile: **79.57 s**, `Result: Succeeded`.
+- Cook: **543 packages**, 0 errors, 1 warning — and that single warning is the per-node device-profile gate *working as designed* (`r.Shadow.MaxCSMResolution` set by `SetByScalability` is correctly outranked by `SetByProjectSetting`).
+- Package: **`BUILD SUCCESSFUL`**, `AutomationTool exiting with ExitCode=0`, 1.5 GB archive, 34.85 s `BuildCookRun`.
+- Shipped `.exe` boots: `LoadMap: /Game/Maps/M_Blockout01` → `ACommanderGameMode::InitGame map=M_Blockout01 controller=CommanderPlayerController pawn=CommanderCharacter` → `PlayerController ... ready` → `Engine is initialized` → clean exit.
+- **FSR is live on AMD: `LogFSR: Successfully initialized FSR Upscaling provider using version '4.1.2 *'`.** The UE plugin stays pinned at 4.1.1; **4.1.2 comes from the Adrenalin driver (26.10.1)** — driver-side, exactly as the FSR research concluded. **No 4.1.2 plugin pin added.**
+- **The `-CommanderInputAudit` harness is WORKING, not broken** — it prints map, game mode, controller, pawn, `PlayerInput`, `InputComponent`, `PlayerStart` (`V(Y=-1500.00, Z=100.00)`), pawn location/rotation/velocity, plus all 8 axis and 5 action mappings, live in the packaged build. It fires on the tick *after* map load, so a harness that quits inside the same `ExecCmds` block exits before the audit prints.
+- All three upscaler families compile and link: `FFXFSRApi`, `FFXFSRSettings`, `FFXFSRTemporalUpscaling` (FSR) plus the DLSS, XeSS and `StreamlineNGXCommon` modules. FSR primary; DLSS and XeSS retained for compatibility.
+- The runtime level-fix subsystem executes correctly **in the packaged build**, not just the editor: 12 changes applied (pit rim × 5, ramp, pillar ledges × 3, cover blocks × 2, keycard beacon).
+
+### Corrected
+- The first `BUILD_EXIT=6` was **not** a bad target name — `TheCommanderGameEditor` is a real target (`Source/TheCommanderGameEditor.Target.cs`). The actual cause was `Unable to find plugin 'FSR' (referenced via TheCommander.uproject)`, because `Plugins/` is gitignored and a fresh clone carries no plugin payload. Provision with `python Tools/ue/fetch_upscaler_plugins.py` (SHA-256 verified, 0 downloads from a warm cache). A UBT exit code is not a diagnosis; the message above it is.
+
+### Verse
+> *"Test everything; hold fast what is good."* — 1 Thessalonians 5:21 (ESV)
+> Chosen because this leg is the first time the build actually lied to us — everything compiled clean, `BUILD SUCCESSFUL`, zero warnings, and the shipped binary still died on the first frame. Only booting the real packaged `.exe` exposed it. "Test everything" is what separated *the compiler is satisfied* from *the player can play*; "hold fast what is good" is why the findings that came back clean were left alone instead of being cosmetically rewritten.
