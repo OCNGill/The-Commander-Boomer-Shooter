@@ -1,0 +1,105 @@
+{
+  "adapter": "AMD Radeon RX 7900 XTX",
+  "distinct_files": 5,
+  "driver": "32.0.32015.7029 (Adrenalin 26.20.15.07)",
+  "enemies": {
+    "XCOM_Chryssalid": {
+      "blown_frac": 0.0,
+      "bytes": 1173227,
+      "dark_frac": 0.06125,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "file": "XCOM_Chryssalid_ue.png",
+      "luminance": {
+        "max": 239.8,
+        "median": 53.0,
+        "min": 0.0,
+        "p05": 4.6,
+        "p95": 114.0
+      },
+      "sha256": "21704861dddcf64d0d8d4db25fba97c4b9540d7bd6d13bbeb38313d9b396456c",
+      "unique_colors": 1950
+    },
+    "XCOM_Floater": {
+      "blown_frac": 0.0,
+      "bytes": 609202,
+      "dark_frac": 0.30584,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "file": "XCOM_Floater_ue.png",
+      "luminance": {
+        "max": 219.3,
+        "median": 51.0,
+        "min": 0.0,
+        "p05": 4.0,
+        "p95": 67.0
+      },
+      "sha256": "62565548c0dc0dee76af7f43d785bdb7268faf7e95c11356256002e64d65f771",
+      "unique_colors": 519
+    },
+    "XCOM_Muton": {
+      "blown_frac": 0.0,
+      "bytes": 1173227,
+      "dark_frac": 0.32246,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "file": "XCOM_Muton_ue.png",
+      "luminance": {
+        "max": 226.9,
+        "median": 38.0,
+        "min": 0.0,
+        "p05": 4.0,
+        "p95": 84.0
+      },
+      "sha256": "57749c91f2c15267f8bd9a13089f0b20ff7c234c17f76ac5c520181e838d2e17",
+      "unique_colors": 1145
+    },
+    "XCOM_Sectoid": {
+      "blown_frac": 0.0,
+      "bytes": 315909,
+      "dark_frac": 0.42086,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "file": "XCOM_Sectoid_ue.png",
+      "luminance": {
+        "max": 33.0,
+        "median": 16.0,
+        "min": 0.0,
+        "p05": 1.0,
+        "p95": 23.0
+      },
+      "sha256": "a57624be4278a2f404f60f6a4ac84cd3d52583379a9603dc20a37b934644f91d",
+      "unique_colors": 34
+    },
+    "XCOM_Viper": {
+      "blown_frac": 0.0,
+      "bytes": 609202,
+      "dark_frac": 0.4276,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "file": "XCOM_Viper_ue.png",
+      "luminance": {
+        "max": 218.4,
+        "median": 31.0,
+        "min": 0.0,
+        "p05": 2.0,
+        "p95": 42.0
+      },
+      "sha256": "ab093bdc33fe88dcc7ec85776013396b9051d127ed0bedcf550e9f2bca65b5d5",
+      "unique_colors": 345
+    }
+  },
+  "method": "SceneCapture2D in a built studio: dark floor, grey backdrop, key/fill/rim directional lights + skylight, empty world",
+  "note": "read_render_target returns the render target buffer BEFORE the export, so its histogram disagrees with the exported PNG. The exported PNG is the ground truth and is what is measured here.",
+  "source": "MAIN UE 5.8 editor, scheduled task in session 1"
+}
