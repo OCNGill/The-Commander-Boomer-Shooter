@@ -69,6 +69,13 @@ if not exist "%EXE%" ( echo [FATAL] packaged exe missing: %EXE% & exit /b 7 )
 echo.
 echo === [3/4] SMOKE TEST THE SHIPPED .exe ===
 del /q "%SMOKELOG%" >nul 2>&1
+REM A stale log from a previous run whose game is still alive CANNOT be deleted, and
+REM the marker poll below would then match it and report a FALSE PASS. Refuse to run.
+if exist "%SMOKELOG%" (
+  echo     [FAIL] previous smoke log is locked by a running game - refusing a stale-log smoke
+  set "SMOKE_EXIT=-2"
+  goto smoke_verdict
+)
 set "PREEXIST="
 for /f "tokens=2" %%P in ('tasklist /FI "IMAGENAME eq TheCommanderGame.exe" /NH 2^>nul') do set "PREEXIST=%%P"
 if defined PREEXIST goto smoke_skip
@@ -104,6 +111,7 @@ echo     FSR provider : %FSR%
 echo     input audit  : %INPUT_AUDIT%
 echo     archive      : %ARCH%
 echo     log          : %SMOKELOG%
+if "%SMOKE_EXIT%"=="-2" ( echo     RESULT: FAIL & exit /b 8 )
 if defined SKIPSMOKE ( echo     RESULT: SKIPPED & exit /b 0 )
 if "%VERDICT%"=="BOOTED" ( echo     RESULT: PASS & exit /b 0 )
 echo     RESULT: FAIL
