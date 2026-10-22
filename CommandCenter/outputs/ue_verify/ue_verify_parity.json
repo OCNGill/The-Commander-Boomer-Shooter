@@ -1,0 +1,575 @@
+{
+  "engine": "5.8.1-56057345+++UE5+Release-5.8",
+  "fresh": {
+    "XCOM_Chryssalid": {
+      "asset_path": "/Game/Tests/UEParity/XCOM_Chryssalid.XCOM_Chryssalid",
+      "enemy": "XCOM_Chryssalid",
+      "material": {
+        "accent_emissive_assigned": true,
+        "accent_emissive_slot": true,
+        "assigned": [
+          "XCOM_Chryssalid_CHITIN",
+          "XCOM_Chryssalid_PLATE",
+          "XCOM_Chryssalid_CHITIN_BONE",
+          "XCOM_Chryssalid_PLATE_DARK",
+          "XCOM_Chryssalid_ACCENT_EMISSIVE"
+        ],
+        "material_detail": [
+          {
+            "expressions": 0,
+            "material": "XCOM_Chryssalid_CHITIN",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Chryssalid_PLATE",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Chryssalid_CHITIN_BONE",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Chryssalid_PLATE_DARK",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Chryssalid_ACCENT_EMISSIVE",
+            "texture_nodes": 0
+          }
+        ],
+        "slot_count": 5,
+        "slots": [
+          "XCOM_Chryssalid_CHITIN",
+          "XCOM_Chryssalid_PLATE",
+          "XCOM_Chryssalid_CHITIN_BONE",
+          "XCOM_Chryssalid_PLATE_DARK",
+          "XCOM_Chryssalid_ACCENT_EMISSIVE"
+        ],
+        "textures": 0
+      },
+      "ok": true,
+      "pass": "fresh",
+      "retention_pct": 100.0,
+      "tris_source_fbx": 6252,
+      "tris_source_method": "mesh.get_num_triangles",
+      "tris_ue": 6252
+    },
+    "XCOM_Floater": {
+      "asset_path": "/Game/Tests/UEParity/XCOM_Floater.XCOM_Floater",
+      "enemy": "XCOM_Floater",
+      "material": {
+        "accent_emissive_assigned": true,
+        "accent_emissive_slot": true,
+        "assigned": [
+          "XCOM_Floater_CHITIN",
+          "XCOM_Floater_ACCENT_EMISSIVE",
+          "XCOM_Floater_PLATE_DARK",
+          "XCOM_Floater_CHITIN_BONE"
+        ],
+        "material_detail": [
+          {
+            "expressions": 0,
+            "material": "XCOM_Floater_CHITIN",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Floater_ACCENT_EMISSIVE",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Floater_PLATE_DARK",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Floater_CHITIN_BONE",
+            "texture_nodes": 0
+          }
+        ],
+        "slot_count": 4,
+        "slots": [
+          "XCOM_Floater_CHITIN",
+          "XCOM_Floater_ACCENT_EMISSIVE",
+          "XCOM_Floater_PLATE_DARK",
+          "XCOM_Floater_CHITIN_BONE"
+        ],
+        "textures": 0
+      },
+      "ok": true,
+      "pass": "fresh",
+      "retention_pct": 100.0,
+      "tris_source_fbx": 2184,
+      "tris_source_method": "mesh.get_num_triangles",
+      "tris_ue": 2184
+    },
+    "XCOM_Muton": {
+      "asset_path": "/Game/Tests/UEParity/XCOM_Muton.XCOM_Muton",
+      "enemy": "XCOM_Muton",
+      "material": {
+        "accent_emissive_assigned": true,
+        "accent_emissive_slot": true,
+        "assigned": [
+          "XCOM_Muton_PLATE",
+          "XCOM_Muton_CHITIN",
+          "XCOM_Muton_PLATE_OXBLOOD",
+          "XCOM_Muton_PLATE_DARK",
+          "XCOM_Muton_ACCENT_EMISSIVE"
+        ],
+        "material_detail": [
+          {
+            "expressions": 0,
+            "material": "XCOM_Muton_PLATE",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Muton_CHITIN",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Muton_PLATE_OXBLOOD",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Muton_PLATE_DARK",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Muton_ACCENT_EMISSIVE",
+            "texture_nodes": 0
+          }
+        ],
+        "slot_count": 5,
+        "slots": [
+          "XCOM_Muton_PLATE",
+          "XCOM_Muton_CHITIN",
+          "XCOM_Muton_PLATE_OXBLOOD",
+          "XCOM_Muton_PLATE_DARK",
+          "XCOM_Muton_ACCENT_EMISSIVE"
+        ],
+        "textures": 0
+      },
+      "ok": true,
+      "pass": "fresh",
+      "retention_pct": 100.0,
+      "tris_source_fbx": 5216,
+      "tris_source_method": "mesh.get_num_triangles",
+      "tris_ue": 5216
+    },
+    "XCOM_Sectoid": {
+      "asset_path": "/Game/Tests/UEParity/XCOM_Sectoid.XCOM_Sectoid",
+      "enemy": "XCOM_Sectoid",
+      "material": {
+        "accent_emissive_assigned": true,
+        "accent_emissive_slot": true,
+        "assigned": [
+          "XCOM_Sectoid_PLATE",
+          "XCOM_Sectoid_CHITIN",
+          "XCOM_Sectoid_CHITIN_BONE",
+          "XCOM_Sectoid_PLATE_DARK",
+          "XCOM_Sectoid_ACCENT_EMISSIVE"
+        ],
+        "material_detail": [
+          {
+            "expressions": 0,
+            "material": "XCOM_Sectoid_PLATE",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Sectoid_CHITIN",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Sectoid_CHITIN_BONE",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Sectoid_PLATE_DARK",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Sectoid_ACCENT_EMISSIVE",
+            "texture_nodes": 0
+          }
+        ],
+        "slot_count": 5,
+        "slots": [
+          "XCOM_Sectoid_PLATE",
+          "XCOM_Sectoid_CHITIN",
+          "XCOM_Sectoid_CHITIN_BONE",
+          "XCOM_Sectoid_PLATE_DARK",
+          "XCOM_Sectoid_ACCENT_EMISSIVE"
+        ],
+        "textures": 0
+      },
+      "ok": true,
+      "pass": "fresh",
+      "retention_pct": 100.0,
+      "tris_source_fbx": 7308,
+      "tris_source_method": "mesh.get_num_triangles",
+      "tris_ue": 7308
+    },
+    "XCOM_Viper": {
+      "asset_path": "/Game/Tests/UEParity/XCOM_Viper.XCOM_Viper",
+      "enemy": "XCOM_Viper",
+      "material": {
+        "accent_emissive_assigned": true,
+        "accent_emissive_slot": true,
+        "assigned": [
+          "XCOM_Viper_PLATE",
+          "XCOM_Viper_CHITIN",
+          "XCOM_Viper_PLATE_DARK",
+          "XCOM_Viper_CHITIN_BONE",
+          "XCOM_Viper_ACCENT_EMISSIVE"
+        ],
+        "material_detail": [
+          {
+            "expressions": 0,
+            "material": "XCOM_Viper_PLATE",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Viper_CHITIN",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Viper_PLATE_DARK",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Viper_CHITIN_BONE",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "XCOM_Viper_ACCENT_EMISSIVE",
+            "texture_nodes": 0
+          }
+        ],
+        "slot_count": 5,
+        "slots": [
+          "XCOM_Viper_PLATE",
+          "XCOM_Viper_CHITIN",
+          "XCOM_Viper_PLATE_DARK",
+          "XCOM_Viper_CHITIN_BONE",
+          "XCOM_Viper_ACCENT_EMISSIVE"
+        ],
+        "textures": 0
+      },
+      "ok": true,
+      "pass": "fresh",
+      "retention_pct": 100.0,
+      "tris_source_fbx": 5764,
+      "tris_source_method": "mesh.get_num_triangles",
+      "tris_ue": 5764
+    }
+  },
+  "generated_utc": "2026-10-21T15:09:37.514965Z",
+  "notes": [
+    "render phase skipped (UEPARITY_MEASURE_ONLY=1)"
+  ],
+  "shipping_path": "/Game/Enemies/XCOM",
+  "shots": [],
+  "stale": {
+    "XCOM_Chryssalid": {
+      "asset_path": "/Game/Enemies/XCOM/XCOM_Chryssalid.XCOM_Chryssalid",
+      "enemy": "XCOM_Chryssalid",
+      "material": {
+        "accent_emissive_assigned": true,
+        "accent_emissive_slot": true,
+        "assigned": [
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial"
+        ],
+        "material_detail": [
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          }
+        ],
+        "slot_count": 5,
+        "slots": [
+          "XCOM_Chryssalid_CHITIN",
+          "XCOM_Chryssalid_PLATE",
+          "XCOM_Chryssalid_CHITIN_BONE",
+          "XCOM_Chryssalid_PLATE_DARK",
+          "XCOM_Chryssalid_ACCENT_EMISSIVE"
+        ],
+        "textures": 0
+      },
+      "ok": true,
+      "pass": "stale",
+      "retention_pct": 100.0,
+      "tris_source_fbx": 6252,
+      "tris_source_method": "mesh.get_num_triangles",
+      "tris_stale_report": 2536,
+      "tris_ue": 6252
+    },
+    "XCOM_Floater": {
+      "asset_path": "/Game/Enemies/XCOM/XCOM_Floater.XCOM_Floater",
+      "enemy": "XCOM_Floater",
+      "material": {
+        "accent_emissive_assigned": true,
+        "accent_emissive_slot": true,
+        "assigned": [
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial"
+        ],
+        "material_detail": [
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          }
+        ],
+        "slot_count": 4,
+        "slots": [
+          "XCOM_Floater_CHITIN",
+          "XCOM_Floater_ACCENT_EMISSIVE",
+          "XCOM_Floater_PLATE_DARK",
+          "XCOM_Floater_CHITIN_BONE"
+        ],
+        "textures": 0
+      },
+      "ok": true,
+      "pass": "stale",
+      "retention_pct": 100.0,
+      "tris_source_fbx": 2184,
+      "tris_source_method": "mesh.get_num_triangles",
+      "tris_stale_report": 1980,
+      "tris_ue": 2184
+    },
+    "XCOM_Muton": {
+      "asset_path": "/Game/Enemies/XCOM/XCOM_Muton.XCOM_Muton",
+      "enemy": "XCOM_Muton",
+      "material": {
+        "accent_emissive_assigned": true,
+        "accent_emissive_slot": true,
+        "assigned": [
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial"
+        ],
+        "material_detail": [
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          }
+        ],
+        "slot_count": 5,
+        "slots": [
+          "XCOM_Muton_PLATE",
+          "XCOM_Muton_CHITIN",
+          "XCOM_Muton_PLATE_OXBLOOD",
+          "XCOM_Muton_PLATE_DARK",
+          "XCOM_Muton_ACCENT_EMISSIVE"
+        ],
+        "textures": 0
+      },
+      "ok": true,
+      "pass": "stale",
+      "retention_pct": 100.0,
+      "tris_source_fbx": 5216,
+      "tris_source_method": "mesh.get_num_triangles",
+      "tris_stale_report": 2520,
+      "tris_ue": 5216
+    },
+    "XCOM_Sectoid": {
+      "asset_path": "/Game/Enemies/XCOM/XCOM_Sectoid.XCOM_Sectoid",
+      "enemy": "XCOM_Sectoid",
+      "material": {
+        "accent_emissive_assigned": true,
+        "accent_emissive_slot": true,
+        "assigned": [
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial"
+        ],
+        "material_detail": [
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          }
+        ],
+        "slot_count": 5,
+        "slots": [
+          "XCOM_Sectoid_PLATE",
+          "XCOM_Sectoid_CHITIN",
+          "XCOM_Sectoid_CHITIN_BONE",
+          "XCOM_Sectoid_PLATE_DARK",
+          "XCOM_Sectoid_ACCENT_EMISSIVE"
+        ],
+        "textures": 0
+      },
+      "ok": true,
+      "pass": "stale",
+      "retention_pct": 100.0,
+      "tris_source_fbx": 7308,
+      "tris_source_method": "mesh.get_num_triangles",
+      "tris_stale_report": 2864,
+      "tris_ue": 7308
+    },
+    "XCOM_Viper": {
+      "asset_path": "/Game/Enemies/XCOM/XCOM_Viper.XCOM_Viper",
+      "enemy": "XCOM_Viper",
+      "material": {
+        "accent_emissive_assigned": true,
+        "accent_emissive_slot": true,
+        "assigned": [
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial",
+          "WorldGridMaterial"
+        ],
+        "material_detail": [
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          },
+          {
+            "expressions": 0,
+            "material": "WorldGridMaterial",
+            "texture_nodes": 0
+          }
+        ],
+        "slot_count": 5,
+        "slots": [
+          "XCOM_Viper_PLATE",
+          "XCOM_Viper_CHITIN",
+          "XCOM_Viper_PLATE_DARK",
+          "XCOM_Viper_CHITIN_BONE",
+          "XCOM_Viper_ACCENT_EMISSIVE"
+        ],
+        "textures": 0
+      },
+      "ok": true,
+      "pass": "stale",
+      "retention_pct": 100.0,
+      "tris_source_fbx": 5764,
+      "tris_source_method": "mesh.get_num_triangles",
+      "tris_stale_report": 3712,
+      "tris_ue": 5764
+    }
+  },
+  "throwaway_path": "/Game/Tests/UEParity"
+}

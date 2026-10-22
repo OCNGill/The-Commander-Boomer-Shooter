@@ -1,0 +1,787 @@
+{
+  "enemies": {
+    "XCOM_Chryssalid": {
+      "shipping": {
+        "assigned": [
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+        ],
+        "materials": [
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          }
+        ],
+        "slots": [
+          "XCOM_Chryssalid_CHITIN",
+          "XCOM_Chryssalid_PLATE",
+          "XCOM_Chryssalid_CHITIN_BONE",
+          "XCOM_Chryssalid_PLATE_DARK",
+          "XCOM_Chryssalid_ACCENT_EMISSIVE"
+        ]
+      },
+      "verification": {
+        "assigned": [
+          "/Game/Tests/UEParity/XCOM_Chryssalid_CHITIN.XCOM_Chryssalid_CHITIN",
+          "/Game/Tests/UEParity/XCOM_Chryssalid_PLATE.XCOM_Chryssalid_PLATE",
+          "/Game/Tests/UEParity/XCOM_Chryssalid_CHITIN_BONE.XCOM_Chryssalid_CHITIN_BONE",
+          "/Game/Tests/UEParity/XCOM_Chryssalid_PLATE_DARK.XCOM_Chryssalid_PLATE_DARK",
+          "/Game/Tests/UEParity/XCOM_Chryssalid_ACCENT_EMISSIVE.XCOM_Chryssalid_ACCENT_EMISSIVE"
+        ],
+        "materials": [
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Chryssalid_CHITIN",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Chryssalid_CHITIN.XCOM_Chryssalid_CHITIN",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Chryssalid_PLATE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Chryssalid_PLATE.XCOM_Chryssalid_PLATE",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Chryssalid_CHITIN_BONE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Chryssalid_CHITIN_BONE.XCOM_Chryssalid_CHITIN_BONE",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Chryssalid_PLATE_DARK",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Chryssalid_PLATE_DARK.XCOM_Chryssalid_PLATE_DARK",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Chryssalid_ACCENT_EMISSIVE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Chryssalid_ACCENT_EMISSIVE.XCOM_Chryssalid_ACCENT_EMISSIVE",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          }
+        ],
+        "slots": [
+          "XCOM_Chryssalid_CHITIN",
+          "XCOM_Chryssalid_PLATE",
+          "XCOM_Chryssalid_CHITIN_BONE",
+          "XCOM_Chryssalid_PLATE_DARK",
+          "XCOM_Chryssalid_ACCENT_EMISSIVE"
+        ]
+      }
+    },
+    "XCOM_Floater": {
+      "shipping": {
+        "assigned": [
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+        ],
+        "materials": [
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          }
+        ],
+        "slots": [
+          "XCOM_Floater_CHITIN",
+          "XCOM_Floater_ACCENT_EMISSIVE",
+          "XCOM_Floater_PLATE_DARK",
+          "XCOM_Floater_CHITIN_BONE"
+        ]
+      },
+      "verification": {
+        "assigned": [
+          "/Game/Tests/UEParity/XCOM_Floater_CHITIN.XCOM_Floater_CHITIN",
+          "/Game/Tests/UEParity/XCOM_Floater_ACCENT_EMISSIVE.XCOM_Floater_ACCENT_EMISSIVE",
+          "/Game/Tests/UEParity/XCOM_Floater_PLATE_DARK.XCOM_Floater_PLATE_DARK",
+          "/Game/Tests/UEParity/XCOM_Floater_CHITIN_BONE.XCOM_Floater_CHITIN_BONE"
+        ],
+        "materials": [
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Floater_CHITIN",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Floater_CHITIN.XCOM_Floater_CHITIN",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Floater_ACCENT_EMISSIVE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Floater_ACCENT_EMISSIVE.XCOM_Floater_ACCENT_EMISSIVE",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Floater_PLATE_DARK",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Floater_PLATE_DARK.XCOM_Floater_PLATE_DARK",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Floater_CHITIN_BONE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Floater_CHITIN_BONE.XCOM_Floater_CHITIN_BONE",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          }
+        ],
+        "slots": [
+          "XCOM_Floater_CHITIN",
+          "XCOM_Floater_ACCENT_EMISSIVE",
+          "XCOM_Floater_PLATE_DARK",
+          "XCOM_Floater_CHITIN_BONE"
+        ]
+      }
+    },
+    "XCOM_Muton": {
+      "shipping": {
+        "assigned": [
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+        ],
+        "materials": [
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          }
+        ],
+        "slots": [
+          "XCOM_Muton_PLATE",
+          "XCOM_Muton_CHITIN",
+          "XCOM_Muton_PLATE_OXBLOOD",
+          "XCOM_Muton_PLATE_DARK",
+          "XCOM_Muton_ACCENT_EMISSIVE"
+        ]
+      },
+      "verification": {
+        "assigned": [
+          "/Game/Tests/UEParity/XCOM_Muton_PLATE.XCOM_Muton_PLATE",
+          "/Game/Tests/UEParity/XCOM_Muton_CHITIN.XCOM_Muton_CHITIN",
+          "/Game/Tests/UEParity/XCOM_Muton_PLATE_OXBLOOD.XCOM_Muton_PLATE_OXBLOOD",
+          "/Game/Tests/UEParity/XCOM_Muton_PLATE_DARK.XCOM_Muton_PLATE_DARK",
+          "/Game/Tests/UEParity/XCOM_Muton_ACCENT_EMISSIVE.XCOM_Muton_ACCENT_EMISSIVE"
+        ],
+        "materials": [
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Muton_PLATE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Muton_PLATE.XCOM_Muton_PLATE",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Muton_CHITIN",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Muton_CHITIN.XCOM_Muton_CHITIN",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Muton_PLATE_OXBLOOD",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Muton_PLATE_OXBLOOD.XCOM_Muton_PLATE_OXBLOOD",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Muton_PLATE_DARK",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Muton_PLATE_DARK.XCOM_Muton_PLATE_DARK",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Muton_ACCENT_EMISSIVE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Muton_ACCENT_EMISSIVE.XCOM_Muton_ACCENT_EMISSIVE",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          }
+        ],
+        "slots": [
+          "XCOM_Muton_PLATE",
+          "XCOM_Muton_CHITIN",
+          "XCOM_Muton_PLATE_OXBLOOD",
+          "XCOM_Muton_PLATE_DARK",
+          "XCOM_Muton_ACCENT_EMISSIVE"
+        ]
+      }
+    },
+    "XCOM_Sectoid": {
+      "shipping": {
+        "assigned": [
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+        ],
+        "materials": [
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          }
+        ],
+        "slots": [
+          "XCOM_Sectoid_PLATE",
+          "XCOM_Sectoid_CHITIN",
+          "XCOM_Sectoid_CHITIN_BONE",
+          "XCOM_Sectoid_PLATE_DARK",
+          "XCOM_Sectoid_ACCENT_EMISSIVE"
+        ]
+      },
+      "verification": {
+        "assigned": [
+          "/Game/Tests/UEParity/XCOM_Sectoid_PLATE.XCOM_Sectoid_PLATE",
+          "/Game/Tests/UEParity/XCOM_Sectoid_CHITIN.XCOM_Sectoid_CHITIN",
+          "/Game/Tests/UEParity/XCOM_Sectoid_CHITIN_BONE.XCOM_Sectoid_CHITIN_BONE",
+          "/Game/Tests/UEParity/XCOM_Sectoid_PLATE_DARK.XCOM_Sectoid_PLATE_DARK",
+          "/Game/Tests/UEParity/XCOM_Sectoid_ACCENT_EMISSIVE.XCOM_Sectoid_ACCENT_EMISSIVE"
+        ],
+        "materials": [
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Sectoid_PLATE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Sectoid_PLATE.XCOM_Sectoid_PLATE",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Sectoid_CHITIN",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Sectoid_CHITIN.XCOM_Sectoid_CHITIN",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Sectoid_CHITIN_BONE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Sectoid_CHITIN_BONE.XCOM_Sectoid_CHITIN_BONE",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Sectoid_PLATE_DARK",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Sectoid_PLATE_DARK.XCOM_Sectoid_PLATE_DARK",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Sectoid_ACCENT_EMISSIVE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Sectoid_ACCENT_EMISSIVE.XCOM_Sectoid_ACCENT_EMISSIVE",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          }
+        ],
+        "slots": [
+          "XCOM_Sectoid_PLATE",
+          "XCOM_Sectoid_CHITIN",
+          "XCOM_Sectoid_CHITIN_BONE",
+          "XCOM_Sectoid_PLATE_DARK",
+          "XCOM_Sectoid_ACCENT_EMISSIVE"
+        ]
+      }
+    },
+    "XCOM_Viper": {
+      "shipping": {
+        "assigned": [
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+          "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial"
+        ],
+        "materials": [
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "Material",
+            "expressions": null,
+            "name": "WorldGridMaterial",
+            "parent": "n/a:Exception(\"Material: Failed to find property 'parent' for attribute 'parent' on 'Material'\")",
+            "path": "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          }
+        ],
+        "slots": [
+          "XCOM_Viper_PLATE",
+          "XCOM_Viper_CHITIN",
+          "XCOM_Viper_PLATE_DARK",
+          "XCOM_Viper_CHITIN_BONE",
+          "XCOM_Viper_ACCENT_EMISSIVE"
+        ]
+      },
+      "verification": {
+        "assigned": [
+          "/Game/Tests/UEParity/XCOM_Viper_PLATE.XCOM_Viper_PLATE",
+          "/Game/Tests/UEParity/XCOM_Viper_CHITIN.XCOM_Viper_CHITIN",
+          "/Game/Tests/UEParity/XCOM_Viper_PLATE_DARK.XCOM_Viper_PLATE_DARK",
+          "/Game/Tests/UEParity/XCOM_Viper_CHITIN_BONE.XCOM_Viper_CHITIN_BONE",
+          "/Game/Tests/UEParity/XCOM_Viper_ACCENT_EMISSIVE.XCOM_Viper_ACCENT_EMISSIVE"
+        ],
+        "materials": [
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Viper_PLATE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Viper_PLATE.XCOM_Viper_PLATE",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Viper_CHITIN",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Viper_CHITIN.XCOM_Viper_CHITIN",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Viper_PLATE_DARK",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Viper_PLATE_DARK.XCOM_Viper_PLATE_DARK",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Viper_CHITIN_BONE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Viper_CHITIN_BONE.XCOM_Viper_CHITIN_BONE",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          },
+          {
+            "class": "MaterialInstanceConstant",
+            "expressions": null,
+            "name": "XCOM_Viper_ACCENT_EMISSIVE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "path": "/Game/Tests/UEParity/XCOM_Viper_ACCENT_EMISSIVE.XCOM_Viper_ACCENT_EMISSIVE",
+            "texture_parameters": [],
+            "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+            "vector_parameters": []
+          }
+        ],
+        "slots": [
+          "XCOM_Viper_PLATE",
+          "XCOM_Viper_CHITIN",
+          "XCOM_Viper_PLATE_DARK",
+          "XCOM_Viper_CHITIN_BONE",
+          "XCOM_Viper_ACCENT_EMISSIVE"
+        ]
+      }
+    }
+  },
+  "shipping_materials": {
+    "/Game/Enemies/XCOM/M_XCOM_Chitin.M_XCOM_Chitin": {
+      "class": "MaterialInstanceConstant",
+      "expressions": null,
+      "name": "M_XCOM_Chitin",
+      "parent": null,
+      "path": "/Game/Enemies/XCOM/M_XCOM_Chitin.M_XCOM_Chitin",
+      "texture_parameters": [],
+      "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+      "vector_parameters": []
+    },
+    "/Game/Enemies/XCOM/XCOM_Armor_Accent.XCOM_Armor_Accent": {
+      "class": "MaterialInstanceConstant",
+      "expressions": null,
+      "name": "XCOM_Armor_Accent",
+      "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+      "path": "/Game/Enemies/XCOM/XCOM_Armor_Accent.XCOM_Armor_Accent",
+      "texture_parameters": [],
+      "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+      "vector_parameters": []
+    },
+    "/Game/Enemies/XCOM/XCOM_Armor_Plate.XCOM_Armor_Plate": {
+      "class": "MaterialInstanceConstant",
+      "expressions": null,
+      "name": "XCOM_Armor_Plate",
+      "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+      "path": "/Game/Enemies/XCOM/XCOM_Armor_Plate.XCOM_Armor_Plate",
+      "texture_parameters": [],
+      "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+      "vector_parameters": []
+    },
+    "/Game/Enemies/XCOM/XCOM_Chitin_Dark.XCOM_Chitin_Dark": {
+      "class": "MaterialInstanceConstant",
+      "expressions": null,
+      "name": "XCOM_Chitin_Dark",
+      "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+      "path": "/Game/Enemies/XCOM/XCOM_Chitin_Dark.XCOM_Chitin_Dark",
+      "texture_parameters": [],
+      "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+      "vector_parameters": []
+    },
+    "/Game/Enemies/XCOM/XCOM_Chitin_Mid.XCOM_Chitin_Mid": {
+      "class": "MaterialInstanceConstant",
+      "expressions": null,
+      "name": "XCOM_Chitin_Mid",
+      "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+      "path": "/Game/Enemies/XCOM/XCOM_Chitin_Mid.XCOM_Chitin_Mid",
+      "texture_parameters": [],
+      "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+      "vector_parameters": []
+    },
+    "/Game/Enemies/XCOM/XCOM_Chitin_Pale.XCOM_Chitin_Pale": {
+      "class": "MaterialInstanceConstant",
+      "expressions": null,
+      "name": "XCOM_Chitin_Pale",
+      "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+      "path": "/Game/Enemies/XCOM/XCOM_Chitin_Pale.XCOM_Chitin_Pale",
+      "texture_parameters": [],
+      "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+      "vector_parameters": []
+    },
+    "/Game/Enemies/XCOM/XCOM_Core_Emissive.XCOM_Core_Emissive": {
+      "class": "MaterialInstanceConstant",
+      "expressions": null,
+      "name": "XCOM_Core_Emissive",
+      "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+      "path": "/Game/Enemies/XCOM/XCOM_Core_Emissive.XCOM_Core_Emissive",
+      "texture_parameters": [],
+      "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+      "vector_parameters": []
+    },
+    "/Game/Enemies/XCOM/XCOM_Eye_Emissive.XCOM_Eye_Emissive": {
+      "class": "MaterialInstanceConstant",
+      "expressions": null,
+      "name": "XCOM_Eye_Emissive",
+      "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+      "path": "/Game/Enemies/XCOM/XCOM_Eye_Emissive.XCOM_Eye_Emissive",
+      "texture_parameters": [],
+      "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+      "vector_parameters": []
+    },
+    "/Game/Enemies/XCOM/XCOM_Flesh.XCOM_Flesh": {
+      "class": "MaterialInstanceConstant",
+      "expressions": null,
+      "name": "XCOM_Flesh",
+      "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+      "path": "/Game/Enemies/XCOM/XCOM_Flesh.XCOM_Flesh",
+      "texture_parameters": [],
+      "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+      "vector_parameters": []
+    },
+    "/Game/Enemies/XCOM/XCOM_Gunmetal.XCOM_Gunmetal": {
+      "class": "MaterialInstanceConstant",
+      "expressions": null,
+      "name": "XCOM_Gunmetal",
+      "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+      "path": "/Game/Enemies/XCOM/XCOM_Gunmetal.XCOM_Gunmetal",
+      "texture_parameters": [],
+      "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+      "vector_parameters": []
+    },
+    "/Game/Enemies/XCOM/XCOM_Plasma_Emissive.XCOM_Plasma_Emissive": {
+      "class": "MaterialInstanceConstant",
+      "expressions": null,
+      "name": "XCOM_Plasma_Emissive",
+      "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+      "path": "/Game/Enemies/XCOM/XCOM_Plasma_Emissive.XCOM_Plasma_Emissive",
+      "texture_parameters": [],
+      "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
+      "vector_parameters": []
+    }
+  },
+  "world": {
+    "actors": null,
+    "name": "Untitled",
+    "path": "/Temp/Untitled_0.Untitled"
+  }
+}

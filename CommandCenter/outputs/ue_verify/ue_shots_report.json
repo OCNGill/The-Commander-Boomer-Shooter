@@ -1,0 +1,236 @@
+{
+  "azimuth": 30.0,
+  "elevation": 14.0,
+  "enemies": {
+    "XCOM_Chryssalid": {
+      "bounds": {
+        "extent": [
+          41.15703201293945,
+          81.14892578125,
+          51.388614654541016
+        ],
+        "origin": [
+          0.0,
+          -1.0489158630371094,
+          51.388614654541016
+        ]
+      },
+      "center": [
+        0.0,
+        0.0,
+        51.388614654541016
+      ],
+      "enemy": "XCOM_Chryssalid",
+      "error": "TypeError(\"set_actor_rotation() required argument 'teleport_physics' (pos 2) not found\")",
+      "ok": false,
+      "size": 162.2978515625,
+      "slots": [
+        {
+          "material": "XCOM_Chryssalid_CHITIN",
+          "slot": "XCOM_Chryssalid_CHITIN"
+        },
+        {
+          "material": "XCOM_Chryssalid_PLATE",
+          "slot": "XCOM_Chryssalid_PLATE"
+        },
+        {
+          "material": "XCOM_Chryssalid_CHITIN_BONE",
+          "slot": "XCOM_Chryssalid_CHITIN_BONE"
+        },
+        {
+          "material": "XCOM_Chryssalid_PLATE_DARK",
+          "slot": "XCOM_Chryssalid_PLATE_DARK"
+        },
+        {
+          "material": "XCOM_Chryssalid_ACCENT_EMISSIVE",
+          "slot": "XCOM_Chryssalid_ACCENT_EMISSIVE"
+        }
+      ],
+      "traceback": "Traceback (most recent call last):\n  File \"C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/python/ue_enemy_shots.py\", line 299, in main\n    build_studio(world, center, size)\n  File \"C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/python/ue_enemy_shots.py\", line 171, in build_studio\n    ka.set_actor_rotation(aim(key_pos, (center.x, center.y, center.z)))\nTypeError: set_actor_rotation() required argument 'teleport_physics' (pos 2) not found\n"
+    },
+    "XCOM_Floater": {
+      "bounds": {
+        "extent": [
+          124.0,
+          70.01068115234375,
+          14.489994049072266
+        ],
+        "origin": [
+          0.0,
+          -6.400842666625977,
+          104.71000671386719
+        ]
+      },
+      "center": [
+        0.0,
+        0.0,
+        14.489994049072266
+      ],
+      "enemy": "XCOM_Floater",
+      "error": "TypeError(\"set_actor_rotation() required argument 'teleport_physics' (pos 2) not found\")",
+      "ok": false,
+      "size": 248.0,
+      "slots": [
+        {
+          "material": "XCOM_Floater_CHITIN",
+          "slot": "XCOM_Floater_CHITIN"
+        },
+        {
+          "material": "XCOM_Floater_ACCENT_EMISSIVE",
+          "slot": "XCOM_Floater_ACCENT_EMISSIVE"
+        },
+        {
+          "material": "XCOM_Floater_PLATE_DARK",
+          "slot": "XCOM_Floater_PLATE_DARK"
+        },
+        {
+          "material": "XCOM_Floater_CHITIN_BONE",
+          "slot": "XCOM_Floater_CHITIN_BONE"
+        }
+      ],
+      "traceback": "Traceback (most recent call last):\n  File \"C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/python/ue_enemy_shots.py\", line 299, in main\n    build_studio(world, center, size)\n  File \"C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/python/ue_enemy_shots.py\", line 171, in build_studio\n    ka.set_actor_rotation(aim(key_pos, (center.x, center.y, center.z)))\nTypeError: set_actor_rotation() required argument 'teleport_physics' (pos 2) not found\n"
+    },
+    "XCOM_Muton": {
+      "bounds": {
+        "extent": [
+          57.26759338378906,
+          54.2551155090332,
+          103.4408950805664
+        ],
+        "origin": [
+          -1.9073486328125e-06,
+          29.244861602783203,
+          103.4408950805664
+        ]
+      },
+      "center": [
+        0.0,
+        0.0,
+        103.4408950805664
+      ],
+      "enemy": "XCOM_Muton",
+      "error": "TypeError(\"set_actor_rotation() required argument 'teleport_physics' (pos 2) not found\")",
+      "ok": false,
+      "size": 206.8817901611328,
+      "slots": [
+        {
+          "material": "XCOM_Muton_PLATE",
+          "slot": "XCOM_Muton_PLATE"
+        },
+        {
+          "material": "XCOM_Muton_CHITIN",
+          "slot": "XCOM_Muton_CHITIN"
+        },
+        {
+          "material": "XCOM_Muton_PLATE_OXBLOOD",
+          "slot": "XCOM_Muton_PLATE_OXBLOOD"
+        },
+        {
+          "material": "XCOM_Muton_PLATE_DARK",
+          "slot": "XCOM_Muton_PLATE_DARK"
+        },
+        {
+          "material": "XCOM_Muton_ACCENT_EMISSIVE",
+          "slot": "XCOM_Muton_ACCENT_EMISSIVE"
+        }
+      ],
+      "traceback": "Traceback (most recent call last):\n  File \"C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/python/ue_enemy_shots.py\", line 299, in main\n    build_studio(world, center, size)\n  File \"C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/python/ue_enemy_shots.py\", line 171, in build_studio\n    ka.set_actor_rotation(aim(key_pos, (center.x, center.y, center.z)))\nTypeError: set_actor_rotation() required argument 'teleport_physics' (pos 2) not found\n"
+    },
+    "XCOM_Sectoid": {
+      "bounds": {
+        "extent": [
+          26.121627807617188,
+          35.21114730834961,
+          69.58856964111328
+        ],
+        "origin": [
+          0.17199993133544922,
+          20.414539337158203,
+          69.58856964111328
+        ]
+      },
+      "center": [
+        0.0,
+        0.0,
+        69.58856964111328
+      ],
+      "enemy": "XCOM_Sectoid",
+      "error": "TypeError(\"set_actor_rotation() required argument 'teleport_physics' (pos 2) not found\")",
+      "ok": false,
+      "size": 139.17713928222656,
+      "slots": [
+        {
+          "material": "XCOM_Sectoid_PLATE",
+          "slot": "XCOM_Sectoid_PLATE"
+        },
+        {
+          "material": "XCOM_Sectoid_CHITIN",
+          "slot": "XCOM_Sectoid_CHITIN"
+        },
+        {
+          "material": "XCOM_Sectoid_CHITIN_BONE",
+          "slot": "XCOM_Sectoid_CHITIN_BONE"
+        },
+        {
+          "material": "XCOM_Sectoid_PLATE_DARK",
+          "slot": "XCOM_Sectoid_PLATE_DARK"
+        },
+        {
+          "material": "XCOM_Sectoid_ACCENT_EMISSIVE",
+          "slot": "XCOM_Sectoid_ACCENT_EMISSIVE"
+        }
+      ],
+      "traceback": "Traceback (most recent call last):\n  File \"C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/python/ue_enemy_shots.py\", line 299, in main\n    build_studio(world, center, size)\n  File \"C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/python/ue_enemy_shots.py\", line 171, in build_studio\n    ka.set_actor_rotation(aim(key_pos, (center.x, center.y, center.z)))\nTypeError: set_actor_rotation() required argument 'teleport_physics' (pos 2) not found\n"
+    },
+    "XCOM_Viper": {
+      "bounds": {
+        "extent": [
+          31.885120391845703,
+          34.861114501953125,
+          102.92800903320312
+        ],
+        "origin": [
+          1.0207748413085938,
+          14.974485397338867,
+          102.92800903320312
+        ]
+      },
+      "center": [
+        0.0,
+        0.0,
+        102.92800903320312
+      ],
+      "enemy": "XCOM_Viper",
+      "error": "TypeError(\"set_actor_rotation() required argument 'teleport_physics' (pos 2) not found\")",
+      "ok": false,
+      "size": 205.85601806640625,
+      "slots": [
+        {
+          "material": "XCOM_Viper_PLATE",
+          "slot": "XCOM_Viper_PLATE"
+        },
+        {
+          "material": "XCOM_Viper_CHITIN",
+          "slot": "XCOM_Viper_CHITIN"
+        },
+        {
+          "material": "XCOM_Viper_PLATE_DARK",
+          "slot": "XCOM_Viper_PLATE_DARK"
+        },
+        {
+          "material": "XCOM_Viper_CHITIN_BONE",
+          "slot": "XCOM_Viper_CHITIN_BONE"
+        },
+        {
+          "material": "XCOM_Viper_ACCENT_EMISSIVE",
+          "slot": "XCOM_Viper_ACCENT_EMISSIVE"
+        }
+      ],
+      "traceback": "Traceback (most recent call last):\n  File \"C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/python/ue_enemy_shots.py\", line 299, in main\n    build_studio(world, center, size)\n  File \"C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/python/ue_enemy_shots.py\", line 171, in build_studio\n    ka.set_actor_rotation(aim(key_pos, (center.x, center.y, center.z)))\nTypeError: set_actor_rotation() required argument 'teleport_physics' (pos 2) not found\n"
+    }
+  },
+  "fill": 0.62,
+  "fov": 35.0,
+  "height": 1350,
+  "width": 1080
+}

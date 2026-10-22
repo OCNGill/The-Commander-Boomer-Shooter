@@ -1,0 +1,1328 @@
+{
+  "api": {
+    "DirectionalLightComponent.cast_shadows": "present",
+    "DirectionalLightComponent.intensity": "present",
+    "DirectionalLightComponent.light_color": "present",
+    "PointLightComponent.cast_shadows": "present",
+    "PointLightComponent.intensity": "present",
+    "PointLightComponent.light_color": "present",
+    "PointLightComponent.source_radius": "present",
+    "RenderingLibrary.create_render_target2d": "X.create_render_target2d(world_context_object, width=256, height=256, format=TextureRenderTargetFormat.RTF_RGBA16F, clear_color=[0.000000, 0.000000, 0.000000, 1.000000], auto_generate_mip_maps=False, support_ua_vs=False) -> TextureRenderTarget2D\r\nCreates a new render target and initializes it to the specified dimensions\r\n\r\nArgs:\r\n    world_context_object (Object): \r\n    width (int32): \r\n    height (int32): \r\n    format (TextureRenderTargetFormat): \r\n    clear_color (LinearColor): \r\n    auto_generate_mip_maps (bool): \r\n    support_ua_vs (bool): \r\n\r\nReturns:\r\n    TextureRenderTarget2D:",
+    "RenderingLibrary.export_render_target": "X.export_render_target(world_context_object, texture_render_target, file_path, file_name) -> None\r\nExports a render target as a HDR or PNG image onto the disk (depending on the format of the render target)\r\n\r\nArgs:\r\n    world_context_object (Object): \r\n    texture_render_target (TextureRenderTarget2D): \r\n    file_path (str): \r\n    file_name (str):",
+    "RenderingLibrary.read_render_target": "X.read_render_target(world_context_object, texture_render_target, normalize=True) -> Array[Color] or None\r\nIncredibly inefficient and slow operation! Reads entire render target as sRGB color and returns a linear array of sRGB colors.\nLDR render targets are assumed to be in sRGB space. HDR ones are assumed to be in linear space.\nResult whether the operation succeeded.  If successful, OutSamples will an entry per pixel, where each is 8-bit per channel [0,255] BGRA in sRGB space.\r\n\r\nArgs:\r\n    world_context_object (Object): \r\n    texture_render_target (TextureRenderTarget2D): \r\n    normalize (bool): \r\n\r\nReturns:\r\n    Array[Color] or None: \r\n\r\n    out_samples (Array[Color]):",
+    "SceneCaptureComponent2D.capture_source": "present",
+    "SceneCaptureComponent2D.fov_angle": "present",
+    "SceneCaptureComponent2D.texture_target": "present"
+  },
+  "authority": "/Game/Tests/UEParity",
+  "enemies": {
+    "XCOM_Chryssalid": {
+      "after": [
+        {
+          "assigned": "XCOM_Chryssalid_CHITIN",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Chryssalid_CHITIN",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Chryssalid_CHITIN.XCOM_Chryssalid_CHITIN",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "19.360000610351562"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE215E60) {r: 0.068000, g: 0.042000, b: 0.032000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219AA0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE214420) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE217AE0) {r: 0.017000, g: 0.010500, b: 0.008000, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Chryssalid_CHITIN"
+        },
+        {
+          "assigned": "XCOM_Chryssalid_PLATE",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Chryssalid_PLATE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Chryssalid_PLATE.XCOM_Chryssalid_PLATE",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "46.2400016784668"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2156A0) {r: 0.100000, g: 0.082000, b: 0.070000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219860) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2131E0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE216B20) {r: 0.025000, g: 0.020500, b: 0.017500, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Chryssalid_PLATE"
+        },
+        {
+          "assigned": "XCOM_Chryssalid_CHITIN_BONE",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Chryssalid_CHITIN_BONE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Chryssalid_CHITIN_BONE.XCOM_Chryssalid_CHITIN_BONE",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "14.4399995803833"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2171A0) {r: 0.250000, g: 0.230000, b: 0.180000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE214C60) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE214660) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2173E0) {r: 0.062500, g: 0.057500, b: 0.045000, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Chryssalid_CHITIN_BONE"
+        },
+        {
+          "assigned": "XCOM_Chryssalid_PLATE_DARK",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Chryssalid_PLATE_DARK",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Chryssalid_PLATE_DARK.XCOM_Chryssalid_PLATE_DARK",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "9.000000953674316"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE215CE0) {r: 0.010000, g: 0.011000, b: 0.013000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2178A0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE216EA0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2179E0) {r: 0.002500, g: 0.002750, b: 0.003250, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Chryssalid_PLATE_DARK"
+        },
+        {
+          "assigned": "XCOM_Chryssalid_ACCENT_EMISSIVE",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Chryssalid_ACCENT_EMISSIVE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Chryssalid_ACCENT_EMISSIVE.XCOM_Chryssalid_ACCENT_EMISSIVE",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "60.84000015258789"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2190E0) {r: 0.081000, g: 0.180000, b: 0.009000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE218720) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE217B20) {r: 0.900000, g: 2.000000, b: 0.100000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2195A0) {r: 0.020250, g: 0.045000, b: 0.002250, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Chryssalid_ACCENT_EMISSIVE"
+        }
+      ],
+      "authority_map": {
+        "XCOM_Chryssalid_ACCENT_EMISSIVE": "XCOM_Chryssalid_ACCENT_EMISSIVE",
+        "XCOM_Chryssalid_CHITIN": "XCOM_Chryssalid_CHITIN",
+        "XCOM_Chryssalid_CHITIN_BONE": "XCOM_Chryssalid_CHITIN_BONE",
+        "XCOM_Chryssalid_PLATE": "XCOM_Chryssalid_PLATE",
+        "XCOM_Chryssalid_PLATE_DARK": "XCOM_Chryssalid_PLATE_DARK"
+      },
+      "before": [
+        [
+          "XCOM_Chryssalid_CHITIN",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Chryssalid_PLATE",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Chryssalid_CHITIN_BONE",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Chryssalid_PLATE_DARK",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Chryssalid_ACCENT_EMISSIVE",
+          "WorldGridMaterial"
+        ]
+      ],
+      "bind": [
+        {
+          "assigned": "XCOM_Chryssalid_CHITIN",
+          "slot": "XCOM_Chryssalid_CHITIN"
+        },
+        {
+          "assigned": "XCOM_Chryssalid_PLATE",
+          "slot": "XCOM_Chryssalid_PLATE"
+        },
+        {
+          "assigned": "XCOM_Chryssalid_CHITIN_BONE",
+          "slot": "XCOM_Chryssalid_CHITIN_BONE"
+        },
+        {
+          "assigned": "XCOM_Chryssalid_PLATE_DARK",
+          "slot": "XCOM_Chryssalid_PLATE_DARK"
+        },
+        {
+          "assigned": "XCOM_Chryssalid_ACCENT_EMISSIVE",
+          "slot": "XCOM_Chryssalid_ACCENT_EMISSIVE"
+        }
+      ],
+      "enemy": "XCOM_Chryssalid",
+      "matches_authority": true,
+      "material_moves": {
+        "XCOM_Chryssalid_ACCENT_EMISSIVE": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Chryssalid_ACCENT_EMISSIVE.XCOM_Chryssalid_ACCENT_EMISSIVE",
+          "material": "XCOM_Chryssalid_ACCENT_EMISSIVE",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Chryssalid_ACCENT_EMISSIVE.XCOM_Chryssalid_ACCENT_EMISSIVE"
+        },
+        "XCOM_Chryssalid_CHITIN": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Chryssalid_CHITIN.XCOM_Chryssalid_CHITIN",
+          "material": "XCOM_Chryssalid_CHITIN",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Chryssalid_CHITIN.XCOM_Chryssalid_CHITIN"
+        },
+        "XCOM_Chryssalid_CHITIN_BONE": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Chryssalid_CHITIN_BONE.XCOM_Chryssalid_CHITIN_BONE",
+          "material": "XCOM_Chryssalid_CHITIN_BONE",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Chryssalid_CHITIN_BONE.XCOM_Chryssalid_CHITIN_BONE"
+        },
+        "XCOM_Chryssalid_PLATE": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Chryssalid_PLATE.XCOM_Chryssalid_PLATE",
+          "material": "XCOM_Chryssalid_PLATE",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Chryssalid_PLATE.XCOM_Chryssalid_PLATE"
+        },
+        "XCOM_Chryssalid_PLATE_DARK": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Chryssalid_PLATE_DARK.XCOM_Chryssalid_PLATE_DARK",
+          "material": "XCOM_Chryssalid_PLATE_DARK",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Chryssalid_PLATE_DARK.XCOM_Chryssalid_PLATE_DARK"
+        }
+      },
+      "ok": true,
+      "saved": true
+    },
+    "XCOM_Floater": {
+      "after": [
+        {
+          "assigned": "XCOM_Floater_CHITIN",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Floater_CHITIN",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Floater_CHITIN.XCOM_Floater_CHITIN",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "19.360000610351562"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE214C60) {r: 0.036000, g: 0.050000, b: 0.072000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE217F20) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE217E20) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE217CA0) {r: 0.009000, g: 0.012500, b: 0.018000, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Floater_CHITIN"
+        },
+        {
+          "assigned": "XCOM_Floater_ACCENT_EMISSIVE",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Floater_ACCENT_EMISSIVE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Floater_ACCENT_EMISSIVE.XCOM_Floater_ACCENT_EMISSIVE",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "60.84000015258789"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2177A0) {r: 0.009000, g: 0.144000, b: 0.180000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE216760) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2175A0) {r: 0.130000, g: 2.080000, b: 2.600000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2173A0) {r: 0.002250, g: 0.036000, b: 0.045000, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Floater_ACCENT_EMISSIVE"
+        },
+        {
+          "assigned": "XCOM_Floater_PLATE_DARK",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Floater_PLATE_DARK",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Floater_PLATE_DARK.XCOM_Floater_PLATE_DARK",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "9.000000953674316"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE215CE0) {r: 0.010000, g: 0.011000, b: 0.013000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE214A20) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2159E0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE213FA0) {r: 0.002500, g: 0.002750, b: 0.003250, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Floater_PLATE_DARK"
+        },
+        {
+          "assigned": "XCOM_Floater_CHITIN_BONE",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Floater_CHITIN_BONE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Floater_CHITIN_BONE.XCOM_Floater_CHITIN_BONE",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "14.4399995803833"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE217C60) {r: 0.200000, g: 0.205000, b: 0.195000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE218460) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE217B20) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE218720) {r: 0.050000, g: 0.051250, b: 0.048750, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Floater_CHITIN_BONE"
+        }
+      ],
+      "authority_map": {
+        "XCOM_Floater_ACCENT_EMISSIVE": "XCOM_Floater_ACCENT_EMISSIVE",
+        "XCOM_Floater_CHITIN": "XCOM_Floater_CHITIN",
+        "XCOM_Floater_CHITIN_BONE": "XCOM_Floater_CHITIN_BONE",
+        "XCOM_Floater_PLATE_DARK": "XCOM_Floater_PLATE_DARK"
+      },
+      "before": [
+        [
+          "XCOM_Floater_CHITIN",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Floater_ACCENT_EMISSIVE",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Floater_PLATE_DARK",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Floater_CHITIN_BONE",
+          "WorldGridMaterial"
+        ]
+      ],
+      "bind": [
+        {
+          "assigned": "XCOM_Floater_CHITIN",
+          "slot": "XCOM_Floater_CHITIN"
+        },
+        {
+          "assigned": "XCOM_Floater_ACCENT_EMISSIVE",
+          "slot": "XCOM_Floater_ACCENT_EMISSIVE"
+        },
+        {
+          "assigned": "XCOM_Floater_PLATE_DARK",
+          "slot": "XCOM_Floater_PLATE_DARK"
+        },
+        {
+          "assigned": "XCOM_Floater_CHITIN_BONE",
+          "slot": "XCOM_Floater_CHITIN_BONE"
+        }
+      ],
+      "enemy": "XCOM_Floater",
+      "matches_authority": true,
+      "material_moves": {
+        "XCOM_Floater_ACCENT_EMISSIVE": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Floater_ACCENT_EMISSIVE.XCOM_Floater_ACCENT_EMISSIVE",
+          "material": "XCOM_Floater_ACCENT_EMISSIVE",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Floater_ACCENT_EMISSIVE.XCOM_Floater_ACCENT_EMISSIVE"
+        },
+        "XCOM_Floater_CHITIN": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Floater_CHITIN.XCOM_Floater_CHITIN",
+          "material": "XCOM_Floater_CHITIN",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Floater_CHITIN.XCOM_Floater_CHITIN"
+        },
+        "XCOM_Floater_CHITIN_BONE": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Floater_CHITIN_BONE.XCOM_Floater_CHITIN_BONE",
+          "material": "XCOM_Floater_CHITIN_BONE",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Floater_CHITIN_BONE.XCOM_Floater_CHITIN_BONE"
+        },
+        "XCOM_Floater_PLATE_DARK": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Floater_PLATE_DARK.XCOM_Floater_PLATE_DARK",
+          "material": "XCOM_Floater_PLATE_DARK",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Floater_PLATE_DARK.XCOM_Floater_PLATE_DARK"
+        }
+      },
+      "ok": true,
+      "saved": true
+    },
+    "XCOM_Muton": {
+      "after": [
+        {
+          "assigned": "XCOM_Muton_PLATE",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Muton_PLATE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Muton_PLATE.XCOM_Muton_PLATE",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "46.2400016784668"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2173E0) {r: 0.112000, g: 0.118000, b: 0.126000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE217F60) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE216C20) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE218FA0) {r: 0.028000, g: 0.029500, b: 0.031500, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Muton_PLATE"
+        },
+        {
+          "assigned": "XCOM_Muton_CHITIN",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Muton_CHITIN",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Muton_CHITIN.XCOM_Muton_CHITIN",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "19.360000610351562"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE216B60) {r: 0.044000, g: 0.047000, b: 0.050000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE214A20) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2178A0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE213FA0) {r: 0.011000, g: 0.011750, b: 0.012500, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Muton_CHITIN"
+        },
+        {
+          "assigned": "XCOM_Muton_PLATE_OXBLOOD",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Muton_PLATE_OXBLOOD",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Muton_PLATE_OXBLOOD.XCOM_Muton_PLATE_OXBLOOD",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "33.6400032043457"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2176E0) {r: 0.300000, g: 0.045000, b: 0.035000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE217C60) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2170A0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2195E0) {r: 0.075000, g: 0.011250, b: 0.008750, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Muton_PLATE_OXBLOOD"
+        },
+        {
+          "assigned": "XCOM_Muton_PLATE_DARK",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Muton_PLATE_DARK",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Muton_PLATE_DARK.XCOM_Muton_PLATE_DARK",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "9.000000953674316"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE218CE0) {r: 0.010000, g: 0.011000, b: 0.013000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2181E0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE213BA0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE216AE0) {r: 0.002500, g: 0.002750, b: 0.003250, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Muton_PLATE_DARK"
+        },
+        {
+          "assigned": "XCOM_Muton_ACCENT_EMISSIVE",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Muton_ACCENT_EMISSIVE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Muton_ACCENT_EMISSIVE.XCOM_Muton_ACCENT_EMISSIVE",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "60.84000015258789"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE217EE0) {r: 0.045000, g: 0.180000, b: 0.032400, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE212220) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE213820) {r: 0.600000, g: 2.400000, b: 0.432000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219560) {r: 0.011250, g: 0.045000, b: 0.008100, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Muton_ACCENT_EMISSIVE"
+        }
+      ],
+      "authority_map": {
+        "XCOM_Muton_ACCENT_EMISSIVE": "XCOM_Muton_ACCENT_EMISSIVE",
+        "XCOM_Muton_CHITIN": "XCOM_Muton_CHITIN",
+        "XCOM_Muton_PLATE": "XCOM_Muton_PLATE",
+        "XCOM_Muton_PLATE_DARK": "XCOM_Muton_PLATE_DARK",
+        "XCOM_Muton_PLATE_OXBLOOD": "XCOM_Muton_PLATE_OXBLOOD"
+      },
+      "before": [
+        [
+          "XCOM_Muton_PLATE",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Muton_CHITIN",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Muton_PLATE_OXBLOOD",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Muton_PLATE_DARK",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Muton_ACCENT_EMISSIVE",
+          "WorldGridMaterial"
+        ]
+      ],
+      "bind": [
+        {
+          "assigned": "XCOM_Muton_PLATE",
+          "slot": "XCOM_Muton_PLATE"
+        },
+        {
+          "assigned": "XCOM_Muton_CHITIN",
+          "slot": "XCOM_Muton_CHITIN"
+        },
+        {
+          "assigned": "XCOM_Muton_PLATE_OXBLOOD",
+          "slot": "XCOM_Muton_PLATE_OXBLOOD"
+        },
+        {
+          "assigned": "XCOM_Muton_PLATE_DARK",
+          "slot": "XCOM_Muton_PLATE_DARK"
+        },
+        {
+          "assigned": "XCOM_Muton_ACCENT_EMISSIVE",
+          "slot": "XCOM_Muton_ACCENT_EMISSIVE"
+        }
+      ],
+      "enemy": "XCOM_Muton",
+      "matches_authority": true,
+      "material_moves": {
+        "XCOM_Muton_ACCENT_EMISSIVE": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Muton_ACCENT_EMISSIVE.XCOM_Muton_ACCENT_EMISSIVE",
+          "material": "XCOM_Muton_ACCENT_EMISSIVE",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Muton_ACCENT_EMISSIVE.XCOM_Muton_ACCENT_EMISSIVE"
+        },
+        "XCOM_Muton_CHITIN": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Muton_CHITIN.XCOM_Muton_CHITIN",
+          "material": "XCOM_Muton_CHITIN",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Muton_CHITIN.XCOM_Muton_CHITIN"
+        },
+        "XCOM_Muton_PLATE": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Muton_PLATE.XCOM_Muton_PLATE",
+          "material": "XCOM_Muton_PLATE",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Muton_PLATE.XCOM_Muton_PLATE"
+        },
+        "XCOM_Muton_PLATE_DARK": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Muton_PLATE_DARK.XCOM_Muton_PLATE_DARK",
+          "material": "XCOM_Muton_PLATE_DARK",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Muton_PLATE_DARK.XCOM_Muton_PLATE_DARK"
+        },
+        "XCOM_Muton_PLATE_OXBLOOD": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Muton_PLATE_OXBLOOD.XCOM_Muton_PLATE_OXBLOOD",
+          "material": "XCOM_Muton_PLATE_OXBLOOD",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Muton_PLATE_OXBLOOD.XCOM_Muton_PLATE_OXBLOOD"
+        }
+      },
+      "ok": true,
+      "saved": true
+    },
+    "XCOM_Sectoid": {
+      "after": [
+        {
+          "assigned": "XCOM_Sectoid_PLATE",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Sectoid_PLATE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Sectoid_PLATE.XCOM_Sectoid_PLATE",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "46.2400016784668"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE217F20) {r: 0.115000, g: 0.126000, b: 0.118000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE217EA0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE218FE0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219060) {r: 0.028750, g: 0.031500, b: 0.029500, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Sectoid_PLATE"
+        },
+        {
+          "assigned": "XCOM_Sectoid_CHITIN",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Sectoid_CHITIN",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Sectoid_CHITIN.XCOM_Sectoid_CHITIN",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "19.360000610351562"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2194A0) {r: 0.030000, g: 0.035000, b: 0.041000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2193E0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219720) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219760) {r: 0.007500, g: 0.008750, b: 0.010250, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Sectoid_CHITIN"
+        },
+        {
+          "assigned": "XCOM_Sectoid_CHITIN_BONE",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Sectoid_CHITIN_BONE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Sectoid_CHITIN_BONE.XCOM_Sectoid_CHITIN_BONE",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "14.4399995803833"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219B20) {r: 0.230000, g: 0.215000, b: 0.175000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219AA0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219AE0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219A20) {r: 0.057500, g: 0.053750, b: 0.043750, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Sectoid_CHITIN_BONE"
+        },
+        {
+          "assigned": "XCOM_Sectoid_PLATE_DARK",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Sectoid_PLATE_DARK",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Sectoid_PLATE_DARK.XCOM_Sectoid_PLATE_DARK",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "9.000000953674316"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2196E0) {r: 0.010000, g: 0.011000, b: 0.013000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2192A0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2194E0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE213820) {r: 0.002500, g: 0.002750, b: 0.003250, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Sectoid_PLATE_DARK"
+        },
+        {
+          "assigned": "XCOM_Sectoid_ACCENT_EMISSIVE",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Sectoid_ACCENT_EMISSIVE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Sectoid_ACCENT_EMISSIVE.XCOM_Sectoid_ACCENT_EMISSIVE",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "60.84000015258789"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219920) {r: 0.021600, g: 0.180000, b: 0.072000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2196A0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2198E0) {r: 0.300000, g: 2.500000, b: 1.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE216AE0) {r: 0.005400, g: 0.045000, b: 0.018000, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Sectoid_ACCENT_EMISSIVE"
+        }
+      ],
+      "authority_map": {
+        "XCOM_Sectoid_ACCENT_EMISSIVE": "XCOM_Sectoid_ACCENT_EMISSIVE",
+        "XCOM_Sectoid_CHITIN": "XCOM_Sectoid_CHITIN",
+        "XCOM_Sectoid_CHITIN_BONE": "XCOM_Sectoid_CHITIN_BONE",
+        "XCOM_Sectoid_PLATE": "XCOM_Sectoid_PLATE",
+        "XCOM_Sectoid_PLATE_DARK": "XCOM_Sectoid_PLATE_DARK"
+      },
+      "before": [
+        [
+          "XCOM_Sectoid_PLATE",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Sectoid_CHITIN",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Sectoid_CHITIN_BONE",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Sectoid_PLATE_DARK",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Sectoid_ACCENT_EMISSIVE",
+          "WorldGridMaterial"
+        ]
+      ],
+      "bind": [
+        {
+          "assigned": "XCOM_Sectoid_PLATE",
+          "slot": "XCOM_Sectoid_PLATE"
+        },
+        {
+          "assigned": "XCOM_Sectoid_CHITIN",
+          "slot": "XCOM_Sectoid_CHITIN"
+        },
+        {
+          "assigned": "XCOM_Sectoid_CHITIN_BONE",
+          "slot": "XCOM_Sectoid_CHITIN_BONE"
+        },
+        {
+          "assigned": "XCOM_Sectoid_PLATE_DARK",
+          "slot": "XCOM_Sectoid_PLATE_DARK"
+        },
+        {
+          "assigned": "XCOM_Sectoid_ACCENT_EMISSIVE",
+          "slot": "XCOM_Sectoid_ACCENT_EMISSIVE"
+        }
+      ],
+      "enemy": "XCOM_Sectoid",
+      "matches_authority": true,
+      "material_moves": {
+        "XCOM_Sectoid_ACCENT_EMISSIVE": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Sectoid_ACCENT_EMISSIVE.XCOM_Sectoid_ACCENT_EMISSIVE",
+          "material": "XCOM_Sectoid_ACCENT_EMISSIVE",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Sectoid_ACCENT_EMISSIVE.XCOM_Sectoid_ACCENT_EMISSIVE"
+        },
+        "XCOM_Sectoid_CHITIN": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Sectoid_CHITIN.XCOM_Sectoid_CHITIN",
+          "material": "XCOM_Sectoid_CHITIN",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Sectoid_CHITIN.XCOM_Sectoid_CHITIN"
+        },
+        "XCOM_Sectoid_CHITIN_BONE": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Sectoid_CHITIN_BONE.XCOM_Sectoid_CHITIN_BONE",
+          "material": "XCOM_Sectoid_CHITIN_BONE",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Sectoid_CHITIN_BONE.XCOM_Sectoid_CHITIN_BONE"
+        },
+        "XCOM_Sectoid_PLATE": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Sectoid_PLATE.XCOM_Sectoid_PLATE",
+          "material": "XCOM_Sectoid_PLATE",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Sectoid_PLATE.XCOM_Sectoid_PLATE"
+        },
+        "XCOM_Sectoid_PLATE_DARK": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Sectoid_PLATE_DARK.XCOM_Sectoid_PLATE_DARK",
+          "material": "XCOM_Sectoid_PLATE_DARK",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Sectoid_PLATE_DARK.XCOM_Sectoid_PLATE_DARK"
+        }
+      },
+      "ok": true,
+      "saved": true
+    },
+    "XCOM_Viper": {
+      "after": [
+        {
+          "assigned": "XCOM_Viper_PLATE",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Viper_PLATE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Viper_PLATE.XCOM_Viper_PLATE",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "46.2400016784668"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21AB60) {r: 0.105000, g: 0.092000, b: 0.078000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21A960) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21A860) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21A7E0) {r: 0.026250, g: 0.023000, b: 0.019500, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Viper_PLATE"
+        },
+        {
+          "assigned": "XCOM_Viper_CHITIN",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Viper_CHITIN",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Viper_CHITIN.XCOM_Viper_CHITIN",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "19.360000610351562"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21AAE0) {r: 0.062000, g: 0.052000, b: 0.038000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21A720) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21AA20) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21A8A0) {r: 0.015500, g: 0.013000, b: 0.009500, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Viper_CHITIN"
+        },
+        {
+          "assigned": "XCOM_Viper_PLATE_DARK",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Viper_PLATE_DARK",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Viper_PLATE_DARK.XCOM_Viper_PLATE_DARK",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "9.000000953674316"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21A6A0) {r: 0.010000, g: 0.011000, b: 0.013000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21A5A0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21A520) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21A4E0) {r: 0.002500, g: 0.002750, b: 0.003250, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Viper_PLATE_DARK"
+        },
+        {
+          "assigned": "XCOM_Viper_CHITIN_BONE",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Viper_CHITIN_BONE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Viper_CHITIN_BONE.XCOM_Viper_CHITIN_BONE",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "14.4399995803833"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21A260) {r: 0.245000, g: 0.225000, b: 0.170000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21A1E0) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE21A120) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219E60) {r: 0.061250, g: 0.056250, b: 0.042500, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Viper_CHITIN_BONE"
+        },
+        {
+          "assigned": "XCOM_Viper_ACCENT_EMISSIVE",
+          "material": {
+            "class": "MaterialInstanceConstant",
+            "name": "XCOM_Viper_ACCENT_EMISSIVE",
+            "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
+            "parent_class": "Material",
+            "path": "/Game/Enemies/XCOM/XCOM_Viper_ACCENT_EMISSIVE.XCOM_Viper_ACCENT_EMISSIVE",
+            "scalars": [
+              {
+                "name": "Shininess",
+                "value": "60.84000015258789"
+              }
+            ],
+            "textures": [],
+            "vectors": [
+              {
+                "name": "DiffuseColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219FA0) {r: 0.018000, g: 0.180000, b: 0.135000, a: 1.000000}>"
+              },
+              {
+                "name": "AmbientColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE219F60) {r: 0.000000, g: 0.000000, b: 0.000000, a: 1.000000}>"
+              },
+              {
+                "name": "EmissiveColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE215360) {r: 0.240000, g: 2.400000, b: 1.800000, a: 1.000000}>"
+              },
+              {
+                "name": "SpecularColor",
+                "value": "<Struct 'LinearColor' (0x000001F2BE2143A0) {r: 0.004500, g: 0.045000, b: 0.033750, a: 1.000000}>"
+              }
+            ]
+          },
+          "slot": "XCOM_Viper_ACCENT_EMISSIVE"
+        }
+      ],
+      "authority_map": {
+        "XCOM_Viper_ACCENT_EMISSIVE": "XCOM_Viper_ACCENT_EMISSIVE",
+        "XCOM_Viper_CHITIN": "XCOM_Viper_CHITIN",
+        "XCOM_Viper_CHITIN_BONE": "XCOM_Viper_CHITIN_BONE",
+        "XCOM_Viper_PLATE": "XCOM_Viper_PLATE",
+        "XCOM_Viper_PLATE_DARK": "XCOM_Viper_PLATE_DARK"
+      },
+      "before": [
+        [
+          "XCOM_Viper_PLATE",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Viper_CHITIN",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Viper_PLATE_DARK",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Viper_CHITIN_BONE",
+          "WorldGridMaterial"
+        ],
+        [
+          "XCOM_Viper_ACCENT_EMISSIVE",
+          "WorldGridMaterial"
+        ]
+      ],
+      "bind": [
+        {
+          "assigned": "XCOM_Viper_PLATE",
+          "slot": "XCOM_Viper_PLATE"
+        },
+        {
+          "assigned": "XCOM_Viper_CHITIN",
+          "slot": "XCOM_Viper_CHITIN"
+        },
+        {
+          "assigned": "XCOM_Viper_PLATE_DARK",
+          "slot": "XCOM_Viper_PLATE_DARK"
+        },
+        {
+          "assigned": "XCOM_Viper_CHITIN_BONE",
+          "slot": "XCOM_Viper_CHITIN_BONE"
+        },
+        {
+          "assigned": "XCOM_Viper_ACCENT_EMISSIVE",
+          "slot": "XCOM_Viper_ACCENT_EMISSIVE"
+        }
+      ],
+      "enemy": "XCOM_Viper",
+      "matches_authority": true,
+      "material_moves": {
+        "XCOM_Viper_ACCENT_EMISSIVE": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Viper_ACCENT_EMISSIVE.XCOM_Viper_ACCENT_EMISSIVE",
+          "material": "XCOM_Viper_ACCENT_EMISSIVE",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Viper_ACCENT_EMISSIVE.XCOM_Viper_ACCENT_EMISSIVE"
+        },
+        "XCOM_Viper_CHITIN": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Viper_CHITIN.XCOM_Viper_CHITIN",
+          "material": "XCOM_Viper_CHITIN",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Viper_CHITIN.XCOM_Viper_CHITIN"
+        },
+        "XCOM_Viper_CHITIN_BONE": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Viper_CHITIN_BONE.XCOM_Viper_CHITIN_BONE",
+          "material": "XCOM_Viper_CHITIN_BONE",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Viper_CHITIN_BONE.XCOM_Viper_CHITIN_BONE"
+        },
+        "XCOM_Viper_PLATE": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Viper_PLATE.XCOM_Viper_PLATE",
+          "material": "XCOM_Viper_PLATE",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Viper_PLATE.XCOM_Viper_PLATE"
+        },
+        "XCOM_Viper_PLATE_DARK": {
+          "dst": "/Game/Enemies/XCOM/XCOM_Viper_PLATE_DARK.XCOM_Viper_PLATE_DARK",
+          "material": "XCOM_Viper_PLATE_DARK",
+          "result": "renamed",
+          "src": "/Game/Tests/UEParity/XCOM_Viper_PLATE_DARK.XCOM_Viper_PLATE_DARK"
+        }
+      },
+      "ok": true,
+      "saved": true
+    }
+  },
+  "shipping": "/Game/Enemies/XCOM",
+  "world": {
+    "error": "AttributeError(\"'World' object has no attribute 'get_actors'\")"
+  }
+}

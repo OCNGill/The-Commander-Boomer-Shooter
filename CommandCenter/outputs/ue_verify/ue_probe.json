@@ -1,0 +1,149 @@
+{
+  "all_level_actors": 0,
+  "cube_loaded": true,
+  "current_level": "ERR Exception(\"World: Failed to find property 'current_level' for attribute 'current_level' on 'World'\")",
+  "editor_actor_subsystem": true,
+  "editor_level_library": [
+    "clear_actor_selection_set",
+    "convert_actors",
+    "create_proxy_mesh_actor",
+    "destroy_actor",
+    "eject_pilot_level_actor",
+    "get_actor_reference",
+    "get_all_level_actors",
+    "get_all_level_actors_components",
+    "get_selected_level_actors",
+    "join_static_mesh_actors",
+    "load_level",
+    "merge_static_mesh_actors",
+    "new_level",
+    "new_level_from_template",
+    "pilot_level_actor",
+    "replace_mesh_components_materials_on_actors",
+    "replace_mesh_components_meshes_on_actors",
+    "replace_selected_actors",
+    "set_actor_selection_state",
+    "set_selected_level_actors",
+    "spawn_actor_from_class",
+    "spawn_actor_from_object"
+  ],
+  "editor_static_mesh_lib_tri": [
+    "__getattribute__",
+    "enable_section_cast_shadow",
+    "enable_section_collision",
+    "get_number_verts",
+    "has_instance_vertex_colors",
+    "has_vertex_colors",
+    "is_section_collision_enabled"
+  ],
+  "fbx_exists": true,
+  "fresh": {
+    "accent_emissive_assigned": true,
+    "accent_emissive_slot": true,
+    "slot_count": 5,
+    "slot_mats": [
+      "XCOM_Sectoid_PLATE",
+      "XCOM_Sectoid_CHITIN",
+      "XCOM_Sectoid_CHITIN_BONE",
+      "XCOM_Sectoid_PLATE_DARK",
+      "XCOM_Sectoid_ACCENT_EMISSIVE"
+    ],
+    "slot_names": [
+      "XCOM_Sectoid_PLATE",
+      "XCOM_Sectoid_CHITIN",
+      "XCOM_Sectoid_CHITIN_BONE",
+      "XCOM_Sectoid_PLATE_DARK",
+      "XCOM_Sectoid_ACCENT_EMISSIVE"
+    ],
+    "texture_nodes": 0,
+    "tri_probe": {
+      "mesh.get_num_triangles0": "ERR TypeError(\"get_num_triangles() required argument 'lod_index' (pos 1) not found\")",
+      "mesh.get_num_triangles1": 7308
+    }
+  },
+  "fresh_path": "/Game/Tests/UEParity/XCOM_Sectoid.XCOM_Sectoid",
+  "has_KismetRenderingLibrary": false,
+  "has_SceneCapture2D": true,
+  "has_SceneCaptureComponent2D": true,
+  "imported_paths": [
+    "/Game/Tests/UEParity/XCOM_Sectoid.XCOM_Sectoid"
+  ],
+  "kismet_names": [],
+  "persistent_level": "ERR Exception(\"World: Failed to find property 'persistent_level' for attribute 'persistent_level' on 'World'\")",
+  "render": {},
+  "scene_capture_source_enum": [
+    "SCS_BASE_COLOR",
+    "SCS_DEVICE_DEPTH",
+    "SCS_FINAL_COLOR_HDR",
+    "SCS_FINAL_COLOR_LDR",
+    "SCS_FINAL_TONE_CURVE_HDR",
+    "SCS_NORMAL",
+    "SCS_SCENE_COLOR_HDR",
+    "SCS_SCENE_COLOR_HDR_NO_ALPHA",
+    "SCS_SCENE_COLOR_SCENE_DEPTH",
+    "SCS_SCENE_DEPTH"
+  ],
+  "shipping_class": "StaticMesh",
+  "shipping_loaded": true,
+  "shipping_slot_count": 5,
+  "shipping_slot_mats": [
+    "XCOM_Chitin_Mid",
+    "XCOM_Chitin_Pale",
+    "XCOM_Chitin_Dark",
+    "XCOM_Eye_Emissive",
+    "XCOM_Core_Emissive"
+  ],
+  "shipping_slot_names": [
+    "XCOM_Chitin_Mid",
+    "XCOM_Chitin_Pale",
+    "XCOM_Chitin_Dark",
+    "XCOM_Eye_Emissive",
+    "XCOM_Core_Emissive"
+  ],
+  "smi_found": true,
+  "spawn_actor": "ERR AttributeError(\"'StaticMeshComponent' object has no attribute 'get_world_scale3d'\")",
+  "spawn_label": "StaticMeshActor",
+  "spawn_traceback": "Traceback (most recent call last):\n  File \"C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/python/ue_parity_probe.py\", line 113, in <module>\n    R['smc_world_scale'] = str(smc.get_world_scale3d())\n                               ^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'StaticMeshComponent' object has no attribute 'get_world_scale3d'\n",
+  "static_mesh_editor_subsystem_tri": [
+    "__getattribute__",
+    "get_number_verts",
+    "has_instance_vertex_colors",
+    "has_vertex_colors"
+  ],
+  "texture_render_target_format": [
+    "RTF_R16F",
+    "RTF_R32F",
+    "RTF_R8",
+    "RTF_RG16F",
+    "RTF_RG32F",
+    "RTF_RG8",
+    "RTF_RGB10A2",
+    "RTF_RGBA16F",
+    "RTF_RGBA32F",
+    "RTF_RGBA8",
+    "RTF_RGBA8_SRGB"
+  ],
+  "tri_probe": {
+    "ESML.get_number_verts0": "ERR TypeError(\"get_number_verts() required argument 'static_mesh' (pos 1) not found\"",
+    "ESML.get_number_verts1": "ERR TypeError(\"get_number_verts() required argument 'lod_index' (pos 2) not found\")",
+    "ESML.get_number_verts2": 0,
+    "mesh.get_num_sections0": "ERR TypeError(\"get_num_sections() required argument 'lod' (pos 1) not found\")",
+    "mesh.get_num_sections1": 5,
+    "mesh.get_num_triangles0": "ERR TypeError(\"get_num_triangles() required argument 'lod_index' (pos 1) not found\")",
+    "mesh.get_num_triangles1": 2864,
+    "mesh.get_num_vertices0": "ERR TypeError(\"get_num_vertices() required argument 'lod_index' (pos 1) not found\")",
+    "mesh.get_num_vertices1": 3100
+  },
+  "unreal_editor_subsystem": [
+    "get_editor_world",
+    "get_game_world",
+    "get_level_viewport_camera_info",
+    "get_level_viewport_size",
+    "get_world",
+    "screen_to_world",
+    "set_level_viewport_camera_info",
+    "world_to_screen"
+  ],
+  "world_class": "World",
+  "world_name": "Untitled"
+}
