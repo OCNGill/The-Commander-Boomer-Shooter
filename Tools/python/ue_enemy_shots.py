@@ -256,7 +256,11 @@ def build_studio(world, center, size):
         fcomp.set_material(0, _tinted(floor_mat, (0.045, 0.045, 0.055)))
     # The Engine basic Cube is 100 units, so a scale of size*0.06 gives a
     # floor a few subject-widths across.
-    fs = max(1.0, size * 0.06)
+    # The floor is sized from the SUBJECT, so the smallest creature (the
+    # Sectoid) got the smallest lit area and rendered almost black while
+    # the Muton was fine.  The studio is now a FIXED size - the subject
+    # varies, the set does not - so every enemy is lit identically.
+    fs = 14.0
     fa.set_actor_scale3d(unreal.Vector(fs, fs, 0.02))
     fa.set_actor_location(unreal.Vector(center.x, center.y, -0.5), False, True)
     actors.append(fa)
@@ -265,7 +269,7 @@ def build_studio(world, center, size):
     # A big flat wall behind the subject, squared to the camera, so the
     # background is a controlled grey rather than the world sky.
     az = math.radians(AZIMUTH)
-    back = max(size * 3.0, 1200.0)
+    back = 2600.0
     bx = center.x - math.cos(az) * back
     by = center.y - math.sin(az) * back
     ba = spawn(world, unreal.StaticMeshActor)
@@ -295,14 +299,14 @@ def build_studio(world, center, size):
         return a
 
     # KEY: warm, from front-left-above.  Casts the contact shadow.
-    directional((center.x - size * 2.0, center.y + size * 2.0,
-                 center.z + size * 2.0), 2.4, (1.0, 0.95, 0.87), True, 'KEY')
+    directional((center.x - 900.0, center.y + 900.0,
+                 center.z + 900.0), 2.4, (1.0, 0.95, 0.87), True, 'KEY')
     # FILL: cool, from camera-right, no shadow, lifts the dark side.
-    directional((center.x + size * 2.0, center.y - size * 2.0,
-                 center.z + size * 0.3), 1.1, (0.60, 0.72, 0.92), False, 'FILL')
+    directional((center.x + 900.0, center.y - 900.0,
+                 center.z + 300.0), 1.1, (0.60, 0.72, 0.92), False, 'FILL')
     # RIM: cool, from behind-above, no shadow.  Draws the silhouette edge.
-    directional((center.x - size * 1.5, center.y - size * 2.0,
-                 center.z + size * 1.8), 1.7, (0.72, 0.86, 1.0), False, 'RIM')
+    directional((center.x - 700.0, center.y - 900.0,
+                 center.z + 800.0), 1.7, (0.72, 0.86, 1.0), False, 'RIM')
 
     # BACKDROP LIGHT: the key/fill/rim all aim at the SUBJECT, so the wall
     # behind it was lit only on its far side and rendered black.  This one
@@ -316,9 +320,9 @@ def build_studio(world, center, size):
         setp(blc, 'cast_shadows', False)
     bl.set_actor_location(unreal.Vector(center.x + math.cos(az) * back * 0.5,
                                        center.y + math.sin(az) * back * 0.5,
-                                       center.z + size), False, True)
+                                       center.z + 900.0), False, True)
     aim_ok(bl, (center.x + math.cos(az) * back * 0.5,
-                center.y + math.sin(az) * back * 0.5, center.z + size),
+                center.y + math.sin(az) * back * 0.5, center.z + 900.0),
            (bx, by, center.z), 'BACK')
     L('backdrop light added')
     actors.append(bl)
