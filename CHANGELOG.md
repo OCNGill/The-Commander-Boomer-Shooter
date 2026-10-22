@@ -481,3 +481,51 @@ and only reading the live geometry, not the intent, told us which one was real.*
 > real cause sitting underneath all of it — 14 PSOs that must exist before the game can draw a frame
 > on the Deck. Nothing here worked by brute force; it worked because the failures were separated,
 > named, and put in order.
+
+## [2026-10-22f] — Probe verdicts: the XeFG fix is confirmed in the shipped build, and `-nullrhi` is not a usable control for this project
+
+### Probe A — packaged build, XeFG swapchain override
+| Marker | Result |
+|---|---|
+| `LogXeFGRHI: Display: Override swap chain: 0` | **present** — the fix is baked into the package, not a command-line trick |
+| `LogRHI: RHI D3D12 with Feature Level SM6 is supported and will be used` | ✅ |
+| `Engine is initialized` | ✅ |
+| `Custom swapchain provider: FXeFGDXGISwapChainProvider` | **absent** |
+| `Failure creating: D3D12Viewport` | **absent** |
+| `Fatal error` | **0** |
+| `LogExit: Exiting.` → `Log file closed` | ✅ clean shutdown |
+
+The `-XeFGOverrideSwapChainDisabled` switch on the command line was redundant — the
+`r.XeFG.OverrideSwapChain=0` in `Config/DefaultEngine.ini` already carried it into the
+package. **The shipped `.exe` is confirmed good on this path.**
+
+### Probe B — `-nullrhi` control: a tool artifact, not a game defect
+```
+LogWindows: Error: Assertion failed: ViewportRHI
+  ...Plugins\FSR\Source\FFXFrameInterpolation\Private\FFXFrameInterpolation.cpp:1304
+  FFXFrameInterpolation::GetRHIViewport()            :1304
+  FFXFrameInterpolation::GetRHIViewport()            :1339
+  FFXFrameInterpolation::OnViewportCreatedHandler_SetCustomPresent() :265
+  TMulticastDelegate<void>::Broadcast()
+  UGameEngine::Init()
+```
+**`-nullrhi` gives the FSR frame-interpolation plugin no RHI viewport, and the plugin
+hard-asserts on it.** Exit code 3. The assert fires inside `UGameEngine::Init()`, before
+the engine reports "Engine is initialized" — it is the null RHI, not the game.
+
+**This is not a defect in the shipped build, and the evidence is independent:** the same
+plugin initialises cleanly on the real RHI on every target —
+`Successfully initialized FSR FrameInterpolation using version '3.1.6'` on MAIN, on the
+laptop, and on the Steam Deck under Proton.
+
+**Lesson for anyone testing this project headlessly: `-nullrhi` is not a usable control.**
+Either disable FSR frame interpolation first (and re-enable it for the visual pass), or
+test the logic path with a real RHI. Do not read a `ViewportRHI` assertion as a game bug.
+
+### Verse
+> *"Let all things be done decently and in order."* — 1 Corinthians 14:40 (ESV)
+> Chosen because a control that is itself broken produces a false accusation. Probe B
+> failed loudly, and the failure looked like a defect in the game under test. It was
+> instead a defect in the instrument. Telling the two apart — by checking whether the
+> same code path succeeds on a real RHI elsewhere — is the whole discipline here, and
+> it is the reason the conclusion is stated with evidence instead of with confidence.
