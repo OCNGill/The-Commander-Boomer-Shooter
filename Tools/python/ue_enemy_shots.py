@@ -203,53 +203,83 @@ def clear_world(world):
     L('cleared %d default actors: %s' % (len(removed), sorted(set(removed))))
     return removed
 
+def _tinted(mat, rgb):
+    """A dynamic instance of `mat` with its colour parameter set.
+
+    UE 5.8's MaterialInstanceDynamic takes the parent as a positional
+    argument, not a keyword, and the Engine's BasicShapeMaterial exposes
+    its tint as a vector parameter named 'Color'.
+    """
+    try:
+        mid = unreal.MaterialInstanceDynamic(mat)
+    except Exception as exc:
+        L('dynamic material create failed: %r' % (exc,))
+        return mat
+    for pname in ('Color', 'BaseColor', 'Base Color', 'color', 'Tint'):
+        try:
+            unreal.MaterialEditingLibrary.set_material_instance_vector_parameter_value(
+                mid, pname, unreal.LinearColor(rgb[0], rgb[1], rgb[2], 1.0))
+            return mid
+        except Exception:
+            continue
+    L('no colour parameter found on the studio material')
+    return mid
+
 
 def build_studio(world, center, size):
-    """Floor + three DIRECTIONAL lights.
+    """Studio: dark floor, mid-grey backdrop, key + fill + rim + skylight.
 
-    Directional lights, not spot/point.  A spot or point light in UE uses
-    inverse-distance falloff, so the exposure then depends on how far the
-    light happens to be from the subject -- which is why the earlier rig
-    either blew the floor to white or left the creature as a flat grey
-    silhouette.  A directional light's intensity is distance-independent
-    lux, so the whole studio can be reasoned about in one number.
+    Every part of this rig exists because the previous one produced a
+    picture of an EXPOSURE rather than a picture of a creature:
 
-    Floor scale: the Engine basic Cube is 100 units, so a scale of
-    size*2.5 produced a 50,000-unit slab that filled the frame with a
-    blown-out white plane.  The floor is now a couple of subject-widths.
+    - The Engine's BasicShapeMaterial is a LIGHT grey.  Under any usable
+      key light it clipped to pure white, and the creature's lower half
+      dissolved into the ground.  The floor is now a material instance
+      tinted deep neutral.
+    - An empty world renders the default sky, which is black, so the
+      subject sat on a black void.  A large backdrop plane behind the
+      subject, squared up to the camera, gives a controlled mid-grey
+      studio background instead.
+    - Spot and point lights fall off with distance in UE, so exposure
+      depended on where the light happened to sit.  Directional lights are
+      distance-independent lux, so the whole rig is one number per light.
     """
     actors = []
 
+    # ---- floor -----------------------------------------------------
     floor_mesh = unreal.EditorAssetLibrary.load_asset(FLOOR_MESH)
     floor_mat = unreal.EditorAssetLibrary.load_asset(FLOOR_MAT)
     fa = spawn(world, unreal.StaticMeshActor)
     fcomp = fa.static_mesh_component
     fcomp.set_static_mesh(floor_mesh)
     if floor_mat is not None:
-        fcomp.set_material(0, floor_mat)
-    # The Engine's BasicShapeMaterial is a LIGHT grey, so under any usable
-    # key light the ground clipped to pure white and the creature lost its
-    # lower half against it.  The floor is darkened to a deep neutral so
-    # the subject reads as a lit figure on a dark ground.
-    dark = unreal.LinearColor(0.05, 0.05, 0.06, 1.0)
-    try:
-        mid = unreal.MaterialInstanceDynamic(material_interface=floor_mat)
-        for pname in ('Color', 'BaseColor', 'Base Color', 'color'):
-            try:
-                unreal.MaterialEditingLibrary.set_material_instance_vector_parameter_value(
-                    mid, pname, dark)
-                fcomp.set_material(0, mid)
-                L('floor material darkened via parameter %s' % pname)
-                break
-            except Exception:
-                continue
-    except Exception as exc:
-        L('floor material tint failed: %r' % (exc,))
-    # 100-unit cube -> a floor a few subject-widths across
+        fcomp.set_material(0, _tinted(floor_mat, (0.045, 0.045, 0.055)))
+    # The Engine basic Cube is 100 units, so a scale of size*0.06 gives a
+    # floor a few subject-widths across.
     fs = max(1.0, size * 0.06)
     fa.set_actor_scale3d(unreal.Vector(fs, fs, 0.02))
     fa.set_actor_location(unreal.Vector(center.x, center.y, -0.5), False, True)
     actors.append(fa)
+
+    # ---- backdrop --------------------------------------------------
+    # A big flat wall behind the subject, squared to the camera, so the
+    # background is a controlled grey rather than the world sky.
+    az = math.radians(AZIMUTH)
+    back = max(size * 3.0, 1200.0)
+    bx = center.x - math.cos(az) * back
+    by = center.y - math.sin(az) * back
+    ba = spawn(world, unreal.StaticMeshActor)
+    bc = ba.static_mesh_component
+    bc.set_static_mesh(floor_mesh)
+    if floor_mat is not None:
+        bc.set_material(0, _tinted(floor_mat, (0.16, 0.17, 0.19)))
+    # a wall: wide, tall, very thin, stood on end and turned to face
+    # the camera
+    ba.set_actor_scale3d(unreal.Vector(back * 0.02, 1.0, back * 0.012))
+    ba.set_actor_location(unreal.Vector(bx, by, center.z), False, True)
+    ba.set_actor_rotation(unreal.Rotator(0.0, 0.0, AZIMUTH + 90.0), False)
+    L('backdrop at (%.0f, %.0f) width %.0f' % (bx, by, back * 0.02 * 100.0))
+    actors.append(ba)
 
     def directional(pos, intensity, color, shadows, tag):
         a = spawn(world, unreal.DirectionalLight)
@@ -266,27 +296,26 @@ def build_studio(world, center, size):
 
     # KEY: warm, from front-left-above.  Casts the contact shadow.
     directional((center.x - size * 2.0, center.y + size * 2.0,
-                 center.z + size * 2.0), 0.75, (1.0, 0.95, 0.87), True, 'KEY')
+                 center.z + size * 2.0), 1.6, (1.0, 0.95, 0.87), True, 'KEY')
     # FILL: cool, from camera-right, no shadow, lifts the dark side.
     directional((center.x + size * 2.0, center.y - size * 2.0,
-                 center.z + size * 0.3), 0.45, (0.60, 0.72, 0.92), False, 'FILL')
+                 center.z + size * 0.3), 0.7, (0.60, 0.72, 0.92), False, 'FILL')
     # RIM: cool, from behind-above, no shadow.  Draws the silhouette edge.
     directional((center.x - size * 1.5, center.y - size * 2.0,
-                 center.z + size * 1.8), 0.9, (0.72, 0.86, 1.0), False, 'RIM')
+                 center.z + size * 1.8), 1.2, (0.72, 0.86, 1.0), False, 'RIM')
 
     # AMBIENT: a skylight lights the whole creature evenly, so the subject
     # reads as a modelled form instead of a flat silhouette.
     sl = spawn(world, unreal.SkyLight)
     sc = comp_of(sl, 'light_component', 'skylight_component')
     if sc is not None:
-        setp(sc, 'intensity', 0.6)
+        setp(sc, 'intensity', 0.35)
         setp(sc, 'light_color', unreal.LinearColor(0.55, 0.60, 0.72))
         setp(sc, 'cast_shadows', False)
     L('skylight added')
     actors.append(sl)
 
     return actors
-
 
 def place_camera(world, center, size):
     """3/4 front view, framed so the creature fills FILL of the frame."""
