@@ -44,12 +44,24 @@ REM what lets the engine write the stable PSO cache. The wait is still bounded:
 REM a lane that can hang is a lane that never reports.
 set "SMOKE_TIMEOUT=240"
 set "CACHEDIR=%ARCH%\TheCommander\Content\PipelineCaches\Windows"
+set "GAMEPROC=TheCommanderGame.exe"
 
 if not exist "%UPROJECT%" ( echo [FATAL] uproject not found: %UPROJECT% & exit /b 2 )
 if not exist "%UE%\Engine\Build\BatchFiles\Build.bat" ( echo [FATAL] UE not found: %UE% & exit /b 3 )
 if not exist "%REPO%\Plugins\FSR\FSR.uplugin" ( echo [FATAL] upscaler plugins missing - run: python Tools\ue\fetch_upscaler_plugins.py & exit /b 4 )
 
 if not exist "%OUT%" mkdir "%OUT%" >nul 2>&1
+
+REM ---------------------------------------------------------------------------
+REM  A running instance check that cannot be fooled.
+REM  tasklist /FI ... /NH prints "INFO: No tasks are running which match the
+REM  specified criteria." when nothing matches - and "tokens=2" of that line is
+REM  the word "tasks", not a PID. Match on the image name instead.
+REM ---------------------------------------------------------------------------
+:find_game
+set "PREEXIST="
+for /f "tokens=1" %%P in ('tasklist /FI "IMAGENAME eq %GAMEPROC%" /NH 2^>nul ^| find /i "%GAMEPROC%"') do set "PREEXIST=%%P"
+goto :eof
 
 echo.
 echo === [1/5] BUILD GAME TARGET ===
@@ -87,8 +99,7 @@ if exist "%SMOKELOG%" (
   set "SMOKE_EXIT=-2"
   goto smoke_verdict
 )
-set "PREEXIST="
-for /f "tokens=2" %%P in ('tasklist /FI "IMAGENAME eq TheCommanderGame.exe" /NH 2^>nul') do set "PREEXIST=%%P"
+call :find_game
 if defined PREEXIST goto smoke_skip
 
 start "" /b cmd /c ""%EXE%" -log -abslog="%SMOKELOG%" -savedir="%OUT%\Saved" -CommanderInputAudit -CommanderExitAfterAudit -windowed -ResX=1280 -ResY=720 -nosplash -unattended -nopause > "%SMOKELOG%.stdout" 2>&1"
@@ -97,10 +108,10 @@ set "OURPID="
 set /a "WAITED=0"
 :smoke_spawn
 timeout /t 1 /nobreak >nul 2>&1
-for /f "tokens=2" %%P in ('tasklist /FI "IMAGENAME eq TheCommanderGame.exe" /NH 2^>nul') do set "OURPID=%%P"
+for /f "tokens=2" %%P in ('tasklist /FI "IMAGENAME eq %GAMEPROC%" /NH 2^>nul ^| find /i "%GAMEPROC%"') do set "OURPID=%%P"
 if defined OURPID goto smoke_alive
 set /a "WAITED+=1"
-if %WAITED% GEQ %SMOKE_TIMEOUT% goto smoke_stop
+if !WAITED! GEQ %SMOKE_TIMEOUT% goto smoke_stop
 goto smoke_spawn
 
 :smoke_alive
@@ -108,24 +119,24 @@ set /a "WAITED=0"
 :smoke_wait
 timeout /t 3 /nobreak >nul 2>&1
 set /a "WAITED+=3"
-tasklist /FI "PID eq %OURPID%" 2^>nul | find "%OURPID%" >nul 2>&1 || goto smoke_stop
-if %WAITED% GEQ %SMOKE_TIMEOUT% goto smoke_kill
+tasklist /FI "PID eq !OURPID!" 2^>nul | find "!OURPID!" >nul 2>&1 || goto smoke_stop
+if !WAITED! GEQ %SMOKE_TIMEOUT% goto smoke_kill
 goto smoke_wait
 
 :smoke_kill
-echo     [WARN] the game did not exit on its own within %SMOKE_TIMEOUT%s - killing PID %OURPID%
-taskkill /F /PID %OURPID% >nul 2>&1
+echo     [WARN] the game did not exit on its own within %SMOKE_TIMEOUT%s - killing PID !OURPID!
+taskkill /F /PID !OURPID! >nul 2>&1
 echo     [WARN] the PSO cache may be incomplete - a killed run writes nothing
 goto smoke_stop
 
 :smoke_stop
-taskkill /F /IM TheCommanderGame.exe >nul 2>&1
-echo     pass 1 finished after %WAITED%s
+taskkill /F /IM %GAMEPROC% >nul 2>&1
+echo     pass 1 finished after !WAITED!s
 set "SMOKE_EXIT=0"
 goto smoke_verdict
 
 :smoke_skip
-echo     [SKIP] a TheCommanderGame.exe instance is already running - not touching it
+echo     [SKIP] a %GAMEPROC% instance is already running (PID !PREEXIST!) - not touching it
 set "SMOKE_EXIT=-1"
 set "SKIPSMOKE=1"
 :smoke_verdict
@@ -146,9 +157,9 @@ if defined CACHEFILE (
   echo     [WARN] no .upipelinecache was written - the run did not exit gracefully
   set "CACHEFILE=NONE"
 )
-set "MISS1=?"
+set "MISS1=0"
 if exist "%SMOKELOG%" (
-  for /f %%C in ('findstr /c:"PSOPrecacheState: Missed" "%SMOKELOG%" ^| find /c /v ""') do set "MISS1=%%C"
+  for /f "tokens=*" %%L in ('findstr /c:"PSOPrecacheState: Missed" "%SMOKELOG%" 2^>nul') do set /a MISS1+=1
 )
 echo     pass 1 runtime PSO misses : %MISS1%
 
@@ -158,39 +169,40 @@ REM ---------------------------------------------------------------------------
 echo.
 echo === [5/5] SMOKE PASS 2 (cache installed) ===
 del /q "%SMOKELOG2%" >nul 2>&1
-set "PREEXIST2="
-for /f "tokens=2" %%P in ('tasklist /FI "IMAGENAME eq TheCommanderGame.exe" /NH 2^>nul') do set "PREEXIST2=%%P"
-if defined PREEXIST2 (
-  echo     [SKIP] a TheCommanderGame.exe instance is already running - not touching it
-) else (
-  start "" /b cmd /c ""%EXE%" -log -abslog="%SMOKELOG2%" -savedir="%OUT%\Saved2" -CommanderInputAudit -windowed -ResX=1280 -ResY=720 -nosplash -unattended -nopause > "%SMOKELOG2%.stdout" 2>&1"
-  set /a "WAITED2=0"
+call :find_game
+if defined PREEXIST2 goto smoke2_skip
+if defined PREEXIST goto smoke2_skip
+start "" /b cmd /c ""%EXE%" -log -abslog="%SMOKELOG2%" -savedir="%OUT%\Saved2" -CommanderInputAudit -windowed -ResX=1280 -ResY=720 -nosplash -unattended -nopause > "%SMOKELOG2%.stdout" 2>&1"
+set "OURPID2="
+set /a "WAITED2=0"
 :smoke2_spawn
-  timeout /t 1 /nobreak >nul 2>&1
-  set "OURPID2="
-  for /f "tokens=2" %%P in ('tasklist /FI "IMAGENAME eq TheCommanderGame.exe" /NH 2^>nul') do set "OURPID2=%%P"
-  if defined OURPID2 goto smoke2_alive
-  set /a "WAITED2+=1"
-  if %WAITED2% GEQ 60 goto smoke2_stop
-  goto smoke2_spawn
+timeout /t 1 /nobreak >nul 2>&1
+for /f "tokens=2" %%P in ('tasklist /FI "IMAGENAME eq %GAMEPROC%" /NH 2^>nul ^| find /i "%GAMEPROC%"') do set "OURPID2=%%P"
+if defined OURPID2 goto smoke2_alive
+set /a "WAITED2+=1"
+if !WAITED2! GEQ 60 goto smoke2_stop
+goto smoke2_spawn
 :smoke2_alive
-  set /a "WAITED2=0"
+set /a "WAITED2=0"
 :smoke2_wait
-  timeout /t 3 /nobreak >nul 2>&1
-  set /a "WAITED2+=3"
-  tasklist /FI "PID eq %OURPID2%" 2^>nul | find "%OURPID2%" >nul 2>&1 || goto smoke2_stop
-  if %WAITED2% GEQ %SMOKE_TIMEOUT% goto smoke2_kill
-  goto smoke2_wait
+timeout /t 3 /nobreak >nul 2>&1
+set /a "WAITED2+=3"
+tasklist /FI "PID eq !OURPID2!" 2^>nul | find "!OURPID2!" >nul 2>&1 || goto smoke2_stop
+if !WAITED2! GEQ %SMOKE_TIMEOUT% goto smoke2_kill
+goto smoke2_wait
 :smoke2_kill
-  taskkill /F /PID %OURPID2% >nul 2>&1
-  goto smoke2_stop
+taskkill /F /PID !OURPID2! >nul 2>&1
+goto smoke2_stop
 :smoke2_stop
-  taskkill /F /IM TheCommanderGame.exe >nul 2>&1
-  echo     pass 2 finished after %WAITED2%s
-)
-set "MISS2=?"
+taskkill /F /IM %GAMEPROC% >nul 2>&1
+echo     pass 2 finished after !WAITED2!s
+goto smoke2_done
+:smoke2_skip
+echo     [SKIP] a %GAMEPROC% instance is already running - not touching it
+:smoke2_done
+set "MISS2=0"
 if exist "%SMOKELOG2%" (
-  for /f %%C in ('findstr /c:"PSOPrecacheState: Missed" "%SMOKELOG2%" ^| find /c /v ""') do set "MISS2=%%C"
+  for /f "tokens=*" %%L in ('findstr /c:"PSOPrecacheState: Missed" "%SMOKELOG2%" 2^>nul') do set /a MISS2+=1
 )
 echo     pass 2 runtime PSO misses : %MISS2%
 
