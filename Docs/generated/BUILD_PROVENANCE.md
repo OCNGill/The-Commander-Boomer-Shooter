@@ -43,6 +43,60 @@ Append-only ledger of sovereign packaged builds. The 1.5 GB package itself is
 | Input audit | **PASS** — `-CommanderInputAudit` prints map, game mode, controller, pawn, `PlayerInput`, `InputComponent`, `PlayerStart V(Y=-1500.00, Z=100.00)`, pawn transform, 8 axis + 5 action mappings |
 | Exit | Clean — `LogExit: Exiting` (exit code 0) |
 
+### Second validation: LAPTOP (integrated AMD Radeon — the "I'll try it on the laptop" case)
+
+| Field | Value |
+|---|---|
+| Host | Laptop — Windows 10, AMD Ryzen 5 4500U, 19.4 GB physical RAM, 15.3 GB free |
+| GPU | **AMD Radeon(TM) Graphics** (integrated) — driver 31.0.21923.11000 |
+| Reported capability | **Feature Level 12_1 · shader model 6.7** · binding tier 3 · wave ops · atomic64 — all supported |
+| RHI decision | `LogRHI: RHI D3D12 with Feature Level SM6 is supported and will be used.` |
+| Boot | **PASS** — `LogInit: Display: Engine is initialized` |
+| Map | **PASS** — `LoadMap: /Game/Maps/M_Blockout01` |
+| Player | **PASS** — `ACommanderGameMode::InitGame map=M_Blockout01 … pawn=CommanderCharacter` → `PlayerController … ready` |
+| FSR | **PASS** — `LogFSR: FSR swapchain provider registered` |
+| DLSS | Correctly skipped — `LogStreamlineD3D12RHI: Skip registering IDXGISwapchainProvider (kFeatureDLSS_G)` (no NVIDIA GPU) |
+| **Fatals** | **NONE** |
+| Exit | Clean — `LogExit: Exiting.` |
+| Cost | ~187 s wall, dominated by SM6 PSO compilation on a CPU iGPU (`PSOPrecacheState: Missed` — the package ships **no pipeline cache**) |
+
+**What this proves:** the shipped `.exe` is not a MAIN-only artefact. It runs on a second, much weaker
+AMD machine with no dedicated GPU, selects SM6 correctly, initialises FSR, loads the map, spawns the
+player and exits clean. The XeFG fix is not machine-specific.
+
+**Known gap:** the package contains no `TheCommander_PCD3D_SM6.stable.upipelinecache`, so every first
+run pays a full SM6 shader compile. On a desktop GPU that is a few seconds; on a CPU iGPU or a
+Steam Deck APU it is minutes. **Shipping a cooked PSO/pipeline cache is the next build-lane
+improvement**, and it matters most for the Deck.
+
+### Third target: STEAM DECK — this artefact is not the Deck deliverable, and here is why
+
+| Finding | Evidence |
+|---|---|
+| Package transferred | **1.5 GB** → `/home/deck/AI/TheCommander_Win64` (both `TheCommanderGame.exe` and `TheCommander/Binaries/Win64/TheCommanderGame.exe` present) |
+| Deck GPU | `AMD Custom GPU 0405 (RADV VANGOGH)` = **RDNA 2, Vulkan/RADV live** |
+| Proton available | `Proton 11.0` and `GE-Proton7-28` both installed |
+| X/Wayland | **SOLVED** — `DISPLAY=:0`, `WAYLAND_DISPLAY=wayland-0`, `XAUTHORITY=/run/user/1000/xauth_iabMRX` (99 bytes) |
+| **BLOCKER 1 — prefix** | `Proton: Error while copying to ".../pfx/drive_c/windows/system32/amdxcffx64.dll": No such file or directory` — Proton 11.0-100 cannot build a fresh prefix on this Deck |
+| **BLOCKER 2 — memory** | Deck total 14,804 MB; **only ~1,360 MB available**; **4,866 MB already swapped**. Consumers: `llama-server` 1.0 GB RSS, python 187 MB, konsole 102 MB, kwin 77 MB |
+| **BLOCKER 3 — the decisive one** | This build is **D3D12**. Under Proton that means **vkd3d-proton** — and UE5 + vkd3d is the known-broken class: Proton supports D3D9–D11 well, D3D12 via vkd3d is experimental and is **not a supported UE5 target** |
+
+**Verdict: the Windows D3D12 build is not the Steam Deck deliverable.** The Deck needs a **native
+Linux/Vulkan build** of the same C++ project, cooked and packaged for Linux, run natively.
+
+**What that requires — and which half is not mine to execute:**
+
+| # | Requirement | Owner |
+|---|---|---|
+| 1 | **UE 5.8 for Linux** — Epic Games Launcher install, or the GitHub engine source (GitHub account linked to Epic). Both require an Epic login. | **Commander** — I cannot authenticate to Epic |
+| 2 | **A Linux build box with RAM headroom.** The Deck has 16 GB unified but ~1.4 GB free with inference live. The HTPC has 11 GB total / ~1 GB available and 706 GB free on ZFS — disk is fine, RAM is not. A UE Linux cook+package wants 16 GB+. Stopping the Deck inference window is a human action under the window-owns-inference rule. | **Commander** (kill the window) |
+| 3 | Linux/Vulkan cook + package on the chosen box, ship to the Deck, run natively, re-run the same smoke gate. | **Hermes** — fully autonomous once 1 and 2 clear |
+
+**Required on every target regardless:** ship a cooked **PSO / pipeline cache**. The package contains
+no `TheCommander_PCD3D_SM6.stable.upipelinecache`, so the first run on any CPU iGPU/APU pays a full
+shader compile (measured **~187 s** on the laptop). On a Steam Deck APU that is minutes *per launch*
+until the cache exists.
+
 ### Notes
 
 - **FSR 4.1.2 is live; the UE plugin stays pinned at 4.1.1.** The 4.1.2 implementation is supplied by

@@ -337,6 +337,20 @@ and only reading the live geometry, not the intent, told us which one was real.*
 ### Corrected
 - The first `BUILD_EXIT=6` was **not** a bad target name — `TheCommanderGameEditor` is a real target (`Source/TheCommanderGameEditor.Target.cs`). The actual cause was `Unable to find plugin 'FSR' (referenced via TheCommander.uproject)`, because `Plugins/` is gitignored and a fresh clone carries no plugin payload. Provision with `python Tools/ue/fetch_upscaler_plugins.py` (SHA-256 verified, 0 downloads from a warm cache). A UBT exit code is not a diagnosis; the message above it is.
 
+## [2026-10-22c] — Validation matrix: MAIN ✅, LAPTOP ✅, STEAM DECK ❌ (wrong artefact)
+
+### Verified
+- **MAIN (RX 7900 XTX, D3D12/SM6)** — boots, map loads, FSR 4.1.2 live, 16 input bindings, clean exit. *(unchanged from 2026-10-22b)*
+- **LAPTOP (integrated AMD Radeon, no discrete GPU)** — **PASS**. The iGPU reports **Feature Level 12_1 / shader model 6.7** (binding tier 3, wave ops, atomic64), and the RHI makes the correct call: `LogRHI: RHI D3D12 with Feature Level SM6 is supported and will be used.` Map loads, `ACommanderGameMode::InitGame` → player spawned → `PlayerController ready`, FSR swapchain provider registered, DLSS correctly skipped (`kFeatureDLSS_G` — no NVIDIA GPU), **zero fatals**, clean exit. The XeFG fix is not MAIN-specific.
+
+### Known gap (every target)
+- The package ships **no PSO / pipeline cache** (`TheCommander_PCD3D_SM6.stable.upipelinecache` is absent), so every first run pays a full SM6 shader compile — **measured ~187 s on the laptop's CPU iGPU**. On a Steam Deck APU that is minutes *per launch*. **Shipping a cooked pipeline cache is the next build-lane improvement.**
+
+### Steam Deck — verdict
+- 1.5 GB package transferred to `/home/deck/AI/TheCommander_Win64`; RDNA 2 Vulkan/RADV live; `Proton 11.0` and `GE-Proton7-28` present; X/Wayland solved (`DISPLAY=:0`, `WAYLAND_DISPLAY=wayland-0`, `XAUTHORITY=/run/user/1000/xauth_iabMRX`).
+- **Three blockers, and the third is decisive:** (1) Proton 11.0-100 fails to build a fresh prefix — `Error while copying to ".../drive_c/windows/system32/amdxcffx64.dll": No such file or directory`; (2) the Deck has **~1,360 MB available with 4,866 MB already swapped** (llama-server holds 1.0 GB RSS); (3) **this artefact is D3D12**, and UE5 under Proton means **vkd3d-proton** — an experimental, unsupported path for UE5.
+- **Therefore the Windows D3D12 build is not the Steam Deck deliverable.** The Deck needs a **native Linux/Vulkan build** of the same C++ project. That requires the UE 5.8 **Linux** engine (Epic login — a Commander action) and a Linux box with RAM headroom (killing the Deck inference window — a Commander action under window-owns-inference). The Linux cook/package/ship/verify half is fully Hermes-autonomous once those clear.
+
 ### Verse
-> *"Test everything; hold fast what is good."* — 1 Thessalonians 5:21 (ESV)
-> Chosen because this leg is the first time the build actually lied to us — everything compiled clean, `BUILD SUCCESSFUL`, zero warnings, and the shipped binary still died on the first frame. Only booting the real packaged `.exe` exposed it. "Test everything" is what separated *the compiler is satisfied* from *the player can play*; "hold fast what is good" is why the findings that came back clean were left alone instead of being cosmetically rewritten.
+> *"Do not love money or silver or gold or fine clothing or luxury clothing; but pursue righteousness and faithfulness and love, with the accompanying gifts of humility, righteousness, faith, and self-control."* — 1 Timothy 6:11–12 (ESV)
+> Chosen because this leg is the discipline of wanting the right thing rather than the impressive thing: a Windows build that runs beautifully on a 7900 XTX and a 4500U iGPU is still the wrong artefact for a Steam Deck, and the honest move is to say so plainly rather than keep polishing a package the target hardware was never going to run. "Pursue righteousness and faithfulness and love" is the discipline of following the mission — Linux/Vulkan on the Deck — instead of the comfortable path.
