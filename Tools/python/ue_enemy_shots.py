@@ -205,7 +205,19 @@ def clear_world(world):
 
 
 def build_studio(world, center, size):
-    """Flat floor + key (soft shadow) + fill + rim."""
+    """Floor + three DIRECTIONAL lights.
+
+    Directional lights, not spot/point.  A spot or point light in UE uses
+    inverse-distance falloff, so the exposure then depends on how far the
+    light happens to be from the subject -- which is why the earlier rig
+    either blew the floor to white or left the creature as a flat grey
+    silhouette.  A directional light's intensity is distance-independent
+    lux, so the whole studio can be reasoned about in one number.
+
+    Floor scale: the Engine basic Cube is 100 units, so a scale of
+    size*2.5 produced a 50,000-unit slab that filled the frame with a
+    blown-out white plane.  The floor is now a couple of subject-widths.
+    """
     actors = []
 
     floor_mesh = unreal.EditorAssetLibrary.load_asset(FLOOR_MESH)
@@ -215,53 +227,34 @@ def build_studio(world, center, size):
     fcomp.set_static_mesh(floor_mesh)
     if floor_mat is not None:
         fcomp.set_material(0, floor_mat)
-    ext = max(8.0, size * 2.5)
-    fa.set_actor_scale3d(unreal.Vector(ext, ext, 0.1))
-    fa.set_actor_location(unreal.Vector(center.x, center.y, -0.05), False, True)
+    # 100-unit cube -> a floor a few subject-widths across
+    fs = max(1.0, size * 0.06)
+    fa.set_actor_scale3d(unreal.Vector(fs, fs, 0.02))
+    fa.set_actor_location(unreal.Vector(center.x, center.y, -0.5), False, True)
     actors.append(fa)
 
-    # KEY: soft spot from front-left-above. Casts the contact shadow; the
-    # large source radius softens its edge.
-    key_pos = (center.x - size * 0.8, center.y + size * 1.0,
-               center.z + size * 1.5)
-    ka = spawn(world, unreal.SpotLight)
-    kc = comp_of(ka, 'spot_light_component')
-    if kc is not None:
-        setp(kc, 'intensity', 12000.0 * (size / 100.0) ** 2)
-        setp(kc, 'light_color', unreal.LinearColor(1.0, 0.95, 0.87))
-        setp(kc, 'cast_shadows', True)
-        setp(kc, 'source_radius', 12.0)
-        setp(kc, 'inner_cone_angle', 35.0)
-        setp(kc, 'outer_cone_angle', 65.0)
-    ka.set_actor_location(unreal.Vector(*key_pos), False, True)
-    aim_ok(ka, key_pos, (center.x, center.y, center.z), 'KEY')
-    actors.append(ka)
+    def directional(pos, intensity, color, shadows, tag):
+        a = spawn(world, unreal.DirectionalLight)
+        c = comp_of(a, 'directional_light_component')
+        if c is not None:
+            setp(c, 'intensity', intensity)
+            setp(c, 'light_color', unreal.LinearColor(*color))
+            setp(c, 'cast_shadows', shadows)
+            setp(c, 'source_radius', 20.0)
+        a.set_actor_location(unreal.Vector(*pos), False, True)
+        aim_ok(a, pos, (center.x, center.y, center.z), tag)
+        actors.append(a)
+        return a
 
-    # FILL: cool point light from camera-right, no shadow
-    fill_pos = (center.x + size * 1.3, center.y - size * 1.1,
-                center.z + size * 0.4)
-    fla = spawn(world, unreal.PointLight)
-    fc = comp_of(fla, 'point_light_component')
-    if fc is not None:
-        setp(fc, 'intensity', 1500.0 * (size / 100.0) ** 2)
-        setp(fc, 'light_color', unreal.LinearColor(0.60, 0.72, 0.92))
-        setp(fc, 'cast_shadows', False)
-        setp(fc, 'source_radius', 30.0)
-    fla.set_actor_location(unreal.Vector(*fill_pos), False, True)
-    actors.append(fla)
-
-    # RIM: cool directional from behind-above, no shadow
-    rim_pos = (center.x - size * 1.5, center.y - size * 1.7,
-               center.z + size * 1.4)
-    ra = spawn(world, unreal.DirectionalLight)
-    rc = comp_of(ra, 'directional_light_component')
-    if rc is not None:
-        setp(rc, 'intensity', 3.0)
-        setp(rc, 'light_color', unreal.LinearColor(0.72, 0.86, 1.0))
-        setp(rc, 'cast_shadows', False)
-    ra.set_actor_location(unreal.Vector(*rim_pos), False, True)
-    aim_ok(ra, rim_pos, (center.x, center.y, center.z), 'RIM')
-    actors.append(ra)
+    # KEY: warm, from front-left-above.  Casts the contact shadow.
+    directional((center.x - size * 2.0, center.y + size * 2.0,
+                 center.z + size * 2.0), 2.6, (1.0, 0.95, 0.87), True, 'KEY')
+    # FILL: cool, from camera-right, no shadow, lifts the dark side.
+    directional((center.x + size * 2.0, center.y - size * 2.0,
+                 center.z + size * 0.3), 0.9, (0.60, 0.72, 0.92), False, 'FILL')
+    # RIM: cool, from behind-above, no shadow.  Draws the silhouette edge.
+    directional((center.x - size * 1.5, center.y - size * 2.0,
+                 center.z + size * 1.8), 1.8, (0.72, 0.86, 1.0), False, 'RIM')
 
     return actors
 
@@ -493,9 +486,16 @@ class Shooter(object):
                 unreal.TextureRenderTargetFormat.RTF_RGBA8,
                 unreal.LinearColor(*BG))
             self.comp.set_editor_property('texture_target', self.vrt)
-            # PRM_RenderScenePrimitives: primitives only, so the world sky
-            # cannot bleed into the background - the clear colour shows
-            setp(self.comp, 'primitive_render_mode', 1)
+            # ESceneCapturePrimitiveRenderMode:
+            #   0 = PRM_RenderScenePrimitives  (primitives only)
+            #   1 = PRM_RenderSingleFrame
+            #   2 = PRM_UseShowOnlyList
+            # The value 1 renders the WHOLE scene, so the loaded map's sky
+            # bled into the background as pure black and its bright horizon
+            # blew out the lower half of the frame.  Mode 0 renders the
+            # primitives only, so the render target's clear colour is the
+            # background.
+            setp(self.comp, 'primitive_render_mode', 0)
             self.comp.capture_scene()
             L('%s capture issued (read in %d ticks)'
               % (self.rec['enemy'], TICKS_BEFORE_READ))
