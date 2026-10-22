@@ -227,6 +227,21 @@ def build_studio(world, center, size):
     fcomp.set_static_mesh(floor_mesh)
     if floor_mat is not None:
         fcomp.set_material(0, floor_mat)
+    # The Engine's BasicShapeMaterial is a LIGHT grey, so under any usable
+    # key light the ground clipped to pure white and the creature lost its
+    # lower half against it.  The floor is darkened to a deep neutral so
+    # the subject reads as a lit figure on a dark ground.
+    try:
+        params = floor_mat.get_editor_property('vector_parameter_value')
+        for pv in (params if isinstance(params, list) else [params]):
+            try:
+                pv.set_editor_property('parameter_value', unreal.LinearColor(0.06, 0.06, 0.07, 1.0))
+            except Exception:
+                pass
+        floor_mat.set_editor_property('vector_parameter_value', params)
+        L('floor material darkened')
+    except Exception as exc:
+        L('floor material tint failed: %r' % (exc,))
     # 100-unit cube -> a floor a few subject-widths across
     fs = max(1.0, size * 0.06)
     fa.set_actor_scale3d(unreal.Vector(fs, fs, 0.02))
@@ -248,13 +263,24 @@ def build_studio(world, center, size):
 
     # KEY: warm, from front-left-above.  Casts the contact shadow.
     directional((center.x - size * 2.0, center.y + size * 2.0,
-                 center.z + size * 2.0), 1.0, (1.0, 0.95, 0.87), True, 'KEY')
+                 center.z + size * 2.0), 0.75, (1.0, 0.95, 0.87), True, 'KEY')
     # FILL: cool, from camera-right, no shadow, lifts the dark side.
     directional((center.x + size * 2.0, center.y - size * 2.0,
-                 center.z + size * 0.3), 0.35, (0.60, 0.72, 0.92), False, 'FILL')
+                 center.z + size * 0.3), 0.45, (0.60, 0.72, 0.92), False, 'FILL')
     # RIM: cool, from behind-above, no shadow.  Draws the silhouette edge.
     directional((center.x - size * 1.5, center.y - size * 2.0,
-                 center.z + size * 1.8), 0.7, (0.72, 0.86, 1.0), False, 'RIM')
+                 center.z + size * 1.8), 0.9, (0.72, 0.86, 1.0), False, 'RIM')
+
+    # AMBIENT: a skylight lights the whole creature evenly, so the subject
+    # reads as a modelled form instead of a flat silhouette.
+    sl = spawn(world, unreal.SkyLight)
+    sc = comp_of(sl, 'light_component', 'skylight_component')
+    if sc is not None:
+        setp(sc, 'intensity', 0.6)
+        setp(sc, 'light_color', unreal.LinearColor(0.55, 0.60, 0.72))
+        setp(sc, 'cast_shadows', False)
+    L('skylight added')
+    actors.append(sl)
 
     return actors
 
