@@ -344,7 +344,13 @@ and only reading the live geometry, not the intent, told us which one was real.*
 - **LAPTOP (integrated AMD Radeon, no discrete GPU)** — **PASS**. The iGPU reports **Feature Level 12_1 / shader model 6.7** (binding tier 3, wave ops, atomic64), and the RHI makes the correct call: `LogRHI: RHI D3D12 with Feature Level SM6 is supported and will be used.` Map loads, `ACommanderGameMode::InitGame` → player spawned → `PlayerController ready`, FSR swapchain provider registered, DLSS correctly skipped (`kFeatureDLSS_G` — no NVIDIA GPU), **zero fatals**, clean exit. The XeFG fix is not MAIN-specific.
 
 ### Known gap (every target)
-- The package ships **no PSO / pipeline cache** (`TheCommander_PCD3D_SM6.stable.upipelinecache` is absent), so every first run pays a full SM6 shader compile — **measured ~187 s on the laptop's CPU iGPU**. On a Steam Deck APU that is minutes *per launch*. **Shipping a cooked pipeline cache is the next build-lane improvement.**
+- **CORRECTED 2026-10-22:** this entry originally claimed the package ships no PSO cache and that
+  this cost ~187 s on the laptop. **Both halves were wrong.** UE 5.8 already ships and loads the
+  global shader library (8239 unique shaders, confirmed in the log), and the shipped build reaches
+  playable — engine initialized, FSR live, input audit complete — in **11.1 s** on the laptop's CPU
+  iGPU. The 187 s figure was the whole process lifetime, dominated by teardown after
+  `ExecCmds="quit"` fired during init. The new build is **not** faster; the old measurement was
+  wrong.
 
 ### Steam Deck — verdict
 - 1.5 GB package transferred to `/home/deck/AI/TheCommander_Win64`; RDNA 2 Vulkan/RADV live; `Proton 11.0` and `GE-Proton7-28` present; X/Wayland solved (`DISPLAY=:0`, `WAYLAND_DISPLAY=wayland-0`, `XAUTHORITY=/run/user/1000/xauth_iabMRX`).
@@ -354,3 +360,52 @@ and only reading the live geometry, not the intent, told us which one was real.*
 ### Verse
 > *"Do not love money or silver or gold or fine clothing or luxury clothing; but pursue righteousness and faithfulness and love, with the accompanying gifts of humility, righteousness, faith, and self-control."* — 1 Timothy 6:11–12 (ESV)
 > Chosen because this leg is the discipline of wanting the right thing rather than the impressive thing: a Windows build that runs beautifully on a 7900 XTX and a 4500U iGPU is still the wrong artefact for a Steam Deck, and the honest move is to say so plainly rather than keep polishing a package the target hardware was never going to run. "Pursue righteousness and faithfulness and love" is the discipline of following the mission — Linux/Vulkan on the Deck — instead of the comfortable path.
+
+## [2026-10-22d] — Correction: the "187 s startup" was a measurement error; the build lane now bounds its own smoke test
+
+### Corrected
+- **The "~187 s to start, fixed by shipping a PSO cache" claim was wrong, and it was mine.** Both the
+  old and the new build load the same cooked global shader library (`Using IoDispatcher for shader
+  code library Global. Total 8239 unique shaders`) and both miss exactly **16** PSOs at runtime.
+  Measured like for like on the laptop's integrated AMD Radeon:
+  - OLD build: launch → engine initialized **10.2 s**
+  - NEW build: launch → engine initialized **9.7 s** · → FSR provider 10.3 s · → input audit complete 11.1 s
+  - The 187 s was the **whole process lifetime**, dominated by ~3 minutes of **teardown** after
+    `ExecCmds="quit"` fired during initialisation — and that quit also meant the input audit never
+    printed, so the old run could not be compared on the same metric at all.
+- **What the new config actually does:** `r.ShaderPipelineCache.Enabled=1` and
+  `bShareMaterialShaderCode=True` make UE 5.8's existing shader-library behaviour **explicit and
+  pinned** instead of dependent on an engine default, and `r.ShaderPipelineCache.ReportPSO=1` adds
+  the PSO telemetry that made this correction measurable. It is **not** a 9x speedup and is not
+  claimed as one.
+- **FSR version is driver-dependent, not build-dependent:** the laptop reports provider **3.1.5**
+  (older AMD driver), MAIN reports **4.1.2** (Adrenalin 26.10.1). The project supports FSR 3 and
+  FSR 4; the number printed at runtime is the driver's, which is correct.
+
+### Fixed
+- **`Tools/ue/package_and_smoke_win64.bat` hung on its own smoke test.** The shipped `.exe` does not
+  self-exit — the input audit is emitted once and the game keeps running — so the lane blocked
+  forever on the process. The smoke step now starts the `.exe`, polls the log for
+  `COMMANDER INPUT AUDIT END` (or `Fatal error`) with a **240 s bound**, then stops it. The verdict
+  is still read from the log, never from the exit code.
+- **The lane will never kill a game the Commander is playing.** If a `TheCommanderGame.exe` instance
+  is already running, the smoke step prints `[SKIP]` and exits `RESULT: SKIPPED` without touching it.
+
+### Verified
+- MAIN, full lane, HEAD 57524ca: **build exit 0 · package exit 0 · `BUILD SUCCESSFUL` / `ExitCode=0`
+  · boot verdict BOOTED · FSR provider ENGAGED · input audit OK · RESULT: PASS · LANE_EXIT=0**.
+- Package carries the shader archives: `Save IoStoreShaderCodeArchive 'Global-PCD3D_SM6-PCD3D_SM6'`,
+  `Save IoStoreShaderCodeArchive 'TheCommander-PCD3D_SM6-PCD3D_SM6'`, `63.07 MiB for 967 Global shaders`.
+- Shipped `.exe` on MAIN: `Loaded Shared Shader Library Global — 8239 unique shaders`,
+  `Loaded Shared Shader Library TheCommander — 2113 unique shaders`, `ShaderPipelineCache: Batching
+  Resumed`, **no fatals**.
+- Shipped `.exe` on the laptop: engine initialized, FSR live, input audit END, **no fatals**, ~10 s
+  to playable.
+
+### Verse
+> *"The heart of the righteous studies to answer."* — Proverbs 24:23 (ESV)
+> Chosen because this leg was exactly a wrong answer that had to be caught: a 187 s startup figure was
+> published, then a 20 s figure was published as the fix, and only measuring both logs on the same
+> metric showed that the first number measured teardown and the second measured nothing new.
+> "Studies to answer" is the discipline of going back to the evidence and answering with what the
+> evidence actually says — even when the honest answer retracts two of my own claims.

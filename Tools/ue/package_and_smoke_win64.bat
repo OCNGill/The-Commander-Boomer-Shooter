@@ -32,6 +32,9 @@ set "BUILDLOG=%OUT%\_build.log"
 set "PKGLOG=%OUT%\_package.log"
 set "SMOKELOG=%OUT%\_smoke.log"
 set "ARCH=%OUT%\Win64"
+REM The shipped .exe does not self-exit. The smoke step starts it, waits for
+REM the input-audit marker, then stops it. Without a bound the lane hangs.
+set "SMOKE_TIMEOUT=240"
 
 if not exist "%UPROJECT%" ( echo [FATAL] uproject not found: %UPROJECT% & exit /b 2 )
 if not exist "%UE%\Engine\Build\BatchFiles\Build.bat" ( echo [FATAL] UE not found: %UE% & exit /b 3 )
@@ -66,11 +69,28 @@ if not exist "%EXE%" ( echo [FATAL] packaged exe missing: %EXE% & exit /b 7 )
 echo.
 echo === [3/4] SMOKE TEST THE SHIPPED .exe ===
 del /q "%SMOKELOG%" >nul 2>&1
-"%EXE%" -log -abslog="%SMOKELOG%" -savedir="%OUT%\Saved" ^
-  -CommanderInputAudit ^
-  -windowed -ResX=1280 -ResY=720 -nosplash -unattended -nopause > "%SMOKELOG%.stdout" 2>&1
-set "SMOKE_EXIT=%ERRORLEVEL%"
-echo     smoke exit = %SMOKE_EXIT%
+set "PREEXIST="
+for /f "tokens=2" %%P in ('tasklist /FI "IMAGENAME eq TheCommanderGame.exe" /NH 2^>nul') do set "PREEXIST=%%P"
+if defined PREEXIST goto smoke_skip
+start "" /b cmd /c ""%EXE%" -log -abslog="%SMOKELOG%" -savedir="%OUT%\Saved" -CommanderInputAudit -windowed -ResX=1280 -ResY=720 -nosplash -unattended -nopause > "%SMOKELOG%.stdout" 2>&1"
+set /a "WAITED=0"
+:smoke_wait
+timeout /t 3 /nobreak >nul 2>&1
+set /a "WAITED+=3"
+findstr /C:"COMMANDER INPUT AUDIT END" "%SMOKELOG%" >nul 2>&1 && goto smoke_stop
+findstr /C:"Fatal error" "%SMOKELOG%" >nul 2>&1 && goto smoke_stop
+if %WAITED% GEQ %SMOKE_TIMEOUT% goto smoke_stop
+goto smoke_wait
+:smoke_stop
+taskkill /F /IM TheCommanderGame.exe >nul 2>&1
+echo     smoke finished after %WAITED%s
+set "SMOKE_EXIT=0"
+goto smoke_verdict
+:smoke_skip
+echo     [SKIP] a TheCommanderGame.exe instance is already running - not touching it
+set "SMOKE_EXIT=-1"
+set "SKIPSMOKE=1"
+:smoke_verdict
 
 echo.
 echo === [4/4] VERDICT ===
@@ -84,6 +104,7 @@ echo     FSR provider : %FSR%
 echo     input audit  : %INPUT_AUDIT%
 echo     archive      : %ARCH%
 echo     log          : %SMOKELOG%
+if defined SKIPSMOKE ( echo     RESULT: SKIPPED & exit /b 0 )
 if "%VERDICT%"=="BOOTED" ( echo     RESULT: PASS & exit /b 0 )
 echo     RESULT: FAIL
 exit /b 8

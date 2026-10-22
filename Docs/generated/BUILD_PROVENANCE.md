@@ -58,16 +58,32 @@ Append-only ledger of sovereign packaged builds. The 1.5 GB package itself is
 | DLSS | Correctly skipped — `LogStreamlineD3D12RHI: Skip registering IDXGISwapchainProvider (kFeatureDLSS_G)` (no NVIDIA GPU) |
 | **Fatals** | **NONE** |
 | Exit | Clean — `LogExit: Exiting.` |
-| Cost | ~187 s wall, dominated by SM6 PSO compilation on a CPU iGPU (`PSOPrecacheState: Missed` — the package ships **no pipeline cache**) |
+| Time to playable | **launch → engine initialized 9.7 s · → FSR provider 10.3 s · → input audit complete 11.1 s** (CPU iGPU, no discrete GPU) |
+| Shader library | **Loaded** — `Using IoDispatcher for shader code library Global. Total 8239 unique shaders` |
+| PSOs missed at runtime | **16** (of the precached set) |
 
 **What this proves:** the shipped `.exe` is not a MAIN-only artefact. It runs on a second, much weaker
 AMD machine with no dedicated GPU, selects SM6 correctly, initialises FSR, loads the map, spawns the
 player and exits clean. The XeFG fix is not machine-specific.
 
-**Known gap:** the package contains no `TheCommander_PCD3D_SM6.stable.upipelinecache`, so every first
-run pays a full SM6 shader compile. On a desktop GPU that is a few seconds; on a CPU iGPU or a
-Steam Deck APU it is minutes. **Shipping a cooked PSO/pipeline cache is the next build-lane
-improvement**, and it matters most for the Deck.
+**Corrected measurement (2026-10-22):** an earlier note in this file claimed ~187 s to start and
+attributed it to a missing PSO cache. **That was wrong.** UE 5.8 already ships and loads the global
+shader library — the very first build logged `Loaded Shared Shader Library Global — 8239 unique
+shaders` — so there was never a missing-cache penalty to fix. The 187 s was the **whole process
+lifetime**, dominated by ~3 minutes of **teardown** after `ExecCmds="quit"` fired during
+initialisation (and that quit also meant the input audit never printed). Measured like for like, the
+OLD build reached engine-initialized in **10.2 s** and the new build in **9.7 s**. The new build is
+**not** faster; the measurement was wrong.
+
+**What actually changed in the new build:** `r.ShaderPipelineCache.Enabled=1` and
+`bShareMaterialShaderCode=True` make UE 5.8's existing behaviour **explicit and pinned** instead of
+relying on an engine default, and `r.ShaderPipelineCache.ReportPSO=1` adds the PSO telemetry that
+made this correction measurable at all. Same startup, same 16 runtime-missed PSOs, same ~10 s to
+playable.
+
+**FSR version is driver-dependent, not build-dependent:** the laptop's AMD driver reports provider
+**3.1.5**; MAIN's Adrenalin 26.10.1 reports **4.1.2**. The project supports FSR 3 and FSR 4 — the
+number printed at runtime is the driver's, and that is correct behaviour.
 
 ### Third target: STEAM DECK — this artefact is not the Deck deliverable, and here is why
 
@@ -92,10 +108,10 @@ Linux/Vulkan build** of the same C++ project, cooked and packaged for Linux, run
 | 2 | **A Linux build box with RAM headroom.** The Deck has 16 GB unified but ~1.4 GB free with inference live. The HTPC has 11 GB total / ~1 GB available and 706 GB free on ZFS — disk is fine, RAM is not. A UE Linux cook+package wants 16 GB+. Stopping the Deck inference window is a human action under the window-owns-inference rule. | **Commander** (kill the window) |
 | 3 | Linux/Vulkan cook + package on the chosen box, ship to the Deck, run natively, re-run the same smoke gate. | **Hermes** — fully autonomous once 1 and 2 clear |
 
-**Required on every target regardless:** ship a cooked **PSO / pipeline cache**. The package contains
-no `TheCommander_PCD3D_SM6.stable.upipelinecache`, so the first run on any CPU iGPU/APU pays a full
-shader compile (measured **~187 s** on the laptop). On a Steam Deck APU that is minutes *per launch*
-until the cache exists.
+**Corrected (2026-10-22):** the "no PSO cache" premise was wrong — UE 5.8 already ships the global
+shader library (8239 shaders, loaded at startup) and the shipped build reaches playable in **~10 s**
+on the laptop's CPU iGPU. There is no missing-cache penalty to engineer away. The Deck's launch
+time still needs measuring, but it will be driven by APU throughput, not by a cold shader compile.
 
 ### Notes
 
