@@ -1,9 +1,13 @@
 @echo off
 REM ===========================================================================
-REM  The Commander Boomer Shooter - sovereign Win64 package + smoke test.
+REM  The Commander Boomer Shooter - sovereign Win64 package + smoke + PSO cache.
 REM
-REM  Builds the standalone game target, cooks, stages, packages, archives, and
-REM  then BOOTS THE SHIPPED .exe and verifies it survives first frame.
+REM  Builds the standalone game target, cooks, stages, packages, archives, then
+REM  BOOTS THE SHIPPED .exe twice:
+REM    pass 1  with -CommanderExitAfterAudit, so the engine shuts down normally
+REM            and writes the stable PSO cache that a force-kill never produces;
+REM    pass 2  with that cache installed, to measure whether the runtime PSO
+REM            misses are gone.
 REM  "It compiles" is NOT "it plays" - this script proves both, in one run.
 REM
 REM  Usage (from a console with a live window - do NOT detach via
@@ -31,10 +35,15 @@ set "UPROJECT=%REPO%\TheCommander.uproject"
 set "BUILDLOG=%OUT%\_build.log"
 set "PKGLOG=%OUT%\_package.log"
 set "SMOKELOG=%OUT%\_smoke.log"
+set "SMOKELOG2=%OUT%\_smoke2.log"
 set "ARCH=%OUT%\Win64"
-REM The shipped .exe does not self-exit. The smoke step starts it, waits for
-REM the input-audit marker, then stops it. Without a bound the lane hangs.
+set "EXE=%ARCH%\TheCommander\Binaries\Win64\TheCommanderGame.exe"
+REM The shipped .exe does not self-exit on its own. With -CommanderExitAfterAudit
+REM it asks the engine to shut down normally after the input audit, which is
+REM what lets the engine write the stable PSO cache. The wait is still bounded:
+REM a lane that can hang is a lane that never reports.
 set "SMOKE_TIMEOUT=240"
+set "CACHEDIR=%ARCH%\TheCommander\Content\PipelineCaches\Windows"
 
 if not exist "%UPROJECT%" ( echo [FATAL] uproject not found: %UPROJECT% & exit /b 2 )
 if not exist "%UE%\Engine\Build\BatchFiles\Build.bat" ( echo [FATAL] UE not found: %UE% & exit /b 3 )
@@ -43,7 +52,7 @@ if not exist "%REPO%\Plugins\FSR\FSR.uplugin" ( echo [FATAL] upscaler plugins mi
 if not exist "%OUT%" mkdir "%OUT%" >nul 2>&1
 
 echo.
-echo === [1/4] BUILD GAME TARGET ===
+echo === [1/5] BUILD GAME TARGET ===
 call "%UE%\Engine\Build\BatchFiles\Build.bat" TheCommanderGame Win64 Development ^
   -project="%UPROJECT%" -WaitMutex > "%BUILDLOG%" 2>&1
 set "BUILD_EXIT=%ERRORLEVEL%"
@@ -51,7 +60,7 @@ echo     build exit = %BUILD_EXIT%
 if not "%BUILD_EXIT%"=="0" ( echo [FATAL] compile failed - see %BUILDLOG% & exit /b 5 )
 
 echo.
-echo === [2/4] COOK + STAGE + PACKAGE ===
+echo === [2/5] COOK + STAGE + PACKAGE ===
 if exist "%ARCH%" rd /s /q "%ARCH%"
 call "%UE%\Engine\Build\BatchFiles\RunUAT.bat" BuildCookRun ^
   -project="%UPROJECT%" ^
@@ -63,11 +72,13 @@ set "PKG_EXIT=%ERRORLEVEL%"
 echo     package exit = %PKG_EXIT%
 if not "%PKG_EXIT%"=="0" ( echo [FATAL] package failed - see %PKGLOG% & exit /b 6 )
 
-set "EXE=%ARCH%\TheCommander\Binaries\Win64\TheCommanderGame.exe"
 if not exist "%EXE%" ( echo [FATAL] packaged exe missing: %EXE% & exit /b 7 )
 
+REM ---------------------------------------------------------------------------
+REM  Pass 1: boot the shipped exe and let it exit on its own.
+REM ---------------------------------------------------------------------------
 echo.
-echo === [3/4] SMOKE TEST THE SHIPPED .exe ===
+echo === [3/5] SMOKE PASS 1 (graceful exit, writes the PSO cache) ===
 del /q "%SMOKELOG%" >nul 2>&1
 REM A stale log from a previous run whose game is still alive CANNOT be deleted, and
 REM the marker poll below would then match it and report a FALSE PASS. Refuse to run.
@@ -79,20 +90,40 @@ if exist "%SMOKELOG%" (
 set "PREEXIST="
 for /f "tokens=2" %%P in ('tasklist /FI "IMAGENAME eq TheCommanderGame.exe" /NH 2^>nul') do set "PREEXIST=%%P"
 if defined PREEXIST goto smoke_skip
-start "" /b cmd /c ""%EXE%" -log -abslog="%SMOKELOG%" -savedir="%OUT%\Saved" -CommanderInputAudit -windowed -ResX=1280 -ResY=720 -nosplash -unattended -nopause > "%SMOKELOG%.stdout" 2>&1"
+
+start "" /b cmd /c ""%EXE%" -log -abslog="%SMOKELOG%" -savedir="%OUT%\Saved" -CommanderInputAudit -CommanderExitAfterAudit -windowed -ResX=1280 -ResY=720 -nosplash -unattended -nopause > "%SMOKELOG%.stdout" 2>&1"
+
+set "OURPID="
+set /a "WAITED=0"
+:smoke_spawn
+timeout /t 1 /nobreak >nul 2>&1
+for /f "tokens=2" %%P in ('tasklist /FI "IMAGENAME eq TheCommanderGame.exe" /NH 2^>nul') do set "OURPID=%%P"
+if defined OURPID goto smoke_alive
+set /a "WAITED+=1"
+if %WAITED% GEQ %SMOKE_TIMEOUT% goto smoke_stop
+goto smoke_spawn
+
+:smoke_alive
 set /a "WAITED=0"
 :smoke_wait
 timeout /t 3 /nobreak >nul 2>&1
 set /a "WAITED+=3"
-findstr /C:"COMMANDER INPUT AUDIT END" "%SMOKELOG%" >nul 2>&1 && goto smoke_stop
-findstr /C:"Fatal error" "%SMOKELOG%" >nul 2>&1 && goto smoke_stop
-if %WAITED% GEQ %SMOKE_TIMEOUT% goto smoke_stop
+tasklist /FI "PID eq %OURPID%" 2^>nul | find "%OURPID%" >nul 2>&1 || goto smoke_stop
+if %WAITED% GEQ %SMOKE_TIMEOUT% goto smoke_kill
 goto smoke_wait
+
+:smoke_kill
+echo     [WARN] the game did not exit on its own within %SMOKE_TIMEOUT%s - killing PID %OURPID%
+taskkill /F /PID %OURPID% >nul 2>&1
+echo     [WARN] the PSO cache may be incomplete - a killed run writes nothing
+goto smoke_stop
+
 :smoke_stop
 taskkill /F /IM TheCommanderGame.exe >nul 2>&1
-echo     smoke finished after %WAITED%s
+echo     pass 1 finished after %WAITED%s
 set "SMOKE_EXIT=0"
 goto smoke_verdict
+
 :smoke_skip
 echo     [SKIP] a TheCommanderGame.exe instance is already running - not touching it
 set "SMOKE_EXIT=-1"
@@ -100,17 +131,85 @@ set "SKIPSMOKE=1"
 :smoke_verdict
 
 echo.
-echo === [4/4] VERDICT ===
+echo === [4/5] COLLECT + INSTALL THE STABLE PSO CACHE ===
+set "CACHEFILE="
+for /r "%ARCH%" %%F in (*.upipelinecache) do (
+  if not defined CACHEFILE set "CACHEFILE=%%F"
+)
+if defined CACHEFILE (
+  echo     found : %CACHEFILE%
+  for %%F in ("%CACHEFILE%") do echo     size  : %%~zF bytes
+  if not exist "%CACHEDIR%" mkdir "%CACHEDIR%" >nul 2>&1
+  copy /y "%CACHEFILE%" "%CACHEDIR%\" >nul 2>&1
+  echo     installed to %CACHEDIR%
+) else (
+  echo     [WARN] no .upipelinecache was written - the run did not exit gracefully
+  set "CACHEFILE=NONE"
+)
+set "MISS1=?"
+if exist "%SMOKELOG%" (
+  for /f %%C in ('findstr /c:"PSOPrecacheState: Missed" "%SMOKELOG%" ^| find /c /v ""') do set "MISS1=%%C"
+)
+echo     pass 1 runtime PSO misses : %MISS1%
+
+REM ---------------------------------------------------------------------------
+REM  Pass 2: boot again with the cache installed and count the misses again.
+REM ---------------------------------------------------------------------------
+echo.
+echo === [5/5] SMOKE PASS 2 (cache installed) ===
+del /q "%SMOKELOG2%" >nul 2>&1
+set "PREEXIST2="
+for /f "tokens=2" %%P in ('tasklist /FI "IMAGENAME eq TheCommanderGame.exe" /NH 2^>nul') do set "PREEXIST2=%%P"
+if defined PREEXIST2 (
+  echo     [SKIP] a TheCommanderGame.exe instance is already running - not touching it
+) else (
+  start "" /b cmd /c ""%EXE%" -log -abslog="%SMOKELOG2%" -savedir="%OUT%\Saved2" -CommanderInputAudit -windowed -ResX=1280 -ResY=720 -nosplash -unattended -nopause > "%SMOKELOG2%.stdout" 2>&1"
+  set /a "WAITED2=0"
+:smoke2_spawn
+  timeout /t 1 /nobreak >nul 2>&1
+  set "OURPID2="
+  for /f "tokens=2" %%P in ('tasklist /FI "IMAGENAME eq TheCommanderGame.exe" /NH 2^>nul') do set "OURPID2=%%P"
+  if defined OURPID2 goto smoke2_alive
+  set /a "WAITED2+=1"
+  if %WAITED2% GEQ 60 goto smoke2_stop
+  goto smoke2_spawn
+:smoke2_alive
+  set /a "WAITED2=0"
+:smoke2_wait
+  timeout /t 3 /nobreak >nul 2>&1
+  set /a "WAITED2+=3"
+  tasklist /FI "PID eq %OURPID2%" 2^>nul | find "%OURPID2%" >nul 2>&1 || goto smoke2_stop
+  if %WAITED2% GEQ %SMOKE_TIMEOUT% goto smoke2_kill
+  goto smoke2_wait
+:smoke2_kill
+  taskkill /F /PID %OURPID2% >nul 2>&1
+  goto smoke2_stop
+:smoke2_stop
+  taskkill /F /IM TheCommanderGame.exe >nul 2>&1
+  echo     pass 2 finished after %WAITED2%s
+)
+set "MISS2=?"
+if exist "%SMOKELOG2%" (
+  for /f %%C in ('findstr /c:"PSOPrecacheState: Missed" "%SMOKELOG2%" ^| find /c /v ""') do set "MISS2=%%C"
+)
+echo     pass 2 runtime PSO misses : %MISS2%
+
+echo.
+echo === VERDICT ===
 set "VERDICT=FAIL"
 findstr /C:"Engine is initialized" "%SMOKELOG%" >nul 2>&1 && set "VERDICT=BOOTED"
 findstr /C:"Failure creating: D3D12Viewport" "%SMOKELOG%" >nul 2>&1 && set "VERDICT=FATAL_VIEWPORT"
 findstr /C:"Successfully initialized FSR Upscaling provider" "%SMOKELOG%" >nul 2>&1 && set "FSR=ENGAGED" || set "FSR=NOT_SEEN"
 findstr /C:"COMMANDER INPUT AUDIT BEGIN" "%SMOKELOG%" >nul 2>&1 && set "INPUT_AUDIT=OK" || set "INPUT_AUDIT=NOT_SEEN"
-echo     boot verdict : %VERDICT%
-echo     FSR provider : %FSR%
-echo     input audit  : %INPUT_AUDIT%
-echo     archive      : %ARCH%
-echo     log          : %SMOKELOG%
+findstr /C:"COMMANDER GRACEFUL EXIT: RequestExit" "%SMOKELOG%" >nul 2>&1 && set "GRACEFUL=YES" || set "GRACEFUL=NO"
+echo     boot verdict        : %VERDICT%
+echo     FSR provider        : %FSR%
+echo     input audit         : %INPUT_AUDIT%
+echo     graceful exit       : %GRACEFUL%
+echo     pso cache           : %CACHEFILE%
+echo     pso misses pass1/2  : %MISS1% / %MISS2%
+echo     archive             : %ARCH%
+echo     log                 : %SMOKELOG%
 if "%SMOKE_EXIT%"=="-2" ( echo     RESULT: FAIL & exit /b 8 )
 if defined SKIPSMOKE ( echo     RESULT: SKIPPED & exit /b 0 )
 if "%VERDICT%"=="BOOTED" ( echo     RESULT: PASS & exit /b 0 )
