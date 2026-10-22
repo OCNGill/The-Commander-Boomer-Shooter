@@ -1,178 +1,158 @@
 {
   "generated_utc": "",
   "project": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/",
-  "fbx_dir": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools\\blender\\out_xcom",
+  "fbx_dir": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_xcom_new",
   "destination": "/Game/Enemies/XCOM",
   "enemies": [
     {
       "enemy": "XCOM_Sectoid",
-      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools\\blender\\out_xcom\\XCOM_Sectoid.fbx",
+      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_xcom_new\\XCOM_Sectoid.fbx",
       "asset_path": "/Game/Enemies/XCOM/XCOM_Sectoid.XCOM_Sectoid",
-      "triangle_count": 2864,
+      "triangle_count": 7308,
       "triangle_source": "mesh.get_num_triangles",
       "bounds_origin_cm": [
-        0.0,
-        -0.0,
-        98.0
+        0.17,
+        20.41,
+        69.59
       ],
       "bounds_extent_cm": [
-        76.45,
-        63.0,
-        197.0
+        52.24,
+        70.42,
+        139.18
       ],
       "bounds_source": "get_bounds",
-      "height_cm": 197.0,
-      "width_cm": 76.45,
-      "depth_cm": 63.0,
+      "height_cm": 139.18,
+      "width_cm": 52.24,
+      "depth_cm": 70.42,
       "collision": "UseComplexAsSimple",
       "collision_readback": "<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "material": "XCOM_Chitin_Mid, XCOM_Chitin_Pale, XCOM_Chitin_Dark, XCOM_Eye_Emissive, XCOM_Core_Emissive",
+      "material": "WorldGridMaterial, WorldGridMaterial, WorldGridMaterial, WorldGridMaterial, WorldGridMaterial",
       "material_note": "kept-fbx-authored",
       "status": "OK",
       "error": "",
       "mesh_object": "XCOM_Sectoid",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "collision_is_complex_as_simple": true,
-      "source_fbx_tris": 7308,
-      "imported_tris": 2864,
-      "import_retention_pct": 39.2,
-      "triangle_count_note": "triangle_count is the post-import mesh count measured inside UE 5.8; source_fbx_tris is the triangle count measured directly in the exported FBX (Blender import audit). The gap is UE 5.8 import-time degenerate/duplicate removal on geometry assembled from joined primitives - NOT a Blender export defect. Visual parity against the approved hero renders is still unverified."
+      "collision_is_complex_as_simple": true
     },
     {
       "enemy": "XCOM_Viper",
-      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools\\blender\\out_xcom\\XCOM_Viper.fbx",
+      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_xcom_new\\XCOM_Viper.fbx",
       "asset_path": "/Game/Enemies/XCOM/XCOM_Viper.XCOM_Viper",
-      "triangle_count": 3712,
+      "triangle_count": 5764,
       "triangle_source": "mesh.get_num_triangles",
       "bounds_origin_cm": [
-        0.7,
-        8.65,
-        98.75
+        1.02,
+        14.97,
+        102.93
       ],
       "bounds_extent_cm": [
-        88.61,
-        59.3,
-        198.5
+        63.77,
+        69.72,
+        205.86
       ],
       "bounds_source": "get_bounds",
-      "height_cm": 198.5,
-      "width_cm": 88.61,
-      "depth_cm": 59.3,
+      "height_cm": 205.86,
+      "width_cm": 63.77,
+      "depth_cm": 69.72,
       "collision": "UseComplexAsSimple",
       "collision_readback": "<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "material": "XCOM_Chitin_Mid, XCOM_Chitin_Pale, XCOM_Chitin_Dark, XCOM_Eye_Emissive, XCOM_Gunmetal, XCOM_Plasma_Emissive, XCOM_Core_Emissive",
+      "material": "WorldGridMaterial, WorldGridMaterial, WorldGridMaterial, WorldGridMaterial, WorldGridMaterial",
       "material_note": "kept-fbx-authored",
       "status": "OK",
       "error": "",
       "mesh_object": "XCOM_Viper",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "collision_is_complex_as_simple": true,
-      "source_fbx_tris": 5764,
-      "imported_tris": 3712,
-      "import_retention_pct": 64.4,
-      "triangle_count_note": "triangle_count is the post-import mesh count measured inside UE 5.8; source_fbx_tris is the triangle count measured directly in the exported FBX (Blender import audit). The gap is UE 5.8 import-time degenerate/duplicate removal on geometry assembled from joined primitives - NOT a Blender export defect. Visual parity against the approved hero renders is still unverified."
+      "collision_is_complex_as_simple": true
     },
     {
       "enemy": "XCOM_Floater",
-      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools\\blender\\out_xcom\\XCOM_Floater.fbx",
+      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_xcom_new\\XCOM_Floater.fbx",
       "asset_path": "/Game/Enemies/XCOM/XCOM_Floater.XCOM_Floater",
-      "triangle_count": 1980,
+      "triangle_count": 2184,
       "triangle_source": "mesh.get_num_triangles",
       "bounds_origin_cm": [
         0.0,
-        -0.57,
-        141.62
+        -6.4,
+        104.71
       ],
       "bounds_extent_cm": [
-        215.82,
-        67.53,
-        114.37
+        248.0,
+        140.02,
+        28.98
       ],
       "bounds_source": "get_bounds",
-      "height_cm": 114.37,
-      "width_cm": 215.82,
-      "depth_cm": 67.53,
+      "height_cm": 28.98,
+      "width_cm": 248.0,
+      "depth_cm": 140.02,
       "collision": "UseComplexAsSimple",
       "collision_readback": "<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "material": "XCOM_Chitin_Mid, XCOM_Eye_Emissive, XCOM_Core_Emissive, XCOM_Chitin_Dark, XCOM_Chitin_Pale, XCOM_Flesh",
+      "material": "WorldGridMaterial, WorldGridMaterial, WorldGridMaterial, WorldGridMaterial",
       "material_note": "kept-fbx-authored",
       "status": "OK",
       "error": "",
       "mesh_object": "XCOM_Floater",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "collision_is_complex_as_simple": true,
-      "source_fbx_tris": 2184,
-      "imported_tris": 1980,
-      "import_retention_pct": 90.7,
-      "triangle_count_note": "triangle_count is the post-import mesh count measured inside UE 5.8; source_fbx_tris is the triangle count measured directly in the exported FBX (Blender import audit). The gap is UE 5.8 import-time degenerate/duplicate removal on geometry assembled from joined primitives - NOT a Blender export defect. Visual parity against the approved hero renders is still unverified."
+      "collision_is_complex_as_simple": true
     },
     {
       "enemy": "XCOM_Muton",
-      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools\\blender\\out_xcom\\XCOM_Muton.fbx",
+      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_xcom_new\\XCOM_Muton.fbx",
       "asset_path": "/Game/Enemies/XCOM/XCOM_Muton.XCOM_Muton",
-      "triangle_count": 2520,
+      "triangle_count": 5216,
       "triangle_source": "mesh.get_num_triangles",
       "bounds_origin_cm": [
-        0.31,
-        15.42,
-        100.0
+        -0.0,
+        29.24,
+        103.44
       ],
       "bounds_extent_cm": [
-        105.37,
-        85.65,
-        202.0
+        114.54,
+        108.51,
+        206.88
       ],
       "bounds_source": "get_bounds",
-      "height_cm": 202.0,
-      "width_cm": 105.37,
-      "depth_cm": 85.65,
+      "height_cm": 206.88,
+      "width_cm": 114.54,
+      "depth_cm": 108.51,
       "collision": "UseComplexAsSimple",
       "collision_readback": "<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "material": "XCOM_Armor_Plate, XCOM_Eye_Emissive, XCOM_Chitin_Dark, XCOM_Armor_Accent, XCOM_Gunmetal, XCOM_Plasma_Emissive, XCOM_Core_Emissive",
+      "material": "WorldGridMaterial, WorldGridMaterial, WorldGridMaterial, WorldGridMaterial, WorldGridMaterial",
       "material_note": "kept-fbx-authored",
       "status": "OK",
       "error": "",
       "mesh_object": "XCOM_Muton",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "collision_is_complex_as_simple": true,
-      "source_fbx_tris": 5216,
-      "imported_tris": 2520,
-      "import_retention_pct": 48.3,
-      "triangle_count_note": "triangle_count is the post-import mesh count measured inside UE 5.8; source_fbx_tris is the triangle count measured directly in the exported FBX (Blender import audit). The gap is UE 5.8 import-time degenerate/duplicate removal on geometry assembled from joined primitives - NOT a Blender export defect. Visual parity against the approved hero renders is still unverified."
+      "collision_is_complex_as_simple": true
     },
     {
       "enemy": "XCOM_Chryssalid",
-      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools\\blender\\out_xcom\\XCOM_Chryssalid.fbx",
+      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_xcom_new\\XCOM_Chryssalid.fbx",
       "asset_path": "/Game/Enemies/XCOM/XCOM_Chryssalid.XCOM_Chryssalid",
-      "triangle_count": 2536,
+      "triangle_count": 6252,
       "triangle_source": "mesh.get_num_triangles",
       "bounds_origin_cm": [
         0.0,
-        -10.29,
-        49.17
+        -1.05,
+        51.39
       ],
       "bounds_extent_cm": [
-        73.98,
-        107.42,
-        93.66
+        82.31,
+        162.3,
+        102.78
       ],
       "bounds_source": "get_bounds",
-      "height_cm": 93.66,
-      "width_cm": 73.98,
-      "depth_cm": 107.42,
+      "height_cm": 102.78,
+      "width_cm": 82.31,
+      "depth_cm": 162.3,
       "collision": "UseComplexAsSimple",
       "collision_readback": "<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "material": "XCOM_Chitin_Mid, XCOM_Eye_Emissive, XCOM_Chitin_Pale, XCOM_Chitin_Dark, XCOM_Plasma_Emissive",
+      "material": "WorldGridMaterial, WorldGridMaterial, WorldGridMaterial, WorldGridMaterial, WorldGridMaterial",
       "material_note": "kept-fbx-authored",
       "status": "OK",
       "error": "",
       "mesh_object": "XCOM_Chryssalid",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
-      "collision_is_complex_as_simple": true,
-      "source_fbx_tris": 6252,
-      "imported_tris": 2536,
-      "import_retention_pct": 40.6,
-      "triangle_count_note": "triangle_count is the post-import mesh count measured inside UE 5.8; source_fbx_tris is the triangle count measured directly in the exported FBX (Blender import audit). The gap is UE 5.8 import-time degenerate/duplicate removal on geometry assembled from joined primitives - NOT a Blender export defect. Visual parity against the approved hero renders is still unverified."
+      "collision_is_complex_as_simple": true
     }
   ],
   "summary": "imported=5 failed=0"

@@ -74,6 +74,33 @@ PILLAR = by('BO_Pillar')
 PLAT = by('BO_Platform')
 RAMP = by('BO_Ramp_NE')
 PITRAMP = by('BO_Ramp_Pit')
+# --------------------------------------------------------------- level fixes
+# Mirror of Source/CommanderLevelFix/CommanderLevelFixValues.h - the
+# LEVEL_FIXES_BEGIN..END block in that header.  The header is the runtime
+# source of truth; this dict drives the offline renders, so the two must
+# agree.  Tools/python/check_level_fixes.py parses the header and compares
+# it with this dict - keep the names and the values identical.
+LEVEL_FIXES = {
+    'ArenaFloorTopM': 0.00,
+    'PitFloorTopM': -1.00,
+    'PitRimHeightAboveFloorM': 0.25,
+    'PitRampLowerM': 0.25,
+    'PillarLedgeRadiusM': 3.20,
+    'PillarLedgeAngle1Deg': 30,
+    'PillarLedgeAngle2Deg': 90,
+    'PillarLedgeAngle3Deg': 150,
+    'PillarCoverX': 7.50,
+    'PillarCoverY': 0.00,
+    'PillarCoverSizeM': 3.00,
+    'PillarCoverHeightM': 1.00,
+    'PillarTopZ': 6.00,
+    'BeaconHeightM': 2.60,
+    'BeaconRadiusM': 0.18,
+    'BeaconOffsetX': 1.40,
+    'BeaconOffsetY': 1.40,
+    'BeaconLightIntensity': 4000.00,
+}
+
 PITF = by('BO_PitFloor')
 BOSS = by('ENC_Boss')
 

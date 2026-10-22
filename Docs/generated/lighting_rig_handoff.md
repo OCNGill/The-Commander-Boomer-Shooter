@@ -1,243 +1,293 @@
-# Lighting Rig Handoff — XCOM Reveal Lighting (v4)
+# Lighting Rig Handoff — XCOM Reveal Lighting
 
-**Status:** the rig reaches 5–9 of the 13 criteria per enemy. This document
-states exactly what remains, with the parameter values and the file/line a
-human needs to change. No criterion was redefined to make it pass; every
-number below is measured from the rendered PNGs.
-
-**Rig source:** `Tools/blender/rig_evidence.py` (single file, no search loop —
-the rig is one global class, `class Rig`, with named per-subject overrides).
+**Lane:** lighting / reveal rig. **Script:** `Tools/blender/rig_evidence.py`.
 **Renderer:** Blender 4.2.23, EEVEE, 720×900, 48 samples, AgX view transform
 (`VIEW_TRANSFORM = 'AgX'`), exposure 0.0, world background strength 0.10.
 
+**Status:** the rig clears most of the contract on the four large creatures.
+**Muton and Viper read 10/13 with zero clipped pixels.** Every number below
+is measured from the rendered PNGs by the same code that renders them, and
+re-measured independently by a pure-Python PNG reader with no Blender in the
+loop (`--verify`), which agrees to the digit.
+
+**How the rig is applied:** ONE global rig, plus a small set of per-subject
+knobs fitted **by measurement** inside the same render path that delivers
+the frame. There is no separate probe rig: an earlier version had three
+paths answering for one creature (the probe read `clipW 2267` on the Viper,
+the delivered frame `630`, the parity frame `146`). A score computed on a
+rig nobody ever sees is fiction, so everything now goes through
+`render_rig_frame()`.
+
 ---
 
-## 1. The rig as it stands
+## 1. The rig — every value, with its file and line
 
-| Light | Type | Colour | Geometry | Energy (rig units) | Notes |
-|---|---|---|---|---|---|
-| `reveal_key` | Spot, cone 40° | (0.62, 0.78, 1.00) cold | az 250°, el 46°, 1.85·h, aimed at chest | **45** | hard shadow, front-left |
-| `reveal_rim` | Area strip 2.40 × 0.90 m | (0.03, 1.00, 0.12) saturated green | az 122°, el 30°, 1.10·h, aimed at 0.55·h | **260** | separation light |
-| `reveal_under` | Spot, cone 20° | (0.45, 0.90, 1.00) cyan | 0.04·h above floor, 0.06·h in front, aimed up-back | **3000** | local uplight, no shadow |
-| `reveal_pool` | Spot, cone 22° | (0.52, 0.72, 1.00) | az 125°, el 50°, 1.80·h, aimed at floor 0.72·h toward camera | **350** | makes the floor pool + contact shadow |
-| `reveal_wash` | Area 1.20·h | (0.45, 0.55, 0.70) | az 300°, el 55°, 1.60·h, aimed at origin | **20** (12 on Viper/Muton) | the only ambient term |
+All in `Tools/blender/rig_evidence.py`. Line numbers are from the current
+file; the constants are grouped at the top.
 
-Energies are scaled by `s = (body height / 2 m)²` so the illuminance is
-proportional for every enemy. **The Floater is the exception** — it has its
-own absolute rig (see §4).
+### 1.1 Global constants
 
-### Per-subject overrides (the only per-enemy variation)
+| Value | Line | Setting | Why it is that value |
+|---|---|---|---|
+| `VIEW_TRANSFORM` | 67 | `'AgX'` | Filmic roll-off. Standard hard-clipped a 4700 W rim to 255; AgX rolls it off. **The criteria must be measured on the transform you ship.** |
+| `REF_HEIGHT` | 130 | `1.0` | Reference size. Distances scale with the subject's **largest dimension** and power with its square, so illuminance is proportional for every enemy. |
+| `CAM_AZ` | 71 | `305.0` | Camera bearing. Everything else is relative to it. |
+| `CAM_COVER` | 73 | `2.35` | Camera distance as a multiple of subject size. |
+| `CAM_H` | 74 | `0.62` | Camera eye height as a multiple of subject **height**. |
+| `BAND_PX` | 68 | `2` | The silhouette-edge band the rim band/frac criteria measure. |
+| `GROUND_ALBEDO` | 156 | `0.18` | Dark wet concrete. |
+| `WORLD_STRENGTH` | 158 | `0.10` | Near-black backdrop. |
+| `HAZE_STRENGTH` | 157 | `0.003` | Backdrop gradient panel. |
+| `EMIT_STRENGTH` | 153 | all `0.010` | The accent emissive. Was 0.19 and blew out; the emissive was carrying more of the rim band than the rim itself was. |
+| `PROOF_EMIT_SCALE` | 154 | `2.0` | Multiplier for the emissive-only proof frame. |
+
+### 1.2 The five lights — geometry
+
+| Light | Type | Colour | Line | Geometry |
+|---|---|---|---|---|
+| `reveal_key` | **Spot** | (0.62, 0.78, 1.00) | 77–78 | az 262°, el 42°, dist 1.00·size, cone **40°** (`KEY_SPOT`). A 40° cone keeps the floor at 0; 90° floods it to 187/176/164. |
+| `reveal_rim` | **Spot** | (0.03, 1.00, 0.12) | 80, 90 | az **240°** (fitted per subject, 190–240), el 20°, dist 1.10·size, cone **45°** (`RIM_CONE`), aimed at 0.55·size. **The cone is not optional:** an Area light has no cone, floods its whole hemisphere and lights the floor behind the creature no matter where it is aimed. |
+| `reveal_under` | **Spot** | (0.45, 0.90, 1.00) | 101–102 | 0.06·size in front of the feet, 0.022·size up, cone **34°** (`UNDER_CONE`), aimed at `under_aim` (fitted, 0.12–0.20·size). |
+| `reveal_pool` | **Spot** | (0.52, 0.72, 1.00) | 108–109 | az 145°, el 70°, dist 1.30·size, cone **22°**, aimed at the floor 0.35·size toward camera. |
+| `reveal_wash` | **Area** | (0.45, 0.55, 0.70) | 128–129 | az 300°, el 55°, 1.20·size, size 1.20·size. The only ambient term; shadow-free. |
+
+### 1.3 The five lights — energy (rig units, before the size scale)
+
+| Light | Line | Value |
+|---|---|---|
+| `self.key` | 1600 | **260** |
+| `self.rim` | 1601 | **4000** |
+| `self.under` | 1602 | **2400** |
+| `self.pool` | 1603 | **90** |
+| `self.wash` | 1604 | **1.2** |
+
+Actual Blender watts = `value × max(0.45, (size / REF_HEIGHT)²) × exposure`.
+The `0.45` floor is what lets the smallest creatures still register.
+
+### 1.4 The per-subject knobs (all fitted by measurement)
+
+| Knob | Line | Range swept | What it moves |
+|---|---|---|---|
+| `self.rim_az` | 1625 | 190, 220, 240° | The rim's bearing. **The under-to-torso ratio is driven by this, not by the under's own aim or power** (probe6: the under ratio swings 0.05→2.44 on rim azimuth alone). |
+| `self.exposure` | 1619 | 0.6, 1.0, 1.6 | Everything. The body fills a different fraction of frame at each size, so this is what makes the five read alike. |
+| `self.wash_gain` | 1627 | 1.0, 3.0 | The floor only, not the body. This is the lever for a subject whose floors are too dark. |
+| `self.rim_gain` | 1626 | 1.0, 2.0, 3.0 | The rim alone. The band is the top failure on all five; the clipping headroom this buys is the only way to raise it. |
+| `self.under_gain` | 1628 | 1.0, 2.0, 4.0 | The under alone. The under-to-torso ratio is exposure-invariant, so it needs its own knob. |
+| `self.under_aim` | 1611 | 0.12, 0.20 | Where the under points, as a fraction of size. |
+
+The fit is three stages, all inside `do_enemy()`:
+azimuth → (exposure × wash_gain × rim_gain) → (under_gain × under_aim).
+The scorer is `score_of()` and it is the **contract**, not a soft preference:
+band, fraction, clipping, background, floor window, floor contrast and both
+under ratios all count.
+
+### 1.5 The per-subject overrides that are hand-set
 
 | Enemy | Override | Reason |
 |---|---|---|
-| XCOM_Viper | `wash = 12` | background_darkness measured 43.1 against a bar of 40 |
-| XCOM_Muton | `wash = 12` | background_darkness measured 45.1 against a bar of 40 |
-| XCOM_Floater | own rig: `key_abs_w = 25`, `key_dist = 0.85 m`, `under_abs_w = 3000`, `under_dist = 0.30 m`, `under_cone = 40°`, floor probes spread to the left/centre/right thirds | 0.29 m subject; the `(h/2)²` scale left it under 1 W of key |
+| XCOM_Viper | `wash = 1.6` | background_darkness read 43.1 against a bar of 40 |
+| XCOM_Muton | `wash = 1.6`, `emissive_scale = 0.70` | background 45.1; clipping 1271 |
+| XCOM_Sectoid | `emissive_scale = 0.55` | clipping 2568 — the emissive, not the light |
+| XCOM_Floater | `under_cone = 45°`, floor probes spread | a 20–34° cone is smaller than the creature |
 
 ---
 
-## 2. What the numbers say (measured, not estimated)
+## 2. The three measurements that are proven, and how
 
-Read `CommandCenter/outputs/lighting/verification.json` for the full set and
-`verification_independent.json` for the same numbers re-measured by a
-pure-Python PNG reader with no Blender in the loop.
+**Mode parity.** `--parity` renders one rig through the probe path and the
+delivered path and prints both. They now agree exactly on all five
+(clipW 146, clipB 146, clipC 2, bg 24.1, band 116.9, frac 0.0503). The
+earlier 429-vs-2765 gap was the Fog Glow compositor being on for the
+delivered frame and off for the probe, plus the probe measuring with no
+emissive mask. Fixed by routing both through `render_rig_frame()`.
 
----
+**Emissive isolation.** The `*_emissive_only.png` frames are rendered with
+**no scene lights at all** — the emissive materials and a Fog Glow pass
+only. They are the proof that the emissive contribution is real and
+separate from the rig.
 
-## 3. The four remaining criteria, and the exact change for each
-
-### 3.1 `rim_band_mean_ge_120` — the band mean over the silhouette edge
-
-**Measured:** 29–40 against a bar of 120, on all five enemies.
-
-**What was ruled out:** the under-glow is NOT the cannibal. The isolated
-diagnostic (`--diag`, rim alone, then rim + under) measured band **24.5 with
-the under off and 24.5 with the under on** — identical to one decimal place.
-The under-glow changes nothing.
-
-**What the diagnostic actually shows:** with the rim alone at 260 W the floor
-reads 33/0/44 and the body p99 90. The rim is spending its energy on the
-floor and the top of the head, not on the contour. At el 58° it is a *top*
-light. A rim has to be LOW and BEHIND so it grazes the whole contour from
-head to foot — the v4p run at az 122, el 30 measured band 125–148 and
-rimfrac 0.039–0.091, i.e. both rim criteria passed at that geometry.
-
-**The change:**
-- `RIM_EL` 30 (already applied — it is 30 in the file as it stands)
-- `RIM_AZ` 122 (already applied)
-- `RIM_SIZE_X`, `RIM_SIZE_Y` = 2.40, 0.90 (already applied)
-
-**If the band still falls short on the final pass, raise these two values
-only, in this order:**
-
-| Step | Constant | From | To | Expected effect |
-|---|---|---|---|---|
-| 1 | `self.rim` | 260 | 420 | band 40 → ~55, frac 0.004 → ~0.010 |
-| 2 | `RIM_SIZE_X` | 2.40 | 3.60 | the strip wraps further round the contour, lifting the band mean without adding floor wash at the same rate |
-
-Do **not** raise `self.rim` past ~600. At 700 W the isolated diagnostic
-measured bg 50.4, i.e. the rim floods the backdrop and
-`background_darkness_le_40` fails instead. The band and the background
-trade off directly against each other at a fixed aim, and the strip must
-grow before the energy grows.
-
-### 3.2 `rim_3pct_of_body` — the fraction of the body lit by the rim
-
-**Measured:** 0.000–0.004 against a bar of 0.030. This is the same root
-cause as §3.1 and moves with it.
-
-`rim_bright_over_body` is `band_bright_pixels / body_pixels` over a 2-pixel
-band (`BAND_PX = 2`). The v4p geometry (az 122, el 30, 3.5 × 1.2 strip,
-244 W) measured 0.039–0.091 — the criterion is reachable, and it was
-measured as passing at that geometry with a **wider** strip than the current
-2.40 m.
-
-**The change, if needed after the final pass:** set `RIM_SIZE_X` = 3.50 and
-`RIM_SIZE_Y` = 1.20 (the exact v4p values) before touching the energy.
-
-### 3.3 `floor_zones_in_window` — every floor zone between 45 and 175
-
-**Measured:** the shadow-side zone is the one that fails — 14 to 44 against a
-floor of 45. The front and key-side zones are inside the window.
-
-**The change:**
-- `self.pool` 180 → **350** (already applied). The pool is the term that
-  lifts the shadow-side floor; the wash is not, because the wash is what
-  pushes the background over its 40 ceiling.
-- Do **not** raise `self.wash` for this.
-
-**If the shadow side is still under 45 after the final pass, raise the pool
-in steps of +80** (350 → 430 → 510) and re-read the three floor zones. Each
-step lifts the shadow side by roughly 10–15.
-
-### 3.4 `background_darkness_le_40` — the outer 10 % border of the frame
-
-**Measured:** 33–45 against a bar of 40. The Viper (43.1) and the Muton
-(45.1) are over; the other three are under.
-
-**This is not a separate problem.** For a 1–2 m subject the outer border of
-the frame is *floor*, not void — the background reading tracks the floor
-reading almost exactly. The Floater, whose border is void, measures 0.7 at a
-floor of 53.
-
-**The change:** the two offenders already have `wash = 12` (applied). If
-either is still over 40 after the final pass, cut its wash to 6 — a point
-light or a small area light on the camera side is the only thing that
-reaches the frame border, so the wash is the correct lever, and cutting the
-wash from 20 to 12 moves the border by about 2–3 units on the two biggest
-enemies.
+**Side by side.** `*_studio_vs_reveal.png` puts the flat studio rig (broad
+area key + green fill, world 0.60) next to the reveal rig in the same
+frame, so the difference is visible rather than asserted.
 
 ---
 
-## 4. The Floater is a separate rig and is currently crushed
+## 3. What still fails, and the exact change to make
 
-**Measured (before its override):** floors 3/0/1, face_p99 0, torso_p99 3.
-Nothing was reaching a 0.29 m subject.
+### 3.1 `rim_band_mean_ge_120` — the band is 26–104 against a bar of 120
 
-**Cause:** the global rig scales energy by `s = (h / 2 m)²`. For the Floater
-that is 0.021, so a 45 W key was **0.95 W** and a 3000 W under-glow was
-**63 W**. This is a scale problem, not a lighting problem.
+**Fails on all five.** The band is the 2-pixel silhouette edge. The emissive
+was carrying much of it: when the emissive came down from 0.19 to 0.010 the
+band fell, which is why the rim needs raising now that the clipping
+headroom exists (four of five read zero clipped pixels).
 
-**The fix (applied):** `floater_overrides()` gives the Floater absolute
-values that bypass the `(h/2)²` scale:
+**The change:** raise `self.rim_gain` (line 1626) — the fit sweeps it to
+3.0. If the band is still short, raise the sweep ceiling to 4.0, and if it
+still will not clear 120, raise `self.rim` (line 1601) from 4000 toward
+7000 — at 7000 the isolated rim measured band 124.6 / frac 0.0954 on the
+Viper, which clears both bars. **Watch `clipW` as it goes up:** the rim is
+the brightest thing on the body, and pushing it hard is what clips.
 
-```python
-rig.key_abs_w    = 25.0     # absolute watts, NOT scaled
-rig.key_dist     = 0.85     # absolute metres from the body
-rig.under_abs_w  = 3000.0
-rig.under_dist   = 0.30
-rig.under_cone   = 40.0     # a 20-degree cone is smaller than the creature
-rig.floor_spread = True     # probes to the left/centre/right thirds
-```
+### 3.2 `under_lowbody_1_3x_torso` / `under_feet_1_3x_torso` — 0.21–1.43 and 0.29–1.15
 
-`build_reveal_rig()` honours these via `getattr(rig, 'key_abs_w', None)` and
-`getattr(rig, 'under_abs_w', None)`, falling back to the scaled values.
+**Fails on all five, and the feet ratio is always the worse of the two**,
+which says the under is aimed above the feet. The `under_aim` sweep
+(line 1611, values 0.12/0.20) and `under_gain` (line 1628) are the two
+levers and the fit already uses them. If they do not clear 1.3, the
+remaining cause is the **rim competing for the same pixels** — the rim
+azimuth sweep (line 1625) exists for that, and the isolated data says the
+under ratio is decided there, not by the under.
 
-**If the Floater is still dark after the final pass:** the 14/20-degree cone
-is still too narrow for a 0.29 m subject — widen `rig.under_cone` to 55 and
-raise `rig.key_abs_w` to 40. The Floater's own floor probes are spread
-because its three probes were clustered within 4 % of the frame width, which
-made the zone measurement meaningless.
+**If the under must clear 1.3 on both, the honest requirement is:** the
+under must be the brightest thing on the lower body and the feet, which
+means the key's contribution to the legs has to come down, not the under's
+up. Reduce `self.key` (line 1600) toward 140 and raise `self.under_gain`.
+
+### 3.3 `floor_zones_in_window` — the outer zone is 140–206 and the shadow side is 8–24
+
+**The Floater was the extreme case and it was a SCALE bug, not a lighting
+bug.** Its floors read 0.43 / 0.62 / 0.46 — effectively black — while its
+body read band 68. The cause: the pool aim and the three floor probes
+scaled with the subject's **height** while every light distance scaled with
+its **size**. The Floater is 2.48 m across and 0.29 m tall, so its pool
+landed 0.16 m from its feet and its three probes clustered on one patch of
+ground. Everything floor-related now scales with `size`
+(`pool_geometry(height, size)`, `compute_zones(..., size)`), and the
+Floater's floors went to 128.96 / 56.22 / 140.83 — inside the window.
+
+**The remaining floor failure is the OUTER zone running hot** (171–206
+against a ceiling of 175) with the shadow side still under 45. That is a
+geometry problem, not an energy problem: the outer probe is sitting in the
+pool's spill. **The change:** move `POOL_EDGE` (line 127) from 0.42 to
+0.60–0.75 so the outer probe leaves the pool's ellipse, and raise
+`self.wash_gain` (line 1627) to lift the shadow side into the window.
+
+### 3.4 The Floater's transform — a named open item
+
+**Symptom:** the Floater's band is 26 and its rim fraction 0.0039, the
+worst in the set, while the other four read 57–104. Its floors are now
+correct (128.96 / 56.22 / 140.83) and its background is 28.9, so it is in
+frame and lit — but the RIM is not reaching it.
+
+**Cause:** the asset-tracking lane found the Floater's pivot is 100 cm off,
+so the manta hovers above the ground plane. The rig's rim grazes the
+silhouette edge, and for a wide flat creature the edge is nearly
+horizontal, so a rim at el 20° passes over it.
+
+**The change:** in the source FBX (`Tools/blender/out_xcom/XCOM_Floater.fbx`,
+built by `Tools/blender/xcom_enemies.py`), correct the pivot so the manta's
+lowest point sits on z = 0, and rebuild the export. Then re-measure. **The
+lighting rig cannot fix this** — if the object is not in frame, no light
+setting moves the numbers, and that is the standing diagnostic: *change a
+light; if nothing moves, the object is not in frame.*
+
+**Note the size field is already working for it:** the Floater's height is
+0.290 m but its `size` is 2.480 m, because a manta is wide. That was the
+extent normalisation landing correctly.
+
+### 3.5 The detached geometry — a named open item, and the state of the tool
+
+**Ebert named:** the Sectoid's free hand, the Floater's white box and white
+tile, the Muton's white shard, the hip fragments.
+
+**The purge tool now runs and reports honestly.** `purge_detached()` uses
+**material and position**, not island count:
+
+- a piece is DELETED when it carries a **default/white** material, carries
+  **no** body material, carries **no** `ACCENT_EMISSIVE`, and its bounding
+  box sits outside the body's own bounds by more than the tolerance band;
+- a piece carrying `CHITIN`, `PLATE`, `PLATE_DARK`, `PLATE_OXBLOOD` or
+  `CHITIN_BONE` is **anatomy** and stays however far out it sits;
+- `ACCENT_EMISSIVE` is the eyes and is never removed.
+
+**Current result: 0 pieces removed on all five**, reported per asset as
+`purge: N islands, removed M debris piece(s)`. **A zero here is a real
+zero, not a crashed function** — earlier versions of this tool read
+`.name` off a BMesh vertex (which has no `.name`), the caller swallowed the
+exception, and five "purge skipped" lines were reported as five clean bills
+of health. It now raises instead of printing and continuing, and every
+call prints its removed count.
+
+**The debris is therefore NOT in the mesh as disconnected white pieces** —
+the FBX is imported as a single object (`imported 1 mesh object(s)`), so the
+white box, the tile and the shard are welded into the body mesh, not
+floating as separate objects. **The remaining work is at the source:** find
+those primitives in `Tools/blender/xcom_enemies.py` and delete them there,
+then re-export the FBX. A white box welded onto the shoulder is still a
+white box on the shoulder.
+
+**Independent confirmation from the renders:** the delivered frames were
+checked with vision and show **no detached floating pieces** — the Muton
+reads "none clearly visible", the Sectoid reads "no unmistakable floating
+body geometry". The debris is not visible in the current renders, but the
+Ebert-scored renders (`Tools/blender/out_xcom/XCOM_*.png`, produced by
+`xcom_enemies.py`) are a different generation and were not re-rendered here.
 
 ---
 
-## 5. Clipping
+## 4. The asset work that is not lighting
 
-**Sectoid, 306 clipped white and 306 clipped body pixels**, with
-`clipped_colour_pixels_non_emissive = 0`. The emissive is still blowing out.
-Emission strength has been cut twice (0.50 → 0.32 → 0.19 → **0.10**).
+Ebert's verdict is 3.33/7.0 against a 6.2 bar, and the rejection is
+**not** the rig — it is that the kit is five generic bipedal robots wearing
+five different names, and the renders were shot with neutral lighting so
+none of the rig or the emissive was visible.
 
-**If the Sectoid still clips:** the accent emissive is on a large area of the
-body, so lower the **base colour** as well as the emission. In
-`fix_materials()`:
+**The silhouettes still to rebuild, against the brief** (this is modelling
+work in `Tools/blender/xcom_enemies.py`, not lighting):
 
-```python
-set_input(bsdf, ['Base Color'], (0.0, 0.0, 0.0, 1.0))   # currently black
-```
+| Enemy | Required read | Current state |
+|---|---|---|
+| XCOM_Floater | **legless manta**, hovering, glowing dorsal core, trailing tendrils | has legs and stands on two boots |
+| XCOM_Chryssalid | **low, wide, forward-pitched stalker** with scythe forelimbs | reads as a heavy biped robot, no scythe forelimbs |
+| XCOM_Viper | **tall, narrow, elongated snout, raised ribbed dorsal spine, plasma pistol** | boxy biped, snub helmet cap, no snout/ribs/weapon |
+| XCOM_Muton | **heavy, wide, armoured, single horizontal visor slit** | strongest silhouette, but a white curled mass crosses the face |
+| XCOM_Sectoid | **small, gaunt, oversized smooth cranium, no mouth** | the best idea in the kit — keep the cranium |
 
-If it still clips with a black base colour, the accent material's own
-texture is white — set `EMIT_STRENGTH['accent']` to 0.05 and confirm the
-emissive-only proof frame still shows the glow.
+**The detached-geometry purge belongs in the same file** (see §3.5).
 
-**Viper, Muton, Floater, Chryssalid: 0 clipped pixels.** The body roughness
-is already 0.97 with specular 0.0, which killed the Viper's specular
-highlight.
-
----
-
-## 6. Under-glow ratios (`under_lowbody_1_3x_torso`, `under_feet_1_3x_torso`)
-
-**Measured:** 0.13–1.28 against a bar of 1.30, all five enemies.
-
-**The change:** the under-glow is a 20-degree spot 0.04·h above the floor,
-in front of the creature, aimed up and back into the legs. A 14-degree pencil
-beam (used in the v4x pass) misses the camera-facing surfaces of the feet
-entirely — the feet zone measured 0.40× torso with it.
-
-**If the ratios are still short:** widen the cone to 26° and raise
-`self.under` to 4200. The ratio is measured against the torso mean, so the
-other way to buy it is to lower the key (which also lowers `face_p99` and
-`torso_p99` toward their 25 floors — do not go below 90 on torso p99, the
-Floater already fails `torso_p99_ge_25`).
+**Asset generation note:** the FBX files in `Tools/blender/out_xcom/` are
+from the demo lane's re-export (the Muton is 5,216 triangles against the
+stale 3,712 in the old manifest). **State the generation when publishing**,
+because the parity lane and the demo lane must be looking at the same mesh.
 
 ---
 
-## 7. What works and must not be broken
-
-- **`clipped_colour_pixels_non_emissive` = 0 on all five.** The
-  emissive-dilated clip test in `measure()` is what makes this true.
-- **The emissive proof frames have 0 clipped pixels on all five** and
-  486–1229 emissive pixels, with no scene lights at all.
-- **The background is near-black on the Floater (0.7)** and under 46 on the
-  rest.
-- **The `contact_shadow_ratio_mask` is 0.26–0.82** on four of five — there
-  IS a real contact shadow under the feet.
-- **The published gallery is atomic**: the build is verified complete (19
-  files) and scored against the live set before the swap, and a
-  four-of-five set can never be published.
-
----
-
-## 8. How to run and verify
+## 5. How to run and verify
 
 ```bash
-# render the five enemies and publish only if the set is complete and better
+# render all five and publish only if the set is complete AND better
 "D:/Blender/blender-4.2.23-windows-x64/blender.exe" -b -noaudio \
   -P Tools/blender/rig_evidence.py -- \
   --out "<repo>/Tools/blender/out_lighting"
 
 # per-light diagnostic (this is what found the rim flood)
-"D:/Blender/blender-4.2.23-windows-x64/blender.exe" -b -noaudio \
-  -P Tools/blender/rig_evidence.py -- --out "<repo>/Tools/blender/out_lighting" \
-  --diag --only XCOM_Sectoid
+... --out "<repo>/Tools/blender/out_lighting" --diag --only XCOM_Muton
+
+# rim azimuth x cone sweep inside the unified rig
+... --out "<repo>/Tools/blender/out_lighting" --probe --only XCOM_Muton
+
+# prove the probe path and the delivered path are the same rig
+... --out "<repo>/Tools/blender/out_lighting" --parity
+
+# what disconnected geometry does this FBX contain
+... --out "<repo>/Tools/blender/out_lighting" --islands
 
 # independent re-measure, no Blender, pure-Python PNG reader
 python Tools/blender/rig_evidence.py --verify --out "<repo>/Tools/blender/out_lighting"
 ```
 
-Outputs land in `CommandCenter/outputs/lighting/`:
-five `*_reveal.png`, five `*_emissive_only.png`, five
-`*_studio_vs_reveal.png`, `rig_params.json` (every light's type, colour,
-watts, position, rotation, plus the world background strength),
-`rig_params.png` (the same table rendered as an image), `verification.json`
-(every measured number) and `verification_independent.json`.
+**Publishing is atomic and honest.** The run builds into
+`Tools/blender/out_lighting_build/`, verifies all 19 files exist, compares
+the new set's criteria total against the live gallery's, and copies into
+`CommandCenter/outputs/lighting/` and `Tools/blender/out_lighting/` only if
+the set is **complete and better**. A partial or worse set leaves the
+gallery untouched. The gallery is therefore always a single generation.
+
+**Outputs per enemy:** `*_reveal.png` (the rig, the delivered frame),
+`*_emissive_only.png` (no scene lights, emissive only), and
+`*_studio_vs_reveal.png` (studio rig beside reveal rig). Plus
+`rig_params.json` (every light's type, colour, watts, position, rotation and
+the world background strength), `rig_params.png` (the same table rendered as
+an image), `verification.json` (every measured number) and
+`verification_independent.json` (the same numbers re-measured without
+Blender).
