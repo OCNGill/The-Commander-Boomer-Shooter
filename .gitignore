@@ -11,6 +11,11 @@ Build/
 *.VC.db
 *.code-workspace
 
+# Packaged standalone builds (1.5 GB per build - never committed).
+# Provenance for each build is tracked in Docs/generated/BUILD_PROVENANCE.md
+# and the build lane is Tools/ue/package_and_smoke_win64.bat
+Packaged/
+
 # OS
 Thumbs.db
 .DS_Store
