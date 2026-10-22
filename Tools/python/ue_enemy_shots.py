@@ -296,20 +296,39 @@ def build_studio(world, center, size):
 
     # KEY: warm, from front-left-above.  Casts the contact shadow.
     directional((center.x - size * 2.0, center.y + size * 2.0,
-                 center.z + size * 2.0), 1.6, (1.0, 0.95, 0.87), True, 'KEY')
+                 center.z + size * 2.0), 2.4, (1.0, 0.95, 0.87), True, 'KEY')
     # FILL: cool, from camera-right, no shadow, lifts the dark side.
     directional((center.x + size * 2.0, center.y - size * 2.0,
-                 center.z + size * 0.3), 0.7, (0.60, 0.72, 0.92), False, 'FILL')
+                 center.z + size * 0.3), 1.1, (0.60, 0.72, 0.92), False, 'FILL')
     # RIM: cool, from behind-above, no shadow.  Draws the silhouette edge.
     directional((center.x - size * 1.5, center.y - size * 2.0,
-                 center.z + size * 1.8), 1.2, (0.72, 0.86, 1.0), False, 'RIM')
+                 center.z + size * 1.8), 1.7, (0.72, 0.86, 1.0), False, 'RIM')
+
+    # BACKDROP LIGHT: the key/fill/rim all aim at the SUBJECT, so the wall
+    # behind it was lit only on its far side and rendered black.  This one
+    # points from the camera side straight at the wall, giving the studio
+    # a controlled mid-grey background.
+    bl = spawn(world, unreal.DirectionalLight)
+    blc = comp_of(bl, 'directional_light_component')
+    if blc is not None:
+        setp(blc, 'intensity', 0.8)
+        setp(blc, 'light_color', unreal.LinearColor(0.70, 0.74, 0.82))
+        setp(blc, 'cast_shadows', False)
+    bl.set_actor_location(unreal.Vector(center.x + math.cos(az) * back * 0.5,
+                                       center.y + math.sin(az) * back * 0.5,
+                                       center.z + size), False, True)
+    aim_ok(bl, (center.x + math.cos(az) * back * 0.5,
+                center.y + math.sin(az) * back * 0.5, center.z + size),
+           (bx, by, center.z), 'BACK')
+    L('backdrop light added')
+    actors.append(bl)
 
     # AMBIENT: a skylight lights the whole creature evenly, so the subject
     # reads as a modelled form instead of a flat silhouette.
     sl = spawn(world, unreal.SkyLight)
     sc = comp_of(sl, 'light_component', 'skylight_component')
     if sc is not None:
-        setp(sc, 'intensity', 0.35)
+        setp(sc, 'intensity', 0.55)
         setp(sc, 'light_color', unreal.LinearColor(0.55, 0.60, 0.72))
         setp(sc, 'cast_shadows', False)
     L('skylight added')

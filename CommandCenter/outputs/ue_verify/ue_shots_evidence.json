@@ -4,102 +4,102 @@
   "driver": "32.0.32015.7029 (Adrenalin 26.20.15.07)",
   "enemies": {
     "XCOM_Chryssalid": {
-      "blown_frac": 0.0,
-      "bytes": 1173227,
-      "dark_frac": 0.06125,
+      "blown_frac": 4e-05,
+      "bytes": 1624447,
+      "dark_frac": 0.00305,
       "dimensions": [
         1080,
         1350
       ],
       "file": "XCOM_Chryssalid_ue.png",
       "luminance": {
-        "max": 239.8,
-        "median": 53.0,
+        "max": 252.2,
+        "median": 83.0,
         "min": 0.0,
-        "p05": 4.6,
-        "p95": 114.0
+        "p05": 20.0,
+        "p95": 171.0
       },
-      "sha256": "21704861dddcf64d0d8d4db25fba97c4b9540d7bd6d13bbeb38313d9b396456c",
-      "unique_colors": 1950
+      "sha256": "b86baa7bdcbd2482292e1cca207f0da5db6e80e4c53b73b0f51356d92529d9be",
+      "unique_colors": 2980
     },
     "XCOM_Floater": {
       "blown_frac": 0.0,
-      "bytes": 609202,
-      "dark_frac": 0.30584,
+      "bytes": 846093,
+      "dark_frac": 0.00357,
       "dimensions": [
         1080,
         1350
       ],
       "file": "XCOM_Floater_ue.png",
       "luminance": {
-        "max": 219.3,
-        "median": 51.0,
+        "max": 221.0,
+        "median": 78.0,
         "min": 0.0,
-        "p05": 4.0,
-        "p95": 67.0
+        "p05": 20.0,
+        "p95": 101.0
       },
-      "sha256": "62565548c0dc0dee76af7f43d785bdb7268faf7e95c11356256002e64d65f771",
-      "unique_colors": 519
+      "sha256": "0894a1ce521e158ed05d1ff095cd6a3807693aca619740b0af0154fc2b79ea7b",
+      "unique_colors": 815
     },
     "XCOM_Muton": {
       "blown_frac": 0.0,
-      "bytes": 1173227,
-      "dark_frac": 0.32246,
+      "bytes": 1624447,
+      "dark_frac": 0.00236,
       "dimensions": [
         1080,
         1350
       ],
       "file": "XCOM_Muton_ue.png",
       "luminance": {
-        "max": 226.9,
-        "median": 38.0,
+        "max": 229.8,
+        "median": 60.7,
         "min": 0.0,
-        "p05": 4.0,
-        "p95": 84.0
+        "p05": 23.4,
+        "p95": 126.0
       },
-      "sha256": "57749c91f2c15267f8bd9a13089f0b20ff7c234c17f76ac5c520181e838d2e17",
-      "unique_colors": 1145
+      "sha256": "9f628bd2aae2ce2bc7b06f8dcccdf07427c5a217e834909521242dc219ced6c6",
+      "unique_colors": 1792
     },
     "XCOM_Sectoid": {
       "blown_frac": 0.0,
-      "bytes": 315909,
-      "dark_frac": 0.42086,
+      "bytes": 609202,
+      "dark_frac": 0.00332,
       "dimensions": [
         1080,
         1350
       ],
       "file": "XCOM_Sectoid_ue.png",
       "luminance": {
-        "max": 33.0,
-        "median": 16.0,
+        "max": 48.0,
+        "median": 25.0,
         "min": 0.0,
-        "p05": 1.0,
-        "p95": 23.0
+        "p05": 7.0,
+        "p95": 34.0
       },
-      "sha256": "a57624be4278a2f404f60f6a4ac84cd3d52583379a9603dc20a37b934644f91d",
-      "unique_colors": 34
+      "sha256": "d6eb4511f8eb5f73b513abe8a59b2bd037fac4be844c42dc3c11e714210cc715",
+      "unique_colors": 49
     },
     "XCOM_Viper": {
       "blown_frac": 0.0,
-      "bytes": 609202,
-      "dark_frac": 0.4276,
+      "bytes": 846093,
+      "dark_frac": 0.00851,
       "dimensions": [
         1080,
         1350
       ],
       "file": "XCOM_Viper_ue.png",
       "luminance": {
-        "max": 218.4,
-        "median": 31.0,
+        "max": 219.5,
+        "median": 47.0,
         "min": 0.0,
-        "p05": 2.0,
-        "p95": 42.0
+        "p05": 13.0,
+        "p95": 62.0
       },
-      "sha256": "ab093bdc33fe88dcc7ec85776013396b9051d127ed0bedcf550e9f2bca65b5d5",
-      "unique_colors": 345
+      "sha256": "eb6c8e646958a49c87d020a22cd96063e64b9fbcf92479b22955d61b14ec0736",
+      "unique_colors": 524
     }
   },
-  "method": "SceneCapture2D in a built studio: dark floor, grey backdrop, key/fill/rim directional lights + skylight, empty world",
+  "method": "SceneCapture2D in the editor's empty world. Studio: dark floor, grey backdrop wall, key/fill/rim directional lights + a skylight + a dedicated backdrop light, all distance-independent lux.",
   "note": "read_render_target returns the render target buffer BEFORE the export, so its histogram disagrees with the exported PNG. The exported PNG is the ground truth and is what is measured here.",
   "source": "MAIN UE 5.8 editor, scheduled task in session 1"
 }
