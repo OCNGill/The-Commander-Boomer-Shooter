@@ -1,0 +1,22 @@
+{
+  "name": "GEORDI",
+  "height_m": 1.8,
+  "body": "broad_steady",
+  "face": "warm_grinning_grease_streaked",
+  "palette": {
+    "primary": "#3A3A3A",
+    "accent": "#FF6A00",
+    "trim": "#B87333"
+  },
+  "conduits": [],
+  "distinguishing": [
+    "goggles_pushed_up_on_head",
+    "tool_belt_rig",
+    "welding_shield_strap",
+    "battered_multitool_in_hand",
+    "dont_touch_tag_on_shoulders"
+  ],
+  "emissive": false,
+  "rig": "humanoid",
+  "silhouette": "broad steady engineer, roll-up sleeves, a tool belt that is also a rig, goggles pushed up on the head, a welding shield strap across the chest. Safety-orange + steel + copper trim. A battered multitool always in hand. The friend who laughs at the impossible."
+}

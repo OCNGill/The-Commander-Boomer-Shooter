@@ -1,0 +1,21 @@
+{
+  "name": "EDI",
+  "height_m": 1.8,
+  "body": "light_form_holographic",
+  "face": "composed_precise_faintly_amused",
+  "palette": {
+    "primary": "#19E3FF",
+    "accent": "#B319FF",
+    "trim": "#FFFFFF"
+  },
+  "conduits": [],
+  "distinguishing": [
+    "translucent_light_form",
+    "soft_core_glow",
+    "rippling_data_edges",
+    "fleet_ring_of_data_points_around_shoulders"
+  ],
+  "emissive": true,
+  "rig": "light_form",
+  "silhouette": "NOT a solid robot — a translucent cyan/violet light-form with a soft core glow, edges that ripple like data. A single ring of orbiting data-points around the shoulders (the 'fleet ring'). Composed, precise, faintly amused. The calm in the storm. (Cheapest build: a hologram, not a full body.)"
+}

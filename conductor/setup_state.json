@@ -1,7 +1,26 @@
 {
   "repo": "The_Commander_Boomer_Shooter",
-  "last_updated": "2026-10-19",
+  "last_updated": "2026-10-24",
   "conductor_version": "1.0",
   "engine": "Unreal Engine 5.8",
-  "status": "All headless legs verified: map+encounters+lighting, 26 assets, 5 generated design docs (bible/BP spec/weapon stats/sound list/content JSON), actor-listing API recovered. Next session = interactive editor Blueprint build per spec."
+  "genre": "boomer shooter (backbone, locked) + story/crew/choices as a layer on top (not a genre swap)",
+  "status": "Genre corrected to boomer-shooter-first (Commander 2026-10-24). Story layer scaffolded: SYSTEM_FRAMEWORK.md v0.2 (the System = real-world shadow architecture), CREW_CHARACTERS.md v0.2 (16 modeled characters, core four built first), CREW_PIPELINE.md v0.2 (Blender headless -> FBX -> UE -> Mixamo -> Ebert >=8.5), crew_build.py + 4 specs (HERMES/LIARA locked/GEORDI/EDI). Tracks 7-9 added. Next: build the core four FBXs in Blender (crew_build.py), then the interactive editor session for the boomer combat loop + story mechanics.",
+  "boomer_core": "Doom 2016 movement, 144+ FPS, gibs, overpowered guns — DESIGN.md locked, unchanged",
+  "story_layer": {
+    "enemy": "The System — real-world shadow architecture (shadow govt, big corps/insurance cartels, AI corps, captured institutions). Ground zero: Plymouth MA.",
+    "acts": 5,
+    "mechanics": ["branching dialogue + choice wheel", "audio logs", "augments (capabilities, not stats)", "loyalty missions", "the price of everything (flavor)"],
+    "influence": ["Deus Ex", "Bioshock", "Mass Effect"]
+  },
+  "crew": {
+    "total": 16,
+    "core_four": ["HERMES", "LIARA", "GEORDI", "EDI"],
+    "liara_lock": "semi-liara + cyberpunk, no antennae/tentacles, hair up, neural fiber + left-ear data jack, violet/black"
+  },
+  "pipeline": {
+    "blender": "D:\\Blender\\blender.exe (4.2.23, headless)",
+    "anim": "Mixamo (free) or Blender-authored",
+    "quality_gate": "Ebert >= 8.5 (hard gate)",
+    "inference": "Qwen3.8-27B on Main (sovereign, no cloud) — no DeepSeek/DeepInfer"
+  }
 }

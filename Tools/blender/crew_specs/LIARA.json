@@ -1,0 +1,29 @@
+{
+  "name": "LIARA",
+  "height_m": 1.75,
+  "body": "lean_agile",
+  "face": "sharp_intelligent_dark_featured_determined_feral_focus",
+  "hair": "up_swept_bun",
+  "antennae": false,
+  "tentacles": false,
+  "head_attachments": ["neural_fiber_left", "data_jack_left_ear"],
+  "palette": {
+    "primary": "#101014",
+    "accent": "#B319FF",
+    "trim": "#19E3FF",
+    "iris": "#B319FF"
+  },
+  "conduits": [
+    { "from": "hairline", "to": "left_ear", "color": "#B319FF" }
+  ],
+  "distinguishing": [
+    "neural_fiber_in_updo",
+    "data_jack_behind_left_ear",
+    "violet_iris_rings",
+    "asymmetric_violet_pauldron_left",
+    "bare_right_sleeve"
+  ],
+  "emissive": true,
+  "rig": "humanoid",
+  "silhouette": "lean agile, hair UP in a high swept cyberpunk bun (NO antennae, NO tentacles, nothing hanging off the head). Matte black + electric violet. One armored violet pauldron (left), one bare sleeve. A single neural-fiber strand traces from the hairline to the left ear. Violet iris rings. Sharp, dark-featured, determined. Semi-Liara-ish homage, grounded and human, cyberpunk."
+}
