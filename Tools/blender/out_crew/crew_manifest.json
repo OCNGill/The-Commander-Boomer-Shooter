@@ -2,8 +2,8 @@
   {
     "name": "CREW_HERMES",
     "fbx": "CREW_HERMES.fbx",
-    "fbx_kb": 31.4,
-    "sha256": "aef5afab65a2a28a208e8acfb484768e3f3402f5ef4cfd82d3a0d4513fbf0d61",
+    "fbx_kb": 20.2,
+    "sha256": "b8e1d7c4c2dd7f1087695f1e6fd174b5b000cddff7b814f036501c689a41618e",
     "tris": 76,
     "height_m": 1.828,
     "width_m": 0.7,
@@ -45,8 +45,8 @@
   {
     "name": "CREW_LIARA",
     "fbx": "CREW_LIARA.fbx",
-    "fbx_kb": 31.1,
-    "sha256": "a4c2e108072fb8ab64259e400b02cab3aea275d7127c50aa262965bb41644777",
+    "fbx_kb": 19.9,
+    "sha256": "ac748c359c2fcec66decae3a72047f2bd93972b329943ea667ecee3566b88f68",
     "tris": 74,
     "height_m": 1.731,
     "width_m": 0.695,
@@ -98,8 +98,8 @@
   {
     "name": "CREW_GEORDI",
     "fbx": "CREW_GEORDI.fbx",
-    "fbx_kb": 29.9,
-    "sha256": "a62a5cbfd0df57df6319ad00fed8e011a51a5d009ebe1708337b844e0bbfe8d1",
+    "fbx_kb": 18.7,
+    "sha256": "c5e848ad9dfba5977512db51508e99d559ab751e756db0c92d7f77f5c86ac52e",
     "tris": 66,
     "height_m": 1.75,
     "width_m": 0.67,
@@ -137,8 +137,8 @@
   {
     "name": "CREW_EDI",
     "fbx": "CREW_EDI.fbx",
-    "fbx_kb": 49.7,
-    "sha256": "490a6f8b0a1ccf696aefd160b86e3cacd29fdaca8976d76968870ecad69ad9ae",
+    "fbx_kb": 38.5,
+    "sha256": "1ae072c2d35e6e59f213bed4d183e37a8c9667490a515c3e053a0c10774caab3",
     "tris": 624,
     "height_m": 1.75,
     "width_m": 0.68,

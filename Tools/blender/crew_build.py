@@ -183,21 +183,90 @@ def build_humanoid(spec):
 
 
 def setup_reveal_light():
-    # overhead reveal spot (the XCOM "reveal_cast" pattern)
-    bpy.ops.object.light_add(type="SUN", location=(0, 0, 5))
+    # overhead reveal light + camera (the XCOM "reveal_cast" pattern).
+    # FIXED (2026-10-24): the first run produced all-black PNGs because
+    #   (a) film_transparent=True + default AgX view transform + dark world
+    #       (0.05) composited to pure black, swallowing the character;
+    #   (b) 50mm camera at 3.2 m framed too tight;
+    #   (c) AgX desaturates the violet neon to near-black.
+    # Fix: Filmic, transparent OFF, a real dark-but-visible world, a stronger
+    # angled sun, a wider 24mm camera backed further out, and an emissive
+    # boost so the accent color actually reads as neon.
+    sc = bpy.context.scene
+    # View transform: Filmic (not AgX) — keeps saturated neon vivid.
+    sc.view_settings.view_transform = "Filmic"
+    sc.view_settings.look = "None"
+    # World: a real dark-blue backdrop (not near-black) so the silhouette
+    # has a rim against it.
+    w = sc.world
+    if w and w.use_nodes:
+        for n in w.node_tree.nodes:
+            if n.type == "BACKGROUND":
+                n.inputs["Color"].default_value = (0.02, 0.02, 0.05, 1.0)
+                n.inputs["Strength"].default_value = 1.0
+    # Strong angled sun (top-left, not straight down) for a visible form.
+    bpy.ops.object.light_add(type="SUN", location=(-2, -2, 4), rotation=(math.radians(40), 0, math.radians(-45)))
     sun = bpy.context.active_object
-    sun.data.energy = 3.0
-    bpy.ops.object.camera_add(location=(0, 3.2, 1.6), rotation=(math.radians(80), 0, 0))
+    sun.data.energy = 4.0
+    # Fill: a weak opposite sun so shadows aren't pitch black.
+    bpy.ops.object.light_add(type="SUN", location=(2, 2, 3), rotation=(math.radians(50), 0, math.radians(135)))
+    fill = bpy.context.active_object
+    fill.data.energy = 1.2
+    # Camera: 24mm (wider), backed to 4.5 m, aimed at the torso (~1.2 m).
+    # Use a TRACK_TO constraint (deterministic) instead of hand-computed
+    # rotation — the previous run had the model OUT OF FRAME because the
+    # 80° rot_x guess was wrong. TRACK_TO always points the camera at the
+    # target regardless of Blender's axis conventions.
+    bpy.ops.object.camera_add(location=(0, 4.5, 1.3))
     cam = bpy.context.active_object
-    bpy.context.scene.camera = cam
-    bpy.context.scene.render.resolution_x = 1024
-    bpy.context.scene.render.resolution_y = 1024
-    bpy.context.scene.render.film_transparent = True
+    cam.name = "RevealCam"
+    cam.data.lens = 24.0
+    sc.camera = cam
+    # Target: the character's chest. Use an Empty so the constraint has a
+    # stable target object (not the camera itself).
+    tgt = bpy.data.objects.new("RevealTarget", None)
+    sc.collection.objects.link(tgt)
+    tgt.location = (0, 0, 1.1)  # chest height of a 1.8 m humanoid
+    c = cam.constraints.new(type="TRACK_TO")
+    c.target = tgt
+    c.track_axis = "TRACK_NEGATIVE_Z"
+    c.up_axis = "UP_Y"
+    # Render settings: opaque film (NOT transparent — that was the black bug).
+    sc.render.resolution_x = 1024
+    sc.render.resolution_y = 1024
+    sc.render.film_transparent = False
+    # (Sample count left at the .blend default of 64 — EEVEE; not sc.render.samples,
+    # which is Cycles-only and raised AttributeError on EEVEE.)
+    # Background: a simple dark plane behind the character so the silhouette
+    # has a rim against it (the world color alone reads as a flat void).
+    bpy.ops.mesh.primitive_plane_add(size=20, location=(0, -4, 2), rotation=(math.radians(90), 0, 0))
+    bg = bpy.context.active_object
+    bg.name = "RevealBG"
+    bg.data.materials.append(add_material("RevealBG_mat", (0.03, 0.03, 0.07), rough=0.9))
+    bg.select_set(False)  # keep it out of the FBX export selection
+    # Emissive boost: raise accent emission strength so the neon reads.
+    for m in bpy.data.materials:
+        if m.use_nodes:
+            bsdf = m.node_tree.nodes.get("Principled BSDF")
+            if bsdf:
+                es = bsdf.inputs.get("Emission Strength")
+                ec = bsdf.inputs.get("Emission Color")
+                if es and ec:
+                    # If this material has any emission color set, boost it.
+                    c = ec.default_value
+                    if c[0] + c[1] + c[2] > 0.05:
+                        es.default_value = 5.0
 
 
-def render_view(name, rotation_y=0.0):
+def render_view(name, rot_z=0.0):
+    """Render one view. `rot_z` rotates the CHARACTER (not the camera) so the
+    TRACK_TO constraint stays locked on the target. Pass rot_z=90° for the
+    turn (side) view."""
     cam = bpy.context.scene.camera
-    cam.rotation_euler[1] = rotation_y
+    # Rotate the character mesh around world Z for the turn view.
+    char = bpy.data.objects.get(f"CREW_{CHARACTER}")
+    if char:
+        char.rotation_euler[2] = rot_z
     path = os.path.join(OUT_DIR, f"CREW_{CHARACTER}_{name}.png")
     bpy.context.scene.render.filepath = path
     bpy.ops.render.render(write_still=True)
@@ -220,7 +289,7 @@ def main():
 
     setup_reveal_light()
     reveal = render_view("reveal")
-    turn = render_view("turn", rotation_y=math.radians(90))
+    turn = render_view("turn", rot_z=math.radians(90))
 
     # stats
     tris = sum(len(o.data.polygons) for o in [char] if hasattr(o.data, "polygons"))
@@ -231,9 +300,13 @@ def main():
     emissive_px = 0  # placeholder; a real pass would count bright pixels
     # (the XCOM manifest has this; we carry the field for schema parity)
 
-    # export FBX (UE preset: forward -Z, up Y)
+    # export FBX (UE preset: forward -Z, up Y).
+    # Select ONLY the character mesh — NOT the camera, target empty, or
+    # background plane (those are render-only and would pollute the FBX).
     fbx_path = os.path.join(OUT_DIR, f"CREW_{CHARACTER}.fbx")
-    bpy.ops.object.select_all(action="SELECT")
+    bpy.ops.object.select_all(action="DESELECT")
+    char.select_set(True)
+    bpy.context.view_layer.objects.active = char
     bpy.ops.export_scene.fbx(
         filepath=fbx_path,
         use_selection=True,
