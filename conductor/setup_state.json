@@ -4,7 +4,7 @@
   "conductor_version": "1.0",
   "engine": "Unreal Engine 5.8",
   "genre": "boomer shooter (backbone, locked) + story/crew/choices as a layer on top (not a genre swap)",
-  "status": "Genre corrected to boomer-shooter-first (Commander 2026-10-24). Story layer scaffolded: SYSTEM_FRAMEWORK.md v0.2 (the System = real-world shadow architecture), CREW_CHARACTERS.md v0.2 (16 modeled characters, core four built first), CREW_PIPELINE.md v0.2 (Blender headless -> FBX -> UE -> Mixamo -> Ebert >=8.5), crew_build.py + 4 specs (HERMES/LIARA locked/GEORDI/EDI). Tracks 7-9 added. Next: build the core four FBXs in Blender (crew_build.py), then the interactive editor session for the boomer combat loop + story mechanics.",
+  "status": "Core four crew BUILT + VERIFIED (HERMES, LIARA locked, GEORDI, EDI) — FBX + reveal/turn PNGs + manifest (Tools/blender/out_crew/). Render-setup bug fixed (all-black PNGs → TRACK_TO camera + Filmic + opaque film); pixel-verified via PIL (38,400/38,400 center pixels bright on all 4). Manifest matches XCOM schema. NEXT: Ebert gate on the four (>=8.5 to ship), then UE import to /Game/Characters/Crew/, then the interactive editor session for the boomer combat loop + story mechanics. Blender path = D:\\Blender\\blender-4.2.23-windows-x64\\blender.exe (NOT D:\\Blender\\blender.exe).",
   "boomer_core": "Doom 2016 movement, 144+ FPS, gibs, overpowered guns — DESIGN.md locked, unchanged",
   "story_layer": {
     "enemy": "The System — real-world shadow architecture (shadow govt, big corps/insurance cartels, AI corps, captured institutions). Ground zero: Plymouth MA.",
