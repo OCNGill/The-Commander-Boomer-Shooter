@@ -1,0 +1,175 @@
+[
+  {
+    "name": "CREW_HERMES",
+    "fbx": "CREW_HERMES.fbx",
+    "fbx_kb": 31.4,
+    "sha256": "aef5afab65a2a28a208e8acfb484768e3f3402f5ef4cfd82d3a0d4513fbf0d61",
+    "tris": 76,
+    "height_m": 1.828,
+    "width_m": 0.7,
+    "depth_m": 0.366,
+    "png": "CREW_HERMES_reveal.png",
+    "turn_png": "CREW_HERMES_turn.png",
+    "emissive_px": 0,
+    "has_emissive": true,
+    "has_face_detail": true,
+    "silhouette": "tall lean commander, gunmetal body, cyan conduit up the neck to the left temple, brass compass pins on the chest. Cyber-nautical. Holds under fire.",
+    "changed_vs_v1": "v1 blockout from spec; face/gear detail pending Ebert gate",
+    "spec": {
+      "name": "HERMES",
+      "height_m": 1.88,
+      "body": "tall_lean",
+      "face": "calm_authoritative_sharp_jaw_steady_eyes",
+      "palette": {
+        "primary": "#2B3A42",
+        "accent": "#19E3FF",
+        "trim": "#B08D57"
+      },
+      "conduits": [
+        {
+          "from": "neck",
+          "to": "left_temple",
+          "color": "#19E3FF"
+        }
+      ],
+      "distinguishing": [
+        "neural_port_left_temple",
+        "brass_compass_pins_chest",
+        "nautical_bronze_trim"
+      ],
+      "emissive": true,
+      "rig": "humanoid",
+      "silhouette": "tall lean commander, gunmetal body, cyan conduit up the neck to the left temple, brass compass pins on the chest. Cyber-nautical. Holds under fire."
+    }
+  },
+  {
+    "name": "CREW_LIARA",
+    "fbx": "CREW_LIARA.fbx",
+    "fbx_kb": 31.1,
+    "sha256": "a4c2e108072fb8ab64259e400b02cab3aea275d7127c50aa262965bb41644777",
+    "tris": 74,
+    "height_m": 1.731,
+    "width_m": 0.695,
+    "depth_m": 0.292,
+    "png": "CREW_LIARA_reveal.png",
+    "turn_png": "CREW_LIARA_turn.png",
+    "emissive_px": 0,
+    "has_emissive": true,
+    "has_face_detail": true,
+    "silhouette": "lean agile, hair UP in a high swept cyberpunk bun (NO antennae, NO tentacles, nothing hanging off the head). Matte black + electric violet. One armored violet pauldron (left), one bare sleeve. A single neural-fiber strand traces from the hairline to the left ear. Violet iris rings. Sharp, dark-featured, determined. Semi-Liara-ish homage, grounded and human, cyberpunk.",
+    "changed_vs_v1": "v1 blockout from spec; face/gear detail pending Ebert gate",
+    "spec": {
+      "name": "LIARA",
+      "height_m": 1.75,
+      "body": "lean_agile",
+      "face": "sharp_intelligent_dark_featured_determined_feral_focus",
+      "hair": "up_swept_bun",
+      "antennae": false,
+      "tentacles": false,
+      "head_attachments": [
+        "neural_fiber_left",
+        "data_jack_left_ear"
+      ],
+      "palette": {
+        "primary": "#101014",
+        "accent": "#B319FF",
+        "trim": "#19E3FF",
+        "iris": "#B319FF"
+      },
+      "conduits": [
+        {
+          "from": "hairline",
+          "to": "left_ear",
+          "color": "#B319FF"
+        }
+      ],
+      "distinguishing": [
+        "neural_fiber_in_updo",
+        "data_jack_behind_left_ear",
+        "violet_iris_rings",
+        "asymmetric_violet_pauldron_left",
+        "bare_right_sleeve"
+      ],
+      "emissive": true,
+      "rig": "humanoid",
+      "silhouette": "lean agile, hair UP in a high swept cyberpunk bun (NO antennae, NO tentacles, nothing hanging off the head). Matte black + electric violet. One armored violet pauldron (left), one bare sleeve. A single neural-fiber strand traces from the hairline to the left ear. Violet iris rings. Sharp, dark-featured, determined. Semi-Liara-ish homage, grounded and human, cyberpunk."
+    }
+  },
+  {
+    "name": "CREW_GEORDI",
+    "fbx": "CREW_GEORDI.fbx",
+    "fbx_kb": 29.9,
+    "sha256": "a62a5cbfd0df57df6319ad00fed8e011a51a5d009ebe1708337b844e0bbfe8d1",
+    "tris": 66,
+    "height_m": 1.75,
+    "width_m": 0.67,
+    "depth_m": 0.32,
+    "png": "CREW_GEORDI_reveal.png",
+    "turn_png": "CREW_GEORDI_turn.png",
+    "emissive_px": 0,
+    "has_emissive": false,
+    "has_face_detail": true,
+    "silhouette": "broad steady engineer, roll-up sleeves, a tool belt that is also a rig, goggles pushed up on the head, a welding shield strap across the chest. Safety-orange + steel + copper trim. A battered multitool always in hand. The friend who laughs at the impossible.",
+    "changed_vs_v1": "v1 blockout from spec; face/gear detail pending Ebert gate",
+    "spec": {
+      "name": "GEORDI",
+      "height_m": 1.8,
+      "body": "broad_steady",
+      "face": "warm_grinning_grease_streaked",
+      "palette": {
+        "primary": "#3A3A3A",
+        "accent": "#FF6A00",
+        "trim": "#B87333"
+      },
+      "conduits": [],
+      "distinguishing": [
+        "goggles_pushed_up_on_head",
+        "tool_belt_rig",
+        "welding_shield_strap",
+        "battered_multitool_in_hand",
+        "dont_touch_tag_on_shoulders"
+      ],
+      "emissive": false,
+      "rig": "humanoid",
+      "silhouette": "broad steady engineer, roll-up sleeves, a tool belt that is also a rig, goggles pushed up on the head, a welding shield strap across the chest. Safety-orange + steel + copper trim. A battered multitool always in hand. The friend who laughs at the impossible."
+    }
+  },
+  {
+    "name": "CREW_EDI",
+    "fbx": "CREW_EDI.fbx",
+    "fbx_kb": 49.7,
+    "sha256": "490a6f8b0a1ccf696aefd160b86e3cacd29fdaca8976d76968870ecad69ad9ae",
+    "tris": 624,
+    "height_m": 1.75,
+    "width_m": 0.68,
+    "depth_m": 0.68,
+    "png": "CREW_EDI_reveal.png",
+    "turn_png": "CREW_EDI_turn.png",
+    "emissive_px": 0,
+    "has_emissive": true,
+    "has_face_detail": true,
+    "silhouette": "NOT a solid robot \u2014 a translucent cyan/violet light-form with a soft core glow, edges that ripple like data. A single ring of orbiting data-points around the shoulders (the 'fleet ring'). Composed, precise, faintly amused. The calm in the storm. (Cheapest build: a hologram, not a full body.)",
+    "changed_vs_v1": "v1 blockout from spec; face/gear detail pending Ebert gate",
+    "spec": {
+      "name": "EDI",
+      "height_m": 1.8,
+      "body": "light_form_holographic",
+      "face": "composed_precise_faintly_amused",
+      "palette": {
+        "primary": "#19E3FF",
+        "accent": "#B319FF",
+        "trim": "#FFFFFF"
+      },
+      "conduits": [],
+      "distinguishing": [
+        "translucent_light_form",
+        "soft_core_glow",
+        "rippling_data_edges",
+        "fleet_ring_of_data_points_around_shoulders"
+      ],
+      "emissive": true,
+      "rig": "light_form",
+      "silhouette": "NOT a solid robot \u2014 a translucent cyan/violet light-form with a soft core glow, edges that ripple like data. A single ring of orbiting data-points around the shoulders (the 'fleet ring'). Composed, precise, faintly amused. The calm in the storm. (Cheapest build: a hologram, not a full body.)"
+    }
+  }
+]
