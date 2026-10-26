@@ -12,6 +12,7 @@
 | 7 | The System (story layer) | **SPECED** | Spec | SYSTEM_FRAMEWORK.md v0.2 — the real-world System (shadow govt, big corps/insurance, AI corps, captured institutions), factions, 5-act skeleton, RPG layers on top of the boomer core. Commander owns the story-arch. |
 | 8 | Crew modeling (Blender→FBX→UE) | **SPECED** | Spec | CREW_CHARACTERS.md + CREW_PIPELINE.md + crew_build.py + 4 specs (HERMES, LIARA locked, GEORDI, EDI). Core four to build first. Ebert ≥8.5 gate. |
 | 9 | Story mechanics (choices/crew/loyalty) | **SPECED** | Spec | Branching dialogue + choice wheel, audio logs, augments (capabilities not stats), loyalty missions — the Deus Ex / Bioshock / Mass Effect layers on top of the boomer core. |
+| 10 | Plymouth MA level (real GPS) | **BUILDING** | Build | OSM house→Lobster Hut corridor (1260×1884m) as 3D level: real map-textured ground, road ribbons, harbor water, building boxes, gold route line + beacons. 3 ortho views + hero persp + UE-ready FBX (501KB). Blender 4.2.23 on HTPC (Cycles CPU; EEVEE_NEXT black-frames headless). |
 
 ## Future Tracks
 | # | Name | Description |
