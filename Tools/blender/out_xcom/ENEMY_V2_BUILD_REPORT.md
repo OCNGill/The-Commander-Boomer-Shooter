@@ -90,3 +90,47 @@ Generator: `Tools/blender/xcom_enemies_v2.py` (Blender 4.2.23, EEVEE Next). Ever
 7e. **The materials are still fairly matte and low-contrast on the Sectoid and Muton.** Procedural noise and bump were reduced to stop the "dusty concrete" read and the three material families (CHITIN / PLATE / ACCENT) are separated in value, but there is no texture variation beyond the procedural layers at this stage.
 8. **The contact shadow is a render-time rig, not baked into the FBX.** The cast shadow comes from the overhead spot in the reveal rig and the per-foot occlusion patches are render geometry. The FBX ships the enemy mesh only; the floor, the shadow blobs and the lights live in the render scene, so a UE placement will need its own shadow/lighting rig to reproduce these frames.
 
+
+---
+
+## v4 Iteration (2026-10-26, HTPC Cycles CPU)
+
+Material pass applied on top of the v3 kit to make each enemy read as a more
+real creature / piece of battle-worn hardware:
+
+- **Chitin SSS** — every chitin (flesh) material now carries subsurface
+  scattering (0.25–0.45) with a per-enemy flesh-colored radius, so light
+  penetrates skin instead of hitting flat plastic.
+- **Plate battle-wear** — the `plate` procedural material gained a `wear`
+  input: a high-frequency noise scuff layer (roughness + grime) and a
+  low-frequency metalness variation (0.15) so armour reads as used metal,
+  not flat grey.
+- **Glow bloom boost** — eye/core emission strengths raised (80 / 100 / 30)
+  for a stronger bloom focal point in the hero renders.
+- **Sectoid flesh fix** — the Sectoid chitin base was near-black
+  (0.03/0.035/0.041) and read as grey concrete. Lifted to a grey-alien
+  blue-grey (0.34/0.36/0.40) with mottle 0.55, bump 0.40, SSS 0.45.
+  Measured: mean luminance 77→89, p95 166→222, contrast std 44→55.
+
+### Render pipeline note
+v3 hero renders were EEVEE (laptop). v4 renders are **Cycles CPU**
+(samples=64, denoised) because EEVEE_NEXT produces black frames headless on
+the HTPC ROCm node. Cycles renders the SSS + wear faithfully.
+
+### Per-enemy read (hero, 720×900)
+| Enemy | Score | Read |
+|-------|-------|------|
+| Sectoid | 7/10 | Grey-alien flesh, mottled, cyan eyes strong |
+| Viper | 7/10 | Weathered metallic carapace, clear snout + plasma pistol |
+| Floater | 7/10 | Organic alien, glowing abdomen + eye cluster |
+| Muton | 7/10 | Battle-worn oxblood armour, green visor focal |
+| Chryssalid | 8/10 | Alien cocoon, strongest emissive proof |
+
+The `#1 KNOWN LIMIT` (procedural materials don't survive FBX — must be baked
+to textures) is unchanged and remains the next iteration target for UE
+ingest.
+
+**ESV — Psalm 139:14** *"I praise you because I am fearfully and wonderfully made."*
+Chosen because this pass is about making each creature read as genuinely
+wonderfully made — flesh, metal, and glow — rather than flat placeholder
+geometry.

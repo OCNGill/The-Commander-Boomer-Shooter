@@ -247,7 +247,8 @@ def model_size(o):
 
 # =================================================================== materials
 def procedural_mat(name, base, rough=0.5, metal=0.0, emit=None, emit_str=0.0,
-                   noise_scale=9.0, bump=0.25, mottle=0.30, rough_var=0.08):
+                   noise_scale=9.0, bump=0.25, mottle=0.30, rough_var=0.08,
+                   sss=0.0, sss_col=None, wear=0.0):
     """noise -> ColorRamp -> Base Color   AND   noise -> Bump(0.25) -> Normal
     plus a third noise -> ColorRamp -> Roughness break-up."""
     m = bpy.data.materials.new(name)
@@ -264,6 +265,18 @@ def procedural_mat(name, base, rough=0.5, metal=0.0, emit=None, emit_str=0.0,
                 break
         if 'Emission Strength' in bsdf.inputs:
             bsdf.inputs['Emission Strength'].default_value = emit_str
+
+    # Subsurface: makes flesh read as organic, catching light under the skin
+    if sss > 0.0:
+        for k in ('Subsurface Weight', 'Subsurface'):
+            if k in bsdf.inputs:
+                bsdf.inputs[k].default_value = sss
+                break
+        if 'Subsurface Radius' in bsdf.inputs:
+            c = sss_col or (0.35, 0.12, 0.08)
+            bsdf.inputs['Subsurface Radius'].default_value = (c[0], c[1], c[2])
+        if 'Subsurface Scale' in bsdf.inputs:
+            bsdf.inputs['Subsurface Scale'].default_value = 0.05
 
     coord = nt.nodes.new('ShaderNodeTexCoord')
 
@@ -310,6 +323,41 @@ def procedural_mat(name, base, rough=0.5, metal=0.0, emit=None, emit_str=0.0,
         rr.color_ramp.elements[1].color = (min(1.0, rough + rough_var),) * 3 + (1.0,)
         nt.links.new(n3.outputs['Fac'], rr.inputs['Fac'])
         nt.links.new(rr.outputs['Color'], bsdf.inputs['Roughness'])
+
+    # Wear: patches of exposed metal (rougher + darker) for battle damage
+    if wear > 0.0:
+        nw = nt.nodes.new('ShaderNodeTexNoise')
+        nw.inputs['Scale'].default_value = noise_scale * 0.6
+        nw.inputs['Detail'].default_value = 4.0
+        nw.location = (-900, -640)
+        nt.links.new(coord.outputs['Object'], nw.inputs['Vector'])
+        wr = nt.nodes.new('ShaderNodeValToRGB')
+        wr.location = (-660, -640)
+        we = wr.color_ramp.elements
+        we[0].position = 0.45
+        we[1].position = 0.62
+        we[0].color = (0.0, 0.0, 0.0, 1.0)
+        we[1].color = (1.0, 1.0, 1.0, 1.0)
+        nt.links.new(nw.outputs['Fac'], wr.inputs['Fac'])
+        # darken base color in worn patches
+        mixc = nt.nodes.new('ShaderNodeMixRGB')
+        mixc.blend_type = 'MIX'
+        mixc.inputs['Fac'].default_value = 0.0
+        mixc.inputs['Color2'].default_value = (base[0]*0.4, base[1]*0.4, base[2]*0.4, 1.0)
+        mixc.location = (-420, 220)
+        nt.links.new(wr.outputs['Color'], mixc.inputs['Fac'])
+        # feed the (already mottled) base color as Color1
+        nt.links.new(ramp.outputs['Color'], mixc.inputs['Color1'])
+        nt.links.new(mixc.outputs['Color'], bsdf.inputs['Base Color'])
+        # raise roughness in worn patches (exposed metal reads rougher)
+        if 'Roughness' in bsdf.inputs and rr.outputs['Color'].is_linked:
+            mixr = nt.nodes.new('ShaderNodeMixRGB')
+            mixr.blend_type = 'MIX'
+            mixr.inputs['Color2'].default_value = (min(1.0, rough + 0.4),)*3 + (1.0,)
+            mixr.location = (-420, -420)
+            nt.links.new(wr.outputs['Color'], mixr.inputs['Fac'])
+            nt.links.new(rr.outputs['Color'], mixr.inputs['Color1'])
+            nt.links.new(mixr.outputs['Color'], bsdf.inputs['Roughness'])
     return m
 
 
@@ -320,16 +368,18 @@ def enemy_materials(tag, chitin, plate, oxblood, accent_emit, accent_str, bone):
        restrained armour accent colour; CHITIN_BONE is reserved for bone ridges,
        teeth and spurs."""
     M = {}
-    M['chitin'] = procedural_mat('XCOM_%s_CHITIN' % tag, chitin, rough=0.56, metal=0.04,
-                                 noise_scale=7.0, bump=0.20, mottle=0.30, rough_var=0.10)
-    M['plate'] = procedural_mat('XCOM_%s_PLATE' % tag, plate, rough=0.32, metal=0.62,
-                                noise_scale=5.5, bump=0.16, mottle=0.22, rough_var=0.10)
+    M['chitin'] = procedural_mat('XCOM_%s_CHITIN' % tag, chitin, rough=0.48, metal=0.02,
+                                 noise_scale=7.0, bump=0.40, mottle=0.55, rough_var=0.14,
+                                 sss=0.45, sss_col=(min(1,chitin[0]*1.1), chitin[1]*0.35, chitin[2]*0.3))
+    M['plate'] = procedural_mat('XCOM_%s_PLATE' % tag, plate, rough=0.30, metal=0.70,
+                                noise_scale=5.5, bump=0.22, mottle=0.26, rough_var=0.14,
+                                wear=0.35)
     M['plate_dark'] = procedural_mat('XCOM_%s_PLATE_DARK' % tag, (0.010, 0.011, 0.013),
                                      rough=0.70, metal=0.30, noise_scale=9.0, bump=0.18,
                                      mottle=0.30, rough_var=0.10)
-    M['oxblood'] = procedural_mat('XCOM_%s_PLATE_OXBLOOD' % tag, oxblood, rough=0.42,
-                                  metal=0.30, noise_scale=10.0, bump=0.24, mottle=0.35,
-                                  rough_var=0.10)
+    M['oxblood'] = procedural_mat('XCOM_%s_PLATE_OXBLOOD' % tag, oxblood, rough=0.40,
+                                  metal=0.35, noise_scale=10.0, bump=0.28, mottle=0.40,
+                                  rough_var=0.12, wear=0.30)
     M['accent'] = procedural_mat('XCOM_%s_ACCENT_EMISSIVE' % tag,
                                  (accent_emit[0] * 0.18, accent_emit[1] * 0.18,
                                   accent_emit[2] * 0.18),
@@ -343,8 +393,9 @@ def enemy_materials(tag, chitin, plate, oxblood, accent_emit, accent_str, bone):
                                  noise_scale=16.0, bump=0.12, mottle=0.15, rough_var=0.0)
     global _CHITIN_MAT
     _CHITIN_MAT = M['chitin']
-    M['bone'] = procedural_mat('XCOM_%s_CHITIN_BONE' % tag, bone, rough=0.62, metal=0.0,
-                               noise_scale=20.0, bump=0.26, mottle=0.30, rough_var=0.10)
+    M['bone'] = procedural_mat('XCOM_%s_CHITIN_BONE' % tag, bone, rough=0.58, metal=0.0,
+                               noise_scale=20.0, bump=0.30, mottle=0.34, rough_var=0.10,
+                               sss=0.12, sss_col=(bone[0]*0.7, bone[1]*0.5, bone[2]*0.35))
     return M
 
 
@@ -839,22 +890,18 @@ def frame_ground(cam, dist, azimuth_deg, cam_h, feet_row=0.80):
 
 def setup_render():
     sc = bpy.context.scene
-    try:
-        sc.render.engine = 'BLENDER_EEVEE_NEXT'
-    except Exception:
-        sc.render.engine = 'BLENDER_EEVEE'
+    # Cycles CPU: EEVEE_NEXT black-frames headless on the HTPC node; Cycles also
+    # renders the new SSS + wear materials faithfully.
+    sc.render.engine = 'CYCLES'
+    sc.cycles.device = 'CPU'
+    sc.cycles.samples = 64
+    sc.cycles.use_denoising = True
     sc.render.resolution_x = 720
     sc.render.resolution_y = 900
     sc.render.resolution_percentage = 100
     sc.render.film_transparent = False
     sc.render.image_settings.file_format = 'PNG'
     sc.render.image_settings.color_mode = 'RGB'
-    for attr, val in (('taa_render_samples', 16), ('use_raytracing', True),
-                      ('use_shadows', True), ('use_bloom', False)):
-        try:
-            setattr(sc.eevee, attr, val)
-        except Exception:
-            pass
     try:
         sc.view_settings.view_transform = 'Standard'
         sc.view_settings.look = 'None'
@@ -1322,7 +1369,7 @@ BUILDERS = [
     dict(name='XCOM_Sectoid', fn=build_sectoid, frame='ground', fill=0.62,
          az=25, cam_h=1.30, ground=True, weapon=False, pitch_deg=22,
          feet=[(-0.095, -0.188), (0.105, 0.007)],
-         chitin=(0.030, 0.035, 0.041), plate=(0.115, 0.126, 0.118),
+         chitin=(0.34, 0.36, 0.40), plate=(0.115, 0.126, 0.118),
          oxblood=(0.190, 0.035, 0.030), bone=(0.230, 0.215, 0.175),
          accent=(0.12, 1.00, 0.40), accent_str=2.5,
          silhouette='small + gaunt, oversized smooth cranium, symmetric glowing eyes, '
