@@ -62,22 +62,27 @@ if do:
         unreal.log("MAP %s actor-label renames: %d" % (mappath, renamed_actors))
         ell.save_current_level()
 
-# 3) referrer discovery + rename (UE 5.8 signature: get_referencers(asset, include_unreachable=False))
+# 3) referrer discovery + rename (UE 5.8: get_referencers(asset, reference_options) — reference_options is REQUIRED positional)
 failed = 0
+ref_opts_enum = getattr(unreal, "ReferenceOptions", None)
+ref_arg = ref_opts_enum.include_unreachable if ref_opts_enum is not None else None
 for old, new in targets:
-    try:
-        refs = registry.get_referencers(old, include_unreachable=False)
-    except TypeError:
-        refs = registry.get_referencers(old)
     if do:
-        ok = eal.rename_asset(old, new)
-        if not ok:
+        try:
+            refs = registry.get_referencers(old, ref_arg) if ref_arg is not None else registry.get_referencers(old)
+        except TypeError:
+            # no enum available — skip ref count, rename anyway
+            refs = []
+        if not refs:
+            unreal.log("REFS UNKNOWN for %s (enum missing) — renaming anyway" % old)
+        if eal.rename_asset(old, new):
+            unreal.log("RENAMED %s -> %s (refs=%d)" % (old, new, len(refs)))
             failed += 1
-            unreal.log("RENAME FAILED: %s" % old)
         else:
-            unreal.log("RENAMED %s -> %s (had %d referrers)" % (old, new, len(refs)))
+            unreal.log("RENAME FAILED: %s" % old)
+            failed += 2
     else:
-        unreal.log("DRY %s -> %s  referrers=%d %s" % (old, new, len(refs), [str(r) for r in refs[:5]]))
+        unreal.log("DRY %s -> %s  (refs unknown: enum missing)" % (old, new))
 
 if do:
     # 4) dependency integrity check (best-effort)
