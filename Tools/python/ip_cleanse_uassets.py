@@ -62,13 +62,11 @@ if do:
         unreal.log("MAP %s actor-label renames: %d" % (mappath, renamed_actors))
         ell.save_current_level()
 
-# 3) referrer discovery + rename
+# 3) referrer discovery + rename (UE 5.8 signature: get_referencers(asset, include_unreachable=False))
 failed = 0
-ref_opts = getattr(unreal, "ReferenceOptions", None)
-ref_arg = ref_opts.include_unreachable if ref_opts else None
 for old, new in targets:
     try:
-        refs = registry.get_referencers(old, ref_arg) if ref_arg is not None else registry.get_referencers(old)
+        refs = registry.get_referencers(old, include_unreachable=False)
     except TypeError:
         refs = registry.get_referencers(old)
     if do:
