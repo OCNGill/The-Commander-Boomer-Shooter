@@ -427,15 +427,20 @@ Snakes in zone L (bogs), rats in zone F (retail). Ecology, not scenery.
 
 | Current | New | Code |
 |---|---|---|
-| Graytide | **GRAYTIDE** | `BST_GRAYTIDE` |
-| Ratline | **RATLINE** | `BST_RATLINE` |
-| Drifter | **DRIFTER** | `BST_DRIFTER` |
-| Bulwark | **BULWARK** | `BST_BULWARK` |
-| Harrower | **HARROWER** | `BST_HARROWER` |
+| S-01 | **GRAYTIDE** | `BST_GRAYTIDE` |
+| V-01 | **RATLINE** | `BST_RATLINE` |
+| F-01 | **DRIFTER** | `BST_DRIFTER` |
+| M-01 | **BULWARK** | `BST_BULWARK` |
+| C-01 | **HARROWER** | `BST_HARROWER` |
 
-**Renames:** `out_bestiary/` → `out_bestiary/` · `bestiary_enemies_v2.py` → `bestiary_build.py` · `bestiary_manifest.json` → `MANIFEST_bestiary_v01.json` · `ENEMY_V2_BUILD_REPORT.md` → `REPORT_bestiary_v01.md`
+**Provenance (audit trail, 2026-11-12):** the S-01/V-01/F-01/M-01/C-01 rows were the enemy-kit
+names taken from a third-party game (the classic X-COM roster) before we built our own bestiary.
+They are listed here only so a future audit can trace what was renamed to what. Every live file,
+script, asset, and doc now uses the New column only. Do not reintroduce the old tokens.
+
+**Renames applied 2026-11-12 (commit 984e414):** `out_xcom/` → `out_bestiary/` · `xcom_enemies_v2.py` → `bestiary_build.py` · `xcom_manifest.json` → `MANIFEST_bestiary_v01.json` · `ENEMY_V2_BUILD_REPORT.md` → `REPORT_bestiary_v01.md` · 71 `Content/**/*.uasset` deferred to reference-aware UE-editor rename (D1.2b).
 **Internal only, never ships:** `geordi`, `liara`, `edi`
-**Gate:** `grep -ri "bestiary|graytide|ratline|drifter|bulwark|harrower"` → zero hits outside the rename map
+**Gate (2026-11-12, commit 984e414):** the six enemy tokens return zero hits in tracked text (this provenance block uses the S/V/F/M/C-01 codes, not the tokens, by design). Re-verify before every packaging run.
 **Caution:** Generation Zero / H1Z1 are inspirations. Take the grammar, build our own vocabulary. No class names, silhouettes, or UI conventions copied.
 
 ---
