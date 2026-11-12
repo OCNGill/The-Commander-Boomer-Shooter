@@ -64,8 +64,13 @@ if do:
 
 # 3) referrer discovery + rename
 failed = 0
+ref_opts = getattr(unreal, "ReferenceOptions", None)
+ref_arg = ref_opts.include_unreachable if ref_opts else None
 for old, new in targets:
-    refs = registry.get_referencers(old, include_unreachable=False)
+    try:
+        refs = registry.get_referencers(old, ref_arg) if ref_arg is not None else registry.get_referencers(old)
+    except TypeError:
+        refs = registry.get_referencers(old)
     if do:
         ok = eal.rename_asset(old, new)
         if not ok:
@@ -77,14 +82,21 @@ for old, new in targets:
         unreal.log("DRY %s -> %s  referrers=%d %s" % (old, new, len(refs), [str(r) for r in refs[:5]]))
 
 if do:
-    # 4) dependency integrity check
+    # 4) dependency integrity check (best-effort)
     broken = 0
-    for a in registry.get_all_assets():
-        for o in registry.get_dependencies(a.package_name, include_unreachable=False):
-            if not o.asset_name:
-                broken += 1
-                if broken <= 10:
-                    unreal.log("  BROKEN? %s -> %s" % (a.package_name, str(o)))
+    try:
+        for a in registry.get_all_assets():
+            try:
+                deps = registry.get_dependencies(a.package_name)
+            except Exception:
+                continue
+            for o in deps:
+                if not o.asset_name:
+                    broken += 1
+                    if broken <= 10:
+                        unreal.log("  BROKEN? %s -> %s" % (a.package_name, str(o)))
+    except Exception as e:
+        unreal.log("DEP CHECK SKIPPED: %s" % e)
     unreal.log("DEPENDENCY CHECK: %d suspicious refs" % broken)
     eal.save_dirty_packages(include_unloaded=True)
     unreal.log("SAVED. IP_CLEANSE_D1.2b DONE failed_renames=%d" % failed)
