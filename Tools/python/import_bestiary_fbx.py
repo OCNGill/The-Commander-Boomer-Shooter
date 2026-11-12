@@ -1,11 +1,11 @@
-"""Import X-COM enemy FBX blockouts into /Game/Enemies/XCOM as static meshes.
+"""Import X-COM enemy FBX blockouts into /Game/Enemies/BESTIARY as static meshes.
 
 Run:
   UnrealEditor-Cmd.exe TheCommander.uproject -run=pythonscript \
-      -script=Tools/python/import_xcom_fbx.py -unattended -nosplash -stdout -FullStdOutLogOutput
+      -script=Tools/python/import_bestiary_fbx.py -unattended -nosplash -stdout -FullStdOutLogOutput
 
 Read-only with respect to Content/Maps/ - no map is ever opened or saved.
-Writes Docs/generated/xcom_ue_import_report.json.
+Writes Docs/generated/bestiary_ue_import_report.json.
 """
 import unreal
 import os
@@ -13,18 +13,18 @@ import json
 import traceback
 
 PROJ = unreal.SystemLibrary.get_project_directory()
-# FBX source dir. Override with XCOM_FBX_DIR to import a different export
-# generation (e.g. Tools/blender/out_xcom_new) without editing this file.
-FBX_DIR = os.environ.get('XCOM_FBX_DIR') or os.path.join(PROJ, 'Tools', 'blender', 'out_xcom')
-DEST = '/Game/Enemies/XCOM'
-REPORT_JSON = os.path.join(PROJ, 'Docs', 'generated', 'xcom_ue_import_report.json')
+# FBX source dir. Override with BESTIARY_FBX_DIR to import a different export
+# generation (e.g. Tools/blender/out_bestiary_new) without editing this file.
+FBX_DIR = os.environ.get('BESTIARY_FBX_DIR') or os.path.join(PROJ, 'Tools', 'blender', 'out_bestiary')
+DEST = '/Game/Enemies/BESTIARY'
+REPORT_JSON = os.path.join(PROJ, 'Docs', 'generated', 'bestiary_ue_import_report.json')
 
 ENEMIES = [
-    ('XCOM_Sectoid', 'M_XCOM_Chitin'),
-    ('XCOM_Viper', 'M_XCOM_Chitin'),
-    ('XCOM_Floater', 'M_XCOM_Chitin'),
-    ('XCOM_Muton', 'M_XCOM_Chitin'),
-    ('XCOM_Chryssalid', 'M_XCOM_Chitin'),
+    ('BESTIARY_Graytide', 'M_BESTIARY_Chitin'),
+    ('BESTIARY_Ratline', 'M_BESTIARY_Chitin'),
+    ('BESTIARY_Drifter', 'M_BESTIARY_Chitin'),
+    ('BESTIARY_Bulwark', 'M_BESTIARY_Chitin'),
+    ('BESTIARY_Harrower', 'M_BESTIARY_Chitin'),
 ]
 
 # Parent material used for the trivial instance we create for the enemies.
@@ -119,7 +119,7 @@ def carried_materials(mesh):
 
 
 def ensure_material(mat_name):
-    """Create /Game/Enemies/XCOM/<mat_name> as a MaterialInstanceConstant if absent.
+    """Create /Game/Enemies/BESTIARY/<mat_name> as a MaterialInstanceConstant if absent.
     Returns (asset_or_None, note)."""
     path = '%s/%s' % (DEST, mat_name)
     if unreal.EditorAssetLibrary.does_asset_exist(path):

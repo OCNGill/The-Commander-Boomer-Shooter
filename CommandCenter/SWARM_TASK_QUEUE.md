@@ -22,7 +22,7 @@ so the Command Center dashboard (http://10.0.0.93:8899/) shows ALL of it togethe
 - If the lock is held, WAIT — do not run a second Blender. Poll every 20s, max 5 attempts,
   then take a different task and note the deferral in the ledger.
 - Keep each render <= 3 models, 720x900, EEVEE, 48 samples. Cycles only if asked.
-- Copy results to the repo (`Tools/blender/out_xcom/`) only when the lock is yours.
+- Copy results to the repo (`Tools/blender/out_bestiary/`) only when the lock is yours.
 
 ## TASK INDEX
 | Task | Slot hint | Deliverable |
@@ -38,6 +38,6 @@ so the Command Center dashboard (http://10.0.0.93:8899/) shows ALL of it togethe
 
 ## HARD DESIGN LOCKS (do not violate)
 - True 3D only. NO sprites, NO billboard impostors for enemies.
-- Original X-COM enemies only (Sectoid, Viper, Floater, Muton, Chryssalid + bosses) — modernized, not re-invented.
+- Original X-COM enemies only (Graytide, Ratline, Drifter, Bulwark, Harrower + bosses) — modernized, not re-invented.
 - Main character/player: NOT in scope this pass.
 - Zero reload animations (weapons contract) — applies to enemy weapons too.

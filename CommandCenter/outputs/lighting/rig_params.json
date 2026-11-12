@@ -109,7 +109,7 @@
  "ground_albedo": 0.18,
  "proof_emission_scale": 2.0,
  "per_enemy": {
-  "XCOM_Chryssalid": {
+  "BESTIARY_Harrower": {
    "lights": [
     {
      "name": "studio_key",
@@ -259,7 +259,7 @@
     }
    },
    "emissive_materials": {
-    "accent": "XCOM_Chryssalid_ACCENT_EMISSIVE"
+    "accent": "BESTIARY_Harrower_ACCENT_EMISSIVE"
    },
    "emission_strength": {
     "accent": 0.01,
@@ -371,7 +371,7 @@
     ]
    }
   },
-  "XCOM_Muton": {
+  "BESTIARY_Bulwark": {
    "lights": [
     {
      "name": "studio_key",
@@ -521,7 +521,7 @@
     }
    },
    "emissive_materials": {
-    "accent": "XCOM_Muton_ACCENT_EMISSIVE"
+    "accent": "BESTIARY_Bulwark_ACCENT_EMISSIVE"
    },
    "emission_strength": {
     "accent": 0.01,
@@ -633,7 +633,7 @@
     ]
    }
   },
-  "XCOM_Floater": {
+  "BESTIARY_Drifter": {
    "lights": [
     {
      "name": "studio_key",
@@ -783,7 +783,7 @@
     }
    },
    "emissive_materials": {
-    "accent": "XCOM_Floater_ACCENT_EMISSIVE"
+    "accent": "BESTIARY_Drifter_ACCENT_EMISSIVE"
    },
    "emission_strength": {
     "accent": 0.01,
@@ -895,7 +895,7 @@
     ]
    }
   },
-  "XCOM_Viper": {
+  "BESTIARY_Ratline": {
    "lights": [
     {
      "name": "studio_key",
@@ -1045,7 +1045,7 @@
     }
    },
    "emissive_materials": {
-    "accent": "XCOM_Viper_ACCENT_EMISSIVE"
+    "accent": "BESTIARY_Ratline_ACCENT_EMISSIVE"
    },
    "emission_strength": {
     "accent": 0.01,
@@ -1157,7 +1157,7 @@
     ]
    }
   },
-  "XCOM_Sectoid": {
+  "BESTIARY_Graytide": {
    "lights": [
     {
      "name": "studio_key",
@@ -1307,7 +1307,7 @@
     }
    },
    "emissive_materials": {
-    "accent": "XCOM_Sectoid_ACCENT_EMISSIVE"
+    "accent": "BESTIARY_Graytide_ACCENT_EMISSIVE"
    },
    "emission_strength": {
     "accent": 0.01,

@@ -427,15 +427,15 @@ Snakes in zone L (bogs), rats in zone F (retail). Ecology, not scenery.
 
 | Current | New | Code |
 |---|---|---|
-| Sectoid | **GRAYTIDE** | `BST_GRAYTIDE` |
-| Viper | **RATLINE** | `BST_RATLINE` |
-| Floater | **DRIFTER** | `BST_DRIFTER` |
-| Muton | **BULWARK** | `BST_BULWARK` |
-| Chryssalid | **HARROWER** | `BST_HARROWER` |
+| Graytide | **GRAYTIDE** | `BST_GRAYTIDE` |
+| Ratline | **RATLINE** | `BST_RATLINE` |
+| Drifter | **DRIFTER** | `BST_DRIFTER` |
+| Bulwark | **BULWARK** | `BST_BULWARK` |
+| Harrower | **HARROWER** | `BST_HARROWER` |
 
-**Renames:** `out_xcom/` → `out_bestiary/` · `xcom_enemies_v2.py` → `bestiary_build.py` · `xcom_manifest.json` → `MANIFEST_bestiary_v01.json` · `ENEMY_V2_BUILD_REPORT.md` → `REPORT_bestiary_v01.md`
+**Renames:** `out_bestiary/` → `out_bestiary/` · `bestiary_enemies_v2.py` → `bestiary_build.py` · `bestiary_manifest.json` → `MANIFEST_bestiary_v01.json` · `ENEMY_V2_BUILD_REPORT.md` → `REPORT_bestiary_v01.md`
 **Internal only, never ships:** `geordi`, `liara`, `edi`
-**Gate:** `grep -ri "xcom|sectoid|viper|floater|muton|chryssalid"` → zero hits outside the rename map
+**Gate:** `grep -ri "bestiary|graytide|ratline|drifter|bulwark|harrower"` → zero hits outside the rename map
 **Caution:** Generation Zero / H1Z1 are inspirations. Take the grammar, build our own vocabulary. No class names, silhouettes, or UI conventions copied.
 
 ---

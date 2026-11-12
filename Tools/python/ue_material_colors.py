@@ -1,9 +1,9 @@
 """UE 5.8 probe #3 - the actual colour data carried by each material.
 
-For every MaterialInstanceConstant in /Game/Enemies/XCOM and
+For every MaterialInstanceConstant in /Game/Enemies/BESTIARY and
 /Game/Tests/UEParity, dump the vector/scalar parameter overrides by name and
-value. This is what makes XCOM_Sectoid_PLATE differ from
-XCOM_Sectoid_CHITIN, and it is what the shots will actually show.
+value. This is what makes BESTIARY_Graytide_PLATE differ from
+BESTIARY_Graytide_CHITIN, and it is what the shots will actually show.
 
 Also checks whether the Interchange parent material exists on disk, and
 whether it is a real asset or a session-transient object.
@@ -18,7 +18,7 @@ import unreal
 
 REPO = r'C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter'
 OUT = REPO + '/CommandCenter/outputs/ue_verify'
-FOLDERS = ['/Game/Enemies/XCOM', '/Game/Tests/UEParity']
+FOLDERS = ['/Game/Enemies/BESTIARY', '/Game/Tests/UEParity']
 
 
 def L(m):

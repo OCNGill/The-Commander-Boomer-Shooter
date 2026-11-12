@@ -4,8 +4,8 @@
 **Written:** 2026-10-21T03:04:40-04:00
 **Source basis:** the author's own knowledge of *UFO: Enemy Unknown* / *X-COM: UFO Defense* (Mythos Games /
 MicroProse, 1994 — the "1994" release in North America, *UFO: Enemy Unknown* in Europe), cross-checked
-against the in-repo assets this swarm has already built (`Tools/blender/out_xcom/xcom_manifest.json`,
-`Tools/blender/xcom_enemies_v2.py`) so the research and the models do not drift apart.
+against the in-repo assets this swarm has already built (`Tools/blender/out_bestiary/bestiary_manifest.json`,
+`Tools/blender/bestiary_enemies_v2.py`) so the research and the models do not drift apart.
 **No web search was used for this artifact** (per task instruction). Where a claim is a memory rather
 than a verified citation, it is marked `[recall]`; where it is structural to the repo's own pipeline, it
 is marked `[repo]`.
@@ -18,7 +18,7 @@ This matters for every downstream task (TASK-02 texture, TASK-03 reveal spec, TA
 materials, and the UE5 side), so it goes first.
 
 The Commander's design brief states that in 1994 "the Battlescape was dark and aliens appeared in a hard
-flash of light — you saw them *arrive*, lit from nowhere" (`CommandCenter/briefs/XCOM_ENEMY_DESIGN_BRIEF.md`).
+flash of light — you saw them *arrive*, lit from nowhere" (`CommandCenter/briefs/BESTIARY_ENEMY_DESIGN_BRIEF.md`).
 **That is a beloved myth, not what the 1994 game did.** The 1994 Battlescape had no dynamic lighting
 system, no light rigs, and no spawn-flash effect. What it actually had was this:
 
@@ -68,11 +68,11 @@ normative.
 
 | Enemy | 1994 battlefield role | 1994 weapon | Size class | Primary colour | The one detail you remember |
 |---|---|---|---|---|---|
-| **Sectoid** | Psychic infiltrator; small squads; panic/psi hybrid | Unarmed (psi) — plasma pistol only in the later re-releases | Small (shortest) | Pale putty grey-green, near-white belly | A head that is *all cranium* — enormous smooth dome, no mouth, one dark eye socket pair |
-| **Viper** | The marquee alien; standard terror-mission line unit | Plasma rifle | Tall, lean | Olive-drab scaled green, yellow-cream underside | The long low reptilian snout and the raised dorsal rib-cage |
-| **Floater** | Aerial ambusher; swoops in and lifts a human out of the map | Unarmed (levitation/psi) | Medium, but *flying* | Grey-green membrane, pale underside | It has no legs at all — it hovers and the ground shadow is the only thing under it |
-| **Muton** | Terror-mission elite; the heavy; arrives in numbers with cover | Heavy plasma cannon | Tall, heavy, widest | Blue-grey armour, **oxblood** chest plate | The visor slit: a horizontal red eye-band across a helmeted, armoured skull |
-| **Chryssalid** | Fast terror; leaps; infects/kills civilians and soldiers | Unarmed — scythe limbs | Low, long, fast | Dusk-purple / maroon chitin | The head is a huge forward-jutting wedge with scythes sweeping ahead of it |
+| **Graytide** | Psychic infiltrator; small squads; panic/psi hybrid | Unarmed (psi) — plasma pistol only in the later re-releases | Small (shortest) | Pale putty grey-green, near-white belly | A head that is *all cranium* — enormous smooth dome, no mouth, one dark eye socket pair |
+| **Ratline** | The marquee alien; standard terror-mission line unit | Plasma rifle | Tall, lean | Olive-drab scaled green, yellow-cream underside | The long low reptilian snout and the raised dorsal rib-cage |
+| **Drifter** | Aerial ambusher; swoops in and lifts a human out of the map | Unarmed (levitation/psi) | Medium, but *flying* | Grey-green membrane, pale underside | It has no legs at all — it hovers and the ground shadow is the only thing under it |
+| **Bulwark** | Terror-mission elite; the heavy; arrives in numbers with cover | Heavy plasma cannon | Tall, heavy, widest | Blue-grey armour, **oxblood** chest plate | The visor slit: a horizontal red eye-band across a helmeted, armoured skull |
+| **Harrower** | Fast terror; leaps; infects/kills civilians and soldiers | Unarmed — scythe limbs | Low, long, fast | Dusk-purple / maroon chitin | The head is a huge forward-jutting wedge with scythes sweeping ahead of it |
 | **Ethereal** *(boss tier)* | Psi apex; mind-control leader | Unarmed (psi) | Tall, gaunt, floating-appearing | Cold teal-black, pale mask | A face that is a featureless elongated mask with a vertical slit |
 | **Silicoid** *(boss tier)* | Cybernetic raid soldier; robot infantry | Plasma rifle | Human-sized, stiff | Brushed steel, red lens | Its red eye-lens in a smooth featureless metal face |
 | **Dreadnought** *(boss tier)* | The carrier; the raid; the panic source | — (vehicle) | Vast | Matte charcoal, ribbed | A wing-shaped hull of a hundred spine-ribs that *flies over the map* |
@@ -81,12 +81,12 @@ normative.
 
 The design brief lists the second wave as "Ethereal, Borg, Dreadnought, Celestial, Chosen, Retinoid
 (Orion)." **Only three of those are 1994 canon.** Flagging rather than editing the brief
-(`CommandCenter/briefs/XCOM_ENEMY_DESIGN_BRIEF.md`):
+(`CommandCenter/briefs/BESTIARY_ENEMY_DESIGN_BRIEF.md`):
 
 - **1994 canon:** **Ethereal** (alien-base/raid psi leader), **Silicoid** (cybernetic robot soldier),
   **Dreadnought** (the flying carrier raid).
 - **Not 1994:** **Borg**, **Chosen**, **Celestial**, **Retinoid**, and the "Orion" designation are
-  **X-COM: Apocalypse (1997)** and **XCOM (2012 reboot)** lineage. They are excellent designs, and
+  **X-COM: Apocalypse (1997)** and **BESTIARY (2012 reboot)** lineage. They are excellent designs, and
   the Commander may well want them, but they are not "the 1994 roster" and must not be sold as such.
 - The 1994 game *did* have the Chosen-adjacent concept of the alien **"Ethereal"** and the armoured
   elite psions in the 1994 alien base — but the named "Chosen" and "Celestial" classes, and the
@@ -107,7 +107,7 @@ modernized build must keep.
 
 ---
 
-### 2.1 SECTOID — the infiltrator
+### 2.1 GRAYTIDE — the infiltrator
 
 **Silhouette.** A small biped whose entire read is *top-heavy*. The outline is a smooth, unbroken dome
 of a head that swells to nearly a third of the body's total height, dropping almost vertically to
@@ -122,50 +122,50 @@ No neck — the cranium sits directly on the shoulders, which is what makes it r
 creature rather than a bald human. Hands are oversized for the body: long, thin, splayed fingers.
 
 **Posture.** Hunched. The head is carried forward of the spine, the shoulders are raised, the arms hang
-loose. The 1994 sprite shows the Sectoid with its head thrust forward and slightly down, as if
+loose. The 1994 sprite shows the Graytide with its head thrust forward and slightly down, as if
 peering. It reads as *curious and wrong*, not aggressive.
 
 **Colour.** Pale putty grey-green, almost a dirty bone colour, with a slightly warmer tan on the
 flanks; the eye region is the darkest value on the creature and the only high-contrast feature. In
-the modern kit this maps to `XCOM_Chitin_Pale` / `XCOM_Chitin_Mid` with the *eyes* as the only accent.
+the modern kit this maps to `BESTIARY_Chitin_Pale` / `BESTIARY_Chitin_Mid` with the *eyes* as the only accent.
 
-**The single most memorable detail.** **No mouth.** The 1994 Sectoid's face is a smooth, uninterrupted
+**The single most memorable detail.** **No mouth.** The 1994 Graytide's face is a smooth, uninterrupted
 expansion of cranium with two large dark eyes set low and wide, and absolutely no mouth, no jaw, no
 snout. Every modernizer reaches for "add a mouth for readability" and it ruins the creature. The
-repo's v2 fixlist got this right — "Sectoid: canonically mouthless — keep that, but add a nasal slit,
+repo's v2 fixlist got this right — "Graytide: canonically mouthless — keep that, but add a nasal slit,
 a brow ridge, and a chin plate so the skull is not a bare sphere" `[repo]`. **Keep the mouthlessness
 forever.** The nasal slit is the correct modern addition; the chin plate is a near-miss (it starts to
 suggest a jaw) — the fixlist already calls it out and it should stay subtle.
 
 **On the 1994 Battlescape.** A 32×32 sprite seen from the game's high 3/4 overhead camera, so the
 readable information is the **top-down head shape and the thin vertical dark line of the body**,
-with the big eyes picking up as two dark pixels. In a night map, the Sectoid was a pale smudge
+with the big eyes picking up as two dark pixels. In a night map, the Graytide was a pale smudge
 against black — the *pale* value was the read, the eyes were the punch. In a day map it was a
 deceptively civilian-looking little figure, which is exactly the 1994 infiltration fantasy: the
-Sectoid in daylight looked almost like a hunched civilian. That contrast is the whole character.
+Graytide in daylight looked almost like a hunched civilian. That contrast is the whole character.
 
-**1994 reveal behaviour.** A Sectoid was among the *first* alien type the player ever met, and the
+**1994 reveal behaviour.** A Graytide was among the *first* alien type the player ever met, and the
 1994 game taught the fog rule with it: it was typically already standing in a black tile when the
 first soldier turned the corner. The contact was announced by the alarm sting and the "!" reaction,
-then the Sectoid sprite simply appeared in the cleared terrain. It was not a jump-scare enemy; it
+then the Graytide sprite simply appeared in the cleared terrain. It was not a jump-scare enemy; it
 was a *surprise of scale and pallor* — you expected a person, and there was a small pale thing
-with no face. In 1994 the Sectoid also **panicked**: it raised panic in nearby civilians, and the
-panic spiral (civilians fleeing, doors opening) was more frightening than the Sectoid itself.
+with no face. In 1994 the Graytide also **panicked**: it raised panic in nearby civilians, and the
+panic spiral (civilians fleeing, doors opening) was more frightening than the Graytide itself.
 
 **Modernization must keep.** (a) Mouthless, permanently. (b) The head is the character — the
 modernized cranium must be the largest single mass on the model, and the eyes the brightest pixels.
-(c) A "pale smudge in the dark" read — the Sectoid is the one enemy whose *pale* material should be
+(c) A "pale smudge in the dark" read — the Graytide is the one enemy whose *pale* material should be
 allowed to be the brightest non-emissive thing in frame, because that was its 1994 job.
 (d) The hunch: torso pitched forward, head slightly further forward still.
 
 ---
 
-### 2.2 VIPER — the marquee alien
+### 2.2 RATLINE — the marquee alien
 
 **Silhouette.** Tall, narrow, and reptilian. A long low head thrust forward on a short thick neck, a
 body that is longer than it is wide, arms that hang past the knees, and — the element that makes it
 iconic — a **raised ridge of dorsal ribs** running the length of the back, each rib standing proud of
-the spine like a row of blades. The 1994 Viper outline is essentially a **standing question-mark**:
+the spine like a row of blades. The 1994 Ratline outline is essentially a **standing question-mark**:
 head forward, ribs up, tail down.
 
 **Proportions.** `[recall]` About 2.0 m in the 1994 game; the in-repo v3 model is **2.06 m** `[repo]`
@@ -178,12 +178,12 @@ stance with a long tail. The repo manifest calls it "tall + narrow" with a 0.64 
 2.06 m height `[repo]` — that 1:3.2 width-to-height ratio is right and is the number to protect.
 
 **Posture.** A forward-leaning hunter. The head is carried low and forward, the shoulders hunched
-forward over the chest, the knees slightly bent, the tail counterbalancing behind. The 1994 Viper
+forward over the chest, the knees slightly bent, the tail counterbalancing behind. The 1994 Ratline
 looked *permanently mid-pounce*, even standing still.
 
 **Colour.** Olive-drab / army green scaled hide, mottled darker on the back and along the rib ridge,
 with a paler yellow-cream belly and inner arm. The plasma rifle it carries has a distinctly
-*cold-blue* glow in the 1994 art — the Viper was the alien most associated with the cold plasma
+*cold-blue* glow in the 1994 art — the Ratline was the alien most associated with the cold plasma
 flash at night.
 
 **The single most memorable detail.** **The elongated snout.** In 1994 it was a long, flat, almost
@@ -191,22 +191,22 @@ crocodilian muzzle with a slight downward hook and a visible nostril ridge, and 
 shown in profile or near-profile. Second place: the raised rib-cage ridge. The repo v2 added a
 **45 cm forward-projecting tapered snout with a plated nasal ridge and six bone teeth in a recessed
 jaw seam** `[repo]` — that is a faithful and well-judged modernization of the 1994 read. **Do not
-shorten the snout** for "realism"; the snout *is* the Viper.
+shorten the snout** for "realism"; the snout *is* the Ratline.
 
-**On the 1994 Battlescape.** At 32×32 in a 3/4 overhead view, the Viper's readable marks were: the
+**On the 1994 Battlescape.** At 32×32 in a 3/4 overhead view, the Ratline's readable marks were: the
 forward jut of the head (a distinct dark notch in the sprite's upper-left), the dorsal rib ridge (a
 row of light pixels catching the painted light down the back), and the long thin arms. In daylight it
 was a green biped with a rifle; in a night map it was almost entirely defined by the **faint lit
 top of the rib ridge and the muzzle flash**.
 
-**1994 reveal behaviour.** The Viper was the game's *standard terror* — it came in squads, in
-groups, often with a Muton. The 1994 pattern was a **dropship**: the map starts empty, a troop
+**1994 reveal behaviour.** The Ratline was the game's *standard terror* — it came in squads, in
+groups, often with a Bulwark. The 1994 pattern was a **dropship**: the map starts empty, a troop
 transport lands out of frame, and the aliens walk in. The 1994 game *did* have a UFO landing on
 terror missions and the troops deploy from it at the map edge. But the "ambush" the player actually
 experienced was: the aliens were already on the map, hidden in black, and the *first* one you saw was
 the one that opened fire — the plasma rifle's glow and report announced them a beat before the
 soldier had a visual. **That is the authentic 1994 "alien contact reveal": a light before a body.**
-The Viper is the enemy that most needs the modern rig to reproduce that ordering — the weapon coil
+The Ratline is the enemy that most needs the modern rig to reproduce that ordering — the weapon coil
 should read as the first thing visible, then the silhouette behind it.
 
 **Modernization must keep.** (a) The snout. (b) The rib ridge as a *silhouette* element — it must
@@ -215,7 +215,7 @@ read. (d) Height ~2.0–2.1 m and the 1:3.2 width ratio.
 
 ---
 
-### 2.3 FLOATER — the aerial ambusher
+### 2.3 DRIFTER — the aerial ambusher
 
 **Silhouette.** A broad, flat, manta-like body with **no legs and no ground contact**, wings or
 membranes swept out to either side, a small blunt head at the front, and trailing filaments off the
@@ -229,7 +229,7 @@ height. The in-repo v3 build is a legitimately excellent piece of enemy design i
 segments) `[repo]`. Keep the 1:7.5.
 
 **Posture.** Level, flat, and *banked* — it is always slightly rolled, never upright. The 1994
-Floater was always shown off the ground with a gap under it.
+Drifter was always shown off the ground with a gap under it.
 
 **Colour.** Grey-green, with a translucent-looking membrane and a paler underside, plus the one
 bright thing on it: the **glowing core**. `[repo]` The v3 model puts a **low segmented glowing dorsal
@@ -237,24 +237,24 @@ core** on the back and only two hair-fine filaments trailing off the rear — no
 descending appendage of any kind. That is right, and the fix is *already* correct. Do not re-add
 anything below the body.
 
-**The single most memorable detail.** **Nothing under it.** The Floater's underside is empty space.
+**The single most memorable detail.** **Nothing under it.** The Drifter's underside is empty space.
 In 1994 it was literally the only alien that was not standing on the ground, and the ground shadow
 underneath it was the tell. The repo's v3 answer — "the body-shaped hover ellipse on the floor is
 the only thing beneath it" `[repo]` — is exactly the 1994 grammar, and it is the single strongest
 piece of fidelity in the whole kit. **Protect this at all costs.** Every later pass must be checked
-against "is there anything under the Floater that isn't a shadow."
+against "is there anything under the Drifter that isn't a shadow."
 
-**On the 1994 Battlescape.** `[recall]` The 1994 Floater's battlefield behaviour was a swoop-in
+**On the 1994 Battlescape.** `[recall]` The 1994 Drifter's battlefield behaviour was a swoop-in
 ambush: it descended onto an isolated human and **levitated them off the map** (the civilian was
-removed from play, and X-COM paid a ransom). It also performed the "psi" role — the 1994 Floater
-was a psychic; the 1997+ "Floater" became a flying gun platform with a plasma cannon, and that is
-**not** the 1994 creature. The Commander's brief describes the Floater as "psychic hover, mind
+removed from play, and X-COM paid a ransom). It also performed the "psi" role — the 1994 Drifter
+was a psychic; the 1997+ "Drifter" became a flying gun platform with a plasma cannon, and that is
+**not** the 1994 creature. The Commander's brief describes the Drifter as "psychic hover, mind
 control" `[repo]` — that is 1994-accurate, and the modern build correctly gives it **no weapon**
 (`has_weapon: false` `[repo]`). Keep it unarmed.
 
-**1994 reveal behaviour.** Because it flew, the Floater's reveal was the one 1994 case that was
+**1994 reveal behaviour.** Because it flew, the Drifter's reveal was the one 1994 case that was
 *not* a pop-in from black: it came **down through the fog** — a shadow crossing the ground first,
-then the body, then the descent. The 1994 camera was top-down enough that a descending Floater was
+then the body, then the descent. The 1994 camera was top-down enough that a descending Drifter was
 a *growing shadow*. The modern equivalent that must be built: **shadow first, body second, light
 third.** The `reveal_under` light in the repo rig and the hover ellipse in the v3 model are the
 right primitives; the ordering (ground shadow appears → body resolves → rim light snaps) is the
@@ -266,51 +266,51 @@ authored beat that has to be in the reveal spec.
 
 ---
 
-### 2.4 MUTON — the terror-mission heavy
+### 2.4 BULWARK — the terror-mission heavy
 
 **Silhouette.** A wide, heavy, armoured biped. Enormous squared pauldrons that flare out past the
 hips; a helmeted, featureless head with a single **horizontal visor slit**; a broad chest with a
-prominent plate; thick, straight legs. The 1994 Muton outline is basically a **bell** — narrow head,
+prominent plate; thick, straight legs. The 1994 Bulwark outline is basically a **bell** — narrow head,
 enormous shoulders, skirt of armour. It is the widest and the heaviest silhouette in the roster, and
 it is the only enemy that reads as *made* rather than *born*.
 
 **Proportions.** `[recall]` ~2.2 m in 1994; the in-repo v3 model is **2.07 m** with a **1.15 m
-width** `[repo]` — i.e. 1:1.8 height:width. Compare the Viper at 1:3.2. **That contrast is the
-whole readability strategy of the kit:** the Muton is broad and short-looking, the Viper is tall and
+width** `[repo]` — i.e. 1:1.8 height:width. Compare the Ratline at 1:3.2. **That contrast is the
+whole readability strategy of the kit:** the Bulwark is broad and short-looking, the Ratline is tall and
 thin, and at gameplay distance they can never be confused. The repo's "walking tank" phrasing is
 accurate. Keep the 1:1.8.
 
-**Posture.** Square, planted, both feet wide. The 1994 Muton stood like a door — it did not lean,
+**Posture.** Square, planted, both feet wide. The 1994 Bulwark stood like a door — it did not lean,
 it did not slouch, it *occupied space*. The repo v2/v3 notes describe huge angled pauldrons, a
 horizontal emissive visor slit in a dark recess, a brow bar, a helmet crest, a slatted respirator,
 and a detailed oxblood chest plate with panel seams, a 3-slat vent grille, and a rank insignia
-`[repo]` — all good, all in the spirit of 1994 where the Muton had visible armour *sections*.
+`[repo]` — all good, all in the spirit of 1994 where the Bulwark had visible armour *sections*.
 
 **Colour.** Blue-grey / gunmetal armour with a distinctly **red-oxblood** chest plate that reads as
-the creature's "tie". In the 1994 sprite the Muton's single warm colour was that chest panel; the
-rest was cold grey-blue. The repo keeps exactly this: `XCOM_Armor_Plate` (metal 0.65) plus
-`XCOM_Armor_Accent` (oxblood) `[repo]`. Correct. The accent is the identity.
+the creature's "tie". In the 1994 sprite the Bulwark's single warm colour was that chest panel; the
+rest was cold grey-blue. The repo keeps exactly this: `BESTIARY_Armor_Plate` (metal 0.65) plus
+`BESTIARY_Armor_Accent` (oxblood) `[repo]`. Correct. The accent is the identity.
 
 **The single most memorable detail.** **The horizontal visor slit.** A single narrow red eye-band
-across a featureless armoured helm. The 1994 Muton had no visible face at all beyond that band, and
+across a featureless armoured helm. The 1994 Bulwark had no visible face at all beyond that band, and
 the band was *angry* — a laser line, not a pair of eyes. The repo v2 explicitly removed the
 illegible "cream hook" and replaced it with "a HORIZONTAL EMISSIVE VISOR SLIT in a dark recess" and
 a "brow bar, a helmet crest and a slatted respirator" `[repo]`. That is a clean, correct
 modernization. **The visor must remain a single band** — do not split it into two eyes, do not give
-the Muton a mouth.
+the Bulwark a mouth.
 
-**On the 1994 Battlescape.** The 1994 Muton was the *alarm* enemy — the unit that made the whole
+**On the 1994 Battlescape.** The 1994 Bulwark was the *alarm* enemy — the unit that made the whole
 terror mission a terror mission. The 32×32 sprite read as: wide shoulders, a bright horizontal line
 at head height, a pale chest block. The red chest plate plus the red visor in a black night map gave
 the player a **two-red-points-on-a-grey-mass** read that was instantly identifiable, and it is the
 clearest demonstration in the original game that *colour accents carry identity in the dark*. That
-is precisely the argument the modern rig makes, and the Muton is its poster child.
+is precisely the argument the modern rig makes, and the Bulwark is its poster child.
 
 **1994 reveal behaviour.** Mutons arrived in numbers, under cover, and were the enemy that **ended
-missions by weight of fire** rather than by a single alpha strike — the 1994 Muton's plasma cannon
-was brutal. The 1994 player's experience of the Muton was: you *knew* one was on the map before you
-could see it, because the first Muton you'd ever met had already killed a soldier. In the
-modernized version this argues for the Muton being the enemy with the **longest, hardest read** —
+missions by weight of fire** rather than by a single alpha strike — the 1994 Bulwark's plasma cannon
+was brutal. The 1994 player's experience of the Bulwark was: you *knew* one was on the map before you
+could see it, because the first Bulwark you'd ever met had already killed a soldier. In the
+modernized version this argues for the Bulwark being the enemy with the **longest, hardest read** —
 its silhouette should be heavy, slow, and unmistakable, and its reveal should feel like a wall
 arriving rather than a shape appearing.
 
@@ -321,7 +321,7 @@ fixlist.
 
 ---
 
-### 2.5 CHRYSSALID — the terror from the deep
+### 2.5 HARROWER — the terror from the deep
 
 **Silhouette.** Low, long, fast, and **forward-pitched**. A deep body carried close to the ground on
 four long spindly legs, a huge head thrust forward and low, and two long **scythe arms** sweeping
@@ -330,35 +330,35 @@ you** — wedge head forward, body tapering back, legs cycling underneath.
 
 **Proportions.** `[recall]` ~1.3 m tall in 1994, but very long front-to-back; the in-repo v3 model is
 **1.03 m tall × 1.62 m long** `[repo]`. The 1:1.6 length-to-height ratio is the important one: the
-Chryssalid is the longest of the five and the lowest. Do not raise it. It should never be able to
-look over a waist-high crate, because the whole point of the 1994 Chryssalid was that it came in
+Harrower is the longest of the five and the lowest. Do not raise it. It should never be able to
+look over a waist-high crate, because the whole point of the 1994 Harrower was that it came in
 *under* your guard and took a civilian before your rifleman turned.
 
 **Posture.** Coiled. Head low and forward, scythes extended, rear arched. The 1994 sprite even at
 rest looked like it was mid-leap.
 
 **Colour.** Dusk-purple / maroon chitin, near-black in the shadows, with a pale cutting edge on the
-scythes. In the 1994 palette the Chryssalid was one of the few enemies with a saturated *non-green*
-colour, which is why it never got confused with the Viper in a night map.
+scythes. In the 1994 palette the Harrower was one of the few enemies with a saturated *non-green*
+colour, which is why it never got confused with the Ratline in a night map.
 
 **The single most memorable detail.** **The scythes.** Two long blade-arms that sweep forward and
 cross ahead of the head, and the venom glow at the base of them. The repo v2 got this right and
 explicitly: "TWO real scythe forelimbs sweeping forward with a bone cutting edge, a dorsal ridge of
 bone spurs, a low head with emissive eyes, mandibles, a mouth seam and a glowing venom sac" `[repo]`.
 **The scythes must be bone-white cutting edges against the dark chitin** — that value contrast is
-what makes the creature visible in the dark, and it is the same principle as the Muton's red accents.
+what makes the creature visible in the dark, and it is the same principle as the Bulwark's red accents.
 
-**On the 1994 Battlescape.** The 1994 Chryssalid was the one enemy with a *movement* identity rather
+**On the 1994 Battlescape.** The 1994 Harrower was the one enemy with a *movement* identity rather
 than a static one: it was **fast** (faster than a soldier could react), and critically it **leapt**,
 crossing several tiles in a single bound. It also had the most unpleasant 1994 animation in the
-game. And its horror function was narrative: a Chryssalid that caught a civilian would leave
-something *wrong* behind — a body that was no longer entirely a body. The 1994 Chryssalid could
-turn a human into a Chryssalid. That is a signature 1994 story beat, and the modernized version
-should keep a version of it (spawn a Chryssalid-form rather than a corpse).
+game. And its horror function was narrative: a Harrower that caught a civilian would leave
+something *wrong* behind — a body that was no longer entirely a body. The 1994 Harrower could
+turn a human into a Harrower. That is a signature 1994 story beat, and the modernized version
+should keep a version of it (spawn a Harrower-form rather than a corpse).
 
-**1994 reveal behaviour.** Because it leapt, the Chryssalid's reveal was not a pop-in from black but
+**1994 reveal behaviour.** Because it leapt, the Harrower's reveal was not a pop-in from black but
 a **fast crossing of a lit tile** — you saw it because it moved, and then it was on top of you. The
-1994 player learned to fear movement more than shapes. The modern equivalent: the Chryssalid's
+1994 player learned to fear movement more than shapes. The modern equivalent: the Harrower's
 emissive eyes and venom glow should be visible **at distance in a dark tile before the body
 resolves** — a pair of small green points sliding across the dark, which is the 1994 "I see it
 because it moved" memory, translated into 3D.
@@ -405,23 +405,23 @@ lit the same way (hard cold key, coloured rim, under-glow) so the reveal grammar
 
 ## 4. Cross-checks against the assets already in the repo
 
-The research above was checked against `Tools/blender/out_xcom/xcom_manifest.json` and the v2 build
+The research above was checked against `Tools/blender/out_bestiary/bestiary_manifest.json` and the v2 build
 script, so the next pass does not "fix" a deliberate choice by accident. `[repo]`
 
 | Enemy | In-repo measured (v3 manifest) | 1994 read | Verdict |
 |---|---|---|---|
-| Sectoid | 1.44 m tall, 0.46 m wide, **no weapon**, luminous eyes, no mouth | smallest frame, mouthless, unarmed psi | Height is ~20% over the 1994 feel. **Recommendation:** pull the cranium scale/height toward ~1.25–1.35 m, or keep 1.44 m but raise the cranium ratio so it still reads as the *smallest* silhouette from the gameplay camera. Do not change the mouthlessness or the eye emissive. |
-| Viper | 2.06 m, 0.64 m wide (1:3.2), plasma pistol, snout + 5-rib spine, teeth | tall, narrow, snouted, plasma rifle | Faithful. **One naming risk:** the manifest calls it a "plasma pistol" while the 1994 Viper carried a **plasma rifle** and the 1994 Sectoid carried no gun. If the intent is 1994 accuracy, the Viper's weapon should be the rifle, and the "pistol" naming should be checked against the weapon contract in `Docs/generated/weapons_enemies_v1.json`. |
-| Floater | 0.33 m tall, 2.48 m wide (1:7.5), **legless**, no weapon, dorsal core, rear filaments only | hovering manta, legless, unarmed, 1 bright core | Excellent. **No changes.** Guard the "nothing underneath" rule. |
-| Muton | 2.07 m, 1.15 m wide (1:1.8), visor slit, oxblood chest, heavy plasma rifle, two-handed | broad armoured heavy, single visor band, heavy cannon | Faithful. Weight is a bit lighter than the 1994 Muton's "door" mass, but the 1:1.8 ratio is the right discriminator against the Viper. |
-| Chryssalid | 1.03 m tall, 1.62 m long, 4 digitigrade legs, 2 scythe forelimbs, venom sac, no weapon | low, long, leaping, scythes | Faithful and well-judged. |
+| Graytide | 1.44 m tall, 0.46 m wide, **no weapon**, luminous eyes, no mouth | smallest frame, mouthless, unarmed psi | Height is ~20% over the 1994 feel. **Recommendation:** pull the cranium scale/height toward ~1.25–1.35 m, or keep 1.44 m but raise the cranium ratio so it still reads as the *smallest* silhouette from the gameplay camera. Do not change the mouthlessness or the eye emissive. |
+| Ratline | 2.06 m, 0.64 m wide (1:3.2), plasma pistol, snout + 5-rib spine, teeth | tall, narrow, snouted, plasma rifle | Faithful. **One naming risk:** the manifest calls it a "plasma pistol" while the 1994 Ratline carried a **plasma rifle** and the 1994 Graytide carried no gun. If the intent is 1994 accuracy, the Ratline's weapon should be the rifle, and the "pistol" naming should be checked against the weapon contract in `Docs/generated/weapons_enemies_v1.json`. |
+| Drifter | 0.33 m tall, 2.48 m wide (1:7.5), **legless**, no weapon, dorsal core, rear filaments only | hovering manta, legless, unarmed, 1 bright core | Excellent. **No changes.** Guard the "nothing underneath" rule. |
+| Bulwark | 2.07 m, 1.15 m wide (1:1.8), visor slit, oxblood chest, heavy plasma rifle, two-handed | broad armoured heavy, single visor band, heavy cannon | Faithful. Weight is a bit lighter than the 1994 Bulwark's "door" mass, but the 1:1.8 ratio is the right discriminator against the Ratline. |
+| Harrower | 1.03 m tall, 1.62 m long, 4 digitigrade legs, 2 scythe forelimbs, venom sac, no weapon | low, long, leaping, scythes | Faithful and well-judged. |
 
 Additional cross-referenced repo constraints these dossiers must not violate:
 
-- `XCOM_Eye_Emissive` / `XCOM_Core_Emissive` / `XCOM_Plasma_Emissive` are the **only** emissive
+- `BESTIARY_Eye_Emissive` / `BESTIARY_Core_Emissive` / `BESTIARY_Plasma_Emissive` are the **only** emissive
   families, and the eyes must be the brightest pixels in frame `[repo, LIGHTING_V2_FIXLIST §1]`.
 - Material families are exactly **CHITIN / PLATE / ACCENT** — bone/pale is reserved for bone ridges,
-  teeth and spurs, never for hands or feet `[repo, XCOM_ENEMY_V2_FIXLIST §E]`.
+  teeth and spurs, never for hands or feet `[repo, BESTIARY_ENEMY_V2_FIXLIST §E]`.
 - No enemies are to be re-invented: modernized, not redesigned. Everything above is framed as
   *protection* of a 1994 feature, never as a new feature.
 - Hard locks: true 3D only, no sprites, no billboards; no reload animations **including enemy
@@ -445,16 +445,16 @@ authored beat, per enemy:
 5. **The eyes are the brightest pixels in the frame.** (1994: the only light in a night map was the
    plasma flash and the glow; the modern version keeps the *emissive-first* rule.)
 6. **A ground anchor.** A tight contact-occlusion seam at the soles, and one clear cast shadow
-   falling away from the camera — except the Floater, whose only ground element is its shadow.
+   falling away from the camera — except the Drifter, whose only ground element is its shadow.
 7. **The under-glow is under the creature, not in front of it.** (Per `LIGHTING_V2_FIXLIST` §3, a
    floor pool is not an under-glow.)
 8. **Enemy-specific first-read** (from the dossiers above):
-   - Sectoid — a pale smudge; no mouth; the *absence* is the scare.
-   - Viper — the **weapon coil glow first**, then the snout and rib ridge.
-   - Floater — **ground shadow first**, body second, light third; it descends into the fog.
-   - Muton — the **red visor band and oxblood chest** are the first two things in the frame; it
+   - Graytide — a pale smudge; no mouth; the *absence* is the scare.
+   - Ratline — the **weapon coil glow first**, then the snout and rib ridge.
+   - Drifter — **ground shadow first**, body second, light third; it descends into the fog.
+   - Bulwark — the **red visor band and oxblood chest** are the first two things in the frame; it
      arrives as a wall.
-   - Chryssalid — **two small green points moving across a dark tile**; it resolves late and
+   - Harrower — **two small green points moving across a dark tile**; it resolves late and
      arrives first.
 
 ---
@@ -464,11 +464,11 @@ authored beat, per enemy:
 1. **Roster lineage** — should the second wave be split into 1994 (Ethereal / Silicoid /
    Dreadnought) and later-linenage (Chosen / Celestial / Borg / Retinoid)? The brief currently
    lumps them. §1.1.
-2. **Viper weapon naming** — 1994 Viper = plasma **rifle**; the manifest says "plasma pistol."
+2. **Ratline weapon naming** — 1994 Ratline = plasma **rifle**; the manifest says "plasma pistol."
    Reconcile against the weapon contract.
-3. **Sectoid height** — 1.44 m vs a 1994 feel of roughly 1.1–1.2 m; scale down, or raise the
+3. **Graytide height** — 1.44 m vs a 1994 feel of roughly 1.1–1.2 m; scale down, or raise the
    cranium ratio?
-4. **Chryssalid civilian infection** — the 1994 Chryssalid turned humans into Chryssalids. Adopt as
+4. **Harrower civilian infection** — the 1994 Harrower turned humans into Chryssalids. Adopt as
    a modernized mechanic? (No regeneration, no health system changes implied; it is a spawn swap.)
 5. **Doctrine for the 1994 myth** — the brief's "aliens appeared in a hard flash of light" is
    in-fiction-now and accurate-as-a-feel, but historically wrong. Recommendation: keep the rig,

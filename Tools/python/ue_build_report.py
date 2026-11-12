@@ -19,20 +19,20 @@ SHOT_DIR = os.path.join(OUT, 'shots')
 
 # Measured mtimes (ISO, local). Recorded from the filesystem during the run.
 MTIME_FBX = {
-    'XCOM_Sectoid': '2026-10-21T04:24',
-    'XCOM_Viper': '2026-10-21T04:25',
-    'XCOM_Floater': '2026-10-21T04:26',
-    'XCOM_Muton': '2026-10-21T04:26',
-    'XCOM_Chryssalid': '2026-10-21T04:27',
+    'BESTIARY_Graytide': '2026-10-21T04:24',
+    'BESTIARY_Ratline': '2026-10-21T04:25',
+    'BESTIARY_Drifter': '2026-10-21T04:26',
+    'BESTIARY_Bulwark': '2026-10-21T04:26',
+    'BESTIARY_Harrower': '2026-10-21T04:27',
 }
 MTIME_UASSET = {
-    'XCOM_Sectoid': '2026-10-21T01:13',
-    'XCOM_Viper': '2026-10-21T01:13',
-    'XCOM_Floater': '2026-10-21T01:13',
-    'XCOM_Muton': '2026-10-21T01:13',
-    'XCOM_Chryssalid': '2026-10-21T01:13',
+    'BESTIARY_Graytide': '2026-10-21T01:13',
+    'BESTIARY_Ratline': '2026-10-21T01:13',
+    'BESTIARY_Drifter': '2026-10-21T01:13',
+    'BESTIARY_Bulwark': '2026-10-21T01:13',
+    'BESTIARY_Harrower': '2026-10-21T01:13',
 }
-ENEMIES = ['XCOM_Sectoid', 'XCOM_Viper', 'XCOM_Floater', 'XCOM_Muton', 'XCOM_Chryssalid']
+ENEMIES = ['BESTIARY_Graytide', 'BESTIARY_Ratline', 'BESTIARY_Drifter', 'BESTIARY_Bulwark', 'BESTIARY_Harrower']
 
 
 def mtime_of(path):
@@ -77,7 +77,7 @@ def main():
     lines = []
     A = lines.append
 
-    A('# UE 5.8 In-Engine Parity Verification - XCOM Enemy Kit')
+    A('# UE 5.8 In-Engine Parity Verification - BESTIARY Enemy Kit')
     A('')
     A('Generated: %s' % data.get('generated_utc', '?'))
     A('Engine: UE %s' % data.get('engine', '?'))
@@ -85,9 +85,9 @@ def main():
     A('')
     A('## Headline')
     A('')
-    A('The shipping UE assets under `Content/Enemies/XCOM/` are **two rebuilds stale**.')
+    A('The shipping UE assets under `Content/Enemies/BESTIARY/` are **two rebuilds stale**.')
     A('They hold the **v1** import, not the current **v3** source meshes. The retention')
-    A('figure that appeared in `xcom_ue_import_report.md` (39-91%) compares a v1 asset')
+    A('figure that appeared in `bestiary_ue_import_report.md` (39-91%) compares a v1 asset')
     A('against a v3 FBX, so it measures **staleness, not geometry loss**.')
     A('')
     A('Both numbers are reported below, labelled precisely.')
@@ -101,8 +101,8 @@ def main():
         A('| %s | %s | %s | %s |' % (e, MTIME_FBX.get(e, '?'),
                                      MTIME_UASSET.get(e, '?'), '2 rebuilds'))
     A('')
-    A('FBX files: `Tools/blender/out_xcom/XCOM_*.fbx` (current v3 builder output).')
-    A('uassets: `Content/Enemies/XCOM/XCOM_*.uasset` (v1 import, never re-imported).')
+    A('FBX files: `Tools/blender/out_bestiary/BESTIARY_*.fbx` (current v3 builder output).')
+    A('uassets: `Content/Enemies/BESTIARY/BESTIARY_*.uasset` (v1 import, never re-imported).')
     A('Note: an independent audit cited FBX mtimes of 02:47-02:51; this lane measured')
     A('04:24-04:27. The uasset mtime (01:13) matches the audit exactly. Either way the')
     A('uassets predate the FBX files, so the conclusion is unchanged.')
@@ -205,7 +205,7 @@ def main():
     A('- PASS A (fresh): each current v3 FBX re-imported into the throwaway path')
     A('  `/Game/Tests/UEParity/` with the same `FbxImportUI` options as the original')
     A('  production import, then measured.')
-    A('- PASS B (stale): the shipping `/Game/Enemies/XCOM/` assets loaded read-only.')
+    A('- PASS B (stale): the shipping `/Game/Enemies/BESTIARY/` assets loaded read-only.')
     A('- Renders: `SceneCaptureComponent2D` -> `TextureRenderTarget2D` -> PNG export,')
     A('  960x1200, grey background, floor + contact shadow, 3/4 front view, key + fill + rim.')
     A('- No map was opened, modified, or saved. `Content/Maps/M_Blockout01.umap` is')

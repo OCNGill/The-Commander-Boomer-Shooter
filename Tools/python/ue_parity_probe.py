@@ -17,9 +17,9 @@ import os
 import unreal
 
 REPO = r'C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter'
-FBX_DIR = REPO + '/Tools/blender/out_xcom'
+FBX_DIR = REPO + '/Tools/blender/out_bestiary'
 THROW = '/Game/Tests/UEParity'
-SHIPPING = '/Game/Enemies/XCOM'
+SHIPPING = '/Game/Enemies/BESTIARY'
 
 R = {}
 
@@ -119,7 +119,7 @@ except Exception as e:
 # ------------------------------------------- triangle count on shipping mesh
 ship_mesh = None
 try:
-    ship_mesh = unreal.EditorAssetLibrary.load_asset(SHIPPING + '/XCOM_Sectoid.XCOM_Sectoid')
+    ship_mesh = unreal.EditorAssetLibrary.load_asset(SHIPPING + '/BESTIARY_Graytide.BESTIARY_Graytide')
     R['shipping_loaded'] = bool(ship_mesh)
     R['shipping_class'] = ship_mesh.get_class().get_name() if ship_mesh else None
 except Exception as e:
@@ -177,7 +177,7 @@ L('TRI ' + json.dumps(tri_result, default=str))
 
 # ------------------------------------------------------------ fresh import
 fresh = {}
-name = 'XCOM_Sectoid'
+name = 'BESTIARY_Graytide'
 try:
     fbx = FBX_DIR + '/' + name + '.fbx'
     R['fbx_exists'] = os.path.isfile(fbx)

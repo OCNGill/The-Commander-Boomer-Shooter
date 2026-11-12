@@ -13,7 +13,7 @@
   "driver": "32.0.32015.7029 (2026-10-17), Adrenalin 26.20.15.07",
   "editor": "F:\\Unreal_engine\\UE_5.8  (UnrealEditor-Cmd.exe, scheduled task in session 1)",
   "enemies": {
-    "XCOM_Chryssalid": {
+    "BESTIARY_Harrower": {
       "blown_frac": 0.02517,
       "bytes": 1624447,
       "dark_frac": 0.00385,
@@ -21,7 +21,7 @@
         1080,
         1350
       ],
-      "file": "XCOM_Chryssalid_ue.png",
+      "file": "BESTIARY_Harrower_ue.png",
       "luminance": {
         "max": 254.9,
         "median": 111.0,
@@ -32,7 +32,7 @@
       "sha256": "d12478d75d88a0685ee8a907683ce40af07fba0479e2a5671550df51fff695e7",
       "unique_colors": 3953
     },
-    "XCOM_Floater": {
+    "BESTIARY_Drifter": {
       "blown_frac": 0.0,
       "bytes": 846093,
       "dark_frac": 0.00336,
@@ -40,7 +40,7 @@
         1080,
         1350
       ],
-      "file": "XCOM_Floater_ue.png",
+      "file": "BESTIARY_Drifter_ue.png",
       "luminance": {
         "max": 223.5,
         "median": 110.0,
@@ -51,7 +51,7 @@
       "sha256": "8738375d7e60447e63b99039b0992b50d0723c4ab943ca313da3add2d931ad41",
       "unique_colors": 1152
     },
-    "XCOM_Muton": {
+    "BESTIARY_Bulwark": {
       "blown_frac": 0.0,
       "bytes": 1624447,
       "dark_frac": 0.00172,
@@ -59,7 +59,7 @@
         1080,
         1350
       ],
-      "file": "XCOM_Muton_ue.png",
+      "file": "BESTIARY_Bulwark_ue.png",
       "luminance": {
         "max": 232.9,
         "median": 79.0,
@@ -70,7 +70,7 @@
       "sha256": "b09c848b64ddd6463696c949c83454e5c5230f151c95991994a2e4a337c3d86d",
       "unique_colors": 2476
     },
-    "XCOM_Sectoid": {
+    "BESTIARY_Graytide": {
       "blown_frac": 0.0,
       "bytes": 609202,
       "dark_frac": 0.00383,
@@ -78,7 +78,7 @@
         1080,
         1350
       ],
-      "file": "XCOM_Sectoid_ue.png",
+      "file": "BESTIARY_Graytide_ue.png",
       "luminance": {
         "max": 64.0,
         "median": 37.0,
@@ -89,7 +89,7 @@
       "sha256": "fd81d339ee78f203344f80798af85af3cfd29bc3904f4b4c7ee107411cf5f048",
       "unique_colors": 65
     },
-    "XCOM_Viper": {
+    "BESTIARY_Ratline": {
       "blown_frac": 0.0,
       "bytes": 846093,
       "dark_frac": 0.00731,
@@ -97,7 +97,7 @@
         1080,
         1350
       ],
-      "file": "XCOM_Viper_ue.png",
+      "file": "BESTIARY_Ratline_ue.png",
       "luminance": {
         "max": 220.5,
         "median": 68.0,

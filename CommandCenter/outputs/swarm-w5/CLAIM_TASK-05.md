@@ -7,5 +7,5 @@
 - **Deliverable:** `CommandCenter/outputs/swarm-w5/TASK-05_texture_recipes.md`
 - **Scope:** Procedural texture recipes for the X-COM enemy kit (chitin, bone, armour plate, plasma)
   plus the UV / uniform layout convention for the enemies. Grounded in the existing
-  `Tools/blender/make_textures_v2.py` generator and `Tools/blender/xcom_enemies_v2.py`
+  `Tools/blender/make_textures_v2.py` generator and `Tools/blender/bestiary_enemies_v2.py`
   material graph; specifies the fix for the "reads as lichen" artefact.

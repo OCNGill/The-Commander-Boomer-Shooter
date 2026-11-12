@@ -1,8 +1,8 @@
-"""UE 5.8 - PHASE B: in-engine parity shots of the five shipping XCOM enemies.
+"""UE 5.8 - PHASE B: in-engine parity shots of the five shipping BESTIARY enemies.
 
-Renders each /Game/Enemies/XCOM static mesh with a scene capture in a
+Renders each /Game/Enemies/BESTIARY static mesh with a scene capture in a
 controlled studio (neutral grey background, flat floor, key + fill + rim) and
-writes CommandCenter/outputs/ue_verify/shots/XCOM_<Enemy>_ue.png.
+writes CommandCenter/outputs/ue_verify/shots/BESTIARY_<Enemy>_ue.png.
 
 WHY THIS FILE IS TICK-DRIVEN
 ----------------------------
@@ -40,13 +40,13 @@ REPO = os.environ.get('UE_REPO',
                        r'C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter')
 OUT = REPO + '/CommandCenter/outputs/ue_verify'
 SHOTS = OUT + '/shots'
-SHIPPING = '/Game/Enemies/XCOM'
+SHIPPING = '/Game/Enemies/BESTIARY'
 # The proofing COPY of the frozen arena map.  Content/Tests/M_Proof_Blockout.umap
 # is byte-identical to Content/Maps/M_Blockout01.umap, so the frozen map is
 # never opened.  This map is loaded read-only: it is never saved.
 MAP = '/Game/Tests/M_Proof_Blockout'
-ENEMIES = ['XCOM_Sectoid', 'XCOM_Viper', 'XCOM_Floater', 'XCOM_Muton',
-           'XCOM_Chryssalid']
+ENEMIES = ['BESTIARY_Graytide', 'BESTIARY_Ratline', 'BESTIARY_Drifter', 'BESTIARY_Bulwark',
+           'BESTIARY_Harrower']
 
 WIDTH = 1080
 HEIGHT = 1350
@@ -257,8 +257,8 @@ def build_studio(world, center, size):
     # The Engine basic Cube is 100 units, so a scale of size*0.06 gives a
     # floor a few subject-widths across.
     # The floor is sized from the SUBJECT, so the smallest creature (the
-    # Sectoid) got the smallest lit area and rendered almost black while
-    # the Muton was fine.  The studio is now a FIXED size - the subject
+    # Graytide) got the smallest lit area and rendered almost black while
+    # the Bulwark was fine.  The studio is now a FIXED size - the subject
     # varies, the set does not - so every enemy is lit identically.
     fs = 14.0
     fa.set_actor_scale3d(unreal.Vector(fs, fs, 0.02))
@@ -694,7 +694,7 @@ class Shooter(object):
         new = sorted(after - before)
         produced = [f for f in after
                     if f.lower().startswith('%s_ue' % name.lower())]
-        # normalise to exactly XCOM_<Enemy>_ue.png
+        # normalise to exactly BESTIARY_<Enemy>_ue.png
         final = None
         for f in produced:
             p = os.path.join(SHOTS, f)

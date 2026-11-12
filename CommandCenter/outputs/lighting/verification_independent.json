@@ -1,5 +1,5 @@
 {
- "XCOM_Sectoid": {
+ "BESTIARY_Graytide": {
   "width": 720,
   "height": 900,
   "clipped_white_pixels": 4171,
@@ -276,7 +276,7 @@
    }
   }
  },
- "XCOM_Viper": {
+ "BESTIARY_Ratline": {
   "width": 720,
   "height": 900,
   "clipped_white_pixels": 0,
@@ -553,7 +553,7 @@
    }
   }
  },
- "XCOM_Floater": {
+ "BESTIARY_Drifter": {
   "width": 720,
   "height": 900,
   "clipped_white_pixels": 0,
@@ -830,7 +830,7 @@
    }
   }
  },
- "XCOM_Muton": {
+ "BESTIARY_Bulwark": {
   "width": 720,
   "height": 900,
   "clipped_white_pixels": 0,
@@ -1107,7 +1107,7 @@
    }
   }
  },
- "XCOM_Chryssalid": {
+ "BESTIARY_Harrower": {
   "width": 720,
   "height": 900,
   "clipped_white_pixels": 340,

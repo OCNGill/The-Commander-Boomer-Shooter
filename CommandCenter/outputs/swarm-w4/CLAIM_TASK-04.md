@@ -12,7 +12,7 @@
 
 Read-only analysis of the already-specced enemy roster
 (`Docs/generated/weapons_enemies_v1.json`) against the five X-COM originals
-(Sectoid, Viper, Floater, Muton, Chryssalid) as built by the Blender pass.
+(Graytide, Ratline, Drifter, Bulwark, Harrower) as built by the Blender pass.
 
 ## Write boundary honoured
 

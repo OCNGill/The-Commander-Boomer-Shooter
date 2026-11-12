@@ -29,7 +29,7 @@ fixed** (see §11):
 
 ## 1. The grammar being preserved (inherited, not invented)
 
-The reveal grammar is inherited verbatim from `CommandCenter/outputs/swarm-w1/TASK-01_xcom1994_roster.md`
+The reveal grammar is inherited verbatim from `CommandCenter/outputs/swarm-w1/TASK-01_bestiary1994_roster.md`
 §5 ("The reveal grammar, stated once, for TASK-03 to inherit"). It is restated here only so the
 implementer has it in one place:
 
@@ -42,7 +42,7 @@ implementer has it in one place:
    readable; the rest is falloff.
 5. **The eyes are the brightest pixels in the frame.**
 6. **A ground anchor.** A tight contact-occlusion seam at the soles and one clear cast shadow
-   falling away from the camera — except the Floater, whose only ground element is its shadow.
+   falling away from the camera — except the Drifter, whose only ground element is its shadow.
 7. **The under-glow is under the creature, not in front of it.** A floor pool is not an under-glow.
 8. **Enemy-specific first read** (§6).
 
@@ -184,19 +184,19 @@ timing adjustments below are this spec's.
 
 | Enemy | Height | First read (inherited) | Clip beat | Key on | Rim on | Emissive lead | Pool on | Under | Extra |
 |---|---|---|---|---|---|---|---|---|---|
-| **Sectoid** | 1.39 m | A pale smudge; no mouth; the *absence* is the scare | f0 | **f0, 100%** | f1 (ramp) | f1 (eyes) | f3 | f4, **50% energy** | Slowest resolve: the cranium catches the key, the rest stays black. The rim is the read. |
-| **Viper** | 2.06 m | The **weapon coil glow first**, then the snout and rib ridge | f0 | **f1** (one frame late, behind the coil) | f1 | **f0 (plasma coil, full)** | f3 | f4, **80%** | The coil is lit *before* the key — the weapon is the first thing the eye finds. No under-glow from the creature; the coil is the under-light. |
-| **Floater** | 0.29 m body, hovers 0.9 m | **Ground shadow first, body second, light third**; it descends into the fog | f0 | **f5 (late)** | f5 | f3 | **f0 (first light of all)** | **n/a** | **Order is inverted on purpose.** Beat D becomes beat A: the shadow arrives first, the body descends over f0→f7, the key lands last. No contact shadow (it never touches the ground); its only ground element is its cast shadow. |
-| **Muton** | 2.07 m | The **red visor band and oxblood chest** are the first two things in frame; it arrives as a wall | f0 | **f1** | f2 (delayed one more) | **f0 (visor + oxblood, full)** | f3 | f4, **60%** | Heaviest key, slowest body resolve. The wall reads before the mass does. |
-| **Chryssalid** | 1.03 m | **Two small green points moving across a dark tile**; it resolves late and arrives first | f0 | **f5 (late)** | f6 | **f0 (two green points, full)** | f3 | f4, **100%** | The body stays near-black until f5 — the two points *arrive first* and the creature resolves onto them. The green points must read against black, not against a lit body. |
+| **Graytide** | 1.39 m | A pale smudge; no mouth; the *absence* is the scare | f0 | **f0, 100%** | f1 (ramp) | f1 (eyes) | f3 | f4, **50% energy** | Slowest resolve: the cranium catches the key, the rest stays black. The rim is the read. |
+| **Ratline** | 2.06 m | The **weapon coil glow first**, then the snout and rib ridge | f0 | **f1** (one frame late, behind the coil) | f1 | **f0 (plasma coil, full)** | f3 | f4, **80%** | The coil is lit *before* the key — the weapon is the first thing the eye finds. No under-glow from the creature; the coil is the under-light. |
+| **Drifter** | 0.29 m body, hovers 0.9 m | **Ground shadow first, body second, light third**; it descends into the fog | f0 | **f5 (late)** | f5 | f3 | **f0 (first light of all)** | **n/a** | **Order is inverted on purpose.** Beat D becomes beat A: the shadow arrives first, the body descends over f0→f7, the key lands last. No contact shadow (it never touches the ground); its only ground element is its cast shadow. |
+| **Bulwark** | 2.07 m | The **red visor band and oxblood chest** are the first two things in frame; it arrives as a wall | f0 | **f1** | f2 (delayed one more) | **f0 (visor + oxblood, full)** | f3 | f4, **60%** | Heaviest key, slowest body resolve. The wall reads before the mass does. |
+| **Harrower** | 1.03 m | **Two small green points moving across a dark tile**; it resolves late and arrives first | f0 | **f5 (late)** | f6 | **f0 (two green points, full)** | f3 | f4, **100%** | The body stays near-black until f5 — the two points *arrive first* and the creature resolves onto them. The green points must read against black, not against a lit body. |
 
-**Floater-specific rules** (because its manifest says `has_ground_contact: false`,
+**Drifter-specific rules** (because its manifest says `has_ground_contact: false`,
 `hover_clearance_m: 0.9`):
 
 - It has **no contact seam** and **no under-glow**; its only ground element is its cast shadow.
 - It **descends** into frame: the 8-frame pose is a descent, not a rise.
 - Its pivot sits on the floor, so in UE it **must spawn at +100 cm** and be levelled by hover
-  (see `TASK-07`'s Floater trap).
+  (see `TASK-07`'s Drifter trap).
 - Its measured `contact_shadow_ratio` is 0.011 — near zero, and correct.
 
 ---
@@ -227,9 +227,9 @@ spoken for by the insult bank.
 
 | ID | Requirement |
 |---|---|
-| **A1** | One dedicated reveal sting per enemy (5), named `SFX_XCOM_Reveal_<Enemy>` — short bright transient, 0.15–0.4 s, non-voiced, no tail longer than 0.4 s. `Sectoid`, `Viper`, `Floater`, `Muton`, `Chryssalid`. |
+| **A1** | One dedicated reveal sting per enemy (5), named `SFX_BESTIARY_Reveal_<Enemy>` — short bright transient, 0.15–0.4 s, non-voiced, no tail longer than 0.4 s. `Graytide`, `Ratline`, `Drifter`, `Bulwark`, `Harrower`. |
 | **A2** | The sting must be **transient-first**: its attack must be ≤ 20 ms so it reads as a *snap* against a key-light snap, not as a swell. |
-| **A3** | The sting must be **spectrally distinct per enemy** — the Chryssalid's is thin and high (two points), the Muton's is low and broad (a wall), the Viper's has a coil-hum character, the Floater's is airy and rising, the Sectoid's is a dry scrape. |
+| **A3** | The sting must be **spectrally distinct per enemy** — the Harrower's is thin and high (two points), the Bulwark's is low and broad (a wall), the Ratline's has a coil-hum character, the Drifter's is airy and rising, the Graytide's is a dry scrape. |
 | **A4** | Until A1 exists, `sfx_pizza_impact` is the **placeholder only** and must be flagged as such in the asset tracker (TASK-08). |
 | **A5** | The sting must be triggerable on the **exact frame** the key light enables, from the same event that drives the reveal clip. Sub-frame drift of more than one frame breaks grammar rule 2. |
 
@@ -244,7 +244,7 @@ The reveal is a **lighting and pose** event, never a camera event.
 | Camera movement during the reveal | **none** — no dolly, no cut, no shake, no roll, no FOV change |
 | The reveal happens in the *gameplay* camera | the tile camera the player already owns. The rig is authored so it reads from any of the isometric tile cameras. |
 | The hero/verification camera (a measuring instrument, not the shipping camera) | az 305°, lens 50 mm, camera height 0.62·h, target 0.42·h, cover distance 2.35·h |
-| Per-enemy cover distance | Sectoid 3.27 m, Viper 4.84 m, Muton 4.86 m, Chryssalid 2.42 m, **Floater 5.39 m** (it is 2.48 m wide and hovers, so it needs its own distance) |
+| Per-enemy cover distance | Graytide 3.27 m, Ratline 4.84 m, Bulwark 4.86 m, Harrower 2.42 m, **Drifter 5.39 m** (it is 2.48 m wide and hovers, so it needs its own distance) |
 | Framing | full body, nothing cropped, the creature reads against a near-black backdrop, the floor pool and cast shadow inside the frame |
 | The key/rim azimuth relationship | fixed: the key is camera-left-front, the rim is behind-left. Never swap them for an enemy, never re-aim the key at the floor |
 
@@ -311,13 +311,13 @@ haze 0.003.
 **Measurement generation: `Tools/blender/out_lighting/verification.json`, generated
 `2026-10-21T07:33:03` (sha256 prefix `d1f887a230`), 5 of 5 rendered, 0 skipped, 720×900,
 EEVEE 48 samples, AgX, renderer "EEVEE (Blender 4.2)".**
-**All five enemies still fail.** Pass counts: Muton 6/13, Chryssalid 7/13, Sectoid 7/13,
-Viper 8/13, Floater 8/13.
+**All five enemies still fail.** Pass counts: Bulwark 6/13, Harrower 7/13, Graytide 7/13,
+Ratline 8/13, Drifter 8/13.
 
 > **This section was rewritten at 07:36.** The rig was reworked and re-rendered by another lane
 > at 07:32:29/07:33:03, which changed the failure profile substantially: the **floor white-out
 > is fixed** (the floor now sits inside its window on four of five enemies and the backdrop
-> passes on all five) but **clipping has exploded** (2442 clipped pixels on the Sectoid, up
+> passes on all five) but **clipping has exploded** (2442 clipped pixels on the Graytide, up
 > from 491). Any earlier reading of this document that cites the 06:40:13 generation is
 > superseded. Numbers below are the 07:33:03 generation.
 
@@ -329,39 +329,39 @@ collapsed from 59–121 to 0.42–41.7:
 
 | Enemy | background darkness (≤ 40) | top band | **bottom band** | floor_front mean | floor_shadow mean | floor_key mean |
 |---|---|---|---|---|---|---|
-| Sectoid | **20.871** ✔ | 0.99 | 34.83 | 88.93 | 62.60 | 26.99 |
-| Viper | **22.964** ✔ | 1.00 | 38.01 | 89.65 | 51.11 | 32.50 |
-| Muton | **22.851** ✔ | 0.99 | 41.70 | 90.52 | 63.99 | 26.75 |
-| Chryssalid | **6.595** ✔ | 0.97 | 5.10 | 32.84 | 5.05 | 2.13 |
-| Floater | **0.699** ✔ | 0.97 | 0.42 | 1.38 | 0.66 | 0.48 |
+| Graytide | **20.871** ✔ | 0.99 | 34.83 | 88.93 | 62.60 | 26.99 |
+| Ratline | **22.964** ✔ | 1.00 | 38.01 | 89.65 | 51.11 | 32.50 |
+| Bulwark | **22.851** ✔ | 0.99 | 41.70 | 90.52 | 63.99 | 26.75 |
+| Harrower | **6.595** ✔ | 0.97 | 5.10 | 32.84 | 5.05 | 2.13 |
+| Drifter | **0.699** ✔ | 0.97 | 0.42 | 1.38 | 0.66 | 0.48 |
 
 **Fixed: the floor contrast.** `floor_zones_differ_15pct` now passes on **all five** — the floor
 is no longer a flat white card:
 
 | Enemy | min lateral difference | bar | verdict |
 |---|---|---|---|
-| Chryssalid | **57.86 %** | 15 % | pass |
-| Viper | **36.41 %** | 15 % | pass |
-| Sectoid | **29.60 %** | 15 % | pass |
-| Muton | **29.32 %** | 15 % | pass |
-| Floater | **26.86 %** | 15 % | pass |
+| Harrower | **57.86 %** | 15 % | pass |
+| Ratline | **36.41 %** | 15 % | pass |
+| Graytide | **29.60 %** | 15 % | pass |
+| Bulwark | **29.32 %** | 15 % | pass |
+| Drifter | **26.86 %** | 15 % | pass |
 
-**Fixed: the rim's brightness ratio.** `rim_3pct_of_body` now passes on three of five (Viper
-0.0799, Muton 0.0413, Sectoid 0.0414, all above 0.03).
+**Fixed: the rim's brightness ratio.** `rim_3pct_of_body` now passes on three of five (Ratline
+0.0799, Bulwark 0.0413, Graytide 0.0414, all above 0.03).
 
 **Broken: clipping.** The rig traded floor blowout for body blowout:
 
 | Enemy | clipped white/body pixels | colour clip off emissive | was (06:40:13) |
 |---|---|---|---|
-| **Sectoid** | **2442** | 0 | 491 |
-| **Muton** | **1271** | **235** | 0 |
-| **Viper** | **1081** | 0 | 0 |
-| **Chryssalid** | **525** | 0 | 0 |
-| Floater | 0 | 0 | 268 |
+| **Graytide** | **2442** | 0 | 491 |
+| **Bulwark** | **1271** | **235** | 0 |
+| **Ratline** | **1081** | 0 | 0 |
+| **Harrower** | **525** | 0 | 0 |
+| Drifter | 0 | 0 | 268 |
 
-The Muton is the only enemy now clipping **off-emissive** colour (235 px) — that is a *material*
+The Bulwark is the only enemy now clipping **off-emissive** colour (235 px) — that is a *material*
 problem, not an energy problem: a surface is driven past its colour ceiling. The `KEY_COLOR_MAX
-0.62` ceiling on the cold key is what protects the other three; the Muton's oxblood plate
+0.62` ceiling on the cold key is what protects the other three; the Bulwark's oxblood plate
 absorbs and re-emits, so the key at 320 rig units over-drives it.
 
 **Still broken: the rim band.** `rim_band_mean_ge_120` still fails on three of five, and the
@@ -369,70 +369,70 @@ two that fail badly are the two smallest creatures:
 
 | Enemy | `rim_band_mean_lum` (need ≥ 120) | `rim_bright_over_body` (need ≥ 0.03) |
 |---|---|---|
-| Viper | **134.088** ✔ | 0.07987 ✔ |
-| Muton | **111.443** ✘ (93 % of the bar) | 0.04133 ✔ |
-| Sectoid | **105.322** ✘ (88 %) | 0.04140 ✔ |
-| Chryssalid | **31.078** ✘ (26 %) | 0.00769 ✘ |
-| Floater | **1.977** ✘ (2 %) | 0.0 ✘ |
+| Ratline | **134.088** ✔ | 0.07987 ✔ |
+| Bulwark | **111.443** ✘ (93 % of the bar) | 0.04133 ✔ |
+| Graytide | **105.322** ✘ (88 %) | 0.04140 ✔ |
+| Harrower | **31.078** ✘ (26 %) | 0.00769 ✘ |
+| Drifter | **1.977** ✘ (2 %) | 0.0 ✘ |
 
 The rim is now a **spot cone (45°, az 240, el 20)**, and a spot at rim energy lands its hot
 centre somewhere the band probe does not read. On the two big bipeds it is nearly there
-(93 % and 88 % of the bar); on the **Chryssalid (1.03 m) and the Floater (0.29 m, 5.39 m
-away) it is essentially absent** — 2 % of the required band. The Floater's `rim_pixels` is
+(93 % and 88 % of the bar); on the **Harrower (1.03 m) and the Drifter (0.29 m, 5.39 m
+away) it is essentially absent** — 2 % of the required band. The Drifter's `rim_pixels` is
 **0**: the rim contributes nothing to its silhouette at all. That is the single clearest
 remaining defect and it is a *scale* problem: rim energy is fixed in rig units while the
-Floater sits 5.39 m from the camera and only 0.29 m tall.
+Drifter sits 5.39 m from the camera and only 0.29 m tall.
 
 **Still broken: the under-glow ratios.** `under_lowbody_1_3x_torso` fails on four of five:
 
 | Enemy | `under_lowbody_over_torso` (need ≥ 1.3) | `under_feet_over_torso` (need ≥ 1.3) | reading |
 |---|---|---|---|
-| Floater | **1.8749** ✔ | 0.4011 ✘ | under owns the body but not the feet |
-| Viper | 0.8509 ✘ | 0.2115 ✘ | under is on the floor, not the body |
-| Sectoid | 0.8338 ✘ | 0.3927 ✘ | same |
-| Muton | 0.7023 ✘ | 0.4311 ✘ | same |
-| Chryssalid | 0.5905 ✘ | **2.2388** ✔ | feet read, low body does not |
+| Drifter | **1.8749** ✔ | 0.4011 ✘ | under owns the body but not the feet |
+| Ratline | 0.8509 ✘ | 0.2115 ✘ | under is on the floor, not the body |
+| Graytide | 0.8338 ✘ | 0.3927 ✘ | same |
+| Bulwark | 0.7023 ✘ | 0.4311 ✘ | same |
+| Harrower | 0.5905 ✘ | **2.2388** ✔ | feet read, low body does not |
 
 The under-glow still lights the ground rather than the creature. The rework raised under
 energy to 3000 rig units and tightened the cone to 26° with a 0.01 m source radius, which
 made the falloff steeper — but a steeper falloff from a source at `UNDER_Z 0.04` still lands
-on the floor first. The Floater is the exception that proves the mechanism: it hovers 0.9 m
+on the floor first. The Drifter is the exception that proves the mechanism: it hovers 0.9 m
 above the floor, so its under-glow *can* reach the body (1.87×) and cannot reach the floor
 (0.40×). **The fix direction follows directly: the under-glow's source must be nearer the
 body's underside than the ground.**
 
-**Still broken: the Floater's empty face.** `face_p99` is **0.00** (face mean 0.00, p99 0.00,
-torso mean 3.67) → fails `face_p99_ge_25`. The Floater's whole body is dark: `visible_body_pixels`
+**Still broken: the Drifter's empty face.** `face_p99` is **0.00** (face mean 0.00, p99 0.00,
+torso mean 3.67) → fails `face_p99_ge_25`. The Drifter's whole body is dark: `visible_body_pixels`
 is **868** out of a 11 755-pixel body, and `emissive_pixels` is **15** (the other four enemies
-carry 20 798–38 004). The Floater is currently **effectively unlit**. Its floor mean is 1.38 —
+carry 20 798–38 004). The Drifter is currently **effectively unlit**. Its floor mean is 1.38 —
 far below the `floor_mean` window of [45, 175] — so it fails `floor_zones_in_window` on the
-*dark* side. **The Floater is the opposite failure of the 06:40 generation: it was blown out,
+*dark* side. **The Drifter is the opposite failure of the 06:40 generation: it was blown out,
 and now it is black.**
 
 ### 10.2 The current gate scoreboard (07:33:03)
 
 | Enemy | Passing | Failing criteria |
 |---|---|---|
-| XCOM_Muton | 6/13 | clipped white, clipped body, colour clip off emissive, floor in window, rim band 120, under lowbody, under feet |
-| XCOM_Sectoid | 7/13 | clipped white, clipped body, floor in window, rim band 120, under lowbody, under feet |
-| XCOM_Chryssalid | 7/13 | clipped white, clipped body, floor in window, rim 3 %, rim band 120, under lowbody |
-| XCOM_Viper | 8/13 | clipped white, clipped body, floor in window, under lowbody, under feet |
-| XCOM_Floater | 8/13 | floor in window, face p99, rim 3 %, rim band 120, under feet |
+| BESTIARY_Bulwark | 6/13 | clipped white, clipped body, colour clip off emissive, floor in window, rim band 120, under lowbody, under feet |
+| BESTIARY_Graytide | 7/13 | clipped white, clipped body, floor in window, rim band 120, under lowbody, under feet |
+| BESTIARY_Harrower | 7/13 | clipped white, clipped body, floor in window, rim 3 %, rim band 120, under lowbody |
+| BESTIARY_Ratline | 8/13 | clipped white, clipped body, floor in window, under lowbody, under feet |
+| BESTIARY_Drifter | 8/13 | floor in window, face p99, rim 3 %, rim band 120, under feet |
 
 **Reading the scoreboard.** The four bipeds now fail on the same pair of issues — *the body is
 too hot* (clipping) and *the under-glow is on the floor* — plus a rim band that is 7–12 % short.
-The Chryssalid adds a rim that is 74 % short. The Floater fails almost everything because it
+The Harrower adds a rim that is 74 % short. The Drifter fails almost everything because it
 is too dark, not too bright.
 
 **The honest summary: the rework traded a floor white-out for a body white-out, and left the
 under-glow and the small-enemy rim unresolved.** Three defects, in priority order:
 
-1. **Clipping on the four bipeds** (Sectoid 2442, Muton 1271, Viper 1081, Chryssalid 525) —
-   the key/rim/under energies are now too hot for the body, and the Muton additionally clips
+1. **Clipping on the four bipeds** (Graytide 2442, Bulwark 1271, Ratline 1081, Harrower 525) —
+   the key/rim/under energies are now too hot for the body, and the Bulwark additionally clips
    off-emissive.
 2. **The under-glow lights the floor** (`under_lowbody` 0.59–0.85 on four of five against a
    1.3 bar; the feet ratios 0.21–0.43 on three of five).
-3. **The rim is absent on the small enemies** (Chryssalid band 31 of 120; Floater band 2 of 120
+3. **The rim is absent on the small enemies** (Harrower band 31 of 120; Drifter band 2 of 120
    with `rim_pixels` 0).
 
 ### 10.3 What still has to be true of the reveal itself
@@ -448,13 +448,13 @@ and is listed in §12 (R3, R7).
 `CommandCenter/outputs/lighting/verification_independent.json` was generated at **06:32:18** —
 i.e. against the *previous* rig generation, so it is **not** a second opinion on the 07:33:03
 numbers. It remains useful as a record of the 06:40 state, and it flagged a disagreement worth
-carrying forward: the Floater's `contact_shadow_ratio_mask` measured **1.2203** there (which
+carrying forward: the Drifter's `contact_shadow_ratio_mask` measured **1.2203** there (which
 would fail `contact_shadow_present` at ≤ 0.85) while the harness reported 0.011 and passed it.
-The 07:33:03 harness value for the Floater is **0.4765** — still under the bar, but the
-two-measure disagreement on the Floater's contact shadow has never been resolved, and the
-Floater's ground element is the one ground element the reveal grammar explicitly calls for.
+The 07:33:03 harness value for the Drifter is **0.4765** — still under the bar, but the
+two-measure disagreement on the Drifter's contact shadow has never been resolved, and the
+Drifter's ground element is the one ground element the reveal grammar explicitly calls for.
 **Re-run the independent measure against the 07:33 generation and reconcile it before the
-Floater is signed off.**
+Drifter is signed off.**
 
 ---
 
@@ -465,7 +465,7 @@ Floater is signed off.**
 `Docs/generated/weapons_enemies_v1.json` currently holds six **Plymouth eldritch** creatures:
 `e_01 Barnacle Drone`, `e_02 Pilgrim Zealot`, `e_03 Mayflower Phantom`, `e_04 Lobster Brute`,
 `e_05 Rock Golem`, `e_06 Nor-Easter Titan`. There is **no overlap** with the five X-COM originals
-this reveal is built for (Sectoid, Viper, Floater, Muton, Chryssalid). `e_06` is an unfilled boss
+this reveal is built for (Graytide, Ratline, Drifter, Bulwark, Harrower). `e_06` is an unfilled boss
 slot. `TASK-04` (swarm-w4) lists 17 flagged conflicts in this area, including weapon-damage
 disagreements across three separate sources.
 
@@ -475,7 +475,7 @@ that does not contain it. **Not fixed here.**
 
 ### 11.2 The UE side the reveal will be authored against is stale
 
-The reveal rig is a UE actor component. The UE assets in `Content/Enemies/XCOM/` are dated
+The reveal rig is a UE actor component. The UE assets in `Content/Enemies/BESTIARY/` are dated
 **01:04–01:13**, while the FBX they were imported from are dated **04:24–04:27** — the UE tree
 is **two rebuilds stale**. The import report is dated 04:41:30 but its recorded triangle counts
 (2864 / 3712 / 1980 / 2520 / 2536) do not match the current manifest (7308 / 5764 / 2184 / 5216 /
@@ -490,12 +490,12 @@ tracking and DoD.
 `PU_`, 60 for `WP_`, and **100 otherwise**. Those are Plymouth-roster values. The X-COM enemies
 have no `ENC_` label of their own, so they would fall through to the 100 uu default. Any reveal
 spawn that re-points a mesh must not use this normaliser for the X-COM five — the manifest
-heights are authoritative (Sectoid 1.39 m, Viper 2.06 m, Floater 0.29 m + 0.9 m hover,
-Muton 2.07 m, Chryssalid 1.03 m).
+heights are authoritative (Graytide 1.39 m, Ratline 2.06 m, Drifter 0.29 m + 0.9 m hover,
+Bulwark 2.07 m, Harrower 1.03 m).
 
-### 11.4 The Floater's pivot
+### 11.4 The Drifter's pivot
 
-The Floater's pivot sits on the floor. It must spawn at **+100 cm** and levitate. Reveal
+The Drifter's pivot sits on the floor. It must spawn at **+100 cm** and levitate. Reveal
 grounding is impossible for it by construction; the reveal grammar already accounts for this
 (§6, `TASK-01` rule 6).
 
@@ -529,8 +529,8 @@ thing for the implementing lane to know before touching the rig.
 | R5 | A re-render of all 5 enemies at 720×900 / EEVEE 48 / AgX | `Tools/blender/out_lighting/` |
 | R6 | `verification.json` showing **13/13 on all five** | `Tools/blender/out_lighting/` |
 | R7 | A UE sequence capture proving gates 14–21 (hard step, no alpha, same-frame sting, eyes brightest, under-glow under, one shadow, static camera, 8 frames) | `CommandCenter/outputs/lighting/` |
-| R8 | The Floater's `contact_shadow_ratio` disagreement (§10.4) resolved and recorded | verification notes |
-| R9 | The Floater's face-zone mapping fixed or explicitly exempted (§10.1) | verification notes |
+| R8 | The Drifter's `contact_shadow_ratio` disagreement (§10.4) resolved and recorded | verification notes |
+| R9 | The Drifter's face-zone mapping fixed or explicitly exempted (§10.1) | verification notes |
 
 **Definition of done:** five enemies at 13/13 on the thirteen harness gates, plus all eight
 reveal-specific gates verified from a captured sequence, plus the drift in §13 reconciled and the
@@ -587,7 +587,7 @@ be compared to the 07:33 ones without a conversion.
 
 | Fact | Source |
 |---|---|
-| Reveal grammar (8 rules), per-enemy first reads | `CommandCenter/outputs/swarm-w1/TASK-01_xcom1994_roster.md` §5 |
+| Reveal grammar (8 rules), per-enemy first reads | `CommandCenter/outputs/swarm-w1/TASK-01_bestiary1994_roster.md` §5 |
 | 8-frame `A_<E>_Reveal` clip, rig owns the pose / light owns the flash / audio owns the sting | `CommandCenter/outputs/swarm-w1/TASK-06_rig_plan.md` §3.0, §3.4 |
 | Light vocabulary, UE wiring, bloom and fog guidance | `Docs/generated/lighting_rig_spec.md` |
 | Rig energy table, criteria definitions, drift | `Tools/blender/rig_evidence.py` |
@@ -595,6 +595,6 @@ be compared to the 07:33 ones without a conversion.
 | Independent re-measure | `CommandCenter/outputs/lighting/verification_independent.json` (06:32:18) |
 | Rendered rig parameters | `Tools/blender/out_lighting/rig_params.json` (07:32:29) |
 | Audio cue map | `Docs/generated/insult_bank_contract.md`, `Docs/generated/sound_design_list.md`, `Content/Audio/SFX/` |
-| Naming, spawn traps, Floater +100 cm | `CommandCenter/outputs/swarm-w2/TASK-07_ue_import_pipeline.md` §2 |
+| Naming, spawn traps, Drifter +100 cm | `CommandCenter/outputs/swarm-w2/TASK-07_ue_import_pipeline.md` §2 |
 | Roster conflicts | `CommandCenter/outputs/swarm-w4/TASK-04_roster_integration.md` |
 | Fix list the rig is working against | `CommandCenter/briefs/LIGHTING_V2_FIXLIST.md` |

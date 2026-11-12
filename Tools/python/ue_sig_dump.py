@@ -91,9 +91,9 @@ try:
         L('   ' + str(a))
 except Exception as e:
     L('   list failed %r' % (e,))
-L('=== /Game/Enemies/XCOM contents ===')
+L('=== /Game/Enemies/BESTIARY contents ===')
 try:
-    for a in unreal.EditorAssetLibrary.list_assets('/Game/Enemies/XCOM',
+    for a in unreal.EditorAssetLibrary.list_assets('/Game/Enemies/BESTIARY',
                                                     recursive=True):
         L('   ' + str(a))
 except Exception as e:

@@ -17,7 +17,7 @@ ask questions - you read the file and act.
 
 WORKSPACE: C:\Users\Gillsystems Laptop\source\repos\OCNGill\The_Commander_Boomer_Shooter
 QUEUE:    CommandCenter/SWARM_TASK_QUEUE.md   (read this FIRST)
-BRIEF:    CommandCenter/briefs/XCOM_ENEMY_DESIGN_BRIEF.md
+BRIEF:    CommandCenter/briefs/BESTIARY_ENEMY_DESIGN_BRIEF.md
 OUTPUT:   CommandCenter/outputs/<your-slot>/   (e.g. outputs/htpc-a/)
 LEDGER:   CommandCenter/outputs/LEDGER.md      (append one line per completed task)
 
@@ -38,7 +38,7 @@ RULES (non-negotiable):
 6. On the HTPC, Blender is at /home/gillsystems-htpc/blender-4.2.23-linux-x64/blender
    and is RENDERLESS on Linux (headless EEVEE has no GPU context there). Build FBX on
    HTPC, render on a machine with a display. FBX-only Blender call:
-      ~/blender-4.2.23-linux-x64/blender -b -noaudio ~/gillsystems-swarm/xcom_enemies.py -- --out ~/gillsystems-swarm/out_xcom
+      ~/blender-4.2.23-linux-x64/blender -b -noaudio ~/gillsystems-swarm/bestiary_enemies.py -- --out ~/gillsystems-swarm/out_bestiary
    The helper Tools/blender/blender_turn_htpc.sh wraps this with the lock.
 7. Design truth: TRUE 3D, no sprites. Original 1994 X-COM enemies, modernized.
    Creepy = they come out of nowhere WITH LIGHTING (hard cold key + colored alien rim
@@ -60,20 +60,20 @@ RULES (non-negotiable):
 
 ## FIRST MOVE FOR EACH WINDOW
 
-W1: `Read CommandCenter/SWARM_TASK_QUEUE.md and CommandCenter/briefs/XCOM_ENEMY_DESIGN_BRIEF.md.
-Then claim TASK-01 and write outputs/htpc-a/TASK-01_xcom1994_roster.md`
+W1: `Read CommandCenter/SWARM_TASK_QUEUE.md and CommandCenter/briefs/BESTIARY_ENEMY_DESIGN_BRIEF.md.
+Then claim TASK-01 and write outputs/htpc-a/TASK-01_bestiary1994_roster.md`
 
-W2: `Read CommandCenter/SWARM_TASK_QUEUE.md and CommandCenter/briefs/XCOM_ENEMY_DESIGN_BRIEF.md.
+W2: `Read CommandCenter/SWARM_TASK_QUEUE.md and CommandCenter/briefs/BESTIARY_ENEMY_DESIGN_BRIEF.md.
 Then claim TASK-02 and write outputs/htpc-b/TASK-02_modernization_spec.md`
 
-W3: `Read CommandCenter/SWARM_TASK_QUEUE.md and CommandCenter/briefs/XCOM_ENEMY_DESIGN_BRIEF.md.
+W3: `Read CommandCenter/SWARM_TASK_QUEUE.md and CommandCenter/briefs/BESTIARY_ENEMY_DESIGN_BRIEF.md.
 Then claim TASK-03 and write outputs/main-a/TASK-03_reveal_effect_spec.md`
 
-W4: `Read CommandCenter/SWARM_TASK_QUEUE.md and CommandCenter/briefs/XCOM_ENEMY_DESIGN_BRIEF.md
+W4: `Read CommandCenter/SWARM_TASK_QUEUE.md and CommandCenter/briefs/BESTIARY_ENEMY_DESIGN_BRIEF.md
 and Docs/generated/weapons_enemies_v1.json. Then claim TASK-04 and write
 outputs/main-b/TASK-04_roster_integration.md`
 
-W5: `Read CommandCenter/SWARM_TASK_QUEUE.md and CommandCenter/briefs/XCOM_ENEMY_DESIGN_BRIEF.md.
+W5: `Read CommandCenter/SWARM_TASK_QUEUE.md and CommandCenter/briefs/BESTIARY_ENEMY_DESIGN_BRIEF.md.
 Then claim TASK-05 and write outputs/main-c/TASK-05_texture_recipes.md`
 
 ## COMMANDER'S BLENDER TURN QUEUE (the swarm shares one lock)
@@ -83,11 +83,11 @@ The lock file is the whole coordination mechanism - no agent ever needs to ask p
 ```
 # HTPC (Linux) - FBX authoring turn
 flock -w 900 /home/gillsystems-htpc/.blender.lock -c \
-  '~/blender-4.2.23-linux-x64/blender -b -noaudio ~/gillsystems-swarm/xcom_enemies.py -- --out ~/gillsystems-swarm/out_xcom'
+  '~/blender-4.2.23-linux-x64/blender -b -noaudio ~/gillsystems-swarm/bestiary_enemies.py -- --out ~/gillsystems-swarm/out_bestiary'
 
 # Laptop (Windows) - FBX + render turn
 flock -w 900 "$TEMP/.blender.lock" -c \
-  'D:/Blender/blender-4.2.23-windows-x64/blender.exe -b -noaudio -P Tools/blender/xcom_enemies.py -- --out "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_xcom" --render'
+  'D:/Blender/blender-4.2.23-windows-x64/blender.exe -b -noaudio -P Tools/blender/bestiary_enemies.py -- --out "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_bestiary" --render'
 ```
 
 A turn that cannot take the lock in 900s is SKIPPED, not forced.

@@ -1,6 +1,6 @@
 """Build a combined contact sheet from the five in-engine enemy shots.
 
-Reads CommandCenter/outputs/ue_verify/shots/XCOM_<Enemy>_ue.png and writes
+Reads CommandCenter/outputs/ue_verify/shots/BESTIARY_<Enemy>_ue.png and writes
 CommandCenter/outputs/ue_verify/shots/contact_sheet.png - a 3+2 grid with a
 label under each cell, on the same neutral grey as the renders.
 
@@ -15,8 +15,8 @@ from PIL import Image, ImageDraw
 REPO = r'C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter'
 SHOTS = REPO + '/CommandCenter/outputs/ue_verify/shots'
 OUT = os.path.join(SHOTS, 'contact_sheet.png')
-ENEMIES = ['XCOM_Sectoid', 'XCOM_Viper', 'XCOM_Floater', 'XCOM_Muton',
-           'XCOM_Chryssalid']
+ENEMIES = ['BESTIARY_Graytide', 'BESTIARY_Ratline', 'BESTIARY_Drifter', 'BESTIARY_Bulwark',
+           'BESTIARY_Harrower']
 
 BG = (52, 54, 58)        # neutral grey, matches the render clear colour
 FG = (232, 234, 238)

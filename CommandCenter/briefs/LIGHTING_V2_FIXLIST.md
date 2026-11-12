@@ -1,6 +1,6 @@
 # LIGHTING v2 FIX LIST — what the render actually looks like
 
-Source: my own vision pass on `Tools/blender/out_lighting/XCOM_Sectoid_reveal.png` (the other four
+Source: my own vision pass on `Tools/blender/out_lighting/BESTIARY_Graytide_reveal.png` (the other four
 enemies share the rig, so every item below applies to all five). Ebert is scoring this category
 right now — his verdict lands at `CommandCenter/outputs/ebert/EBERT_LIGHTING_VERDICT.md`. Fix to
 his bar AND to the items below; where the two differ, his bar wins.
@@ -97,8 +97,8 @@ product beauty render. A creepy reveal CONCEALS most of the body and isolates th
 | 8 | Framing | Lower body sinks into darkness; camera at or below eye height |
 | 9 | Consistency | Same shadow direction in all five frames |
 
-**Re-render targets:** `Tools/blender/out_lighting/XCOM_<Name>_reveal.png` (5),
-`XCOM_<Name>_emissive_only.png` (5), `XCOM_<Name>_studio_vs_reveal.png` (5), plus
+**Re-render targets:** `Tools/blender/out_lighting/BESTIARY_<Name>_reveal.png` (5),
+`BESTIARY_<Name>_emissive_only.png` (5), `BESTIARY_<Name>_studio_vs_reveal.png` (5), plus
 `rig_params.json` / `rig_params.png` updated with the new values, and the same set mirrored to
 `CommandCenter/outputs/lighting/`.
 

@@ -16,16 +16,16 @@
   },
   "authority": "/Game/Tests/UEParity",
   "enemies": {
-    "XCOM_Chryssalid": {
+    "BESTIARY_Harrower": {
       "after": [
         {
-          "assigned": "XCOM_Chryssalid_CHITIN",
+          "assigned": "BESTIARY_Harrower_CHITIN",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Chryssalid_CHITIN",
+            "name": "BESTIARY_Harrower_CHITIN",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Chryssalid_CHITIN.XCOM_Chryssalid_CHITIN",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Harrower_CHITIN.BESTIARY_Harrower_CHITIN",
             "scalars": [
               {
                 "name": "Shininess",
@@ -52,16 +52,16 @@
               }
             ]
           },
-          "slot": "XCOM_Chryssalid_CHITIN"
+          "slot": "BESTIARY_Harrower_CHITIN"
         },
         {
-          "assigned": "XCOM_Chryssalid_PLATE",
+          "assigned": "BESTIARY_Harrower_PLATE",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Chryssalid_PLATE",
+            "name": "BESTIARY_Harrower_PLATE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Chryssalid_PLATE.XCOM_Chryssalid_PLATE",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Harrower_PLATE.BESTIARY_Harrower_PLATE",
             "scalars": [
               {
                 "name": "Shininess",
@@ -88,16 +88,16 @@
               }
             ]
           },
-          "slot": "XCOM_Chryssalid_PLATE"
+          "slot": "BESTIARY_Harrower_PLATE"
         },
         {
-          "assigned": "XCOM_Chryssalid_CHITIN_BONE",
+          "assigned": "BESTIARY_Harrower_CHITIN_BONE",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Chryssalid_CHITIN_BONE",
+            "name": "BESTIARY_Harrower_CHITIN_BONE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Chryssalid_CHITIN_BONE.XCOM_Chryssalid_CHITIN_BONE",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Harrower_CHITIN_BONE.BESTIARY_Harrower_CHITIN_BONE",
             "scalars": [
               {
                 "name": "Shininess",
@@ -124,16 +124,16 @@
               }
             ]
           },
-          "slot": "XCOM_Chryssalid_CHITIN_BONE"
+          "slot": "BESTIARY_Harrower_CHITIN_BONE"
         },
         {
-          "assigned": "XCOM_Chryssalid_PLATE_DARK",
+          "assigned": "BESTIARY_Harrower_PLATE_DARK",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Chryssalid_PLATE_DARK",
+            "name": "BESTIARY_Harrower_PLATE_DARK",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Chryssalid_PLATE_DARK.XCOM_Chryssalid_PLATE_DARK",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Harrower_PLATE_DARK.BESTIARY_Harrower_PLATE_DARK",
             "scalars": [
               {
                 "name": "Shininess",
@@ -160,16 +160,16 @@
               }
             ]
           },
-          "slot": "XCOM_Chryssalid_PLATE_DARK"
+          "slot": "BESTIARY_Harrower_PLATE_DARK"
         },
         {
-          "assigned": "XCOM_Chryssalid_ACCENT_EMISSIVE",
+          "assigned": "BESTIARY_Harrower_ACCENT_EMISSIVE",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Chryssalid_ACCENT_EMISSIVE",
+            "name": "BESTIARY_Harrower_ACCENT_EMISSIVE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Chryssalid_ACCENT_EMISSIVE.XCOM_Chryssalid_ACCENT_EMISSIVE",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Harrower_ACCENT_EMISSIVE.BESTIARY_Harrower_ACCENT_EMISSIVE",
             "scalars": [
               {
                 "name": "Shininess",
@@ -196,107 +196,107 @@
               }
             ]
           },
-          "slot": "XCOM_Chryssalid_ACCENT_EMISSIVE"
+          "slot": "BESTIARY_Harrower_ACCENT_EMISSIVE"
         }
       ],
       "authority_map": {
-        "XCOM_Chryssalid_ACCENT_EMISSIVE": "XCOM_Chryssalid_ACCENT_EMISSIVE",
-        "XCOM_Chryssalid_CHITIN": "XCOM_Chryssalid_CHITIN",
-        "XCOM_Chryssalid_CHITIN_BONE": "XCOM_Chryssalid_CHITIN_BONE",
-        "XCOM_Chryssalid_PLATE": "XCOM_Chryssalid_PLATE",
-        "XCOM_Chryssalid_PLATE_DARK": "XCOM_Chryssalid_PLATE_DARK"
+        "BESTIARY_Harrower_ACCENT_EMISSIVE": "BESTIARY_Harrower_ACCENT_EMISSIVE",
+        "BESTIARY_Harrower_CHITIN": "BESTIARY_Harrower_CHITIN",
+        "BESTIARY_Harrower_CHITIN_BONE": "BESTIARY_Harrower_CHITIN_BONE",
+        "BESTIARY_Harrower_PLATE": "BESTIARY_Harrower_PLATE",
+        "BESTIARY_Harrower_PLATE_DARK": "BESTIARY_Harrower_PLATE_DARK"
       },
       "before": [
         [
-          "XCOM_Chryssalid_CHITIN",
+          "BESTIARY_Harrower_CHITIN",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Chryssalid_PLATE",
+          "BESTIARY_Harrower_PLATE",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Chryssalid_CHITIN_BONE",
+          "BESTIARY_Harrower_CHITIN_BONE",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Chryssalid_PLATE_DARK",
+          "BESTIARY_Harrower_PLATE_DARK",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Chryssalid_ACCENT_EMISSIVE",
+          "BESTIARY_Harrower_ACCENT_EMISSIVE",
           "WorldGridMaterial"
         ]
       ],
       "bind": [
         {
-          "assigned": "XCOM_Chryssalid_CHITIN",
-          "slot": "XCOM_Chryssalid_CHITIN"
+          "assigned": "BESTIARY_Harrower_CHITIN",
+          "slot": "BESTIARY_Harrower_CHITIN"
         },
         {
-          "assigned": "XCOM_Chryssalid_PLATE",
-          "slot": "XCOM_Chryssalid_PLATE"
+          "assigned": "BESTIARY_Harrower_PLATE",
+          "slot": "BESTIARY_Harrower_PLATE"
         },
         {
-          "assigned": "XCOM_Chryssalid_CHITIN_BONE",
-          "slot": "XCOM_Chryssalid_CHITIN_BONE"
+          "assigned": "BESTIARY_Harrower_CHITIN_BONE",
+          "slot": "BESTIARY_Harrower_CHITIN_BONE"
         },
         {
-          "assigned": "XCOM_Chryssalid_PLATE_DARK",
-          "slot": "XCOM_Chryssalid_PLATE_DARK"
+          "assigned": "BESTIARY_Harrower_PLATE_DARK",
+          "slot": "BESTIARY_Harrower_PLATE_DARK"
         },
         {
-          "assigned": "XCOM_Chryssalid_ACCENT_EMISSIVE",
-          "slot": "XCOM_Chryssalid_ACCENT_EMISSIVE"
+          "assigned": "BESTIARY_Harrower_ACCENT_EMISSIVE",
+          "slot": "BESTIARY_Harrower_ACCENT_EMISSIVE"
         }
       ],
-      "enemy": "XCOM_Chryssalid",
+      "enemy": "BESTIARY_Harrower",
       "matches_authority": true,
       "material_moves": {
-        "XCOM_Chryssalid_ACCENT_EMISSIVE": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Chryssalid_ACCENT_EMISSIVE.XCOM_Chryssalid_ACCENT_EMISSIVE",
-          "material": "XCOM_Chryssalid_ACCENT_EMISSIVE",
+        "BESTIARY_Harrower_ACCENT_EMISSIVE": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Harrower_ACCENT_EMISSIVE.BESTIARY_Harrower_ACCENT_EMISSIVE",
+          "material": "BESTIARY_Harrower_ACCENT_EMISSIVE",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Chryssalid_ACCENT_EMISSIVE.XCOM_Chryssalid_ACCENT_EMISSIVE"
+          "src": "/Game/Tests/UEParity/BESTIARY_Harrower_ACCENT_EMISSIVE.BESTIARY_Harrower_ACCENT_EMISSIVE"
         },
-        "XCOM_Chryssalid_CHITIN": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Chryssalid_CHITIN.XCOM_Chryssalid_CHITIN",
-          "material": "XCOM_Chryssalid_CHITIN",
+        "BESTIARY_Harrower_CHITIN": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Harrower_CHITIN.BESTIARY_Harrower_CHITIN",
+          "material": "BESTIARY_Harrower_CHITIN",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Chryssalid_CHITIN.XCOM_Chryssalid_CHITIN"
+          "src": "/Game/Tests/UEParity/BESTIARY_Harrower_CHITIN.BESTIARY_Harrower_CHITIN"
         },
-        "XCOM_Chryssalid_CHITIN_BONE": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Chryssalid_CHITIN_BONE.XCOM_Chryssalid_CHITIN_BONE",
-          "material": "XCOM_Chryssalid_CHITIN_BONE",
+        "BESTIARY_Harrower_CHITIN_BONE": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Harrower_CHITIN_BONE.BESTIARY_Harrower_CHITIN_BONE",
+          "material": "BESTIARY_Harrower_CHITIN_BONE",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Chryssalid_CHITIN_BONE.XCOM_Chryssalid_CHITIN_BONE"
+          "src": "/Game/Tests/UEParity/BESTIARY_Harrower_CHITIN_BONE.BESTIARY_Harrower_CHITIN_BONE"
         },
-        "XCOM_Chryssalid_PLATE": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Chryssalid_PLATE.XCOM_Chryssalid_PLATE",
-          "material": "XCOM_Chryssalid_PLATE",
+        "BESTIARY_Harrower_PLATE": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Harrower_PLATE.BESTIARY_Harrower_PLATE",
+          "material": "BESTIARY_Harrower_PLATE",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Chryssalid_PLATE.XCOM_Chryssalid_PLATE"
+          "src": "/Game/Tests/UEParity/BESTIARY_Harrower_PLATE.BESTIARY_Harrower_PLATE"
         },
-        "XCOM_Chryssalid_PLATE_DARK": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Chryssalid_PLATE_DARK.XCOM_Chryssalid_PLATE_DARK",
-          "material": "XCOM_Chryssalid_PLATE_DARK",
+        "BESTIARY_Harrower_PLATE_DARK": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Harrower_PLATE_DARK.BESTIARY_Harrower_PLATE_DARK",
+          "material": "BESTIARY_Harrower_PLATE_DARK",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Chryssalid_PLATE_DARK.XCOM_Chryssalid_PLATE_DARK"
+          "src": "/Game/Tests/UEParity/BESTIARY_Harrower_PLATE_DARK.BESTIARY_Harrower_PLATE_DARK"
         }
       },
       "ok": true,
       "saved": true
     },
-    "XCOM_Floater": {
+    "BESTIARY_Drifter": {
       "after": [
         {
-          "assigned": "XCOM_Floater_CHITIN",
+          "assigned": "BESTIARY_Drifter_CHITIN",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Floater_CHITIN",
+            "name": "BESTIARY_Drifter_CHITIN",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Floater_CHITIN.XCOM_Floater_CHITIN",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Drifter_CHITIN.BESTIARY_Drifter_CHITIN",
             "scalars": [
               {
                 "name": "Shininess",
@@ -323,16 +323,16 @@
               }
             ]
           },
-          "slot": "XCOM_Floater_CHITIN"
+          "slot": "BESTIARY_Drifter_CHITIN"
         },
         {
-          "assigned": "XCOM_Floater_ACCENT_EMISSIVE",
+          "assigned": "BESTIARY_Drifter_ACCENT_EMISSIVE",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Floater_ACCENT_EMISSIVE",
+            "name": "BESTIARY_Drifter_ACCENT_EMISSIVE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Floater_ACCENT_EMISSIVE.XCOM_Floater_ACCENT_EMISSIVE",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Drifter_ACCENT_EMISSIVE.BESTIARY_Drifter_ACCENT_EMISSIVE",
             "scalars": [
               {
                 "name": "Shininess",
@@ -359,16 +359,16 @@
               }
             ]
           },
-          "slot": "XCOM_Floater_ACCENT_EMISSIVE"
+          "slot": "BESTIARY_Drifter_ACCENT_EMISSIVE"
         },
         {
-          "assigned": "XCOM_Floater_PLATE_DARK",
+          "assigned": "BESTIARY_Drifter_PLATE_DARK",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Floater_PLATE_DARK",
+            "name": "BESTIARY_Drifter_PLATE_DARK",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Floater_PLATE_DARK.XCOM_Floater_PLATE_DARK",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Drifter_PLATE_DARK.BESTIARY_Drifter_PLATE_DARK",
             "scalars": [
               {
                 "name": "Shininess",
@@ -395,16 +395,16 @@
               }
             ]
           },
-          "slot": "XCOM_Floater_PLATE_DARK"
+          "slot": "BESTIARY_Drifter_PLATE_DARK"
         },
         {
-          "assigned": "XCOM_Floater_CHITIN_BONE",
+          "assigned": "BESTIARY_Drifter_CHITIN_BONE",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Floater_CHITIN_BONE",
+            "name": "BESTIARY_Drifter_CHITIN_BONE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Floater_CHITIN_BONE.XCOM_Floater_CHITIN_BONE",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Drifter_CHITIN_BONE.BESTIARY_Drifter_CHITIN_BONE",
             "scalars": [
               {
                 "name": "Shininess",
@@ -431,92 +431,92 @@
               }
             ]
           },
-          "slot": "XCOM_Floater_CHITIN_BONE"
+          "slot": "BESTIARY_Drifter_CHITIN_BONE"
         }
       ],
       "authority_map": {
-        "XCOM_Floater_ACCENT_EMISSIVE": "XCOM_Floater_ACCENT_EMISSIVE",
-        "XCOM_Floater_CHITIN": "XCOM_Floater_CHITIN",
-        "XCOM_Floater_CHITIN_BONE": "XCOM_Floater_CHITIN_BONE",
-        "XCOM_Floater_PLATE_DARK": "XCOM_Floater_PLATE_DARK"
+        "BESTIARY_Drifter_ACCENT_EMISSIVE": "BESTIARY_Drifter_ACCENT_EMISSIVE",
+        "BESTIARY_Drifter_CHITIN": "BESTIARY_Drifter_CHITIN",
+        "BESTIARY_Drifter_CHITIN_BONE": "BESTIARY_Drifter_CHITIN_BONE",
+        "BESTIARY_Drifter_PLATE_DARK": "BESTIARY_Drifter_PLATE_DARK"
       },
       "before": [
         [
-          "XCOM_Floater_CHITIN",
+          "BESTIARY_Drifter_CHITIN",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Floater_ACCENT_EMISSIVE",
+          "BESTIARY_Drifter_ACCENT_EMISSIVE",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Floater_PLATE_DARK",
+          "BESTIARY_Drifter_PLATE_DARK",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Floater_CHITIN_BONE",
+          "BESTIARY_Drifter_CHITIN_BONE",
           "WorldGridMaterial"
         ]
       ],
       "bind": [
         {
-          "assigned": "XCOM_Floater_CHITIN",
-          "slot": "XCOM_Floater_CHITIN"
+          "assigned": "BESTIARY_Drifter_CHITIN",
+          "slot": "BESTIARY_Drifter_CHITIN"
         },
         {
-          "assigned": "XCOM_Floater_ACCENT_EMISSIVE",
-          "slot": "XCOM_Floater_ACCENT_EMISSIVE"
+          "assigned": "BESTIARY_Drifter_ACCENT_EMISSIVE",
+          "slot": "BESTIARY_Drifter_ACCENT_EMISSIVE"
         },
         {
-          "assigned": "XCOM_Floater_PLATE_DARK",
-          "slot": "XCOM_Floater_PLATE_DARK"
+          "assigned": "BESTIARY_Drifter_PLATE_DARK",
+          "slot": "BESTIARY_Drifter_PLATE_DARK"
         },
         {
-          "assigned": "XCOM_Floater_CHITIN_BONE",
-          "slot": "XCOM_Floater_CHITIN_BONE"
+          "assigned": "BESTIARY_Drifter_CHITIN_BONE",
+          "slot": "BESTIARY_Drifter_CHITIN_BONE"
         }
       ],
-      "enemy": "XCOM_Floater",
+      "enemy": "BESTIARY_Drifter",
       "matches_authority": true,
       "material_moves": {
-        "XCOM_Floater_ACCENT_EMISSIVE": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Floater_ACCENT_EMISSIVE.XCOM_Floater_ACCENT_EMISSIVE",
-          "material": "XCOM_Floater_ACCENT_EMISSIVE",
+        "BESTIARY_Drifter_ACCENT_EMISSIVE": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Drifter_ACCENT_EMISSIVE.BESTIARY_Drifter_ACCENT_EMISSIVE",
+          "material": "BESTIARY_Drifter_ACCENT_EMISSIVE",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Floater_ACCENT_EMISSIVE.XCOM_Floater_ACCENT_EMISSIVE"
+          "src": "/Game/Tests/UEParity/BESTIARY_Drifter_ACCENT_EMISSIVE.BESTIARY_Drifter_ACCENT_EMISSIVE"
         },
-        "XCOM_Floater_CHITIN": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Floater_CHITIN.XCOM_Floater_CHITIN",
-          "material": "XCOM_Floater_CHITIN",
+        "BESTIARY_Drifter_CHITIN": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Drifter_CHITIN.BESTIARY_Drifter_CHITIN",
+          "material": "BESTIARY_Drifter_CHITIN",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Floater_CHITIN.XCOM_Floater_CHITIN"
+          "src": "/Game/Tests/UEParity/BESTIARY_Drifter_CHITIN.BESTIARY_Drifter_CHITIN"
         },
-        "XCOM_Floater_CHITIN_BONE": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Floater_CHITIN_BONE.XCOM_Floater_CHITIN_BONE",
-          "material": "XCOM_Floater_CHITIN_BONE",
+        "BESTIARY_Drifter_CHITIN_BONE": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Drifter_CHITIN_BONE.BESTIARY_Drifter_CHITIN_BONE",
+          "material": "BESTIARY_Drifter_CHITIN_BONE",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Floater_CHITIN_BONE.XCOM_Floater_CHITIN_BONE"
+          "src": "/Game/Tests/UEParity/BESTIARY_Drifter_CHITIN_BONE.BESTIARY_Drifter_CHITIN_BONE"
         },
-        "XCOM_Floater_PLATE_DARK": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Floater_PLATE_DARK.XCOM_Floater_PLATE_DARK",
-          "material": "XCOM_Floater_PLATE_DARK",
+        "BESTIARY_Drifter_PLATE_DARK": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Drifter_PLATE_DARK.BESTIARY_Drifter_PLATE_DARK",
+          "material": "BESTIARY_Drifter_PLATE_DARK",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Floater_PLATE_DARK.XCOM_Floater_PLATE_DARK"
+          "src": "/Game/Tests/UEParity/BESTIARY_Drifter_PLATE_DARK.BESTIARY_Drifter_PLATE_DARK"
         }
       },
       "ok": true,
       "saved": true
     },
-    "XCOM_Muton": {
+    "BESTIARY_Bulwark": {
       "after": [
         {
-          "assigned": "XCOM_Muton_PLATE",
+          "assigned": "BESTIARY_Bulwark_PLATE",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Muton_PLATE",
+            "name": "BESTIARY_Bulwark_PLATE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Muton_PLATE.XCOM_Muton_PLATE",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Bulwark_PLATE.BESTIARY_Bulwark_PLATE",
             "scalars": [
               {
                 "name": "Shininess",
@@ -543,16 +543,16 @@
               }
             ]
           },
-          "slot": "XCOM_Muton_PLATE"
+          "slot": "BESTIARY_Bulwark_PLATE"
         },
         {
-          "assigned": "XCOM_Muton_CHITIN",
+          "assigned": "BESTIARY_Bulwark_CHITIN",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Muton_CHITIN",
+            "name": "BESTIARY_Bulwark_CHITIN",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Muton_CHITIN.XCOM_Muton_CHITIN",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Bulwark_CHITIN.BESTIARY_Bulwark_CHITIN",
             "scalars": [
               {
                 "name": "Shininess",
@@ -579,16 +579,16 @@
               }
             ]
           },
-          "slot": "XCOM_Muton_CHITIN"
+          "slot": "BESTIARY_Bulwark_CHITIN"
         },
         {
-          "assigned": "XCOM_Muton_PLATE_OXBLOOD",
+          "assigned": "BESTIARY_Bulwark_PLATE_OXBLOOD",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Muton_PLATE_OXBLOOD",
+            "name": "BESTIARY_Bulwark_PLATE_OXBLOOD",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Muton_PLATE_OXBLOOD.XCOM_Muton_PLATE_OXBLOOD",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Bulwark_PLATE_OXBLOOD.BESTIARY_Bulwark_PLATE_OXBLOOD",
             "scalars": [
               {
                 "name": "Shininess",
@@ -615,16 +615,16 @@
               }
             ]
           },
-          "slot": "XCOM_Muton_PLATE_OXBLOOD"
+          "slot": "BESTIARY_Bulwark_PLATE_OXBLOOD"
         },
         {
-          "assigned": "XCOM_Muton_PLATE_DARK",
+          "assigned": "BESTIARY_Bulwark_PLATE_DARK",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Muton_PLATE_DARK",
+            "name": "BESTIARY_Bulwark_PLATE_DARK",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Muton_PLATE_DARK.XCOM_Muton_PLATE_DARK",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Bulwark_PLATE_DARK.BESTIARY_Bulwark_PLATE_DARK",
             "scalars": [
               {
                 "name": "Shininess",
@@ -651,16 +651,16 @@
               }
             ]
           },
-          "slot": "XCOM_Muton_PLATE_DARK"
+          "slot": "BESTIARY_Bulwark_PLATE_DARK"
         },
         {
-          "assigned": "XCOM_Muton_ACCENT_EMISSIVE",
+          "assigned": "BESTIARY_Bulwark_ACCENT_EMISSIVE",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Muton_ACCENT_EMISSIVE",
+            "name": "BESTIARY_Bulwark_ACCENT_EMISSIVE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Muton_ACCENT_EMISSIVE.XCOM_Muton_ACCENT_EMISSIVE",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Bulwark_ACCENT_EMISSIVE.BESTIARY_Bulwark_ACCENT_EMISSIVE",
             "scalars": [
               {
                 "name": "Shininess",
@@ -687,107 +687,107 @@
               }
             ]
           },
-          "slot": "XCOM_Muton_ACCENT_EMISSIVE"
+          "slot": "BESTIARY_Bulwark_ACCENT_EMISSIVE"
         }
       ],
       "authority_map": {
-        "XCOM_Muton_ACCENT_EMISSIVE": "XCOM_Muton_ACCENT_EMISSIVE",
-        "XCOM_Muton_CHITIN": "XCOM_Muton_CHITIN",
-        "XCOM_Muton_PLATE": "XCOM_Muton_PLATE",
-        "XCOM_Muton_PLATE_DARK": "XCOM_Muton_PLATE_DARK",
-        "XCOM_Muton_PLATE_OXBLOOD": "XCOM_Muton_PLATE_OXBLOOD"
+        "BESTIARY_Bulwark_ACCENT_EMISSIVE": "BESTIARY_Bulwark_ACCENT_EMISSIVE",
+        "BESTIARY_Bulwark_CHITIN": "BESTIARY_Bulwark_CHITIN",
+        "BESTIARY_Bulwark_PLATE": "BESTIARY_Bulwark_PLATE",
+        "BESTIARY_Bulwark_PLATE_DARK": "BESTIARY_Bulwark_PLATE_DARK",
+        "BESTIARY_Bulwark_PLATE_OXBLOOD": "BESTIARY_Bulwark_PLATE_OXBLOOD"
       },
       "before": [
         [
-          "XCOM_Muton_PLATE",
+          "BESTIARY_Bulwark_PLATE",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Muton_CHITIN",
+          "BESTIARY_Bulwark_CHITIN",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Muton_PLATE_OXBLOOD",
+          "BESTIARY_Bulwark_PLATE_OXBLOOD",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Muton_PLATE_DARK",
+          "BESTIARY_Bulwark_PLATE_DARK",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Muton_ACCENT_EMISSIVE",
+          "BESTIARY_Bulwark_ACCENT_EMISSIVE",
           "WorldGridMaterial"
         ]
       ],
       "bind": [
         {
-          "assigned": "XCOM_Muton_PLATE",
-          "slot": "XCOM_Muton_PLATE"
+          "assigned": "BESTIARY_Bulwark_PLATE",
+          "slot": "BESTIARY_Bulwark_PLATE"
         },
         {
-          "assigned": "XCOM_Muton_CHITIN",
-          "slot": "XCOM_Muton_CHITIN"
+          "assigned": "BESTIARY_Bulwark_CHITIN",
+          "slot": "BESTIARY_Bulwark_CHITIN"
         },
         {
-          "assigned": "XCOM_Muton_PLATE_OXBLOOD",
-          "slot": "XCOM_Muton_PLATE_OXBLOOD"
+          "assigned": "BESTIARY_Bulwark_PLATE_OXBLOOD",
+          "slot": "BESTIARY_Bulwark_PLATE_OXBLOOD"
         },
         {
-          "assigned": "XCOM_Muton_PLATE_DARK",
-          "slot": "XCOM_Muton_PLATE_DARK"
+          "assigned": "BESTIARY_Bulwark_PLATE_DARK",
+          "slot": "BESTIARY_Bulwark_PLATE_DARK"
         },
         {
-          "assigned": "XCOM_Muton_ACCENT_EMISSIVE",
-          "slot": "XCOM_Muton_ACCENT_EMISSIVE"
+          "assigned": "BESTIARY_Bulwark_ACCENT_EMISSIVE",
+          "slot": "BESTIARY_Bulwark_ACCENT_EMISSIVE"
         }
       ],
-      "enemy": "XCOM_Muton",
+      "enemy": "BESTIARY_Bulwark",
       "matches_authority": true,
       "material_moves": {
-        "XCOM_Muton_ACCENT_EMISSIVE": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Muton_ACCENT_EMISSIVE.XCOM_Muton_ACCENT_EMISSIVE",
-          "material": "XCOM_Muton_ACCENT_EMISSIVE",
+        "BESTIARY_Bulwark_ACCENT_EMISSIVE": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Bulwark_ACCENT_EMISSIVE.BESTIARY_Bulwark_ACCENT_EMISSIVE",
+          "material": "BESTIARY_Bulwark_ACCENT_EMISSIVE",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Muton_ACCENT_EMISSIVE.XCOM_Muton_ACCENT_EMISSIVE"
+          "src": "/Game/Tests/UEParity/BESTIARY_Bulwark_ACCENT_EMISSIVE.BESTIARY_Bulwark_ACCENT_EMISSIVE"
         },
-        "XCOM_Muton_CHITIN": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Muton_CHITIN.XCOM_Muton_CHITIN",
-          "material": "XCOM_Muton_CHITIN",
+        "BESTIARY_Bulwark_CHITIN": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Bulwark_CHITIN.BESTIARY_Bulwark_CHITIN",
+          "material": "BESTIARY_Bulwark_CHITIN",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Muton_CHITIN.XCOM_Muton_CHITIN"
+          "src": "/Game/Tests/UEParity/BESTIARY_Bulwark_CHITIN.BESTIARY_Bulwark_CHITIN"
         },
-        "XCOM_Muton_PLATE": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Muton_PLATE.XCOM_Muton_PLATE",
-          "material": "XCOM_Muton_PLATE",
+        "BESTIARY_Bulwark_PLATE": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Bulwark_PLATE.BESTIARY_Bulwark_PLATE",
+          "material": "BESTIARY_Bulwark_PLATE",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Muton_PLATE.XCOM_Muton_PLATE"
+          "src": "/Game/Tests/UEParity/BESTIARY_Bulwark_PLATE.BESTIARY_Bulwark_PLATE"
         },
-        "XCOM_Muton_PLATE_DARK": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Muton_PLATE_DARK.XCOM_Muton_PLATE_DARK",
-          "material": "XCOM_Muton_PLATE_DARK",
+        "BESTIARY_Bulwark_PLATE_DARK": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Bulwark_PLATE_DARK.BESTIARY_Bulwark_PLATE_DARK",
+          "material": "BESTIARY_Bulwark_PLATE_DARK",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Muton_PLATE_DARK.XCOM_Muton_PLATE_DARK"
+          "src": "/Game/Tests/UEParity/BESTIARY_Bulwark_PLATE_DARK.BESTIARY_Bulwark_PLATE_DARK"
         },
-        "XCOM_Muton_PLATE_OXBLOOD": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Muton_PLATE_OXBLOOD.XCOM_Muton_PLATE_OXBLOOD",
-          "material": "XCOM_Muton_PLATE_OXBLOOD",
+        "BESTIARY_Bulwark_PLATE_OXBLOOD": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Bulwark_PLATE_OXBLOOD.BESTIARY_Bulwark_PLATE_OXBLOOD",
+          "material": "BESTIARY_Bulwark_PLATE_OXBLOOD",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Muton_PLATE_OXBLOOD.XCOM_Muton_PLATE_OXBLOOD"
+          "src": "/Game/Tests/UEParity/BESTIARY_Bulwark_PLATE_OXBLOOD.BESTIARY_Bulwark_PLATE_OXBLOOD"
         }
       },
       "ok": true,
       "saved": true
     },
-    "XCOM_Sectoid": {
+    "BESTIARY_Graytide": {
       "after": [
         {
-          "assigned": "XCOM_Sectoid_PLATE",
+          "assigned": "BESTIARY_Graytide_PLATE",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Sectoid_PLATE",
+            "name": "BESTIARY_Graytide_PLATE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Sectoid_PLATE.XCOM_Sectoid_PLATE",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Graytide_PLATE.BESTIARY_Graytide_PLATE",
             "scalars": [
               {
                 "name": "Shininess",
@@ -814,16 +814,16 @@
               }
             ]
           },
-          "slot": "XCOM_Sectoid_PLATE"
+          "slot": "BESTIARY_Graytide_PLATE"
         },
         {
-          "assigned": "XCOM_Sectoid_CHITIN",
+          "assigned": "BESTIARY_Graytide_CHITIN",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Sectoid_CHITIN",
+            "name": "BESTIARY_Graytide_CHITIN",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Sectoid_CHITIN.XCOM_Sectoid_CHITIN",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Graytide_CHITIN.BESTIARY_Graytide_CHITIN",
             "scalars": [
               {
                 "name": "Shininess",
@@ -850,16 +850,16 @@
               }
             ]
           },
-          "slot": "XCOM_Sectoid_CHITIN"
+          "slot": "BESTIARY_Graytide_CHITIN"
         },
         {
-          "assigned": "XCOM_Sectoid_CHITIN_BONE",
+          "assigned": "BESTIARY_Graytide_CHITIN_BONE",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Sectoid_CHITIN_BONE",
+            "name": "BESTIARY_Graytide_CHITIN_BONE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Sectoid_CHITIN_BONE.XCOM_Sectoid_CHITIN_BONE",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Graytide_CHITIN_BONE.BESTIARY_Graytide_CHITIN_BONE",
             "scalars": [
               {
                 "name": "Shininess",
@@ -886,16 +886,16 @@
               }
             ]
           },
-          "slot": "XCOM_Sectoid_CHITIN_BONE"
+          "slot": "BESTIARY_Graytide_CHITIN_BONE"
         },
         {
-          "assigned": "XCOM_Sectoid_PLATE_DARK",
+          "assigned": "BESTIARY_Graytide_PLATE_DARK",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Sectoid_PLATE_DARK",
+            "name": "BESTIARY_Graytide_PLATE_DARK",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Sectoid_PLATE_DARK.XCOM_Sectoid_PLATE_DARK",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Graytide_PLATE_DARK.BESTIARY_Graytide_PLATE_DARK",
             "scalars": [
               {
                 "name": "Shininess",
@@ -922,16 +922,16 @@
               }
             ]
           },
-          "slot": "XCOM_Sectoid_PLATE_DARK"
+          "slot": "BESTIARY_Graytide_PLATE_DARK"
         },
         {
-          "assigned": "XCOM_Sectoid_ACCENT_EMISSIVE",
+          "assigned": "BESTIARY_Graytide_ACCENT_EMISSIVE",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Sectoid_ACCENT_EMISSIVE",
+            "name": "BESTIARY_Graytide_ACCENT_EMISSIVE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Sectoid_ACCENT_EMISSIVE.XCOM_Sectoid_ACCENT_EMISSIVE",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Graytide_ACCENT_EMISSIVE.BESTIARY_Graytide_ACCENT_EMISSIVE",
             "scalars": [
               {
                 "name": "Shininess",
@@ -958,107 +958,107 @@
               }
             ]
           },
-          "slot": "XCOM_Sectoid_ACCENT_EMISSIVE"
+          "slot": "BESTIARY_Graytide_ACCENT_EMISSIVE"
         }
       ],
       "authority_map": {
-        "XCOM_Sectoid_ACCENT_EMISSIVE": "XCOM_Sectoid_ACCENT_EMISSIVE",
-        "XCOM_Sectoid_CHITIN": "XCOM_Sectoid_CHITIN",
-        "XCOM_Sectoid_CHITIN_BONE": "XCOM_Sectoid_CHITIN_BONE",
-        "XCOM_Sectoid_PLATE": "XCOM_Sectoid_PLATE",
-        "XCOM_Sectoid_PLATE_DARK": "XCOM_Sectoid_PLATE_DARK"
+        "BESTIARY_Graytide_ACCENT_EMISSIVE": "BESTIARY_Graytide_ACCENT_EMISSIVE",
+        "BESTIARY_Graytide_CHITIN": "BESTIARY_Graytide_CHITIN",
+        "BESTIARY_Graytide_CHITIN_BONE": "BESTIARY_Graytide_CHITIN_BONE",
+        "BESTIARY_Graytide_PLATE": "BESTIARY_Graytide_PLATE",
+        "BESTIARY_Graytide_PLATE_DARK": "BESTIARY_Graytide_PLATE_DARK"
       },
       "before": [
         [
-          "XCOM_Sectoid_PLATE",
+          "BESTIARY_Graytide_PLATE",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Sectoid_CHITIN",
+          "BESTIARY_Graytide_CHITIN",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Sectoid_CHITIN_BONE",
+          "BESTIARY_Graytide_CHITIN_BONE",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Sectoid_PLATE_DARK",
+          "BESTIARY_Graytide_PLATE_DARK",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Sectoid_ACCENT_EMISSIVE",
+          "BESTIARY_Graytide_ACCENT_EMISSIVE",
           "WorldGridMaterial"
         ]
       ],
       "bind": [
         {
-          "assigned": "XCOM_Sectoid_PLATE",
-          "slot": "XCOM_Sectoid_PLATE"
+          "assigned": "BESTIARY_Graytide_PLATE",
+          "slot": "BESTIARY_Graytide_PLATE"
         },
         {
-          "assigned": "XCOM_Sectoid_CHITIN",
-          "slot": "XCOM_Sectoid_CHITIN"
+          "assigned": "BESTIARY_Graytide_CHITIN",
+          "slot": "BESTIARY_Graytide_CHITIN"
         },
         {
-          "assigned": "XCOM_Sectoid_CHITIN_BONE",
-          "slot": "XCOM_Sectoid_CHITIN_BONE"
+          "assigned": "BESTIARY_Graytide_CHITIN_BONE",
+          "slot": "BESTIARY_Graytide_CHITIN_BONE"
         },
         {
-          "assigned": "XCOM_Sectoid_PLATE_DARK",
-          "slot": "XCOM_Sectoid_PLATE_DARK"
+          "assigned": "BESTIARY_Graytide_PLATE_DARK",
+          "slot": "BESTIARY_Graytide_PLATE_DARK"
         },
         {
-          "assigned": "XCOM_Sectoid_ACCENT_EMISSIVE",
-          "slot": "XCOM_Sectoid_ACCENT_EMISSIVE"
+          "assigned": "BESTIARY_Graytide_ACCENT_EMISSIVE",
+          "slot": "BESTIARY_Graytide_ACCENT_EMISSIVE"
         }
       ],
-      "enemy": "XCOM_Sectoid",
+      "enemy": "BESTIARY_Graytide",
       "matches_authority": true,
       "material_moves": {
-        "XCOM_Sectoid_ACCENT_EMISSIVE": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Sectoid_ACCENT_EMISSIVE.XCOM_Sectoid_ACCENT_EMISSIVE",
-          "material": "XCOM_Sectoid_ACCENT_EMISSIVE",
+        "BESTIARY_Graytide_ACCENT_EMISSIVE": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Graytide_ACCENT_EMISSIVE.BESTIARY_Graytide_ACCENT_EMISSIVE",
+          "material": "BESTIARY_Graytide_ACCENT_EMISSIVE",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Sectoid_ACCENT_EMISSIVE.XCOM_Sectoid_ACCENT_EMISSIVE"
+          "src": "/Game/Tests/UEParity/BESTIARY_Graytide_ACCENT_EMISSIVE.BESTIARY_Graytide_ACCENT_EMISSIVE"
         },
-        "XCOM_Sectoid_CHITIN": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Sectoid_CHITIN.XCOM_Sectoid_CHITIN",
-          "material": "XCOM_Sectoid_CHITIN",
+        "BESTIARY_Graytide_CHITIN": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Graytide_CHITIN.BESTIARY_Graytide_CHITIN",
+          "material": "BESTIARY_Graytide_CHITIN",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Sectoid_CHITIN.XCOM_Sectoid_CHITIN"
+          "src": "/Game/Tests/UEParity/BESTIARY_Graytide_CHITIN.BESTIARY_Graytide_CHITIN"
         },
-        "XCOM_Sectoid_CHITIN_BONE": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Sectoid_CHITIN_BONE.XCOM_Sectoid_CHITIN_BONE",
-          "material": "XCOM_Sectoid_CHITIN_BONE",
+        "BESTIARY_Graytide_CHITIN_BONE": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Graytide_CHITIN_BONE.BESTIARY_Graytide_CHITIN_BONE",
+          "material": "BESTIARY_Graytide_CHITIN_BONE",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Sectoid_CHITIN_BONE.XCOM_Sectoid_CHITIN_BONE"
+          "src": "/Game/Tests/UEParity/BESTIARY_Graytide_CHITIN_BONE.BESTIARY_Graytide_CHITIN_BONE"
         },
-        "XCOM_Sectoid_PLATE": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Sectoid_PLATE.XCOM_Sectoid_PLATE",
-          "material": "XCOM_Sectoid_PLATE",
+        "BESTIARY_Graytide_PLATE": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Graytide_PLATE.BESTIARY_Graytide_PLATE",
+          "material": "BESTIARY_Graytide_PLATE",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Sectoid_PLATE.XCOM_Sectoid_PLATE"
+          "src": "/Game/Tests/UEParity/BESTIARY_Graytide_PLATE.BESTIARY_Graytide_PLATE"
         },
-        "XCOM_Sectoid_PLATE_DARK": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Sectoid_PLATE_DARK.XCOM_Sectoid_PLATE_DARK",
-          "material": "XCOM_Sectoid_PLATE_DARK",
+        "BESTIARY_Graytide_PLATE_DARK": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Graytide_PLATE_DARK.BESTIARY_Graytide_PLATE_DARK",
+          "material": "BESTIARY_Graytide_PLATE_DARK",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Sectoid_PLATE_DARK.XCOM_Sectoid_PLATE_DARK"
+          "src": "/Game/Tests/UEParity/BESTIARY_Graytide_PLATE_DARK.BESTIARY_Graytide_PLATE_DARK"
         }
       },
       "ok": true,
       "saved": true
     },
-    "XCOM_Viper": {
+    "BESTIARY_Ratline": {
       "after": [
         {
-          "assigned": "XCOM_Viper_PLATE",
+          "assigned": "BESTIARY_Ratline_PLATE",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Viper_PLATE",
+            "name": "BESTIARY_Ratline_PLATE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Viper_PLATE.XCOM_Viper_PLATE",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Ratline_PLATE.BESTIARY_Ratline_PLATE",
             "scalars": [
               {
                 "name": "Shininess",
@@ -1085,16 +1085,16 @@
               }
             ]
           },
-          "slot": "XCOM_Viper_PLATE"
+          "slot": "BESTIARY_Ratline_PLATE"
         },
         {
-          "assigned": "XCOM_Viper_CHITIN",
+          "assigned": "BESTIARY_Ratline_CHITIN",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Viper_CHITIN",
+            "name": "BESTIARY_Ratline_CHITIN",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Viper_CHITIN.XCOM_Viper_CHITIN",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Ratline_CHITIN.BESTIARY_Ratline_CHITIN",
             "scalars": [
               {
                 "name": "Shininess",
@@ -1121,16 +1121,16 @@
               }
             ]
           },
-          "slot": "XCOM_Viper_CHITIN"
+          "slot": "BESTIARY_Ratline_CHITIN"
         },
         {
-          "assigned": "XCOM_Viper_PLATE_DARK",
+          "assigned": "BESTIARY_Ratline_PLATE_DARK",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Viper_PLATE_DARK",
+            "name": "BESTIARY_Ratline_PLATE_DARK",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Viper_PLATE_DARK.XCOM_Viper_PLATE_DARK",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Ratline_PLATE_DARK.BESTIARY_Ratline_PLATE_DARK",
             "scalars": [
               {
                 "name": "Shininess",
@@ -1157,16 +1157,16 @@
               }
             ]
           },
-          "slot": "XCOM_Viper_PLATE_DARK"
+          "slot": "BESTIARY_Ratline_PLATE_DARK"
         },
         {
-          "assigned": "XCOM_Viper_CHITIN_BONE",
+          "assigned": "BESTIARY_Ratline_CHITIN_BONE",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Viper_CHITIN_BONE",
+            "name": "BESTIARY_Ratline_CHITIN_BONE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Viper_CHITIN_BONE.XCOM_Viper_CHITIN_BONE",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Ratline_CHITIN_BONE.BESTIARY_Ratline_CHITIN_BONE",
             "scalars": [
               {
                 "name": "Shininess",
@@ -1193,16 +1193,16 @@
               }
             ]
           },
-          "slot": "XCOM_Viper_CHITIN_BONE"
+          "slot": "BESTIARY_Ratline_CHITIN_BONE"
         },
         {
-          "assigned": "XCOM_Viper_ACCENT_EMISSIVE",
+          "assigned": "BESTIARY_Ratline_ACCENT_EMISSIVE",
           "material": {
             "class": "MaterialInstanceConstant",
-            "name": "XCOM_Viper_ACCENT_EMISSIVE",
+            "name": "BESTIARY_Ratline_ACCENT_EMISSIVE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
             "parent_class": "Material",
-            "path": "/Game/Enemies/XCOM/XCOM_Viper_ACCENT_EMISSIVE.XCOM_Viper_ACCENT_EMISSIVE",
+            "path": "/Game/Enemies/BESTIARY/BESTIARY_Ratline_ACCENT_EMISSIVE.BESTIARY_Ratline_ACCENT_EMISSIVE",
             "scalars": [
               {
                 "name": "Shininess",
@@ -1229,99 +1229,99 @@
               }
             ]
           },
-          "slot": "XCOM_Viper_ACCENT_EMISSIVE"
+          "slot": "BESTIARY_Ratline_ACCENT_EMISSIVE"
         }
       ],
       "authority_map": {
-        "XCOM_Viper_ACCENT_EMISSIVE": "XCOM_Viper_ACCENT_EMISSIVE",
-        "XCOM_Viper_CHITIN": "XCOM_Viper_CHITIN",
-        "XCOM_Viper_CHITIN_BONE": "XCOM_Viper_CHITIN_BONE",
-        "XCOM_Viper_PLATE": "XCOM_Viper_PLATE",
-        "XCOM_Viper_PLATE_DARK": "XCOM_Viper_PLATE_DARK"
+        "BESTIARY_Ratline_ACCENT_EMISSIVE": "BESTIARY_Ratline_ACCENT_EMISSIVE",
+        "BESTIARY_Ratline_CHITIN": "BESTIARY_Ratline_CHITIN",
+        "BESTIARY_Ratline_CHITIN_BONE": "BESTIARY_Ratline_CHITIN_BONE",
+        "BESTIARY_Ratline_PLATE": "BESTIARY_Ratline_PLATE",
+        "BESTIARY_Ratline_PLATE_DARK": "BESTIARY_Ratline_PLATE_DARK"
       },
       "before": [
         [
-          "XCOM_Viper_PLATE",
+          "BESTIARY_Ratline_PLATE",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Viper_CHITIN",
+          "BESTIARY_Ratline_CHITIN",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Viper_PLATE_DARK",
+          "BESTIARY_Ratline_PLATE_DARK",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Viper_CHITIN_BONE",
+          "BESTIARY_Ratline_CHITIN_BONE",
           "WorldGridMaterial"
         ],
         [
-          "XCOM_Viper_ACCENT_EMISSIVE",
+          "BESTIARY_Ratline_ACCENT_EMISSIVE",
           "WorldGridMaterial"
         ]
       ],
       "bind": [
         {
-          "assigned": "XCOM_Viper_PLATE",
-          "slot": "XCOM_Viper_PLATE"
+          "assigned": "BESTIARY_Ratline_PLATE",
+          "slot": "BESTIARY_Ratline_PLATE"
         },
         {
-          "assigned": "XCOM_Viper_CHITIN",
-          "slot": "XCOM_Viper_CHITIN"
+          "assigned": "BESTIARY_Ratline_CHITIN",
+          "slot": "BESTIARY_Ratline_CHITIN"
         },
         {
-          "assigned": "XCOM_Viper_PLATE_DARK",
-          "slot": "XCOM_Viper_PLATE_DARK"
+          "assigned": "BESTIARY_Ratline_PLATE_DARK",
+          "slot": "BESTIARY_Ratline_PLATE_DARK"
         },
         {
-          "assigned": "XCOM_Viper_CHITIN_BONE",
-          "slot": "XCOM_Viper_CHITIN_BONE"
+          "assigned": "BESTIARY_Ratline_CHITIN_BONE",
+          "slot": "BESTIARY_Ratline_CHITIN_BONE"
         },
         {
-          "assigned": "XCOM_Viper_ACCENT_EMISSIVE",
-          "slot": "XCOM_Viper_ACCENT_EMISSIVE"
+          "assigned": "BESTIARY_Ratline_ACCENT_EMISSIVE",
+          "slot": "BESTIARY_Ratline_ACCENT_EMISSIVE"
         }
       ],
-      "enemy": "XCOM_Viper",
+      "enemy": "BESTIARY_Ratline",
       "matches_authority": true,
       "material_moves": {
-        "XCOM_Viper_ACCENT_EMISSIVE": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Viper_ACCENT_EMISSIVE.XCOM_Viper_ACCENT_EMISSIVE",
-          "material": "XCOM_Viper_ACCENT_EMISSIVE",
+        "BESTIARY_Ratline_ACCENT_EMISSIVE": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Ratline_ACCENT_EMISSIVE.BESTIARY_Ratline_ACCENT_EMISSIVE",
+          "material": "BESTIARY_Ratline_ACCENT_EMISSIVE",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Viper_ACCENT_EMISSIVE.XCOM_Viper_ACCENT_EMISSIVE"
+          "src": "/Game/Tests/UEParity/BESTIARY_Ratline_ACCENT_EMISSIVE.BESTIARY_Ratline_ACCENT_EMISSIVE"
         },
-        "XCOM_Viper_CHITIN": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Viper_CHITIN.XCOM_Viper_CHITIN",
-          "material": "XCOM_Viper_CHITIN",
+        "BESTIARY_Ratline_CHITIN": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Ratline_CHITIN.BESTIARY_Ratline_CHITIN",
+          "material": "BESTIARY_Ratline_CHITIN",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Viper_CHITIN.XCOM_Viper_CHITIN"
+          "src": "/Game/Tests/UEParity/BESTIARY_Ratline_CHITIN.BESTIARY_Ratline_CHITIN"
         },
-        "XCOM_Viper_CHITIN_BONE": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Viper_CHITIN_BONE.XCOM_Viper_CHITIN_BONE",
-          "material": "XCOM_Viper_CHITIN_BONE",
+        "BESTIARY_Ratline_CHITIN_BONE": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Ratline_CHITIN_BONE.BESTIARY_Ratline_CHITIN_BONE",
+          "material": "BESTIARY_Ratline_CHITIN_BONE",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Viper_CHITIN_BONE.XCOM_Viper_CHITIN_BONE"
+          "src": "/Game/Tests/UEParity/BESTIARY_Ratline_CHITIN_BONE.BESTIARY_Ratline_CHITIN_BONE"
         },
-        "XCOM_Viper_PLATE": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Viper_PLATE.XCOM_Viper_PLATE",
-          "material": "XCOM_Viper_PLATE",
+        "BESTIARY_Ratline_PLATE": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Ratline_PLATE.BESTIARY_Ratline_PLATE",
+          "material": "BESTIARY_Ratline_PLATE",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Viper_PLATE.XCOM_Viper_PLATE"
+          "src": "/Game/Tests/UEParity/BESTIARY_Ratline_PLATE.BESTIARY_Ratline_PLATE"
         },
-        "XCOM_Viper_PLATE_DARK": {
-          "dst": "/Game/Enemies/XCOM/XCOM_Viper_PLATE_DARK.XCOM_Viper_PLATE_DARK",
-          "material": "XCOM_Viper_PLATE_DARK",
+        "BESTIARY_Ratline_PLATE_DARK": {
+          "dst": "/Game/Enemies/BESTIARY/BESTIARY_Ratline_PLATE_DARK.BESTIARY_Ratline_PLATE_DARK",
+          "material": "BESTIARY_Ratline_PLATE_DARK",
           "result": "renamed",
-          "src": "/Game/Tests/UEParity/XCOM_Viper_PLATE_DARK.XCOM_Viper_PLATE_DARK"
+          "src": "/Game/Tests/UEParity/BESTIARY_Ratline_PLATE_DARK.BESTIARY_Ratline_PLATE_DARK"
         }
       },
       "ok": true,
       "saved": true
     }
   },
-  "shipping": "/Game/Enemies/XCOM",
+  "shipping": "/Game/Enemies/BESTIARY",
   "world": {
     "error": "AttributeError(\"'World' object has no attribute 'get_actors'\")"
   }

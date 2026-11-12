@@ -20,13 +20,13 @@ import unreal
 
 REPO = r'C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter'
 OUT = REPO + '/CommandCenter/outputs/ue_verify'
-SHIPPING = '/Game/Enemies/XCOM'
+SHIPPING = '/Game/Enemies/BESTIARY'
 THROW = '/Game/Tests/UEParity'
-NAMES = ['XCOM_Sectoid_PLATE', 'XCOM_Sectoid_ACCENT_EMISSIVE',
-         'XCOM_Sectoid_CHITIN', 'XCOM_Floater_CHITIN',
-         'XCOM_Chryssalid_PLATE', 'XCOM_Muton_PLATE_OXBLOOD',
-         'XCOM_Chitin_Mid', 'XCOM_Armor_Plate', 'XCOM_Eye_Emissive',
-         'M_XCOM_Chitin']
+NAMES = ['BESTIARY_Graytide_PLATE', 'BESTIARY_Graytide_ACCENT_EMISSIVE',
+         'BESTIARY_Graytide_CHITIN', 'BESTIARY_Drifter_CHITIN',
+         'BESTIARY_Harrower_PLATE', 'BESTIARY_Bulwark_PLATE_OXBLOOD',
+         'BESTIARY_Chitin_Mid', 'BESTIARY_Armor_Plate', 'BESTIARY_Eye_Emissive',
+         'M_BESTIARY_Chitin']
 
 
 def L(m):

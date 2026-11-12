@@ -231,7 +231,7 @@ arbitrary intersections rather than structure" — so the accent follows *anatom
 (chest plate, visor, core), never a mesh seam.
 
 **Rule S4.** Zero detached geometry. Any floating part in any submitted frame is a defect, and
-the kit already failed this once (Sectoid's hand, Muton's white shard, Viper's floating prongs).
+the kit already failed this once (Graytide's hand, Bulwark's white shard, Ratline's floating prongs).
 This is now a **build-time assertion**, not a review-time catch: the Blender build script must
 assert that every mesh part is connected to the body or is a *declared* emissive sub-part.
 
@@ -249,7 +249,7 @@ The game carries **two monster lines** and three later additions, and none of th
 
 | Line | Members | Language | Reads as |
 |---|---|---|---|
-| **X-COM 1994 originals** | Sectoid, Viper, Floater, Muton, Chryssalid | Original *UFO: Enemy Unknown* designs, modernized | Aliens: biomechanical, chitin + plasma, emissive eyes and cores |
+| **X-COM 1994 originals** | Graytide, Ratline, Drifter, Bulwark, Harrower | Original *UFO: Enemy Unknown* designs, modernized | Aliens: biomechanical, chitin + plasma, emissive eyes and cores |
 | **Plymouth natives** | Barnacle Drone, Pilgrim Zealot, Mayflower Phantom, Lobster Brute, Rock Golem, Nor-Easter Titan | Original designs (1926 maritime + rock + fog) | Working gear of the yard: barnacle, canvas, sail-cloth, shell, granite |
 
 **Three more lines join them**, and each has its own rule:
@@ -257,12 +257,12 @@ The game carries **two monster lines** and three later additions, and none of th
 | Line | Members | Language | Reads as |
 |---|---|---|---|
 | **Human collaborators** | Tobias Angell, Edda Cobb, Dr. Wren Hollis | Original (1926 dockworkers) | The only friendly actors in the game - and the only entries that can be dead when you arrive |
-| **Cyborgs** | Cyberdisc, Bionic Chryssalid | 1994 X-COM line, own designs | Machines that were *built*: hard rings and hydraulic legs, no organic curvature |
+| **Cyborgs** | Cyberdisc, Bionic Harrower | 1994 X-COM line, own designs | Machines that were *built*: hard rings and hydraulic legs, no organic curvature |
 | **Skin jobs** | the Oysterman, the Lampwright, the Ice Man | Cylon-style synthetics wearing Plymouth | People-shaped and not people - every one of them has exactly one tell |
 
 
 **The naming rule that keeps them apart:** X-COM enemies are named for what they *are*
-(Sectoid, Viper, Floater). Plymouth enemies are named for what they are *made of or wear*
+(Graytide, Ratline, Drifter). Plymouth enemies are named for what they are *made of or wear*
 (Barnacle, Pilgrim, Mayflower, Lobster, Rock). A player who has never seen the game should be
 able to guess which is which from the name alone, and never be wrong.
 
@@ -276,13 +276,13 @@ plain 1926 New England names, because the horror in this game is administrative,
 
 ### 5.2 Full roster
 
-> Numbers below are **measured** from `Tools/blender/out_xcom/xcom_manifest.json` (the five built
+> Numbers below are **measured** from `Tools/blender/out_bestiary/bestiary_manifest.json` (the five built
 > X-COM enemies) or **specified targets** (everything else, labelled `[target]`). HP and damage
 > are design values cross-checked against `Docs/generated/weapon_stats_table.md` §3.
 
 #### X-COM 1994 originals
 
-##### SECTOID — *the small one*
+##### GRAYTIDE — *the small one*
 | | |
 |---|---|
 | **Lineage** | 1994 original. Psychic infiltrator. |
@@ -294,7 +294,7 @@ plain 1926 New England names, because the horror in this game is administrative,
 | **Budget** | ≤9,000 tris · 1024px · 4 materials · 24 bones · 1 vfx |
 | **Signature** | The only creature in the kit with **no mouth at all** and the only one whose eyes are the light source. |
 
-##### VIPER — *the line infantry*
+##### RATLINE — *the line infantry*
 | | |
 |---|---|
 | **Lineage** | 1994 original. The marquee alien. Plasma rifle. |
@@ -304,9 +304,9 @@ plain 1926 New England names, because the horror in this game is administrative,
 | **HP / speed** | 90 · 300 uu/s |
 | **Attack** | `plasma-burst` — telegraph 1.0 s → 3 × 18 dmg at 2,500 uu/s |
 | **Budget** | ≤7,500 tris · 1024px · 5 materials · 26 bones · 2 vfx |
-| **Signature** | The snout and the rib spine are the two features that make it a Viper **in one glance**. |
+| **Signature** | The snout and the rib spine are the two features that make it a Ratline **in one glance**. |
 
-##### FLOATER — *the one that flies*
+##### DRIFTER — *the one that flies*
 | | |
 |---|---|
 | **Lineage** | 1994 original. Aerial ambusher. |
@@ -319,7 +319,7 @@ plain 1926 New England names, because the horror in this game is administrative,
 | **Signature** | **Nothing is under the body.** The only thing beneath it is a body-shaped hover ellipse. The absence of legs is the whole design. |
 | **Deck note** | No legs = no leg animation cost. The hover ellipse is a decal, not geometry. |
 
-##### MUTON — *the heavy*
+##### BULWARK — *the heavy*
 | | |
 |---|---|
 | **Lineage** | 1994 original. Terror-mission elite. |
@@ -331,7 +331,7 @@ plain 1926 New England names, because the horror in this game is administrative,
 | **Budget** | ≤7,000 tris · 1024px · 6 materials · 28 bones · 2 vfx |
 | **Signature** | The **only warm hue in the alien set** — the oxblood chest plate. One material instance, one accent, on the chest only (Rule S3). |
 
-##### CHRYSSALID — *the fast one*
+##### HARROWER — *the fast one*
 | | |
 |---|---|
 | **Lineage** | 1994 original. Fast terror, leaper, infector. |
@@ -415,7 +415,7 @@ player a route, a machine or a fact, and every one of those can be taken away.
 
 Two machines, and they are here to do things the organic five cannot. The Cyberdisc is the
 1994 X-COM lineage's own cyborg, and it is unmistakably a machine - hard concentric rings, one
-amber emitter lens, no organic curvature anywhere on it. The Bionic Chryssalid is a heavier
+amber emitter lens, no organic curvature anywhere on it. The Bionic Harrower is a heavier
 cybernetic variant of a species the player already knows, and it fills a gap the organic
 roster leaves open: it deletes the player's cover, so the fight moves instead of the shooting.
 
@@ -430,7 +430,7 @@ shoot something they cannot hurt, and the reason the player must move instead of
 biped or organic. **Deck note:** 14 bones and one emissive - the cheapest field projector on
 the Deck.
 
-##### BIONIC CHRYSSALID - *the one that walks through cover* `[target]`
+##### BIONIC HARROWER - *the one that walks through cover* `[target]`
 1.10 m - **9,800 tris** (ceiling 12,000) - 1024px - 6 materials - **32 bones** - 2 vfx. The
 forward-pitched stalker you already know, rebuilt on hydraulic legs with plate where the
 chitin was - and it **walks where the organic one leaps**. Its `hydraulic-scythe` lands for
@@ -529,7 +529,7 @@ Expanded into three rules that everything visual obeys:
    planking. Nothing is clean. Nothing is new. If a surface has no grime gradient, it is wrong.
 2. **Light is scarce and therefore a weapon.** The enemies' emissives are the brightest pixels
    in frame. The player's own visibility is the fog's job. This is the 1994 *UFO* grammar
-   honestly understood (see `CommandCenter/outputs/swarm-w1/TASK-01_xcom1994_roster.md` §0:
+   honestly understood (see `CommandCenter/outputs/swarm-w1/TASK-01_bestiary1994_roster.md` §0:
    the 1994 reveal was **pop-in from black**, not a light flash, and the "flash" people remember
    was plasma fire being the only light source on a night map).
 3. **The palette is a marine one.** Cold blue-green greys, wet black, rusted orange, bone, and
@@ -549,20 +549,20 @@ Expanded into three rules that everything visual obeys:
 | Accent D — alien green rim | `#33FF6B` | `reveal_rim` only, never as albedo |
 | Accent E — plasma cyan | `#73E6FF` | `reveal_under`, emissive cores |
 | Accent F — plasma violet | `#B07CFF` | weapon coils, boss only |
-| **Oxblood** | `#7A2B2B` | Muton chest plate — the single warm hue in the alien set |
+| **Oxblood** | `#7A2B2B` | Bulwark chest plate — the single warm hue in the alien set |
 
 **Rule:** no more than **three** of these are on screen in one frame. Accents D–F are *light*
 colours, not paint. There is no purple/blue SaaS gradient anywhere in this game and there never
 will be.
 
-### 7.3 Materials (locked names, `Content/Enemies/XCOM/`)
+### 7.3 Materials (locked names, `Content/Enemies/BESTIARY/`)
 
-`XCOM_Chitin_Dark` · `_Mid` · `_Pale` — matte-to-satin carapace
-`XCOM_Armor_Plate` (metalness 0.65) · `XCOM_Armor_Accent` (oxblood) — Muton only
-`XCOM_Eye_Emissive` (emission 14) — every alien reads in the dark
-`XCOM_Core_Emissive` (emission 22) — dorsal/neck power core, cyan
-`XCOM_Plasma_Emissive` (emission 16) — weapon coils, violet
-`XCOM_Gunmetal` — enemy weapon bodies
+`BESTIARY_Chitin_Dark` · `_Mid` · `_Pale` — matte-to-satin carapace
+`BESTIARY_Armor_Plate` (metalness 0.65) · `BESTIARY_Armor_Accent` (oxblood) — Bulwark only
+`BESTIARY_Eye_Emissive` (emission 14) — every alien reads in the dark
+`BESTIARY_Core_Emissive` (emission 22) — dorsal/neck power core, cyan
+`BESTIARY_Plasma_Emissive` (emission 16) — weapon coils, violet
+`BESTIARY_Gunmetal` — enemy weapon bodies
 
 Level materials: `T_Floor_Concrete_Wet` · `T_Wall_Brick_Old` · `T_Wall_Steel_Rusted` ·
 `T_Ground_Gravel` · `T_Roof_Tar` · `T_Wood_Plank_Dock` — all **2048²** with normal + roughness
@@ -844,7 +844,7 @@ to live in the bank are the exact thing it exists to stop.
 - [x] TTS insult-bank contract with the render defect identified
 - [x] Photograph plan mapped to Ebert's exact evidence requirements
 - [x] Human collaborators as full roster entries, each with a gameplay role and a written fallback
-- [x] Two cyborgs (Cyberdisc, Bionic Chryssalid) with machine-readable silhouettes and full budgets
+- [x] Two cyborgs (Cyberdisc, Bionic Harrower) with machine-readable silhouettes and full budgets
 - [x] Three skin jobs (the Oysterman, the Lampwright, the Ice Man), each with one learnable tell
 - [x] The Harvester's glowing pepperoni pizza as a named attack, with flight behaviour, damage and the player's answer
 - [x] The Harvester's taunt rotation, pointed at the existing insult bank

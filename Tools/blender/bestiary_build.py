@@ -6,18 +6,18 @@ stage them on a lit ground plane with the 1994 "terror mission" reveal rig.
 v2 closes the Ebert round-1 deltas (ground plane, real faces, connected anatomy,
 visible emissive reveal rig, distinct silhouettes):
 
-  * FLOATER is LEGLESS: wide manta body, NO feet, hovering (hover-shadow ellipse
+  * DRIFTER is LEGLESS: wide manta body, NO feet, hovering (hover-shadow ellipse
     only, no ground contact), glowing emissive dorsal core, trailing tendrils,
     wings spread.
-  * VIPER is TALL + NARROW: forward-projecting elongated snout, raised ribbed dorsal
+  * RATLINE is TALL + NARROW: forward-projecting elongated snout, raised ribbed dorsal
     spine, visible plasma pistol (body + grip + trigger guard + barrel + emissive
     coil), reptilian head.
-  * MUTON is HEAVY + WIDE: armoured, horizontal emissive visor slit (the v1 white
+  * BULWARK is HEAVY + WIDE: armoured, horizontal emissive visor slit (the v1 white
     "hook" mass is gone), heavy two-handed plasma rifle with foregrip, oxblood
     chest plate WITH panel lines / vent / insignia.
-  * CHRYSSALID is LOW + WIDE + FORWARD-PITCHED: four long digitigrade legs, two real
+  * HARROWER is LOW + WIDE + FORWARD-PITCHED: four long digitigrade legs, two real
     scythe forelimbs, venom glow. NOT a biped.
-  * SECTOID is SMALL + GAUNT: oversized smooth cranium, symmetric emissive eyes, no
+  * GRAYTIDE is SMALL + GAUNT: oversized smooth cranium, symmetric emissive eyes, no
     mouth (nasal slit + brow ridge + chin plate), hand joined to the wrist.
 
 Mechanical rules enforced by construction:
@@ -36,7 +36,7 @@ Mechanical rules enforced by construction:
 
 Render rig (non-negotiable):
   * Dark wet concrete ground plane + contact shadow under every ground-standing
-    enemy; the Floater gets a soft hover shadow ellipse instead.
+    enemy; the Drifter gets a soft hover shadow ellipse instead.
   * World background strength 0.10 (near black).
   * Key  = SPOT, hard, ~35 deg, 1400 W, cold blue-white, front-left, aimed at chest.
   * Rim  = SPOT, 900 W, alien green (0.20, 1.0, 0.42), behind-right.
@@ -45,7 +45,7 @@ Render rig (non-negotiable):
     bloom, the Glare node is the only way to make the emissives bloom.
 
 Usage (headless):
-    blender -b -noaudio -P Tools/blender/xcom_enemies.py -- --out <dir> [--render]
+    blender -b -noaudio -P Tools/blender/bestiary_enemies.py -- --out <dir> [--render]
     --out   : directory for FBX + preview PNG renders
     --render: also render hero PNGs, turnarounds and human-scale references
 """
@@ -75,7 +75,7 @@ for i, a in enumerate(tail):
     if a == '--render':
         RENDER = True
 if OUT is None:
-    OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'out_xcom')
+    OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'out_bestiary')
 OUT = os.path.abspath(OUT)
 os.makedirs(OUT, exist_ok=True)
 
@@ -368,24 +368,24 @@ def enemy_materials(tag, chitin, plate, oxblood, accent_emit, accent_str, bone):
        restrained armour accent colour; CHITIN_BONE is reserved for bone ridges,
        teeth and spurs."""
     M = {}
-    M['chitin'] = procedural_mat('XCOM_%s_CHITIN' % tag, chitin, rough=0.48, metal=0.02,
+    M['chitin'] = procedural_mat('BESTIARY_%s_CHITIN' % tag, chitin, rough=0.48, metal=0.02,
                                  noise_scale=7.0, bump=0.40, mottle=0.55, rough_var=0.14,
                                  sss=0.45, sss_col=(min(1,chitin[0]*1.1), chitin[1]*0.35, chitin[2]*0.3))
-    M['plate'] = procedural_mat('XCOM_%s_PLATE' % tag, plate, rough=0.30, metal=0.70,
+    M['plate'] = procedural_mat('BESTIARY_%s_PLATE' % tag, plate, rough=0.30, metal=0.70,
                                 noise_scale=5.5, bump=0.22, mottle=0.26, rough_var=0.14,
                                 wear=0.35)
-    M['plate_dark'] = procedural_mat('XCOM_%s_PLATE_DARK' % tag, (0.010, 0.011, 0.013),
+    M['plate_dark'] = procedural_mat('BESTIARY_%s_PLATE_DARK' % tag, (0.010, 0.011, 0.013),
                                      rough=0.70, metal=0.30, noise_scale=9.0, bump=0.18,
                                      mottle=0.30, rough_var=0.10)
-    M['oxblood'] = procedural_mat('XCOM_%s_PLATE_OXBLOOD' % tag, oxblood, rough=0.40,
+    M['oxblood'] = procedural_mat('BESTIARY_%s_PLATE_OXBLOOD' % tag, oxblood, rough=0.40,
                                   metal=0.35, noise_scale=10.0, bump=0.28, mottle=0.40,
                                   rough_var=0.12, wear=0.30)
-    M['accent'] = procedural_mat('XCOM_%s_ACCENT_EMISSIVE' % tag,
+    M['accent'] = procedural_mat('BESTIARY_%s_ACCENT_EMISSIVE' % tag,
                                  (accent_emit[0] * 0.18, accent_emit[1] * 0.18,
                                   accent_emit[2] * 0.18),
                                  rough=0.22, metal=0.0, emit=accent_emit, emit_str=accent_str,
                                  noise_scale=16.0, bump=0.12, mottle=0.15, rough_var=0.0)
-    M['accent_dim'] = procedural_mat('XCOM_%s_ACCENT_DIM' % tag,
+    M['accent_dim'] = procedural_mat('BESTIARY_%s_ACCENT_DIM' % tag,
                                  (accent_emit[0] * 0.10, accent_emit[1] * 0.10,
                                   accent_emit[2] * 0.10),
                                  rough=0.30, metal=0.0, emit=accent_emit,
@@ -393,7 +393,7 @@ def enemy_materials(tag, chitin, plate, oxblood, accent_emit, accent_str, bone):
                                  noise_scale=16.0, bump=0.12, mottle=0.15, rough_var=0.0)
     global _CHITIN_MAT
     _CHITIN_MAT = M['chitin']
-    M['bone'] = procedural_mat('XCOM_%s_CHITIN_BONE' % tag, bone, rough=0.58, metal=0.0,
+    M['bone'] = procedural_mat('BESTIARY_%s_CHITIN_BONE' % tag, bone, rough=0.58, metal=0.0,
                                noise_scale=20.0, bump=0.30, mottle=0.34, rough_var=0.10,
                                sss=0.12, sss_col=(bone[0]*0.7, bone[1]*0.5, bone[2]*0.35))
     return M
@@ -483,7 +483,7 @@ def taper(name, p0, p1, r0, r1, material, verts=12):
 
 def planform_prism(name, pts, thickness, material, z=0.0, camber=0.0):
     """Closed thin prism from a 2D planform polygon (x, y). Used for the
-    Floater's continuous manta wings - one piece per side, so the wing reads
+    Drifter's continuous manta wings - one piece per side, so the wing reads
     as a single broad surface instead of a stack of rectangular blades."""
     n = len(pts)
     xmax = max(abs(p[0]) for p in pts) or 1.0
@@ -760,7 +760,7 @@ def plasma_rifle(o, name, origin, yaw_deg=0.0, M=None):
 
 # ========================================================================= rig
 def setup_world(strength=0.10):
-    world = bpy.data.worlds.new('XCOM_World')
+    world = bpy.data.worlds.new('BESTIARY_World')
     bpy.context.scene.world = world
     world.use_nodes = True
     bg = world.node_tree.nodes.get('Background')
@@ -942,8 +942,8 @@ def setup_compositor(threshold=0.85):
 
 def make_ground():
     """Dark wet concrete floor, top surface exactly at z = 0."""
-    return cube('XCOM_Ground', (0, 0, -0.05), (6.0, 6.0, 0.05),
-                procedural_mat('XCOM_Ground_WetConcrete', (0.044, 0.048, 0.056), rough=0.54,
+    return cube('BESTIARY_Ground', (0, 0, -0.05), (6.0, 6.0, 0.05),
+                procedural_mat('BESTIARY_Ground_WetConcrete', (0.044, 0.048, 0.056), rough=0.54,
                                metal=0.08, noise_scale=3.2, bump=0.32, mottle=0.46,
                                rough_var=0.14))
 
@@ -955,7 +955,7 @@ def make_shadow_blob(name, rx, ry, strength=0.62, z=0.006, x=0.0, y=0.0):
     o = bpy.context.object
     o.name = name
     o.scale = (rx, ry, 1.0)          # NOT applied: object-space radius stays unit
-    m = bpy.data.materials.new('XCOM_ShadowBlob')
+    m = bpy.data.materials.new('BESTIARY_ShadowBlob')
     m.use_nodes = True
     nt = m.node_tree
     bsdf = nt.nodes.get('Principled BSDF')
@@ -983,7 +983,7 @@ def make_shadow_blob(name, rx, ry, strength=0.62, z=0.006, x=0.0, y=0.0):
 
 def make_human_reference(x=-0.95, y=0.25):
     """1.8 m neutral human capsule for the scale-proof shots."""
-    mat = procedural_mat('XCOM_ScaleHuman', (0.030, 0.033, 0.038), rough=0.74, metal=0.0,
+    mat = procedural_mat('BESTIARY_ScaleHuman', (0.030, 0.033, 0.038), rough=0.74, metal=0.0,
                          noise_scale=18.0, bump=0.15, mottle=0.25, rough_var=0.06)
     o = []
     for s in (-1, 1):
@@ -1008,8 +1008,8 @@ def make_human_reference(x=-0.95, y=0.25):
 
 
 # ==================================================================== the enemies
-def build_sectoid(M):
-    """SECTOID - small, gaunt and HUNCHED forward. The torso is pitched 22 deg
+def build_graytide(M):
+    """GRAYTIDE - small, gaunt and HUNCHED forward. The torso is pitched 22 deg
     about the pelvis and the head an extra 8 deg, so the shoulders are a
     rounded, unequal mass and not a level bar. Oversized smooth cranium that
     merges into a fleshy nape (mass, not a collar), symmetric emissive ALIEN
@@ -1019,34 +1019,34 @@ def build_sectoid(M):
     tp = []          # torso group: pitched forward as one mass
     hp = []          # head group: extra forward pitch + 8 deg yaw to camera
     # --- feet: bigger relative to the shortened legs, clawed, on the floor
-    foot(o, 'sectoid_footL', (-0.095, -0.155, 0.075), M['plate'], size=1.10,
+    foot(o, 'graytide_footL', (-0.095, -0.155, 0.075), M['plate'], size=1.10,
          claws=3, claw_mat=M['bone'])
-    foot(o, 'sectoid_footR', (0.105, 0.040, 0.075), M['plate'], size=1.10,
+    foot(o, 'graytide_footR', (0.105, 0.040, 0.075), M['plate'], size=1.10,
          claws=3, claw_mat=M['bone'])
     # --- short, tapered, bent legs; the right leg carries the weight
-    limb(o, 'sectoid_shinL', (-0.095, -0.155, 0.075), (-0.092, -0.205, 0.340),
+    limb(o, 'graytide_shinL', (-0.095, -0.155, 0.075), (-0.092, -0.205, 0.340),
          0.040, 0.058, M['chitin'])
-    limb(o, 'sectoid_shinR', (0.105, 0.040, 0.075), (0.100, -0.078, 0.335),
+    limb(o, 'graytide_shinR', (0.105, 0.040, 0.075), (0.100, -0.078, 0.335),
          0.042, 0.060, M['chitin'])
-    limb(o, 'sectoid_thighL', (-0.092, -0.205, 0.340), (-0.070, 0.010, 0.545),
+    limb(o, 'graytide_thighL', (-0.092, -0.205, 0.340), (-0.070, 0.010, 0.545),
          0.058, 0.078, M['chitin'])
-    limb(o, 'sectoid_thighR', (0.100, -0.078, 0.335), (0.078, 0.030, 0.555),
+    limb(o, 'graytide_thighR', (0.100, -0.078, 0.335), (0.078, 0.030, 0.555),
          0.060, 0.080, M['chitin'])
     # flesh thigh mass so the leg is a limb, not a stick
-    tp.append(sphere('sectoid_thighmassL', (-0.082, -0.098, 0.445), 0.072, M['chitin'],
+    tp.append(sphere('graytide_thighmassL', (-0.082, -0.098, 0.445), 0.072, M['chitin'],
                      scale=(0.94, 1.05, 1.05), segs=13, rings=9))
-    tp.append(sphere('sectoid_thighmassR', (0.090, -0.026, 0.448), 0.074, M['chitin'],
+    tp.append(sphere('graytide_thighmassR', (0.090, -0.026, 0.448), 0.074, M['chitin'],
                      scale=(0.94, 1.05, 1.05), segs=13, rings=9))
-    tp.append(sphere('sectoid_pelvis', (0, 0.012, 0.700), 0.108, M['chitin'],
+    tp.append(sphere('graytide_pelvis', (0, 0.012, 0.700), 0.108, M['chitin'],
                      scale=(1.00, 0.80, 0.90), segs=14, rings=9))
     # --- compressed chest
-    tp.append(sphere('sectoid_torso', (0, -0.018, 0.895), 0.128, M['chitin'],
+    tp.append(sphere('graytide_torso', (0, -0.018, 0.895), 0.128, M['chitin'],
                      scale=(1.00, 0.72, 1.42), segs=16, rings=11))
-    tp.append(sphere('sectoid_sternum', (0, -0.082, 0.935), 0.062, M['chitin'],
+    tp.append(sphere('graytide_sternum', (0, -0.082, 0.935), 0.062, M['chitin'],
                      scale=(0.72, 0.34, 1.05), segs=12, rings=8))
-    panel_line(tp, 'sectoid_seam1', (0, -0.092, 0.985), (0.086, 0.005, 0.006),
+    panel_line(tp, 'graytide_seam1', (0, -0.092, 0.985), (0.086, 0.005, 0.006),
                M['plate_dark'])
-    panel_line(tp, 'sectoid_seam2', (0, -0.096, 0.838), (0.072, 0.005, 0.006),
+    panel_line(tp, 'graytide_seam2', (0, -0.096, 0.838), (0.072, 0.005, 0.006),
                M['plate_dark'])
     # --- rounded, UNEQUAL shoulder mass (never a level bar)
     sh_defs = ((-1, (-0.146, -0.076, 1.072), (-0.192, -0.066, 0.860), (-0.160, -0.244, 0.740)),
@@ -1054,41 +1054,41 @@ def build_sectoid(M):
     for s, shp, elb, wri in sh_defs:
         # a wide flattened shoulder mass, pushed inward so it melts into the
         # torso instead of reading as a ball joint
-        tp.append(sphere('sectoid_deltoid%d' % s, (shp[0] * 0.86, shp[1] + 0.020, shp[2] - 0.014),
+        tp.append(sphere('graytide_deltoid%d' % s, (shp[0] * 0.86, shp[1] + 0.020, shp[2] - 0.014),
                          0.090, M['chitin'], scale=(1.55, 1.10, 0.70), segs=14, rings=9))
         # a soft flesh trapezius mass, not a metallic ball joint
-        tp.append(sphere('sectoid_trap%d' % s, (shp[0] * 0.62, shp[1] + 0.034, shp[2] - 0.008),
+        tp.append(sphere('graytide_trap%d' % s, (shp[0] * 0.62, shp[1] + 0.034, shp[2] - 0.008),
                          0.112, M['chitin'], scale=(1.12, 0.96, 0.90), segs=14, rings=9))
-        limb(tp, 'sectoid_uarm%d' % s, shp, elb, 0.046, 0.036, M['chitin'])
-        limb(tp, 'sectoid_farm%d' % s, elb, wri, 0.036, 0.028, M['chitin'])
+        limb(tp, 'graytide_uarm%d' % s, shp, elb, 0.046, 0.036, M['chitin'])
+        limb(tp, 'graytide_farm%d' % s, elb, wri, 0.036, 0.028, M['chitin'])
         # big, simple clasped hand, held forward AND outboard of the torso so
         # the gesture survives a pure silhouette read
-        hand(tp, 'sectoid_hand%d' % s, wri,
+        hand(tp, 'graytide_hand%d' % s, wri,
              (0.52 if s < 0 else -0.52, -0.74, 0.38), M['chitin'], scale=1.45,
              digit_lens=(0.088, 0.120, 0.152))
     # --- head: oversized cranium fused into a fleshy nape (mass, not a collar)
-    tp.append(sphere('sectoid_nape', (0, -0.010, 1.150), 0.165, M['chitin'],
+    tp.append(sphere('graytide_nape', (0, -0.010, 1.150), 0.165, M['chitin'],
                      scale=(1.30, 1.05, 1.00), segs=16, rings=10))
-    tp.append(sphere('sectoid_nape2', (0, 0.020, 1.060), 0.138, M['chitin'],
+    tp.append(sphere('graytide_nape2', (0, 0.020, 1.060), 0.138, M['chitin'],
                      scale=(1.12, 1.02, 0.86), segs=14, rings=9))
     # one continuous flesh mass from the shoulders up into the nape: no collar
-    tp.append(sphere('sectoid_rug', (0, 0.010, 0.995), 0.170, M['chitin'],
+    tp.append(sphere('graytide_rug', (0, 0.010, 0.995), 0.170, M['chitin'],
                      scale=(1.42, 1.10, 0.80), segs=16, rings=10))
-    hp.append(sphere('sectoid_cranium', (0, -0.030, 1.352), 0.196, M['chitin'],
+    hp.append(sphere('graytide_cranium', (0, -0.030, 1.352), 0.196, M['chitin'],
                      scale=(1.02, 1.04, 1.14), segs=18, rings=12))
     for s in (-1, 1):
         _bp = eye_at((0, -0.030, 1.352), 0.196, (1.02, 1.04, 1.14), 0.0, s, 0.34, 0.30)
-        hp.append(sphere('sectoid_brow%d' % s, tuple(_bp[0] + Vector((0, 0, 0.010))),
+        hp.append(sphere('graytide_brow%d' % s, tuple(_bp[0] + Vector((0, 0, 0.010))),
                          0.044, M['chitin'], scale=(1.55, 0.90, 0.32), segs=12, rings=7))
     for s in (-1, 1):
         _ep, _fw = eye_at((0, -0.030, 1.352), 0.196, (1.02, 1.04, 1.14), 0.0, s, 0.34, 0.10)
-        alien_eye(hp, 'sectoid_eye%d' % s, tuple(_ep), 0.044,
+        alien_eye(hp, 'graytide_eye%d' % s, tuple(_ep), 0.044,
                   M['chitin'], M['plate_dark'], M['accent'], forward=_fw)
-    hp.append(cube('sectoid_nasalslit', (0, -0.182, 1.268), (0.013, 0.016, 0.044),
+    hp.append(cube('graytide_nasalslit', (0, -0.182, 1.268), (0.013, 0.016, 0.044),
                    M['plate_dark'], bevel=0.004))
     # a narrow vertical keel under the face - NOT a horizontal slab, which
     # would read as a mouth
-    hp.append(cube('sectoid_chinplate', (0, -0.104, 1.212), (0.020, 0.030, 0.052),
+    hp.append(cube('graytide_chinplate', (0, -0.104, 1.212), (0.020, 0.030, 0.052),
                    M['chitin'], bevel=0.008))
     rotate_about(hp, (0, -0.030, 1.170), (8, 0, 8))
     tp.extend(hp)
@@ -1099,82 +1099,82 @@ def build_sectoid(M):
     # THE HUNCH: 22 deg forward pitch of the upper body about the pelvis
     rotate_about(tp, (0, 0.010, 0.595), (22, 0, 0))
     o.extend(tp)
-    return join_objects(o, 'XCOM_Sectoid')
+    return join_objects(o, 'BESTIARY_Graytide')
 
-def build_viper(M):
-    """VIPER - tall + narrow, forward-projecting elongated snout, raised ribbed dorsal
+def build_ratline(M):
+    """RATLINE - tall + narrow, forward-projecting elongated snout, raised ribbed dorsal
     spine, visible plasma pistol, reptilian head."""
     o = []
     hp = []
-    foot(o, 'viper_footL', (-0.100, -0.135, 0.095), M['plate'], size=0.88, claws=3,
+    foot(o, 'ratline_footL', (-0.100, -0.135, 0.095), M['plate'], size=0.88, claws=3,
          claw_mat=M['chitin'])
-    foot(o, 'viper_footR', (0.100, 0.035, 0.095), M['plate'], size=0.88, claws=3,
+    foot(o, 'ratline_footR', (0.100, 0.035, 0.095), M['plate'], size=0.88, claws=3,
          claw_mat=M['chitin'])
-    limb(o, 'viper_shinL', (-0.100, -0.135, 0.095), (-0.094, -0.070, 0.540),
+    limb(o, 'ratline_shinL', (-0.100, -0.135, 0.095), (-0.094, -0.070, 0.540),
          0.046, 0.058, M['chitin'])
-    limb(o, 'viper_shinR', (0.100, 0.035, 0.095), (0.096, 0.062, 0.540),
+    limb(o, 'ratline_shinR', (0.100, 0.035, 0.095), (0.096, 0.062, 0.540),
          0.046, 0.058, M['chitin'])
-    limb(o, 'viper_thighL', (-0.094, -0.070, 0.540), (-0.088, -0.010, 0.980),
+    limb(o, 'ratline_thighL', (-0.094, -0.070, 0.540), (-0.088, -0.010, 0.980),
          0.058, 0.072, M['chitin'])
-    limb(o, 'viper_thighR', (0.096, 0.062, 0.540), (0.090, 0.020, 0.980),
+    limb(o, 'ratline_thighR', (0.096, 0.062, 0.540), (0.090, 0.020, 0.980),
          0.058, 0.072, M['chitin'])
-    o.append(cube('viper_pelvis', (0, 0, 0.985), (0.115, 0.092, 0.090), M['chitin'],
+    o.append(cube('ratline_pelvis', (0, 0, 0.985), (0.115, 0.092, 0.090), M['chitin'],
                   bevel=0.028))
-    o.append(cube('viper_abdomen', (0, 0.010, 1.150), (0.122, 0.096, 0.210), M['chitin'],
+    o.append(cube('ratline_abdomen', (0, 0.010, 1.150), (0.122, 0.096, 0.210), M['chitin'],
                   bevel=0.042))
-    o.append(cube('viper_chest', (0, 0, 1.400), (0.162, 0.108, 0.280), M['chitin'],
+    o.append(cube('ratline_chest', (0, 0, 1.400), (0.162, 0.108, 0.280), M['chitin'],
                   bevel=0.052))
-    o.append(cube('viper_throat', (0, -0.098, 1.450), (0.066, 0.018, 0.110), M['plate'],
+    o.append(cube('ratline_throat', (0, -0.098, 1.450), (0.066, 0.018, 0.110), M['plate'],
                   bevel=0.010))
-    panel_line(o, 'viper_seam1', (0, -0.108, 1.530), (0.120, 0.005, 0.007), M['plate_dark'])
-    panel_line(o, 'viper_seam2', (0, -0.108, 1.340), (0.104, 0.005, 0.007), M['plate_dark'])
-    o.append(taper('viper_neck', (0, 0.0, 1.540), (0, -0.012, 1.790), 0.066, 0.058,
+    panel_line(o, 'ratline_seam1', (0, -0.108, 1.530), (0.120, 0.005, 0.007), M['plate_dark'])
+    panel_line(o, 'ratline_seam2', (0, -0.108, 1.340), (0.104, 0.005, 0.007), M['plate_dark'])
+    o.append(taper('ratline_neck', (0, 0.0, 1.540), (0, -0.012, 1.790), 0.066, 0.058,
                    M['chitin'], verts=10))
     # raised ribbed dorsal spine (bone ridges)
     for i in range(5):
         z = 1.180 + i * 0.082
-        o.append(taper('viper_rib%d' % i, (0, 0.092, z), (0, 0.168 + i * 0.006, z + 0.118),
+        o.append(taper('ratline_rib%d' % i, (0, 0.092, z), (0, 0.168 + i * 0.006, z + 0.118),
                        0.050, 0.009, M['bone'], verts=8))
     for s, shy in ((-1, -0.030), (1, 0.020)):
-        o.append(cube('viper_shoulder%d' % s, (s * 0.180, shy, 1.520),
+        o.append(cube('ratline_shoulder%d' % s, (s * 0.180, shy, 1.520),
                       (0.054, 0.082, 0.058), M['plate'], bevel=0.018))
-        limb(o, 'viper_uarm%d' % s, (s * 0.185, shy, 1.510), (s * 0.215, -0.020, 1.220),
+        limb(o, 'ratline_uarm%d' % s, (s * 0.185, shy, 1.510), (s * 0.215, -0.020, 1.220),
              0.046, 0.037, M['chitin'])
-        limb(o, 'viper_farm%d' % s, (s * 0.215, -0.020, 1.220), (s * 0.228, -0.050, 1.010),
+        limb(o, 'ratline_farm%d' % s, (s * 0.215, -0.020, 1.220), (s * 0.228, -0.050, 1.010),
              0.037, 0.028, M['chitin'])
-    hand(o, 'viper_handR', (0.228, -0.050, 1.010), (0.25, -0.80, -0.55), M['chitin'], scale=0.82)
-    hand(o, 'viper_handL', (-0.228, -0.050, 1.010), (-0.30, -0.90, 0.30), M['chitin'], scale=0.82)
-    plasma_pistol(o, 'viper_pistol', (0.252, -0.150, 1.002), yaw_deg=-18, pitch_deg=-12, M=M)
+    hand(o, 'ratline_handR', (0.228, -0.050, 1.010), (0.25, -0.80, -0.55), M['chitin'], scale=0.82)
+    hand(o, 'ratline_handL', (-0.228, -0.050, 1.010), (-0.30, -0.90, 0.30), M['chitin'], scale=0.82)
+    plasma_pistol(o, 'ratline_pistol', (0.252, -0.150, 1.002), yaw_deg=-18, pitch_deg=-12, M=M)
     # head: reptilian, elongated forward-projecting snout
-    hp.append(sphere('viper_skull', (0, -0.010, 1.960), 0.112, M['chitin'],
+    hp.append(sphere('ratline_skull', (0, -0.010, 1.960), 0.112, M['chitin'],
                      scale=(0.84, 1.04, 0.88), segs=16, rings=11))
-    hp.append(taper('viper_snout', (0, -0.055, 1.930), (0, -0.500, 1.888), 0.078, 0.020,
+    hp.append(taper('ratline_snout', (0, -0.055, 1.930), (0, -0.500, 1.888), 0.078, 0.020,
                     M['chitin'], verts=10))
-    hp.append(cube('viper_nasalridge', (0, -0.260, 1.968), (0.024, 0.190, 0.022),
+    hp.append(cube('ratline_nasalridge', (0, -0.260, 1.968), (0.024, 0.190, 0.022),
                    M['plate'], bevel=0.006))
-    hp.append(cube('viper_brow', (0, -0.086, 2.000), (0.148, 0.050, 0.020),
+    hp.append(cube('ratline_brow', (0, -0.086, 2.000), (0.148, 0.050, 0.020),
                    M['plate'], bevel=0.007))
     for s in (-1, 1):
         _ep, _fw = eye_at((0, -0.010, 1.960), 0.112, (0.84, 1.04, 0.88), 0.0, s, 0.30, 0.10)
-        alien_eye(hp, 'viper_eye%d' % s, tuple(_ep), 0.042,
+        alien_eye(hp, 'ratline_eye%d' % s, tuple(_ep), 0.042,
                   M['chitin'], M['plate_dark'], M['accent'], forward=_fw)
-    hp.append(taper('viper_jaw', (0, -0.040, 1.880), (0, -0.410, 1.848), 0.060, 0.016,
+    hp.append(taper('ratline_jaw', (0, -0.040, 1.880), (0, -0.410, 1.848), 0.060, 0.016,
                     M['chitin'], verts=8))
-    hp.append(mouth_seam('viper_mouth', (0, -0.105, 1.892), (0, -0.405, 1.866), 0.026,
+    hp.append(mouth_seam('ratline_mouth', (0, -0.105, 1.892), (0, -0.405, 1.866), 0.026,
                          M['plate_dark'], up=(1, 0, 0)))
-    hp.extend(teeth('viper_tooth', [(-0.024, -0.150, 1.888), (0.024, -0.150, 1.888),
+    hp.extend(teeth('ratline_tooth', [(-0.024, -0.150, 1.888), (0.024, -0.150, 1.888),
                                      (-0.026, -0.245, 1.878), (0.026, -0.245, 1.878),
                                      (-0.020, -0.330, 1.868), (0.020, -0.330, 1.868)],
                     0.028, M['bone'], up=(0, 0, 1)))
-    hp.append(cube('viper_chin', (0, -0.075, 1.838), (0.052, 0.052, 0.018),
+    hp.append(cube('ratline_chin', (0, -0.075, 1.838), (0.052, 0.052, 0.018),
                    M['plate'], bevel=0.005))
     rotate_about(hp, (0, 0, 1.800), (0, 0, 8))
     o.extend(hp)
-    return join_objects(o, 'XCOM_Viper')
+    return join_objects(o, 'BESTIARY_Ratline')
 
 
-def build_floater(M):
-    """FLOATER - LEGLESS. ONE continuous swept manta planform: a single
+def build_drifter(M):
+    """DRIFTER - LEGLESS. ONE continuous swept manta planform: a single
     unbroken shell from tip to tip, so the underside has no lobes, notches or
     gaps that could ever read as limbs. There is NO leg, NO foot, NO descending
     rod and NO rounded tip anywhere under the body - the only appendages are
@@ -1219,92 +1219,92 @@ def build_floater(M):
                         (fx * 1.20, 0.760, 1.115), 0.010, 0.0008, M['chitin'], verts=6))
     rotate_about(hp, (0, -0.455, 1.020), (0, 0, 6))
     o.extend(hp)
-    return join_objects(o, 'XCOM_Floater')
+    return join_objects(o, 'BESTIARY_Drifter')
 
-def build_muton(M):
-    """MUTON - heavy + wide, armoured, horizontal emissive visor slit, heavy
+def build_bulwark(M):
+    """BULWARK - heavy + wide, armoured, horizontal emissive visor slit, heavy
     two-handed plasma rifle with foregrip, detailed oxblood chest plate."""
     o = []
     hp = []
-    foot(o, 'muton_footL', (-0.165, -0.125, 0.110), M['plate'], size=0.95, claws=3,
+    foot(o, 'bulwark_footL', (-0.165, -0.125, 0.110), M['plate'], size=0.95, claws=3,
          claw_mat=M['chitin'])
-    foot(o, 'muton_footR', (0.160, 0.050, 0.110), M['plate'], size=0.95, claws=3,
+    foot(o, 'bulwark_footR', (0.160, 0.050, 0.110), M['plate'], size=0.95, claws=3,
          claw_mat=M['chitin'])
-    limb(o, 'muton_shinL', (-0.165, -0.125, 0.110), (-0.158, -0.055, 0.520),
+    limb(o, 'bulwark_shinL', (-0.165, -0.125, 0.110), (-0.158, -0.055, 0.520),
          0.062, 0.078, M['chitin'])
-    limb(o, 'muton_shinR', (0.160, 0.050, 0.110), (0.154, 0.065, 0.520),
+    limb(o, 'bulwark_shinR', (0.160, 0.050, 0.110), (0.154, 0.065, 0.520),
          0.062, 0.078, M['chitin'])
-    limb(o, 'muton_thighL', (-0.158, -0.055, 0.520), (-0.140, 0.000, 0.960),
+    limb(o, 'bulwark_thighL', (-0.158, -0.055, 0.520), (-0.140, 0.000, 0.960),
          0.078, 0.098, M['chitin'])
-    limb(o, 'muton_thighR', (0.154, 0.065, 0.520), (0.140, 0.030, 0.960),
+    limb(o, 'bulwark_thighR', (0.154, 0.065, 0.520), (0.140, 0.030, 0.960),
          0.078, 0.098, M['chitin'])
-    o.append(cube('muton_pelvis', (0, 0.012, 0.965), (0.215, 0.150, 0.105), M['plate'],
+    o.append(cube('bulwark_pelvis', (0, 0.012, 0.965), (0.215, 0.150, 0.105), M['plate'],
                   bevel=0.032))
-    o.append(cube('muton_abdomen', (0, 0.010, 1.100), (0.240, 0.165, 0.180), M['chitin'],
+    o.append(cube('bulwark_abdomen', (0, 0.010, 1.100), (0.240, 0.165, 0.180), M['chitin'],
                   bevel=0.046))
-    o.append(cube('muton_chest', (0, 0.0, 1.360), (0.295, 0.180, 0.320), M['plate'],
+    o.append(cube('bulwark_chest', (0, 0.0, 1.360), (0.295, 0.180, 0.320), M['plate'],
                   bevel=0.065))
     # oxblood chest plate WITH detail: panel lines, vent grille, insignia
-    o.append(cube('muton_chestplate', (0, -0.186, 1.375), (0.225, 0.030, 0.230),
+    o.append(cube('bulwark_chestplate', (0, -0.186, 1.375), (0.225, 0.030, 0.230),
                   M['oxblood'], bevel=0.012))
-    panel_line(o, 'muton_cp_seam1', (0, -0.200, 1.455), (0.190, 0.006, 0.009), M['plate_dark'])
-    panel_line(o, 'muton_cp_seam2', (0, -0.200, 1.295), (0.190, 0.006, 0.009), M['plate_dark'])
-    panel_line(o, 'muton_cp_seam3', (0, -0.200, 1.375), (0.009, 0.006, 0.200), M['plate_dark'])
+    panel_line(o, 'bulwark_cp_seam1', (0, -0.200, 1.455), (0.190, 0.006, 0.009), M['plate_dark'])
+    panel_line(o, 'bulwark_cp_seam2', (0, -0.200, 1.295), (0.190, 0.006, 0.009), M['plate_dark'])
+    panel_line(o, 'bulwark_cp_seam3', (0, -0.200, 1.375), (0.009, 0.006, 0.200), M['plate_dark'])
     for i in range(3):
-        panel_line(o, 'muton_vent%d' % i, (0.132, -0.202, 1.345 + i * 0.030),
+        panel_line(o, 'bulwark_vent%d' % i, (0.132, -0.202, 1.345 + i * 0.030),
                    (0.066, 0.008, 0.012), M['plate_dark'])
-    o.append(cube('muton_insignia1', (-0.088, -0.204, 1.408), (0.020, 0.008, 0.058),
+    o.append(cube('bulwark_insignia1', (-0.088, -0.204, 1.408), (0.020, 0.008, 0.058),
                   M['plate'], rot=(0, DEG(20), 0)))
-    o.append(cube('muton_insignia2', (-0.088, -0.204, 1.340), (0.020, 0.008, 0.058),
+    o.append(cube('bulwark_insignia2', (-0.088, -0.204, 1.340), (0.020, 0.008, 0.058),
                   M['plate'], rot=(0, DEG(-20), 0)))
     for s, shy in ((-1, -0.040), (1, 0.030)):
-        o.append(cube('muton_pauldron%d' % s, (s * 0.395, shy, 1.520),
+        o.append(cube('bulwark_pauldron%d' % s, (s * 0.395, shy, 1.520),
                       (0.140, 0.200, 0.135), M['plate'], rot=(0, 0, s * DEG(15)),
                       bevel=0.036))
-        panel_line(o, 'muton_pauldron_seam%d' % s, (s * 0.398, shy - 0.090, 1.520),
+        panel_line(o, 'bulwark_pauldron_seam%d' % s, (s * 0.398, shy - 0.090, 1.520),
                    (0.112, 0.018, 0.009), M['plate_dark'], rot=(0, 0, s * DEG(15)))
     # right arm holds the rear grip, left arm crosses to the foregrip
-    limb(o, 'muton_uarmR', (0.395, 0.010, 1.430), (0.360, -0.140, 1.170),
+    limb(o, 'bulwark_uarmR', (0.395, 0.010, 1.430), (0.360, -0.140, 1.170),
          0.074, 0.062, M['chitin'])
-    limb(o, 'muton_farmR', (0.360, -0.140, 1.170), (0.125, -0.250, 0.958),
+    limb(o, 'bulwark_farmR', (0.360, -0.140, 1.170), (0.125, -0.250, 0.958),
          0.062, 0.052, M['chitin'])
-    o.append(cube('muton_gauntletR', (0.130, -0.248, 0.970), (0.058, 0.072, 0.054),
+    o.append(cube('bulwark_gauntletR', (0.130, -0.248, 0.970), (0.058, 0.072, 0.054),
                   M['plate'], bevel=0.012))
-    limb(o, 'muton_uarmL', (-0.395, 0.010, 1.430), (-0.120, -0.300, 1.190),
+    limb(o, 'bulwark_uarmL', (-0.395, 0.010, 1.430), (-0.120, -0.300, 1.190),
          0.074, 0.062, M['chitin'])
-    limb(o, 'muton_farmL', (-0.120, -0.300, 1.190), (0.115, -0.500, 0.950),
+    limb(o, 'bulwark_farmL', (-0.120, -0.300, 1.190), (0.115, -0.500, 0.950),
          0.062, 0.052, M['chitin'])
-    o.append(cube('muton_gauntletL', (0.112, -0.498, 0.962), (0.058, 0.072, 0.054),
+    o.append(cube('bulwark_gauntletL', (0.112, -0.498, 0.962), (0.058, 0.072, 0.054),
                   M['plate'], bevel=0.012))
     # head: horizontal emissive visor slit (no facial hook) + respirator
-    hp.append(taper('muton_neck', (0, 0.0, 1.610), (0, 0.0, 1.740), 0.090, 0.082,
+    hp.append(taper('bulwark_neck', (0, 0.0, 1.610), (0, 0.0, 1.740), 0.090, 0.082,
                     M['chitin'], verts=10))
-    hp.append(cube('muton_helmet', (0, 0.0, 1.870), (0.145, 0.155, 0.140), M['plate'],
+    hp.append(cube('bulwark_helmet', (0, 0.0, 1.870), (0.145, 0.155, 0.140), M['plate'],
                    bevel=0.040))
-    hp.append(cube('muton_visorrecess', (0, -0.146, 1.885), (0.130, 0.028, 0.044),
+    hp.append(cube('bulwark_visorrecess', (0, -0.146, 1.885), (0.130, 0.028, 0.044),
                    M['plate_dark'], bevel=0.006))
-    hp.append(cube('muton_visorslit', (0, -0.176, 1.885), (0.112, 0.012, 0.020),
+    hp.append(cube('bulwark_visorslit', (0, -0.176, 1.885), (0.112, 0.012, 0.020),
                    M['accent'], bevel=0.003))
-    hp.append(cube('muton_helmetcrest', (0, 0.012, 1.998), (0.032, 0.220, 0.042),
+    hp.append(cube('bulwark_helmetcrest', (0, 0.012, 1.998), (0.032, 0.220, 0.042),
                    M['plate'], rot=(DEG(-8), 0, 0), bevel=0.010))
-    hp.append(cube('muton_brow', (0, -0.128, 1.948), (0.132, 0.038, 0.028),
+    hp.append(cube('bulwark_brow', (0, -0.128, 1.948), (0.132, 0.038, 0.028),
                    M['plate'], bevel=0.008))
-    hp.append(cube('muton_respirator', (0, -0.100, 1.762), (0.090, 0.080, 0.052),
+    hp.append(cube('bulwark_respirator', (0, -0.100, 1.762), (0.090, 0.080, 0.052),
                    M['plate_dark'], bevel=0.012))
     for i in range(3):
-        hp.append(cube('muton_respslat%d' % i, (0, -0.142, 1.742 + i * 0.020),
+        hp.append(cube('bulwark_respslat%d' % i, (0, -0.142, 1.742 + i * 0.020),
                        (0.066, 0.012, 0.007), M['plate']))
     rotate_about(hp, (0, 0, 1.750), (0, 0, 8))
     o.extend(hp)
     # heavy two-handed plasma rifle, held across the body
-    plasma_rifle(o, 'muton_rifle', (0.12, -0.30, 1.10), yaw_deg=0, M=M)
-    hand(o, 'muton_handR', (0.125, -0.250, 0.958), (0.05, -0.15, 1.0), M['chitin'], scale=0.98)
-    hand(o, 'muton_handL', (0.115, -0.500, 0.950), (0.15, -0.10, 1.0), M['chitin'], scale=0.98)
-    return join_objects(o, 'XCOM_Muton')
+    plasma_rifle(o, 'bulwark_rifle', (0.12, -0.30, 1.10), yaw_deg=0, M=M)
+    hand(o, 'bulwark_handR', (0.125, -0.250, 0.958), (0.05, -0.15, 1.0), M['chitin'], scale=0.98)
+    hand(o, 'bulwark_handL', (0.115, -0.500, 0.950), (0.15, -0.10, 1.0), M['chitin'], scale=0.98)
+    return join_objects(o, 'BESTIARY_Bulwark')
 
 
-def build_chryssalid(M):
-    """CHRYSSALID - low + wide + forward-pitched stalker. Four long digitigrade legs,
+def build_harrower(M):
+    """HARROWER - low + wide + forward-pitched stalker. Four long digitigrade legs,
     two real scythe forelimbs, venom glow. NOT a biped."""
     o = []
     hp = []
@@ -1361,12 +1361,12 @@ def build_chryssalid(M):
                      scale=(1.0, 0.86, 1.05), segs=12, rings=8))
     rotate_about(hp, (0, -0.200, 0.580), (0, 0, 7))
     o.extend(hp)
-    return join_objects(o, 'XCOM_Chryssalid')
+    return join_objects(o, 'BESTIARY_Harrower')
 
 
 # ============================================================== build table
 BUILDERS = [
-    dict(name='XCOM_Sectoid', fn=build_sectoid, frame='ground', fill=0.62,
+    dict(name='BESTIARY_Graytide', fn=build_graytide, frame='ground', fill=0.62,
          az=25, cam_h=1.30, ground=True, weapon=False, pitch_deg=22,
          feet=[(-0.095, -0.188), (0.105, 0.007)],
          chitin=(0.34, 0.36, 0.40), plate=(0.115, 0.126, 0.118),
@@ -1387,7 +1387,7 @@ BUILDERS = [
                  'are enlarged and clasped forward and outboard so the gesture breaks '
                  'the torso outline; and both feet have a tight dark contact patch on '
                  'the floor.'),
-    dict(name='XCOM_Viper', fn=build_viper, frame='ground', fill=0.66,
+    dict(name='BESTIARY_Ratline', fn=build_ratline, frame='ground', fill=0.66,
          az=28, cam_h=1.32, ground=True, weapon=True,
          feet=[(-0.100, -0.161), (0.100, 0.009)],
          chitin=(0.062, 0.052, 0.038), plate=(0.105, 0.092, 0.078),
@@ -1402,7 +1402,7 @@ BUILDERS = [
                  'coil) in the right hand. v3: the chrome eye bezel was replaced by an '
                  'alien almond eye (dark socket, dark ball, glowing lens) and both '
                  'feet now carry a tight dark contact patch on the floor.'),
-    dict(name='XCOM_Floater', fn=build_floater, frame='hover', fill=0.92,
+    dict(name='BESTIARY_Drifter', fn=build_drifter, frame='hover', fill=0.92,
          az=30, cam_h=2.05, target_z=0.72, ground=False, weapon=False,
          feet=None, hover=(1.34, 0.62), under_glow=0.22,
          chitin=(0.036, 0.050, 0.072), plate=(0.072, 0.092, 0.118),
@@ -1413,7 +1413,7 @@ BUILDERS = [
                     'notches), a low segmented glowing dorsal core, and NOTHING under '
                     'the body - no legs, no feet, no rods, no rounded tips; it hovers '
                     'over a soft body-shaped ellipse',
-         changed='v1 gave the Floater legs. v2 still had FIVE descending rods '
+         changed='v1 gave the Drifter legs. v2 still had FIVE descending rods '
                  'ending in glowing spheres, which read as a spider stance. v3: those '
                  'rods and spheres are DELETED - there is no leg, no foot, no '
                  'descending appendage and no rounded tip under the body; the only '
@@ -1425,7 +1425,7 @@ BUILDERS = [
                  'three low segmented lens segments (no canopy/dome); and the '
                  'body-shaped hover ellipse on the floor is the only thing beneath '
                  'it.'),
-    dict(name='XCOM_Muton', fn=build_muton, frame='ground', fill=0.66,
+    dict(name='BESTIARY_Bulwark', fn=build_bulwark, frame='ground', fill=0.66,
          az=26, cam_h=1.32, ground=True, weapon=True,
          feet=[(-0.165, -0.154), (0.160, 0.022)],
          chitin=(0.044, 0.047, 0.050), plate=(0.112, 0.118, 0.126),
@@ -1444,7 +1444,7 @@ BUILDERS = [
                  'v3: both feet now carry a tight dark contact patch on the floor and '
                  'the armour is darker and less dusty than v2 so the oxblood chest '
                  'plate is the focal point.'),
-    dict(name='XCOM_Chryssalid', fn=build_chryssalid, frame='ground', fill=0.58,
+    dict(name='BESTIARY_Harrower', fn=build_harrower, frame='ground', fill=0.58,
          az=32, cam_h=1.18, ground=True, weapon=False,
          feet=[(-0.355, -0.036), (0.355, -0.036), (-0.310, 0.404), (0.310, 0.404)],
          chitin=(0.068, 0.042, 0.032), plate=(0.100, 0.082, 0.070),
@@ -1482,7 +1482,7 @@ def compose_turnaround(paths, out_path):
 
 
 def make_black_emission():
-    m = bpy.data.materials.new('XCOM_SilhouetteBlack')
+    m = bpy.data.materials.new('BESTIARY_SilhouetteBlack')
     m.use_nodes = True
     nt = m.node_tree
     for n in list(nt.nodes):
@@ -1512,7 +1512,7 @@ def render_silhouette(obj, cam, path):
         obj.data.materials.append(black)
         for p in obj.data.polygons:
             p.material_index = 0
-        world = bpy.data.worlds.new('XCOM_SilhouetteWorld')
+        world = bpy.data.worlds.new('BESTIARY_SilhouetteWorld')
         sc.world = world
         world.use_nodes = True
         bg = world.node_tree.nodes.get('Background')
@@ -1549,7 +1549,7 @@ def write_report(manifest, path):
                  'rubric deltas. **v3 closes the two named round-2 failures and then '
                  're-checks the other three the same way.**')
     lines.append('')
-    lines.append('- **Floater - legless.** v2 still had five descending rods ending in '
+    lines.append('- **Drifter - legless.** v2 still had five descending rods ending in '
                  'glowing spheres, which read as a spider stance. v3 deletes them. The '
                  'body is now ONE continuous swept manta planform from tip to tip '
                  '(10 outline points, no notches and no separate wing parts), so the '
@@ -1559,7 +1559,7 @@ def write_report(manifest, path):
                  'render shows a single smooth planform, and the lowest mesh '
                  'vertices are a single centred head pod (z=0.902 at x=0.000) - '
                  'nothing hangs below the body.')
-    lines.append('- **Sectoid - hunched.** The torso is pitched 22 deg forward about '
+    lines.append('- **Graytide - hunched.** The torso is pitched 22 deg forward about '
                  'the pelvis and the head a further 8 deg. The shoulders are a wide '
                  'flattened flesh mass (not a level bar, not ball joints), the cranium '
                  'fuses into a continuous nape and trapezius funnel (no collar), the '
@@ -1568,7 +1568,7 @@ def write_report(manifest, path):
                  'the gesture breaks the torso outline. Both feet have a dark contact '
                  'patch, confirmed by probing the rendered pixels at the projected '
                  'foot positions.')
-    lines.append('- **Viper / Muton / Chryssalid - re-checked on the same criteria.** '
+    lines.append('- **Ratline / Bulwark / Harrower - re-checked on the same criteria.** '
                  'All three keep their distinct silhouette, all eyes were rebuilt as '
                  'alien almond eyes (dark socket, dark ball, glowing lens, no chrome '
                  'bezel), all feet now carry a dark contact patch, and the '
@@ -1577,7 +1577,7 @@ def write_report(manifest, path):
     lines.append('Everything below is produced by the generator script - no '
                  'hand-placed or hand-edited assets.')
     lines.append('')
-    lines.append('Generator: `Tools/blender/xcom_enemies_v2.py` (Blender 4.2.23, EEVEE '
+    lines.append('Generator: `Tools/blender/bestiary_enemies_v2.py` (Blender 4.2.23, EEVEE '
                  'Next). Every model, render and measurement below was produced by '
                  'running that script - nothing is hand-placed or hand-edited.')
     lines.append('')
@@ -1591,7 +1591,7 @@ def write_report(manifest, path):
                      % (m['tris'], m['fbx'], m['fbx_kb'], m['height_m'], m['width_m'],
                         m['length_m']))
         if not m['has_ground_contact']:
-            lines.append('  - The Floater is a FLAT body: %.2f m front-to-back and only '
+            lines.append('  - The Drifter is a FLAT body: %.2f m front-to-back and only '
                          '%.2f m thick, and it hovers %.2f m above the floor. Its '
                          '`height_m` is the body thickness, not a standing height.'
                          % (m['length_m'], m['height_m'], m.get('hover_clearance_m', 0.0)))
@@ -1657,15 +1657,15 @@ def write_report(manifest, path):
                  'the enemy is re-materialised as pure black emission, the floor and '
                  'all lights are hidden, and the world is a flat mid-grey field. They '
                  'prove the SHAPE, not the materials or the lighting.')
-    lines.append('5. **The Chryssalid and Floater carry no weapon** (the brief only '
-                 'calls for weapons on the Viper and Muton), so `has_weapon` is false '
+    lines.append('5. **The Harrower and Drifter carry no weapon** (the brief only '
+                 'calls for weapons on the Ratline and Bulwark), so `has_weapon` is false '
                  'for those two.')
-    lines.append('6. **The Floater has no ground contact by design**, so it is the one '
+    lines.append('6. **The Drifter has no ground contact by design**, so it is the one '
                  'model with `has_ground_contact = false`; the ellipse under it is a '
                  'hover shadow, not a contact shadow.')
     lines.append('7. **No LODs, no collision meshes, no texture bakes, no import-ready '
                  'UE assets** are included - out of scope for this pass.')
-    lines.append('7b. **The Sectoid still reads somewhat mechanical at the shoulders.** '
+    lines.append('7b. **The Graytide still reads somewhat mechanical at the shoulders.** '
                  'The deltoid masses were widened, flattened and pushed into the '
                  'torso, and the nape was thickened into a continuous flesh funnel, '
                  'but at 900 px a lit shoulder cap still reads as a ball joint. It is '
@@ -1677,12 +1677,12 @@ def write_report(manifest, path):
                  'rendered pixels at the projected foot positions (see the probe '
                  'line above), and it reads in the images, but it is not baked into '
                  'the FBX - a UE placement will need its own shadow rig.')
-    lines.append('7d. **The Floater hovers 0.90 m above the floor** and has no ground '
+    lines.append('7d. **The Drifter hovers 0.90 m above the floor** and has no ground '
                  'contact by design, so it is the one model with '
                  '`has_ground_contact = false` and its `height_m` is the body '
                  'thickness, not a standing height.')
     lines.append('7e. **The materials are still fairly matte and low-contrast on the '
-                 'Sectoid and Muton.** Procedural noise and bump were reduced to stop '
+                 'Graytide and Bulwark.** Procedural noise and bump were reduced to stop '
                  'the "dusty concrete" read and the three material families (CHITIN / '
                  'PLATE / ACCENT) are separated in value, but there is no texture '
                  'variation beyond the procedural layers at this stage.')
@@ -1705,12 +1705,12 @@ def main():
     for spec in BUILDERS:
         purge()
         M = enemy_materials(
-            spec['name'].replace('XCOM_', ''),
+            spec['name'].replace('BESTIARY_', ''),
             chitin=spec['chitin'], plate=spec['plate'], oxblood=spec['oxblood'],
             accent_emit=spec['accent'], accent_str=spec['accent_str'], bone=spec['bone'])
         obj = spec['fn'](M)
         if obj is None:
-            print('[XCOM] FAILED build %s' % spec['name'])
+            print('[BESTIARY] FAILED build %s' % spec['name'])
             continue
         tris = tri_count(obj)
         h, wspan, dspan = model_size(obj)
@@ -1743,21 +1743,21 @@ def main():
             for i, (fx, fy) in enumerate(spec.get('feet') or []):
                 # a tight, DARK occlusion patch welded to each foot, plus a
                 # soft skirt: contact shadow, not a broad light pool
-                make_shadow_blob('XCOM_ContactCore%d' % i, 0.215, 0.170, 1.00,
+                make_shadow_blob('BESTIARY_ContactCore%d' % i, 0.215, 0.170, 1.00,
                                  z=0.009, x=fx, y=fy)
-                make_shadow_blob('XCOM_ContactHard%d' % i, 0.125, 0.098, 1.00,
+                make_shadow_blob('BESTIARY_ContactHard%d' % i, 0.125, 0.098, 1.00,
                                  z=0.012, x=fx, y=fy)
-                make_shadow_blob('XCOM_ContactSoft%d' % i, 0.400, 0.310, 0.70,
+                make_shadow_blob('BESTIARY_ContactSoft%d' % i, 0.400, 0.310, 0.70,
                                  z=0.004, x=fx, y=fy)
-            make_shadow_blob('XCOM_ContactBody', 0.44, 0.33, 0.34, z=0.003,
+            make_shadow_blob('BESTIARY_ContactBody', 0.44, 0.33, 0.34, z=0.003,
                              x=0.0, y=0.02)
         else:
             hrx, hry = spec.get('hover', (1.05, 0.60))
             # a body-shaped soft ellipse plus a harder core: this is what sells
             # the hover now that the body casts no shadow of its own
-            make_shadow_blob('XCOM_HoverShadow', hrx, hry, 1.00, z=0.006)
-            make_shadow_blob('XCOM_HoverCore', hrx * 0.70, hry * 0.58, 0.92, z=0.010)
-            make_shadow_blob('XCOM_HoverHard', hrx * 0.46, hry * 0.36, 0.88, z=0.014)
+            make_shadow_blob('BESTIARY_HoverShadow', hrx, hry, 1.00, z=0.006)
+            make_shadow_blob('BESTIARY_HoverCore', hrx * 0.70, hry * 0.58, 0.92, z=0.010)
+            make_shadow_blob('BESTIARY_HoverHard', hrx * 0.46, hry * 0.36, 0.88, z=0.014)
         cam = setup_camera()
 
         if spec['frame'] == 'ground':
@@ -1892,14 +1892,14 @@ def main():
                                            'floor; nothing touches the ground'),
         }
         manifest.append(entry)
-        print('[XCOM] %-16s tris=%-6d h=%.2f w=%.2f fbx=%.1fKB emi=%d (ctl50=%d) '
+        print('[BESTIARY] %-16s tris=%-6d h=%.2f w=%.2f fbx=%.1fKB emi=%d (ctl50=%d) '
               'bottom5 min=%.1f mean=%.1f p05=%.1f dark=%.2f probe=%s' %
               (spec['name'], tris, h, wspan, os.path.getsize(fbx_path) / 1024,
                entry['emissive_px'], entry['emissive_px_control_no_emission_halfres'],
                entry['bottom5_min'], entry['bottom5_mean'], entry['bottom5_p05'],
                entry['bottom5_dark_frac'], st.get('contact_probe')))
 
-    with open(os.path.join(OUT, 'xcom_manifest.json'), 'w') as f:
+    with open(os.path.join(OUT, 'bestiary_manifest.json'), 'w') as f:
         json.dump(manifest, f, indent=1)
 
     # ---- publish hero renders / turnarounds / scale shots to the Command Center
@@ -1911,16 +1911,16 @@ def main():
                     src = os.path.join(OUT, m[key])
                     if os.path.exists(src):
                         shutil.copy2(src, os.path.join(DASH, m[key]))
-            shutil.copy2(os.path.join(OUT, 'xcom_manifest.json'),
-                         os.path.join(DASH, 'xcom_manifest.json'))
+            shutil.copy2(os.path.join(OUT, 'bestiary_manifest.json'),
+                         os.path.join(DASH, 'bestiary_manifest.json'))
             write_report(manifest, os.path.join(DASH, 'ENEMY_V2_BUILD_REPORT.md'))
             shutil.copy2(os.path.join(DASH, 'ENEMY_V2_BUILD_REPORT.md'),
                          os.path.join(OUT, 'ENEMY_V2_BUILD_REPORT.md'))
-            print('[XCOM] published -> %s' % DASH)
+            print('[BESTIARY] published -> %s' % DASH)
         except Exception as e:
-            print('[XCOM] publish failed: %s' % e)
+            print('[BESTIARY] publish failed: %s' % e)
 
-    print('[XCOM] DONE %d enemies -> %s' % (len(manifest), OUT))
+    print('[BESTIARY] DONE %d enemies -> %s' % (len(manifest), OUT))
 
 
 if __name__ == '__main__':

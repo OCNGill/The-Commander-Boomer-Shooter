@@ -1,13 +1,13 @@
 {
   "generated_utc": "",
   "project": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/",
-  "fbx_dir": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_xcom_new",
-  "destination": "/Game/Enemies/XCOM",
+  "fbx_dir": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_bestiary_new",
+  "destination": "/Game/Enemies/BESTIARY",
   "enemies": [
     {
-      "enemy": "XCOM_Sectoid",
-      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_xcom_new\\XCOM_Sectoid.fbx",
-      "asset_path": "/Game/Enemies/XCOM/XCOM_Sectoid.XCOM_Sectoid",
+      "enemy": "BESTIARY_Graytide",
+      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_bestiary_new\\BESTIARY_Graytide.fbx",
+      "asset_path": "/Game/Enemies/BESTIARY/BESTIARY_Graytide.BESTIARY_Graytide",
       "triangle_count": 7308,
       "triangle_source": "mesh.get_num_triangles",
       "bounds_origin_cm": [
@@ -30,14 +30,14 @@
       "material_note": "kept-fbx-authored",
       "status": "OK",
       "error": "",
-      "mesh_object": "XCOM_Sectoid",
+      "mesh_object": "BESTIARY_Graytide",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
       "collision_is_complex_as_simple": true
     },
     {
-      "enemy": "XCOM_Viper",
-      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_xcom_new\\XCOM_Viper.fbx",
-      "asset_path": "/Game/Enemies/XCOM/XCOM_Viper.XCOM_Viper",
+      "enemy": "BESTIARY_Ratline",
+      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_bestiary_new\\BESTIARY_Ratline.fbx",
+      "asset_path": "/Game/Enemies/BESTIARY/BESTIARY_Ratline.BESTIARY_Ratline",
       "triangle_count": 5764,
       "triangle_source": "mesh.get_num_triangles",
       "bounds_origin_cm": [
@@ -60,14 +60,14 @@
       "material_note": "kept-fbx-authored",
       "status": "OK",
       "error": "",
-      "mesh_object": "XCOM_Viper",
+      "mesh_object": "BESTIARY_Ratline",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
       "collision_is_complex_as_simple": true
     },
     {
-      "enemy": "XCOM_Floater",
-      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_xcom_new\\XCOM_Floater.fbx",
-      "asset_path": "/Game/Enemies/XCOM/XCOM_Floater.XCOM_Floater",
+      "enemy": "BESTIARY_Drifter",
+      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_bestiary_new\\BESTIARY_Drifter.fbx",
+      "asset_path": "/Game/Enemies/BESTIARY/BESTIARY_Drifter.BESTIARY_Drifter",
       "triangle_count": 2184,
       "triangle_source": "mesh.get_num_triangles",
       "bounds_origin_cm": [
@@ -90,14 +90,14 @@
       "material_note": "kept-fbx-authored",
       "status": "OK",
       "error": "",
-      "mesh_object": "XCOM_Floater",
+      "mesh_object": "BESTIARY_Drifter",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
       "collision_is_complex_as_simple": true
     },
     {
-      "enemy": "XCOM_Muton",
-      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_xcom_new\\XCOM_Muton.fbx",
-      "asset_path": "/Game/Enemies/XCOM/XCOM_Muton.XCOM_Muton",
+      "enemy": "BESTIARY_Bulwark",
+      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_bestiary_new\\BESTIARY_Bulwark.fbx",
+      "asset_path": "/Game/Enemies/BESTIARY/BESTIARY_Bulwark.BESTIARY_Bulwark",
       "triangle_count": 5216,
       "triangle_source": "mesh.get_num_triangles",
       "bounds_origin_cm": [
@@ -120,14 +120,14 @@
       "material_note": "kept-fbx-authored",
       "status": "OK",
       "error": "",
-      "mesh_object": "XCOM_Muton",
+      "mesh_object": "BESTIARY_Bulwark",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
       "collision_is_complex_as_simple": true
     },
     {
-      "enemy": "XCOM_Chryssalid",
-      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_xcom_new\\XCOM_Chryssalid.fbx",
-      "asset_path": "/Game/Enemies/XCOM/XCOM_Chryssalid.XCOM_Chryssalid",
+      "enemy": "BESTIARY_Harrower",
+      "fbx": "C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter/Tools/blender/out_bestiary_new\\BESTIARY_Harrower.fbx",
+      "asset_path": "/Game/Enemies/BESTIARY/BESTIARY_Harrower.BESTIARY_Harrower",
       "triangle_count": 6252,
       "triangle_source": "mesh.get_num_triangles",
       "bounds_origin_cm": [
@@ -150,7 +150,7 @@
       "material_note": "kept-fbx-authored",
       "status": "OK",
       "error": "",
-      "mesh_object": "XCOM_Chryssalid",
+      "mesh_object": "BESTIARY_Harrower",
       "collision_detail": "body_setup.collision_trace_flag=<CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE: 3>",
       "collision_is_complex_as_simple": true
     }

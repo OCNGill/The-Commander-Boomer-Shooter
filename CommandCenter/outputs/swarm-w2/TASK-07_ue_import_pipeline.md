@@ -1,7 +1,7 @@
 # TASK-07 — UE5 Import Pipeline Spec (X-COM Enemy FBX Kit)
 
 **Slot:** swarm-w2 · **Target:** Unreal Engine **5.8** (`TheCommander.uproject` → `"EngineAssociation": "5.8"`)
-**Proven API baseline:** `Tools/python/import_xcom_fbx.py` (5/5 import, `[XCOMIMPORT] SUMMARY imported=5 failed=0`),
+**Proven API baseline:** `Tools/python/import_bestiary_fbx.py` (5/5 import, `[XCOMIMPORT] SUMMARY imported=5 failed=0`),
 `Tools/python/ensure_base_geometry.py` and `Tools/python/populate_encounters.py` (proven spawn path).
 **Design locks:** TRUE 3D only, NO sprites · original 1994 X-COM roster only · zero reload animations ·
 pickups are the only health system, no regeneration.
@@ -12,28 +12,28 @@ pickups are the only health system, no regeneration.
 
 | Path | What it is | State |
 |---|---|---|
-| `Tools/blender/xcom_enemies.py` | v1 builder (5 enemies, flat Principled materials) | superseded, still present |
-| `Tools/blender/xcom_enemies_v2.py` | **v2/v3 builder** (per-enemy procedural materials, 7 families, reveal rig) | current source of the FBX on disk |
-| `Tools/blender/out_xcom/XCOM_<Enemy>.fbx` | 5 binary FBX, one joined mesh per enemy, Y-up / −Z-forward, `FBX_SCALE_ALL`, no textures, no rig, no LOD | rebuilt 2026-10-21 02:47–02:51 |
-| `Tools/blender/out_xcom/xcom_manifest.json` | tris / kb / dims / silhouette / emissive pixel stats | v3 values (5636/5764/2732/5216/6252) |
-| `Tools/python/import_xcom_fbx.py` | the working UE 5.8 FBX importer | proven 5/5 |
+| `Tools/blender/bestiary_enemies.py` | v1 builder (5 enemies, flat Principled materials) | superseded, still present |
+| `Tools/blender/bestiary_enemies_v2.py` | **v2/v3 builder** (per-enemy procedural materials, 7 families, reveal rig) | current source of the FBX on disk |
+| `Tools/blender/out_bestiary/BESTIARY_<Enemy>.fbx` | 5 binary FBX, one joined mesh per enemy, Y-up / −Z-forward, `FBX_SCALE_ALL`, no textures, no rig, no LOD | rebuilt 2026-10-21 02:47–02:51 |
+| `Tools/blender/out_bestiary/bestiary_manifest.json` | tris / kb / dims / silhouette / emissive pixel stats | v3 values (5636/5764/2732/5216/6252) |
+| `Tools/python/import_bestiary_fbx.py` | the working UE 5.8 FBX importer | proven 5/5 |
 | `Tools/python/ensure_base_geometry.py` | the **proven spawn path** | `spawn_actor_from_class` + `set_static_mesh` |
 | `Tools/python/populate_encounters.py` | encounter/pickup/weapon placement + lighting beats | uses the same proven path |
-| `Content/Enemies/XCOM/*.uasset` | 5 static meshes + 11 materials from the **v1** import | **one generation stale** — see §1.1 |
-| `CommandCenter/outputs/ue_import/xcom_ue_import_report.md` | the v1 import report (prose + tables) | the model for the new report |
+| `Content/Enemies/BESTIARY/*.uasset` | 5 static meshes + 11 materials from the **v1** import | **one generation stale** — see §1.1 |
+| `CommandCenter/outputs/ue_import/bestiary_ue_import_report.md` | the v1 import report (prose + tables) | the model for the new report |
 
 ### 1.1 KNOWN STALENESS — must be handled by this pipeline, not ignored
 
-`Content/Enemies/XCOM/XCOM_Sectoid.uasset` etc. were imported at **01:13** from the **v1** FBX (2864 tris,
-`XCOM_Chitin_Mid` material family). The FBX were rebuilt at **02:47–02:51** with the v3 builder (5636 tris,
-`XCOM_Sectoid_CHITIN` material family). Consequences the pipeline must own:
+`Content/Enemies/BESTIARY/BESTIARY_Graytide.uasset` etc. were imported at **01:13** from the **v1** FBX (2864 tris,
+`BESTIARY_Chitin_Mid` material family). The FBX were rebuilt at **02:47–02:51** with the v3 builder (5636 tris,
+`BESTIARY_Graytide_CHITIN` material family). Consequences the pipeline must own:
 
 1. Re-importing **replaces** the mesh assets (same `destination_name`, `replace_existing=True`) — fine.
-2. The **v1 material assets** (`XCOM_Chitin_Dark/Mid/Pale`, `XCOM_Armor_Plate`, `XCOM_Armor_Accent`,
-   `XCOM_Flesh`, `XCOM_Eye_Emissive`, `XCOM_Core_Emissive`, `XCOM_Plasma_Emissive`, `XCOM_Gunmetal`,
-   `M_XCOM_Chitin`) are **orphans** — the new FBX reference a different material scheme. They should be deleted
+2. The **v1 material assets** (`BESTIARY_Chitin_Dark/Mid/Pale`, `BESTIARY_Armor_Plate`, `BESTIARY_Armor_Accent`,
+   `BESTIARY_Flesh`, `BESTIARY_Eye_Emissive`, `BESTIARY_Core_Emissive`, `BESTIARY_Plasma_Emissive`, `BESTIARY_Gunmetal`,
+   `M_BESTIARY_Chitin`) are **orphans** — the new FBX reference a different material scheme. They should be deleted
    by the owner of `Content/**` (locked for this slot — **reported, not edited**).
-3. `M_XCOM_Chitin` (an instance of `/Engine/BasicShapes/BasicShapeMaterial`) is a **placeholder** and must not
+3. `M_BESTIARY_Chitin` (an instance of `/Engine/BasicShapes/BasicShapeMaterial`) is a **placeholder** and must not
    remain the fallback for any enemy.
 
 ---
@@ -44,13 +44,13 @@ pickups are the only health system, no regeneration.
 
 | Element | Pattern | Example |
 |---|---|---|
-| Enemy FBX | `XCOM_<PascalEnemy>.fbx` | `XCOM_Sectoid.fbx` |
-| Blender object / mesh | `XCOM_<PascalEnemy>` | `XCOM_Chryssalid` |
-| Blender material | `XCOM_<PascalEnemy>_<FAMILY>` | `XCOM_Muton_PLATE_OXBLOOD` |
-| Manifest | `xcom_manifest.json` (one entry per enemy, `name` = asset name) | — |
-| Preview renders | `XCOM_<PascalEnemy>.png`, `_turn.png`, `_scale.png`, `_silh.png` | — |
+| Enemy FBX | `BESTIARY_<PascalEnemy>.fbx` | `BESTIARY_Graytide.fbx` |
+| Blender object / mesh | `BESTIARY_<PascalEnemy>` | `BESTIARY_Harrower` |
+| Blender material | `BESTIARY_<PascalEnemy>_<FAMILY>` | `BESTIARY_Bulwark_PLATE_OXBLOOD` |
+| Manifest | `bestiary_manifest.json` (one entry per enemy, `name` = asset name) | — |
+| Preview renders | `BESTIARY_<PascalEnemy>.png`, `_turn.png`, `_scale.png`, `_silh.png` | — |
 
-`<PascalEnemy>` ∈ `Sectoid, Viper, Floater, Muton, Chryssalid`.
+`<PascalEnemy>` ∈ `Graytide, Ratline, Drifter, Bulwark, Harrower`.
 `<FAMILY>` ∈ `CHITIN, PLATE, PLATE_DARK, PLATE_OXBLOOD, CHITIN_BONE, ACCENT_EMISSIVE, ACCENT_DIM`.
 
 **Rules:** uppercase, no spaces, no dashes, underscores only between words. The FBX stem **must** equal the UE
@@ -60,40 +60,40 @@ asset name — the importer derives the destination name from the stem and the r
 
 | Asset | Path | Name pattern | Example |
 |---|---|---|---|
-| Static mesh (LOD0) | `/Game/Enemies/XCOM` | `XCOM_<PascalEnemy>` | `/Game/Enemies/XCOM/XCOM_Sectoid.XCOM_Sectoid` |
-| Master material | `/Game/Enemies/XCOM/Materials/Masters` | `M_XCOM_<FAMILY>_Master` | `M_XCOM_Chitin_Master` |
-| Material instance | `/Game/Enemies/XCOM/Materials/Instances` | `MI_XCOM_<PascalEnemy>_<FAMILY>` | `MI_XCOM_Muton_PLATE_OXBLOOD` |
-| Texture (optional baked) | `/Game/Enemies/XCOM/Textures` | `T_XCOM_<FAMILY>_<Map>` | `T_XCOM_Chitin_Normal` |
-| Blueprint actor (future) | `/Game/Enemies/XCOM/Blueprints` | `BP_XCOM_<PascalEnemy>` | `BP_XCOM_Viper` |
-| Spawned actor label | in-level | `XCOM_<PascalEnemy>_<nn>` | `XCOM_Sectoid_03` |
+| Static mesh (LOD0) | `/Game/Enemies/BESTIARY` | `BESTIARY_<PascalEnemy>` | `/Game/Enemies/BESTIARY/BESTIARY_Graytide.BESTIARY_Graytide` |
+| Master material | `/Game/Enemies/BESTIARY/Materials/Masters` | `M_BESTIARY_<FAMILY>_Master` | `M_BESTIARY_Chitin_Master` |
+| Material instance | `/Game/Enemies/BESTIARY/Materials/Instances` | `MI_BESTIARY_<PascalEnemy>_<FAMILY>` | `MI_BESTIARY_Bulwark_PLATE_OXBLOOD` |
+| Texture (optional baked) | `/Game/Enemies/BESTIARY/Textures` | `T_BESTIARY_<FAMILY>_<Map>` | `T_BESTIARY_Chitin_Normal` |
+| Blueprint actor (future) | `/Game/Enemies/BESTIARY/Blueprints` | `BP_BESTIARY_<PascalEnemy>` | `BP_BESTIARY_Ratline` |
+| Spawned actor label | in-level | `BESTIARY_<PascalEnemy>_<nn>` | `BESTIARY_Graytide_03` |
 
 **Why `MI_` / `M_` / `T_` prefixes are new:** the existing v1 import wrote raw FBX material names straight into
-`/Game/Enemies/XCOM` (`XCOM_Chitin_Mid.uasset` etc.), so assets, materials and the future baked textures all share
+`/Game/Enemies/BESTIARY` (`BESTIARY_Chitin_Mid.uasset` etc.), so assets, materials and the future baked textures all share
 one flat namespace. The new scheme separates them. The migration is additive: masters/instances go into
 **subfolders**, so the flat folder keeps only the five mesh assets and can be cleaned in one pass.
 
 ### 2.3 Folder/asset path convention (final tree)
 
 ```
-/Game/Enemies/XCOM/
-├── XCOM_Sectoid.uasset        (StaticMesh, LOD0, collision = ComplexAsSimple)
-├── XCOM_Viper.uasset
-├── XCOM_Floater.uasset
-├── XCOM_Muton.uasset
-├── XCOM_Chryssalid.uasset
+/Game/Enemies/BESTIARY/
+├── BESTIARY_Graytide.uasset        (StaticMesh, LOD0, collision = ComplexAsSimple)
+├── BESTIARY_Ratline.uasset
+├── BESTIARY_Drifter.uasset
+├── BESTIARY_Bulwark.uasset
+├── BESTIARY_Harrower.uasset
 ├── Materials/
 │   ├── Masters/
-│   │   ├── M_XCOM_Chitin_Master.uasset
-│   │   ├── M_XCOM_Plate_Master.uasset
-│   │   ├── M_XCOM_PlateDark_Master.uasset
-│   │   ├── M_XCOM_Oxblood_Master.uasset
-│   │   ├── M_XCOM_Bone_Master.uasset
-│   │   ├── M_XCOM_Accent_Master.uasset
-│   │   └── M_XCOM_AccentDim_Master.uasset
+│   │   ├── M_BESTIARY_Chitin_Master.uasset
+│   │   ├── M_BESTIARY_Plate_Master.uasset
+│   │   ├── M_BESTIARY_PlateDark_Master.uasset
+│   │   ├── M_BESTIARY_Oxblood_Master.uasset
+│   │   ├── M_BESTIARY_Bone_Master.uasset
+│   │   ├── M_BESTIARY_Accent_Master.uasset
+│   │   └── M_BESTIARY_AccentDim_Master.uasset
 │   └── Instances/
-│       ├── MI_XCOM_Sectoid_CHITIN.uasset ... (24 instances total, one per FBX slot)
+│       ├── MI_BESTIARY_Graytide_CHITIN.uasset ... (24 instances total, one per FBX slot)
 ├── Textures/                  (optional baked set, per TASK-02 §2.3)
-└── Blueprints/                (BP_XCOM_<Enemy>, when the AI actor is built)
+└── Blueprints/                (BP_BESTIARY_<Enemy>, when the AI actor is built)
 ```
 
 Other kit folders that already exist and must not be disturbed: `/Game/Weapons` (blockout proxies + pickups,
@@ -106,7 +106,7 @@ imported by `import_weapons_fbx.py` into the **flat** `/Game/Weapons` with no su
 
 ### Stage 0 — preflight (pure Python, no UE)
 
-Read `Tools/blender/out_xcom/xcom_manifest.json` and assert for each of the five enemies:
+Read `Tools/blender/out_bestiary/bestiary_manifest.json` and assert for each of the five enemies:
 `tris ≤ LOD0 ceiling` (TASK-02 §1), `fbx` file exists, `height_m > 0`.
 Cross-check the FBX binary for: `Texture`=0 and `Video`=0 (so `import_textures=False` is correct),
 `Deformer`=0 (so `import_as_skeletal=False` is correct), `Model::LOD`=0 (so LODs must be built in UE).
@@ -118,7 +118,7 @@ Cross-check the FBX binary for: `Texture`=0 and `Video`=0 (so `import_textures=F
 ```python
 task = unreal.AssetImportTask()
 task.filename         = os.path.join(FBX_DIR, name + '.fbx')
-task.destination_path = '/Game/Enemies/XCOM'
+task.destination_path = '/Game/Enemies/BESTIARY'
 task.destination_name = name
 task.replace_existing = True
 task.save             = True
@@ -158,30 +158,30 @@ unreal.AssetToolsHelpers.get_asset_tools().import_asset_tasks([task])
   `'FbxStaticMeshImportData' object has no attribute 'remove_debris'`. Never assume a property exists.
 
 After import, resolve the mesh: prefer the `StaticMesh` among `task.imported_object_paths`; fall back to loading
-`'%s/%s.%s' % (DEST, name, name)`. Both paths are in `import_xcom_fbx.py:272-296`.
+`'%s/%s.%s' % (DEST, name, name)`. Both paths are in `import_bestiary_fbx.py:272-296`.
 
 ### Stage 2 — materials (masters → instances → re-point slots)
 
 1. **Create the 7 masters** (once, idempotent). Each master is a `unreal.Material` whose graph reproduces the
    Blender procedural chain (TASK-02 §2.2): `Noise→ColorRamp→BaseColor`, `Noise→Bump→Normal`,
    `Noise→ColorRamp→Roughness`, plus `EmissiveColor`/`EmissiveStrength` on the accent masters.
-2. **Create ≤ 24 instances**, one per (enemy, FBX slot) pair, named `MI_XCOM_<Enemy>_<FAMILY>`:
+2. **Create ≤ 24 instances**, one per (enemy, FBX slot) pair, named `MI_BESTIARY_<Enemy>_<FAMILY>`:
    ```python
    f = unreal.MaterialInstanceConstantFactoryNew()
    f.set_editor_property('initial_parent', master)
-   asset = tools.create_asset(inst_name, '/Game/Enemies/XCOM/Materials/Instances',
+   asset = tools.create_asset(inst_name, '/Game/Enemies/BESTIARY/Materials/Instances',
                               unreal.MaterialInstanceConstant, f)
    ```
    then set the vector/scalar parameters (`BaseColor`, `Roughness`, `Metallic`, `EmissiveColor`,
    `EmissiveStrength`, `NormalStrength`) with
    `unreal.MaterialEditingLibrary.set_material_instance_vector_parameter_value` /
    `..._scalar_parameter_value`, and finally `unreal.EditorAssetLibrary.save_asset(path)`.
-   *(`set_material_instance_vector_parameter_value` is the call already proven at `import_xcom_fbx.py:157`.)*
+   *(`set_material_instance_vector_parameter_value` is the call already proven at `import_bestiary_fbx.py:157`.)*
 3. **Re-point the mesh slots** with `mesh.set_material(i, mi)` for each slot index, where `mi` is the instance
-   matching the FBX slot's material name. This is the proven call at `import_xcom_fbx.py:171-188`.
+   matching the FBX slot's material name. This is the proven call at `import_bestiary_fbx.py:171-188`.
    **Keep the FBX-authored material set** — do not blanket-assign one material to every slot. The v1 run got this
    right (`material_note: kept-fbx-authored`) and it is why the v1 report lists a *different* material set per enemy.
-4. **The `M_XCOM_Chitin` placeholder must not survive.** The old fallback
+4. **The `M_BESTIARY_Chitin` placeholder must not survive.** The old fallback
    (`ensure_material()` creating an instance of `/Engine/BasicShapes/BasicShapeMaterial`) was a safety net for an
    FBX with no materials; every v3 FBX has materials, so the fallback should now create a **master-based** instance
    or fail loudly. A `BasicShapeMaterial` on an alien is a ship-blocker.
@@ -195,7 +195,7 @@ body.set_editor_property('collision_trace_flag',
 ```
 
 - UE 5.8 has **no** `EditorStaticMeshLibrary.set_collision_complex_as_simple` — the API probe in
-  `import_xcom_fbx.py:195-199` lists what the library actually offers. `BodySetup.CollisionTraceFlag` is the
+  `import_bestiary_fbx.py:195-199` lists what the library actually offers. `BodySetup.CollisionTraceFlag` is the
   authoritative property; the deprecated `mesh.collision_complexity` and `unreal.CollisionComplexity` are
   last-resort fallbacks only.
 - **Readback in the same run:**
@@ -215,14 +215,14 @@ them as separate assets.
 
 ### Stage 5 — report
 
-Write `Docs/generated/xcom_ue_import_report.json` (machine) and
-`CommandCenter/outputs/ue_import/xcom_ue_import_report.md` (human), mirroring the v1 report's structure:
+Write `Docs/generated/bestiary_ue_import_report.json` (machine) and
+`CommandCenter/outputs/ue_import/bestiary_ue_import_report.md` (human), mirroring the v1 report's structure:
 per enemy — asset path, triangle count **and the source of that number**, bounds origin/extent in cm and their
 source, height/width/depth in cm, collision status + detail, collision readback, material list + note, status,
 error. Plus a `summary` line `imported=N failed=M` and the FBX manifest cross-check table.
 
 Triangle count must be read with the multi-API probe already in the repo
-(`tri_count()` at `import_xcom_fbx.py:36-81`): `EditorStaticMeshLibrary.get_number_triangles` →
+(`tri_count()` at `import_bestiary_fbx.py:36-81`): `EditorStaticMeshLibrary.get_number_triangles` →
 `mesh.get_num_triangles` → `StaticMeshDescription` → `render_data.get_num_triangles(0)`.
 
 **Report both numbers when they disagree:** the Blender manifest tris and the UE readback tris. The v1 report did
@@ -275,23 +275,23 @@ pattern in this repo that has ever produced a saved actor.
 (`target_height()` / `want / extent_z`, e.g. `ENC_` → 180 uu). **That is for the abstract blockout proxies in
 `Tools/blender/out/`** (`E_BarnacleDrone`, `E_RockGolem`, …), which are meaningless blobs used as spatial markers.
 The X-COM enemies are **authored at true scale** (1.44 / 2.06 / 0.33 / 2.07 / 1.03 m per the manifest). Running
-them through `target_height()` would silently rescale a 2.06 m Viper to 1.80 m and a 1.03 m Chryssalid to 1.80 m.
+them through `target_height()` would silently rescale a 2.06 m Ratline to 1.80 m and a 1.03 m Harrower to 1.80 m.
 **The enemy spawner must set scale 1.0 and never call `target_height()`.**
 
 ### 4.4 The facing trap — Blender −Y is the model's front
 
 Every build function puts the face, snout, mandibles and weapon at **negative Y** in Blender
-(`viper_snout` at y = −0.24, `chry_mandible` at y = −0.46, the Viper pistol at y = −0.15). After
+(`ratline_snout` at y = −0.24, `chry_mandible` at y = −0.46, the Ratline pistol at y = −0.15). After
 `convert_scene=True` that maps to **−Y in UE** as well. A spawner that computes
 `yaw = atan2(dy, dx)` toward the player and does nothing else will place the enemy **facing away**.
 **The spawner must add 180° to the naive yaw** (or equivalently set the actor rotation to
 `yaw = atan2(dy, dx) + 180.0`) so the enemy's face is toward the player. Verify this with one spawn per enemy
-before the wave logic is written — a back-turned Sectoid is the exact failure mode of a blind import.
+before the wave logic is written — a back-turned Graytide is the exact failure mode of a blind import.
 
-### 4.5 The Floater trap — pivot is on the floor
+### 4.5 The Drifter trap — pivot is on the floor
 
-`join_objects()` forces the origin to the world cursor at (0,0,0) (`xcom_enemies_v2.py:231-233`), so the
-Floater's *body* sits ~1.05 m above its own pivot while its mesh bbox height is only 0.33 m. **The Floater must
+`join_objects()` forces the origin to the world cursor at (0,0,0) (`bestiary_enemies_v2.py:231-233`), so the
+Drifter's *body* sits ~1.05 m above its own pivot while its mesh bbox height is only 0.33 m. **The Drifter must
 be spawned at Z + 100 cm** (or its own hover height defined by the wave table) so the shell is above the floor.
 The other four are grounded at Z = 0 with feet on the floor (the builder explicitly welds a contact patch under
 every foot — `make_shadow_blob` calls in `main()`).
@@ -300,7 +300,7 @@ every foot — `make_shadow_blob` calls in `main()`).
 
 The 1994 reveal is the design centrepiece: the enemy appears lit out of darkness by a hard cold key, a coloured
 alien rim and a low under-glow. The rig is authored in Blender as `reveal_key` / `reveal_rim` / `reveal_under`
-(`xcom_enemies_v2.py:720-789`) and its measured parameters live in
+(`bestiary_enemies_v2.py:720-789`) and its measured parameters live in
 `CommandCenter/outputs/lighting/rig_params.json`:
 
 | Light | Type | Colour | Blender energy (per-enemy) | UE spawn contract |
@@ -324,11 +324,11 @@ finite radius/attenuation so only the spawning enemy is lit.
 ### 4.7 Enemy actor contract (what the wave system will call)
 
 ```python
-def spawn_xcom_wave(wave_spec) -> list[unreal.Actor]
+def spawn_bestiary_wave(wave_spec) -> list[unreal.Actor]
 ```
 - `wave_spec` = list of `(enemy_name, location, optional_facing_point)`.
 - Returns the spawned actors; the caller never touches `static_mesh_component` directly.
-- Each actor gets the label `XCOM_<PascalEnemy>_<nn>` (§2.2).
+- Each actor gets the label `BESTIARY_<PascalEnemy>_<nn>` (§2.2).
 - Each actor gets its reveal rig attached and initialised.
 - **No health regeneration, no reload animation, no sprite fallback** anywhere in the contract.
 
@@ -344,18 +344,18 @@ actors = list(sub.get_all_level_actors())     # works
 (`populate_encounters.py:96-110`.)
 
 Cleanup by label prefix, exactly as `populate_encounters.py` does it: destroy every `StaticMeshActor` whose label
-starts with `XCOM_` before re-placing a wave. **Keep the label prefix scheme stable** (`XCOM_`) so cleanup never
+starts with `BESTIARY_` before re-placing a wave. **Keep the label prefix scheme stable** (`BESTIARY_`) so cleanup never
 deletes a pickup or a blockout proxy (`ENC_`, `PU_`, `WP_`).
 
 ### 4.9 Map safety
 
-The import script must **never open, modify or save a map**. `import_xcom_fbx.py:7-8` states this explicitly and
+The import script must **never open, modify or save a map**. `import_bestiary_fbx.py:7-8` states this explicitly and
 the v1 report proved it: after the import, `git status --porcelain Content/Maps/M_Blockout01.umap` printed
 nothing. The new import must keep that property — import assets only, `save_asset` on the mesh and the
 materials, `save_dirty_packages` for the packages, **no** `load_map` / `save_map`.
 
 The *spawn* script is the opposite: it may load and save the map, but it must only touch actors whose label
-starts with `XCOM_`.
+starts with `BESTIARY_`.
 
 ---
 
@@ -364,18 +364,18 @@ starts with `XCOM_`.
 ```bash
 # import (read-only w.r.t. maps)
 UnrealEditor-Cmd.exe TheCommander.uproject -run=pythonscript \
-    -script=Tools/python/import_xcom_fbx.py \
+    -script=Tools/python/import_bestiary_fbx.py \
     -unattended -nosplash -stdout -FullStdOutLogOutput
 
 # spawn/place (may load+save the map)
 UnrealEditor-Cmd.exe TheCommander.uproject -run=pythonscript \
-    -script=Tools/python/spawn_xcom_enemies.py \
+    -script=Tools/python/spawn_bestiary_enemies.py \
     -unattended -nosplash -NoSound
 ```
 
 `-stdout -FullStdOutLogOutput` is required: the import report and the `SUMMARY imported=N failed=M` line are read
 from the log, and the v1 attempt-1 failure (`remove_debris`) was only diagnosable from it
-(`Saved/Logs/import_xcom_attempt1_failed.log`).
+(`Saved/Logs/import_bestiary_attempt1_failed.log`).
 
 The commandlet exits with code 1 even on success because of an unrelated editor-config load error
 (`ProjectPackagingSettings` / `PPB_Shipping`). **Do not treat a non-zero exit code as an import failure** — assert
@@ -386,11 +386,11 @@ Warnings section.)
 
 ## 6. Acceptance criteria (TASK-07)
 
-1. `xcom_manifest.json` preflight passes for all five enemies (tris under ceiling, FBX present, manifest↔FBX
+1. `bestiary_manifest.json` preflight passes for all five enemies (tris under ceiling, FBX present, manifest↔FBX
    consistent) **before** UE is invoked.
-2. All five import at `/Game/Enemies/XCOM/XCOM_<Enemy>` as `StaticMesh`, scale 1.0, upright (Z-up), with
+2. All five import at `/Game/Enemies/BESTIARY/BESTIARY_<Enemy>` as `StaticMesh`, scale 1.0, upright (Z-up), with
    `SUMMARY imported=5 failed=0`.
-3. Every FBX material slot is re-pointed to a `MI_XCOM_<Enemy>_<FAMILY>` instance built from the correct master;
+3. Every FBX material slot is re-pointed to a `MI_BESTIARY_<Enemy>_<FAMILY>` instance built from the correct master;
    no `BasicShapeMaterial` fallback survives anywhere.
 4. All five carry `BodySetup.CollisionTraceFlag == CTF_USE_COMPLEX_AS_SIMPLE`, confirmed by readback **from the
    saved asset in a separate UE session**.
@@ -398,5 +398,5 @@ Warnings section.)
 6. The report JSON + MD are written, containing the manifest↔UE cross-check table.
 7. `Content/Maps/M_Blockout01.umap` is byte-unchanged by the import (`git status --porcelain` empty).
 8. Spawn proof: one of each enemy spawned via `spawn_actor_from_class` + `set_static_mesh`, scale 1.0, **facing
-   the player** (the 180° correction applied), Floater clear of the floor, each with its reveal rig lit.
+   the player** (the 180° correction applied), Drifter clear of the floor, each with its reveal rig lit.
 9. `Content/**` shows no sprite assets, no reload animations, and no health-regeneration logic.

@@ -16,12 +16,12 @@ the re-score of the CLOSED delta plus the three categories that were still empty
 
 ## (a) ENEMIES — v2 rebuild (re-score of the deltas)
 
-Evidence: `Tools/blender/out_xcom/` — for each of the five enemies:
-- `XCOM_<Name>.png` — hero render under the reveal rig
-- `XCOM_<Name>_turn.png` — turnaround (3 views)
-- `XCOM_<Name>_scale.png` — 1.8 m human reference
-- `XCOM_<Name>.fbx` — the mesh
-- `xcom_manifest.json` — tris, height, and the per-enemy booleans (ground contact, emissive,
+Evidence: `Tools/blender/out_bestiary/` — for each of the five enemies:
+- `BESTIARY_<Name>.png` — hero render under the reveal rig
+- `BESTIARY_<Name>_turn.png` — turnaround (3 views)
+- `BESTIARY_<Name>_scale.png` — 1.8 m human reference
+- `BESTIARY_<Name>.fbx` — the mesh
+- `bestiary_manifest.json` — tris, height, and the per-enemy booleans (ground contact, emissive,
   weapon, face detail)
 
 Your v1 asks, in your own words, were: unmistakable silhouette per enemy, zero detached parts,

@@ -41,8 +41,8 @@
   },
   "roster": [
     {
-      "id": "xcom_sectoid",
-      "name": "Sectoid",
+      "id": "bestiary_graytide",
+      "name": "Graytide",
       "lineage": "X-COM 1994 (original UFO: Enemy Unknown)",
       "tier": "psychic_infiltrator",
       "role": "swarm pressure, psychic harassment",
@@ -50,7 +50,7 @@
       "width_m": 0.52,
       "length_m": 0.7,
       "tris": 7308,
-      "status": "BUILT (Tools/blender/out_xcom/XCOM_Sectoid.fbx)",
+      "status": "BUILT (Tools/blender/out_bestiary/BESTIARY_Graytide.fbx)",
       "hp": 30,
       "speed_uu_s": 320,
       "attack": {
@@ -89,8 +89,8 @@
       }
     },
     {
-      "id": "xcom_viper",
-      "name": "Viper",
+      "id": "bestiary_ratline",
+      "name": "Ratline",
       "lineage": "X-COM 1994",
       "tier": "line_infantry",
       "role": "ranged line unit, plasma rifle pressure",
@@ -98,7 +98,7 @@
       "width_m": 0.64,
       "length_m": 0.7,
       "tris": 5764,
-      "status": "BUILT (Tools/blender/out_xcom/XCOM_Viper.fbx)",
+      "status": "BUILT (Tools/blender/out_bestiary/BESTIARY_Ratline.fbx)",
       "hp": 90,
       "speed_uu_s": 300,
       "attack": {
@@ -139,8 +139,8 @@
       }
     },
     {
-      "id": "xcom_floater",
-      "name": "Floater",
+      "id": "bestiary_drifter",
+      "name": "Drifter",
       "lineage": "X-COM 1994",
       "tier": "aerial_ambusher",
       "role": "hovering psi attacker, ignores ground cover",
@@ -149,7 +149,7 @@
       "length_m": 1.4,
       "hover_clearance_m": 0.9,
       "tris": 2184,
-      "status": "BUILT (Tools/blender/out_xcom/XCOM_Floater.fbx)",
+      "status": "BUILT (Tools/blender/out_bestiary/BESTIARY_Drifter.fbx)",
       "hp": 45,
       "speed_uu_s": 380,
       "attack": {
@@ -190,8 +190,8 @@
       }
     },
     {
-      "id": "xcom_muton",
-      "name": "Muton",
+      "id": "bestiary_bulwark",
+      "name": "Bulwark",
       "lineage": "X-COM 1994",
       "tier": "armoured_heavy",
       "role": "armoured line breaker, heavy plasma rifle, area denial",
@@ -199,7 +199,7 @@
       "width_m": 1.15,
       "length_m": 1.09,
       "tris": 5216,
-      "status": "BUILT (Tools/blender/out_xcom/XCOM_Muton.fbx)",
+      "status": "BUILT (Tools/blender/out_bestiary/BESTIARY_Bulwark.fbx)",
       "hp": 220,
       "speed_uu_s": 260,
       "attack": {
@@ -239,8 +239,8 @@
       }
     },
     {
-      "id": "xcom_chryssalid",
-      "name": "Chryssalid",
+      "id": "bestiary_harrower",
+      "name": "Harrower",
       "lineage": "X-COM 1994",
       "tier": "fast_stalker",
       "role": "fast flanker, leaper, closes distance hard",
@@ -248,7 +248,7 @@
       "width_m": 0.82,
       "length_m": 1.62,
       "tris": 6252,
-      "status": "BUILT (Tools/blender/out_xcom/XCOM_Chryssalid.fbx)",
+      "status": "BUILT (Tools/blender/out_bestiary/BESTIARY_Harrower.fbx)",
       "hp": 70,
       "speed_uu_s": 520,
       "attack": {
@@ -723,7 +723,7 @@
       }
     },
     {
-      "id": "xcom_cyberdisc",
+      "id": "bestiary_cyberdisc",
       "name": "Cyberdisc",
       "lineage": "X-COM 1994 (original UFO: Enemy Unknown)",
       "tier": "cyborg_support",
@@ -774,11 +774,11 @@
       }
     },
     {
-      "id": "xcom_bionic_chryssalid",
-      "name": "Bionic Chryssalid",
+      "id": "bestiary_bionic_harrower",
+      "name": "Bionic Harrower",
       "lineage": "X-COM 1994 (original UFO: Enemy Unknown)",
       "tier": "cyborg_heavy_flanker",
-      "role": "heavy cybernetic variant of the Chryssalid; the only enemy that deletes the player's cover",
+      "role": "heavy cybernetic variant of the Harrower; the only enemy that deletes the player's cover",
       "height_m": 1.1,
       "width_m": 0.95,
       "length_m": 1.78,
@@ -793,7 +793,7 @@
         "damage": 45,
         "range_uu": 450
       },
-      "silhouette": "the forward-pitched Chryssalid stalker rebuilt on hydraulic legs, plate instead of chitin, walking where the organic one leaps",
+      "silhouette": "the forward-pitched Harrower stalker rebuilt on hydraulic legs, plate instead of chitin, walking where the organic one leaps",
       "signature": "it shears whatever cover is within 700 uu, so the fight moves instead of the shooting",
       "budget": {
         "tris": 9800,
@@ -1289,7 +1289,7 @@
   },
   "silhouette_rules": [
     {
-      "id": "xcom_cyberdisc",
+      "id": "bestiary_cyberdisc",
       "entity": "Cyberdisc",
       "rule": "a flat disc on nothing, with a raised emitter ring on the rear third - reads as a hovering disc, never as a bird, an insect or a UFO",
       "machine_readable": {
@@ -1306,9 +1306,9 @@
       }
     },
     {
-      "id": "xcom_bionic_chryssalid",
-      "entity": "Bionic Chryssalid",
-      "rule": "the Chryssalid you already know, but standing on hydraulic legs - it does not leap, it walks, and it reads as heavy",
+      "id": "bestiary_bionic_harrower",
+      "entity": "Bionic Harrower",
+      "rule": "the Harrower you already know, but standing on hydraulic legs - it does not leap, it walks, and it reads as heavy",
       "machine_readable": {
         "posture": "crouch",
         "limbs": 6,

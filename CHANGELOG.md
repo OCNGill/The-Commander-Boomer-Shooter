@@ -95,12 +95,12 @@
   Backup of the pre-patch config retained as `config.yaml.bak-2026-10-21-*`.
   Scope note: only `auxiliary.vision` was touched. The `delegation`, `providers`, `model.default`,
   and `compression` blocks belong to another lane and were not modified.
-- **5 true-3D X-COM enemies built** (`Tools/blender/xcom_enemies.py`, Blender 4.2.23 LTS, headless):
-  Sectoid, Viper, Floater, Muton, Chryssalid. Original 1994 *UFO: Enemy Unknown* roster,
+- **5 true-3D X-COM enemies built** (`Tools/blender/bestiary_enemies.py`, Blender 4.2.23 LTS, headless):
+  Graytide, Ratline, Drifter, Bulwark, Harrower. Original 1994 *UFO: Enemy Unknown* roster,
   modernized (chitin/armor/plasma materials, emissive eyes + power cores, sane polycount
   1.9k-3.7k tris). Each ships with the "reveal" light rig that reproduces the 1994
   terror-mission reveal - hard cold key, colored alien rim, low under-glow.
-  Output: `Tools/blender/out_xcom/` - 5 FBX + 5 lit preview PNGs (720x900) + `xcom_manifest.json`.
+  Output: `Tools/blender/out_bestiary/` - 5 FBX + 5 lit preview PNGs (720x900) + `bestiary_manifest.json`.
 - **Command Center live** - `CommandCenter/serve_outputs.py` serves a single dashboard at
   `http://10.0.0.93:8899/` aggregating fleet node status, swarm ledger, task queue, agent
   output slots, renders, Blender kit, UE content inventory, design docs and git state.
@@ -145,7 +145,7 @@
   `Tools/python/run_arena_fix.bat` now uses the forward-slash form verbatim, plus a
   pre-flight existence check and a `tasklist | findstr` guard (the guard had been calling
   MSYS `find`, which silently failed).
-- **Own-vision pass caught a disqualifying defect before the critic did.** The v2 Floater
+- **Own-vision pass caught a disqualifying defect before the critic did.** The v2 Drifter
   still shipped five legs each ending in a rounded glowing cyan orb - the exact defect
   named in round 1 - and the v2 lighting renders came back with rim 2/7 and under-glow 3/7
   against a rig whose own `verification.json` showed `under_energy` of 1.2W and a face-zone
@@ -238,19 +238,19 @@ and only reading the live geometry, not the intent, told us which one was real.*
 - **Enemy v3 is live.** All five X-COM models rebuilt from scratch and published to the dashboard
   (`CommandCenter/outputs/enemy_models/`): hero shot, turnaround, human-scale reference and a
   shape-only silhouette plate per enemy.
-- **The Floater's five descending legs with glowing feet are gone.** The body is now one continuous
+- **The Drifter's five descending legs with glowing feet are gone.** The body is now one continuous
   swept manta planform from tip to tip, with a low segmented glowing dorsal core and two hair-fine
   filaments trailing off the rear. Verified two ways: a bottom-up orthographic silhouette render shows
   a single smooth planform, and the mesh's lowest vertex is one centred head pod at z = 0.902 - nothing
   hangs below the body.
-- **All five FBX are imported into Unreal Engine 5.8** at `/Game/Enemies/XCOM/`, each verified by
+- **All five FBX are imported into Unreal Engine 5.8** at `/Game/Enemies/BESTIARY/`, each verified by
   reloading the saved asset from disk in a separate read-only editor session. Collision is
   `Use Complex as Simple` on all five (written straight to `BodySetup.CollisionTraceFlag` - UE 5.8 has
   no `set_collision_complex_as_simple` helper). Import report:
-  `Docs/generated/xcom_ue_import_report.json`.
+  `Docs/generated/bestiary_ue_import_report.json`.
 - **Triangle-count reconciliation - a claim is retracted.** A separate audit re-imported each exported
   FBX into Blender and counted triangles on the raw mesh: the FBX files are complete and match the
-  Blender build manifest exactly (Sectoid 7308, Viper 5764, Floater 2184, Muton 5216, Chryssalid 6252).
+  Blender build manifest exactly (Graytide 7308, Ratline 5764, Drifter 2184, Bulwark 5216, Harrower 6252).
   UE 5.8's import retains only 39-91% of those triangles. The earlier statement that the imported
   counts "match the Blender manifest exactly" was **wrong** and is retracted. The Blender-side export
   is sound; the reduction happens in UE's import pass (degenerate/duplicate removal on geometry
@@ -259,8 +259,8 @@ and only reading the live geometry, not the intent, told us which one was real.*
 - Disclosed limits from the build lane, carried forward deliberately: the contact shadow is a render
   rig (painted occlusion patch + a 700 W near-vertical spot), not baked geometry, so the engine needs
   its own shadow solution; procedural materials do not survive FBX and need texture bakes; LODs,
-  collision meshes and import-ready gameplay assets are out of scope for this pass; the Sectoid's lit
-  shoulder caps still read as ball joints at 900 px and the Viper's head/neck still shows a seam.
+  collision meshes and import-ready gameplay assets are out of scope for this pass; the Graytide's lit
+  shoulder caps still read as ball joints at 900 px and the Ratline's head/neck still shows a seam.
 
 > *Deuteronomy 25:15 (ESV) - "You shall not have in your bag two differing weights."* One honest scale
 > for the models and one for the engine: the numbers had to reconcile before anyone signed off.
@@ -285,7 +285,7 @@ and only reading the live geometry, not the intent, told us which one was real.*
 - Also fixed: the ramp material lost its assignment during the re-grade and the render died on
   `KeyError: 'ramp'` - caught, repaired, and the full nine-frame set re-rendered clean. Cycles samples
   cut 24 -> 12 with denoising on, taking a nine-frame pass from about seven minutes to under three.
-- The enemy manifest now records `weapon_visibility` per enemy. The Viper and Muton weapons are real
+- The enemy manifest now records `weapon_visibility` per enemy. The Ratline and Bulwark weapons are real
   geometry in the FBX but do not read in the published hero render - a rig and framing defect, not
   missing geometry. The manifest no longer implies otherwise.
 

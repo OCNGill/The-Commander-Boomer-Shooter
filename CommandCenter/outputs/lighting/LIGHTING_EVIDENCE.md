@@ -16,7 +16,7 @@ Metric definitions:
 - `rim_pixels` - g - r > 55 and g > 90 (the alien green rim).
 - `background_darkness` - mean luminance of the outer 10% border.
 
-## XCOM_Chryssalid
+## BESTIARY_Harrower
 
 **Numbers:** clipped_white_pixels = **0**, clipped_body_pixels = **0**,
 clipped_colour_pixels_non_emissive = **24**, emissive_pixels = **16060**,
@@ -31,10 +31,10 @@ rim band mean 57 (hot 214), rim bright pixels 1349 = 0.030 of the body.
 
 **Did not meet the bar:** no_colour_clip_off_emissive, floor_zones_in_window, rim_band_mean_ge_120, under_lowbody_1_3x_torso, under_feet_1_3x_torso.
 
-**Emissive proof frame** (`XCOM_Chryssalid_emissive_only.png`, no scene lights,
+**Emissive proof frame** (`BESTIARY_Harrower_emissive_only.png`, no scene lights,
 emission x2.0, Fog Glow only): 0 bright pixels, 0 clipped.
 
-## XCOM_Muton
+## BESTIARY_Bulwark
 
 **Numbers:** clipped_white_pixels = **0**, clipped_body_pixels = **0**,
 clipped_colour_pixels_non_emissive = **0**, emissive_pixels = **38523**,
@@ -49,10 +49,10 @@ rim band mean 96 (hot 214), rim bright pixels 2471 = 0.038 of the body.
 
 **Did not meet the bar:** rim_band_mean_ge_120, under_lowbody_1_3x_torso, under_feet_1_3x_torso.
 
-**Emissive proof frame** (`XCOM_Muton_emissive_only.png`, no scene lights,
+**Emissive proof frame** (`BESTIARY_Bulwark_emissive_only.png`, no scene lights,
 emission x2.0, Fog Glow only): 0 bright pixels, 0 clipped.
 
-## XCOM_Floater
+## BESTIARY_Drifter
 
 **Numbers:** clipped_white_pixels = **0**, clipped_body_pixels = **0**,
 clipped_colour_pixels_non_emissive = **0**, emissive_pixels = **66673**,
@@ -67,10 +67,10 @@ rim band mean 26 (hot 200), rim bright pixels 39 = 0.004 of the body.
 
 **Did not meet the bar:** floor_zones_differ_15pct, face_p99_ge_25, rim_3pct_of_body, rim_band_mean_ge_120, under_lowbody_1_3x_torso, under_feet_1_3x_torso.
 
-**Emissive proof frame** (`XCOM_Floater_emissive_only.png`, no scene lights,
+**Emissive proof frame** (`BESTIARY_Drifter_emissive_only.png`, no scene lights,
 emission x2.0, Fog Glow only): 0 bright pixels, 0 clipped.
 
-## XCOM_Viper
+## BESTIARY_Ratline
 
 **Numbers:** clipped_white_pixels = **0**, clipped_body_pixels = **0**,
 clipped_colour_pixels_non_emissive = **0**, emissive_pixels = **40212**,
@@ -85,10 +85,10 @@ rim band mean 104 (hot 212), rim bright pixels 2774 = 0.067 of the body.
 
 **Did not meet the bar:** rim_band_mean_ge_120, under_lowbody_1_3x_torso, under_feet_1_3x_torso.
 
-**Emissive proof frame** (`XCOM_Viper_emissive_only.png`, no scene lights,
+**Emissive proof frame** (`BESTIARY_Ratline_emissive_only.png`, no scene lights,
 emission x2.0, Fog Glow only): 0 bright pixels, 0 clipped.
 
-## XCOM_Sectoid
+## BESTIARY_Graytide
 
 **Numbers:** clipped_white_pixels = **313**, clipped_body_pixels = **313**,
 clipped_colour_pixels_non_emissive = **0**, emissive_pixels = **37998**,
@@ -103,6 +103,6 @@ rim band mean 86 (hot 218), rim bright pixels 2099 = 0.029 of the body.
 
 **Did not meet the bar:** no_clipped_white, no_clipped_body, floor_zones_in_window, rim_3pct_of_body, rim_band_mean_ge_120, under_feet_1_3x_torso.
 
-**Emissive proof frame** (`XCOM_Sectoid_emissive_only.png`, no scene lights,
+**Emissive proof frame** (`BESTIARY_Graytide_emissive_only.png`, no scene lights,
 emission x2.0, Fog Glow only): 0 bright pixels, 0 clipped.
 

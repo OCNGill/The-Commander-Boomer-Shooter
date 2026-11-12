@@ -42,18 +42,18 @@
     "accent_emissive_slot": true,
     "slot_count": 5,
     "slot_mats": [
-      "XCOM_Sectoid_PLATE",
-      "XCOM_Sectoid_CHITIN",
-      "XCOM_Sectoid_CHITIN_BONE",
-      "XCOM_Sectoid_PLATE_DARK",
-      "XCOM_Sectoid_ACCENT_EMISSIVE"
+      "BESTIARY_Graytide_PLATE",
+      "BESTIARY_Graytide_CHITIN",
+      "BESTIARY_Graytide_CHITIN_BONE",
+      "BESTIARY_Graytide_PLATE_DARK",
+      "BESTIARY_Graytide_ACCENT_EMISSIVE"
     ],
     "slot_names": [
-      "XCOM_Sectoid_PLATE",
-      "XCOM_Sectoid_CHITIN",
-      "XCOM_Sectoid_CHITIN_BONE",
-      "XCOM_Sectoid_PLATE_DARK",
-      "XCOM_Sectoid_ACCENT_EMISSIVE"
+      "BESTIARY_Graytide_PLATE",
+      "BESTIARY_Graytide_CHITIN",
+      "BESTIARY_Graytide_CHITIN_BONE",
+      "BESTIARY_Graytide_PLATE_DARK",
+      "BESTIARY_Graytide_ACCENT_EMISSIVE"
     ],
     "texture_nodes": 0,
     "tri_probe": {
@@ -61,12 +61,12 @@
       "mesh.get_num_triangles1": 7308
     }
   },
-  "fresh_path": "/Game/Tests/UEParity/XCOM_Sectoid.XCOM_Sectoid",
+  "fresh_path": "/Game/Tests/UEParity/BESTIARY_Graytide.BESTIARY_Graytide",
   "has_KismetRenderingLibrary": false,
   "has_SceneCapture2D": true,
   "has_SceneCaptureComponent2D": true,
   "imported_paths": [
-    "/Game/Tests/UEParity/XCOM_Sectoid.XCOM_Sectoid"
+    "/Game/Tests/UEParity/BESTIARY_Graytide.BESTIARY_Graytide"
   ],
   "kismet_names": [],
   "persistent_level": "ERR Exception(\"World: Failed to find property 'persistent_level' for attribute 'persistent_level' on 'World'\")",
@@ -87,18 +87,18 @@
   "shipping_loaded": true,
   "shipping_slot_count": 5,
   "shipping_slot_mats": [
-    "XCOM_Chitin_Mid",
-    "XCOM_Chitin_Pale",
-    "XCOM_Chitin_Dark",
-    "XCOM_Eye_Emissive",
-    "XCOM_Core_Emissive"
+    "BESTIARY_Chitin_Mid",
+    "BESTIARY_Chitin_Pale",
+    "BESTIARY_Chitin_Dark",
+    "BESTIARY_Eye_Emissive",
+    "BESTIARY_Core_Emissive"
   ],
   "shipping_slot_names": [
-    "XCOM_Chitin_Mid",
-    "XCOM_Chitin_Pale",
-    "XCOM_Chitin_Dark",
-    "XCOM_Eye_Emissive",
-    "XCOM_Core_Emissive"
+    "BESTIARY_Chitin_Mid",
+    "BESTIARY_Chitin_Pale",
+    "BESTIARY_Chitin_Dark",
+    "BESTIARY_Eye_Emissive",
+    "BESTIARY_Core_Emissive"
   ],
   "smi_found": true,
   "spawn_actor": "ERR AttributeError(\"'StaticMeshComponent' object has no attribute 'get_world_scale3d'\")",

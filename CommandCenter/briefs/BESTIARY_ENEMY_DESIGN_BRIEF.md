@@ -14,25 +14,25 @@ light rig driven by the spawn event - authored in Blender as `reveal_key` / `rev
 ## ROSTER (base pass - 5 built)
 | Enemy | 1994 role | Modern read | Signature |
 |---|---|---|---|
-| **Sectoid** | psychic infiltrator | gaunt infiltrator, oversized cranium | luminous eyes, no mouth, bare skull |
-| **Viper** | the marquee alien, plasma rifle | tall reptilian hunter, ribbed spine | elongated snout, back ribs, plasma pistol |
-| **Floater** | psychic hover, mind control | manta-like floater, no legs | glowing dorsal core, trailing tendrils, hover |
-| **Muton** | armored heavy, terror-showstopper | armored heavy, visor slit, heavy rifle | shoulder plates, oxblood chest accent, heavy plasma rifle |
-| **Chryssalid** | terror from the deep, skitters | insectoid stalker, scythe arms | scythe forelimbs, venom glow, low fast silhouette |
+| **Graytide** | psychic infiltrator | gaunt infiltrator, oversized cranium | luminous eyes, no mouth, bare skull |
+| **Ratline** | the marquee alien, plasma rifle | tall reptilian hunter, ribbed spine | elongated snout, back ribs, plasma pistol |
+| **Drifter** | psychic hover, mind control | manta-like drifter, no legs | glowing dorsal core, trailing tendrils, hover |
+| **Bulwark** | armored heavy, terror-showstopper | armored heavy, visor slit, heavy rifle | shoulder plates, oxblood chest accent, heavy plasma rifle |
+| **Harrower** | terror from the deep, skitters | insectoid stalker, scythe arms | scythe forelimbs, venom glow, low fast silhouette |
 
 Second wave (not yet modeled): **Ethereal** (mind-control leader), **Borg**, **Dreadnought**,
 **Celestial**, **Chosen**, **Retinoid** (Orion).
 
 ## MATERIALS
-- `XCOM_Chitin_Dark` / `_Mid` / `_Pale` - matte-to-satin carapace
-- `XCOM_Armor_Plate` (metal 0.65) + `XCOM_Armor_Accent` (oxblood) - Muton only
-- `XCOM_Eye_Emissive` (emission 14) - every enemy reads in the dark
-- `XCOM_Core_Emissive` (emission 22) - dorsal/neck power core, cyan
-- `XCOM_Plasma_Emissive` (emission 16) - weapon coils, violet
-- `XCOM_Gunmetal` - enemy weapon bodies
+- `BESTIARY_Chitin_Dark` / `_Mid` / `_Pale` - matte-to-satin carapace
+- `BESTIARY_Armor_Plate` (metal 0.65) + `BESTIARY_Armor_Accent` (oxblood) - Bulwark only
+- `BESTIARY_Eye_Emissive` (emission 14) - every enemy reads in the dark
+- `BESTIARY_Core_Emissive` (emission 22) - dorsal/neck power core, cyan
+- `BESTIARY_Plasma_Emissive` (emission 16) - weapon coils, violet
+- `BESTIARY_Gunmetal` - enemy weapon bodies
 
 ## BUILD OUTPUT
-`Tools/blender/xcom_enemies.py` -> `Tools/blender/out_xcom/`
+`Tools/blender/bestiary_enemies.py` -> `Tools/blender/out_bestiary/`
 - 5 FBX (one per enemy, joined mesh, Y-up, FBX_SCALE_ALL)
 - 5 lit preview PNGs (720x900, EEVEE, 48 samples) for review + Ebert scoring
-- `xcom_manifest.json` (tris, kb, height per enemy)
+- `bestiary_manifest.json` (tris, kb, height per enemy)

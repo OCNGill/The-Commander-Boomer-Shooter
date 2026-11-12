@@ -30,7 +30,7 @@
      - ≥ 8.5 → GATED, ship it
 ```
 
-> **Why Blender headless (no MCP needed):** the XCOM kit proved it — `Tools/blender/*.py`
+> **Why Blender headless (no MCP needed):** the BESTIARY kit proved it — `Tools/blender/*.py`
 > scripts build models, export FBX, and emit the reveal/silhouette PNGs. We reuse that
 > exact pattern for the crew.
 
@@ -49,7 +49,7 @@ Each character produces, under `Tools/blender/out_crew/`:
 | `CREW_<Name>_scale.png` | Scale plate (with a 1.8 m human ref). |
 | `crew_manifest.json` | The metadata (tris, height, emissive px, silhouette note, changed_vs_v1). |
 
-> The manifest shape is the **XCOM manifest** (`Tools/blender/out_xcom/xcom_manifest.json`)
+> The manifest shape is the **BESTIARY manifest** (`Tools/blender/out_bestiary/bestiary_manifest.json`)
 > — we copy its exact schema so the Ebert gate + UE import can consume it without changes.
 
 ---

@@ -3,7 +3,7 @@
 crew_build.py — sovereign crew-character pipeline (Blender 4.x, headless).
 
 Builds the modeled crew (CREW_CHARACTERS.md) as FBX + reveal/silhouette PNGs,
-reusing the XCOM kit's proven pattern (Tools/blender/out_xcom/). No MCP needed.
+reusing the BESTIARY kit's proven pattern (Tools/blender/out_bestiary/). No MCP needed.
 
 Run:
     "D:\\Blender\\blender.exe" -b -P Tools/blender/crew_build.py -- --char HERMES
@@ -15,7 +15,7 @@ LIARA LOCK (Commander 2026-10-23): antennae=false, tentacles=false,
 head_attachments limited to the neural fiber + left-ear data jack. Cyberpunk palette.
 
 Every exported FBX is sha256-verified (zero-trust). The manifest schema matches
-out_xcom/xcom_manifest.json so the Ebert gate + UE import consume it unchanged.
+out_bestiary/bestiary_manifest.json so the Ebert gate + UE import consume it unchanged.
 """
 
 import os
@@ -183,7 +183,7 @@ def build_humanoid(spec):
 
 
 def setup_reveal_light():
-    # overhead reveal light + camera (the XCOM "reveal_cast" pattern).
+    # overhead reveal light + camera (the BESTIARY "reveal_cast" pattern).
     # FIXED (2026-10-24): the first run produced all-black PNGs because
     #   (a) film_transparent=True + default AgX view transform + dark world
     #       (0.05) composited to pure black, swallowing the character;
@@ -298,7 +298,7 @@ def main():
 
     # emissive pixel count (from the reveal)
     emissive_px = 0  # placeholder; a real pass would count bright pixels
-    # (the XCOM manifest has this; we carry the field for schema parity)
+    # (the BESTIARY manifest has this; we carry the field for schema parity)
 
     # export FBX (UE preset: forward -Z, up Y).
     # Select ONLY the character mesh — NOT the camera, target empty, or

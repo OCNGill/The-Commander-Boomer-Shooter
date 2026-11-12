@@ -1,6 +1,6 @@
 {
   "enemies": {
-    "XCOM_Chryssalid": {
+    "BESTIARY_Harrower": {
       "shipping": {
         "assigned": [
           "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
@@ -62,28 +62,28 @@
           }
         ],
         "slots": [
-          "XCOM_Chryssalid_CHITIN",
-          "XCOM_Chryssalid_PLATE",
-          "XCOM_Chryssalid_CHITIN_BONE",
-          "XCOM_Chryssalid_PLATE_DARK",
-          "XCOM_Chryssalid_ACCENT_EMISSIVE"
+          "BESTIARY_Harrower_CHITIN",
+          "BESTIARY_Harrower_PLATE",
+          "BESTIARY_Harrower_CHITIN_BONE",
+          "BESTIARY_Harrower_PLATE_DARK",
+          "BESTIARY_Harrower_ACCENT_EMISSIVE"
         ]
       },
       "verification": {
         "assigned": [
-          "/Game/Tests/UEParity/XCOM_Chryssalid_CHITIN.XCOM_Chryssalid_CHITIN",
-          "/Game/Tests/UEParity/XCOM_Chryssalid_PLATE.XCOM_Chryssalid_PLATE",
-          "/Game/Tests/UEParity/XCOM_Chryssalid_CHITIN_BONE.XCOM_Chryssalid_CHITIN_BONE",
-          "/Game/Tests/UEParity/XCOM_Chryssalid_PLATE_DARK.XCOM_Chryssalid_PLATE_DARK",
-          "/Game/Tests/UEParity/XCOM_Chryssalid_ACCENT_EMISSIVE.XCOM_Chryssalid_ACCENT_EMISSIVE"
+          "/Game/Tests/UEParity/BESTIARY_Harrower_CHITIN.BESTIARY_Harrower_CHITIN",
+          "/Game/Tests/UEParity/BESTIARY_Harrower_PLATE.BESTIARY_Harrower_PLATE",
+          "/Game/Tests/UEParity/BESTIARY_Harrower_CHITIN_BONE.BESTIARY_Harrower_CHITIN_BONE",
+          "/Game/Tests/UEParity/BESTIARY_Harrower_PLATE_DARK.BESTIARY_Harrower_PLATE_DARK",
+          "/Game/Tests/UEParity/BESTIARY_Harrower_ACCENT_EMISSIVE.BESTIARY_Harrower_ACCENT_EMISSIVE"
         ],
         "materials": [
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Chryssalid_CHITIN",
+            "name": "BESTIARY_Harrower_CHITIN",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Chryssalid_CHITIN.XCOM_Chryssalid_CHITIN",
+            "path": "/Game/Tests/UEParity/BESTIARY_Harrower_CHITIN.BESTIARY_Harrower_CHITIN",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -91,9 +91,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Chryssalid_PLATE",
+            "name": "BESTIARY_Harrower_PLATE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Chryssalid_PLATE.XCOM_Chryssalid_PLATE",
+            "path": "/Game/Tests/UEParity/BESTIARY_Harrower_PLATE.BESTIARY_Harrower_PLATE",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -101,9 +101,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Chryssalid_CHITIN_BONE",
+            "name": "BESTIARY_Harrower_CHITIN_BONE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Chryssalid_CHITIN_BONE.XCOM_Chryssalid_CHITIN_BONE",
+            "path": "/Game/Tests/UEParity/BESTIARY_Harrower_CHITIN_BONE.BESTIARY_Harrower_CHITIN_BONE",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -111,9 +111,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Chryssalid_PLATE_DARK",
+            "name": "BESTIARY_Harrower_PLATE_DARK",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Chryssalid_PLATE_DARK.XCOM_Chryssalid_PLATE_DARK",
+            "path": "/Game/Tests/UEParity/BESTIARY_Harrower_PLATE_DARK.BESTIARY_Harrower_PLATE_DARK",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -121,24 +121,24 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Chryssalid_ACCENT_EMISSIVE",
+            "name": "BESTIARY_Harrower_ACCENT_EMISSIVE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Chryssalid_ACCENT_EMISSIVE.XCOM_Chryssalid_ACCENT_EMISSIVE",
+            "path": "/Game/Tests/UEParity/BESTIARY_Harrower_ACCENT_EMISSIVE.BESTIARY_Harrower_ACCENT_EMISSIVE",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
           }
         ],
         "slots": [
-          "XCOM_Chryssalid_CHITIN",
-          "XCOM_Chryssalid_PLATE",
-          "XCOM_Chryssalid_CHITIN_BONE",
-          "XCOM_Chryssalid_PLATE_DARK",
-          "XCOM_Chryssalid_ACCENT_EMISSIVE"
+          "BESTIARY_Harrower_CHITIN",
+          "BESTIARY_Harrower_PLATE",
+          "BESTIARY_Harrower_CHITIN_BONE",
+          "BESTIARY_Harrower_PLATE_DARK",
+          "BESTIARY_Harrower_ACCENT_EMISSIVE"
         ]
       }
     },
-    "XCOM_Floater": {
+    "BESTIARY_Drifter": {
       "shipping": {
         "assigned": [
           "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
@@ -189,26 +189,26 @@
           }
         ],
         "slots": [
-          "XCOM_Floater_CHITIN",
-          "XCOM_Floater_ACCENT_EMISSIVE",
-          "XCOM_Floater_PLATE_DARK",
-          "XCOM_Floater_CHITIN_BONE"
+          "BESTIARY_Drifter_CHITIN",
+          "BESTIARY_Drifter_ACCENT_EMISSIVE",
+          "BESTIARY_Drifter_PLATE_DARK",
+          "BESTIARY_Drifter_CHITIN_BONE"
         ]
       },
       "verification": {
         "assigned": [
-          "/Game/Tests/UEParity/XCOM_Floater_CHITIN.XCOM_Floater_CHITIN",
-          "/Game/Tests/UEParity/XCOM_Floater_ACCENT_EMISSIVE.XCOM_Floater_ACCENT_EMISSIVE",
-          "/Game/Tests/UEParity/XCOM_Floater_PLATE_DARK.XCOM_Floater_PLATE_DARK",
-          "/Game/Tests/UEParity/XCOM_Floater_CHITIN_BONE.XCOM_Floater_CHITIN_BONE"
+          "/Game/Tests/UEParity/BESTIARY_Drifter_CHITIN.BESTIARY_Drifter_CHITIN",
+          "/Game/Tests/UEParity/BESTIARY_Drifter_ACCENT_EMISSIVE.BESTIARY_Drifter_ACCENT_EMISSIVE",
+          "/Game/Tests/UEParity/BESTIARY_Drifter_PLATE_DARK.BESTIARY_Drifter_PLATE_DARK",
+          "/Game/Tests/UEParity/BESTIARY_Drifter_CHITIN_BONE.BESTIARY_Drifter_CHITIN_BONE"
         ],
         "materials": [
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Floater_CHITIN",
+            "name": "BESTIARY_Drifter_CHITIN",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Floater_CHITIN.XCOM_Floater_CHITIN",
+            "path": "/Game/Tests/UEParity/BESTIARY_Drifter_CHITIN.BESTIARY_Drifter_CHITIN",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -216,9 +216,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Floater_ACCENT_EMISSIVE",
+            "name": "BESTIARY_Drifter_ACCENT_EMISSIVE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Floater_ACCENT_EMISSIVE.XCOM_Floater_ACCENT_EMISSIVE",
+            "path": "/Game/Tests/UEParity/BESTIARY_Drifter_ACCENT_EMISSIVE.BESTIARY_Drifter_ACCENT_EMISSIVE",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -226,9 +226,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Floater_PLATE_DARK",
+            "name": "BESTIARY_Drifter_PLATE_DARK",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Floater_PLATE_DARK.XCOM_Floater_PLATE_DARK",
+            "path": "/Game/Tests/UEParity/BESTIARY_Drifter_PLATE_DARK.BESTIARY_Drifter_PLATE_DARK",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -236,23 +236,23 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Floater_CHITIN_BONE",
+            "name": "BESTIARY_Drifter_CHITIN_BONE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Floater_CHITIN_BONE.XCOM_Floater_CHITIN_BONE",
+            "path": "/Game/Tests/UEParity/BESTIARY_Drifter_CHITIN_BONE.BESTIARY_Drifter_CHITIN_BONE",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
           }
         ],
         "slots": [
-          "XCOM_Floater_CHITIN",
-          "XCOM_Floater_ACCENT_EMISSIVE",
-          "XCOM_Floater_PLATE_DARK",
-          "XCOM_Floater_CHITIN_BONE"
+          "BESTIARY_Drifter_CHITIN",
+          "BESTIARY_Drifter_ACCENT_EMISSIVE",
+          "BESTIARY_Drifter_PLATE_DARK",
+          "BESTIARY_Drifter_CHITIN_BONE"
         ]
       }
     },
-    "XCOM_Muton": {
+    "BESTIARY_Bulwark": {
       "shipping": {
         "assigned": [
           "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
@@ -314,28 +314,28 @@
           }
         ],
         "slots": [
-          "XCOM_Muton_PLATE",
-          "XCOM_Muton_CHITIN",
-          "XCOM_Muton_PLATE_OXBLOOD",
-          "XCOM_Muton_PLATE_DARK",
-          "XCOM_Muton_ACCENT_EMISSIVE"
+          "BESTIARY_Bulwark_PLATE",
+          "BESTIARY_Bulwark_CHITIN",
+          "BESTIARY_Bulwark_PLATE_OXBLOOD",
+          "BESTIARY_Bulwark_PLATE_DARK",
+          "BESTIARY_Bulwark_ACCENT_EMISSIVE"
         ]
       },
       "verification": {
         "assigned": [
-          "/Game/Tests/UEParity/XCOM_Muton_PLATE.XCOM_Muton_PLATE",
-          "/Game/Tests/UEParity/XCOM_Muton_CHITIN.XCOM_Muton_CHITIN",
-          "/Game/Tests/UEParity/XCOM_Muton_PLATE_OXBLOOD.XCOM_Muton_PLATE_OXBLOOD",
-          "/Game/Tests/UEParity/XCOM_Muton_PLATE_DARK.XCOM_Muton_PLATE_DARK",
-          "/Game/Tests/UEParity/XCOM_Muton_ACCENT_EMISSIVE.XCOM_Muton_ACCENT_EMISSIVE"
+          "/Game/Tests/UEParity/BESTIARY_Bulwark_PLATE.BESTIARY_Bulwark_PLATE",
+          "/Game/Tests/UEParity/BESTIARY_Bulwark_CHITIN.BESTIARY_Bulwark_CHITIN",
+          "/Game/Tests/UEParity/BESTIARY_Bulwark_PLATE_OXBLOOD.BESTIARY_Bulwark_PLATE_OXBLOOD",
+          "/Game/Tests/UEParity/BESTIARY_Bulwark_PLATE_DARK.BESTIARY_Bulwark_PLATE_DARK",
+          "/Game/Tests/UEParity/BESTIARY_Bulwark_ACCENT_EMISSIVE.BESTIARY_Bulwark_ACCENT_EMISSIVE"
         ],
         "materials": [
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Muton_PLATE",
+            "name": "BESTIARY_Bulwark_PLATE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Muton_PLATE.XCOM_Muton_PLATE",
+            "path": "/Game/Tests/UEParity/BESTIARY_Bulwark_PLATE.BESTIARY_Bulwark_PLATE",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -343,9 +343,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Muton_CHITIN",
+            "name": "BESTIARY_Bulwark_CHITIN",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Muton_CHITIN.XCOM_Muton_CHITIN",
+            "path": "/Game/Tests/UEParity/BESTIARY_Bulwark_CHITIN.BESTIARY_Bulwark_CHITIN",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -353,9 +353,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Muton_PLATE_OXBLOOD",
+            "name": "BESTIARY_Bulwark_PLATE_OXBLOOD",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Muton_PLATE_OXBLOOD.XCOM_Muton_PLATE_OXBLOOD",
+            "path": "/Game/Tests/UEParity/BESTIARY_Bulwark_PLATE_OXBLOOD.BESTIARY_Bulwark_PLATE_OXBLOOD",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -363,9 +363,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Muton_PLATE_DARK",
+            "name": "BESTIARY_Bulwark_PLATE_DARK",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Muton_PLATE_DARK.XCOM_Muton_PLATE_DARK",
+            "path": "/Game/Tests/UEParity/BESTIARY_Bulwark_PLATE_DARK.BESTIARY_Bulwark_PLATE_DARK",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -373,24 +373,24 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Muton_ACCENT_EMISSIVE",
+            "name": "BESTIARY_Bulwark_ACCENT_EMISSIVE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Muton_ACCENT_EMISSIVE.XCOM_Muton_ACCENT_EMISSIVE",
+            "path": "/Game/Tests/UEParity/BESTIARY_Bulwark_ACCENT_EMISSIVE.BESTIARY_Bulwark_ACCENT_EMISSIVE",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
           }
         ],
         "slots": [
-          "XCOM_Muton_PLATE",
-          "XCOM_Muton_CHITIN",
-          "XCOM_Muton_PLATE_OXBLOOD",
-          "XCOM_Muton_PLATE_DARK",
-          "XCOM_Muton_ACCENT_EMISSIVE"
+          "BESTIARY_Bulwark_PLATE",
+          "BESTIARY_Bulwark_CHITIN",
+          "BESTIARY_Bulwark_PLATE_OXBLOOD",
+          "BESTIARY_Bulwark_PLATE_DARK",
+          "BESTIARY_Bulwark_ACCENT_EMISSIVE"
         ]
       }
     },
-    "XCOM_Sectoid": {
+    "BESTIARY_Graytide": {
       "shipping": {
         "assigned": [
           "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
@@ -452,28 +452,28 @@
           }
         ],
         "slots": [
-          "XCOM_Sectoid_PLATE",
-          "XCOM_Sectoid_CHITIN",
-          "XCOM_Sectoid_CHITIN_BONE",
-          "XCOM_Sectoid_PLATE_DARK",
-          "XCOM_Sectoid_ACCENT_EMISSIVE"
+          "BESTIARY_Graytide_PLATE",
+          "BESTIARY_Graytide_CHITIN",
+          "BESTIARY_Graytide_CHITIN_BONE",
+          "BESTIARY_Graytide_PLATE_DARK",
+          "BESTIARY_Graytide_ACCENT_EMISSIVE"
         ]
       },
       "verification": {
         "assigned": [
-          "/Game/Tests/UEParity/XCOM_Sectoid_PLATE.XCOM_Sectoid_PLATE",
-          "/Game/Tests/UEParity/XCOM_Sectoid_CHITIN.XCOM_Sectoid_CHITIN",
-          "/Game/Tests/UEParity/XCOM_Sectoid_CHITIN_BONE.XCOM_Sectoid_CHITIN_BONE",
-          "/Game/Tests/UEParity/XCOM_Sectoid_PLATE_DARK.XCOM_Sectoid_PLATE_DARK",
-          "/Game/Tests/UEParity/XCOM_Sectoid_ACCENT_EMISSIVE.XCOM_Sectoid_ACCENT_EMISSIVE"
+          "/Game/Tests/UEParity/BESTIARY_Graytide_PLATE.BESTIARY_Graytide_PLATE",
+          "/Game/Tests/UEParity/BESTIARY_Graytide_CHITIN.BESTIARY_Graytide_CHITIN",
+          "/Game/Tests/UEParity/BESTIARY_Graytide_CHITIN_BONE.BESTIARY_Graytide_CHITIN_BONE",
+          "/Game/Tests/UEParity/BESTIARY_Graytide_PLATE_DARK.BESTIARY_Graytide_PLATE_DARK",
+          "/Game/Tests/UEParity/BESTIARY_Graytide_ACCENT_EMISSIVE.BESTIARY_Graytide_ACCENT_EMISSIVE"
         ],
         "materials": [
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Sectoid_PLATE",
+            "name": "BESTIARY_Graytide_PLATE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Sectoid_PLATE.XCOM_Sectoid_PLATE",
+            "path": "/Game/Tests/UEParity/BESTIARY_Graytide_PLATE.BESTIARY_Graytide_PLATE",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -481,9 +481,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Sectoid_CHITIN",
+            "name": "BESTIARY_Graytide_CHITIN",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Sectoid_CHITIN.XCOM_Sectoid_CHITIN",
+            "path": "/Game/Tests/UEParity/BESTIARY_Graytide_CHITIN.BESTIARY_Graytide_CHITIN",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -491,9 +491,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Sectoid_CHITIN_BONE",
+            "name": "BESTIARY_Graytide_CHITIN_BONE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Sectoid_CHITIN_BONE.XCOM_Sectoid_CHITIN_BONE",
+            "path": "/Game/Tests/UEParity/BESTIARY_Graytide_CHITIN_BONE.BESTIARY_Graytide_CHITIN_BONE",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -501,9 +501,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Sectoid_PLATE_DARK",
+            "name": "BESTIARY_Graytide_PLATE_DARK",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Sectoid_PLATE_DARK.XCOM_Sectoid_PLATE_DARK",
+            "path": "/Game/Tests/UEParity/BESTIARY_Graytide_PLATE_DARK.BESTIARY_Graytide_PLATE_DARK",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -511,24 +511,24 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Sectoid_ACCENT_EMISSIVE",
+            "name": "BESTIARY_Graytide_ACCENT_EMISSIVE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Sectoid_ACCENT_EMISSIVE.XCOM_Sectoid_ACCENT_EMISSIVE",
+            "path": "/Game/Tests/UEParity/BESTIARY_Graytide_ACCENT_EMISSIVE.BESTIARY_Graytide_ACCENT_EMISSIVE",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
           }
         ],
         "slots": [
-          "XCOM_Sectoid_PLATE",
-          "XCOM_Sectoid_CHITIN",
-          "XCOM_Sectoid_CHITIN_BONE",
-          "XCOM_Sectoid_PLATE_DARK",
-          "XCOM_Sectoid_ACCENT_EMISSIVE"
+          "BESTIARY_Graytide_PLATE",
+          "BESTIARY_Graytide_CHITIN",
+          "BESTIARY_Graytide_CHITIN_BONE",
+          "BESTIARY_Graytide_PLATE_DARK",
+          "BESTIARY_Graytide_ACCENT_EMISSIVE"
         ]
       }
     },
-    "XCOM_Viper": {
+    "BESTIARY_Ratline": {
       "shipping": {
         "assigned": [
           "/Engine/EngineMaterials/WorldGridMaterial.WorldGridMaterial",
@@ -590,28 +590,28 @@
           }
         ],
         "slots": [
-          "XCOM_Viper_PLATE",
-          "XCOM_Viper_CHITIN",
-          "XCOM_Viper_PLATE_DARK",
-          "XCOM_Viper_CHITIN_BONE",
-          "XCOM_Viper_ACCENT_EMISSIVE"
+          "BESTIARY_Ratline_PLATE",
+          "BESTIARY_Ratline_CHITIN",
+          "BESTIARY_Ratline_PLATE_DARK",
+          "BESTIARY_Ratline_CHITIN_BONE",
+          "BESTIARY_Ratline_ACCENT_EMISSIVE"
         ]
       },
       "verification": {
         "assigned": [
-          "/Game/Tests/UEParity/XCOM_Viper_PLATE.XCOM_Viper_PLATE",
-          "/Game/Tests/UEParity/XCOM_Viper_CHITIN.XCOM_Viper_CHITIN",
-          "/Game/Tests/UEParity/XCOM_Viper_PLATE_DARK.XCOM_Viper_PLATE_DARK",
-          "/Game/Tests/UEParity/XCOM_Viper_CHITIN_BONE.XCOM_Viper_CHITIN_BONE",
-          "/Game/Tests/UEParity/XCOM_Viper_ACCENT_EMISSIVE.XCOM_Viper_ACCENT_EMISSIVE"
+          "/Game/Tests/UEParity/BESTIARY_Ratline_PLATE.BESTIARY_Ratline_PLATE",
+          "/Game/Tests/UEParity/BESTIARY_Ratline_CHITIN.BESTIARY_Ratline_CHITIN",
+          "/Game/Tests/UEParity/BESTIARY_Ratline_PLATE_DARK.BESTIARY_Ratline_PLATE_DARK",
+          "/Game/Tests/UEParity/BESTIARY_Ratline_CHITIN_BONE.BESTIARY_Ratline_CHITIN_BONE",
+          "/Game/Tests/UEParity/BESTIARY_Ratline_ACCENT_EMISSIVE.BESTIARY_Ratline_ACCENT_EMISSIVE"
         ],
         "materials": [
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Viper_PLATE",
+            "name": "BESTIARY_Ratline_PLATE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Viper_PLATE.XCOM_Viper_PLATE",
+            "path": "/Game/Tests/UEParity/BESTIARY_Ratline_PLATE.BESTIARY_Ratline_PLATE",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -619,9 +619,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Viper_CHITIN",
+            "name": "BESTIARY_Ratline_CHITIN",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Viper_CHITIN.XCOM_Viper_CHITIN",
+            "path": "/Game/Tests/UEParity/BESTIARY_Ratline_CHITIN.BESTIARY_Ratline_CHITIN",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -629,9 +629,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Viper_PLATE_DARK",
+            "name": "BESTIARY_Ratline_PLATE_DARK",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Viper_PLATE_DARK.XCOM_Viper_PLATE_DARK",
+            "path": "/Game/Tests/UEParity/BESTIARY_Ratline_PLATE_DARK.BESTIARY_Ratline_PLATE_DARK",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -639,9 +639,9 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Viper_CHITIN_BONE",
+            "name": "BESTIARY_Ratline_CHITIN_BONE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Viper_CHITIN_BONE.XCOM_Viper_CHITIN_BONE",
+            "path": "/Game/Tests/UEParity/BESTIARY_Ratline_CHITIN_BONE.BESTIARY_Ratline_CHITIN_BONE",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
@@ -649,131 +649,131 @@
           {
             "class": "MaterialInstanceConstant",
             "expressions": null,
-            "name": "XCOM_Viper_ACCENT_EMISSIVE",
+            "name": "BESTIARY_Ratline_ACCENT_EMISSIVE",
             "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-            "path": "/Game/Tests/UEParity/XCOM_Viper_ACCENT_EMISSIVE.XCOM_Viper_ACCENT_EMISSIVE",
+            "path": "/Game/Tests/UEParity/BESTIARY_Ratline_ACCENT_EMISSIVE.BESTIARY_Ratline_ACCENT_EMISSIVE",
             "texture_parameters": [],
             "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
             "vector_parameters": []
           }
         ],
         "slots": [
-          "XCOM_Viper_PLATE",
-          "XCOM_Viper_CHITIN",
-          "XCOM_Viper_PLATE_DARK",
-          "XCOM_Viper_CHITIN_BONE",
-          "XCOM_Viper_ACCENT_EMISSIVE"
+          "BESTIARY_Ratline_PLATE",
+          "BESTIARY_Ratline_CHITIN",
+          "BESTIARY_Ratline_PLATE_DARK",
+          "BESTIARY_Ratline_CHITIN_BONE",
+          "BESTIARY_Ratline_ACCENT_EMISSIVE"
         ]
       }
     }
   },
   "shipping_materials": {
-    "/Game/Enemies/XCOM/M_XCOM_Chitin.M_XCOM_Chitin": {
+    "/Game/Enemies/BESTIARY/M_BESTIARY_Chitin.M_BESTIARY_Chitin": {
       "class": "MaterialInstanceConstant",
       "expressions": null,
-      "name": "M_XCOM_Chitin",
+      "name": "M_BESTIARY_Chitin",
       "parent": null,
-      "path": "/Game/Enemies/XCOM/M_XCOM_Chitin.M_XCOM_Chitin",
+      "path": "/Game/Enemies/BESTIARY/M_BESTIARY_Chitin.M_BESTIARY_Chitin",
       "texture_parameters": [],
       "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
       "vector_parameters": []
     },
-    "/Game/Enemies/XCOM/XCOM_Armor_Accent.XCOM_Armor_Accent": {
+    "/Game/Enemies/BESTIARY/BESTIARY_Armor_Accent.BESTIARY_Armor_Accent": {
       "class": "MaterialInstanceConstant",
       "expressions": null,
-      "name": "XCOM_Armor_Accent",
+      "name": "BESTIARY_Armor_Accent",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-      "path": "/Game/Enemies/XCOM/XCOM_Armor_Accent.XCOM_Armor_Accent",
+      "path": "/Game/Enemies/BESTIARY/BESTIARY_Armor_Accent.BESTIARY_Armor_Accent",
       "texture_parameters": [],
       "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
       "vector_parameters": []
     },
-    "/Game/Enemies/XCOM/XCOM_Armor_Plate.XCOM_Armor_Plate": {
+    "/Game/Enemies/BESTIARY/BESTIARY_Armor_Plate.BESTIARY_Armor_Plate": {
       "class": "MaterialInstanceConstant",
       "expressions": null,
-      "name": "XCOM_Armor_Plate",
+      "name": "BESTIARY_Armor_Plate",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-      "path": "/Game/Enemies/XCOM/XCOM_Armor_Plate.XCOM_Armor_Plate",
+      "path": "/Game/Enemies/BESTIARY/BESTIARY_Armor_Plate.BESTIARY_Armor_Plate",
       "texture_parameters": [],
       "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
       "vector_parameters": []
     },
-    "/Game/Enemies/XCOM/XCOM_Chitin_Dark.XCOM_Chitin_Dark": {
+    "/Game/Enemies/BESTIARY/BESTIARY_Chitin_Dark.BESTIARY_Chitin_Dark": {
       "class": "MaterialInstanceConstant",
       "expressions": null,
-      "name": "XCOM_Chitin_Dark",
+      "name": "BESTIARY_Chitin_Dark",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-      "path": "/Game/Enemies/XCOM/XCOM_Chitin_Dark.XCOM_Chitin_Dark",
+      "path": "/Game/Enemies/BESTIARY/BESTIARY_Chitin_Dark.BESTIARY_Chitin_Dark",
       "texture_parameters": [],
       "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
       "vector_parameters": []
     },
-    "/Game/Enemies/XCOM/XCOM_Chitin_Mid.XCOM_Chitin_Mid": {
+    "/Game/Enemies/BESTIARY/BESTIARY_Chitin_Mid.BESTIARY_Chitin_Mid": {
       "class": "MaterialInstanceConstant",
       "expressions": null,
-      "name": "XCOM_Chitin_Mid",
+      "name": "BESTIARY_Chitin_Mid",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-      "path": "/Game/Enemies/XCOM/XCOM_Chitin_Mid.XCOM_Chitin_Mid",
+      "path": "/Game/Enemies/BESTIARY/BESTIARY_Chitin_Mid.BESTIARY_Chitin_Mid",
       "texture_parameters": [],
       "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
       "vector_parameters": []
     },
-    "/Game/Enemies/XCOM/XCOM_Chitin_Pale.XCOM_Chitin_Pale": {
+    "/Game/Enemies/BESTIARY/BESTIARY_Chitin_Pale.BESTIARY_Chitin_Pale": {
       "class": "MaterialInstanceConstant",
       "expressions": null,
-      "name": "XCOM_Chitin_Pale",
+      "name": "BESTIARY_Chitin_Pale",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-      "path": "/Game/Enemies/XCOM/XCOM_Chitin_Pale.XCOM_Chitin_Pale",
+      "path": "/Game/Enemies/BESTIARY/BESTIARY_Chitin_Pale.BESTIARY_Chitin_Pale",
       "texture_parameters": [],
       "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
       "vector_parameters": []
     },
-    "/Game/Enemies/XCOM/XCOM_Core_Emissive.XCOM_Core_Emissive": {
+    "/Game/Enemies/BESTIARY/BESTIARY_Core_Emissive.BESTIARY_Core_Emissive": {
       "class": "MaterialInstanceConstant",
       "expressions": null,
-      "name": "XCOM_Core_Emissive",
+      "name": "BESTIARY_Core_Emissive",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-      "path": "/Game/Enemies/XCOM/XCOM_Core_Emissive.XCOM_Core_Emissive",
+      "path": "/Game/Enemies/BESTIARY/BESTIARY_Core_Emissive.BESTIARY_Core_Emissive",
       "texture_parameters": [],
       "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
       "vector_parameters": []
     },
-    "/Game/Enemies/XCOM/XCOM_Eye_Emissive.XCOM_Eye_Emissive": {
+    "/Game/Enemies/BESTIARY/BESTIARY_Eye_Emissive.BESTIARY_Eye_Emissive": {
       "class": "MaterialInstanceConstant",
       "expressions": null,
-      "name": "XCOM_Eye_Emissive",
+      "name": "BESTIARY_Eye_Emissive",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-      "path": "/Game/Enemies/XCOM/XCOM_Eye_Emissive.XCOM_Eye_Emissive",
+      "path": "/Game/Enemies/BESTIARY/BESTIARY_Eye_Emissive.BESTIARY_Eye_Emissive",
       "texture_parameters": [],
       "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
       "vector_parameters": []
     },
-    "/Game/Enemies/XCOM/XCOM_Flesh.XCOM_Flesh": {
+    "/Game/Enemies/BESTIARY/BESTIARY_Flesh.BESTIARY_Flesh": {
       "class": "MaterialInstanceConstant",
       "expressions": null,
-      "name": "XCOM_Flesh",
+      "name": "BESTIARY_Flesh",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-      "path": "/Game/Enemies/XCOM/XCOM_Flesh.XCOM_Flesh",
+      "path": "/Game/Enemies/BESTIARY/BESTIARY_Flesh.BESTIARY_Flesh",
       "texture_parameters": [],
       "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
       "vector_parameters": []
     },
-    "/Game/Enemies/XCOM/XCOM_Gunmetal.XCOM_Gunmetal": {
+    "/Game/Enemies/BESTIARY/BESTIARY_Gunmetal.BESTIARY_Gunmetal": {
       "class": "MaterialInstanceConstant",
       "expressions": null,
-      "name": "XCOM_Gunmetal",
+      "name": "BESTIARY_Gunmetal",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-      "path": "/Game/Enemies/XCOM/XCOM_Gunmetal.XCOM_Gunmetal",
+      "path": "/Game/Enemies/BESTIARY/BESTIARY_Gunmetal.BESTIARY_Gunmetal",
       "texture_parameters": [],
       "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
       "vector_parameters": []
     },
-    "/Game/Enemies/XCOM/XCOM_Plasma_Emissive.XCOM_Plasma_Emissive": {
+    "/Game/Enemies/BESTIARY/BESTIARY_Plasma_Emissive.BESTIARY_Plasma_Emissive": {
       "class": "MaterialInstanceConstant",
       "expressions": null,
-      "name": "XCOM_Plasma_Emissive",
+      "name": "BESTIARY_Plasma_Emissive",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
-      "path": "/Game/Enemies/XCOM/XCOM_Plasma_Emissive.XCOM_Plasma_Emissive",
+      "path": "/Game/Enemies/BESTIARY/BESTIARY_Plasma_Emissive.BESTIARY_Plasma_Emissive",
       "texture_parameters": [],
       "texture_props": "n/a:AttributeError(\"type object 'MaterialEditingLibrary' has no attribute 'get_material_texture_property_names'\")",
       "vector_parameters": []

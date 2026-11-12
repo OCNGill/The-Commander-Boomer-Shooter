@@ -3,9 +3,9 @@
 **Slot:** swarm-w5 · **Model:** minimax/minimax-m3.1-flash:free · **Node:** Gillsystems-Laptop
 **Written:** 2026-10-21T03:16:40-04:00
 **Deliverable:** `CommandCenter/outputs/swarm-w5/TASK-05_texture_recipes.md`
-**Engine path:** Blender 4.2.23 (authoring) → FBX (`Tools/blender/xcom_enemies_v2.py`) → UE 5.8 (`Docs/generated/xcom_ue_import_report.md`).
+**Engine path:** Blender 4.2.23 (authoring) → FBX (`Tools/blender/bestiary_enemies_v2.py`) → UE 5.8 (`Docs/generated/bestiary_ue_import_report.md`).
 **Hard locks honoured:** TRUE 3D only (no sprites, no billboards); original 1994 X-COM enemies only
-(Sectoid / Viper / Floater / Muton / Chryssalid), modernised not re-invented; **zero reload animations
+(Graytide / Ratline / Drifter / Bulwark / Harrower), modernised not re-invented; **zero reload animations
 ever, including enemy weapons**; **pickups are the only health system, no regeneration**. Nothing in
 this document adds a reload, a regen, or a billboard.
 **Scope note:** this slot is research + authoring spec only. `Tools/blender/**`, `Content/**`,
@@ -94,9 +94,9 @@ zero-mean. Diffuse sanity: `T_Floor_Concrete_Wet` luma mean **86.9** / std **14.
 a full 7-entry manifest. It is the newer set but its seam ratios are worse (§F10), so the figures above are
 taken from the v1 set `out_textures/`, which is the stable, complete, verified one.
 
-### 0.4 The enemy material graph that already exists: `Tools/blender/xcom_enemies_v2.py`
+### 0.4 The enemy material graph that already exists: `Tools/blender/bestiary_enemies_v2.py`
 
-`procedural_mat()` (`xcom_enemies_v2.py:249-313`) is the current enemy surface, and it is *exactly* the fixlist
+`procedural_mat()` (`bestiary_enemies_v2.py:249-313`) is the current enemy surface, and it is *exactly* the fixlist
 §F demand ("noise → ColorRamp → Base Color, noise → Bump → Normal, third noise → roughness break-up"):
 
 ```
@@ -127,16 +127,16 @@ Per-enemy scalars from `enemy_materials()` (`:316-348`) and `BUILDERS` (`:1320`)
 > **Read the hex, not the tuple.** The tuples are **linear** values (what Blender's `default_value` and the
 > Principled Base Color expect). The hex column is the **sRGB-encoded** form of those same tuples, which is
 > what a texture file must contain. The repo's own `hexof()` (`make_textures_v2.py:579-580`) is a naive
-> `round(v*255)` with **no gamma**, so it prints `#08090A` for the Sectoid chitin where the sRGB value is
+> `round(v*255)` with **no gamma**, so it prints `#08090A` for the Graytide chitin where the sRGB value is
 > `#303539`. Both are "correct" for their own use; do not paste a `hexof()` value into an albedo PNG.
 
 | Enemy | CHITIN | PLATE | OXBLOOD | BONE | ACCENT (emissive) |
 |---|---|---|---|---|---|
-| Sectoid | `#303539` (0.030,0.035,0.041) | `#5F6360` (0.115,0.126,0.118) | `#793530` (0.190,0.035,0.030) | `#848074` (0.230,0.215,0.175) | `#61FFAA` (0.12,1.00,0.40) str 2.5 |
-| Viper | `#464037` (0.062,0.052,0.038) | `#5B564F` (0.105,0.092,0.078) | `#7C382F` (0.200,0.040,0.028) | `#888273` (0.245,0.225,0.170) | `#59FFE1` (0.10,1.00,0.75) str 2.4 |
-| Floater | `#353F4C` (0.036,0.050,0.072) | `#4C5660` (0.072,0.092,0.118) | `#6C3C42` (0.150,0.045,0.055) | `#7C7D7A` (0.200,0.205,0.195) | `#3FE7FF` (0.05,0.80,1.00) str 2.6 |
-| Muton | `#3B3D3F` (0.044,0.047,0.050) | `#5E6063` (0.112,0.118,0.126) | `#953C35` (0.300,0.045,0.035) | `#858177` (0.235,0.220,0.185) | `#89FF76` (0.25,1.00,0.18) str 2.4 |
-| Chryssalid | `#4A3A32` (0.068,0.042,0.032) | `#59514B` (0.100,0.082,0.070) | `#843F35` (0.230,0.050,0.035) | `#898476` (0.250,0.230,0.180) | `#B3FF3F` (0.45,1.00,0.05) str 2.0 |
+| Graytide | `#303539` (0.030,0.035,0.041) | `#5F6360` (0.115,0.126,0.118) | `#793530` (0.190,0.035,0.030) | `#848074` (0.230,0.215,0.175) | `#61FFAA` (0.12,1.00,0.40) str 2.5 |
+| Ratline | `#464037` (0.062,0.052,0.038) | `#5B564F` (0.105,0.092,0.078) | `#7C382F` (0.200,0.040,0.028) | `#888273` (0.245,0.225,0.170) | `#59FFE1` (0.10,1.00,0.75) str 2.4 |
+| Drifter | `#353F4C` (0.036,0.050,0.072) | `#4C5660` (0.072,0.092,0.118) | `#6C3C42` (0.150,0.045,0.055) | `#7C7D7A` (0.200,0.205,0.195) | `#3FE7FF` (0.05,0.80,1.00) str 2.6 |
+| Bulwark | `#3B3D3F` (0.044,0.047,0.050) | `#5E6063` (0.112,0.118,0.126) | `#953C35` (0.300,0.045,0.035) | `#858177` (0.235,0.220,0.185) | `#89FF76` (0.25,1.00,0.18) str 2.4 |
+| Harrower | `#4A3A32` (0.068,0.042,0.032) | `#59514B` (0.100,0.082,0.070) | `#843F35` (0.230,0.050,0.035) | `#898476` (0.250,0.230,0.180) | `#B3FF3F` (0.45,1.00,0.05) str 2.0 |
 
 ---
 
@@ -149,36 +149,36 @@ observation, and the only way to act on it is to measure it.
 ### 1.1 What was measured
 
 **A. Green-dominant pixel fraction** (pixels where `G > R+10` and `G > B+6` and `45 < G`), on the current
-hero renders in `Tools/blender/out_xcom/*.png` (900×720):
+hero renders in `Tools/blender/out_bestiary/*.png` (900×720):
 
 | Render | green-dominant | mean R | mean G | mean B |
 |---|---|---|---|---|
-| `XCOM_Chryssalid_turn.png` | **8.06 %** | 44.1 | 51.7 | 51.8 |
-| `XCOM_Chryssalid.png` | **4.85 %** | 41.5 | 48.1 | 48.5 |
-| `XCOM_Muton_turn.png` | 4.63 % | 26.1 | 33.1 | 34.4 |
-| `XCOM_Floater.png` | 3.80 % | 31.6 | 43.2 | 45.8 |
-| `XCOM_Sectoid_turn.png` | 3.57 % | 30.9 | 40.3 | 42.8 |
-| `XCOM_Viper_turn.png` | 3.44 % | 22.7 | 29.1 | 30.3 |
-| `XCOM_Muton.png` | 2.89 % | 27.1 | 32.7 | 34.9 |
-| `XCOM_Viper.png` | 2.70 % | 22.5 | 28.5 | 30.1 |
-| `XCOM_Sectoid.png` | 1.82 % | 29.3 | 38.3 | 41.3 |
-| `XCOM_Floater_turn.png` | 1.11 % | 10.9 | 15.3 | 17.2 |
+| `BESTIARY_Harrower_turn.png` | **8.06 %** | 44.1 | 51.7 | 51.8 |
+| `BESTIARY_Harrower.png` | **4.85 %** | 41.5 | 48.1 | 48.5 |
+| `BESTIARY_Bulwark_turn.png` | 4.63 % | 26.1 | 33.1 | 34.4 |
+| `BESTIARY_Drifter.png` | 3.80 % | 31.6 | 43.2 | 45.8 |
+| `BESTIARY_Graytide_turn.png` | 3.57 % | 30.9 | 40.3 | 42.8 |
+| `BESTIARY_Ratline_turn.png` | 3.44 % | 22.7 | 29.1 | 30.3 |
+| `BESTIARY_Bulwark.png` | 2.89 % | 27.1 | 32.7 | 34.9 |
+| `BESTIARY_Ratline.png` | 2.70 % | 22.5 | 28.5 | 30.1 |
+| `BESTIARY_Graytide.png` | 1.82 % | 29.3 | 38.3 | 41.3 |
+| `BESTIARY_Drifter_turn.png` | 1.11 % | 10.9 | 15.3 | 17.2 |
 
 The `*_silh.png` silhouette renders are 0.000 % (greyscale by construction) and are excluded.
 
-> **These figures are a moving target.** The hero renders in `out_xcom/` were regenerated by the enemy lane
-> at 03:34-03:37 on 2026-10-21, *during* this task, and the green fractions moved (the Chryssalid went from
+> **These figures are a moving target.** The hero renders in `out_bestiary/` were regenerated by the enemy lane
+> at 03:34-03:37 on 2026-10-21, *during* this task, and the green fractions moved (the Harrower went from
 > 4.32 % to 4.85 %, and the new `*_turn.png` variants are worse than the `*_scale.png` ones). Re-measure
 > before acting on a specific number; the **shape** of the problem — 1.1 % to 8.1 % green-dominant pixels on
-> every enemy, worst on the Chryssalid and the turn poses — has not changed.
+> every enemy, worst on the Harrower and the turn poses — has not changed.
 
 **B. Vision read of the two worst frames** (`vision_analyze` on the actual PNGs):
-- Chryssalid: *"olive, sage, and mint-green coloration appearing on portions of the shell and limbs"*;
+- Harrower: *"olive, sage, and mint-green coloration appearing on portions of the shell and limbs"*;
   *"fine, cloudy tonal variation across the body… does not form clearly separated lichen colonies"*; the
   read is *"a dark chitinous carapace with a restrained moss/lichen-like green patina"*. Critically, the review
   also says the shell shows *"large, soft, coherent white highlights"* and *"a genuine moss or crustose lichen
   layer would look rougher and more broken up, scattering the light into many small highlights"*.
-- Muton: *"irregular green mottling—especially on the viewer-left side of the shoulder… could superficially
+- Bulwark: *"irregular green mottling—especially on the viewer-left side of the shoulder… could superficially
   suggest lichen, moss, or green oxidation"*.
 
 **C. The same measurement on the shipped environment set** (`Tools/blender/out_textures/`, albedo only):
@@ -191,7 +191,7 @@ that it is *present in the same frame* as the enemies, which is what makes the e
 1. **Green is in the wrong place.** The environment set's botanical palette is *deliberately* mint/forest green
    — `CONCRETE_MINT`, `GRAVEL_MINT`, `STEEL_FOREST`, `TAR_FOREST`, `WOOD_MINT` (`make_textures_v2.py:65-94`),
    used for **algae and moss** (`:670-671, 849-850, 901-902, 1007-1008, 1125-1128`). The enemy rim light is
-   **alien green** `(0.20, 1.00, 0.42)` at ~900 W (`XCOM_ENEMY_V2_FIXLIST.md` §B) and the accent emissives are
+   **alien green** `(0.20, 1.00, 0.42)` at ~900 W (`BESTIARY_ENEMY_V2_FIXLIST.md` §B) and the accent emissives are
    green on four of five enemies. A green-lit, green-mottled surface in the same frame as green-algae concrete
    is exactly what the eye calls *lichen*. **The enemy albedo must contain no green at all**; green is allowed
    only in the emissive accent channel and in the rim light.
@@ -219,8 +219,8 @@ out of the albedo and into the emissive channel only.** Everything below is that
 
 ## 2. RECIPE 1 — CHITIN (segmented exoskeleton)
 
-**Applies to:** `XCOM_<Enemy>_CHITIN` — torsos, limbs, cranium, abdomen, Floater shell + wings, Chryssalid
-thorax, Muton abdomen. This is the base of every silhouette, so it gets the most attention.
+**Applies to:** `BESTIARY_<Enemy>_CHITIN` — torsos, limbs, cranium, abdomen, Drifter shell + wings, Harrower
+thorax, Bulwark abdomen. This is the base of every silhouette, so it gets the most attention.
 
 ### 2.1 Node graph, in plain terms
 
@@ -291,7 +291,7 @@ Ambient-Occlusion term (UE) or an inverted groove mask (Blender preview).
 ### 2.6 Target resolution & tiling
 
 - **Procedural (primary, recommended):** no bitmap at all — the graph above runs in UE as
-  `M_XCOM_Chitin_Master` (this is TASK-02's recommendation and it is correct: FBX carries no node graph).
+  `M_BESTIARY_Chitin_Master` (this is TASK-02's recommendation and it is correct: FBX carries no node graph).
 - **Baked fallback (hero close-up only):** **1024²** albedo + normal + ORM covering **2 m** of surface
   (0.195 cm/texel — the environment set's density, §0.2), plus one shared **2048²** micro-detail normal
   covering **0.5 m** (0.0244 cm/texel) tiled at 0.5 m. See §7 for the layout rule.
@@ -300,8 +300,8 @@ Ambient-Occlusion term (UE) or an inverted groove mask (Blender preview).
 
 ## 3. RECIPE 2 — BONE (spurs, teeth, ribs, scythe edges)
 
-**Applies to:** `XCOM_<Enemy>_CHITIN_BONE` — Viper dorsal ribs + teeth, Sectoid claws, Floater wing ribs,
-Chryssalid dorsal spurs + mandibles + scythe cutting edge, Muton bone accents. Per the fixlist §E, bone is the
+**Applies to:** `BESTIARY_<Enemy>_CHITIN_BONE` — Ratline dorsal ribs + teeth, Graytide claws, Drifter wing ribs,
+Harrower dorsal spurs + mandibles + scythe cutting edge, Bulwark bone accents. Per the fixlist §E, bone is the
 **only** pale material in the kit and it must never appear on hands or feet.
 
 ### 3.1 Node graph, in plain terms
@@ -341,8 +341,8 @@ never picks up a green or a grey speckle that could read as mould.
 
 ### 3.3 Base colours
 
-`BUILDERS` bone triplets: Sectoid `#848074`, Viper `#888273`, Floater `#7C7D7A`, Muton `#858177`,
-Chryssalid `#898476`. **These are the only bright values allowed on the creature besides the emissive accent.**
+`BUILDERS` bone triplets: Graytide `#848074`, Ratline `#888273`, Drifter `#7C7D7A`, Bulwark `#858177`,
+Harrower `#898476`. **These are the only bright values allowed on the creature besides the emissive accent.**
 They are warm-neutral (R ≥ G ≥ B by a small margin) so that under a *green* rim they do not turn into lichen.
 Do not desaturate them further and do not push them green to "match" the palette — the palette's greens belong
 to the environment's algae, not to bone.
@@ -361,12 +361,12 @@ and the 2 m-tile density at 512² (0.39 cm/texel) still resolves the 2 mm cracks
 
 ---
 
-## 4. RECIPE 3 — ARMOUR PLATE (Muton, plus every enemy's plate family)
+## 4. RECIPE 3 — ARMOUR PLATE (Bulwark, plus every enemy's plate family)
 
-**Applies to:** `XCOM_<Enemy>_PLATE` (hard shell: Sectoid sternum/shoulder caps/feet, Viper throat/shoulders/feet,
-Muton helmet/chest/pauldrons/pelvis/feet, Chryssalid feet + scythe blades), `XCOM_<Enemy>_PLATE_DARK`
+**Applies to:** `BESTIARY_<Enemy>_PLATE` (hard shell: Graytide sternum/shoulder caps/feet, Ratline throat/shoulders/feet,
+Bulwark helmet/chest/pauldrons/pelvis/feet, Harrower feet + scythe blades), `BESTIARY_<Enemy>_PLATE_DARK`
 (recesses, panel-line seams, visor recess, respirator, mouth seams, eye sockets) and
-`XCOM_<Enemy>_PLATE_OXBLOOD` (Muton chest plate only).
+`BESTIARY_<Enemy>_PLATE_OXBLOOD` (Bulwark chest plate only).
 
 ### 4.1 Node graph, in plain terms
 
@@ -410,15 +410,15 @@ environment set's *green* verdigris recipe (`STEEL_FOREST` at `make_textures_v2.
 | Principled | Roughness **0.32**, Metal **0.62** | — | matches the shipped `PLATE` family (0.32 / 0.62). |
 
 `PLATE_DARK` uses the same graph with base colour linear `(0.010, 0.011, 0.013)` — sRGB **`#191B1E`**,
-roughness **0.70**, metal 0.30, brush weight halved (`xcom_enemies_v2.py:327-328`) — it is the shadow-line
+roughness **0.70**, metal 0.30, brush weight halved (`bestiary_enemies_v2.py:327-328`) — it is the shadow-line
 colour of the whole kit, so it must never pick up brightness.
-`PLATE_OXBLOOD` uses base `#953C35` (Muton), roughness 0.42, metal 0.30, patina weight 0.20, and **the same
+`PLATE_OXBLOOD` uses base `#953C35` (Bulwark), roughness 0.42, metal 0.30, patina weight 0.20, and **the same
 greyscale-only rule**.
 
 ### 4.3 Base colours
 
-`BUILDERS` plate / oxblood triplets, §0.5. The Muton oxblood `#953C35` is the single most saturated non-emissive
-colour in the kit and it must stay the Muton's focal point — so the patina on it is value-only and capped at
+`BUILDERS` plate / oxblood triplets, §0.5. The Bulwark oxblood `#953C35` is the single most saturated non-emissive
+colour in the kit and it must stay the Bulwark's focal point — so the patina on it is value-only and capped at
 0.20, and its emissive-free saturation must not be diluted by a green or grey environment tint.
 
 ### 4.4 Roughness & bump
@@ -438,8 +438,8 @@ detail tier is not optional here).
 
 ## 5. RECIPE 4 — PLASMA (weapon coils, dorsal core, eyes)
 
-**Applies to:** `XCOM_Plasma_Emissive` (violet, emission 16), `XCOM_Core_Emissive` (cyan, emission 22),
-`XCOM_Eye_Emissive` (emission 14) and the per-enemy `ACCENT_EMISSIVE` / `ACCENT_DIM`.
+**Applies to:** `BESTIARY_Plasma_Emissive` (violet, emission 16), `BESTIARY_Core_Emissive` (cyan, emission 22),
+`BESTIARY_Eye_Emissive` (emission 14) and the per-enemy `ACCENT_EMISSIVE` / `ACCENT_DIM`.
 
 ### 5.1 The rule that makes plasma different from every other recipe
 
@@ -471,8 +471,8 @@ voronoi crackle so the surface is not a flat neon decal.
 | Fresnel power | **2.4** | tight rim. A low power floods the whole surface and kills the reveal read. |
 | Noise | fBM, `fy=32`, Detail 3 | 16 cycles/m ≈ 6.25 cm energy drift, ~10 % amplitude. |
 | Voronoi crackle | 4.5 cells/m, Randomness 1.0, ramp 0.0-0.05 | 22 cm cells — the *only* visible structure; must stay subtle. |
-| Emission strength | eyes **2.0-2.6** (per enemy, §0.5); plasma coil **16**; dorsal core **22** | from `XCOM_ENEMY_DESIGN_BRIEF.md` §MATERIALS and `BUILDERS`. |
-| `ACCENT_DIM` | strength × **0.28** | already authored in `xcom_enemies_v2.py:338-343`, assigned nowhere. Ship it, assign nothing. |
+| Emission strength | eyes **2.0-2.6** (per enemy, §0.5); plasma coil **16**; dorsal core **22** | from `BESTIARY_ENEMY_DESIGN_BRIEF.md` §MATERIALS and `BUILDERS`. |
+| `ACCENT_DIM` | strength × **0.28** | already authored in `bestiary_enemies_v2.py:338-343`, assigned nowhere. Ship it, assign nothing. |
 | Base colour | **(0.02, 0.02, 0.02)** linear | the housing is black so the bloom has contrast. |
 | Roughness / Metal | **0.22 / 0.0** | matches the shipped accent family. |
 
@@ -551,11 +551,11 @@ def tex_chitin(base, seed):
 
 | Metric | Value | Gate (§9) | Pass |
 |---|---|---|---|
-| Wrap-vs-interior seam ratio | **0.82 / 1.01** (Sectoid); 0.83-0.84 / 1.02 for the other four | ≤ 1.35 | yes |
+| Wrap-vs-interior seam ratio | **0.82 / 1.01** (Graytide); 0.83-0.84 / 1.02 for the other four | ≤ 1.35 | yes |
 | Green-dominant pixels | **0.000 %** on all five | < 0.5 % | yes |
 | Roughness range / std | **0.40 → 0.74**, std 0.110 | std ≥ 0.05 | yes |
 | Normal map mean RGB | **127.5 / 127.5 / 244.8** | 127±2 / 127±2 / 240-255 | yes |
-| Luma mean / std | 0.075 / 0.064 (Sectoid) | — | reads as a real surface |
+| Luma mean / std | 0.075 / 0.064 (Graytide) | — | reads as a real surface |
 | Groove coverage | **2.54 %** of the surface | — | thin, hard seams |
 | Plate tone spread | 0.784 → 1.058 | — | ±14 %, value only |
 
@@ -590,11 +590,11 @@ Verification is the existing `Tools/blender/verify_textures.py`, extended with t
 ### 7.1 The constraint that decides the convention
 
 Measured facts:
-- `Tools/blender/xcom_enemies_v2.py` **never unwraps** — there is no `bpy.ops.uv.smart_project` anywhere in
+- `Tools/blender/bestiary_enemies_v2.py` **never unwraps** — there is no `bpy.ops.uv.smart_project` anywhere in
   `Tools/blender/*.py` (grep confirmed). The enemies are primitives joined into one mesh.
 - The FBX does carry a `UVMap` layer (`LayerElementUV=2` per TASK-02's binary scan) but it is the **Blender
   primitive default** — per-face island soup with no consistency between enemies.
-- The current material graph already uses **`TexCoord.Object`**, not UV (`xcom_enemies_v2.py:268-274`).
+- The current material graph already uses **`TexCoord.Object`**, not UV (`bestiary_enemies_v2.py:268-274`).
 
 **Therefore the convention is a *uniform* (object/world) layout, not a UV atlas, and that is not a
 compromise — it is the correct answer for a kit of joined primitives whose only stable coordinate frame is
@@ -603,13 +603,13 @@ object space.**
 ### 7.2 `COMMAND-UNIFORM-1` — the rule
 
 > **1 UV unit = 1 metre of creature surface. Every enemy uses the same object-space mapping, so one
-> chitin plate is physically the same size on the 0.94 m Chryssalid and the 2.02 m Muton.**
+> chitin plate is physically the same size on the 0.94 m Harrower and the 2.02 m Bulwark.**
 
 Concretely:
 
 | Item | Value | Note |
 |---|---|---|
-| Primary mapping | `TexCoord.Object` → `Mapping` (scale 1.0) → procedural | **Object space, not Generated.** Generated is normalised to each enemy's bounding box, so the Chryssalid's chitin would be 2× denser than the Muton's — the scale drift that makes a kit look like two kits. |
+| Primary mapping | `TexCoord.Object` → `Mapping` (scale 1.0) → procedural | **Object space, not Generated.** Generated is normalised to each enemy's bounding box, so the Harrower's chitin would be 2× denser than the Bulwark's — the scale drift that makes a kit look like two kits. |
 | Why not UV | joined primitives, never unwrapped, FBX carries no node graph | object space is the only frame that survives the FBX boundary and needs no `Tools/blender/**` edit. |
 | Texel density, body tier | **512 px/m = 0.195 cm/texel** | **identical to the environment set** (`WORLD_M=4.0, SIZE=2048` → 0.195 cm/texel). The creatures and the harbour then read as one world. |
 | Texel density, detail tier | **4096 px/m = 0.0244 cm/texel** (2048² over 0.5 m) | one shared detail normal per family, tiled at 0.5 m. Needed for 3 mm chitin grain, 8 mm brush lines, 2 mm bone cracks. |
@@ -652,7 +652,7 @@ Ordered by impact. Each item names the file the Blender lane must touch (all und
 
 | # | Change | Where | Kill criterion |
 |---|---|---|---|
-| **C1** | **Remove every green from enemy albedo.** No `CONCRETE_MINT` / `GRAVEL_MINT` / `STEEL_FOREST` / `TAR_FOREST` / `WOOD_MINT` constant, and no hue-varying mix, in any chitin / bone / plate recipe. Green survives only in the emissive accent and the rim light. | new `make_textures_enemy.py`; `procedural_mat()` in `xcom_enemies_v2.py` | green-dominant pixel fraction in every enemy albedo map **< 0.5 %** (the current hero renders measure **1.1 % - 8.1 %**, worst on `XCOM_Chryssalid_turn.png` at 8.06 %) |
+| **C1** | **Remove every green from enemy albedo.** No `CONCRETE_MINT` / `GRAVEL_MINT` / `STEEL_FOREST` / `TAR_FOREST` / `WOOD_MINT` constant, and no hue-varying mix, in any chitin / bone / plate recipe. Green survives only in the emissive accent and the rim light. | new `make_textures_enemy.py`; `procedural_mat()` in `bestiary_enemies_v2.py` | green-dominant pixel fraction in every enemy albedo map **< 0.5 %** (the current hero renders measure **1.1 % - 8.1 %**, worst on `BESTIARY_Harrower_turn.png` at 8.06 %) |
 | **C2** | **Replace the isotropic ±0.30 mottle with Voronoi plate structure** — per-plate value tone (±14 %, greyscale) + a hard edge groove instead of soft round patches. The groove ramp is `0.20 × cell`; at the 6/m plate pitch that is a **~30 mm wide groove band** (measured: half-width 14.8 mm, 2.54 % surface coverage). | `procedural_mat()` → new `chitin_mat()`; `make_textures_enemy.py` | a vision pass on a 200 % crop reports "polygonal plates with hard seams", not "rounded patches" |
 | **C3** | **Drive the normal from the same height field that shades the albedo** (the `bake()` law). Add an explicit normal map; the current graph has a Bump node on a single 31.5-scale noise and no cell edges. | `procedural_mat()`, `make_textures_enemy.py` | albedo and normal agree; the surface shows **hard, thin bright-edged grooves** instead of a broad waxy sheen |
 | **C4** | **Split roughness between plate faces and grooves** (0.40 satin face / 0.74 matte groove on chitin; 0.32/0.48/0.20/0.42 on plate). A uniformly matte surface is the lichen signature. | `procedural_mat()`, `make_textures_enemy.py` | roughness map std ≥ 0.05 in every family |
@@ -694,11 +694,11 @@ through `save_png()` + `verify_textures.py` to produce the shipped PNGs and the 
 
 | # | Finding | Impact | Owner |
 |---|---|---|---|
-| **F1** | **The FBX carries no node graph.** `Texture=0 / Video=0` on all five enemy FBXs (TASK-02's binary scan, independently consistent with `procedural_mat()` being pure Blender nodes). Every recipe in this document must therefore be **re-authored in UE as a master material** (TASK-02's `M_XCOM_*_Master` set) or baked — the Blender preview and the shipped game will otherwise look different. | Critical | Blender lane + UE lane |
+| **F1** | **The FBX carries no node graph.** `Texture=0 / Video=0` on all five enemy FBXs (TASK-02's binary scan, independently consistent with `procedural_mat()` being pure Blender nodes). Every recipe in this document must therefore be **re-authored in UE as a master material** (TASK-02's `M_BESTIARY_*_Master` set) or baked — the Blender preview and the shipped game will otherwise look different. | Critical | Blender lane + UE lane |
 | **F2** | **The enemies are never unwrapped** (no `smart_project` in `Tools/blender/*.py`). The `COMMAND-UNIFORM-1` object-space convention in §7 removes the need for an unwrap on the procedural path, but any bake still needs one, which is a `Tools/blender/**` change. | High | Blender lane |
-| **F3** | **Material naming drift.** `XCOM_ENEMY_DESIGN_BRIEF.md` §MATERIALS names `XCOM_Chitin_Dark / _Mid / _Pale`, `XCOM_Armor_Plate`, `XCOM_Armor_Accent`. The current builder (`xcom_enemies_v2.py`) ships `XCOM_<Enemy>_CHITIN / _PLATE / _PLATE_DARK / _PLATE_OXBLOOD / _CHITIN_BONE / _ACCENT_EMISSIVE / _ACCENT_DIM` — **24 slots, none of them matching the brief's names**, and the older `xcom_enemies.py` used the brief's names. The UE import report lists the *v1* names on the imported meshes. | Medium — the texture recipe set must pick one naming family | Blueprint owner |
-| **F4** | **`XCOM_Plasma_Emissive` and `XCOM_Core_Emissive` are named in the brief but are not materials the current builder creates** — the builder makes one per-enemy `ACCENT_EMISSIVE`. The brief's emission strengths (eyes 14 / core 22 / plasma 16) also do not match the builder's per-enemy strengths (2.0-2.6). | Medium — §5.3 gives both numbers and the mapping | Blueprint owner |
-| **F5** | **The green rim light is a texture-side problem too.** The reveal rig's alien-green rim `(0.20, 1.00, 0.42)` at ~900 W (`XCOM_ENEMY_V2_FIXLIST.md` §B) is the amplifier for every green artefact; `LIGHTING_V2_FIXLIST.md` §2 already calls the rim "a broad green kicker" that "reads as a coloured studio fill". C1 (no green in albedo) removes the *texture* half; the lighting half belongs to the lighting lane. | High | Lighting lane |
+| **F3** | **Material naming drift.** `BESTIARY_ENEMY_DESIGN_BRIEF.md` §MATERIALS names `BESTIARY_Chitin_Dark / _Mid / _Pale`, `BESTIARY_Armor_Plate`, `BESTIARY_Armor_Accent`. The current builder (`bestiary_enemies_v2.py`) ships `BESTIARY_<Enemy>_CHITIN / _PLATE / _PLATE_DARK / _PLATE_OXBLOOD / _CHITIN_BONE / _ACCENT_EMISSIVE / _ACCENT_DIM` — **24 slots, none of them matching the brief's names**, and the older `bestiary_enemies.py` used the brief's names. The UE import report lists the *v1* names on the imported meshes. | Medium — the texture recipe set must pick one naming family | Blueprint owner |
+| **F4** | **`BESTIARY_Plasma_Emissive` and `BESTIARY_Core_Emissive` are named in the brief but are not materials the current builder creates** — the builder makes one per-enemy `ACCENT_EMISSIVE`. The brief's emission strengths (eyes 14 / core 22 / plasma 16) also do not match the builder's per-enemy strengths (2.0-2.6). | Medium — §5.3 gives both numbers and the mapping | Blueprint owner |
+| **F5** | **The green rim light is a texture-side problem too.** The reveal rig's alien-green rim `(0.20, 1.00, 0.42)` at ~900 W (`BESTIARY_ENEMY_V2_FIXLIST.md` §B) is the amplifier for every green artefact; `LIGHTING_V2_FIXLIST.md` §2 already calls the rim "a broad green kicker" that "reads as a coloured studio fill". C1 (no green in albedo) removes the *texture* half; the lighting half belongs to the lighting lane. | High | Lighting lane |
 | **F6** | **`Tools/blender/out_textures_v2/` was mid-regeneration during this task and has since completed** (it was 14 files and climbing with three `blender.exe` processes resident when this task began; it now carries a full 7-entry manifest plus the trim sheet). Its seam figures differ from the v1 set in `out_textures/`, and the v2 numbers are **worse** in several cases (§F10). This document measures the **v1 set** (`out_textures/`, 44 files, stable and complete) for its normal-map and lichen figures, and reports both sets' seam ratios. | Informational | — |
 | **F7** | `Tools/blender/**` is locked for this slot, so **none of §8's C1-C7 changes are applied**. They are written as a change list with acceptance gates, for the Blender lane to execute under the lock. | — | Blender lane |
 | **F8** | **`mt.fbm()` does not tile on its own — a real, reproducible defect in the shipped generator, with an identified root cause.** `fbm()` (`make_textures_v2.py:187-206`) passes a per-octave phase `oy = 0.5*((o*5)%2)`, `ox = 0.5*((o*3)%2)` to `perlin()`. Those phases alternate **0.0 / 0.5** per octave, so even octaves are sampled at phase **0.0**. **Root cause (verified in the lattice arithmetic):** at phase 0.0 the first sample row lands *exactly on a lattice node* (`Y=0.0000, t=0.0000`) while the last row lands mid-cell between two different nodes (`Y=31.9688, t=0.9688`). The wrap therefore compares a node-centre value against a mid-cell value, and the seam step is **0.3689 against an interior step of 0.0001 — a 3061× ratio**. At any non-zero phase both ends land mid-cell and the wrap compares like with like (ratio 0.79-1.27). Measured in isolation at 1024²: `fbm(fy=32, oct=4)` → seam **6.50 / 6.08**; `fbm(fy=4, oct=6)` → **40.44 / 55.48**. **Fix (verified):** a *constant* non-zero phase for all octaves. Seam ratios with the phase held at 0.5: fy32/oct4 **0.76 / 0.78**, fy4/oct6 **0.71 / 0.63**, fy8/oct5 **0.74 / 0.74**, fy16/oct4 **0.75 / 0.74**, fy64/oct3 **0.88 / 0.79** — all inside the 1.35 bar. (Phase 0.25 measures marginally better still — **0.30 / 0.29** at fy32/oct4 — and is the value the §6 skeleton uses.) The environment set survives this because its albedo is dominated by other terms (worley cells, ridged, grime) that *do* tile, and because `contact_sheet()` (`make_textures_v2.py:496-514`) hides the defect in the delivered 2×2 proof. A texture built purely from `fbm()` — exactly what the enemy recipes need — inherits a visible seam. | **High** — a new tiling texture built on `mt.fbm()` as-is will show a seam | Blender lane |
@@ -730,8 +730,8 @@ confined to the emissive accent and the rim light.
 
 *Companion artifacts: `CommandCenter/outputs/swarm-w2/TASK-02_modernization_spec.md` (UE master materials,
 resolution table, import settings — this document's recipes are the surface detail that spec defers to),
-`CommandCenter/outputs/swarm-w1/TASK-01_xcom1994_roster.md` (roster and reveal grammar),
-`CommandCenter/briefs/XCOM_ENEMY_DESIGN_BRIEF.md` (materials and emissive strengths),
-`CommandCenter/briefs/XCOM_ENEMY_V2_FIXLIST.md` §E-§F (three material families, surface story),
+`CommandCenter/outputs/swarm-w1/TASK-01_bestiary1994_roster.md` (roster and reveal grammar),
+`CommandCenter/briefs/BESTIARY_ENEMY_DESIGN_BRIEF.md` (materials and emissive strengths),
+`CommandCenter/briefs/BESTIARY_ENEMY_V2_FIXLIST.md` §E-§F (three material families, surface story),
 `CommandCenter/outputs/ebert/EBERT_ENEMY_VERDICT.md` (the bar: "zero surface story — no textures, no decals,
 no wear, no roughness variation").*

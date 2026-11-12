@@ -1,16 +1,16 @@
 """UE 5.8 - PHASE A: relocate the per-enemy materials and re-bind the shipping meshes.
 
 STATE OF THE WORLD (measured in-engine, not assumed):
-  * The five shipping meshes at /Game/Enemies/XCOM have the CORRECT slot NAMES
-    (XCOM_Sectoid_PLATE, XCOM_Sectoid_CHITIN, ...) but every slot currently
+  * The five shipping meshes at /Game/Enemies/BESTIARY have the CORRECT slot NAMES
+    (BESTIARY_Graytide_PLATE, BESTIARY_Graytide_CHITIN, ...) but every slot currently
     points at WorldGridMaterial.
   * The verification copies at /Game/Tests/UEParity have the same slot names
-    bound to the per-enemy materials (XCOM_Sectoid_PLATE, ...), which are
+    bound to the per-enemy materials (BESTIARY_Graytide_PLATE, ...), which are
     MaterialInstanceConstants over /InterchangeAssets/Materials/
     FBXLegacyPhongSurfaceMaterial and each carry their own colour overrides.
   * Those per-enemy material ASSETS live ONLY in the throwaway folder, which
     is deleted at cleanup. So they are RELOCATED (renamed - not recreated,
-    not re-authored) into /Game/Enemies/XCOM first, and only then bound.
+    not re-authored) into /Game/Enemies/BESTIARY first, and only then bound.
     A shipping mesh must not reference an asset that the cleanup deletes.
   * Nothing in Content/Maps is opened, modified or saved.
 
@@ -25,10 +25,10 @@ import unreal
 
 REPO = os.environ.get('UE_REPO', r'C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter')
 OUT = REPO + '/CommandCenter/outputs/ue_verify'
-SHIPPING = '/Game/Enemies/XCOM'
+SHIPPING = '/Game/Enemies/BESTIARY'
 THROW = '/Game/Tests/UEParity'
-ENEMIES = ['XCOM_Sectoid', 'XCOM_Viper', 'XCOM_Floater', 'XCOM_Muton',
-           'XCOM_Chryssalid']
+ENEMIES = ['BESTIARY_Graytide', 'BESTIARY_Ratline', 'BESTIARY_Drifter', 'BESTIARY_Bulwark',
+           'BESTIARY_Harrower']
 
 
 def L(m):

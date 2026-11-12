@@ -1,5 +1,5 @@
 {
- "Sectoid": {
+ "Graytide": {
   "hero_kb": 598.2,
   "w": 720,
   "h": 900,
@@ -22,7 +22,7 @@
   "kb_silh": 471.4,
   "kb": 167.9
  },
- "Viper": {
+ "Ratline": {
   "hero_kb": 582.1,
   "w": 720,
   "h": 900,
@@ -45,7 +45,7 @@
   "kb_silh": 473.6,
   "kb": 140.4
  },
- "Floater": {
+ "Drifter": {
   "hero_kb": 583.8,
   "w": 720,
   "h": 900,
@@ -68,7 +68,7 @@
   "kb_silh": 464.6,
   "kb": 78.3
  },
- "Muton": {
+ "Bulwark": {
   "hero_kb": 612.0,
   "w": 720,
   "h": 900,
@@ -91,7 +91,7 @@
   "kb_silh": 467.1,
   "kb": 122.7
  },
- "Chryssalid": {
+ "Harrower": {
   "hero_kb": 641.0,
   "w": 720,
   "h": 900,

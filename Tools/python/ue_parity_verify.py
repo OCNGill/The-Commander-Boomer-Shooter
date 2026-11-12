@@ -5,7 +5,7 @@ Runs as a UE Python commandlet script. Two passes:
   PASS A (FRESH)  - re-imports the CURRENT on-disk v3 FBX into a throwaway
                      /Game/Tests/UEParity/ folder and measures what THAT
                      import retains. This is the like-for-like number.
-  PASS B (STALE)  - loads the SHIPPING assets under /Game/Enemies/XCOM/ and
+  PASS B (STALE)  - loads the SHIPPING assets under /Game/Enemies/BESTIARY/ and
                      measures them without touching them.
 
 Nothing is ever saved except the throwaway import folder, which the caller
@@ -26,29 +26,29 @@ import sys
 import unreal
 
 REPO = r'C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter'
-FBX_DIR = REPO + '/Tools/blender/out_xcom'
+FBX_DIR = REPO + '/Tools/blender/out_bestiary'
 THROW = '/Game/Tests/UEParity'
-SHIPPING = '/Game/Enemies/XCOM'
+SHIPPING = '/Game/Enemies/BESTIARY'
 OUT = REPO + '/CommandCenter/outputs/ue_verify'
 
-ENEMIES = ['XCOM_Sectoid', 'XCOM_Viper', 'XCOM_Floater', 'XCOM_Muton', 'XCOM_Chryssalid']
+ENEMIES = ['BESTIARY_Graytide', 'BESTIARY_Ratline', 'BESTIARY_Drifter', 'BESTIARY_Bulwark', 'BESTIARY_Harrower']
 
 # Tri counts of the CURRENT (v3) source FBX, per the Blender build manifest.
 SRC_FBX_TRIS = {
-    'XCOM_Sectoid': 7308,
-    'XCOM_Viper': 5764,
-    'XCOM_Floater': 2184,
-    'XCOM_Muton': 5216,
-    'XCOM_Chryssalid': 6252,
+    'BESTIARY_Graytide': 7308,
+    'BESTIARY_Ratline': 5764,
+    'BESTIARY_Drifter': 2184,
+    'BESTIARY_Bulwark': 5216,
+    'BESTIARY_Harrower': 6252,
 }
 
-# Tri counts of the SHIPPING (v1-import) assets, per xcom_ue_import_report.md.
+# Tri counts of the SHIPPING (v1-import) assets, per bestiary_ue_import_report.md.
 STALE_TRIS = {
-    'XCOM_Sectoid': 2864,
-    'XCOM_Viper': 3712,
-    'XCOM_Floater': 1980,
-    'XCOM_Muton': 2520,
-    'XCOM_Chryssalid': 2536,
+    'BESTIARY_Graytide': 2864,
+    'BESTIARY_Ratline': 3712,
+    'BESTIARY_Drifter': 1980,
+    'BESTIARY_Bulwark': 2520,
+    'BESTIARY_Harrower': 2536,
 }
 
 # Where the render targets / PNGs go. Absolute windows path, forward slashes.
@@ -183,7 +183,7 @@ def import_fresh(name):
     """Re-import the current v3 FBX into the throwaway folder.
 
     Uses the SAME FbxImportUI options as the original production import
-    (Tools/python/import_xcom_fbx.py) so the measurement is like-for-like.
+    (Tools/python/import_bestiary_fbx.py) so the measurement is like-for-like.
     """
     fbx = FBX_DIR + '/' + name + '.fbx'
     if not os.path.isfile(fbx):

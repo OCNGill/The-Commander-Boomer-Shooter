@@ -1,18 +1,18 @@
 """UE 5.8 - re-bind shipping X-COM enemy materials, then render parity shots.
 
 PHASE A (re-bind)
-  The five shipping meshes at /Game/Enemies/XCOM have WorldGridMaterial on
+  The five shipping meshes at /Game/Enemies/BESTIARY have WorldGridMaterial on
   every slot.  The correct per-slot materials are bound on the verification
   copies at /Game/Tests/UEParity, which is the AUTHORITY for slot -> material.
 
   Those per-enemy material assets live ONLY in the throwaway folder, which is
   deleted at cleanup - so they are RELOCATED (renamed, never re-authored) into
-  /Game/Enemies/XCOM first, then bound by slot NAME, then the shipping meshes
+  /Game/Enemies/BESTIARY first, then bound by slot NAME, then the shipping meshes
   are saved and re-measured from disk.  No new material asset is created.
 
 PHASE B (shots)
   Each shipping mesh is rendered in-engine into
-  CommandCenter/outputs/ue_verify/shots/XCOM_<Enemy>_ue.png (>=900 px tall):
+  CommandCenter/outputs/ue_verify/shots/BESTIARY_<Enemy>_ue.png (>=900 px tall):
   neutral grey background (render-target clear colour, no sky), flat floor,
   key + fill + rim lights, 3/4 front view framed from the actor bounds.
 
@@ -25,7 +25,7 @@ Notes on the engine behaviour that this script relies on:
 Writes, incrementally as each step completes:
   CommandCenter/outputs/ue_verify/ue_rebind_report.json
   CommandCenter/outputs/ue_verify/ue_shots_report.json
-  CommandCenter/outputs/ue_verify/shots/XCOM_<Enemy>_ue.png
+  CommandCenter/outputs/ue_verify/shots/BESTIARY_<Enemy>_ue.png
 """
 
 import json
@@ -35,13 +35,13 @@ import os
 import unreal
 
 REPO = r'C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter'
-SHIPPING = '/Game/Enemies/XCOM'
+SHIPPING = '/Game/Enemies/BESTIARY'
 THROW = '/Game/Tests/UEParity'
 OUT = REPO + '/CommandCenter/outputs/ue_verify'
 SHOT_DIR = OUT + '/shots'
 
-ENEMIES = ['XCOM_Sectoid', 'XCOM_Viper', 'XCOM_Floater', 'XCOM_Muton',
-           'XCOM_Chryssalid']
+ENEMIES = ['BESTIARY_Graytide', 'BESTIARY_Ratline', 'BESTIARY_Drifter', 'BESTIARY_Bulwark',
+           'BESTIARY_Harrower']
 
 W, H = 960, 1200          # >= 900 px tall, 4:5 like the approved hero plates
 FOV = 40.0
@@ -347,7 +347,7 @@ def phase_b():
                 report['notes'].append('no floor material found')
 
     for name in ENEMIES:
-        shot = {'enemy': name, 'png': 'XCOM_%s_ue.png' % name, 'ok': False}
+        shot = {'enemy': name, 'png': 'BESTIARY_%s_ue.png' % name, 'ok': False}
         try:
             mesh = load(SHIPPING, name)
             if mesh is None:

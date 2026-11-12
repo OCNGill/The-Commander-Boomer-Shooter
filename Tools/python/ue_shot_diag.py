@@ -26,9 +26,9 @@ REPO = os.environ.get('UE_REPO',
                        r'C:/Users/Gillsystems Laptop/source/repos/OCNGill/The_Commander_Boomer_Shooter')
 OUT = REPO + '/CommandCenter/outputs/ue_verify/diag'
 SHOTS = OUT + '/shots'
-SHIPPING = '/Game/Enemies/XCOM'
+SHIPPING = '/Game/Enemies/BESTIARY'
 MAP = '/Game/Tests/M_Proof_Blockout'
-ENEMY = 'XCOM_Muton'
+ENEMY = 'BESTIARY_Bulwark'
 
 W, H = 480, 600
 FOV = 35.0

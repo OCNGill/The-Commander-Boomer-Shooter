@@ -1,11 +1,11 @@
-# Lighting Rig Handoff — XCOM Reveal Lighting
+# Lighting Rig Handoff — BESTIARY Reveal Lighting
 
 **Lane:** lighting / reveal rig. **Script:** `Tools/blender/rig_evidence.py`.
 **Renderer:** Blender 4.2.23, EEVEE, 720×900, 48 samples, AgX view transform
 (`VIEW_TRANSFORM = 'AgX'`), exposure 0.0, world background strength 0.10.
 
 **Status:** the rig clears most of the contract on the four large creatures.
-**Muton and Viper read 10/13 with zero clipped pixels.** Every number below
+**Bulwark and Ratline read 10/13 with zero clipped pixels.** Every number below
 is measured from the rendered PNGs by the same code that renders them, and
 re-measured independently by a pure-Python PNG reader with no Blender in the
 loop (`--verify`), which agrees to the digit.
@@ -13,7 +13,7 @@ loop (`--verify`), which agrees to the digit.
 **How the rig is applied:** ONE global rig, plus a small set of per-subject
 knobs fitted **by measurement** inside the same render path that delivers
 the frame. There is no separate probe rig: an earlier version had three
-paths answering for one creature (the probe read `clipW 2267` on the Viper,
+paths answering for one creature (the probe read `clipW 2267` on the Ratline,
 the delivered frame `630`, the parity frame `146`). A score computed on a
 rig nobody ever sees is fiction, so everything now goes through
 `render_rig_frame()`.
@@ -85,10 +85,10 @@ under ratios all count.
 
 | Enemy | Override | Reason |
 |---|---|---|
-| XCOM_Viper | `wash = 1.6` | background_darkness read 43.1 against a bar of 40 |
-| XCOM_Muton | `wash = 1.6`, `emissive_scale = 0.70` | background 45.1; clipping 1271 |
-| XCOM_Sectoid | `emissive_scale = 0.55` | clipping 2568 — the emissive, not the light |
-| XCOM_Floater | `under_cone = 45°`, floor probes spread | a 20–34° cone is smaller than the creature |
+| BESTIARY_Ratline | `wash = 1.6` | background_darkness read 43.1 against a bar of 40 |
+| BESTIARY_Bulwark | `wash = 1.6`, `emissive_scale = 0.70` | background 45.1; clipping 1271 |
+| BESTIARY_Graytide | `emissive_scale = 0.55` | clipping 2568 — the emissive, not the light |
+| BESTIARY_Drifter | `under_cone = 45°`, floor probes spread | a 20–34° cone is smaller than the creature |
 
 ---
 
@@ -125,7 +125,7 @@ headroom exists (four of five read zero clipped pixels).
 3.0. If the band is still short, raise the sweep ceiling to 4.0, and if it
 still will not clear 120, raise `self.rim` (line 1601) from 4000 toward
 7000 — at 7000 the isolated rim measured band 124.6 / frac 0.0954 on the
-Viper, which clears both bars. **Watch `clipW` as it goes up:** the rim is
+Ratline, which clears both bars. **Watch `clipW` as it goes up:** the rim is
 the brightest thing on the body, and pushing it hard is what clips.
 
 ### 3.2 `under_lowbody_1_3x_torso` / `under_feet_1_3x_torso` — 0.21–1.43 and 0.29–1.15
@@ -145,15 +145,15 @@ up. Reduce `self.key` (line 1600) toward 140 and raise `self.under_gain`.
 
 ### 3.3 `floor_zones_in_window` — the outer zone is 140–206 and the shadow side is 8–24
 
-**The Floater was the extreme case and it was a SCALE bug, not a lighting
+**The Drifter was the extreme case and it was a SCALE bug, not a lighting
 bug.** Its floors read 0.43 / 0.62 / 0.46 — effectively black — while its
 body read band 68. The cause: the pool aim and the three floor probes
 scaled with the subject's **height** while every light distance scaled with
-its **size**. The Floater is 2.48 m across and 0.29 m tall, so its pool
+its **size**. The Drifter is 2.48 m across and 0.29 m tall, so its pool
 landed 0.16 m from its feet and its three probes clustered on one patch of
 ground. Everything floor-related now scales with `size`
 (`pool_geometry(height, size)`, `compute_zones(..., size)`), and the
-Floater's floors went to 128.96 / 56.22 / 140.83 — inside the window.
+Drifter's floors went to 128.96 / 56.22 / 140.83 — inside the window.
 
 **The remaining floor failure is the OUTER zone running hot** (171–206
 against a ceiling of 175) with the shadow side still under 45. That is a
@@ -162,33 +162,33 @@ pool's spill. **The change:** move `POOL_EDGE` (line 127) from 0.42 to
 0.60–0.75 so the outer probe leaves the pool's ellipse, and raise
 `self.wash_gain` (line 1627) to lift the shadow side into the window.
 
-### 3.4 The Floater's transform — a named open item
+### 3.4 The Drifter's transform — a named open item
 
-**Symptom:** the Floater's band is 26 and its rim fraction 0.0039, the
+**Symptom:** the Drifter's band is 26 and its rim fraction 0.0039, the
 worst in the set, while the other four read 57–104. Its floors are now
 correct (128.96 / 56.22 / 140.83) and its background is 28.9, so it is in
 frame and lit — but the RIM is not reaching it.
 
-**Cause:** the asset-tracking lane found the Floater's pivot is 100 cm off,
+**Cause:** the asset-tracking lane found the Drifter's pivot is 100 cm off,
 so the manta hovers above the ground plane. The rig's rim grazes the
 silhouette edge, and for a wide flat creature the edge is nearly
 horizontal, so a rim at el 20° passes over it.
 
-**The change:** in the source FBX (`Tools/blender/out_xcom/XCOM_Floater.fbx`,
-built by `Tools/blender/xcom_enemies.py`), correct the pivot so the manta's
+**The change:** in the source FBX (`Tools/blender/out_bestiary/BESTIARY_Drifter.fbx`,
+built by `Tools/blender/bestiary_enemies.py`), correct the pivot so the manta's
 lowest point sits on z = 0, and rebuild the export. Then re-measure. **The
 lighting rig cannot fix this** — if the object is not in frame, no light
 setting moves the numbers, and that is the standing diagnostic: *change a
 light; if nothing moves, the object is not in frame.*
 
-**Note the size field is already working for it:** the Floater's height is
+**Note the size field is already working for it:** the Drifter's height is
 0.290 m but its `size` is 2.480 m, because a manta is wide. That was the
 extent normalisation landing correctly.
 
 ### 3.5 The detached geometry — a named open item, and the state of the tool
 
-**Ebert named:** the Sectoid's free hand, the Floater's white box and white
-tile, the Muton's white shard, the hip fragments.
+**Ebert named:** the Graytide's free hand, the Drifter's white box and white
+tile, the Bulwark's white shard, the hip fragments.
 
 **The purge tool now runs and reports honestly.** `purge_detached()` uses
 **material and position**, not island count:
@@ -212,16 +212,16 @@ call prints its removed count.
 the FBX is imported as a single object (`imported 1 mesh object(s)`), so the
 white box, the tile and the shard are welded into the body mesh, not
 floating as separate objects. **The remaining work is at the source:** find
-those primitives in `Tools/blender/xcom_enemies.py` and delete them there,
+those primitives in `Tools/blender/bestiary_enemies.py` and delete them there,
 then re-export the FBX. A white box welded onto the shoulder is still a
 white box on the shoulder.
 
 **Independent confirmation from the renders:** the delivered frames were
-checked with vision and show **no detached floating pieces** — the Muton
-reads "none clearly visible", the Sectoid reads "no unmistakable floating
+checked with vision and show **no detached floating pieces** — the Bulwark
+reads "none clearly visible", the Graytide reads "no unmistakable floating
 body geometry". The debris is not visible in the current renders, but the
-Ebert-scored renders (`Tools/blender/out_xcom/XCOM_*.png`, produced by
-`xcom_enemies.py`) are a different generation and were not re-rendered here.
+Ebert-scored renders (`Tools/blender/out_bestiary/BESTIARY_*.png`, produced by
+`bestiary_enemies.py`) are a different generation and were not re-rendered here.
 
 ---
 
@@ -233,20 +233,20 @@ five different names, and the renders were shot with neutral lighting so
 none of the rig or the emissive was visible.
 
 **The silhouettes still to rebuild, against the brief** (this is modelling
-work in `Tools/blender/xcom_enemies.py`, not lighting):
+work in `Tools/blender/bestiary_enemies.py`, not lighting):
 
 | Enemy | Required read | Current state |
 |---|---|---|
-| XCOM_Floater | **legless manta**, hovering, glowing dorsal core, trailing tendrils | has legs and stands on two boots |
-| XCOM_Chryssalid | **low, wide, forward-pitched stalker** with scythe forelimbs | reads as a heavy biped robot, no scythe forelimbs |
-| XCOM_Viper | **tall, narrow, elongated snout, raised ribbed dorsal spine, plasma pistol** | boxy biped, snub helmet cap, no snout/ribs/weapon |
-| XCOM_Muton | **heavy, wide, armoured, single horizontal visor slit** | strongest silhouette, but a white curled mass crosses the face |
-| XCOM_Sectoid | **small, gaunt, oversized smooth cranium, no mouth** | the best idea in the kit — keep the cranium |
+| BESTIARY_Drifter | **legless manta**, hovering, glowing dorsal core, trailing tendrils | has legs and stands on two boots |
+| BESTIARY_Harrower | **low, wide, forward-pitched stalker** with scythe forelimbs | reads as a heavy biped robot, no scythe forelimbs |
+| BESTIARY_Ratline | **tall, narrow, elongated snout, raised ribbed dorsal spine, plasma pistol** | boxy biped, snub helmet cap, no snout/ribs/weapon |
+| BESTIARY_Bulwark | **heavy, wide, armoured, single horizontal visor slit** | strongest silhouette, but a white curled mass crosses the face |
+| BESTIARY_Graytide | **small, gaunt, oversized smooth cranium, no mouth** | the best idea in the kit — keep the cranium |
 
 **The detached-geometry purge belongs in the same file** (see §3.5).
 
-**Asset generation note:** the FBX files in `Tools/blender/out_xcom/` are
-from the demo lane's re-export (the Muton is 5,216 triangles against the
+**Asset generation note:** the FBX files in `Tools/blender/out_bestiary/` are
+from the demo lane's re-export (the Bulwark is 5,216 triangles against the
 stale 3,712 in the old manifest). **State the generation when publishing**,
 because the parity lane and the demo lane must be looking at the same mesh.
 
@@ -261,10 +261,10 @@ because the parity lane and the demo lane must be looking at the same mesh.
   --out "<repo>/Tools/blender/out_lighting"
 
 # per-light diagnostic (this is what found the rim flood)
-... --out "<repo>/Tools/blender/out_lighting" --diag --only XCOM_Muton
+... --out "<repo>/Tools/blender/out_lighting" --diag --only BESTIARY_Bulwark
 
 # rim azimuth x cone sweep inside the unified rig
-... --out "<repo>/Tools/blender/out_lighting" --probe --only XCOM_Muton
+... --out "<repo>/Tools/blender/out_lighting" --probe --only BESTIARY_Bulwark
 
 # prove the probe path and the delivered path are the same rig
 ... --out "<repo>/Tools/blender/out_lighting" --parity

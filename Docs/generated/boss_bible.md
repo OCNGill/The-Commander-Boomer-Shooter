@@ -95,13 +95,13 @@ silhouette"*. So the Harvester gets **two features that are never optional and n
 
 | Part | Material | Colour |
 |---|---|---|
-| Body shell | `XCOM_Chitin_Dark` | wet black-green |
-| Maw plates (inner) | `XCOM_Chitin_Pale` | bone |
-| Nine teeth | `XCOM_Armor_Plate` (metal 0.65) | gunmetal |
-| Dorsal core | `XCOM_Core_Emissive` (emission 22) | cyan |
-| Spine spurs | `XCOM_Armor_Accent` (oxblood) | oxblood — **the single warm hue**, on six small parts only |
-| Eye-lens (behind the maw, only visible when it opens) | `XCOM_Eye_Emissive` (emission 14) | alien green |
-| Spore-mass (the "food" it chews) | `XCOM_Flesh` | pale, wet |
+| Body shell | `BESTIARY_Chitin_Dark` | wet black-green |
+| Maw plates (inner) | `BESTIARY_Chitin_Pale` | bone |
+| Nine teeth | `BESTIARY_Armor_Plate` (metal 0.65) | gunmetal |
+| Dorsal core | `BESTIARY_Core_Emissive` (emission 22) | cyan |
+| Spine spurs | `BESTIARY_Armor_Accent` (oxblood) | oxblood — **the single warm hue**, on six small parts only |
+| Eye-lens (behind the maw, only visible when it opens) | `BESTIARY_Eye_Emissive` (emission 14) | alien green |
+| Spore-mass (the "food" it chews) | `BESTIARY_Flesh` | pale, wet |
 
 **Rule S3 compliance:** the oxblood is on **six spurs**, not on the body. The cyan core is the
 only large emissive. Nothing else on this creature glows.
@@ -176,7 +176,7 @@ The outer ring of the 12×12 grid is a **rail**: a 3,000 uu perimeter track, vis
 
 ### 4.3 The other consumable — dropped nodes
 
-**Enemy-dropped nodes.** Each Chryssalid the Harvester spawns drops a **spore-node** on death:
+**Enemy-dropped nodes.** Each Harrower the Harvester spawns drops a **spore-node** on death:
 a small, glowing, walk-over pickup. It is **edible by the Harvester** (heals it 120 HP) and
 **also edible by the player** (a 40 HP health pickup, because it is full of processed
 spore-matter). This is the game's only "pick up the enemy's food" moment and it is deliberately
@@ -306,7 +306,7 @@ Ebert's "first-impression impact" axis and his "visual craft" axis both peak on 
 | 5 | **Scale** | 1.8 m human reference — the Harvester is **3.40 m** and towers | |
 | 6 | **Emissive proof** | lit by only its own emissives (core + eye-lens + spore trail) | proves the glow emits |
 | 7 | **Studio vs reveal** | side-by-side | the lighting bar |
-| 8 | **In-engine, Act III arena** | at gameplay camera distance, 1.6 m eye height, real FOV, with a Chryssalid for scale | Ebert's "in-engine at real camera distance" bar |
+| 8 | **In-engine, Act III arena** | at gameplay camera distance, 1.6 m eye height, real FOV, with a Harrower for scale | Ebert's "in-engine at real camera distance" bar |
 | 9 | **The 12 power nodes** | one orthographic line-up of all 12 nodes, true relative scale | proves the consumable set exists and is legible |
 | 10 | **The rail + gap** | a top-down frame of the arena showing the rail seam and the single SW gap | proves the Phase III damage window is real and findable |
 | 11 | **Mid-fight frame** | the maw open, one node mid-consumption, spore trail, 2 Chryssalids alive | the "mid-action" game screenshot the rubric requires |

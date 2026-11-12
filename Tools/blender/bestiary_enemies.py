@@ -11,7 +11,7 @@ Design doctrine (Commander, 2026-10-21):
   * Base enemies only. Main character comes later.
 
 Usage (headless):
-    blender -b -noaudio -P Tools/blender/xcom_enemies.py -- --out <dir> [--render]
+    blender -b -noaudio -P Tools/blender/bestiary_enemies.py -- --out <dir> [--render]
     --out   : directory for FBX + preview PNG renders
     --render: also render lit preview PNGs (used for Ebert scoring + Commander review)
 
@@ -40,7 +40,7 @@ for i, a in enumerate(tail):
     if a == '--render':
         RENDER = True
 if OUT is None:
-    OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'out_xcom')
+    OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'out_bestiary')
 OUT = os.path.abspath(OUT)
 os.makedirs(OUT, exist_ok=True)
 
@@ -150,93 +150,93 @@ def tri_count(o):
 # ------------------------------------------------------------------ materials set
 def build_materials():
     M = {}
-    M['chitin_dark'] = mat('XCOM_Chitin_Dark', (0.045, 0.052, 0.040), rough=0.42, metal=0.12)
-    M['chitin_mid'] = mat('XCOM_Chitin_Mid', (0.085, 0.105, 0.070), rough=0.38, metal=0.18)
-    M['chitin_pale'] = mat('XCOM_Chitin_Pale', (0.34, 0.33, 0.24), rough=0.62)
-    M['flesh'] = mat('XCOM_Flesh', (0.20, 0.085, 0.075), rough=0.72)
-    M['plate'] = mat('XCOM_Armor_Plate', (0.13, 0.14, 0.15), rough=0.35, metal=0.65)
-    M['plate_red'] = mat('XCOM_Armor_Accent', (0.30, 0.045, 0.035), rough=0.40, metal=0.35)
-    M['eye'] = mat('XCOM_Eye_Emissive', (0.9, 0.95, 0.6), rough=0.15,
+    M['chitin_dark'] = mat('BESTIARY_Chitin_Dark', (0.045, 0.052, 0.040), rough=0.42, metal=0.12)
+    M['chitin_mid'] = mat('BESTIARY_Chitin_Mid', (0.085, 0.105, 0.070), rough=0.38, metal=0.18)
+    M['chitin_pale'] = mat('BESTIARY_Chitin_Pale', (0.34, 0.33, 0.24), rough=0.62)
+    M['flesh'] = mat('BESTIARY_Flesh', (0.20, 0.085, 0.075), rough=0.72)
+    M['plate'] = mat('BESTIARY_Armor_Plate', (0.13, 0.14, 0.15), rough=0.35, metal=0.65)
+    M['plate_red'] = mat('BESTIARY_Armor_Accent', (0.30, 0.045, 0.035), rough=0.40, metal=0.35)
+    M['eye'] = mat('BESTIARY_Eye_Emissive', (0.9, 0.95, 0.6), rough=0.15,
                    emit=(0.85, 1.0, 0.45), emit_str=14.0)
-    M['core'] = mat('XCOM_Core_Emissive', (0.5, 0.85, 1.0), rough=0.2,
+    M['core'] = mat('BESTIARY_Core_Emissive', (0.5, 0.85, 1.0), rough=0.2,
                     emit=(0.35, 0.8, 1.0), emit_str=22.0)
-    M['pulse'] = mat('XCOM_Plasma_Emissive', (0.6, 0.3, 1.0), rough=0.2,
+    M['pulse'] = mat('BESTIARY_Plasma_Emissive', (0.6, 0.3, 1.0), rough=0.2,
                      emit=(0.55, 0.25, 1.0), emit_str=16.0)
-    M['metal_dark'] = mat('XCOM_Gunmetal', (0.07, 0.07, 0.08), rough=0.30, metal=0.85)
+    M['metal_dark'] = mat('BESTIARY_Gunmetal', (0.07, 0.07, 0.08), rough=0.30, metal=0.85)
     return M
 
 
 # ================================================================== THE ENEMIES
-def build_sectoid(M):
-    """SECTOID - psychic infiltrator. Slender, huge cranium, thin limbs, no mouth.
+def build_graytide(M):
+    """GRAYTIDE - psychic infiltrator. Slender, huge cranium, thin limbs, no mouth.
     Mod notes: 3.2k tris, matte chitin + oversized emissive eyes."""
     o = []
-    o.append(sphere('sectoid_cranium', (0, 0, 1.62), 0.30, M['chitin_mid'], scale=(0.85, 1.05, 1.15)))
-    o.append(cube('sectoid_jaw', (0, 0.05, 1.40), (0.14, 0.16, 0.10), M['chitin_pale'], bevel=0.03))
-    o.append(cyl('sectoid_neck', (0, 0, 1.22), 0.09, 0.22, M['chitin_dark'], verts=12))
-    o.append(cube('sectoid_torso', (0, 0, 0.92), (0.19, 0.13, 0.30), M['chitin_mid'], bevel=0.05))
-    o.append(cube('sectoid_hips', (0, 0, 0.60), (0.16, 0.12, 0.12), M['chitin_dark'], bevel=0.04))
+    o.append(sphere('graytide_cranium', (0, 0, 1.62), 0.30, M['chitin_mid'], scale=(0.85, 1.05, 1.15)))
+    o.append(cube('graytide_jaw', (0, 0.05, 1.40), (0.14, 0.16, 0.10), M['chitin_pale'], bevel=0.03))
+    o.append(cyl('graytide_neck', (0, 0, 1.22), 0.09, 0.22, M['chitin_dark'], verts=12))
+    o.append(cube('graytide_torso', (0, 0, 0.92), (0.19, 0.13, 0.30), M['chitin_mid'], bevel=0.05))
+    o.append(cube('graytide_hips', (0, 0, 0.60), (0.16, 0.12, 0.12), M['chitin_dark'], bevel=0.04))
     for s in (-1, 1):
-        o.append(cyl('sectoid_upperarm', (s * 0.26, 0, 0.92), 0.055, 0.34, M['chitin_dark'],
+        o.append(cyl('graytide_upperarm', (s * 0.26, 0, 0.92), 0.055, 0.34, M['chitin_dark'],
                      rot=(0, s * 0.18, 0), verts=12))
-        o.append(cyl('sectoid_forearm', (s * 0.32, -0.04, 0.66), 0.048, 0.30, M['chitin_dark'],
+        o.append(cyl('graytide_forearm', (s * 0.32, -0.04, 0.66), 0.048, 0.30, M['chitin_dark'],
                      rot=(0.25, s * 0.10, 0), verts=12))
         for f in range(3):
-            o.append(cyl('sectoid_finger', (s * 0.34, -0.12 - f * 0.035, 0.50),
+            o.append(cyl('graytide_finger', (s * 0.34, -0.12 - f * 0.035, 0.50),
                          0.016, 0.14, M['chitin_pale'],
                          rot=(0.5, 0, s * 0.2), verts=8))
-        o.append(cyl('sectoid_thigh', (s * 0.11, 0, 0.44), 0.07, 0.34, M['chitin_dark'],
+        o.append(cyl('graytide_thigh', (s * 0.11, 0, 0.44), 0.07, 0.34, M['chitin_dark'],
                      rot=(0, s * 0.04, 0), verts=12))
-        o.append(cyl('sectoid_shin', (s * 0.12, 0.02, 0.16), 0.055, 0.30, M['chitin_dark'],
+        o.append(cyl('graytide_shin', (s * 0.12, 0.02, 0.16), 0.055, 0.30, M['chitin_dark'],
                      rot=(-0.10, 0, 0), verts=12))
-        o.append(cube('sectoid_foot', (s * 0.12, -0.04, 0.03), (0.07, 0.13, 0.035),
+        o.append(cube('graytide_foot', (s * 0.12, -0.04, 0.03), (0.07, 0.13, 0.035),
                       M['chitin_pale'], bevel=0.015))
     # eyes: the 1994 tell — big luminous eyes on a dark head
-    o.append(sphere('sectoid_eye_l', (-0.11, -0.22, 1.66), 0.075, M['eye'], scale=(1, 0.6, 1.2)))
-    o.append(sphere('sectoid_eye_r', (0.11, -0.22, 1.66), 0.075, M['eye'], scale=(1, 0.6, 1.2)))
-    o.append(sphere('sectoid_crown_core', (0, 0.02, 1.90), 0.075, M['core'], scale=(1, 1, 0.7)))
-    return join_objects(o, 'XCOM_Sectoid')
+    o.append(sphere('graytide_eye_l', (-0.11, -0.22, 1.66), 0.075, M['eye'], scale=(1, 0.6, 1.2)))
+    o.append(sphere('graytide_eye_r', (0.11, -0.22, 1.66), 0.075, M['eye'], scale=(1, 0.6, 1.2)))
+    o.append(sphere('graytide_crown_core', (0, 0.02, 1.90), 0.075, M['core'], scale=(1, 1, 0.7)))
+    return join_objects(o, 'BESTIARY_Graytide')
 
 
-def build_viper(M):
-    """VIPER - the marquee alien. Tall reptilian humanoid, elongated snout head,
+def build_ratline(M):
+    """RATLINE - the marquee alien. Tall reptilian humanoid, elongated snout head,
     ribbed spine, small plasma pistol. Mod notes: 4.5k tris, chitin + emissive eyes."""
     o = []
-    o.append(cube('viper_skull', (0, 0, 1.80), (0.17, 0.21, 0.18), M['chitin_mid'], bevel=0.05))
-    o.append(cube('viper_snout', (0, -0.24, 1.72), (0.09, 0.14, 0.07), M['chitin_pale'], bevel=0.03))
-    o.append(cyl('viper_jaw', (0, -0.16, 1.62), 0.075, 0.16, M['chitin_dark'],
+    o.append(cube('ratline_skull', (0, 0, 1.80), (0.17, 0.21, 0.18), M['chitin_mid'], bevel=0.05))
+    o.append(cube('ratline_snout', (0, -0.24, 1.72), (0.09, 0.14, 0.07), M['chitin_pale'], bevel=0.03))
+    o.append(cyl('ratline_jaw', (0, -0.16, 1.62), 0.075, 0.16, M['chitin_dark'],
                  rot=(math.pi / 2, 0, 0), verts=12))
-    o.append(cyl('viper_neck', (0, 0, 1.53), 0.11, 0.24, M['chitin_dark'], verts=12))
-    o.append(cube('viper_chest', (0, 0, 1.16), (0.25, 0.15, 0.30), M['chitin_mid'], bevel=0.06))
-    o.append(cube('viper_abdomen', (0, 0.02, 0.78), (0.18, 0.13, 0.22), M['chitin_dark'], bevel=0.05))
+    o.append(cyl('ratline_neck', (0, 0, 1.53), 0.11, 0.24, M['chitin_dark'], verts=12))
+    o.append(cube('ratline_chest', (0, 0, 1.16), (0.25, 0.15, 0.30), M['chitin_mid'], bevel=0.06))
+    o.append(cube('ratline_abdomen', (0, 0.02, 0.78), (0.18, 0.13, 0.22), M['chitin_dark'], bevel=0.05))
     # ribbed spine — the X-COM silhouette read
     for i in range(5):
-        o.append(cube('viper_rib_%d' % i, (0, 0.14, 1.05 + i * 0.11),
+        o.append(cube('ratline_rib_%d' % i, (0, 0.14, 1.05 + i * 0.11),
                       (0.16 - i * 0.02, 0.05, 0.035), M['chitin_pale'], bevel=0.012))
     for s in (-1, 1):
-        o.append(cyl('viper_upperarm', (s * 0.31, 0, 1.14), 0.062, 0.32, M['chitin_dark'],
+        o.append(cyl('ratline_upperarm', (s * 0.31, 0, 1.14), 0.062, 0.32, M['chitin_dark'],
                      rot=(0, s * 0.16, 0), verts=12))
-        o.append(cyl('viper_forearm', (s * 0.37, -0.06, 0.88), 0.055, 0.30, M['chitin_dark'],
+        o.append(cyl('ratline_forearm', (s * 0.37, -0.06, 0.88), 0.055, 0.30, M['chitin_dark'],
                      rot=(0.35, s * 0.08, 0), verts=12))
-        o.append(cube('viper_claw', (s * 0.38, -0.14, 0.71), (0.045, 0.10, 0.045),
+        o.append(cube('ratline_claw', (s * 0.38, -0.14, 0.71), (0.045, 0.10, 0.045),
                       M['chitin_pale'], bevel=0.015))
-        o.append(cyl('viper_thigh', (s * 0.13, 0, 0.56), 0.085, 0.38, M['chitin_dark'],
+        o.append(cyl('ratline_thigh', (s * 0.13, 0, 0.56), 0.085, 0.38, M['chitin_dark'],
                      rot=(0, s * 0.05, 0), verts=12))
-        o.append(cyl('viper_shin', (s * 0.14, 0.03, 0.22), 0.065, 0.32, M['chitin_dark'],
+        o.append(cyl('ratline_shin', (s * 0.14, 0.03, 0.22), 0.065, 0.32, M['chitin_dark'],
                      rot=(-0.12, 0, 0), verts=12))
-        o.append(cube('viper_foot', (s * 0.14, -0.05, 0.04), (0.08, 0.16, 0.045),
+        o.append(cube('ratline_foot', (s * 0.14, -0.05, 0.04), (0.08, 0.16, 0.045),
                       M['chitin_pale'], bevel=0.02))
-        o.append(sphere('viper_eye', (s * 0.10, -0.18, 1.85), 0.055, M['eye'],
+        o.append(sphere('ratline_eye', (s * 0.10, -0.18, 1.85), 0.055, M['eye'],
                         scale=(1, 0.55, 0.9)))
     # plasma pistol, held
-    o.append(cube('viper_pistol', (0.40, -0.22, 0.80), (0.05, 0.16, 0.05), M['metal_dark'], bevel=0.01))
-    o.append(sphere('viper_pistol_coil', (0.40, -0.32, 0.80), 0.045, M['pulse'], scale=(1, 1.4, 1)))
-    o.append(sphere('viper_spine_core', (0, 0.16, 1.34), 0.07, M['core'], scale=(1, 0.6, 1.3)))
-    return join_objects(o, 'XCOM_Viper')
+    o.append(cube('ratline_pistol', (0.40, -0.22, 0.80), (0.05, 0.16, 0.05), M['metal_dark'], bevel=0.01))
+    o.append(sphere('ratline_pistol_coil', (0.40, -0.32, 0.80), 0.045, M['pulse'], scale=(1, 1.4, 1)))
+    o.append(sphere('ratline_spine_core', (0, 0.16, 1.34), 0.07, M['core'], scale=(1, 0.6, 1.3)))
+    return join_objects(o, 'BESTIARY_Ratline')
 
 
-def build_floater(M):
-    """FLOATER - psychic hovering manta. No legs, trailing tendrils, glowing core.
+def build_drifter(M):
+    """DRIFTER - psychic hovering manta. No legs, trailing tendrils, glowing core.
     Mod notes: 3.6k tris, the 'comes out of nowhere' silhouette."""
     o = []
     o.append(sphere('float_core', (0, 0, 1.55), 0.34, M['chitin_mid'], scale=(1.1, 0.8, 0.85)))
@@ -253,46 +253,46 @@ def build_floater(M):
             o.append(cyl('float_tendril', (s * (0.12 + t * 0.05), 0.10, 1.22 - t * 0.05),
                          0.022, 0.55, M['flesh'], rot=(0.12, 0, s * 0.08), verts=8))
     o.append(cyl('float_spine', (0, 0.10, 1.18), 0.05, 0.30, M['chitin_dark'], verts=10))
-    return join_objects(o, 'XCOM_Floater')
+    return join_objects(o, 'BESTIARY_Drifter')
 
 
-def build_muton(M):
-    """MUTON - armored heavy. The 1994 terror-showstopper: shoulder plates, helmet
+def build_bulwark(M):
+    """BULWARK - armored heavy. The 1994 terror-showstopper: shoulder plates, helmet
     with visor slit, heavy plasma rifle. Mod notes: 5.2k tris, metal + red accents."""
     o = []
-    o.append(cube('muton_helmet', (0, 0, 1.86), (0.16, 0.17, 0.15), M['plate'], bevel=0.04))
-    o.append(cube('muton_visor', (0, -0.16, 1.85), (0.11, 0.02, 0.035), M['eye']))
-    o.append(cyl('muton_neck', (0, 0, 1.66), 0.10, 0.16, M['chitin_dark'], verts=12))
-    o.append(cube('muton_chest', (0, 0, 1.26), (0.30, 0.19, 0.34), M['plate'], bevel=0.07))
-    o.append(cube('muton_chest_acc', (0, -0.19, 1.30), (0.16, 0.02, 0.12), M['plate_red'], bevel=0.01))
-    o.append(cube('muton_abdomen', (0, 0.01, 0.86), (0.22, 0.16, 0.20), M['chitin_dark'], bevel=0.05))
+    o.append(cube('bulwark_helmet', (0, 0, 1.86), (0.16, 0.17, 0.15), M['plate'], bevel=0.04))
+    o.append(cube('bulwark_visor', (0, -0.16, 1.85), (0.11, 0.02, 0.035), M['eye']))
+    o.append(cyl('bulwark_neck', (0, 0, 1.66), 0.10, 0.16, M['chitin_dark'], verts=12))
+    o.append(cube('bulwark_chest', (0, 0, 1.26), (0.30, 0.19, 0.34), M['plate'], bevel=0.07))
+    o.append(cube('bulwark_chest_acc', (0, -0.19, 1.30), (0.16, 0.02, 0.12), M['plate_red'], bevel=0.01))
+    o.append(cube('bulwark_abdomen', (0, 0.01, 0.86), (0.22, 0.16, 0.20), M['chitin_dark'], bevel=0.05))
     for s in (-1, 1):
-        o.append(cube('muton_pauldron', (s * 0.36, 0, 1.44), (0.14, 0.20, 0.13),
+        o.append(cube('bulwark_pauldron', (s * 0.36, 0, 1.44), (0.14, 0.20, 0.13),
                       M['plate'], rot=(0, 0, s * 0.16), bevel=0.04))
-        o.append(cyl('muton_upperarm', (s * 0.36, 0, 1.12), 0.075, 0.28, M['chitin_dark'],
+        o.append(cyl('bulwark_upperarm', (s * 0.36, 0, 1.12), 0.075, 0.28, M['chitin_dark'],
                      rot=(0, s * 0.10, 0), verts=12))
-        o.append(cyl('muton_forearm', (s * 0.40, -0.08, 0.86), 0.068, 0.28, M['chitin_dark'],
+        o.append(cyl('bulwark_forearm', (s * 0.40, -0.08, 0.86), 0.068, 0.28, M['chitin_dark'],
                      rot=(0.30, 0, 0), verts=12))
-        o.append(cube('muton_gauntlet', (s * 0.41, -0.16, 0.70), (0.07, 0.08, 0.06),
+        o.append(cube('bulwark_gauntlet', (s * 0.41, -0.16, 0.70), (0.07, 0.08, 0.06),
                       M['plate'], bevel=0.015))
-        o.append(cyl('muton_thigh', (s * 0.15, 0, 0.62), 0.10, 0.34, M['chitin_dark'],
+        o.append(cyl('bulwark_thigh', (s * 0.15, 0, 0.62), 0.10, 0.34, M['chitin_dark'],
                      rot=(0, s * 0.05, 0), verts=12))
-        o.append(cyl('muton_shin', (s * 0.16, 0.03, 0.24), 0.08, 0.30, M['chitin_dark'],
+        o.append(cyl('bulwark_shin', (s * 0.16, 0.03, 0.24), 0.08, 0.30, M['chitin_dark'],
                      rot=(-0.10, 0, 0), verts=12))
-        o.append(cube('muton_foot', (s * 0.16, -0.06, 0.05), (0.10, 0.18, 0.06),
+        o.append(cube('bulwark_foot', (s * 0.16, -0.06, 0.05), (0.10, 0.18, 0.06),
                       M['plate'], bevel=0.02))
     # heavy plasma rifle
-    o.append(cube('muton_rifle_body', (0.46, -0.24, 0.86), (0.07, 0.26, 0.08), M['metal_dark'], bevel=0.015))
-    o.append(cyl('muton_rifle_barrel', (0.46, -0.44, 0.86), 0.035, 0.20, M['metal_dark'],
+    o.append(cube('bulwark_rifle_body', (0.46, -0.24, 0.86), (0.07, 0.26, 0.08), M['metal_dark'], bevel=0.015))
+    o.append(cyl('bulwark_rifle_barrel', (0.46, -0.44, 0.86), 0.035, 0.20, M['metal_dark'],
                  rot=(math.pi / 2, 0, 0), verts=12))
-    o.append(sphere('muton_rifle_coil', (0.46, -0.50, 0.86), 0.055, M['pulse'], scale=(1, 1.5, 1))
+    o.append(sphere('bulwark_rifle_coil', (0.46, -0.50, 0.86), 0.055, M['pulse'], scale=(1, 1.5, 1))
               )
-    o.append(sphere('muton_back_core', (0, 0.22, 1.40), 0.09, M['core'], scale=(1, 0.6, 1.2)))
-    return join_objects(o, 'XCOM_Muton')
+    o.append(sphere('bulwark_back_core', (0, 0.22, 1.40), 0.09, M['core'], scale=(1, 0.6, 1.2)))
+    return join_objects(o, 'BESTIARY_Bulwark')
 
 
-def build_chryssalid(M):
-    """CHRYSSALID - the terror from the deep: insectoid, scythe arms, skittering.
+def build_harrower(M):
+    """HARROWER - the terror from the deep: insectoid, scythe arms, skittering.
     Mod notes: 4.0k tris, chitin plates + venom glow."""
     o = []
     o.append(sphere('chry_head', (0, -0.06, 0.80), 0.20, M['chitin_mid'], scale=(0.9, 1.2, 0.8)))
@@ -315,21 +315,21 @@ def build_chryssalid(M):
         o.append(cyl('chry_leg_c', (s * 0.20, 0.26, 0.44), 0.024, 0.38, M['chitin_dark'],
                      rot=(0.2, s * 0.6, 0), verts=8))
     o.append(sphere('chry_venom', (0, -0.16, 0.50), 0.06, M['pulse'], scale=(1, 0.8, 1.2)))
-    return join_objects(o, 'XCOM_Chryssalid')
+    return join_objects(o, 'BESTIARY_Harrower')
 
 
 BUILDERS = [
-    ('XCOM_Sectoid', build_sectoid, 1.95),
-    ('XCOM_Viper', build_viper, 2.10),
-    ('XCOM_Floater', build_floater, 1.85),
-    ('XCOM_Muton', build_muton, 2.05),
-    ('XCOM_Chryssalid', build_chryssalid, 1.35),
+    ('BESTIARY_Graytide', build_graytide, 1.95),
+    ('BESTIARY_Ratline', build_ratline, 2.10),
+    ('BESTIARY_Drifter', build_drifter, 1.85),
+    ('BESTIARY_Bulwark', build_bulwark, 2.05),
+    ('BESTIARY_Harrower', build_harrower, 1.35),
 ]
 
 
 # --------------------------------------------------------------- reveal lighting
 def setup_dark_world():
-    world = bpy.data.worlds.new('XCOM_World')
+    world = bpy.data.worlds.new('BESTIARY_World')
     bpy.context.scene.world = world
     world.use_nodes = True
     bg = world.node_tree.nodes.get('Background')
@@ -417,7 +417,7 @@ def main():
     for name, fn, h in BUILDERS:
         obj = fn(M)
         if obj is None:
-            print('[XCOM] FAILED build %s' % name)
+            print('[BESTIARY] FAILED build %s' % name)
             continue
         tris = tri_count(obj)
         # export FBX
@@ -440,13 +440,13 @@ def main():
                          'fbx_kb': round(os.path.getsize(fbx_path) / 1024, 1),
                          'tris': tris, 'png': os.path.basename(png) if RENDER else None,
                          'height_m': h})
-        print('[XCOM] %-16s tris=%-6d fbx=%.1fKB %s' %
+        print('[BESTIARY] %-16s tris=%-6d fbx=%.1fKB %s' %
               (name, tris, os.path.getsize(fbx_path) / 1024, 'rendered' if RENDER else 'no-render'))
 
     import json
-    with open(os.path.join(OUT, 'xcom_manifest.json'), 'w') as f:
+    with open(os.path.join(OUT, 'bestiary_manifest.json'), 'w') as f:
         json.dump(manifest, f, indent=1)
-    print('[XCOM] DONE %d enemies -> %s' % (len(manifest), OUT))
+    print('[BESTIARY] DONE %d enemies -> %s' % (len(manifest), OUT))
 
 
 if __name__ == '__main__':

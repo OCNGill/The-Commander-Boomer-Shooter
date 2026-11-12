@@ -53,7 +53,7 @@
  },
  "skipped": [],
  "enemies": {
-  "XCOM_Chryssalid": {
+  "BESTIARY_Harrower": {
    "width": 720,
    "height": 900,
    "clipped_white_pixels": 0,
@@ -422,7 +422,7 @@
     "wash": 1.2
    },
    "emissive_materials": {
-    "accent": "XCOM_Chryssalid_ACCENT_EMISSIVE"
+    "accent": "BESTIARY_Harrower_ACCENT_EMISSIVE"
    },
    "emission_strength": {
     "accent": 0.01,
@@ -468,7 +468,7 @@
     "under_feet_1_3x_torso"
    ]
   },
-  "XCOM_Muton": {
+  "BESTIARY_Bulwark": {
    "width": 720,
    "height": 900,
    "clipped_white_pixels": 0,
@@ -837,7 +837,7 @@
     "wash": 1.6
    },
    "emissive_materials": {
-    "accent": "XCOM_Muton_ACCENT_EMISSIVE"
+    "accent": "BESTIARY_Bulwark_ACCENT_EMISSIVE"
    },
    "emission_strength": {
     "accent": 0.01,
@@ -881,7 +881,7 @@
     "under_feet_1_3x_torso"
    ]
   },
-  "XCOM_Floater": {
+  "BESTIARY_Drifter": {
    "width": 720,
    "height": 900,
    "clipped_white_pixels": 0,
@@ -1250,7 +1250,7 @@
     "wash": 1.2
    },
    "emissive_materials": {
-    "accent": "XCOM_Floater_ACCENT_EMISSIVE"
+    "accent": "BESTIARY_Drifter_ACCENT_EMISSIVE"
    },
    "emission_strength": {
     "accent": 0.01,
@@ -1297,7 +1297,7 @@
     "under_feet_1_3x_torso"
    ]
   },
-  "XCOM_Viper": {
+  "BESTIARY_Ratline": {
    "width": 720,
    "height": 900,
    "clipped_white_pixels": 0,
@@ -1666,7 +1666,7 @@
     "wash": 1.6
    },
    "emissive_materials": {
-    "accent": "XCOM_Viper_ACCENT_EMISSIVE"
+    "accent": "BESTIARY_Ratline_ACCENT_EMISSIVE"
    },
    "emission_strength": {
     "accent": 0.01,
@@ -1710,7 +1710,7 @@
     "under_feet_1_3x_torso"
    ]
   },
-  "XCOM_Sectoid": {
+  "BESTIARY_Graytide": {
    "width": 720,
    "height": 900,
    "clipped_white_pixels": 313,
@@ -2079,7 +2079,7 @@
     "wash": 1.2
    },
    "emissive_materials": {
-    "accent": "XCOM_Sectoid_ACCENT_EMISSIVE"
+    "accent": "BESTIARY_Graytide_ACCENT_EMISSIVE"
    },
    "emission_strength": {
     "accent": 0.01,

@@ -7,7 +7,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 OUT = os.path.join(ROOT, 'Tools', 'blender', 'out_level')
 JSON_PATH = os.path.join(ROOT, 'Docs', 'generated', 'level_transforms.json')
-XCOM = os.path.join(ROOT, 'Tools', 'blender', 'out_xcom')
+BESTIARY = os.path.join(ROOT, 'Tools', 'blender', 'out_bestiary')
 args = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 for i, a in enumerate(args):
     if a == '--out':
@@ -428,16 +428,16 @@ def cam(name, p, target, lens=38.0):
     return c
 
 # ------------------------------------------------------------------ enemy kit
-ENEMY_FBX = {'Drone': 'XCOM_Floater', 'Zealot': 'XCOM_Sectoid',
-             'Phantom': 'XCOM_Chryssalid', 'Brute': 'XCOM_Viper',
-             'Golem': 'XCOM_Muton', 'Boss': 'XCOM_Viper'}
-DEFAULT_H = {'XCOM_Sectoid': 1.95, 'XCOM_Viper': 2.10, 'XCOM_Floater': 1.85,
-             'XCOM_Muton': 2.05, 'XCOM_Chryssalid': 1.35}
+ENEMY_FBX = {'Drone': 'BESTIARY_Drifter', 'Zealot': 'BESTIARY_Graytide',
+             'Phantom': 'BESTIARY_Harrower', 'Brute': 'BESTIARY_Ratline',
+             'Golem': 'BESTIARY_Bulwark', 'Boss': 'BESTIARY_Ratline'}
+DEFAULT_H = {'BESTIARY_Graytide': 1.95, 'BESTIARY_Ratline': 2.10, 'BESTIARY_Drifter': 1.85,
+             'BESTIARY_Bulwark': 2.05, 'BESTIARY_Harrower': 1.35}
 
 def manifest_h():
     out = dict(DEFAULT_H)
     try:
-        m = json.load(open(os.path.join(XCOM, 'xcom_manifest.json')))
+        m = json.load(open(os.path.join(BESTIARY, 'bestiary_manifest.json')))
     except Exception as exc:
         print('[LEVEL] manifest unreadable: %r' % (exc,))
         return out
@@ -500,7 +500,7 @@ def tint_fbx(objs, m_alien):
                 pass
 
 def import_fbx(fbx_name, target_h):
-    path = os.path.join(XCOM, fbx_name + '.fbx')
+    path = os.path.join(BESTIARY, fbx_name + '.fbx')
     if not os.path.exists(path):
         print('[LEVEL] MISSING FBX %s - skipped' % path)
         return None

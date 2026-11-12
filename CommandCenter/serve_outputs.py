@@ -124,7 +124,7 @@ def build_manifest():
     # ---- categorized gallery: one bucket per workstream ----
     CATS = [
         ("lighting", ("out_lighting", "lighting", "rig_evidence", "reveal", "emissive")),
-        ("enemies", ("out_xcom", "enemy", "sectoid", "viper", "floater", "muton", "chryssalid")),
+        ("enemies", ("out_bestiary", "enemy", "graytide", "ratline", "drifter", "bulwark", "harrower")),
         ("level", ("out_level", "level", "blueprint")),
         ("textures", ("out_textures", "textures", "trim", "contact")),
         ("ebert", ("ebert", "verdict")),
@@ -167,8 +167,8 @@ def build_manifest():
 
     # ---- level stats + latest manifest snapshots ----
     for key, rel in (("level_stats", "Docs/generated/level_stats.json"),
-                     ("xcom_manifest", "Tools/blender/out_xcom/xcom_manifest.json"),
-                     ("ue_import_report", "Docs/generated/xcom_ue_import_report.json"),
+                     ("bestiary_manifest", "Tools/blender/out_bestiary/bestiary_manifest.json"),
+                     ("ue_import_report", "Docs/generated/bestiary_ue_import_report.json"),
                      ("level_transforms", "Docs/generated/level_transforms.json")):
         p = os.path.join(REPO, rel.replace("/", os.sep))
         if os.path.exists(p):
@@ -179,11 +179,11 @@ def build_manifest():
 
     # ---- blender kit ----
     kit = []
-    for fp in glob.glob(os.path.join(REPO, "Tools", "blender", "out_xcom", "*.fbx")):
+    for fp in glob.glob(os.path.join(REPO, "Tools", "blender", "out_bestiary", "*.fbx")):
         kit.append({"name": os.path.basename(fp), "kb": round(os.path.getsize(fp) / 1024, 1)})
     m["blender_fbx"] = sorted(kit, key=lambda x: x["name"])
-    m["blender_manifest"] = read(os.path.join(REPO, "Tools", "blender", "out_xcom",
-                                              "xcom_manifest.json"), 20000)
+    m["blender_manifest"] = read(os.path.join(REPO, "Tools", "blender", "out_bestiary",
+                                              "bestiary_manifest.json"), 20000)
 
     # ---- UE assets ----
     assets = []

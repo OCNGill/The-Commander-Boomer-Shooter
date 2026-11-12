@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-XCOM lighting evidence rig - V4 (bounded).
+BESTIARY lighting evidence rig - V4 (bounded).
 
 The "reveal" rig from the 1994 X-COM terror missions: the enemies come out of
 nowhere, lit from nothing.  Every number in verification.json is MEASURED from
@@ -55,10 +55,10 @@ import functools
 print = functools.partial(print, flush=True)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SNAP = os.path.join(HERE, 'out_xcom')
+SNAP = os.path.join(HERE, 'out_bestiary')
 
-ENEMY_ORDER = ['XCOM_Sectoid', 'XCOM_Viper', 'XCOM_Floater',
-               'XCOM_Muton', 'XCOM_Chryssalid']
+ENEMY_ORDER = ['BESTIARY_Graytide', 'BESTIARY_Ratline', 'BESTIARY_Drifter',
+               'BESTIARY_Bulwark', 'BESTIARY_Harrower']
 
 RES_X, RES_Y = 720, 900
 SAMPLES = 48
@@ -441,8 +441,8 @@ def detached_pieces(mask):
     """Count disconnected pieces in the rendered silhouette.
 
     Ebert's verdict names the debris as visible disconnected parts: the
-    Sectoid's free hand, the Floater's white box and white tile, the
-    Muton's white shard, the hip fragments.  3D mesh islands cannot
+    Graytide's free hand, the Drifter's white box and white tile, the
+    Bulwark's white shard, the hip fragments.  3D mesh islands cannot
     separate those from the designed appendages (each primitive is split
     into several islands), but the question is about what is VISIBLE: a
     connected component of the silhouette mask.
@@ -1040,7 +1040,7 @@ def build_scene(res_scale=1.0):
 
 
 def make_world(strength, color=WORLD_COLOR):
-    w = bpy.data.worlds.new('XCOM_World')
+    w = bpy.data.worlds.new('BESTIARY_World')
     bpy.context.scene.world = w
     w.use_nodes = True
     bg = w.node_tree.nodes.get('Background')
@@ -1118,7 +1118,7 @@ def set_input(node, names, value):
 
 
 def ground_mat():
-    m = bpy.data.materials.new('XCOM_Ground_WetConcrete')
+    m = bpy.data.materials.new('BESTIARY_Ground_WetConcrete')
     m.use_nodes = True
     bsdf = m.node_tree.nodes.get('Principled BSDF')
     if bsdf:
@@ -1133,7 +1133,7 @@ def ground_mat():
 def add_ground():
     bpy.ops.mesh.primitive_plane_add(size=40.0, location=(0, 0, -0.012))
     o = bpy.context.object
-    o.name = 'XCOM_Ground'
+    o.name = 'BESTIARY_Ground'
     o.data.materials.append(ground_mat())
     try:
         o.visible_shadow = False
@@ -1146,7 +1146,7 @@ def haze_mat():
     """Soft radial gradient panel BEHIND the subject.  Bright in the middle,
     falling away to black at the edges - the V3 ramp was inverted and gave a
     flat mid-grey border."""
-    m = bpy.data.materials.new('XCOM_Haze')
+    m = bpy.data.materials.new('BESTIARY_Haze')
     m.use_nodes = True
     nt = m.node_tree
     nt.nodes.clear()
@@ -1177,7 +1177,7 @@ def add_haze(height):
     bpy.ops.mesh.primitive_plane_add(size=1.9 * height,
                                      location=(cx, cy, height * 0.55))
     o = bpy.context.object
-    o.name = 'XCOM_Haze'
+    o.name = 'BESTIARY_Haze'
     o.data.materials.append(haze_mat())
     o.rotation_euler = (math.radians(90.0), 0.0,
                          math.atan2(cy, cx) + math.pi / 2.0)
@@ -1208,7 +1208,7 @@ def import_subject(fbx_path):
     if len(meshes) > 1:
         bpy.ops.object.join()
     obj = bpy.context.object
-    obj.name = 'XCOM_Subject'
+    obj.name = 'BESTIARY_Subject'
     xs, ys, zs = [], [], []
     for v in obj.data.vertices:
         w = obj.matrix_world @ v.co
@@ -1264,14 +1264,14 @@ def _is_white_material(name):
 def purge_detached(obj, height, scene_objs=None):
     """Delete the small detached parts that float clear of the body.
 
-    Ebert's verdict names the debris: the Sectoid's free hand, the Floater's
-    white box and white tile, the Muton's white shard, the hip fragments.
+    Ebert's verdict names the debris: the Graytide's free hand, the Drifter's
+    white box and white tile, the Bulwark's white shard, the hip fragments.
     The first three are WHITE - default or unassigned material.
 
     THE RULE IS MATERIAL AND POSITION, NOT ISLAND COUNT.  These creatures
     are assembled from segmented plates, limbs and armour, so they are
     legitimately dozens of connected components; "island" is not "debris".
-    An earlier version deleted 60 of the Chryssalid's 80 pieces, including
+    An earlier version deleted 60 of the Harrower's 80 pieces, including
     its emissive eyes, and aborted the asset.
 
     A piece is DELETED when ALL of these hold:
@@ -1557,7 +1557,7 @@ def add_label(cam, text):
     cu.extrude = 0.0
     ob = bpy.data.objects.new('LBL_' + text[:8], cu)
     bpy.context.scene.collection.objects.link(ob)
-    m = bpy.data.materials.new('XCOM_Label')
+    m = bpy.data.materials.new('BESTIARY_Label')
     m.use_nodes = True
     nt = m.node_tree
     nt.nodes.clear()
@@ -1696,11 +1696,11 @@ class Rig(object):
     key 260 (spot 40), rim 4000 (cone 45, az 240, el 20), under 2400
     (cone 34, aimed at 0.22 h), pool 90, wash 1.2.
 
-    These are the probe9 winners on the Muton: band 124.0, fraction 0.0583,
+    These are the probe9 winners on the Bulwark: band 124.0, fraction 0.0583,
     background 28.6, floor 100/90/62 - all inside their bars at once.
 
     The key comes down a little so it stops competing with the under-glow on
-    the body; the rim goes up a touch because the Viper at 200 W already
+    the body; the rim goes up a touch because the Ratline at 200 W already
     cleared the fraction bar and only the band was short; the pool and the
     wash come down hard because they are what fills the shadow-side floor
     zone and the backdrop; the under comes up so it can own the underside
@@ -1736,7 +1736,7 @@ class Rig(object):
         # the same way.
         self.exposure = 1.0
         # the creature's LARGEST dimension.  Height is the wrong measure for
-        # this set: the Floater is a wide flat manta and 0.290 m of height
+        # this set: the Drifter is a wide flat manta and 0.290 m of height
         # says nothing about its size.
         self.size = 2.0
         # per-subject knobs, all fitted by measurement in ONE render path
@@ -1822,7 +1822,7 @@ def make_rig(name, sc, height):
     size = sc.get('size') or height
     rig.size = size
     subject_overrides(name, rig, height)
-    floater_overrides(name, rig, height)
+    drifter_overrides(name, rig, height)
     return rig
 
 
@@ -1832,10 +1832,10 @@ def build_reveal_rig(rig, anchor, height, target, obj=None):
     clear_lights()
     h = float(height)
     size = getattr(rig, 'size', None) or h
-    # Normalise by the LARGEST dimension, not the height: the Floater is a
+    # Normalise by the LARGEST dimension, not the height: the Drifter is a
     # wide flat manta and its 0.290 m of height says nothing about its
     # size.  A squared-height scale gave it 0.084 of the energy and the
-    # Muton 4.28 - a fifty-one-fold spread - and the Floater rendered as a
+    # Bulwark 4.28 - a fifty-one-fold spread - and the Drifter rendered as a
     # black frame.  The floor keeps a small creature on the record.
     s = max(0.45, (size / REF_HEIGHT) ** 2.0)
     # An AREA light's power is spread over its surface, but the irradiance
@@ -1844,7 +1844,7 @@ def build_reveal_rig(rig, anchor, height, target, obj=None):
     sa = s
     chest = (0.0, 0.0, 0.70 * size)
     # A light's distance is set by the BODY it has to illuminate.  The
-    # Floater is 2.48 m across and 0.29 m tall, so a key placed at the
+    # Drifter is 2.48 m across and 0.29 m tall, so a key placed at the
     # subject's SIZE sits 2.5 m from a 29 cm creature and lights the
     # floor instead.  Scale the distance by the body's own height.
     dscale = max(0.20, min(1.0, h / max(0.05, size)))
@@ -2005,7 +2005,7 @@ def compute_zones(cam, anchor, height, rig=None, size=None):
                (POOL_G * h) * cd[1] + (POOL_EDGE * h) * ld[1], 0.0)
 
     if rig is not None and getattr(rig, 'floor_spread', False):
-        # The Floater's three probes were clustered within 4% of the frame
+        # The Drifter's three probes were clustered within 4% of the frame
         # width, which makes the zone measurement meaningless.  Spread them
         # to the left third, the centre and the right third of the floor.
         yc = proj(pool_pt)[1]
@@ -2374,7 +2374,7 @@ def floor_contributions(name, fbx, out_dir, mask_dir, tmp_dir):
     mask_path = os.path.join(mask_dir, name + '_diag_mask.png')
     render_mask(obj, mask_path, 'silhouette', scale=1.0)
     rig0 = Rig()
-    floater_overrides(name, rig0, height)
+    drifter_overrides(name, rig0, height)
     zones = merge_zones(body_row_zones(mask_path),
                         compute_zones(cam, anchor, height, rig0, size))
     tmp = os.path.join(tmp_dir, name + '_diag.png')
@@ -2415,54 +2415,54 @@ def floor_contributions(name, fbx, out_dir, mask_dir, tmp_dir):
 def subject_overrides(name, rig, height):
     """The only per-subject corrections in this rig.
 
-    The Viper and the Muton read a background of 43-45 against a bar of
-    40, so their wash is trimmed from 20 to 12.  The Floater gets an
-    entirely separate rig (see floater_overrides)."""
-    if name in ('XCOM_Viper', 'XCOM_Muton'):
+    The Ratline and the Bulwark read a background of 43-45 against a bar of
+    40, so their wash is trimmed from 20 to 12.  The Drifter gets an
+    entirely separate rig (see drifter_overrides)."""
+    if name in ('BESTIARY_Ratline', 'BESTIARY_Bulwark'):
         rig.wash = 0.9
-    # The Sectoid clipped 2442 white pixels and the Muton 1271: the
+    # The Graytide clipped 2442 white pixels and the Bulwark 1271: the
     # emissive is the thing blowing out.  Lowering the emission strength
     # frees the exposure budget for the rim energy, which is what actually
     # moves the band.
-    if name == 'XCOM_Sectoid':
+    if name == 'BESTIARY_Graytide':
         rig.emissive_scale = 0.55
-    elif name == 'XCOM_Viper':
+    elif name == 'BESTIARY_Ratline':
         rig.emissive_scale = 0.55
     # The rim cannot satisfy the band and the clipping at once from one
     # global value: the small creatures clip where the large ones are still
     # short.  Tune it per subject, the same way the emissive is tuned.
-    if name == 'XCOM_Chryssalid':
+    if name == 'BESTIARY_Harrower':
         # its band is 16 with a fraction of 0.0000, so its body is nearly
         # black, while its 6076 clipped pixels are on the EMISSIVE EYES
         # (clipB is zero).  Cut the emissive and raise the rim.
         rig.emissive_scale = 0.18
         rig.rim = 5000.0
-    elif name == 'XCOM_Floater':
+    elif name == 'BESTIARY_Drifter':
         rig.rim = 5000.0
-    elif name in ('XCOM_Muton', 'XCOM_Viper'):
+    elif name in ('BESTIARY_Bulwark', 'BESTIARY_Ratline'):
         rig.rim = 9000.0
-    elif name == 'XCOM_Sectoid':
+    elif name == 'BESTIARY_Graytide':
         rig.rim = 8000.0
-    elif name == 'XCOM_Muton':
+    elif name == 'BESTIARY_Bulwark':
         rig.emissive_scale = 0.40
     print('[V4] %s overrides: wash %.1f emissive x%.2f'
           % (name, rig.wash, getattr(rig, 'emissive_scale', 1.0)))
     return rig
 
 
-def floater_overrides(name, rig, height):
-    """The Floater is a separate subject and needs its own geometry.
+def drifter_overrides(name, rig, height):
+    """The Drifter is a separate subject and needs its own geometry.
 
     It is 0.29 m tall.  The body-height-scaled rig puts the key 1.85 m away
     inside a 40 degree cone aimed at a chest 5 cm off the ground, so the key
     never reaches it at all (face_p99 = 0).  The key comes in to 0.85 m with
     25 W, so the inverse-square falloff does not bury it.
     """
-    if 'Floater' not in name:
+    if 'Drifter' not in name:
         return rig
     # With every light distance now proportional to the subject's height
     # and P proportional to h^2, the illuminance is constant across the set
-    # and the Floater needs no special rig.  It still needs a wider
+    # and the Drifter needs no special rig.  It still needs a wider
     # under-glow cone (a 20-degree cone is smaller than the creature) and
     # its floor probes spread across the frame.
     rig.under_cone = 45.0
@@ -2494,7 +2494,7 @@ def probe_sweep(name, fbx, out_dir, mask_dir, tmp_dir):
     fix_materials(getattr(rig0, 'emissive_scale', 1.0))
     rig0 = Rig()
     subject_overrides(name, rig0, height)
-    floater_overrides(name, rig0, height)
+    drifter_overrides(name, rig0, height)
     zones = merge_zones(body_row_zones(mask_path),
                         compute_zones(cam, anchor, height, rig0, size))
     tmp = os.path.join(tmp_dir, name + '_probe.png')
@@ -2586,7 +2586,7 @@ def probe_sweep(name, fbx, out_dir, mask_dir, tmp_dir):
 def parity_check(name, fbx, out_dir, mask_dir, tmp_dir):
     """Prove the probe path and the delivered path are the same rig.
 
-    v6a reported clipW 2765 for a Muton that probe9 measured at 429 with
+    v6a reported clipW 2765 for a Bulwark that probe9 measured at 429 with
     identical constants: the delivered frame had the Fog Glow compositor
     on and the probe had it off.  This renders one rig through both paths
     and prints both sets of numbers.
@@ -2836,7 +2836,7 @@ def do_enemy(name, fbx, out_dir, mask_dir, tmp_dir):
 
     ONE RIG, ONE RENDER PATH, ONE MEASUREMENT.  v10 had three paths
     answering for the same creature - the probe read clipW 2267 on the
-    Viper, the delivered frame read 630 and the parity frame read 146.  A
+    Ratline, the delivered frame read 630 and the parity frame read 146.  A
     score computed on a rig nobody ever sees is fiction, so everything below
     goes through render_rig_frame(), and the DELIVERED PNG is the frame that
     was measured.
@@ -3169,7 +3169,7 @@ def render_params_table(out_dir, doc):
         sc.view_settings.view_transform = 'Standard'
     except Exception:
         pass
-    m = bpy.data.materials.new('XCOM_TableBG')
+    m = bpy.data.materials.new('BESTIARY_TableBG')
     m.use_nodes = True
     bsdf = m.node_tree.nodes.get('Principled BSDF')
     if bsdf:
@@ -3185,7 +3185,7 @@ def render_params_table(out_dir, doc):
         cu.extrude = 0.0
         ob = bpy.data.objects.new('T', cu)
         bpy.context.scene.collection.objects.link(ob)
-        mm = bpy.data.materials.new('XCOM_TableText')
+        mm = bpy.data.materials.new('BESTIARY_TableText')
         mm.use_nodes = True
         nt2 = mm.node_tree
         nt2.nodes.clear()
@@ -3199,7 +3199,7 @@ def render_params_table(out_dir, doc):
         return ob
 
     lines = []
-    lines.append(('XCOM REVEAL RIG - PARAMETER TABLE (v4)', 7.0, (1.0, 0.75, 0.25)))
+    lines.append(('BESTIARY REVEAL RIG - PARAMETER TABLE (v4)', 7.0, (1.0, 0.75, 0.25)))
     lines.append(('Blender 4.2 EEVEE   %dx%d   %d samples   view transform %s'
                   % (RES_X, RES_Y, SAMPLES, VIEW_TRANSFORM), 4.0, (0.72, 0.82, 0.96)))
     lines.append(('world background strength %.2f   colour %.3f,%.3f,%.3f   '
@@ -3461,7 +3461,7 @@ def write_ue_spec(out_dir, rig_log, verification, names):
 
     L = []
     A = L.append
-    A('# XCOM Reveal Lighting Rig - UE5 Handoff (v4)')
+    A('# BESTIARY Reveal Lighting Rig - UE5 Handoff (v4)')
     A('')
     A('Generated by `Tools/blender/rig_evidence.py` from the measured Blender')
     A('renders. Every intensity below was taken from the rig that produced the')
@@ -3623,7 +3623,7 @@ def write_ue_spec(out_dir, rig_log, verification, names):
     A('')
     A('## 6. Wiring it up in Blueprint')
     A('')
-    A('1. Add a `BP_XCOM_RevealRig` actor component with five child components:')
+    A('1. Add a `BP_BESTIARY_RevealRig` actor component with five child components:')
     A('   `SpotLight reveal_key`, `SpotLight reveal_rim`, `PointLight reveal_under`,')
     A('   `SpotLight reveal_pool`, `PointLight reveal_wash`.')
     A('2. Set the transforms from section 1 (they are already actor-relative).')
@@ -3752,7 +3752,7 @@ def render_params_table(out_dir, doc):
         bg.inputs[1].default_value = 1.0
     sc.world = w
 
-    m = bpy.data.materials.new('XCOM_TableBG')
+    m = bpy.data.materials.new('BESTIARY_TableBG')
     m.use_nodes = True
     bsdf = m.node_tree.nodes.get('Principled BSDF')
     if bsdf:
@@ -3762,7 +3762,7 @@ def render_params_table(out_dir, doc):
     bpy.context.object.data.materials.append(m)
 
     lines = []      # (text, size, colour)
-    lines.append(('XCOM REVEAL RIG  -  PARAMETER TABLE (v4)', 5.6, (1.0, 0.76, 0.26)))
+    lines.append(('BESTIARY REVEAL RIG  -  PARAMETER TABLE (v4)', 5.6, (1.0, 0.76, 0.26)))
     lines.append(('Blender 4.2 EEVEE   %dx%d   %d samples   view transform %s   '
                   'world background strength %.2f'
                   % (RES_X, RES_Y, SAMPLES, VIEW_TRANSFORM, WORLD_STRENGTH),
@@ -3849,7 +3849,7 @@ def render_params_table(out_dir, doc):
         cu.extrude = 0.0
         ob = bpy.data.objects.new('T', cu)
         bpy.context.scene.collection.objects.link(ob)
-        mm = bpy.data.materials.new('XCOM_TableText')
+        mm = bpy.data.materials.new('BESTIARY_TableText')
         mm.use_nodes = True
         nt2 = mm.node_tree
         nt2.nodes.clear()

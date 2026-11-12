@@ -448,7 +448,7 @@
     "asset:/Engine/EngineMaterials/WorldGridMaterial": "Material"
   },
   "materials": {
-    "shipping/M_XCOM_Chitin": {
+    "shipping/M_BESTIARY_Chitin": {
       "api_params": [
         "blendable_location_override",
         "blendable_priority_override",
@@ -476,14 +476,14 @@
       ],
       "base_overrides": "<Struct 'MaterialInstanceBasePropertyOverrides' (0x0000025E0DDF0560) {}>",
       "class": "MaterialInstanceConstant",
-      "name": "M_XCOM_Chitin",
+      "name": "M_BESTIARY_Chitin",
       "parent": null,
-      "path": "/Game/Enemies/XCOM/M_XCOM_Chitin.M_XCOM_Chitin",
+      "path": "/Game/Enemies/BESTIARY/M_BESTIARY_Chitin.M_BESTIARY_Chitin",
       "scalar_parameter_values": 0,
       "texture_parameter_values": 0,
       "vector_parameter_values": 1
     },
-    "shipping/XCOM_Armor_Plate": {
+    "shipping/BESTIARY_Armor_Plate": {
       "api_params": [
         "blendable_location_override",
         "blendable_priority_override",
@@ -511,7 +511,7 @@
       ],
       "base_overrides": "<Struct 'MaterialInstanceBasePropertyOverrides' (0x0000025E0DBBE560) {}>",
       "class": "MaterialInstanceConstant",
-      "name": "XCOM_Armor_Plate",
+      "name": "BESTIARY_Armor_Plate",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
       "parent_class": "Material",
       "parent_expressions": "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")",
@@ -519,12 +519,12 @@
       "parent_texture_samples": [
         "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")"
       ],
-      "path": "/Game/Enemies/XCOM/XCOM_Armor_Plate.XCOM_Armor_Plate",
+      "path": "/Game/Enemies/BESTIARY/BESTIARY_Armor_Plate.BESTIARY_Armor_Plate",
       "scalar_parameter_values": 1,
       "texture_parameter_values": 0,
       "vector_parameter_values": 4
     },
-    "shipping/XCOM_Chitin_Mid": {
+    "shipping/BESTIARY_Chitin_Mid": {
       "api_params": [
         "blendable_location_override",
         "blendable_priority_override",
@@ -552,7 +552,7 @@
       ],
       "base_overrides": "<Struct 'MaterialInstanceBasePropertyOverrides' (0x0000025E0DBBCD60) {}>",
       "class": "MaterialInstanceConstant",
-      "name": "XCOM_Chitin_Mid",
+      "name": "BESTIARY_Chitin_Mid",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
       "parent_class": "Material",
       "parent_expressions": "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")",
@@ -560,12 +560,12 @@
       "parent_texture_samples": [
         "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")"
       ],
-      "path": "/Game/Enemies/XCOM/XCOM_Chitin_Mid.XCOM_Chitin_Mid",
+      "path": "/Game/Enemies/BESTIARY/BESTIARY_Chitin_Mid.BESTIARY_Chitin_Mid",
       "scalar_parameter_values": 1,
       "texture_parameter_values": 0,
       "vector_parameter_values": 4
     },
-    "shipping/XCOM_Eye_Emissive": {
+    "shipping/BESTIARY_Eye_Emissive": {
       "api_params": [
         "blendable_location_override",
         "blendable_priority_override",
@@ -593,7 +593,7 @@
       ],
       "base_overrides": "<Struct 'MaterialInstanceBasePropertyOverrides' (0x0000025E0DBBF560) {}>",
       "class": "MaterialInstanceConstant",
-      "name": "XCOM_Eye_Emissive",
+      "name": "BESTIARY_Eye_Emissive",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
       "parent_class": "Material",
       "parent_expressions": "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")",
@@ -601,12 +601,12 @@
       "parent_texture_samples": [
         "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")"
       ],
-      "path": "/Game/Enemies/XCOM/XCOM_Eye_Emissive.XCOM_Eye_Emissive",
+      "path": "/Game/Enemies/BESTIARY/BESTIARY_Eye_Emissive.BESTIARY_Eye_Emissive",
       "scalar_parameter_values": 1,
       "texture_parameter_values": 0,
       "vector_parameter_values": 4
     },
-    "verification/XCOM_Chryssalid_PLATE": {
+    "verification/BESTIARY_Harrower_PLATE": {
       "api_params": [
         "blendable_location_override",
         "blendable_priority_override",
@@ -634,7 +634,7 @@
       ],
       "base_overrides": "<Struct 'MaterialInstanceBasePropertyOverrides' (0x0000025E0DDF4560) {}>",
       "class": "MaterialInstanceConstant",
-      "name": "XCOM_Chryssalid_PLATE",
+      "name": "BESTIARY_Harrower_PLATE",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
       "parent_class": "Material",
       "parent_expressions": "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")",
@@ -642,12 +642,12 @@
       "parent_texture_samples": [
         "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")"
       ],
-      "path": "/Game/Tests/UEParity/XCOM_Chryssalid_PLATE.XCOM_Chryssalid_PLATE",
+      "path": "/Game/Tests/UEParity/BESTIARY_Harrower_PLATE.BESTIARY_Harrower_PLATE",
       "scalar_parameter_values": 1,
       "texture_parameter_values": 0,
       "vector_parameter_values": 4
     },
-    "verification/XCOM_Floater_CHITIN": {
+    "verification/BESTIARY_Drifter_CHITIN": {
       "api_params": [
         "blendable_location_override",
         "blendable_priority_override",
@@ -675,7 +675,7 @@
       ],
       "base_overrides": "<Struct 'MaterialInstanceBasePropertyOverrides' (0x0000025E0DDF3560) {}>",
       "class": "MaterialInstanceConstant",
-      "name": "XCOM_Floater_CHITIN",
+      "name": "BESTIARY_Drifter_CHITIN",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
       "parent_class": "Material",
       "parent_expressions": "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")",
@@ -683,12 +683,12 @@
       "parent_texture_samples": [
         "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")"
       ],
-      "path": "/Game/Tests/UEParity/XCOM_Floater_CHITIN.XCOM_Floater_CHITIN",
+      "path": "/Game/Tests/UEParity/BESTIARY_Drifter_CHITIN.BESTIARY_Drifter_CHITIN",
       "scalar_parameter_values": 1,
       "texture_parameter_values": 0,
       "vector_parameter_values": 4
     },
-    "verification/XCOM_Muton_PLATE_OXBLOOD": {
+    "verification/BESTIARY_Bulwark_PLATE_OXBLOOD": {
       "api_params": [
         "blendable_location_override",
         "blendable_priority_override",
@@ -716,7 +716,7 @@
       ],
       "base_overrides": "<Struct 'MaterialInstanceBasePropertyOverrides' (0x0000025E0DDF5560) {}>",
       "class": "MaterialInstanceConstant",
-      "name": "XCOM_Muton_PLATE_OXBLOOD",
+      "name": "BESTIARY_Bulwark_PLATE_OXBLOOD",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
       "parent_class": "Material",
       "parent_expressions": "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")",
@@ -724,12 +724,12 @@
       "parent_texture_samples": [
         "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")"
       ],
-      "path": "/Game/Tests/UEParity/XCOM_Muton_PLATE_OXBLOOD.XCOM_Muton_PLATE_OXBLOOD",
+      "path": "/Game/Tests/UEParity/BESTIARY_Bulwark_PLATE_OXBLOOD.BESTIARY_Bulwark_PLATE_OXBLOOD",
       "scalar_parameter_values": 1,
       "texture_parameter_values": 0,
       "vector_parameter_values": 4
     },
-    "verification/XCOM_Sectoid_ACCENT_EMISSIVE": {
+    "verification/BESTIARY_Graytide_ACCENT_EMISSIVE": {
       "api_params": [
         "blendable_location_override",
         "blendable_priority_override",
@@ -757,7 +757,7 @@
       ],
       "base_overrides": "<Struct 'MaterialInstanceBasePropertyOverrides' (0x0000025E0DDF1D60) {}>",
       "class": "MaterialInstanceConstant",
-      "name": "XCOM_Sectoid_ACCENT_EMISSIVE",
+      "name": "BESTIARY_Graytide_ACCENT_EMISSIVE",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
       "parent_class": "Material",
       "parent_expressions": "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")",
@@ -765,12 +765,12 @@
       "parent_texture_samples": [
         "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")"
       ],
-      "path": "/Game/Tests/UEParity/XCOM_Sectoid_ACCENT_EMISSIVE.XCOM_Sectoid_ACCENT_EMISSIVE",
+      "path": "/Game/Tests/UEParity/BESTIARY_Graytide_ACCENT_EMISSIVE.BESTIARY_Graytide_ACCENT_EMISSIVE",
       "scalar_parameter_values": 1,
       "texture_parameter_values": 0,
       "vector_parameter_values": 4
     },
-    "verification/XCOM_Sectoid_CHITIN": {
+    "verification/BESTIARY_Graytide_CHITIN": {
       "api_params": [
         "blendable_location_override",
         "blendable_priority_override",
@@ -798,7 +798,7 @@
       ],
       "base_overrides": "<Struct 'MaterialInstanceBasePropertyOverrides' (0x0000025E0DDF2560) {}>",
       "class": "MaterialInstanceConstant",
-      "name": "XCOM_Sectoid_CHITIN",
+      "name": "BESTIARY_Graytide_CHITIN",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
       "parent_class": "Material",
       "parent_expressions": "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")",
@@ -806,12 +806,12 @@
       "parent_texture_samples": [
         "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")"
       ],
-      "path": "/Game/Tests/UEParity/XCOM_Sectoid_CHITIN.XCOM_Sectoid_CHITIN",
+      "path": "/Game/Tests/UEParity/BESTIARY_Graytide_CHITIN.BESTIARY_Graytide_CHITIN",
       "scalar_parameter_values": 1,
       "texture_parameter_values": 0,
       "vector_parameter_values": 4
     },
-    "verification/XCOM_Sectoid_PLATE": {
+    "verification/BESTIARY_Graytide_PLATE": {
       "api_params": [
         "blendable_location_override",
         "blendable_priority_override",
@@ -839,7 +839,7 @@
       ],
       "base_overrides": "<Struct 'MaterialInstanceBasePropertyOverrides' (0x0000025E0DDF0D60) {}>",
       "class": "MaterialInstanceConstant",
-      "name": "XCOM_Sectoid_PLATE",
+      "name": "BESTIARY_Graytide_PLATE",
       "parent": "/InterchangeAssets/Materials/FBXLegacyPhongSurfaceMaterial.FBXLegacyPhongSurfaceMaterial",
       "parent_class": "Material",
       "parent_expressions": "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")",
@@ -847,7 +847,7 @@
       "parent_texture_samples": [
         "n/a:Exception(\"Material: Property 'Expressions' for attribute 'expressions' on 'Material' is protected and cannot be read\")"
       ],
-      "path": "/Game/Tests/UEParity/XCOM_Sectoid_PLATE.XCOM_Sectoid_PLATE",
+      "path": "/Game/Tests/UEParity/BESTIARY_Graytide_PLATE.BESTIARY_Graytide_PLATE",
       "scalar_parameter_values": 1,
       "texture_parameter_values": 0,
       "vector_parameter_values": 4

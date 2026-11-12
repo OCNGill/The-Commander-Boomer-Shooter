@@ -1,6 +1,6 @@
 # X-COM ENEMY PASS 2 — FIX LIST (derived from direct vision review of the v1 renders)
 
-Evidence: `Tools/blender/out_xcom/*.png` reviewed with `vision_analyze` on 2026-10-21.
+Evidence: `Tools/blender/out_bestiary/*.png` reviewed with `vision_analyze` on 2026-10-21.
 Verdict on v1: **legible clean blockout, not a finished creature.** The renders are
 technically clean but the creature does not read as alive, and the "creepy reveal"
 lighting is not landing because the scene has no darkness to reveal against.
@@ -12,7 +12,7 @@ and re-submit to Ebert.
 
 ## A. GROUNDING — nothing floats
 - v1 has **no floor**. Add a large ground plane (6m x 6m cube, 0.1m thick) under the model,
-  dark wet concrete material (`XCOM_Ground_Wet`, base 0.03/0.035/0.04, roughness 0.35).
+  dark wet concrete material (`BESTIARY_Ground_Wet`, base 0.03/0.035/0.04, roughness 0.35).
 - Every enemy must show a **contact shadow** on that floor. If the feet do not touch the
   floor, lower them until they do.
 - Without this, the model reads as a bobblehead pasted on a background.
@@ -32,17 +32,17 @@ v1's lighting is flat studio light, not a 1994 terror-mission reveal. Fix:
 - Optional: a faint volumetric haze plane in front of the key so the light shaft reads.
 
 ## C. FACE — this is the focal point and it is currently empty
-v1 Viper/Muton: a blank cream oval for an eye, no mouth, no structure. The face must carry
+v1 Ratline/Bulwark: a blank cream oval for an eye, no mouth, no structure. The face must carry
 the character. For EVERY enemy:
 - **Eye assembly** (3 parts): socket rim (flattened torus or scaled ring) + eyeball
   (dark sphere, near-black) + emissive iris disc facing forward. Emissive strength 18-30.
 - **Mouth/jaw seam**: a dark inset (thin scaled box or gap between jaw and skull) so the
-  head has a real aperture. Viper and Muton get a visible jaw + 4-6 small teeth (cones).
-- Viper: elongate the snout, add a nasal ridge, deepen the brow so it looks predatory.
-- Muton: the helmet needs a **readable visor slit** (emissive, thin, horizontal) and a
+  head has a real aperture. Ratline and Bulwark get a visible jaw + 4-6 small teeth (cones).
+- Ratline: elongate the snout, add a nasal ridge, deepen the brow so it looks predatory.
+- Bulwark: the helmet needs a **readable visor slit** (emissive, thin, horizontal) and a
   chin/breath apparatus. The current "cream hook" on the face is illegible - either give it
   a clear identity (mandible, respirator) or remove it.
-- Sectoid: canonically mouthless - keep that, but add a nasal slit, a brow ridge, and a
+- Graytide: canonically mouthless - keep that, but add a nasal slit, a brow ridge, and a
   chin plate so the skull is not a bare sphere.
 
 ## D. ANATOMY - connect the parts
@@ -55,7 +55,7 @@ v1 reads as "boxes, cylinders and spheres assembled together". Fix with joints:
   **different lengths**, each attached to the palm.
 - Feet: give them toes/claws (2-3 small cones) or reduce their size; v1's "slippers" are
   disproportionately large. Feet must meet the floor.
-- No component may be visibly detached: the v1 Viper's left arm and both hands read as
+- No component may be visibly detached: the v1 Ratline's left arm and both hands read as
   floating beside the body.
 
 ## E. MATERIAL LOGIC - three families, no more
@@ -66,7 +66,7 @@ v1 mixes green, sage, white, mint and black with no anatomical logic. Per enemy 
 - **Retire the pale "cloth" material from flesh areas.** Pale/bone is only for bone ridges
   and teeth. The white hands and white boots in v1 were the brightest thing on screen and
   stole focus from the face - they must go dark.
-- One restrained accent color per enemy (Muton keeps his oxblood chest plate, but it needs
+- One restrained accent color per enemy (Bulwark keeps his oxblood chest plate, but it needs
   detail, not a flat salmon rectangle).
 
 ## F. SURFACE STORYTELLING
@@ -76,11 +76,11 @@ v1 mixes green, sage, white, mint and black with no anatomical logic. Per enemy 
   - Plate material gets a subtle roughness break-up so it is not uniform
 - Add **panel lines / seams** on armor: thin dark inset boxes on the chest plate and
   pauldrons (2-3 per enemy). They cost nothing and instantly read as manufactured.
-- Muton's chest plate needs an insignia or vent detail - a flat colored rectangle reads
+- Bulwark's chest plate needs an insignia or vent detail - a flat colored rectangle reads
   as placeholder.
 
 ## G. GEAR LEGIBILITY
-- The v1 plasma pistol is an unidentifiable black box; the Muton rifle is a bar with a ball.
+- The v1 plasma pistol is an unidentifiable black box; the Bulwark rifle is a bar with a ball.
   Every weapon needs: body, **grip** (angled, hand-sized), **trigger guard**, **barrel or
   emitter**, and an emissive coil. Two-handed weapons need a foregrip.
 
@@ -104,7 +104,7 @@ v1 mixes green, sage, white, mint and black with no anatomical logic. Per enemy 
 6. Procedural surface detail on every material; panel lines on armor.
 7. Weapons legible as weapons.
 8. Static, asymmetric, intentional pose per enemy.
-9. Re-run: `blender -b -noaudio -P Tools/blender/xcom_enemies.py -- --out <dir> --render`
+9. Re-run: `blender -b -noaudio -P Tools/blender/bestiary_enemies.py -- --out <dir> --render`
    then submit the new PNGs to Ebert for re-scoring. **The v1 PNGs are not the deliverable.**
 
 > Psalm 33:6 (ESV) - "By the word of the LORD were the heavens made; and all the host of them

@@ -5,7 +5,7 @@
 #
 # Usage:
 #   ./blender_turn_htpc.sh <script.py> [extra blender args...]
-#   ./blender_turn_htpc.sh xcom_enemies.py -- --out ~/gillsystems-swarm/out_xcom
+#   ./blender_turn_htpc.sh bestiary_enemies.py -- --out ~/gillsystems-swarm/out_bestiary
 #
 # Exit codes: 0 = turn completed | 75 = lock busy (skipped, try another task)
 set -uo pipefail
